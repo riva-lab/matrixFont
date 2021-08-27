@@ -1,0 +1,382 @@
+object fmNew: TfmNew
+  Left = 347
+  Height = 376
+  Top = 285
+  Width = 510
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  BorderWidth = 10
+  Caption = 'Создать новый шрифт'
+  ClientHeight = 376
+  ClientWidth = 510
+  DefaultMonitor = dmMainForm
+  OnShow = FormShow
+  PopupMode = pmExplicit
+  Position = poMainFormCenter
+  LCLVersion = '1.6.4.0'
+  object pMain: TPanel
+    Left = 50
+    Height = 281
+    Top = 20
+    Width = 400
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.HorizontalSpacing = 10
+    ChildSizing.VerticalSpacing = 10
+    ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
+    ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 281
+    ClientWidth = 400
+    TabOrder = 0
+    object pName: TPanel
+      Left = 0
+      Height = 42
+      Top = 0
+      Width = 400
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 42
+      ClientWidth = 400
+      TabOrder = 0
+      object lbFontName: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 0
+        Width = 400
+        Caption = 'Название'
+        Color = cl3DLight
+        ParentColor = False
+        Transparent = False
+      end
+      object edFontName: TEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 23
+        Top = 19
+        Width = 400
+        MaxLength = 64
+        TabOrder = 0
+      end
+    end
+    object pAuthor: TPanel
+      Left = 0
+      Height = 42
+      Top = 52
+      Width = 400
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 42
+      ClientWidth = 400
+      TabOrder = 1
+      object lbAuthor: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 0
+        Width = 400
+        Caption = 'Автор'
+        Color = cl3DLight
+        ParentColor = False
+        Transparent = False
+      end
+      object edAuthor: TEdit
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 23
+        Top = 19
+        Width = 400
+        MaxLength = 64
+        TabOrder = 0
+      end
+    end
+    object pEncoding: TPanel
+      Left = 0
+      Height = 42
+      Top = 104
+      Width = 400
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 42
+      ClientWidth = 400
+      TabOrder = 2
+      object lbEncoding: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 0
+        Width = 400
+        Caption = 'Кодировка'
+        Color = cl3DLight
+        ParentColor = False
+        Transparent = False
+      end
+      object cbEncoding: TComboBox
+        Left = 0
+        Height = 23
+        Top = 19
+        Width = 400
+        ItemHeight = 15
+        Style = csDropDownList
+        TabOrder = 0
+      end
+    end
+    object pValues: TPanel
+      Left = 0
+      Height = 59
+      Top = 156
+      Width = 400
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 59
+      ClientWidth = 400
+      TabOrder = 3
+      object lbFontName1: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 0
+        Width = 195
+        Caption = 'Диапазон символов'
+        Color = cl3DLight
+        ParentColor = False
+        Transparent = False
+      end
+      object lbFontName2: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 205
+        Height = 15
+        Top = 0
+        Width = 195
+        Caption = 'Размеры холста'
+        Color = cl3DLight
+        ParentColor = False
+        Transparent = False
+      end
+      object pRange: TPanel
+        Left = 0
+        Height = 40
+        Top = 19
+        Width = 195
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 2
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 40
+        ClientWidth = 195
+        TabOrder = 0
+        object seStartItem: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 93
+          Constraints.MinWidth = 64
+          MaxValue = 255
+          OnChange = seStartItemChange
+          TabOrder = 0
+          Value = 5
+        end
+        object seLastItem: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 103
+          Height = 23
+          Top = 0
+          Width = 92
+          Constraints.MinWidth = 64
+          MaxValue = 255
+          OnChange = seLastItemChange
+          TabOrder = 1
+          Value = 5
+        end
+        object lbStartItem: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 15
+          Top = 25
+          Width = 93
+          Caption = 'первый'
+          Layout = tlBottom
+          ParentColor = False
+        end
+        object lbLastItem: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 103
+          Height = 15
+          Top = 25
+          Width = 92
+          Caption = 'последний'
+          Layout = tlBottom
+          ParentColor = False
+        end
+      end
+      object pSizes: TPanel
+        Left = 205
+        Height = 40
+        Top = 19
+        Width = 195
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 2
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 40
+        ClientWidth = 195
+        TabOrder = 1
+        object seWidth: TSpinEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 93
+          Constraints.MinWidth = 64
+          MaxValue = 128
+          MinValue = 1
+          TabOrder = 0
+          Value = 5
+        end
+        object seHeight: TSpinEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 103
+          Height = 23
+          Top = 0
+          Width = 92
+          Constraints.MinWidth = 64
+          MaxValue = 128
+          MinValue = 1
+          TabOrder = 1
+          Value = 7
+        end
+        object lbWidth: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 15
+          Top = 25
+          Width = 93
+          Caption = 'ширина'
+          Layout = tlBottom
+          ParentColor = False
+        end
+        object lbHeight: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 103
+          Height = 15
+          Top = 25
+          Width = 92
+          Caption = 'высота'
+          Layout = tlBottom
+          ParentColor = False
+        end
+      end
+    end
+    object pControls: TPanel
+      Left = 0
+      Height = 56
+      Top = 225
+      Width = 400
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 10
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 56
+      ClientWidth = 400
+      Constraints.MinWidth = 400
+      TabOrder = 4
+      object bbOK: TBitBtn
+        Left = 200
+        Height = 56
+        Top = 0
+        Width = 200
+        AutoSize = True
+        BorderSpacing.InnerBorder = 15
+        BorderSpacing.CellAlignHorizontal = ccaRightBottom
+        Caption = 'Создать'
+        Constraints.MinWidth = 200
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          200000000000000400006400000064000000000000000000000000690F7A003D
+          08C5002A06DF002D06DF002D06DF002D06DF002D06DF002D06DF002D06DF002D
+          06DF002D06DF002D06DF002D06DF002906DF003B08C500640E85003D09D80000
+          00FF002C06FA002405FA002405FA002405FA002405FA002405FA002405FA0024
+          05FA002405FA002405FA002405FA002D06FA000000FF002F06E6003607CD001F
+          05FF009D1500008A130000891300008913000089130000891300008913000089
+          130000891300008913000089130000A01600002A06FA002905E0003908CD001B
+          04FF008612000076100000751000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06E0003908CC001B
+          04FF008612030076100000751000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF003908CC001B
+          04FF008612030076100000751000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF003908CC001B
+          04FF008612030076100000751000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF003808CE001D
+          04FF008712000076100000751000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF002F07D90017
+          03FF009514000075100000751000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF005D0DA30000
+          00FF004D0ABF0091140000741000007510000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF008B13030051
+          0BBE000000FF004F0BBF00911400007410000075100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF007410000091
+          140000500BBF000000FF004F0BBF009114000074100000751000007510000075
+          100000751000007510000075100000891300002405FA002D06DF007510000074
+          10000091140000500BBF000000FF004F0BBF0091140000751000007510000076
+          1000007610000076100000761000008A1300002405FA002D06E0007510000075
+          1000007410000091140000500BBF000000FF004D0BBF00931411008713030086
+          1203008612030086120300861203009D1603002906FA002905DF007510000075
+          100000751000007410000091140000500BBE000000FF001E04FF001D04FF001B
+          04FF001B04FF001B04FF001B04FF002205FF000000FF003307E6007510000075
+          1000007510000075100000741000008B1300005C0CA0003707C9003808CC0039
+          08CC003908CC003908CC003908CC003507CC004609B900690E7A
+        }
+        ModalResult = 1
+        Spacing = 10
+        TabOrder = 0
+      end
+    end
+  end
+end

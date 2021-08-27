@@ -1,0 +1,305 @@
+object fmPreview: TfmPreview
+  Left = 221
+  Height = 190
+  Top = 481
+  Width = 642
+  Anchors = []
+  BorderIcons = [biSystemMenu]
+  ClientHeight = 190
+  ClientWidth = 642
+  Constraints.MinHeight = 190
+  Constraints.MinWidth = 600
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PopupMode = pmAuto
+  Position = poMainFormCenter
+  SessionProperties = 'mmPreview.Lines;seDelta.Value;seSpace.Value;rbMono.Checked;rbProp.Checked'
+  LCLVersion = '1.6.4.0'
+  object pcPages: TPageControl
+    Left = 0
+    Height = 150
+    Top = 0
+    Width = 642
+    TabStop = False
+    ActivePage = tabPreview
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object tabPreview: TTabSheet
+      Caption = 'Предпросмотр'
+      ClientHeight = 122
+      ClientWidth = 634
+      object scbImage: TScrollBox
+        Left = 0
+        Height = 122
+        Top = 0
+        Width = 634
+        HorzScrollBar.Page = 105
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Page = 30
+        VertScrollBar.Tracking = True
+        Align = alClient
+        Anchors = []
+        BorderStyle = bsNone
+        ClientHeight = 122
+        ClientWidth = 634
+        Constraints.MinWidth = 50
+        TabOrder = 0
+        OnMouseWheel = scbImageMouseWheel
+        object lbBackground: TLabel
+          Left = 0
+          Height = 122
+          Top = 0
+          Width = 634
+          Align = alClient
+          AutoSize = False
+          Caption = '   '
+          Color = clScrollBar
+          ParentColor = False
+          Transparent = False
+        end
+        object imPreview: TImage
+          AnchorSideLeft.Control = scbImage
+          AnchorSideTop.Control = scbImage
+          Left = 0
+          Height = 30
+          Top = 0
+          Width = 105
+          Stretch = True
+          Transparent = True
+        end
+      end
+    end
+    object tabTxt: TTabSheet
+      Caption = 'Выводимый текст'
+      ClientHeight = 232
+      ClientWidth = 715
+      object mmPreview: TMemo
+        Left = 0
+        Height = 232
+        Top = 0
+        Width = 715
+        Align = alClient
+        Anchors = []
+        BorderStyle = bsNone
+        Font.Name = 'Consolas'
+        OnChange = rbPropChange
+        ParentFont = False
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+        WordWrap = False
+      end
+    end
+  end
+  object pControls: TPanel
+    Left = 0
+    Height = 40
+    Top = 150
+    Width = 642
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 4
+    ChildSizing.TopBottomSpacing = 4
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.Layout = cclTopToBottomThenLeftToRight
+    ClientHeight = 40
+    ClientWidth = 642
+    TabOrder = 1
+    object pFontType: TPanel
+      Left = 4
+      Height = 32
+      Top = 4
+      Width = 268
+      AutoSize = True
+      BorderSpacing.CellAlignHorizontal = ccaLeftTop
+      BevelOuter = bvNone
+      ChildSizing.LeftRightSpacing = 5
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ClientHeight = 32
+      ClientWidth = 268
+      TabOrder = 0
+      object rbProp: TRadioButton
+        Tag = 1
+        AnchorSideTop.Side = asrCenter
+        Left = 5
+        Height = 32
+        Top = 0
+        Width = 134
+        Caption = 'Пропорциональный'
+        Checked = True
+        OnChange = rbPropChange
+        OnClick = rbPropChange
+        TabOrder = 0
+        TabStop = True
+      end
+      object rbMono: TRadioButton
+        Tag = 1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 149
+        Height = 32
+        Top = 0
+        Width = 114
+        Caption = 'Моноширинный'
+        OnChange = rbPropChange
+        OnClick = rbPropChange
+        TabOrder = 1
+      end
+    end
+    object pButtons: TPanel
+      Left = 312
+      Height = 32
+      Top = 4
+      Width = 326
+      AutoSize = True
+      BorderSpacing.CellAlignHorizontal = ccaRightBottom
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ClientHeight = 32
+      ClientWidth = 326
+      TabOrder = 1
+      object seSpace: TSpinEdit
+        AnchorSideTop.Side = asrCenter
+        AnchorSideBottom.Side = asrBottom
+        Left = 0
+        Height = 23
+        Hint = 'Дистанция между символами'
+        Top = 4
+        Width = 50
+        BorderSpacing.CellAlignVertical = ccaCenter
+        Constraints.MinWidth = 50
+        MaxValue = 10
+        OnChange = rbPropChange
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        Value = 1
+      end
+      object seDelta: TSpinEdit
+        AnchorSideTop.Side = asrCenter
+        AnchorSideBottom.Side = asrCenter
+        Left = 60
+        Height = 23
+        Hint = 'Дистанция между строками'
+        Top = 4
+        Width = 50
+        BorderSpacing.CellAlignVertical = ccaCenter
+        Constraints.MinWidth = 50
+        MaxValue = 10
+        OnChange = rbPropChange
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        Value = 1
+      end
+      object tbControls: TToolBar
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 120
+        Top = 0
+        Width = 206
+        Align = alNone
+        AutoSize = True
+        ButtonHeight = 32
+        ButtonWidth = 40
+        Caption = 'tbControls'
+        EdgeInner = esNone
+        EdgeOuter = esNone
+        Images = fmMain.ImListNew16A
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        TabStop = True
+        object ToolButton2: TToolButton
+          Left = 126
+          Top = 0
+          Action = acResetText
+        end
+        object ToolButton3: TToolButton
+          Left = 166
+          Top = 0
+          Action = acExportImage
+        end
+        object ToolButton1: TToolButton
+          Left = 86
+          Top = 0
+          Action = acEditText
+        end
+        object ToolButton4: TToolButton
+          Left = 41
+          Top = 0
+          Action = acZoomIn
+        end
+        object ToolButton5: TToolButton
+          Left = 1
+          Top = 0
+          Action = acZoomOut
+        end
+        object ToolButton6: TToolButton
+          Left = 81
+          Height = 32
+          Top = 0
+          Width = 5
+          Caption = 'ToolButton6'
+          Style = tbsDivider
+        end
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Images = fmMain.ImListNew16A
+    left = 45
+    top = 75
+    object acResetText: TAction
+      Caption = 'По умолчанию'
+      Hint = 'Восстановить текст примера по умолчанию'
+      ImageIndex = 42
+      OnExecute = acResetTextExecute
+    end
+    object acExportImage: TAction
+      Caption = 'Экспорт ...'
+      Hint = 'Сохранить пример как изображение'
+      ImageIndex = 30
+      OnExecute = acExportImageExecute
+    end
+    object acEditText: TAction
+      AutoCheck = True
+      Caption = 'Текст'
+      GroupIndex = 1
+      Hint = 'Редактировать текст примера'
+      ImageIndex = 41
+      OnExecute = acEditTextExecute
+    end
+    object acZoomIn: TAction
+      Caption = 'Увеличить'
+      Hint = 'Увеличить масштаб'
+      ImageIndex = 37
+      OnExecute = acZoomInExecute
+      ShortCut = 117
+    end
+    object acZoomOut: TAction
+      Caption = 'Уменьшить'
+      Hint = 'Уменьшить масштаб'
+      ImageIndex = 38
+      OnExecute = acZoomOutExecute
+      ShortCut = 116
+    end
+  end
+  object SaveDlg: TSaveDialog
+    Title = 'Экспорт изображения текста предпросмотра'
+    Filter = 'Portable Network Graphics File|*.png'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    left = 145
+    top = 75
+  end
+  object IniStoragePV: TIniPropStorage
+    StoredValues = <>
+    left = 235
+    top = 75
+  end
+end

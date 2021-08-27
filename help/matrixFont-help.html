@@ -1,0 +1,601 @@
+<!doctype html>
+<html style='font-size:13px !important'>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-fences-math .MathJax_SVG_Display, .md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: visible; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; zoom: 90%; }
+#math-inline-preview-content { zoom: 1.1; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-math .MathJax_SVG_Display { margin-top: 8px; cursor: default; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    font-family: "JetBrains Mono NL", monospace;
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+ :root {--mermaid-font-zoom:1.44em ;} 
+</style><title>matrixFont-help</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='matrixfont-v10--руководство-пользователя'><span>matrixFont v1.0 // Руководство пользователя</span></h1><p>&nbsp;</p><p><img src="screenshots/s1.png" referrerpolicy="no-referrer"></p><p>&nbsp;</p><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#matrixfont-v10--руководство-пользователя">matrixFont v1.0 // Руководство пользователя</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n6"><a class="md-toc-inner" href="#введение">Введение</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n51"><a class="md-toc-inner" href="#проект-шрифта">Проект шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n53"><a class="md-toc-inner" href="#создание-шрифта">Создание шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n57"><a class="md-toc-inner" href="#сохранение-шрифта">Сохранение шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n60"><a class="md-toc-inner" href="#загрузка-шрифта">Загрузка шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n63"><a class="md-toc-inner" href="#импорт-системного-шрифта">Импорт системного шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n68"><a class="md-toc-inner" href="#свойства-шрифта">Свойства шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n73"><a class="md-toc-inner" href="#навигатор">Навигатор</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n76"><a class="md-toc-inner" href="#редактирование-символов">Редактирование символов</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n79"><a class="md-toc-inner" href="#приемы">Приемы</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n89"><a class="md-toc-inner" href="#пиксельное-редактирование">Пиксельное редактирование</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n92"><a class="md-toc-inner" href="#операции-редактирования-символа">Операции редактирования символа</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n127"><a class="md-toc-inner" href="#пакетное-редактирование">Пакетное редактирование</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n131"><a class="md-toc-inner" href="#задание-диапазона-символов-шрифта">Задание диапазона символов шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n135"><a class="md-toc-inner" href="#изменение-размеров-символов-шрифта">Изменение размеров символов шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n139"><a class="md-toc-inner" href="#оптимизация-размеров-символов-шрифта">Оптимизация размеров символов шрифта</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n143"><a class="md-toc-inner" href="#отмена-и-повтор-выполненной-команды">Отмена и повтор выполненной команды</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n147"><a class="md-toc-inner" href="#копирование-и-вставка-символов">Копирование и вставка символов</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n169"><a class="md-toc-inner" href="#поиск">Поиск</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n172"><a class="md-toc-inner" href="#образец-текста">Образец текста</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n179"><a class="md-toc-inner" href="#генерирование-кода-си">Генерирование кода Си</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n186"><a class="md-toc-inner" href="#настройки">Настройки</a></span><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n193"><a class="md-toc-inner" href="#помощь-в-интернационализации-интерфейса">Помощь в интернационализации интерфейса</a></span></p></div><h1 id='введение'><span>Введение</span></h1><p><span>Приложение позволяет создавать, редактировать растровые шрифты и генерировать код </span><strong><span>Си</span></strong><span> для подключения созданного шрифта к проекту программного обеспечения. Основная область применения — разработка проектов программного обеспечения с использованием графического интерфейса пользователя во встраиваемых системах. </span></p><p><span>Возможности приложения:</span></p><ul><li><span>диапазон символов шрифта от 0 до 255;</span></li><li><span>размеры символа от 1х1 до 100х100;</span></li><li><span>выбор кодовой страницы (кодировки);</span></li><li><span>компактный собственный формат файла шрифта </span><strong><span>RHF</span></strong><span>;</span></li><li><span>просмотр образца текста создаваемым шрифтом;</span></li><li><span>создание проекта на основе системного шрифта (импорт с последующей растеризацией);</span></li><li><span>гибко настраиваемая генерация кода </span><strong><span>Си</span></strong><span>;</span></li><li><span>удобное редактирование символов мышью;</span></li><li><span>история операций редактирования для каждого символа шрифта;</span></li><li><span>копирование и вставка символов шрифта;</span></li><li><span>поиск символов по коду или по названию;</span></li><li><span>масштабирование рабочего поля редактора при помощи колеса мыши;</span></li><li><span>пиксельная сетка, шахматный фон;</span></li><li><span>эффекты редактирования: инверсия, отображение, сдвиг, прижатие символов;</span></li><li><span>пакетное редактирование всех символов шрифта;</span></li><li><span>навигатор по символам шрифта с отображением начертания созданных символов;</span></li><li><span>оптимизация размера холста символов;</span></li><li><span>изменение размера холста символов после создания проекта шрифта;</span></li><li><span>изменение диапазона символов после создания проекта шрифта;</span></li><li><span>широкие возможности настройки (внешний вид, цвета и прочее).</span></li></ul><p>&nbsp;</p><h1 id='проект-шрифта'><span>Проект шрифта</span></h1><p>&nbsp;</p><h2 id='создание-шрифта'><span>Создание шрифта</span></h2><p><img src="screenshots/s2.png" referrerpolicy="no-referrer"></p><p><span>Команда </span><code>Файл &gt; Новый шрифт</code><span> открывает диалог создания нового шрифта. Задайте название, автора, кодировку, код первого и последнего символа, ширину и высоту символа в пикселях. После нажатия кнопки </span><code>Создать</code><span> будет создан новый шрифт с заданными установками. Также новый шрифт с параметрами по умолчанию, которые можно изменить в настройках, создается автоматически при запуске приложения.</span></p><p>&nbsp;</p><h2 id='сохранение-шрифта'><span>Сохранение шрифта</span></h2><p><span>Созданный и отредактированный шрифт можно сохранить в файл. Используется собственный компактный формат </span><strong><span>RHF (Raster Hardware Font)</span></strong><span>. Чтобы сохранить шрифт, выберите команду </span><code>Файл &gt; Сохранить</code><span>. Если шрифт был загружен из файла, то команда </span><code>Файл &gt; Сохранить</code><span> перезапишет исходный файл. Чтобы сохранить шрифт в другой файл используйте команду </span><code>Файл &gt; Сохранить как…</code></p><p>&nbsp;</p><h2 id='загрузка-шрифта'><span>Загрузка шрифта</span></h2><p><span>Для загрузки ранее сохраненного шрифта в формате </span><strong><span>RHF</span></strong><span>, используйте команду </span><code>Файл &gt; Открыть</code><span>. Также можно загрузить шрифт в приложение просто перетащив файл в окно приложения.</span></p><p>&nbsp;</p><h2 id='импорт-системного-шрифта'><span>Импорт системного шрифта</span></h2><p><img src="screenshots/s3.png" referrerpolicy="no-referrer"></p><p><span>Приложение позволяет создать изображения символов шрифта, используя установленный в системе шрифт (TTF, OTF, FON и т.п.). Команда </span><code>Файл &gt; Импорт шрифта</code><span> открывает диалоговое окно </span><strong><span>Импорт шрифта</span></strong><span>. </span></p><p><span>Выберите шрифт, задайте его размер и начертание. Контролируйте вид символов по образцу текста, который выводится в верхней части окна. Образец можно масштабировать колесом мыши. Размеры холста символа устанавливаются автоматически, но их можно изменить. Задайте необходимую кодировку и дополнительные опции: прижатие символов к левому краю холста и оптимизация пустого пространства вокруг символа. Обратите внимание, что генерируемые изображения символов зависят от выбранной кодировки!</span></p><p>&nbsp;</p><h2 id='свойства-шрифта'><span>Свойства шрифта</span></h2><p><img src="screenshots/s4.png" referrerpolicy="no-referrer"></p><p><span>Команда </span><code>Файл &gt; Свойства шрифта</code><span> отображает окно просмотра служебной и дополнительной информации о шрифте и файле. В окне </span><strong><span>Свойства шрифта</span></strong><span> отображаются следующие данные: название шрифта (используется при генерировании кода Си), автор шрифта, кодировка, расположение файла шрифта (если он был сохранен), коды первого и последнего символов, размеры холста символов (ширина и высота), дата и приложение создания шрифта, дата и приложение сохранения последней правки шрифта.</span></p><p><span>Название, автора и кодировку шрифта можно изменить, после чего нажать кнопку </span><code>Применить</code><span>, чтобы изменения были внесены. Остальные данные носят информационный характер и не подлежат редактированию в этом окне (для изменения диапазона или размеров холста есть специальные операции, описанные далее).</span></p><p>&nbsp;</p><h2 id='навигатор'><span>Навигатор</span></h2><p><span>Навигатор — левая часть главного окна. Представляет собой список символов шрифта. Позволяет быстро перемещаться между символами. Также отображает код символа (десятичный или шестнадцатеричный) и его начертание текущим редактируемым шрифтом. Высоту строки можно изменить колесом мыши с зажатой клавишей </span><code>Ctrl</code><span> или в настройках. Также в настройках можно изменить видимость отдельных столбцов и их шрифт.</span></p><p>&nbsp;</p><h1 id='редактирование-символов'><span>Редактирование символов</span></h1><p><span>Редактор символов — правая часть главного окна. Контент в редакторе можно масштабировать колесом мыши или командами из меню </span><code>Вид &gt; Масштаб</code><span>. Команда </span><code>Вид &gt; Масштаб &gt; Вписать</code><span> задает оптимальный масштаб так, чтобы холст целиком помещался в редакторе. Флаг </span><code>Вид &gt; Сетка</code><span> управляет видимостью пиксельной сетки холста. Также в настройках можно включить шахматный фон в дополнение к сетке.</span></p><p>&nbsp;</p><h2 id='приемы'><span>Приемы</span></h2><p><span>Поддерживается несколько приемов редактирования символов:</span></p><ul><li><a href='#пиксельное-редактирование'><span>пиксельное</span></a><span>;</span></li><li><a href='#операции-редактирования-символа'><span>операции с символом</span></a><span>;</span></li><li><a href='#пакетное-редактирование'><span>пакетное редактирование</span></a><span>.</span></li></ul><p>&nbsp;</p><h3 id='пиксельное-редактирование'><span>Пиксельное редактирование</span></h3><p><span>Это основной метод создания символов, осуществляется мышью в редакторе символа. Щелчок левой кнопкой устанавливает пиксель, правой — очищает, средней — инвертирует. Чтобы изменить всю строку, удерживайте </span><code>Ctrl</code><span> при щелчке кнопкой мыши. Чтобы изменить весь столбец, удерживайте </span><code>Shift</code><span> при щелчке кнопкой мыши.</span></p><p>&nbsp;</p><h3 id='операции-редактирования-символа'><span>Операции редактирования символа</span></h3><figure><table><thead><tr><th><span>Операция</span></th><th><span>Команда</span></th><th><span>Действие</span></th></tr></thead><tbody><tr><td><span>Очистка символа</span></td><td><code>Правка &gt; Очистить</code></td><td><span>стирает все установленные пиксели</span></td></tr><tr><td><span>Инверсия</span></td><td><code>Эффекты &gt; Инвертировать</code></td><td><span>инвертирует все пиксели символа</span></td></tr><tr><td><span>Горизонтальное отображение</span></td><td><code>Эффекты &gt; Отобразить &gt; Горизонтально</code></td><td><span>зеркально отображает символ в горизонтальной плоскости</span></td></tr><tr><td><span>Вертикальное отображение</span></td><td><code>Эффекты &gt; Отобразить &gt; Вертикально</code></td><td><span>зеркально отображает символ в вертикальной плоскости</span></td></tr><tr><td><span>Сдвиг</span></td><td><code>Эффекты &gt; Сдвиг &gt; ...</code></td><td><span>перемещает символ на одну строку или столбец</span></td></tr><tr><td>&nbsp;</td><td><code>Эффекты &gt; Сдвиг &gt; С переносом</code></td><td><span>если выбрана эта опция, то крайний вытесняющийся столбец или строка вставляется с противоположной стороны</span></td></tr><tr><td><span>Прижатие</span></td><td><code>Эффекты &gt; Прижать  &gt; ...</code></td><td><span>перемещает символ к выбранному краю до тех пор, пока не останется чистого столбца или строки с этого края</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='пакетное-редактирование'><span>Пакетное редактирование</span></h3><p><span>Позволяет применить операцию ко всем символам шрифта. Операции аналогичны операциям с символом, находятся в меню </span><code>Шрифт</code><span>. Также есть несколько дополнительных операций для пакетной обработки.</span></p><p><strong><span>Обратите внимание!</span></strong><span> После применения следующих операций история правок всех символов будет очищена. Эти операции невозможно отменить после применения.</span></p><p>&nbsp;</p><h4 id='задание-диапазона-символов-шрифта'><span>Задание диапазона символов шрифта</span></h4><p><img src="screenshots/s8.png" referrerpolicy="no-referrer"></p><p><span>Команда </span><code>Шрифт &gt; Задать диапазон…</code><span> позволяет добавить в существующий шрифт новые символы или убрать ненужные (только с краев диапазона). В открывшемся диалоговом окне задайте коды начального и последнего символов шрифта. Если некоторые символы из предыдущего диапазона не войдут в новый диапазон, то они будут утеряны. Если новый диапазон содержит символы, которые не входили в предыдущий диапазон, то они будут созданы пустыми.</span></p><p>&nbsp;</p><h4 id='изменение-размеров-символов-шрифта'><span>Изменение размеров символов шрифта</span></h4><p><img src="screenshots/s10.png" referrerpolicy="no-referrer"></p><p><span>Команда </span><code>Шрифт &gt; Изменить размер холста…</code><span> позволяет изменить размер холста символов существующего шрифта. В диалоговом окне выберите действие — расширить или обрезать, введите в соответствующие поля нужные значения.</span></p><p>&nbsp;</p><h4 id='оптимизация-размеров-символов-шрифта'><span>Оптимизация размеров символов шрифта</span></h4><p><img src="screenshots/s9.png" referrerpolicy="no-referrer"></p><p><span>Команда </span><code>Шрифт &gt; Оптимизация размера холста…</code><span> удаляет общие для всех символов пустые строки и/или столбцы с краев холста. В диалогом окне задайте границы оптимизации — с каких краев нужно удалять пустые строки и/или столбцы.</span></p><p>&nbsp;</p><h2 id='отмена-и-повтор-выполненной-команды'><span>Отмена и повтор выполненной команды</span></h2><p><span>Каждый символ имеет свою историю правок, куда записываются все этапы редактирования. История правок доступна только в текущем сеансе работы. История очищается у всех символов при создании нового шрифта, загрузке шрифта из файла или выполнении некоторых операций. Для перемещения по истории правок символа используйте команды </span><code>Отменить</code><span> и </span><code>Повторить</code><span> из меню </span><code>Правка</code><span>.</span></p><p><span>Для отмены или повтора пакетной операции предназначены команды </span><code>Отменить</code><span> и </span><code>Повторить</code><span> из меню </span><code>Шрифт</code><span>, которые применяют соответствующие символьные команды ко всем символам шрифта одновременно.</span></p><p>&nbsp;</p><h2 id='копирование-и-вставка-символов'><span>Копирование и вставка символов</span></h2><p><span>Меню </span><code>Правка</code><span> содержит команды для работы с буфером обмена: </span><code>Копировать</code><span>, </span><code>Вырезать</code><span>, </span><code>Вставить</code><span>. При копировании и вырезании в буфер обмена помещается весь символ целиком. При вставке символа из буфера обмена его верхний левый край совмещается с верхним левым краем текущего холста.</span></p><p><span>Поддерживается копирование/вставка символов между холстами разных размеров. Если вставляемый символ больше текущего холста, то будет вставлена только часть, которая помещается на текущем холсте. Если вставляемый символ меньше текущего холста, то он будет вставлен целиком, а оставшаяся часть текущего холста не будет изменена.</span></p><p><span>Также есть команда пакетной вставки </span><code>Шрифт &gt; Пакетная вставка</code><span>, которая вставляет содержимое буфера обмена во все символы одновременно.</span></p><p><span>Меню </span><code>Правка &gt; Режим вставки</code><span> позволяет выбрать один из 4 режимов вставки, см. таблицу.</span></p><figure><table><thead><tr><th><span>Режим вставки</span></th><th><span>Описание</span></th></tr></thead><tbody><tr><td><span>Замена (NORM)</span></td><td><span>вставляемый символ заменяет текущий</span></td></tr><tr><td><span>И (AND)</span></td><td><span>попиксельная операция И между вставляемым символом и текущим</span></td></tr><tr><td><span>ИЛИ (OR)</span></td><td><span>попиксельная операция ИЛИ между вставляемым символом и текущим</span></td></tr><tr><td><span>Искл. ИЛИ (XOR)</span></td><td><span>попиксельная операция Искл. ИЛИ между вставляемым символом и текущим</span></td></tr></tbody></table></figure><p>&nbsp;</p><h2 id='поиск'><span>Поиск</span></h2><p><span>Команда-флаг </span><code>Правка &gt; Найти…</code><span> позволяет быстро найти нужный символ в навигаторе и перейти к его редактированию. Если флаг установлен, в нижней части редактора отображается панель поиска, где можно задать поиск по символу или по его десятичному коду.</span></p><p>&nbsp;</p><h1 id='образец-текста'><span>Образец текста</span></h1><p><img src="screenshots/s5.png" referrerpolicy="no-referrer"></p><p><span>Команда </span><code>Файл &gt; Образец текста</code><span> показывает окно с образцом текста для визуальной оценки создаваемого шрифта. Образец можно масштабировать при колесом мыши, текущий масштаб отображается в заголовке окна.</span></p><p><span>Переключатель </span><strong><span>Пропорциональный/Моноширинный</span></strong><span> позволяет задать стиль формирования строк из символов. Если выбран стиль </span><strong><span>Пропорциональный</span></strong><span>, то все межсимвольные интервалы одинаковы и задаются значением поля </span><strong><span>Дистанция между символами</span></strong><span>. Если выбран стиль </span><strong><span>Моноширинный</span></strong><span>, то все символы располагаются в ячейках виртуальной сетки шириной равной ширине символа, дистанция между ячейками задается значением поля </span><strong><span>Дистанция между символами</span></strong><span>. Поле </span><strong><span>Дистанция между строками</span></strong><span> позволяет задать дистанцию между верхом текущей строки и низом предыдущей.</span></p><p><span>Текст образца может быть произвольным, состоящим из символов, которые входят в редактируемый шрифт. Текст можно изменить, нажав кнопку-флаг </span><code>Редактировать текст</code><span>.</span></p><p><span>Кнопка </span><code>Сохранить пример как изображение</code><span> позволяет сохранить текущее изображение текста образца в выбранном масштабе в формате </span><strong><span>PNG</span></strong><span>.</span></p><p>&nbsp;</p><h1 id='генерирование-кода-си'><span>Генерирование кода Си</span></h1><p><img src="screenshots/s6.png" referrerpolicy="no-referrer"></p><p><span>После завершения редактирования шрифта можно сгенерировать соответствующий код на языке </span><strong><span>Си</span></strong><span> для использования шрифта в проектах программного обеспечения. Команда </span><code>Файл &gt; Генерировать…</code><span> открывает окно генератора кода </span><strong><span>Си</span></strong><span>.</span></p><p><span>В окне генератора есть две вкладки: </span><strong><span>Настройки вывода</span></strong><span> и </span><strong><span>Вывод</span></strong><span>.</span></p><p><span>Во вкладке </span><strong><span>Настройки вывода</span></strong><span> можно гибко настроить параметры генерирования кода. Генерирование базируется на том, что каждый пиксель символа кодируется одним битом двоичного числа.</span></p><p><span>На вкладке </span><strong><span>Вывод</span></strong><span> расположено единственное поле, в котором содержится сгенерированный код. Код можно скопировать в буфер обмена (кнопка </span><code>Копировать в буфер</code><span>) или сохранить в заголовочный файл Си (кнопка </span><code>Экспорт в файл…</code><span>). Кнопка </span><code>Обновить вывод</code><span> обновляет код, если окно генератора открыто вместе с главным окном приложения, в котором продолжается редактирование шрифта. Кнопка-флаг </span><code>Поверх окна редактора</code><span> управляет видимостью окна генератора поверх окна главного окна приложения. Кнопка </span><code>Примагнитить справа от редактора</code><span> включает прилипание окна генератора к правому краю главного окна при изменении положения последнего на экране.</span></p><p>&nbsp;</p><h1 id='настройки'><span>Настройки</span></h1><p><span>Для комфорта пользователя есть различные настройки внешнего вида и поведения приложения.</span></p><p><span>Команда-флаг </span><code>Вид &gt; Поверх всех окон</code><span> управляет видимостью окна приложения — если флаг установлен, то приложение всегда будет отображаться поверх других окон, даже если оно теряет фокус.</span></p><p><span>Меню </span><code>Вид &gt; Панели &gt;</code><span> позволяет задать видимость панелей быстрого доступа.</span></p><p><span>Остальные настройки находятся в окне, которое можно вызвать командой </span><code>Файл &gt; Настройки</code><span>.</span></p><p><img src="screenshots/s7.png" referrerpolicy="no-referrer"></p><p>&nbsp;</p><h1 id='помощь-в-интернационализации-интерфейса'><span>Помощь в интернационализации интерфейса</span></h1><p><span>Автор будет благодарен за Вашу помощь в переводе интерфейса приложения и справочных материалов на Ваш родной язык.</span></p><p><span>Приложение разработано с возможностью легкой локализации интерфейса. Файлы локализаций размещаются в каталоге </span><a href='../bin/lang'><span>bin/lang</span></a><span>.</span></p><p><span>Чтобы перевести интерфейс на другой язык, следуйте нижеприведенным инструкциям:</span></p><ol start='' ><li><p><span>Скопируйте файл </span><code>*.ru.po</code><span> (каталог </span><a href='../bin/lang'><span>bin/lang</span></a><span>) и замените суффикс локали на свой, например, для немецкого </span><code>*.de.po</code><span>.</span></p></li><li><p><span>Откройте свой файл </span><code>*.??.po</code><span> в </span><a href='http://translate.sourceforge.net/wiki/virtaal/index'><span>Virtaal</span></a><span>.</span></p></li><li><p><span>Осуществите перевод с русского на свой родной язык и сохраните переведенный файл.</span></p></li><li><p><span>Добавьте в </span><code>languages.ini</code><span> определение для своего перевода:</span></p><ul><li><span>увеличьте значение </span><code>Count</code><span> на единицу (</span><code>Count</code><span> показывает число доступных локализаций),</span></li><li><span>добавьте строку вида </span><code>L-&lt;index&gt;=&lt;locale&gt;&lt;description&gt;</code><span>, например,  </span><code>L-1=RU, Russian - Русский</code><span>,</span></li><li><span>обратите внимание, первые 2 символа описания должны совпадать с суффиксом локали (регистр не имеет значения).</span></li></ul></li></ol><p>&nbsp;</p></div></div>
+</body>
+</html>

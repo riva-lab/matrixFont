@@ -1,0 +1,1 @@
+upx --best "bin\*.exe"

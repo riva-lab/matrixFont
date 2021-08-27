@@ -1,0 +1,582 @@
+object fmImport: TfmImport
+  Left = 384
+  Height = 417
+  Top = 218
+  Width = 635
+  AutoSize = True
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Импорт шрифта'
+  ClientHeight = 417
+  ClientWidth = 635
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  SessionProperties = 'cbOptimize.Checked;cbSnapLeft.Checked;mmExample.Lines'
+  ShowHint = True
+  LCLVersion = '1.6.4.0'
+  object pcPages: TPageControl
+    Left = 0
+    Height = 235
+    Top = 0
+    Width = 635
+    ActivePage = tsExample
+    Align = alClient
+    Constraints.MinHeight = 200
+    Constraints.MinWidth = 500
+    TabIndex = 0
+    TabOrder = 0
+    object tsExample: TTabSheet
+      Caption = 'Образец'
+      ClientHeight = 207
+      ClientWidth = 627
+      object scbImage: TScrollBox
+        Left = 0
+        Height = 207
+        Top = 0
+        Width = 627
+        HorzScrollBar.Increment = 14
+        HorzScrollBar.Page = 140
+        HorzScrollBar.Smooth = True
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Increment = 6
+        VertScrollBar.Page = 65
+        VertScrollBar.Smooth = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        BorderStyle = bsNone
+        ClientHeight = 207
+        ClientWidth = 627
+        Color = clNone
+        ParentColor = False
+        TabOrder = 0
+        OnMouseWheel = scbImageMouseWheel
+        object shPreviewBG: TShape
+          Left = 0
+          Height = 207
+          Top = 0
+          Width = 627
+          Align = alClient
+          Pen.JoinStyle = pjsMiter
+          Pen.Width = 0
+        end
+        object imPreview: TImage
+          AnchorSideLeft.Control = scbImage
+          AnchorSideTop.Control = scbImage
+          Left = 0
+          Height = 43
+          Top = 0
+          Width = 140
+          Proportional = True
+          Stretch = True
+        end
+      end
+    end
+    object tsExampleText: TTabSheet
+      Caption = 'Текст образца'
+      ClientHeight = 207
+      ClientWidth = 627
+      object mmExample: TMemo
+        Left = 0
+        Height = 207
+        Top = 0
+        Width = 627
+        Align = alClient
+        BorderStyle = bsNone
+        Font.Height = -21
+        Lines.Strings = (
+          'mmExample'
+        )
+        OnChange = mmExampleChange
+        ParentFont = False
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+        WordWrap = False
+      end
+    end
+  end
+  object pMain: TPanel
+    Left = 0
+    Height = 182
+    Top = 235
+    Width = 635
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 10
+    ChildSizing.TopBottomSpacing = 10
+    ChildSizing.HorizontalSpacing = 20
+    ChildSizing.VerticalSpacing = 10
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.Layout = cclTopToBottomThenLeftToRight
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 182
+    ClientWidth = 635
+    TabOrder = 1
+    object pFont: TPanel
+      Left = 10
+      Height = 162
+      Top = 10
+      Width = 226
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 162
+      ClientWidth = 226
+      TabOrder = 0
+      object pFontName: TPanel
+        Left = 0
+        Height = 44
+        Top = 0
+        Width = 226
+        AutoSize = True
+        BorderSpacing.CellAlignVertical = ccaLeftTop
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 44
+        ClientWidth = 226
+        TabOrder = 0
+        object lbFontSystem: TLabel
+          Left = 0
+          Height = 15
+          Top = 0
+          Width = 226
+          Caption = 'Системный шрифт'
+          Color = cl3DLight
+          ParentColor = False
+          Transparent = False
+        end
+        object cbFontList: TComboBox
+          Left = 0
+          Height = 23
+          Top = 21
+          Width = 226
+          Constraints.MinWidth = 200
+          ItemHeight = 15
+          OnChange = fontChange
+          TabOrder = 0
+          Text = 'Arial'
+        end
+      end
+      object pFontSize: TPanel
+        Left = 0
+        Height = 42
+        Top = 49
+        Width = 226
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 4
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.Layout = cclTopToBottomThenLeftToRight
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 42
+        ClientWidth = 226
+        TabOrder = 1
+        object lbFontSize: TLabel
+          Left = 0
+          Height = 15
+          Top = 0
+          Width = 81
+          Caption = 'Размер'
+          ParentColor = False
+        end
+        object seSize: TSpinEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 23
+          Top = 19
+          Width = 81
+          Constraints.MinWidth = 50
+          OnChange = fontChange
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          Value = 8
+        end
+        object lbEmpty: TLabel
+          Left = 91
+          Height = 15
+          Top = 0
+          Width = 135
+          ParentColor = False
+        end
+        object sbMore: TSpeedButton
+          Left = 91
+          Height = 23
+          Top = 19
+          Width = 135
+          Caption = 'Дополнительно ...'
+          OnClick = btnMoreClick
+        end
+      end
+      object pFontStyle: TPanel
+        Left = 0
+        Height = 42
+        Top = 96
+        Width = 226
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 4
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.Layout = cclTopToBottomThenLeftToRight
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 42
+        ClientWidth = 226
+        TabOrder = 2
+        object cbStyleBold: TCheckBox
+          Left = 0
+          Height = 19
+          Top = 0
+          Width = 113
+          Caption = 'Полужирный'
+          OnChange = fontChange
+          TabOrder = 0
+        end
+        object cbStyleUnder: TCheckBox
+          Left = 0
+          Height = 19
+          Top = 23
+          Width = 113
+          Caption = 'Подчеркнутый'
+          OnChange = fontChange
+          TabOrder = 2
+        end
+        object cbStyleItalic: TCheckBox
+          Left = 123
+          Height = 19
+          Top = 0
+          Width = 103
+          Caption = 'Курсив'
+          OnChange = fontChange
+          TabOrder = 1
+        end
+        object cbStyleStrike: TCheckBox
+          Left = 123
+          Height = 19
+          Top = 23
+          Width = 103
+          Caption = 'Зачеркнутый'
+          OnChange = fontChange
+          TabOrder = 3
+        end
+      end
+      object cbExampleEdit: TCheckBox
+        Left = 0
+        Height = 19
+        Top = 143
+        Width = 226
+        Caption = 'Изменить текст образца'
+        OnChange = fontChange
+        TabOrder = 3
+      end
+    end
+    object pValues: TPanel
+      Left = 256
+      Height = 162
+      Top = 10
+      Width = 157
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 162
+      ClientWidth = 157
+      TabOrder = 1
+      object lbRange: TLabel
+        Left = 0
+        Height = 15
+        Top = 0
+        Width = 157
+        Alignment = taCenter
+        Caption = 'Диапазон символов'
+        Color = cl3DLight
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+      end
+      object pRange: TPanel
+        Left = 0
+        Height = 50
+        Top = 21
+        Width = 157
+        AutoSize = True
+        BorderSpacing.CellAlignVertical = ccaLeftTop
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 4
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 50
+        ClientWidth = 157
+        TabOrder = 0
+        object seStartItem: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 75
+          Constraints.MinWidth = 64
+          MaxValue = 255
+          TabOrder = 0
+          Value = 5
+        end
+        object lbItemStart: TLabel
+          Left = 85
+          Height = 23
+          Top = 0
+          Width = 72
+          Caption = 'Первый'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seLastItem: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 27
+          Width = 75
+          Constraints.MinWidth = 64
+          MaxValue = 255
+          TabOrder = 1
+          Value = 5
+        end
+        object lbItemLast: TLabel
+          Left = 85
+          Height = 23
+          Top = 27
+          Width = 72
+          Caption = 'Последний'
+          Layout = tlCenter
+          ParentColor = False
+        end
+      end
+      object lbSize: TLabel
+        Left = 0
+        Height = 15
+        Top = 86
+        Width = 157
+        Alignment = taCenter
+        BorderSpacing.Top = 15
+        Caption = 'Размер холста'
+        Color = cl3DLight
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+      end
+      object pSize: TPanel
+        Left = 0
+        Height = 50
+        Top = 107
+        Width = 157
+        AutoSize = True
+        BorderSpacing.CellAlignVertical = ccaLeftTop
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 4
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 50
+        ClientWidth = 157
+        TabOrder = 1
+        object seW: TSpinEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 78
+          TabOrder = 0
+        end
+        object lbItemWidth: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 88
+          Height = 23
+          Top = 0
+          Width = 69
+          Caption = 'Ширина'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seH: TSpinEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 27
+          Width = 78
+          TabOrder = 1
+        end
+        object lbItemHeight: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 88
+          Height = 23
+          Top = 27
+          Width = 69
+          Caption = 'Высота'
+          Layout = tlCenter
+          ParentColor = False
+        end
+      end
+    end
+    object pControls: TPanel
+      Left = 453
+      Height = 162
+      Top = 10
+      Width = 172
+      AutoSize = True
+      BorderSpacing.CellAlignHorizontal = ccaRightBottom
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 162
+      ClientWidth = 172
+      TabOrder = 2
+      object cbEncoding: TComboBox
+        Left = 0
+        Height = 23
+        Top = 0
+        Width = 172
+        ItemHeight = 15
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object pOptions: TPanel
+        Left = 0
+        Height = 45
+        Top = 30
+        Width = 154
+        AutoSize = True
+        BorderSpacing.CellAlignHorizontal = ccaLeftTop
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 45
+        ClientWidth = 154
+        TabOrder = 0
+        object cbSnapLeft: TCheckBox
+          Left = 0
+          Height = 19
+          Hint = 'Прижать все символы к левому краю холста'
+          Top = 0
+          Width = 154
+          BorderSpacing.CellAlignVertical = ccaLeftTop
+          Caption = 'Прижать к левому краю'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+        end
+        object cbOptimize: TCheckBox
+          Left = 0
+          Height = 19
+          Hint = 'Убрать общее пустое пространство вокруг символов'
+          Top = 24
+          Width = 154
+          BorderSpacing.CellAlignVertical = ccaLeftTop
+          Caption = 'Оптимизировать холст'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+        end
+      end
+      object lbScale: TLabel
+        Left = 0
+        Height = 17
+        Top = 80
+        Width = 172
+        Alignment = taCenter
+        Caption = 'lbScale'
+        Font.Color = clBtnShadow
+        ParentColor = False
+        ParentFont = False
+      end
+      object bbImport: TBitBtn
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 0
+        Height = 58
+        Top = 104
+        Width = 172
+        AutoSize = True
+        BorderSpacing.InnerBorder = 16
+        BorderSpacing.CellAlignVertical = ccaRightBottom
+        Caption = 'Импортировать'
+        Constraints.MinWidth = 150
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          200000000000000400006400000064000000000000000000000000690E7A0033
+          07E6002905DF002D06E0002D06DF002D06DF002D06DF002D06DF002D06DF002D
+          06DF002D06DF002D06DF002D06E0002905E0003107E700660E7D00460ABA0000
+          00FF002806FB002305FB002305FB002305FB002305FE002105F8002C06D1002E
+          06CD002105F8002305FE002305FB002806FB000000FF004109BA003507CC0023
+          05FF009E1602008A1300008913000088130000881300009D15000084125F007C
+          117C009414000087130000891300009F1600002805FF002F06D0003908CC001B
+          04FF008712020075100000731000007D11000092140300560CAD000000FF0005
+          01FF007C1167008012000074100000881300001F04FF003207D0003908CC001B
+          04FF0087120200751000007A1100007B1152002405FA000000FF000A01FF0000
+          00FF002D06FF008C13290076100000881300001F04FF003207D0003908CC001B
+          04FF008712020078100000801231001603FF000000FF007410B2002B06F7002C
+          06FC000701FF00480AC60088130000871300001F04FF003207D0003908CC001B
+          04FF00871202007610000076101200570C9F007F122A00821248000000FF0078
+          107800520BA4000000FF0073104C008E1300001F04FF003207D0003808CC001E
+          04FF0088130200751000007410000080120000921400004209C3000701FF0081
+          11270082120800590CBC006E0F28008B1300001F04FF003207D0003808C8001D
+          04FF009214150075100000741000007810000088133D000901FF003707DA008A
+          130000761000008412000077100000871300001F04FF003207D0005E0D9E0000
+          00FF003A08D5008312000076100000961400004009D2000000FF00791162007B
+          110000751000007510000075100000881300001F04FF003207D0008B1300004F
+          0B92002906FF009314110093140000490AC8000000FF00560CB9008A13000073
+          100000751000007510000075100000881300001F04FF003207D0007110150079
+          114D0074107E004C0AA7001102FF000000FF004B0AC6008E1303007410000075
+          100000751000007510000075100000881300001F04FF003207D000560CB70000
+          00FF000601FF000000FF001A03FE00730FBB009A151400751000007410000075
+          100000751000007510000075100000881300001F04FF003207D000700F350063
+          0E6C00680E5E007C11250095153A001D04FF003607CD00931408008812000086
+          1206008612060086120600861200009C1501002705FF002F06D000771000007E
+          1100007D1100007A110000811200004309CD000000FF001503FF001C04FF001A
+          04FF001A04FF001A04FF001A04FF001E05FF000000FF004209B9007510000075
+          1000007510000075100000741000008B1304005B0CAD002F06DB003908C90039
+          08C9003908C9003908C9003908CA003608C9003E08D5006A0E70
+        }
+        ModalResult = 1
+        Spacing = 10
+        TabOrder = 1
+      end
+    end
+  end
+  object dlgFont: TFontDialog
+    Font.Height = -11
+    Font.Name = 'Arial'
+    MinFontSize = 0
+    MaxFontSize = 0
+    Options = []
+    left = 105
+    top = 25
+  end
+  object IniStorageImport: TIniPropStorage
+    StoredValues = <>
+    left = 105
+    top = 115
+  end
+end

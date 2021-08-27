@@ -1,0 +1,6 @@
+bin/settings.ini
+bin/*.exe
+install/
+source/backup/
+source/lib/
+article/

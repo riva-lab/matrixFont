@@ -1,0 +1,511 @@
+object fmProp: TfmProp
+  Left = 337
+  Height = 369
+  Top = 161
+  Width = 607
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  BorderWidth = 10
+  Caption = 'Свойства шрифта'
+  ClientHeight = 369
+  ClientWidth = 607
+  Color = clForm
+  OnShow = FormShow
+  PopupMode = pmExplicit
+  Position = poMainFormCenter
+  ShowHint = True
+  LCLVersion = '1.6.4.0'
+  object pMain: TPanel
+    Left = 35
+    Height = 275
+    Top = 20
+    Width = 519
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.HorizontalSpacing = 10
+    ChildSizing.VerticalSpacing = 5
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 275
+    ClientWidth = 519
+    TabOrder = 0
+    object pEdits: TPanel
+      Left = 0
+      Height = 163
+      Top = 0
+      Width = 519
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 163
+      ClientWidth = 519
+      TabOrder = 0
+      object lbName: TLabel
+        Left = 0
+        Height = 23
+        Top = 0
+        Width = 59
+        Alignment = taRightJustify
+        Caption = 'Название'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object edFontName: TEdit
+        Left = 69
+        Height = 23
+        Top = 0
+        Width = 450
+        MaxLength = 64
+        TabOrder = 0
+      end
+      object lbAuthor: TLabel
+        Left = 0
+        Height = 23
+        Top = 28
+        Width = 59
+        Alignment = taRightJustify
+        Caption = 'Автор'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object edAuthor: TEdit
+        Left = 69
+        Height = 23
+        Top = 28
+        Width = 450
+        MaxLength = 64
+        TabOrder = 1
+      end
+      object lbFontEncoding: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 23
+        Top = 56
+        Width = 59
+        Alignment = taRightJustify
+        Caption = 'Кодировка'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbEncoding: TComboBox
+        Left = 69
+        Height = 23
+        Top = 56
+        Width = 450
+        ItemHeight = 15
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object lbPath: TLabel
+        Left = 0
+        Height = 23
+        Top = 84
+        Width = 59
+        Alignment = taRightJustify
+        Caption = 'Файл'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object edPath: TEdit
+        Left = 69
+        Height = 23
+        Top = 84
+        Width = 450
+        Color = clForm
+        Constraints.MinWidth = 450
+        OnClick = edPathClick
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object lbDateCreate: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 23
+        Top = 112
+        Width = 59
+        Alignment = taRightJustify
+        Caption = 'Создан'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object pCreate: TPanel
+        Left = 69
+        Height = 23
+        Top = 112
+        Width = 450
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 5
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 3
+        ClientHeight = 23
+        ClientWidth = 450
+        TabOrder = 4
+        object edDateCreate: TEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 223
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 128
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edAppCreate: TEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 228
+          Height = 23
+          Top = 0
+          Width = 222
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 128
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object lbDateChange: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 23
+        Top = 140
+        Width = 59
+        Alignment = taRightJustify
+        Caption = 'Изменен'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object pChange: TPanel
+        Left = 69
+        Height = 23
+        Top = 140
+        Width = 450
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 5
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 3
+        ClientHeight = 23
+        ClientWidth = 450
+        TabOrder = 5
+        object edDateChange: TEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 223
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 128
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edAppChange: TEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 228
+          Height = 23
+          Top = 0
+          Width = 222
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 128
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+    end
+    object pBottom: TPanel
+      Left = 0
+      Height = 107
+      Top = 168
+      Width = 519
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 5
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 107
+      ClientWidth = 519
+      TabOrder = 1
+      object pValues: TPanel
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 107
+        Top = 0
+        Width = 255
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 107
+        ClientWidth = 255
+        TabOrder = 0
+        object lbStart: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 23
+          Top = 0
+          Width = 107
+          Alignment = taRightJustify
+          Caption = 'Первый символ'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object edStart: TEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 117
+          Height = 23
+          Top = 0
+          Width = 80
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 64
+          NumbersOnly = True
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object lbLast: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 23
+          Top = 28
+          Width = 107
+          Alignment = taRightJustify
+          Caption = 'Последний символ'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object edLast: TEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 117
+          Height = 23
+          Top = 28
+          Width = 80
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 64
+          NumbersOnly = True
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object lbWidth: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 23
+          Top = 56
+          Width = 107
+          Alignment = taRightJustify
+          Caption = 'Ширина символа'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object edWidth: TEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 117
+          Height = 23
+          Top = 56
+          Width = 80
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 64
+          NumbersOnly = True
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object lbHeight: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 23
+          Top = 84
+          Width = 107
+          Alignment = taRightJustify
+          Caption = 'Высота символа'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object edHeight: TEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 117
+          Height = 23
+          Top = 84
+          Width = 80
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 64
+          NumbersOnly = True
+          ReadOnly = True
+          TabOrder = 3
+        end
+      end
+      object bbApply: TBitBtn
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 319
+        Height = 58
+        Top = 49
+        Width = 200
+        BorderSpacing.InnerBorder = 8
+        BorderSpacing.CellAlignHorizontal = ccaRightBottom
+        BorderSpacing.CellAlignVertical = ccaRightBottom
+        Caption = 'Применить'
+        Constraints.MinWidth = 200
+        Glyph.Data = {
+          36100000424D3610000000000000360000002800000020000000200000000100
+          2000000000000010000064000000640000000000000000000000FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00007510000075
+          1000007510000075100000751000007510000075100000751000007410000078
+          1006007E11D000650EFF008011D8007C11100073100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007410000090
+          14AC004409FF000000FF002E07FF008D13E0007D111100731000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000731000008C137D0060
+          0EFF000000FF000000FF000000FF003107FF008D14DD007D110D007310000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000072100000871259007410FF0001
+          00FF000000FF004B0AFF001603FF000000FF002F07FF008D14E0007D11100073
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          10000075100000751000007510000073100000801228008212FE001503FF0000
+          00FF003E09FF00A216D7006E0FEE000300FF000000FF003307FF008F14E2007D
+          1111007310000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          100000751000007510000074100000791105008C13DB002B06FF000000FF0029
+          06FF008B13DB00771000008B135A006E0FFF000401FF000000FF002E06FF008B
+          13E3007E11150073100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000741000009014AD00460AFF000000FF001002FF0081
+          12FF0081122C0073100000731000008C136E006D0FFF000300FF000000FF002E
+          06FF008D13E2007E111000731000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          10000075100000721000008E147E005F0DFF000000FF000000FF007310FF0087
+          125900721000007510000075100000731000008C136A006E0FFF000401FF0000
+          00FF002C06FF008D13E4007E1112007310000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007310000086124C007410FF000100FF000000FF005D0DFF008E13880073
+          10000075100000751000007510000075100000731000008C136F007010FF0006
+          01FF000000FF002E06FF008C13E0007E11110073100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000074
+          1000007F1124008512FC001503FF000000FF004409FF009014AF007410000075
+          1000007510000075100000751000007510000075100000731000008B13650073
+          10FF000601FF000000FF002E06FF008D13E3007D111100731000007510000075
+          1000007510000075100000751000007510000075100000751000007310000078
+          1000008E13D3003007FF000000FF002805FF008B13E000791108007410000075
+          100000751000007510000075100000751000007510000075100000731000008B
+          1368007010FF000401FF000000FF003107FF008D14DD007D110D007310000075
+          100000751000007510000075100000751000007510000075100000771006008C
+          13A700490AFF000000FF001103FF008212FE0081112800731000007510000075
+          1000007510000075100000751000007510000075100000751000007510000072
+          1000008B1365007010FF000501FF000000FF002F07FF008E14E3007D11140073
+          1000007510000075100000751000007510000075100000751000008712910059
+          0CFF000000FF000000FF006F0FFF0088135A0072100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          100000731000008C136B006E0FFF000200FF000000FF003107FF008D13E2007E
+          11110073100000751000007510000075100000751000007510000087129E0044
+          09FF000000FF005A0CFF008E138A007310000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          10000075100000731000008C136A006E0FFF000501FF000000FF002D06FF008C
+          13E2007E11150073100000751000007510000075100000751000007610480073
+          10D7007310FF008112A400741000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000731000008C136E006D0FFF000300FF000000FF002E
+          06FF008D13E2007E111000731000007510000075100000751000007310000078
+          1000007F11000076100000741000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          100000751000007510000075100000731000008B136A006F0FFF000601FF0000
+          00FF002D06FF008D13E4007D1112007310000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          10000075100000751000007510000075100000731000008C1370007010FF0004
+          01FF000000FF003007FF008E13DF007D110D0073100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000721000008B13650070
+          0FFF000601FF000000FF003007FF008D13DF007D111100731000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          100000751000007510000075100000751000007510000075100000731000008C
+          136800700FFF000401FF000000FF003207FF008913DD0079100C007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000073
+          1000008B136500700FFF000501FF000000FF002F07FF008312A0007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          100000731000008C136C006E0FFF000000FF001503FF008112A7007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          1000007510000075100000751000007510000075100000751000007510000075
+          100000751000007310000084126C007210FF006D0FFF0079104BFFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+        }
+        ModalResult = 1
+        Spacing = 10
+        TabOrder = 1
+      end
+    end
+  end
+end
