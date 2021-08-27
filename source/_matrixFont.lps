@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="10"/>
-    <BuildModes Active="x64-Release"/>
+    <BuildModes Active="x32-Release"/>
     <Units Count="93">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
