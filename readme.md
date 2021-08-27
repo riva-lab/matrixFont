@@ -55,7 +55,7 @@
 
 Copyright 2015-2017, 2021 Riva, [FreeBSD License, modified](license.md)
 
-[История версий](versions.txt)
+[История версий](versions.md)
 
 Разработано в [Free Pascal RAD IDE Lazarus](http://www.lazarus-ide.org), компилятор [Free Pascal Compiler](https://freepascal.org).
 

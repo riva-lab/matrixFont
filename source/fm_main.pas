@@ -18,8 +18,9 @@ resourcestring
   TXT_CHANGED   = 'изменен';
 
 const
-  HELP_DIR  = 'help';
-  HELP_FILE = 'matrixFont-help';
+  HELP_DIR        = 'help';
+  HELP_DIR_ONLINE = '-/blob/master/help';
+  HELP_FILE       = 'matrixFont-help';
 
 type
 
@@ -1286,7 +1287,7 @@ procedure TfmMain.actionService(Sender: TObject);
         OpenURL('..' + DirectorySeparator + HELP_DIR + DirectorySeparator + HELP_FILE + '.md');
 
       'acHelpNet': // действие: вызов справки онлайн
-        OpenURL(APP_SITE_ADDRESS + '/' + HELP_DIR + '/' + HELP_FILE + '.md');
+        OpenURL(APP_SITE_ADDRESS + '/' + HELP_DIR_ONLINE + '/' + HELP_FILE + '.md');
 
       'acWebsite':    // действие: информация о программе
         OpenURL(APP_SITE_ADDRESS);

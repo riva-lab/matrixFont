@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="10"/>
-    <BuildModes Active="x32-Release"/>
+    <BuildModes Active="x64-Release"/>
     <Units Count="93">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
@@ -20,9 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1507"/>
-        <CursorPos Y="1507"/>
-        <FoldState Value=" T7RC_Z T3qW0T3 pifjd06[94ajF0Q[96Y0A6 pj2]RH5[95g0I[R4bjR0N2]ILkA0T[R4BkJ033]9Yk90c8 T6sG21Fh"/>
+        <CursorPos X="39" Y="23"/>
+        <FoldState Value=" T7SC_Z T3qX0T3 pifjd06[94ajF0Q[96Y0A6 pj2]RH5[95g0I[R4bjR0N21[K4BnT033]9Yk90c8 T6sH21F)"/>
         <UsageCount Value="205"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -65,7 +64,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="478"/>
-        <CursorPos X="68" Y="489"/>
+        <CursorPos X="16" Y="485"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -187,7 +186,7 @@
         <Filename Value="help.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="50" Y="11"/>
+        <CursorPos X="6" Y="10"/>
         <FoldState Value=" T3I031$"/>
         <UsageCount Value="200"/>
       </Unit16>
@@ -743,7 +742,7 @@
         <UsageCount Value="10"/>
       </Unit92>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="3" HistoryIndex="2">
       <Position1>
         <Filename Value="font.pas"/>
         <Caret Line="422" Column="48" TopLine="380"/>
@@ -752,6 +751,10 @@
         <Filename Value="font.pas"/>
         <Caret Line="485" Column="61" TopLine="464"/>
       </Position2>
+      <Position3>
+        <Filename Value="fm_main.pas"/>
+        <Caret Line="1289" Column="48" TopLine="1269"/>
+      </Position3>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
