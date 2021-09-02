@@ -23,7 +23,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="52"/>
+      <BuildNr Value="53"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2017, 2021" OriginalFilename="matrixFont" ProductName="matrixFont" ProductVersion=""/>
     </VersionInfo>
@@ -60,6 +60,11 @@
               </Win32>
             </Options>
           </Linking>
+          <Other>
+            <OtherDefines Count="1">
+              <Define0 Value="DEBUG"/>
+            </OtherDefines>
+          </Other>
         </CompilerOptions>
       </Item2>
       <Item3 Name="x32-Debug">
@@ -103,6 +108,10 @@
               <ShoLineNum Value="True"/>
               <ShowDebugInfo Value="True"/>
             </Verbosity>
+            <CustomOptions Value="-dDEBUG"/>
+            <OtherDefines Count="1">
+              <Define0 Value="DEBUG"/>
+            </OtherDefines>
           </Other>
         </CompilerOptions>
       </Item3>
@@ -323,6 +332,10 @@
         <ShoLineNum Value="True"/>
         <ShowDebugInfo Value="True"/>
       </Verbosity>
+      <CustomOptions Value="-dDEBUG"/>
+      <OtherDefines Count="1">
+        <Define0 Value="DEBUG"/>
+      </OtherDefines>
     </Other>
   </CompilerOptions>
   <Debugging>

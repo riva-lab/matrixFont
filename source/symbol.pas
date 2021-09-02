@@ -5,11 +5,12 @@ unit symbol;
 interface
 
 uses
-  Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LConvEncoding, LCLType,
-  u_encodings;
+  Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LConvEncoding, LazFileUtils,
+  LCLType, GraphUtil, u_encodings, fm_import, u_utilities;
 
 const
   EXCHANGE_BUFFER_TYPE_ID = 'matrixFontApp'; // ID буфера обмена
+  CHAR_IMPORT_FORMATS     = 'png,jpg,jpeg,bmp,pnm,pgm,ppm,pbm,tif,tiff,ico';
 
 type
   TNumberView      = (nvHEX, nvBIN, nvDEC);
@@ -90,6 +91,9 @@ type
     // прижать символ к краю
     procedure Snap(Border: TBorder);
 
+    // центрирование символа
+    procedure Center(AVertical: Boolean);
+
     // вывести изображение символа в битмап
     procedure Draw(bmp: TBitmap);
 
@@ -126,8 +130,14 @@ type
     // импорт символа из системного шрифта для растеризации
     procedure Import(Font: TFont; Index: Integer; AEncoding: String);
 
+    // импорт изображения символа из файла PNG
+    procedure ImportImage(AFilename: String; ATreshold: Byte = 128);
+
     // получение ширины символа
     function GetCharWidth: Integer;
+
+    // получение высоты символа
+    function GetCharHeight: Integer;
 
     // загрузка символа целиком
     procedure LoadSymbol(ASymbol: TPSymbolField);
@@ -490,6 +500,28 @@ procedure TSymbol.Snap(Border: TBorder);
       end;
   end;
 
+// центрирование символа
+procedure TSymbol.Center(AVertical: Boolean);
+  var
+    i, steps: Integer;
+  begin
+    if AVertical then
+      begin
+      Snap(brUp);
+      steps := (FHeight - GetCharHeight) div 2;
+      for i := 0 to steps - 1 do
+        Shift(dirDown);
+      end
+    else
+      begin
+      Snap(brLeft);
+      steps := (FWidth - GetCharWidth) div 2;
+      for i := 0 to steps - 1 do
+        Shift(dirRight);
+      end;
+
+  end;
+
 // вывести изображение символа в битмап
 procedure TSymbol.Draw(bmp: TBitmap);
   var
@@ -809,6 +841,32 @@ procedure TSymbol.Import(Font: TFont; Index: Integer; AEncoding: String);
     FreeAndNil(tmp);
   end;
 
+// импорт изображения символа из файла PNG
+procedure TSymbol.ImportImage(AFilename: String; ATreshold: Byte);
+  var
+    tmp:          TPicture;
+    w, h, mw, mh: Integer;
+  begin
+    if FileExistsUTF8(AFilename) and
+      FileExtCheck(AFilename, CHAR_IMPORT_FORMATS) then
+      begin
+      tmp := TPicture.Create;
+      tmp.LoadFromFile(AFilename);
+
+      mw := FWidth - 1;
+      mh := FHeight - 1;
+      if tmp.Width < mw then mw := tmp.Width - 1;
+      if tmp.Height < mh then mh := tmp.Height - 1;
+
+      // растеризация символа во внутренний формат
+      for h := 0 to mh do
+        for w := 0 to mw do
+          FSymbol[w, h] := ColorToGray(tmp.Bitmap.Canvas.Pixels[w, h]) < ATreshold;
+
+      FreeAndNil(tmp);
+      end;
+  end;
+
 // получение ширины символа
 function TSymbol.GetCharWidth: Integer;
   var
@@ -838,6 +896,37 @@ function TSymbol.GetCharWidth: Integer;
       w := FWidth div 2 + 1;
 
     Result := w;
+  end;
+
+// получение высоты символа
+function TSymbol.GetCharHeight: Integer;
+  var
+    y, x, h, tmp: Integer;
+    empty:        Boolean;
+  begin
+    h   := 0;
+    tmp := 0;
+
+    for y := 0 to FHeight - 1 do
+      begin
+
+      empty := True;
+      for x := 0 to FWidth - 1 do
+        if FSymbol[x, y] then
+          begin
+          empty := False;
+          break;
+          end;
+
+      Inc(tmp);
+      if not empty then
+        h := tmp;
+      end;
+
+    if h = 0 then
+      h := FHeight div 2 + 1;
+
+    Result := h;
   end;
 
 // загрузка символа целиком (вызывается обычно после создания символа)

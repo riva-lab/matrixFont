@@ -252,6 +252,7 @@ msgid "Экспорт в файл..."
 msgstr ""
 
 #: tfmgen.acrefreshout.caption
+msgctxt "tfmgen.acrefreshout.caption"
 msgid "Обновить"
 msgstr ""
 
@@ -513,6 +514,24 @@ msgstr ""
 
 #: tfmmain.acdeletelastfileslist.caption
 msgid "Очистить список"
+msgstr ""
+
+#: tfmmain.acfontcenterh.caption
+msgctxt "TFMMAIN.ACFONTCENTERH.CAPTION"
+msgid "Горизонтально"
+msgstr ""
+
+#: tfmmain.acfontcenterh.hint
+msgid "Центрировать все символы горизонтально"
+msgstr ""
+
+#: tfmmain.acfontcenterv.caption
+msgctxt "TFMMAIN.ACFONTCENTERV.CAPTION"
+msgid "Вертикально"
+msgstr ""
+
+#: tfmmain.acfontcenterv.hint
+msgid "Центрировать все символы вертикально"
 msgstr ""
 
 #: tfmmain.acfontchangesizes.caption
@@ -794,6 +813,10 @@ msgstr ""
 msgid "Шрифт"
 msgstr ""
 
+#: tfmmain.acmenufontcenter.caption
+msgid "Центрировать символы"
+msgstr ""
+
 #: tfmmain.acmenufontmirror.caption
 msgid "Отобразить символы"
 msgstr ""
@@ -821,6 +844,10 @@ msgstr ""
 
 #: tfmmain.acmenusymbol.caption
 msgid "Эффекты"
+msgstr ""
+
+#: tfmmain.acmenusymbolcenter.caption
+msgid "Центрировать"
 msgstr ""
 
 #: tfmmain.acmenusymbolmirror.caption
@@ -922,6 +949,24 @@ msgstr ""
 msgid "Вкл/выкл отображение окна поверх других"
 msgstr ""
 
+#: tfmmain.acsymbolcenterh.caption
+msgctxt "tfmmain.acsymbolcenterh.caption"
+msgid "Горизонтально"
+msgstr ""
+
+#: tfmmain.acsymbolcenterh.hint
+msgid "Центрировать символ горизонтально"
+msgstr ""
+
+#: tfmmain.acsymbolcenterv.caption
+msgctxt "tfmmain.acsymbolcenterv.caption"
+msgid "Вертикально"
+msgstr ""
+
+#: tfmmain.acsymbolcenterv.hint
+msgid "Центрировать символ вертикально"
+msgstr ""
+
 #: tfmmain.acsymbolclear.caption
 msgctxt "tfmmain.acsymbolclear.caption"
 msgid "Очистить"
@@ -954,6 +999,14 @@ msgstr ""
 
 #: tfmmain.acsymbolfind.hint
 msgid "Поиск символа по названию или коду"
+msgstr ""
+
+#: tfmmain.acsymbolimportimage.caption
+msgid "Импорт изображения ..."
+msgstr ""
+
+#: tfmmain.acsymbolimportimage.hint
+msgid "Импортировать изображение на холст символа"
 msgstr ""
 
 #: tfmmain.acsymbolinvert.caption
@@ -1136,6 +1189,10 @@ msgstr ""
 msgid "Уменьшить изображение холста"
 msgstr ""
 
+#: tfmmain.dlgimport.title
+msgid "Импортировать изображение"
+msgstr ""
+
 #: tfmmain.dlgopen.title
 msgid "Открыть файл шрифта"
 msgstr ""
@@ -1168,6 +1225,11 @@ msgstr ""
 
 #: tfmmain.menuitem100.caption
 msgctxt "TFMMAIN.MENUITEM100.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tfmmain.menuitem109.caption
+msgctxt "TFMMAIN.MENUITEM109.CAPTION"
 msgid "-"
 msgstr ""
 
@@ -1283,6 +1345,10 @@ msgstr ""
 msgid "ToolButton38"
 msgstr ""
 
+#: tfmmain.toolbutton4.caption
+msgid "ToolButton4"
+msgstr ""
+
 #: tfmmain.toolbutton43.caption
 msgid "ToolButton43"
 msgstr ""
@@ -1312,6 +1378,10 @@ msgstr ""
 #: tfmmain.toolbutton63.caption
 msgctxt "TFMMAIN.TOOLBUTTON63.CAPTION"
 msgid "ToolButton7"
+msgstr ""
+
+#: tfmmain.toolbutton67.caption
+msgid "ToolButton67"
 msgstr ""
 
 #: tfmmain.toolbutton7.caption
@@ -1487,30 +1557,21 @@ msgstr ""
 msgid "Сохранить пример как изображение"
 msgstr ""
 
+#: tfmpreview.acrefresh.caption
+msgctxt "TFMPREVIEW.ACREFRESH.CAPTION"
+msgid "Обновить"
+msgstr ""
+
+#: tfmpreview.acrefresh.hint
+msgid "Обновить образец текста"
+msgstr ""
+
 #: tfmpreview.acresettext.caption
 msgid "По умолчанию"
 msgstr ""
 
 #: tfmpreview.acresettext.hint
 msgid "Восстановить текст примера по умолчанию"
-msgstr ""
-
-#: tfmpreview.aczoomin.caption
-msgctxt "TFMPREVIEW.ACZOOMIN.CAPTION"
-msgid "Увеличить"
-msgstr ""
-
-#: tfmpreview.aczoomin.hint
-msgid "Увеличить масштаб"
-msgstr ""
-
-#: tfmpreview.aczoomout.caption
-msgctxt "TFMPREVIEW.ACZOOMOUT.CAPTION"
-msgid "Уменьшить"
-msgstr ""
-
-#: tfmpreview.aczoomout.hint
-msgid "Уменьшить масштаб"
 msgstr ""
 
 #: tfmpreview.lbbackground.caption
@@ -1549,10 +1610,6 @@ msgstr ""
 
 #: tfmpreview.tbcontrols.caption
 msgid "tbControls"
-msgstr ""
-
-#: tfmpreview.toolbutton6.caption
-msgid "ToolButton6"
 msgstr ""
 
 #: tfmprop.bbapply.caption
@@ -1703,9 +1760,17 @@ msgstr ""
 msgid "Навигатор: фоновый цвет символа прозрачный"
 msgstr ""
 
+#: tfmsettings.cbpreviewrefresh.caption
+msgid "Обновлять образец текста предпросмотра автоматически"
+msgstr ""
+
 #: tfmsettings.lbauthor.caption
 msgctxt "TFMSETTINGS.LBAUTHOR.CAPTION"
 msgid "Автор"
+msgstr ""
+
+#: tfmsettings.lbbwtreshold.caption
+msgid "Порог черного при импорте изображения"
 msgstr ""
 
 #: tfmsettings.lbcolora.caption

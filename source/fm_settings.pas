@@ -20,21 +20,15 @@ type
   { TfmSettings }
 
   TfmSettings = class(TForm)
-    cbCodeHex:          TCheckBox;
-    cbNaviScroll:       TCheckBox;
-    cbtnImportA:        TColorButton;
-    cbtnImportBG:       TColorButton;
-    cbEncoding:         TComboBox;
     IniStorageSettings: TIniPropStorage;
-    lbColorImport:      TLabel;
-    lbColorImportA:     TLabel;
-    lbColorImportBG:    TLabel;
-    lbEmpty1:           TLabel;
-    lbFontEncoding:     TLabel;
-    pColorImport:       TPanel;
     SettingsActionList: TActionList;
     acOK:               TAction;
     acCancel:           TAction;
+
+    PageCtrl:      TPageControl;
+    tsGeneral:     TTabSheet;
+    tsNewDefaults: TTabSheet;
+    tsColors:      TTabSheet;
 
     bbApply:    TBitBtn;
     bbCancel:   TBitBtn;
@@ -47,16 +41,23 @@ type
     cbtnPreviewBG:  TColorButton;
     cbtnBackground: TColorButton;
     cbtnActive:     TColorButton;
+    cbtnImportA:    TColorButton;
+    cbtnImportBG:   TColorButton;
 
     cbNaviTransparent: TCheckBox;
     cbNaviInvert:      TCheckBox;
+    cbNaviScroll:      TCheckBox;
     cbChessGrid:       TCheckBox;
     cbCharName:        TCheckBox;
     cbCodeName:        TCheckBox;
+    cbCodeHex:         TCheckBox;
     cbMagnetPreview:   TCheckBox;
-    cbCharNameFont:    TComboBox;
-    cbCodeNameFont:    TComboBox;
-    cbLanguage:        TComboBox;
+    cbPreviewRefresh:  TCheckBox;
+
+    cbCharNameFont: TComboBox;
+    cbCodeNameFont: TComboBox;
+    cbLanguage:     TComboBox;
+    cbEncoding:     TComboBox;
 
     pLanguage:      TPanel;
     lbNewDefaults2: TPanel;
@@ -69,6 +70,13 @@ type
     pButtons:       TPanel;
     pColorNavi:     TPanel;
 
+    lbColorImport:    TLabel;
+    lbColorImportA:   TLabel;
+    lbColorImportBG:  TLabel;
+    lbEmpty1:         TLabel;
+    lbFontEncoding:   TLabel;
+    lbBWTreshold:     TLabel;
+    pColorImport:     TPanel;
     lbGridThickness:  TLabel;
     lbColorGrid:      TLabel;
     lbColorBG:        TLabel;
@@ -91,6 +99,7 @@ type
     lbFontName:       TLabel;
     lbAuthor:         TLabel;
 
+    seBWTreshold:       TSpinEdit;
     seCodeNameFontSize: TSpinEdit;
     seNewHeight:        TSpinEdit;
     seNewItemLast:      TSpinEdit;
@@ -104,12 +113,6 @@ type
     edFontName: TEdit;
 
 
-    PageCtrl:      TPageControl;
-    tsGeneral:     TTabSheet;
-    tsNewDefaults: TTabSheet;
-    tsColors:      TTabSheet;
-
-
     procedure cbCharNameClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -120,11 +123,13 @@ type
     procedure cbLanguageChange(Sender: TObject);
 
   PRIVATE
-    FLanguage:      String;
-    FLanguageIndex: Integer;
-    FChessGrid:     Boolean;
-    FMagnetPreview: Boolean;
-    FGridThickness: Integer;
+    FLanguage:       String;
+    FLanguageIndex:  Integer;
+    FChessGrid:      Boolean;
+    FMagnetPreview:  Boolean;
+    FPreviewRefresh: Boolean;
+    FGridThickness:  Integer;
+    FBWTreshold:     Integer;
 
     FColorActive:     TColor;
     FColorBackground: TColor;
@@ -164,7 +169,9 @@ type
   PUBLIC
     property Language: String read FLanguage;
     property MagnetPreview: Boolean read FMagnetPreview;
+    property PreviewRefresh: Boolean read FPreviewRefresh;
     property GridThickness: Integer read FGridThickness;
+    property BWTreshold: Integer read FBWTreshold;
     property ChessGrid: Boolean read FChessGrid;
 
     property ColorActive: TColor read FColorActive;
@@ -251,10 +258,12 @@ procedure TfmSettings.FormShow(Sender: TObject);
 
 procedure TfmSettings.LoadComponentsFromFields;
   begin
-    cbLanguage.ItemIndex    := FLanguageIndex;
-    seGridThickness.Value   := FGridThickness;
-    cbMagnetPreview.Checked := FMagnetPreview;
-    cbChessGrid.Checked     := FChessGrid;
+    cbLanguage.ItemIndex     := FLanguageIndex;
+    seGridThickness.Value    := FGridThickness;
+    seBWTreshold.Value       := FBWTreshold;
+    cbMagnetPreview.Checked  := FMagnetPreview;
+    cbPreviewRefresh.Checked := FPreviewRefresh;
+    cbChessGrid.Checked      := FChessGrid;
 
     cbtnActive.ButtonColor     := FColorActive;
     cbtnBackground.ButtonColor := FColorBackground;
@@ -292,11 +301,13 @@ procedure TfmSettings.LoadComponentsFromFields;
 
 procedure TfmSettings.LoadFieldsFromComponents;
   begin
-    FLanguageIndex := cbLanguage.ItemIndex;
-    FLanguage      := LowerCase(Copy(cbLanguage.Text, 1, 2));
-    FGridThickness := seGridThickness.Value;
-    FMagnetPreview := cbMagnetPreview.Checked;
-    FChessGrid     := cbChessGrid.Checked;
+    FLanguageIndex  := cbLanguage.ItemIndex;
+    FLanguage       := LowerCase(Copy(cbLanguage.Text, 1, 2));
+    FGridThickness  := seGridThickness.Value;
+    FBWTreshold     := seBWTreshold.Value;
+    FMagnetPreview  := cbMagnetPreview.Checked;
+    FPreviewRefresh := cbPreviewRefresh.Checked;
+    FChessGrid      := cbChessGrid.Checked;
 
     FColorActive     := cbtnActive.ButtonColor;
     FColorBackground := cbtnBackground.ButtonColor;

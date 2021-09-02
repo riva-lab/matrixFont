@@ -146,6 +146,9 @@ type
     // прижать все символы шрифта к краю
     procedure Snap(Border: TBorder);
 
+    // центрирование всех символов шрифта
+    procedure Center(AVertical: Boolean);
+
     // генерировать код шрифта
     function GenerateCode(StartChar: Integer = 0; EndChar: Integer = 0): String;
 
@@ -400,6 +403,18 @@ procedure TFont.Snap(Border: TBorder);
     for i := 1 to FFontLength do
       begin
       FSymbol[i - 1].Snap(Border);
+      FSymbol[i - 1].SaveChange;
+      end;
+  end;
+
+// центрирование всех символов шрифта
+procedure TFont.Center(AVertical: Boolean);
+  var
+    i: Integer;
+  begin
+    for i := 1 to FFontLength do
+      begin
+      FSymbol[i - 1].Center(AVertical);
       FSymbol[i - 1].SaveChange;
       end;
   end;

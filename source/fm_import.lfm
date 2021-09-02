@@ -158,6 +158,7 @@ object fmImport: TfmImport
           Height = 23
           Top = 21
           Width = 226
+          AutoDropDown = True
           Constraints.MinWidth = 200
           ItemHeight = 15
           OnChange = fontChange

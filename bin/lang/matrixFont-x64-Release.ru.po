@@ -1,7 +1,7 @@
 # Riva <@@@>, 2021.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-07-30 21:18+0300\n"
+"PO-Revision-Date: 2021-09-02 15:29+0300\n"
 "Last-Translator: Riva <@@@>\n"
 "Language-Team: 2021\n"
 "Language: en\n"
@@ -261,6 +261,7 @@ msgid "Экспорт в файл..."
 msgstr "Экспорт в файл..."
 
 #: tfmgen.acrefreshout.caption
+msgctxt "tfmgen.acrefreshout.caption"
 msgid "Обновить"
 msgstr "Обновить"
 
@@ -523,6 +524,24 @@ msgstr "Завершить работу приложения"
 #: tfmmain.acdeletelastfileslist.caption
 msgid "Очистить список"
 msgstr "Очистить список"
+
+#: tfmmain.acfontcenterh.caption
+msgctxt "tfmmain.acfontcenterh.caption"
+msgid "Горизонтально"
+msgstr "Горизонтально"
+
+#: tfmmain.acfontcenterh.hint
+msgid "Центрировать все символы горизонтально"
+msgstr "Центрировать все символы горизонтально"
+
+#: tfmmain.acfontcenterv.caption
+msgctxt "tfmmain.acfontcenterv.caption"
+msgid "Вертикально"
+msgstr "Вертикально"
+
+#: tfmmain.acfontcenterv.hint
+msgid "Центрировать все символы вертикально"
+msgstr "Центрировать все символы вертикально"
 
 #: tfmmain.acfontchangesizes.caption
 msgid "Изменить размер холста ..."
@@ -803,6 +822,10 @@ msgstr "Файл"
 msgid "Шрифт"
 msgstr "Шрифт"
 
+#: tfmmain.acmenufontcenter.caption
+msgid "Центрировать символы"
+msgstr "Центрировать символы"
+
 #: tfmmain.acmenufontmirror.caption
 msgid "Отобразить символы"
 msgstr "Отобразить символы"
@@ -831,6 +854,10 @@ msgstr "Режим вставки"
 #: tfmmain.acmenusymbol.caption
 msgid "Эффекты"
 msgstr "Эффекты"
+
+#: tfmmain.acmenusymbolcenter.caption
+msgid "Центрировать"
+msgstr "Центрировать"
 
 #: tfmmain.acmenusymbolmirror.caption
 msgid "Отобразить"
@@ -931,6 +958,24 @@ msgstr "Поверх всех окон"
 msgid "Вкл/выкл отображение окна поверх других"
 msgstr "Вкл/выкл отображение окна поверх других"
 
+#: tfmmain.acsymbolcenterh.caption
+msgctxt "tfmmain.acsymbolcenterh.caption"
+msgid "Горизонтально"
+msgstr "Горизонтально"
+
+#: tfmmain.acsymbolcenterh.hint
+msgid "Центрировать символ горизонтально"
+msgstr "Центрировать символ горизонтально"
+
+#: tfmmain.acsymbolcenterv.caption
+msgctxt "tfmmain.acsymbolcenterv.caption"
+msgid "Вертикально"
+msgstr "Вертикально"
+
+#: tfmmain.acsymbolcenterv.hint
+msgid "Центрировать символ вертикально"
+msgstr "Центрировать символ вертикально"
+
 #: tfmmain.acsymbolclear.caption
 msgctxt "tfmmain.acsymbolclear.caption"
 msgid "Очистить"
@@ -964,6 +1009,16 @@ msgstr "Найти символ"
 #: tfmmain.acsymbolfind.hint
 msgid "Поиск символа по названию или коду"
 msgstr "Поиск символа по названию или коду"
+
+#: tfmmain.acsymbolimportimage.caption
+#| msgid "Импорт из изображения ..."
+msgid "Импорт изображения ..."
+msgstr "Импорт изображения ..."
+
+#: tfmmain.acsymbolimportimage.hint
+#| msgid "Импортировать изображение символа из PNG"
+msgid "Импортировать изображение на холст символа"
+msgstr "Импортировать изображение на холст символа"
 
 #: tfmmain.acsymbolinvert.caption
 msgctxt "tfmmain.acsymbolinvert.caption"
@@ -1145,6 +1200,10 @@ msgstr "Уменьшить"
 msgid "Уменьшить изображение холста"
 msgstr "Уменьшить изображение холста"
 
+#: tfmmain.dlgimport.title
+msgid "Импортировать изображение"
+msgstr "Импортировать изображение"
+
 #: tfmmain.dlgopen.title
 msgid "Открыть файл шрифта"
 msgstr "Открыть файл шрифта"
@@ -1177,6 +1236,11 @@ msgstr "Код символа [DEC]"
 
 #: tfmmain.menuitem100.caption
 msgctxt "TFMMAIN.MENUITEM100.CAPTION"
+msgid "-"
+msgstr "-"
+
+#: tfmmain.menuitem109.caption
+msgctxt "tfmmain.menuitem109.caption"
 msgid "-"
 msgstr "-"
 
@@ -1292,6 +1356,10 @@ msgstr "ToolButton33"
 msgid "ToolButton38"
 msgstr "ToolButton38"
 
+#: tfmmain.toolbutton4.caption
+msgid "ToolButton4"
+msgstr "ToolButton4"
+
 #: tfmmain.toolbutton43.caption
 msgid "ToolButton43"
 msgstr "ToolButton43"
@@ -1322,6 +1390,10 @@ msgstr "ToolButton56"
 msgctxt "TFMMAIN.TOOLBUTTON63.CAPTION"
 msgid "ToolButton7"
 msgstr "ToolButton7"
+
+#: tfmmain.toolbutton67.caption
+msgid "ToolButton67"
+msgstr "ToolButton67"
 
 #: tfmmain.toolbutton7.caption
 msgctxt "tfmmain.toolbutton7.caption"
@@ -1496,6 +1568,15 @@ msgstr "Экспорт ..."
 msgid "Сохранить пример как изображение"
 msgstr "Сохранить пример как изображение"
 
+#: tfmpreview.acrefresh.caption
+msgctxt "tfmpreview.acrefresh.caption"
+msgid "Обновить"
+msgstr "Обновить"
+
+#: tfmpreview.acrefresh.hint
+msgid "Обновить образец текста"
+msgstr "Обновить образец текста"
+
 #: tfmpreview.acresettext.caption
 msgid "По умолчанию"
 msgstr "По умолчанию"
@@ -1503,24 +1584,6 @@ msgstr "По умолчанию"
 #: tfmpreview.acresettext.hint
 msgid "Восстановить текст примера по умолчанию"
 msgstr "Восстановить текст примера по умолчанию"
-
-#: tfmpreview.aczoomin.caption
-msgctxt "TFMPREVIEW.ACZOOMIN.CAPTION"
-msgid "Увеличить"
-msgstr "Увеличить"
-
-#: tfmpreview.aczoomin.hint
-msgid "Увеличить масштаб"
-msgstr "Увеличить масштаб"
-
-#: tfmpreview.aczoomout.caption
-msgctxt "TFMPREVIEW.ACZOOMOUT.CAPTION"
-msgid "Уменьшить"
-msgstr "Уменьшить"
-
-#: tfmpreview.aczoomout.hint
-msgid "Уменьшить масштаб"
-msgstr "Уменьшить масштаб"
 
 #: tfmpreview.lbbackground.caption
 msgid "   "
@@ -1559,10 +1622,6 @@ msgstr "Выводимый текст"
 #: tfmpreview.tbcontrols.caption
 msgid "tbControls"
 msgstr "tbControls"
-
-#: tfmpreview.toolbutton6.caption
-msgid "ToolButton6"
-msgstr "ToolButton6"
 
 #: tfmprop.bbapply.caption
 msgctxt "TFMPROP.BBAPPLY.CAPTION"
@@ -1712,10 +1771,18 @@ msgstr "Прокрутка колесом перемещает по символ
 msgid "Навигатор: фоновый цвет символа прозрачный"
 msgstr "Навигатор: фоновый цвет символа прозрачный"
 
+#: tfmsettings.cbpreviewrefresh.caption
+msgid "Обновлять образец текста предпросмотра автоматически"
+msgstr "Обновлять образец текста предпросмотра автоматически"
+
 #: tfmsettings.lbauthor.caption
 msgctxt "TFMSETTINGS.LBAUTHOR.CAPTION"
 msgid "Автор"
 msgstr "Автор"
+
+#: tfmsettings.lbbwtreshold.caption
+msgid "Порог черного при импорте изображения"
+msgstr "Порог черного при импорте изображения"
 
 #: tfmsettings.lbcolora.caption
 msgctxt "tfmsettings.lbcolora.caption"
@@ -2000,7 +2067,6 @@ msgid "8859-2 (ISO/IEC - центрально-европейская, лат. 2)
 msgstr "8859-2 (ISO/IEC - центрально-европейская, лат. 2)"
 
 #: u_encodings.enc_ansi
-#, fuzzy
 #| msgid "ANSI (только ASCII, 7 бит)"
 msgid "ANSI (ASCII 7-битная)"
 msgstr "ANSI (ASCII 7-битная)"

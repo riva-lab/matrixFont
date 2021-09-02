@@ -2,11 +2,11 @@ object fmPreview: TfmPreview
   Left = 221
   Height = 190
   Top = 481
-  Width = 642
+  Width = 600
   Anchors = []
   BorderIcons = [biSystemMenu]
   ClientHeight = 190
-  ClientWidth = 642
+  ClientWidth = 600
   Constraints.MinHeight = 190
   Constraints.MinWidth = 600
   OnCreate = FormCreate
@@ -19,7 +19,7 @@ object fmPreview: TfmPreview
     Left = 0
     Height = 150
     Top = 0
-    Width = 642
+    Width = 600
     TabStop = False
     ActivePage = tabPreview
     Align = alClient
@@ -28,12 +28,12 @@ object fmPreview: TfmPreview
     object tabPreview: TTabSheet
       Caption = 'Предпросмотр'
       ClientHeight = 122
-      ClientWidth = 634
+      ClientWidth = 592
       object scbImage: TScrollBox
         Left = 0
         Height = 122
         Top = 0
-        Width = 634
+        Width = 592
         HorzScrollBar.Page = 105
         HorzScrollBar.Tracking = True
         VertScrollBar.Page = 30
@@ -42,7 +42,7 @@ object fmPreview: TfmPreview
         Anchors = []
         BorderStyle = bsNone
         ClientHeight = 122
-        ClientWidth = 634
+        ClientWidth = 592
         Constraints.MinWidth = 50
         TabOrder = 0
         OnMouseWheel = scbImageMouseWheel
@@ -50,7 +50,7 @@ object fmPreview: TfmPreview
           Left = 0
           Height = 122
           Top = 0
-          Width = 634
+          Width = 592
           Align = alClient
           AutoSize = False
           Caption = '   '
@@ -95,16 +95,18 @@ object fmPreview: TfmPreview
     Left = 0
     Height = 40
     Top = 150
-    Width = 642
+    Width = 600
     Align = alBottom
     AutoSize = True
+    BorderSpacing.CellAlignVertical = ccaCenter
     BevelOuter = bvNone
     ChildSizing.LeftRightSpacing = 4
     ChildSizing.TopBottomSpacing = 4
     ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
     ChildSizing.Layout = cclTopToBottomThenLeftToRight
     ClientHeight = 40
-    ClientWidth = 642
+    ClientWidth = 600
     TabOrder = 1
     object pFontType: TPanel
       Left = 4
@@ -150,10 +152,11 @@ object fmPreview: TfmPreview
       end
     end
     object pButtons: TPanel
-      Left = 312
+      Left = 315
       Height = 32
       Top = 4
-      Width = 326
+      Width = 281
+      Align = alRight
       AutoSize = True
       BorderSpacing.CellAlignHorizontal = ccaRightBottom
       BevelOuter = bvNone
@@ -161,7 +164,7 @@ object fmPreview: TfmPreview
       ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
       ChildSizing.Layout = cclTopToBottomThenLeftToRight
       ClientHeight = 32
-      ClientWidth = 326
+      ClientWidth = 281
       TabOrder = 1
       object seSpace: TSpinEdit
         AnchorSideTop.Side = asrCenter
@@ -202,7 +205,7 @@ object fmPreview: TfmPreview
         AnchorSideBottom.Side = asrBottom
         Left = 120
         Top = 0
-        Width = 206
+        Width = 161
         Align = alNone
         AutoSize = True
         ButtonHeight = 32
@@ -216,37 +219,24 @@ object fmPreview: TfmPreview
         TabOrder = 2
         TabStop = True
         object ToolButton2: TToolButton
-          Left = 126
+          Left = 81
           Top = 0
           Action = acResetText
         end
         object ToolButton3: TToolButton
-          Left = 166
+          Left = 121
           Top = 0
           Action = acExportImage
         end
         object ToolButton1: TToolButton
-          Left = 86
+          Left = 41
           Top = 0
           Action = acEditText
         end
         object ToolButton4: TToolButton
-          Left = 41
-          Top = 0
-          Action = acZoomIn
-        end
-        object ToolButton5: TToolButton
           Left = 1
           Top = 0
-          Action = acZoomOut
-        end
-        object ToolButton6: TToolButton
-          Left = 81
-          Height = 32
-          Top = 0
-          Width = 5
-          Caption = 'ToolButton6'
-          Style = tbsDivider
+          Action = acRefresh
         end
       end
     end
@@ -275,19 +265,11 @@ object fmPreview: TfmPreview
       ImageIndex = 41
       OnExecute = acEditTextExecute
     end
-    object acZoomIn: TAction
-      Caption = 'Увеличить'
-      Hint = 'Увеличить масштаб'
-      ImageIndex = 37
-      OnExecute = acZoomInExecute
-      ShortCut = 117
-    end
-    object acZoomOut: TAction
-      Caption = 'Уменьшить'
-      Hint = 'Уменьшить масштаб'
-      ImageIndex = 38
-      OnExecute = acZoomOutExecute
-      ShortCut = 116
+    object acRefresh: TAction
+      Caption = 'Обновить'
+      Hint = 'Обновить образец текста'
+      ImageIndex = 29
+      OnExecute = acRefreshExecute
     end
   end
   object SaveDlg: TSaveDialog

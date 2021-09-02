@@ -1,22 +1,22 @@
 object fmSettings: TfmSettings
-  Left = 353
-  Height = 417
-  Top = 143
+  Left = 354
+  Height = 440
+  Top = 128
   Width = 518
   AutoSize = True
   BorderIcons = [biSystemMenu]
   Caption = 'Настройки'
-  ClientHeight = 417
+  ClientHeight = 440
   ClientWidth = 518
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  SessionProperties = 'cbCharName.Checked;cbCharNameFont.Text;cbChessGrid.Checked;cbCodeHex.Checked;cbCodeName.Checked;cbCodeNameFont.Text;cbLanguage.ItemIndex;cbMagnetPreview.Checked;cbNaviInvert.Checked;cbNaviScroll.Checked;cbNaviTransparent.Checked;cbtnActive.ButtonColor;cbtnBackground.Color;cbtnGrid.ButtonColor;cbtnImportA.ButtonColor;cbtnImportBG.ButtonColor;cbtnNaviA.ButtonColor;cbtnNaviBG.ButtonColor;cbtnPreviewA.ButtonColor;cbtnPreviewBG.ButtonColor;edAuthor.Text;edFontName.Text;seCharNameFontSize.Value;seCodeNameFontSize.Value;seGridThickness.Value;seHeight.Value;seItemLast.Value;seItemStart.Value;seNaviHeight.Value;seWidth.Value;cbEncoding.ItemIndex'
+  SessionProperties = 'cbCharName.Checked;cbCharNameFont.Text;cbChessGrid.Checked;cbCodeHex.Checked;cbCodeName.Checked;cbCodeNameFont.Text;cbEncoding.ItemIndex;cbLanguage.ItemIndex;cbMagnetPreview.Checked;cbNaviInvert.Checked;cbNaviScroll.Checked;cbNaviTransparent.Checked;cbtnActive.ButtonColor;cbtnBackground.Color;cbtnGrid.ButtonColor;cbtnImportA.ButtonColor;cbtnImportBG.ButtonColor;cbtnNaviA.ButtonColor;cbtnNaviBG.ButtonColor;cbtnPreviewA.ButtonColor;cbtnPreviewBG.ButtonColor;edAuthor.Text;edFontName.Text;seBWTreshold.Value;seCharNameFontSize.Value;seCodeNameFontSize.Value;seGridThickness.Value;seHeight.Value;seItemLast.Value;seItemStart.Value;seNaviHeight.Value;seNewHeight.Value;seNewItemLast.Value;seNewItemStart.Value;seNewWidth.Value;seWidth.Value;cbPreviewRefresh.Checked'
   ShowHint = True
   LCLVersion = '1.6.4.0'
   object PageCtrl: TPageControl
     Left = 0
-    Height = 363
+    Height = 386
     Top = 0
     Width = 518
     ActivePage = tsGeneral
@@ -32,7 +32,7 @@ object fmSettings: TfmSettings
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 335
+      ClientHeight = 358
       ClientWidth = 510
       object pLanguage: TPanel
         Left = 10
@@ -72,7 +72,7 @@ object fmSettings: TfmSettings
       end
       object pValues: TPanel
         Left = 10
-        Height = 61
+        Height = 89
         Top = 38
         Width = 490
         AutoSize = True
@@ -83,7 +83,7 @@ object fmSettings: TfmSettings
         ChildSizing.EnlargeHorizontal = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 61
+        ClientHeight = 89
         ClientWidth = 490
         TabOrder = 1
         object seGridThickness: TSpinEdit
@@ -132,6 +132,29 @@ object fmSettings: TfmSettings
           Layout = tlCenter
           ParentColor = False
         end
+        object seBWTreshold: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 23
+          Top = 61
+          Width = 97
+          Constraints.MinWidth = 64
+          MaxValue = 255
+          TabOrder = 2
+          Value = 128
+        end
+        object lbBWTreshold: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 107
+          Height = 23
+          Top = 61
+          Width = 383
+          Caption = 'Порог черного при импорте изображения'
+          Layout = tlCenter
+          ParentColor = False
+        end
       end
       object cbNaviInvert: TCheckBox
         AnchorSideLeft.Side = asrBottom
@@ -139,7 +162,7 @@ object fmSettings: TfmSettings
         AnchorSideRight.Side = asrBottom
         Left = 10
         Height = 19
-        Top = 104
+        Top = 132
         Width = 490
         Caption = 'Навигатор: отображать выделенный символ инверсно'
         Checked = True
@@ -152,7 +175,7 @@ object fmSettings: TfmSettings
         AnchorSideRight.Side = asrBottom
         Left = 10
         Height = 19
-        Top = 128
+        Top = 156
         Width = 490
         Caption = 'Навигатор: фоновый цвет символа прозрачный'
         Checked = True
@@ -166,7 +189,7 @@ object fmSettings: TfmSettings
         Left = 10
         Height = 19
         Hint = 'Прокрутка колесом перемещает по символам (выбрано) или прокручивает список (не выбрано)'
-        Top = 152
+        Top = 180
         Width = 490
         Caption = 'Навигатор: смена символов прокруткой'
         TabOrder = 7
@@ -174,7 +197,7 @@ object fmSettings: TfmSettings
       object cbChessGrid: TCheckBox
         Left = 10
         Height = 19
-        Top = 176
+        Top = 204
         Width = 490
         Caption = 'Редактор символа: шахматный фон'
         TabOrder = 4
@@ -183,17 +206,28 @@ object fmSettings: TfmSettings
         AnchorSideTop.Side = asrBottom
         Left = 10
         Height = 19
-        Top = 200
+        Top = 228
         Width = 490
         Caption = 'Примагничивать окно предпросмотра к низу редактора'
         Checked = True
         State = cbChecked
         TabOrder = 5
       end
+      object cbPreviewRefresh: TCheckBox
+        AnchorSideTop.Side = asrBottom
+        Left = 10
+        Height = 19
+        Top = 252
+        Width = 490
+        Caption = 'Обновлять образец текста предпросмотра автоматически'
+        Checked = True
+        State = cbChecked
+        TabOrder = 8
+      end
       object lbNaviColumns: TLabel
         Left = 10
         Height = 20
-        Top = 229
+        Top = 281
         Width = 490
         Alignment = taCenter
         AutoSize = False
@@ -210,7 +244,7 @@ object fmSettings: TfmSettings
       object pNaviColumns: TPanel
         Left = 10
         Height = 61
-        Top = 254
+        Top = 306
         Width = 490
         AutoSize = True
         BevelOuter = bvNone
@@ -314,7 +348,7 @@ object fmSettings: TfmSettings
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 336
+      ClientHeight = 335
       ClientWidth = 510
       object lbColorEditor: TLabel
         Left = 10
@@ -688,7 +722,7 @@ object fmSettings: TfmSettings
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 335
+      ClientHeight = 358
       ClientWidth = 510
       object lbNewDefaults: TLabel
         Left = 10
@@ -853,7 +887,7 @@ object fmSettings: TfmSettings
           Top = 56
           Width = 154
           Constraints.MinWidth = 64
-          MaxValue = 128
+          MaxValue = 512
           MinValue = 1
           TabOrder = 2
           Value = 5
@@ -876,7 +910,7 @@ object fmSettings: TfmSettings
           Top = 84
           Width = 154
           Constraints.MinWidth = 64
-          MaxValue = 128
+          MaxValue = 512
           MinValue = 1
           TabOrder = 3
           Value = 7
@@ -898,7 +932,7 @@ object fmSettings: TfmSettings
   object pControls: TPanel
     Left = 0
     Height = 54
-    Top = 363
+    Top = 386
     Width = 518
     Align = alBottom
     AutoSize = True

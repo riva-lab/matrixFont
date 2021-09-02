@@ -3,8 +3,8 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="10"/>
-    <BuildModes Active="x32-Release"/>
-    <Units Count="93">
+    <BuildModes Active="x32-Debug"/>
+    <Units Count="97">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,8 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="39" Y="23"/>
-        <FoldState Value=" T7SC_Z T3qX0T3 pifjd06[94ajF0Q[96Y0A6 pj2]RH5[95g0I[R4bjR0N21[K4BnT033]9Yk90c8 T6sH21F)"/>
+        <CursorPos X="31" Y="18"/>
+        <FoldState Value=" T7SC_z T3rG0T3 pjCkA06]9iajF0S[96a0A6]R2jd0H5[95g0I[R4bjR0N2 pk0kW0T[R4BkJ03[\4Yk90c8 T6tE21FA"/>
         <UsageCount Value="205"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,9 +33,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="187"/>
-        <CursorPos Y="292"/>
-        <FoldState Value=" T7i7B{2 T3kH0d7 pickG0D T6lO212n"/>
+        <TopLine Value="147"/>
+        <CursorPos X="5" Y="198"/>
+        <FoldState Value=" T7i7B{2 T3kH0d116 T6m8211t"/>
         <UsageCount Value="200"/>
       </Unit2>
       <Unit3>
@@ -45,26 +45,26 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="49"/>
-        <CursorPos X="58" Y="58"/>
-        <FoldState Value=" T3iP031z"/>
+        <TopLine Value="7"/>
+        <CursorPos Y="55"/>
+        <FoldState Value=" T7DBU T3iB0C2}"/>
         <UsageCount Value="200"/>
       </Unit3>
       <Unit4>
         <Filename Value="symbol.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="769"/>
-        <CursorPos Y="784"/>
-        <FoldState Value=" T7UC}E T3m2059 pkTlH0{33 plIke2O8 pjAmM0S3]SFlC0^2 T6mf21GC"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="844"/>
+        <CursorPos Y="845"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="font.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="478"/>
-        <CursorPos X="16" Y="485"/>
+        <TopLine Value="311"/>
+        <CursorPos Y="411"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -107,8 +107,8 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="124"/>
-        <CursorPos Y="216"/>
-        <FoldState Value=" T7LE) T3jP0B7 piYjI0; T6m123M"/>
+        <CursorPos Y="22"/>
+        <FoldState Value=" T7LE) T3jP0B7 pibjL0; T6m423j"/>
         <UsageCount Value="207"/>
       </Unit9>
       <Unit10>
@@ -118,9 +118,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="134"/>
-        <CursorPos Y="211"/>
-        <FoldState Value=" T7JF. T3jO059 T6kL221E"/>
+        <TopLine Value="139"/>
+        <CursorPos Y="182"/>
+        <FoldState Value=" T7JF: T3jM05A T6kJ221y"/>
         <UsageCount Value="200"/>
       </Unit10>
       <Unit11>
@@ -178,15 +178,15 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="214"/>
-        <FoldState Value=" T7LG}B T3lf083 pjNjf036 T6m9211("/>
+        <CursorPos X="15" Y="4"/>
+        <FoldState Value=" T7LG}I T3m5083 pjRk2036 T6mG211s"/>
         <UsageCount Value="200"/>
       </Unit15>
       <Unit16>
         <Filename Value="help.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="6" Y="10"/>
+        <CursorPos X="38" Y="11"/>
         <FoldState Value=" T3I031$"/>
         <UsageCount Value="200"/>
       </Unit16>
@@ -197,7 +197,7 @@
         <TopLine Value="14"/>
         <CursorPos X="72" Y="27"/>
         <FoldState Value=" T3i90TR"/>
-        <UsageCount Value="157"/>
+        <UsageCount Value="168"/>
       </Unit17>
       <Unit18>
         <Filename Value="copenfilelist.pas"/>
@@ -207,15 +207,16 @@
         <TopLine Value="40"/>
         <CursorPos Y="61"/>
         <FoldState Value=" T7HIK T3i3055 T6iI211="/>
-        <UsageCount Value="153"/>
+        <UsageCount Value="164"/>
       </Unit18>
       <Unit19>
         <Filename Value="u_utilities.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="45" Y="55"/>
-        <UsageCount Value="151"/>
+        <TopLine Value="39"/>
+        <CursorPos Y="97"/>
+        <FoldState Value=" T3i90E4 T6iQ211R"/>
+        <UsageCount Value="162"/>
       </Unit19>
       <Unit20>
         <Filename Value="u_encodings.pas"/>
@@ -223,7 +224,7 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="40" Y="11"/>
         <FoldState Value=" TCXF3 T3iJ089 T6jH214'"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="41"/>
       </Unit20>
       <Unit21>
         <Filename Value="C:\lazarus\fpc\2.6.4\source\rtl\objpas\sysutils\sysstrh.inc"/>
@@ -514,9 +515,9 @@
         <Filename Value="C:\lazarus\lcl\graphics.pp"/>
         <UnitName Value="Graphics"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1153"/>
-        <CursorPos X="15" Y="1164"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="870"/>
+        <CursorPos X="14" Y="882"/>
+        <UsageCount Value="10"/>
       </Unit61>
       <Unit62>
         <Filename Value="fm_gen.lfm"/>
@@ -741,20 +742,159 @@
         <CursorPos Y="8519"/>
         <UsageCount Value="10"/>
       </Unit92>
+      <Unit93>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\rtl\win32\windows.pp"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit93>
+      <Unit94>
+        <Filename Value="C:\lazarus\components\lazutils\winlazfileutils.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="934"/>
+        <CursorPos Y="952"/>
+        <UsageCount Value="10"/>
+      </Unit94>
+      <Unit95>
+        <Filename Value="C:\lazarus\components\lazutils\lazfileutils.pas"/>
+        <UnitName Value="LazFileUtils"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="225"/>
+        <CursorPos X="64" Y="219"/>
+        <UsageCount Value="10"/>
+      </Unit95>
+      <Unit96>
+        <Filename Value="C:\lazarus\lcl\lcltype.pp"/>
+        <UnitName Value="LCLType"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1382"/>
+        <CursorPos X="3" Y="1394"/>
+        <UsageCount Value="10"/>
+      </Unit96>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <OtherDefines Count="1">
+      <Define0 Value="DEBUG"/>
+    </OtherDefines>
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="font.pas"/>
-        <Caret Line="422" Column="48" TopLine="380"/>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="856" Column="36" TopLine="850"/>
       </Position1>
       <Position2>
-        <Filename Value="font.pas"/>
-        <Caret Line="485" Column="61" TopLine="464"/>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="867" TopLine="850"/>
       </Position2>
       <Position3>
-        <Filename Value="fm_main.pas"/>
-        <Caret Line="1289" Column="48" TopLine="1269"/>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
       </Position3>
+      <Position4>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="867" TopLine="850"/>
+      </Position4>
+      <Position5>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position5>
+      <Position6>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="867" TopLine="850"/>
+      </Position6>
+      <Position7>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="856" Column="39" TopLine="850"/>
+      </Position7>
+      <Position8>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position8>
+      <Position9>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="850"/>
+      </Position9>
+      <Position10>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position10>
+      <Position11>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="850"/>
+      </Position11>
+      <Position12>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position12>
+      <Position13>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="850"/>
+      </Position13>
+      <Position14>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position14>
+      <Position15>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="866" Column="26" TopLine="847"/>
+      </Position15>
+      <Position16>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" Column="47" TopLine="850"/>
+      </Position16>
+      <Position17>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position17>
+      <Position18>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="850"/>
+      </Position18>
+      <Position19>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="850"/>
+      </Position19>
+      <Position20>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="850"/>
+      </Position20>
+      <Position21>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="856" Column="38" TopLine="847"/>
+      </Position21>
+      <Position22>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="862" TopLine="847"/>
+      </Position22>
+      <Position23>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="865" TopLine="847"/>
+      </Position23>
+      <Position24>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="866" TopLine="847"/>
+      </Position24>
+      <Position25>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="848"/>
+      </Position25>
+      <Position26>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="849"/>
+      </Position26>
+      <Position27>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="849"/>
+      </Position27>
+      <Position28>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="869" TopLine="849"/>
+      </Position28>
+      <Position29>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="868" TopLine="849"/>
+      </Position29>
+      <Position30>
+        <Filename Value="symbol.pas"/>
+        <Caret Line="856" Column="41" TopLine="849"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

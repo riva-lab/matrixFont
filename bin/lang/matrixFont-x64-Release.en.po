@@ -4,7 +4,7 @@
 # Riva <@@@>, 2021.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-07-30 21:17+0300\n"
+"PO-Revision-Date: 2021-09-02 15:30+0300\n"
 "Last-Translator: Riva <@@@>\n"
 "Language-Team: 2021\n"
 "Language: en\n"
@@ -264,6 +264,7 @@ msgid "Экспорт в файл..."
 msgstr "Export to file..."
 
 #: tfmgen.acrefreshout.caption
+msgctxt "tfmgen.acrefreshout.caption"
 msgid "Обновить"
 msgstr "Update"
 
@@ -526,6 +527,24 @@ msgstr "Finish work and exit from application"
 #: tfmmain.acdeletelastfileslist.caption
 msgid "Очистить список"
 msgstr "Clear list"
+
+#: tfmmain.acfontcenterh.caption
+msgctxt "tfmmain.acfontcenterh.caption"
+msgid "Горизонтально"
+msgstr "Horizontally"
+
+#: tfmmain.acfontcenterh.hint
+msgid "Центрировать все символы горизонтально"
+msgstr "Center all chars horizontally"
+
+#: tfmmain.acfontcenterv.caption
+msgctxt "tfmmain.acfontcenterv.caption"
+msgid "Вертикально"
+msgstr "Vertically"
+
+#: tfmmain.acfontcenterv.hint
+msgid "Центрировать все символы вертикально"
+msgstr "Center all chars vertically"
 
 #: tfmmain.acfontchangesizes.caption
 msgid "Изменить размер холста ..."
@@ -807,6 +826,10 @@ msgstr "File"
 msgid "Шрифт"
 msgstr "Font"
 
+#: tfmmain.acmenufontcenter.caption
+msgid "Центрировать символы"
+msgstr "Center chars"
+
 #: tfmmain.acmenufontmirror.caption
 msgid "Отобразить символы"
 msgstr "Mirror chars"
@@ -835,6 +858,10 @@ msgstr "Insert mode"
 #: tfmmain.acmenusymbol.caption
 msgid "Эффекты"
 msgstr "Effects"
+
+#: tfmmain.acmenusymbolcenter.caption
+msgid "Центрировать"
+msgstr "Center"
 
 #: tfmmain.acmenusymbolmirror.caption
 msgid "Отобразить"
@@ -935,6 +962,24 @@ msgstr "On top"
 msgid "Вкл/выкл отображение окна поверх других"
 msgstr "On/off viewing of window on top of all others"
 
+#: tfmmain.acsymbolcenterh.caption
+msgctxt "tfmmain.acsymbolcenterh.caption"
+msgid "Горизонтально"
+msgstr "Horizontally"
+
+#: tfmmain.acsymbolcenterh.hint
+msgid "Центрировать символ горизонтально"
+msgstr "Center char horizontally"
+
+#: tfmmain.acsymbolcenterv.caption
+msgctxt "tfmmain.acsymbolcenterv.caption"
+msgid "Вертикально"
+msgstr "Vertically"
+
+#: tfmmain.acsymbolcenterv.hint
+msgid "Центрировать символ вертикально"
+msgstr "Center char vertically"
+
 #: tfmmain.acsymbolclear.caption
 msgctxt "tfmmain.acsymbolclear.caption"
 msgid "Очистить"
@@ -968,6 +1013,16 @@ msgstr "Find char"
 #: tfmmain.acsymbolfind.hint
 msgid "Поиск символа по названию или коду"
 msgstr "Search char by name or code"
+
+#: tfmmain.acsymbolimportimage.caption
+#| msgid "Импорт из изображения ..."
+msgid "Импорт изображения ..."
+msgstr "Import image ..."
+
+#: tfmmain.acsymbolimportimage.hint
+#| msgid "Импортировать изображение символа из PNG"
+msgid "Импортировать изображение на холст символа"
+msgstr "Import image to char canvas"
 
 #: tfmmain.acsymbolinvert.caption
 msgctxt "tfmmain.acsymbolinvert.caption"
@@ -1149,6 +1204,10 @@ msgstr "Zoom out"
 msgid "Уменьшить изображение холста"
 msgstr "Zoom out canvas image"
 
+#: tfmmain.dlgimport.title
+msgid "Импортировать изображение"
+msgstr "Import image"
+
 #: tfmmain.dlgopen.title
 msgid "Открыть файл шрифта"
 msgstr "Open font file"
@@ -1181,6 +1240,11 @@ msgstr "Char code [DEC]"
 
 #: tfmmain.menuitem100.caption
 msgctxt "tfmmain.menuitem100.caption"
+msgid "-"
+msgstr "-"
+
+#: tfmmain.menuitem109.caption
+msgctxt "tfmmain.menuitem109.caption"
 msgid "-"
 msgstr "-"
 
@@ -1296,6 +1360,10 @@ msgstr "ToolButton33"
 msgid "ToolButton38"
 msgstr "ToolButton38"
 
+#: tfmmain.toolbutton4.caption
+msgid "ToolButton4"
+msgstr "ToolButton4"
+
 #: tfmmain.toolbutton43.caption
 msgid "ToolButton43"
 msgstr "ToolButton43"
@@ -1326,6 +1394,10 @@ msgstr "ToolButton56"
 msgctxt "TFMMAIN.TOOLBUTTON63.CAPTION"
 msgid "ToolButton7"
 msgstr "ToolButton7"
+
+#: tfmmain.toolbutton67.caption
+msgid "ToolButton67"
+msgstr "ToolButton67"
 
 #: tfmmain.toolbutton7.caption
 msgctxt "tfmmain.toolbutton7.caption"
@@ -1500,6 +1572,15 @@ msgstr "Export ..."
 msgid "Сохранить пример как изображение"
 msgstr "Save sample as an image"
 
+#: tfmpreview.acrefresh.caption
+msgctxt "tfmpreview.acrefresh.caption"
+msgid "Обновить"
+msgstr "Update"
+
+#: tfmpreview.acrefresh.hint
+msgid "Обновить образец текста"
+msgstr "Refresh example text"
+
 #: tfmpreview.acresettext.caption
 msgid "По умолчанию"
 msgstr "By default"
@@ -1507,24 +1588,6 @@ msgstr "By default"
 #: tfmpreview.acresettext.hint
 msgid "Восстановить текст примера по умолчанию"
 msgstr "Restore default example text"
-
-#: tfmpreview.aczoomin.caption
-msgctxt "TFMPREVIEW.ACZOOMIN.CAPTION"
-msgid "Увеличить"
-msgstr "Zoom in"
-
-#: tfmpreview.aczoomin.hint
-msgid "Увеличить масштаб"
-msgstr "Scale zoom in"
-
-#: tfmpreview.aczoomout.caption
-msgctxt "TFMPREVIEW.ACZOOMOUT.CAPTION"
-msgid "Уменьшить"
-msgstr "Zoom out"
-
-#: tfmpreview.aczoomout.hint
-msgid "Уменьшить масштаб"
-msgstr "Scale zoom out"
 
 #: tfmpreview.lbbackground.caption
 msgid "   "
@@ -1563,10 +1626,6 @@ msgstr "Displayed text"
 #: tfmpreview.tbcontrols.caption
 msgid "tbControls"
 msgstr "tbControls"
-
-#: tfmpreview.toolbutton6.caption
-msgid "ToolButton6"
-msgstr "ToolButton6"
 
 #: tfmprop.bbapply.caption
 msgctxt "TFMPROP.BBAPPLY.CAPTION"
@@ -1716,10 +1775,18 @@ msgstr "Wheel scrolling moves through the chars (selected) or scrolls the list (
 msgid "Навигатор: фоновый цвет символа прозрачный"
 msgstr "Navigator: background color of char is transparent"
 
+#: tfmsettings.cbpreviewrefresh.caption
+msgid "Обновлять образец текста предпросмотра автоматически"
+msgstr "Refresh preview example text automatically"
+
 #: tfmsettings.lbauthor.caption
 msgctxt "TFMSETTINGS.LBAUTHOR.CAPTION"
 msgid "Автор"
 msgstr "Author"
+
+#: tfmsettings.lbbwtreshold.caption
+msgid "Порог черного при импорте изображения"
+msgstr "Treshold of black at image import"
 
 #: tfmsettings.lbcolora.caption
 msgctxt "tfmsettings.lbcolora.caption"

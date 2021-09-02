@@ -8,7 +8,7 @@ uses
   Windows, LCLIntf, ShellApi;
 
 const
-  HELP_FILE   = '..\help\matrixFont-help.html';
+  HELP_FILE   = 'matrixFont-help.html';
   HELP_ENGINE = 'hh.exe';
 
 procedure HelpOpenDefault;

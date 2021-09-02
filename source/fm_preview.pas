@@ -18,6 +18,7 @@ type
   { TfmPreview }
 
   TfmPreview = class(TForm)
+    acRefresh:     TAction;
     imPreview:     TImage;
     IniStoragePV:  TIniPropStorage;
     mmPreview:     TMemo;
@@ -30,8 +31,6 @@ type
     tabPreview:    TTabSheet;
     tabTxt:        TTabSheet;
     ActionList1:   TActionList;
-    acZoomIn:      TAction;
-    acZoomOut:     TAction;
     acEditText:    TAction;
     acExportImage: TAction;
     acResetText:   TAction;
@@ -40,8 +39,6 @@ type
     ToolButton2:   TToolButton;
     ToolButton3:   TToolButton;
     ToolButton4:   TToolButton;
-    ToolButton5:   TToolButton;
-    ToolButton6:   TToolButton;
     lbBackground:  TLabel;
     rbProp:        TRadioButton;
     rbMono:        TRadioButton;
@@ -50,6 +47,7 @@ type
 
     // экспорт изображения с текстом текущим шрифтом
     procedure acExportImageExecute(Sender: TObject);
+    procedure acRefreshExecute(Sender: TObject);
 
     // создание окна предпросмотра
     procedure FormCreate(Sender: TObject);
@@ -178,6 +176,12 @@ procedure TfmPreview.acExportImageExecute(Sender: TObject);
           FreeAndNil(pic);
           end;
       end;
+  end;
+
+// обновление
+procedure TfmPreview.acRefreshExecute(Sender: TObject);
+  begin
+    UpdatePreview;
   end;
 
 // команда - РЕДАКТИРОВАТЬ ТЕКСТ

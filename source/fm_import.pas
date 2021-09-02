@@ -172,18 +172,21 @@ procedure TfmImport.fontChange(Sender: TObject);
   begin
     pcPages.ActivePageIndex := cbExampleEdit.Checked.ToInteger;
 
-    with dlgFont.Font do
-      begin
-      Name := cbFontList.Items[cbFontList.ItemIndex];
-      Size := seSize.Value;
+      try
+      with dlgFont.Font do
+        begin
+        Name := cbFontList.Text;
+        Size := seSize.Value;
+        end;
+
+      SetStyleByFlag(cbStyleBold.Checked, [fsBold]);
+      SetStyleByFlag(cbStyleStrike.Checked, [fsStrikeOut]);
+      SetStyleByFlag(cbStyleItalic.Checked, [fsItalic]);
+      SetStyleByFlag(cbStyleUnder.Checked, [fsUnderline]);
+
+      ApplyChange;
+      finally
       end;
-
-    SetStyleByFlag(cbStyleBold.Checked, [fsBold]);
-    SetStyleByFlag(cbStyleStrike.Checked, [fsStrikeOut]);
-    SetStyleByFlag(cbStyleItalic.Checked, [fsItalic]);
-    SetStyleByFlag(cbStyleUnder.Checked, [fsUnderline]);
-
-    ApplyChange;
   end;
 
 // изменение начертания шрифта

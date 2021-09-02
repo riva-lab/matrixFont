@@ -195,7 +195,7 @@ procedure TfmGen.acCopyToClipboardExecute(Sender: TObject);
 // изменение префикса (переопределение названия шрифта)
 procedure TfmGen.edDefPrefixChange(Sender: TObject);
   var
-    x, cursor_position, old_str_length, new_str_length: Integer;
+    cursor_position, old_str_length, new_str_length: Integer;
   begin
     with edDefPrefix do
       begin

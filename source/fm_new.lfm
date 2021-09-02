@@ -270,7 +270,7 @@ object fmNew: TfmNew
           Top = 0
           Width = 93
           Constraints.MinWidth = 64
-          MaxValue = 128
+          MaxValue = 512
           MinValue = 1
           TabOrder = 0
           Value = 5
@@ -282,7 +282,7 @@ object fmNew: TfmNew
           Top = 0
           Width = 92
           Constraints.MinWidth = 64
-          MaxValue = 128
+          MaxValue = 512
           MinValue = 1
           TabOrder = 1
           Value = 7
