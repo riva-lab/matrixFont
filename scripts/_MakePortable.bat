@@ -17,6 +17,7 @@ set PROJNAME=matrixFont
 set BUILD=Release
 
 
+cd ..
 
 set PROJARC=x64
 
