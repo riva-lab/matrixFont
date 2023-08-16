@@ -1,56 +1,58 @@
 object fmPreview: TfmPreview
-  Left = 221
-  Height = 190
-  Top = 481
-  Width = 600
+  Left = 355
+  Height = 238
+  Top = 168
+  Width = 750
   Anchors = []
   BorderIcons = [biSystemMenu]
-  ClientHeight = 190
-  ClientWidth = 600
-  Constraints.MinHeight = 190
-  Constraints.MinWidth = 600
+  ClientHeight = 238
+  ClientWidth = 750
+  Constraints.MinHeight = 238
+  Constraints.MinWidth = 750
+  DesignTimePPI = 120
   OnCreate = FormCreate
   OnShow = FormShow
   PopupMode = pmAuto
   Position = poMainFormCenter
   SessionProperties = 'mmPreview.Lines;seDelta.Value;seSpace.Value;rbMono.Checked;rbProp.Checked'
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '2.2.6.0'
   object pcPages: TPageControl
     Left = 0
-    Height = 150
+    Height = 190
     Top = 0
-    Width = 600
+    Width = 750
     TabStop = False
     ActivePage = tabPreview
     Align = alClient
+    Style = tsButtons
     TabIndex = 0
     TabOrder = 0
     object tabPreview: TTabSheet
       Caption = 'Предпросмотр'
-      ClientHeight = 122
-      ClientWidth = 592
+      ClientHeight = 154
+      ClientWidth = 742
       object scbImage: TScrollBox
         Left = 0
-        Height = 122
+        Height = 154
         Top = 0
-        Width = 592
-        HorzScrollBar.Page = 105
+        Width = 742
+        HorzScrollBar.Page = 131
         HorzScrollBar.Tracking = True
-        VertScrollBar.Page = 30
+        VertScrollBar.Page = 38
         VertScrollBar.Tracking = True
         Align = alClient
         Anchors = []
         BorderStyle = bsNone
-        ClientHeight = 122
-        ClientWidth = 592
-        Constraints.MinWidth = 50
+        ClientHeight = 154
+        ClientWidth = 742
+        Constraints.MinWidth = 62
         TabOrder = 0
         OnMouseWheel = scbImageMouseWheel
         object lbBackground: TLabel
           Left = 0
-          Height = 122
+          Height = 154
           Top = 0
-          Width = 592
+          Width = 742
           Align = alClient
           AutoSize = False
           Caption = '   '
@@ -62,9 +64,9 @@ object fmPreview: TfmPreview
           AnchorSideLeft.Control = scbImage
           AnchorSideTop.Control = scbImage
           Left = 0
-          Height = 30
+          Height = 38
           Top = 0
-          Width = 105
+          Width = 131
           Stretch = True
           Transparent = True
         end
@@ -72,13 +74,13 @@ object fmPreview: TfmPreview
     end
     object tabTxt: TTabSheet
       Caption = 'Выводимый текст'
-      ClientHeight = 232
-      ClientWidth = 715
+      ClientHeight = 154
+      ClientWidth = 742
       object mmPreview: TMemo
         Left = 0
-        Height = 232
+        Height = 154
         Top = 0
-        Width = 715
+        Width = 742
         Align = alClient
         Anchors = []
         BorderStyle = bsNone
@@ -93,9 +95,9 @@ object fmPreview: TfmPreview
   end
   object pControls: TPanel
     Left = 0
-    Height = 40
-    Top = 150
-    Width = 600
+    Height = 48
+    Top = 190
+    Width = 750
     Align = alBottom
     AutoSize = True
     BorderSpacing.CellAlignVertical = ccaCenter
@@ -105,14 +107,14 @@ object fmPreview: TfmPreview
     ChildSizing.EnlargeHorizontal = crsScaleChilds
     ChildSizing.EnlargeVertical = crsScaleChilds
     ChildSizing.Layout = cclTopToBottomThenLeftToRight
-    ClientHeight = 40
-    ClientWidth = 600
+    ClientHeight = 48
+    ClientWidth = 750
     TabOrder = 1
     object pFontType: TPanel
       Left = 4
-      Height = 32
+      Height = 40
       Top = 4
-      Width = 268
+      Width = 330
       AutoSize = True
       BorderSpacing.CellAlignHorizontal = ccaLeftTop
       BevelOuter = bvNone
@@ -120,16 +122,16 @@ object fmPreview: TfmPreview
       ChildSizing.HorizontalSpacing = 10
       ChildSizing.EnlargeVertical = crsScaleChilds
       ChildSizing.Layout = cclTopToBottomThenLeftToRight
-      ClientHeight = 32
-      ClientWidth = 268
+      ClientHeight = 40
+      ClientWidth = 330
       TabOrder = 0
       object rbProp: TRadioButton
         Tag = 1
         AnchorSideTop.Side = asrCenter
         Left = 5
-        Height = 32
+        Height = 40
         Top = 0
-        Width = 134
+        Width = 169
         Caption = 'Пропорциональный'
         Checked = True
         OnChange = rbPropChange
@@ -141,10 +143,10 @@ object fmPreview: TfmPreview
         Tag = 1
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Side = asrCenter
-        Left = 149
-        Height = 32
+        Left = 184
+        Height = 40
         Top = 0
-        Width = 114
+        Width = 141
         Caption = 'Моноширинный'
         OnChange = rbPropChange
         OnClick = rbPropChange
@@ -152,10 +154,10 @@ object fmPreview: TfmPreview
       end
     end
     object pButtons: TPanel
-      Left = 315
-      Height = 32
+      Left = 399
+      Height = 40
       Top = 4
-      Width = 281
+      Width = 347
       Align = alRight
       AutoSize = True
       BorderSpacing.CellAlignHorizontal = ccaRightBottom
@@ -163,19 +165,19 @@ object fmPreview: TfmPreview
       ChildSizing.HorizontalSpacing = 10
       ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
       ChildSizing.Layout = cclTopToBottomThenLeftToRight
-      ClientHeight = 32
-      ClientWidth = 281
+      ClientHeight = 40
+      ClientWidth = 347
       TabOrder = 1
       object seSpace: TSpinEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideBottom.Side = asrBottom
         Left = 0
-        Height = 23
+        Height = 28
         Hint = 'Дистанция между символами'
-        Top = 4
-        Width = 50
+        Top = 6
+        Width = 63
         BorderSpacing.CellAlignVertical = ccaCenter
-        Constraints.MinWidth = 50
+        Constraints.MinWidth = 62
         MaxValue = 10
         OnChange = rbPropChange
         ParentShowHint = False
@@ -186,13 +188,13 @@ object fmPreview: TfmPreview
       object seDelta: TSpinEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideBottom.Side = asrCenter
-        Left = 60
-        Height = 23
+        Left = 73
+        Height = 28
         Hint = 'Дистанция между строками'
-        Top = 4
-        Width = 50
+        Top = 6
+        Width = 63
         BorderSpacing.CellAlignVertical = ccaCenter
-        Constraints.MinWidth = 50
+        Constraints.MinWidth = 62
         MaxValue = 10
         OnChange = rbPropChange
         ParentShowHint = False
@@ -203,13 +205,14 @@ object fmPreview: TfmPreview
       object tbControls: TToolBar
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Side = asrBottom
-        Left = 120
+        Left = 146
+        Height = 40
         Top = 0
-        Width = 161
+        Width = 201
         Align = alNone
         AutoSize = True
-        ButtonHeight = 32
-        ButtonWidth = 40
+        ButtonHeight = 40
+        ButtonWidth = 50
         Caption = 'tbControls'
         EdgeInner = esNone
         EdgeOuter = esNone
@@ -219,17 +222,17 @@ object fmPreview: TfmPreview
         TabOrder = 2
         TabStop = True
         object ToolButton2: TToolButton
-          Left = 81
+          Left = 101
           Top = 0
           Action = acResetText
         end
         object ToolButton3: TToolButton
-          Left = 121
+          Left = 151
           Top = 0
           Action = acExportImage
         end
         object ToolButton1: TToolButton
-          Left = 41
+          Left = 51
           Top = 0
           Action = acEditText
         end
@@ -243,8 +246,8 @@ object fmPreview: TfmPreview
   end
   object ActionList1: TActionList
     Images = fmMain.ImListNew16A
-    left = 45
-    top = 75
+    Left = 56
+    Top = 94
     object acResetText: TAction
       Caption = 'По умолчанию'
       Hint = 'Восстановить текст примера по умолчанию'
@@ -276,12 +279,12 @@ object fmPreview: TfmPreview
     Title = 'Экспорт изображения текста предпросмотра'
     Filter = 'Portable Network Graphics File|*.png'
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
-    left = 145
-    top = 75
+    Left = 181
+    Top = 94
   end
   object IniStoragePV: TIniPropStorage
     StoredValues = <>
-    left = 235
-    top = 75
+    Left = 294
+    Top = 94
   end
 end

@@ -1,41 +1,41 @@
 object fmConfirm: TfmConfirm
-  Left = 362
-  Height = 123
-  Top = 282
-  Width = 562
+  Left = 391
+  Height = 154
+  Top = 205
+  Width = 702
   AutoSize = True
   BorderIcons = []
   BorderStyle = bsToolWindow
-  ClientHeight = 123
-  ClientWidth = 562
-  Constraints.MinWidth = 480
+  ClientHeight = 154
+  ClientWidth = 702
+  Constraints.MinWidth = 600
+  DesignTimePPI = 120
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '2.2.0.4'
   object pMessage: TPanel
     Left = 0
-    Height = 45
+    Height = 58
     Top = 0
-    Width = 562
+    Width = 702
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 45
-    ClientWidth = 562
+    ClientHeight = 58
+    ClientWidth = 702
     Color = clWhite
     ParentColor = False
     TabOrder = 1
     object lbMessage: TLabel
-      Left = 15
-      Height = 15
-      Top = 15
-      Width = 532
+      Left = 19
+      Height = 20
+      Top = 19
+      Width = 664
       Align = alClient
       Alignment = taCenter
-      BorderSpacing.Around = 15
+      BorderSpacing.Around = 19
       Caption = '---'
       Layout = tlCenter
-      ParentColor = False
     end
   end
   object pButtons: TPanel
@@ -43,12 +43,12 @@ object fmConfirm: TfmConfirm
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = pMessage
     AnchorSideTop.Side = asrBottom
-    Left = 46
-    Height = 66
-    Top = 50
-    Width = 470
+    Left = 64
+    Height = 74
+    Top = 64
+    Width = 575
     AutoSize = True
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     BevelOuter = bvNone
     ChildSizing.LeftRightSpacing = 15
     ChildSizing.TopBottomSpacing = 15
@@ -56,19 +56,19 @@ object fmConfirm: TfmConfirm
     ChildSizing.VerticalSpacing = 10
     ChildSizing.Layout = cclTopToBottomThenLeftToRight
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 66
-    ClientWidth = 470
+    ClientHeight = 74
+    ClientWidth = 575
     TabOrder = 0
     object bbYes: TBitBtn
       Left = 15
-      Height = 36
+      Height = 44
       Top = 15
-      Width = 140
+      Width = 175
       AutoSize = True
-      BorderSpacing.InnerBorder = 5
+      BorderSpacing.InnerBorder = 6
       Caption = 'Да'
-      Constraints.MinHeight = 35
-      Constraints.MinWidth = 140
+      Constraints.MinHeight = 44
+      Constraints.MinWidth = 175
       Default = True
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
@@ -111,15 +111,15 @@ object fmConfirm: TfmConfirm
       TabOrder = 1
     end
     object bbNo: TBitBtn
-      Left = 165
-      Height = 36
+      Left = 200
+      Height = 44
       Top = 15
-      Width = 140
+      Width = 175
       AutoSize = True
-      BorderSpacing.InnerBorder = 5
+      BorderSpacing.InnerBorder = 6
       Caption = 'Нет'
-      Constraints.MinHeight = 35
-      Constraints.MinWidth = 140
+      Constraints.MinHeight = 44
+      Constraints.MinWidth = 175
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
@@ -161,16 +161,16 @@ object fmConfirm: TfmConfirm
       TabOrder = 2
     end
     object bbCancel: TBitBtn
-      Left = 315
-      Height = 36
+      Left = 385
+      Height = 44
       Top = 15
-      Width = 140
+      Width = 175
       AutoSize = True
-      BorderSpacing.InnerBorder = 5
+      BorderSpacing.InnerBorder = 6
       Cancel = True
       Caption = 'Отмена'
-      Constraints.MinHeight = 35
-      Constraints.MinWidth = 140
+      Constraints.MinHeight = 44
+      Constraints.MinWidth = 175
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         20000000000000040000640000006400000000000000000000008080EE008080

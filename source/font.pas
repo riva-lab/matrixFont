@@ -724,7 +724,7 @@ function TFont.ReadFromFile(FileName: String): Boolean;
       FontLength    := CharLength;
       Height        := CharHeight;
       Width         := CharWidth;
-      FEncoding     := Encoding;
+      FEncoding     := GetEncodingAdapted(Encoding);
       end;
 
     // --- чтение данных о символах ---

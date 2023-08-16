@@ -5,7 +5,7 @@ unit u_encodings;
 interface
 
 uses
-  Classes, LConvEncoding;
+  Classes, SysUtils, LConvEncoding;
 
 resourcestring
   ENC_ANSI   = 'ANSI (ASCII 7-битная)';
@@ -26,7 +26,9 @@ resourcestring
   ENC_88591  = '8859-1 (ISO/IEC - западно-европейская, лат. 1)';
   ENC_88592  = '8859-2 (ISO/IEC - центрально-европейская, лат. 2)';
   ENC_885915 = '8859-15 (ISO/IEC - западно-европейская новая, лат. 9)';
-  ENC_KOI8   = 'КОИ-8 (ANSI - русская)';
+  ENC_KOI8R  = 'KOI8-R (русская)';
+  ENC_KOI8U  = 'KOI8-U (русско-украинская)';
+  ENC_KOI8RU = 'KOI8-RU (русско-белорусско-украинская)';
   ENC_MACR   = 'Macintosh (MAC - латиница)';
 
 
@@ -50,6 +52,9 @@ procedure EncodingsListAssign(AStringList: TStrings);
 function GetEncodingByIndex(AIndex: Integer): String;
 function GetIndexOfEncoding(AEncoding: String): Integer;
 function GetEncodingCaption(AEncoding: String): String;
+
+// адаптирует кодировку прежних версий к текущему списку (ex: koi8 -> koi8r)
+function GetEncodingAdapted(AEncoding: String): String;
 
 function UTF8ToEncoding(AStr: String; AEncoding: String): String;
 function UTF8ToEncodingByIndex(AStr: String; AIndex: Integer): String;
@@ -96,7 +101,11 @@ procedure EncodingsListUpdate;
     EncodingItemAdd(EncodingCPIso1, ENC_88591);
     EncodingItemAdd(EncodingCPIso2, ENC_88592);
     EncodingItemAdd(EncodingCPIso15, ENC_885915);
-    EncodingItemAdd(EncodingCPKOI8, ENC_KOI8);
+
+    EncodingItemAdd(EncodingCPKOI8R, ENC_KOI8R);
+    EncodingItemAdd(EncodingCPKOI8U, ENC_KOI8U);
+    EncodingItemAdd(EncodingCPKOI8RU, ENC_KOI8RU);
+
     EncodingItemAdd(EncodingCPMac, ENC_MACR);
   end;
 
@@ -126,7 +135,7 @@ function GetIndexOfEncoding(AEncoding: String): Integer;
     i: Integer;
   begin
     Result := -1;
-    for i := Low(ENCODINGS_LIST) to High(ENCODINGS_LIST) do
+    for i  := Low(ENCODINGS_LIST) to High(ENCODINGS_LIST) do
       if AEncoding = ENCODINGS_LIST[i].Enc then Exit(i);
   end;
 
@@ -138,6 +147,15 @@ function GetEncodingCaption(AEncoding: String): String;
     i      := GetIndexOfEncoding(AEncoding);
     if i >= 0 then
       Result := ENCODINGS_LIST[i].Caption;
+  end;
+
+function GetEncodingAdapted(AEncoding: String): String;
+  var
+    i: Integer;
+  begin
+    for i := Low(ENCODINGS_LIST) to High(ENCODINGS_LIST) do
+      if String(ENCODINGS_LIST[i].Enc).StartsWith(AEncoding) then
+        Exit(ENCODINGS_LIST[i].Enc);
   end;
 
 
@@ -168,4 +186,3 @@ function EncodingToUTF8ByIndex(AStr: String; AIndex: Integer): String;
 
 
 end.
-

@@ -11,10 +11,10 @@ uses
  // удаление указанного файла, по умолчанию - в корзину
  //function FileRemove(AFileName: String; toTrash: Boolean = True): Boolean;
 
-// открытие указанного пути в проводнике
+ // открытие указанного пути в проводнике
 procedure RootOpenInExplorer(ARoot: String);
 
-// вывод массива байт в строку в HEX виде
+ // вывод массива байт в строку в HEX виде
 function BytesToHex(AData: TBytes; ABefore: String = '0x'; AAfter: String = ' ';
   ABytesPerString: Byte = 8): String;
 
@@ -23,32 +23,42 @@ function CheckBoolean(ABool: Boolean; ValueTrue, ValueFalse: Variant): Variant;
 // проверяет значение переменной на вхождение в диапазон
 function InRange(AValue, AMin, AMax: Variant): Boolean;
 
-// проверка расширения файла, регистронезависимая
+ // проверка расширения файла, регистронезависимая
 function FileExtCheck(AFilename, AExtList: String): Boolean;
 
+ // извлечение названия языка из языковой строки
+function GetLangCaption(ALangStr: String; ADelimiter: Char = ','): String;
+
+ // извлечение кода языка (ex: en_en) из языковой строки
+function GetLangCode(ALangStr: String; ADelimiter: Char = ','): String;
+
+ // убирает из строки копирайта даты
+function GetAuthorName(ACopyrightStr: String): String;
 
 implementation
 
- //function FileRemove(AFileName: String; toTrash: Boolean): Boolean;
- //  var
- //    FileOp: TSHFileOpStruct;
- //  begin
- //    Result := False;
- //    if not FileExistsUTF8(AFileName) then Exit;
- //    if not toTrash then Exit(DeleteFileUTF8(AFileName));
- //
- //    if AFileName <> '' then
- //      begin
- //      FillChar(FileOp, SizeOf(FileOp), 0);
- //      FileOp.Wnd    := 0;
- //      FileOp.wFunc  := FO_DELETE;
- //      FileOp.pFrom  := PChar(UTF8ToWinCP(AFileName) + #0#0);
- //      FileOp.pTo    := nil;
- //      FileOp.fFlags := FOF_ALLOWUNDO or FOF_NOERRORUI or FOF_SILENT; // or FOF_NOCONFIRMATION;
- //      Result        := (SHFileOperation(FileOp) = 0) and (not
- //        FileOp.fAnyOperationsAborted);
- //      end;
- //  end;
+{
+ function FileRemove(AFileName: String; toTrash: Boolean): Boolean;
+   var
+     FileOp: TSHFileOpStruct;
+   begin
+     Result := False;
+     if not FileExistsUTF8(AFileName) then Exit;
+     if not toTrash then Exit(DeleteFileUTF8(AFileName));
+
+     if AFileName <> '' then
+       begin
+       FillChar(FileOp, SizeOf(FileOp), 0);
+       FileOp.Wnd    := 0;
+       FileOp.wFunc  := FO_DELETE;
+       FileOp.pFrom  := PChar(UTF8ToWinCP(AFileName) + #0#0);
+       FileOp.pTo    := nil;
+       FileOp.fFlags := FOF_ALLOWUNDO or FOF_NOERRORUI or FOF_SILENT; // or FOF_NOCONFIRMATION;
+       Result        := (SHFileOperation(FileOp) = 0) and (not
+         FileOp.fAnyOperationsAborted);
+       end;
+   end;
+}
 
 procedure RootOpenInExplorer(ARoot: String);
   begin
@@ -111,6 +121,29 @@ function FileExtCheck(AFilename, AExtList: String): Boolean;
         s += AExtList[i];
 
     Result := False;
+  end;
+
+function GetLangCaption(ALangStr: String; ADelimiter: Char): String;
+  begin
+    Result := ALangStr.Remove(0, ALangStr.IndexOf(ADelimiter) + 1).Trim;
+  end;
+
+function GetLangCode(ALangStr: String; ADelimiter: Char): String;
+  begin
+    Result := ALangStr.Remove(ALangStr.IndexOf(ADelimiter)).ToLower;
+  end;
+
+function GetAuthorName(ACopyrightStr: String): String;
+  var
+    i: Integer;
+  begin
+    for i := 1 to ACopyrightStr.Length do
+      if not (ACopyrightStr[i] in ['0'..'9']) then
+        Result += ACopyrightStr[i];
+
+    for i := ACopyrightStr.Length downto 1 do
+      if LowerCase(ACopyrightStr[i]) in ['a'..'z'] then
+        Exit(Result.Remove(i));
   end;
 
 end.

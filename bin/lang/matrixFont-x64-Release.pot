@@ -1,2125 +1,1752 @@
-# Riva <@@@>, 2021.
 msgid ""
-msgstr ""
-"PO-Revision-Date: 2021-09-02 15:29+0300\n"
-"Last-Translator: Riva <@@@>\n"
-"Language-Team: 2021\n"
-"Language: en\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: fm_about.about_bit
 msgid "-битная"
-msgstr "-битная"
+msgstr ""
 
 #: fm_about.about_build
 msgid "сборка"
-msgstr "сборка"
+msgstr ""
 
 #: fm_about.about_rights
-msgid "Все права защищены\\nСвободное ПО"
-msgstr "Все права защищены\\nСвободное ПО"
+msgid ""
+"Все права защищены\n"
+"Свободное ПО"
+msgstr ""
 
 #: fm_about.about_site
 msgid "сайт"
-msgstr "сайт"
+msgstr ""
 
 #: fm_about.about_version
 msgid "версия"
-msgstr "версия"
+msgstr ""
 
 #: fm_gen.fm_gen_caption
 msgid "Генератор кода"
-msgstr "Генератор кода"
+msgstr ""
 
 #: fm_gen.fm_gen_eb_1
 msgid "0 - нули"
-msgstr "0 - нули"
+msgstr ""
 
 #: fm_gen.fm_gen_eb_2
 msgid "1 - единицы "
-msgstr "1 - единицы "
+msgstr ""
 
 #: fm_gen.fm_gen_ft_1
 msgctxt "fm_gen.fm_gen_ft_1"
 msgid "Моноширинный"
-msgstr "Моноширинный"
+msgstr ""
 
 #: fm_gen.fm_gen_ft_2
 msgctxt "fm_gen.fm_gen_ft_2"
 msgid "Пропорциональный"
-msgstr "Пропорциональный"
-
-#: fm_gen.fm_gen_lng_1
-msgid "C (C99)"
-msgstr "C (C99)"
-
-#: fm_gen.fm_gen_lng_2
-msgid "C (C89)"
-msgstr "C (C89)"
-
-#: fm_gen.fm_gen_nb_1
-msgid "8 (uint8_t, unsigned char)"
-msgstr "8 (uint8_t, unsigned char)"
-
-#: fm_gen.fm_gen_nb_2
-msgid "16 (uint16_t, unsigned short int)"
-msgstr "16 (uint16_t, unsigned short int)"
-
-#: fm_gen.fm_gen_nb_3
-msgid "24 (uint24_t)"
-msgstr "24 (uint24_t)"
-
-#: fm_gen.fm_gen_nb_4
-msgid "32 (uint32_t, unsigned long int)"
-msgstr "32 (uint32_t, unsigned long int)"
-
-#: fm_gen.fm_gen_nv_1
-msgctxt "fm_gen.fm_gen_nv_1"
-msgid "HEX"
-msgstr "HEX"
-
-#: fm_gen.fm_gen_nv_2
-msgid "BIN"
-msgstr "BIN"
-
-#: fm_gen.fm_gen_nv_3
-msgid "DEC"
-msgstr "DEC"
+msgstr ""
 
 #: fm_gen.fm_gen_nv_4
 msgid "HEX (Инверсия)"
-msgstr "HEX (Инверсия)"
+msgstr ""
 
 #: fm_gen.fm_gen_nv_5
 msgid "BIN (Инверсия)"
-msgstr "BIN (Инверсия)"
+msgstr ""
 
 #: fm_gen.fm_gen_nv_6
 msgid "DEC (Инверсия)"
-msgstr "DEC (Инверсия)"
+msgstr ""
 
 #: fm_gen.fm_gen_sclr_1
 msgid "Слева направо"
-msgstr "Слева направо"
+msgstr ""
 
 #: fm_gen.fm_gen_sclr_2
 msgid "Справа налево"
-msgstr "Справа налево"
+msgstr ""
 
 #: fm_gen.fm_gen_scud_1
 msgid "Сначала столбцы"
-msgstr "Сначала столбцы"
+msgstr ""
 
 #: fm_gen.fm_gen_scud_2
 msgid "Сначала строки"
-msgstr "Сначала строки"
+msgstr ""
 
 #: fm_gen.fm_gen_srud_1
 msgid "Сверху вниз"
-msgstr "Сверху вниз"
+msgstr ""
 
 #: fm_gen.fm_gen_srud_2
 msgid "Снизу вверх"
-msgstr "Снизу вверх"
+msgstr ""
 
 #: fm_import.fm_import_scale
 msgid "предпросмотр"
-msgstr "предпросмотр"
+msgstr ""
 
 #: fm_main.txt_changed
 msgid "изменен"
-msgstr "изменен"
+msgstr ""
 
 #: fm_main.txt_navigator
 msgctxt "fm_main.txt_navigator"
 msgid "Навигатор"
-msgstr "Навигатор"
+msgstr ""
 
 #: fm_main.txt_symbol
 msgctxt "fm_main.txt_symbol"
 msgid "Символ"
-msgstr "Символ"
+msgstr ""
 
 #: fm_preview.fm_prev_example
 msgctxt "fm_preview.fm_prev_example"
 msgid "Образец текста"
-msgstr "Образец текста"
+msgstr ""
 
 #: fm_sizes.fm_sizes_add
 msgid "Добавить строки и столбцы"
-msgstr "Добавить строки и столбцы"
+msgstr ""
 
 #: fm_sizes.fm_sizes_crop
 msgid "Обрезать холст"
-msgstr "Обрезать холст"
+msgstr ""
 
 #: fm_sizes.fm_sizes_del
 msgid "Удалить строки и столбцы"
-msgstr "Удалить строки и столбцы"
+msgstr ""
 
 #: fm_sizes.fm_sizes_expand
 msgid "Расширить холст"
-msgstr "Расширить холст"
+msgstr ""
 
 #: font.rhf_char_cyr
 msgid "Кириллица, строчные"
-msgstr "Кириллица, строчные"
+msgstr ""
 
 #: font.rhf_char_cyrcap
 msgid "Кириллица, прописные"
-msgstr "Кириллица, прописные"
+msgstr ""
 
 #: font.rhf_char_digit
 msgid "Цифры"
-msgstr "Цифры"
+msgstr ""
 
 #: font.rhf_char_lat
 msgid "Латиница, строчные"
-msgstr "Латиница, строчные"
+msgstr ""
 
 #: font.rhf_char_latcap
 msgid "Латиница, прописные"
-msgstr "Латиница, прописные"
+msgstr ""
 
 #: font.rhf_comment_app
 msgid "Сгенерировано"
-msgstr "Сгенерировано"
+msgstr ""
 
 #: font.rhf_comment_author
 msgid "Автор шрифта"
-msgstr "Автор шрифта"
+msgstr ""
 
 #: font.rhf_comment_char
 msgctxt "font.rhf_comment_char"
 msgid "Символ"
-msgstr "Символ"
+msgstr ""
 
 #: font.rhf_comment_cp
 msgid "Кодовая страница"
-msgstr "Кодовая страница"
+msgstr ""
 
 #: font.rhf_comment_name
 msgid "Название шрифта"
-msgstr "Название шрифта"
+msgstr ""
 
 #: font.rhf_comment_time
 msgid "Дата и время генерации"
-msgstr "Дата и время генерации"
+msgstr ""
 
 #: tfmabout.lbcopyrights.caption
 msgid "информация"
-msgstr "информация"
-
-#: tfmabout.lbinfo.caption
-msgctxt "tfmabout.lbinfo.caption"
-msgid "lbInfo"
-msgstr "lbInfo"
+msgstr ""
 
 #: tfmabout.lblicense.caption
 msgid "лицензия"
-msgstr "лицензия"
-
-#: tfmabout.lbsite.caption
-msgid "lbSite"
-msgstr "lbSite"
+msgstr ""
 
 #: tfmconfirm.bbcancel.caption
 msgctxt "tfmconfirm.bbcancel.caption"
 msgid "Отмена"
-msgstr "Отмена"
+msgstr ""
 
 #: tfmconfirm.bbno.caption
 msgid "Нет"
-msgstr "Нет"
+msgstr ""
 
 #: tfmconfirm.bbyes.caption
 msgid "Да"
-msgstr "Да"
-
-#: tfmconfirm.lbmessage.caption
-msgid "---"
-msgstr "---"
+msgstr ""
 
 #: tfmgen.accopytoclipboard.caption
 msgctxt "tfmgen.accopytoclipboard.caption"
 msgid "Копировать"
-msgstr "Копировать"
+msgstr ""
 
 #: tfmgen.accopytoclipboard.hint
 msgid "Копировать в буфер"
-msgstr "Копировать в буфер"
+msgstr ""
 
 #: tfmgen.acexport.caption
 msgid "Экспорт"
-msgstr "Экспорт"
+msgstr ""
 
 #: tfmgen.acexport.hint
 msgid "Экспорт в файл..."
-msgstr "Экспорт в файл..."
+msgstr ""
 
 #: tfmgen.acrefreshout.caption
 msgctxt "tfmgen.acrefreshout.caption"
 msgid "Обновить"
-msgstr "Обновить"
+msgstr ""
 
 #: tfmgen.acrefreshout.hint
 msgid "Обновить вывод генератора"
-msgstr "Обновить вывод генератора"
+msgstr ""
 
 #: tfmgen.acresetrange.caption
 msgctxt "tfmgen.acresetrange.caption"
 msgid "Сброс"
-msgstr "Сброс"
+msgstr ""
 
 #: tfmgen.acresetrange.hint
 msgid "Сброс диапазона"
-msgstr "Сброс диапазона"
+msgstr ""
 
 #: tfmgen.actabselcode.caption
-msgctxt "TFMGEN.ACTABSELCODE.CAPTION"
+msgctxt "tfmgen.actabselcode.caption"
 msgid "Вывод"
-msgstr "Вывод"
+msgstr ""
 
 #: tfmgen.actabselcode.hint
 msgid "Вывод - сгенерированный код"
-msgstr "Вывод - сгенерированный код"
+msgstr ""
 
 #: tfmgen.actabselsettings.caption
-msgctxt "TFMGEN.ACTABSELSETTINGS.CAPTION"
+msgctxt "tfmgen.actabselsettings.caption"
 msgid "Настройки"
-msgstr "Настройки"
+msgstr ""
 
 #: tfmgen.actabselsettings.hint
 msgid "Настройки вывода"
-msgstr "Настройки вывода"
-
-#: tfmgen.cbemptybits.text
-msgctxt "TFMGEN.CBEMPTYBITS.TEXT"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cbfonttype.text
-msgctxt "TFMGEN.CBFONTTYPE.TEXT"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cblanguage.text
-msgctxt "TFMGEN.CBLANGUAGE.TEXT"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cbnumbersbits.text
-msgctxt "TFMGEN.CBNUMBERSBITS.TEXT"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cbnumbersview.text
-msgctxt "TFMGEN.CBNUMBERSVIEW.TEXT"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cbscancolsfirst.text
-msgctxt "tfmgen.cbscancolsfirst.text"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cbscancolstoright.text
-msgctxt "TFMGEN.CBSCANCOLSTORIGHT.TEXT"
-msgid "-"
-msgstr "-"
-
-#: tfmgen.cbscanrowstodown.text
-msgctxt "TFMGEN.CBSCANROWSTODOWN.TEXT"
-msgid "-"
-msgstr "-"
+msgstr ""
 
 #: tfmgen.lbdefprefix.caption
 msgid "Префикс для определений"
-msgstr "Префикс для определений"
-
-#: tfmgen.lbdots.caption
-msgid ". . ."
-msgstr ". . ."
+msgstr ""
 
 #: tfmgen.lbemptybits.caption
 msgid "Заполнение пустых разрядов"
-msgstr "Заполнение пустых разрядов"
+msgstr ""
 
 #: tfmgen.lbfonttype.caption
 msgid "Тип шрифта"
-msgstr "Тип шрифта"
-
-#: tfmgen.lbinfo.caption
-msgctxt "TFMGEN.LBINFO.CAPTION"
-msgid "lbInfo"
-msgstr "lbInfo"
+msgstr ""
 
 #: tfmgen.lblanguage.caption
 msgid "Генерируемый код"
-msgstr "Генерируемый код"
+msgstr ""
 
 #: tfmgen.lbnumbersbits.caption
 msgid "Разрядность чисел"
-msgstr "Разрядность чисел"
+msgstr ""
 
 #: tfmgen.lbnumbersview.caption
 msgid "Отображение чисел"
-msgstr "Отображение чисел"
+msgstr ""
 
 #: tfmgen.lbrange.caption
 msgid "Диапазон вывода"
-msgstr "Диапазон вывода"
+msgstr ""
 
 #: tfmgen.lbrangereset.caption
 msgid "[Сброс]"
-msgstr "[Сброс]"
+msgstr ""
 
 #: tfmgen.lbscancolsfirst.caption
 msgid "Очередность считывания"
-msgstr "Очередность считывания"
+msgstr ""
 
 #: tfmgen.lbscancolstoright.caption
 msgid "Считывание столбцов"
-msgstr "Считывание столбцов"
+msgstr ""
 
 #: tfmgen.lbscanrowstodown.caption
 msgid "Считывание строк"
-msgstr "Считывание строк"
+msgstr ""
 
 #: tfmgen.savedlg.title
 msgid "Экспорт заголовочного файла шрифта"
-msgstr "Экспорт заголовочного файла шрифта"
-
-#: tfmgen.tbcode.caption
-msgid "tbCode"
-msgstr "tbCode"
-
-#: tfmgen.tbselector.caption
-msgid "tbSelector"
-msgstr "tbSelector"
-
-#: tfmgen.toolbutton3.caption
-msgid "ToolButton3"
-msgstr "ToolButton3"
+msgstr ""
 
 #: tfmgen.tscode.caption
 msgctxt "tfmgen.tscode.caption"
 msgid "Вывод"
-msgstr "Вывод"
+msgstr ""
 
 #: tfmgen.tsgensettings.caption
 msgctxt "tfmgen.tsgensettings.caption"
 msgid "Настройки"
-msgstr "Настройки"
+msgstr ""
 
 #: tfmimport.bbimport.caption
 msgid "Импортировать"
-msgstr "Импортировать"
+msgstr ""
 
 #: tfmimport.caption
 msgid "Импорт шрифта"
-msgstr "Импорт шрифта"
+msgstr ""
 
 #: tfmimport.cbexampleedit.caption
 msgid "Изменить текст образца"
-msgstr "Изменить текст образца"
-
-#: tfmimport.cbfontlist.text
-msgid "Arial"
-msgstr "Arial"
+msgstr ""
 
 #: tfmimport.cboptimize.caption
 msgid "Оптимизировать холст"
-msgstr "Оптимизировать холст"
+msgstr ""
 
 #: tfmimport.cboptimize.hint
 msgid "Убрать общее пустое пространство вокруг символов"
-msgstr "Убрать общее пустое пространство вокруг символов"
+msgstr ""
 
 #: tfmimport.cbsnapleft.caption
 msgid "Прижать к левому краю"
-msgstr "Прижать к левому краю"
+msgstr ""
 
 #: tfmimport.cbsnapleft.hint
 msgctxt "tfmimport.cbsnapleft.hint"
 msgid "Прижать все символы к левому краю холста"
-msgstr "Прижать все символы к левому краю холста"
+msgstr ""
 
 #: tfmimport.cbstylebold.caption
 msgid "Полужирный"
-msgstr "Полужирный"
+msgstr ""
 
 #: tfmimport.cbstyleitalic.caption
 msgid "Курсив"
-msgstr "Курсив"
+msgstr ""
 
 #: tfmimport.cbstylestrike.caption
 msgid "Зачеркнутый"
-msgstr "Зачеркнутый"
+msgstr ""
 
 #: tfmimport.cbstyleunder.caption
 msgid "Подчеркнутый"
-msgstr "Подчеркнутый"
+msgstr ""
 
 #: tfmimport.lbfontsize.caption
 msgid "Размер"
-msgstr "Размер"
+msgstr ""
 
 #: tfmimport.lbfontsystem.caption
 msgid "Системный шрифт"
-msgstr "Системный шрифт"
+msgstr ""
 
 #: tfmimport.lbitemheight.caption
 msgid "Высота"
-msgstr "Высота"
+msgstr ""
 
 #: tfmimport.lbitemlast.caption
 msgid "Последний"
-msgstr "Последний"
+msgstr ""
 
 #: tfmimport.lbitemstart.caption
 msgid "Первый"
-msgstr "Первый"
+msgstr ""
 
 #: tfmimport.lbitemwidth.caption
 msgid "Ширина"
-msgstr "Ширина"
+msgstr ""
 
 #: tfmimport.lbrange.caption
 msgctxt "tfmimport.lbrange.caption"
 msgid "Диапазон символов"
-msgstr "Диапазон символов"
-
-#: tfmimport.lbscale.caption
-msgid "lbScale"
-msgstr "lbScale"
+msgstr ""
 
 #: tfmimport.lbsize.caption
 msgid "Размер холста"
-msgstr "Размер холста"
+msgstr ""
 
 #: tfmimport.sbmore.caption
 msgid "Дополнительно ..."
-msgstr "Дополнительно ..."
+msgstr ""
 
 #: tfmimport.tsexample.caption
 msgid "Образец"
-msgstr "Образец"
+msgstr ""
 
 #: tfmimport.tsexampletext.caption
 msgid "Текст образца"
-msgstr "Текст образца"
+msgstr ""
 
 #: tfmmain.acappexit.caption
 msgid "Выход"
-msgstr "Выход"
+msgstr ""
 
 #: tfmmain.acappexit.hint
 msgid "Завершить работу приложения"
-msgstr "Завершить работу приложения"
+msgstr ""
 
 #: tfmmain.acdeletelastfileslist.caption
 msgid "Очистить список"
-msgstr "Очистить список"
+msgstr ""
 
 #: tfmmain.acfontcenterh.caption
 msgctxt "tfmmain.acfontcenterh.caption"
 msgid "Горизонтально"
-msgstr "Горизонтально"
+msgstr ""
 
 #: tfmmain.acfontcenterh.hint
 msgid "Центрировать все символы горизонтально"
-msgstr "Центрировать все символы горизонтально"
+msgstr ""
 
 #: tfmmain.acfontcenterv.caption
 msgctxt "tfmmain.acfontcenterv.caption"
 msgid "Вертикально"
-msgstr "Вертикально"
+msgstr ""
 
 #: tfmmain.acfontcenterv.hint
 msgid "Центрировать все символы вертикально"
-msgstr "Центрировать все символы вертикально"
+msgstr ""
 
 #: tfmmain.acfontchangesizes.caption
 msgid "Изменить размер холста ..."
-msgstr "Изменить размер холста ..."
+msgstr ""
 
 #: tfmmain.acfontchangesizes.hint
 msgid "Изменить размер холста всех символов"
-msgstr "Изменить размер холста всех символов"
+msgstr ""
 
 #: tfmmain.acfontcharset.caption
 msgid "Задать диапазон ..."
-msgstr "Задать диапазон ..."
+msgstr ""
 
 #: tfmmain.acfontcharset.hint
 msgid "Задать диапазон символов шрифта"
-msgstr "Задать диапазон символов шрифта"
+msgstr ""
 
 #: tfmmain.acfontclear.caption
-msgctxt "TFMMAIN.ACFONTCLEAR.CAPTION"
+msgctxt "tfmmain.acfontclear.caption"
 msgid "Очистить"
-msgstr "Очистить"
+msgstr ""
 
 #: tfmmain.acfontclear.hint
 msgid "Очистить все символы"
-msgstr "Очистить все символы"
+msgstr ""
 
 #: tfmmain.acfontimport.caption
 msgid "Импорт шрифта ..."
-msgstr "Импорт шрифта ..."
+msgstr ""
 
 #: tfmmain.acfontimport.hint
 msgid "Создать новый шрифт на основе системного"
-msgstr "Создать новый шрифт на основе системного"
+msgstr ""
 
 #: tfmmain.acfontinvert.caption
-msgctxt "TFMMAIN.ACFONTINVERT.CAPTION"
+msgctxt "tfmmain.acfontinvert.caption"
 msgid "Инвертировать"
-msgstr "Инвертировать"
+msgstr ""
 
 #: tfmmain.acfontinvert.hint
 msgid "Инвертировать все символы"
-msgstr "Инвертировать все символы"
+msgstr ""
 
 #: tfmmain.acfontmirrorhorz.caption
-msgctxt "TFMMAIN.ACFONTMIRRORHORZ.CAPTION"
+msgctxt "tfmmain.acfontmirrorhorz.caption"
 msgid "Горизонтально"
-msgstr "Горизонтально"
+msgstr ""
 
 #: tfmmain.acfontmirrorhorz.hint
 msgid "Отобразить все символы горизонтально"
-msgstr "Отобразить все символы горизонтально"
+msgstr ""
 
 #: tfmmain.acfontmirrorvert.caption
-msgctxt "TFMMAIN.ACFONTMIRRORVERT.CAPTION"
+msgctxt "tfmmain.acfontmirrorvert.caption"
 msgid "Вертикально"
-msgstr "Вертикально"
+msgstr ""
 
 #: tfmmain.acfontmirrorvert.hint
 msgid "Отобразить все символы вертикально"
-msgstr "Отобразить все символы вертикально"
+msgstr ""
 
 #: tfmmain.acfontopen.caption
 msgid "Открыть ..."
-msgstr "Открыть ..."
+msgstr ""
 
 #: tfmmain.acfontopen.hint
 msgid "Загрузить шрифт из файла RHF"
-msgstr "Загрузить шрифт из файла RHF"
+msgstr ""
 
 #: tfmmain.acfontoptimize.caption
 msgid "Оптимизация размера холста ..."
-msgstr "Оптимизация размера холста ..."
+msgstr ""
 
 #: tfmmain.acfontoptimize.hint
 msgid "Установить оптимальный размер холста всех символов"
-msgstr "Установить оптимальный размер холста всех символов"
+msgstr ""
 
 #: tfmmain.acfontpaste.caption
 msgid "Пакетная вставка"
-msgstr "Пакетная вставка"
+msgstr ""
 
 #: tfmmain.acfontpaste.hint
 msgid "Вставить содержимое буфера обмена во все символы"
-msgstr "Вставить содержимое буфера обмена во все символы"
+msgstr ""
 
 #: tfmmain.acfontpreview.caption
 msgctxt "tfmmain.acfontpreview.caption"
 msgid "Образец текста"
-msgstr "Образец текста"
+msgstr ""
 
 #: tfmmain.acfontpreview.hint
 msgid "Вывести образец текста текущим шрифтом"
-msgstr "Вывести образец текста текущим шрифтом"
+msgstr ""
 
 #: tfmmain.acfontproperties.caption
 msgctxt "tfmmain.acfontproperties.caption"
 msgid "Свойства шрифта"
-msgstr "Свойства шрифта"
+msgstr ""
 
 #: tfmmain.acfontproperties.hint
 msgid "Просмотр свойств шрифта"
-msgstr "Просмотр свойств шрифта"
+msgstr ""
 
 #: tfmmain.acfontredo.caption
-msgctxt "TFMMAIN.ACFONTREDO.CAPTION"
+msgctxt "tfmmain.acfontredo.caption"
 msgid "Повторить"
-msgstr "Повторить"
+msgstr ""
 
 #: tfmmain.acfontredo.hint
 msgid "Повтор последней отмененной правки в каждом символе"
-msgstr "Повтор последней отмененной правки в каждом символе"
+msgstr ""
 
 #: tfmmain.acfontshiftdown.caption
-msgctxt "TFMMAIN.ACFONTSHIFTDOWN.CAPTION"
+msgctxt "tfmmain.acfontshiftdown.caption"
 msgid "Вниз"
-msgstr "Вниз"
+msgstr ""
 
 #: tfmmain.acfontshiftdown.hint
 msgid "Сдвинуть все символы вниз на 1 строку"
-msgstr "Сдвинуть все символы вниз на 1 строку"
+msgstr ""
 
 #: tfmmain.acfontshiftleft.caption
-msgctxt "TFMMAIN.ACFONTSHIFTLEFT.CAPTION"
+msgctxt "tfmmain.acfontshiftleft.caption"
 msgid "Влево"
-msgstr "Влево"
+msgstr ""
 
 #: tfmmain.acfontshiftleft.hint
 msgid "Сдвинуть все символы влево на 1 столбец"
-msgstr "Сдвинуть все символы влево на 1 столбец"
+msgstr ""
 
 #: tfmmain.acfontshiftright.caption
-msgctxt "TFMMAIN.ACFONTSHIFTRIGHT.CAPTION"
+msgctxt "tfmmain.acfontshiftright.caption"
 msgid "Вправо"
-msgstr "Вправо"
+msgstr ""
 
 #: tfmmain.acfontshiftright.hint
 msgid "Сдвинуть все символы вправо на 1 столбец"
-msgstr "Сдвинуть все символы вправо на 1 столбец"
+msgstr ""
 
 #: tfmmain.acfontshiftrollover.caption
 msgid "С переносом"
-msgstr "С переносом"
+msgstr ""
 
 #: tfmmain.acfontshiftrollover.hint
 msgid "Вкл/выкл сдвиг с переносом"
-msgstr "Вкл/выкл сдвиг с переносом"
+msgstr ""
 
 #: tfmmain.acfontshiftup.caption
-msgctxt "TFMMAIN.ACFONTSHIFTUP.CAPTION"
+msgctxt "tfmmain.acfontshiftup.caption"
 msgid "Вверх"
-msgstr "Вверх"
+msgstr ""
 
 #: tfmmain.acfontshiftup.hint
 msgid "Сдвинуть все символы вверх на 1 строку"
-msgstr "Сдвинуть все символы вверх на 1 строку"
+msgstr ""
 
 #: tfmmain.acfontsnapdown.caption
-msgctxt "TFMMAIN.ACFONTSNAPDOWN.CAPTION"
+msgctxt "tfmmain.acfontsnapdown.caption"
 msgid "К нижнему краю"
-msgstr "К нижнему краю"
+msgstr ""
 
 #: tfmmain.acfontsnapdown.hint
 msgid "Прижать все символы к нижнему краю холста"
-msgstr "Прижать все символы к нижнему краю холста"
+msgstr ""
 
 #: tfmmain.acfontsnapleft.caption
-msgctxt "TFMMAIN.ACFONTSNAPLEFT.CAPTION"
+msgctxt "tfmmain.acfontsnapleft.caption"
 msgid "К левому краю"
-msgstr "К левому краю"
+msgstr ""
 
 #: tfmmain.acfontsnapleft.hint
-msgctxt "TFMMAIN.ACFONTSNAPLEFT.HINT"
+msgctxt "tfmmain.acfontsnapleft.hint"
 msgid "Прижать все символы к левому краю холста"
-msgstr "Прижать все символы к левому краю холста"
+msgstr ""
 
 #: tfmmain.acfontsnapright.caption
-msgctxt "TFMMAIN.ACFONTSNAPRIGHT.CAPTION"
+msgctxt "tfmmain.acfontsnapright.caption"
 msgid "К правому краю"
-msgstr "К правому краю"
+msgstr ""
 
 #: tfmmain.acfontsnapright.hint
 msgid "Прижать все символы к правому краю холста"
-msgstr "Прижать все символы к правому краю холста"
+msgstr ""
 
 #: tfmmain.acfontsnapup.caption
-msgctxt "TFMMAIN.ACFONTSNAPUP.CAPTION"
+msgctxt "tfmmain.acfontsnapup.caption"
 msgid "К верхнему краю"
-msgstr "К верхнему краю"
+msgstr ""
 
 #: tfmmain.acfontsnapup.hint
 msgid "Прижать все символы к верхнему краю холста"
-msgstr "Прижать все символы к верхнему краю холста"
+msgstr ""
 
 #: tfmmain.acfontundo.caption
-msgctxt "TFMMAIN.ACFONTUNDO.CAPTION"
+msgctxt "tfmmain.acfontundo.caption"
 msgid "Отменить"
-msgstr "Отменить"
+msgstr ""
 
 #: tfmmain.acfontundo.hint
 msgid "Отмена последней правки в каждом символе"
-msgstr "Отмена последней правки в каждом символе"
+msgstr ""
 
 #: tfmmain.acgenerate.caption
 msgid "Генерировать код ..."
-msgstr "Генерировать код ..."
+msgstr ""
 
 #: tfmmain.acgenerate.hint
 msgid "Открыть окно генератора кода Си"
-msgstr "Открыть окно генератора кода Си"
+msgstr ""
 
 #: tfmmain.acgenformmagnit.hint
 msgid "Примагнитить справа от редактора"
-msgstr "Примагнитить справа от редактора"
+msgstr ""
 
 #: tfmmain.acgenformontop.hint
 msgid "Поверх окна редактора"
-msgstr "Поверх окна редактора"
+msgstr ""
 
 #: tfmmain.acgridtoggle.caption
 msgid "Сетка"
-msgstr "Сетка"
+msgstr ""
 
 #: tfmmain.acgridtoggle.hint
 msgid "Вкл/выкл видимость пиксельной сетки"
-msgstr "Вкл/выкл видимость пиксельной сетки"
+msgstr ""
 
 #: tfmmain.achelp.caption
-msgctxt "TFMMAIN.ACHELP.CAPTION"
+msgctxt "tfmmain.achelp.caption"
 msgid "Справка"
-msgstr "Справка"
+msgstr ""
 
 #: tfmmain.achelp.hint
 msgid "Открыть руководство пользователя"
-msgstr "Открыть руководство пользователя"
+msgstr ""
 
 #: tfmmain.achelpmd.caption
 msgid "Справка в markdown"
-msgstr "Справка в markdown"
+msgstr ""
 
 #: tfmmain.achelpmd.hint
 msgid "Открыть руководство пользователя в формате markdown"
-msgstr "Открыть руководство пользователя в формате markdown"
+msgstr ""
 
 #: tfmmain.achelpnet.caption
 msgid "Справка в сети"
-msgstr "Справка в сети"
+msgstr ""
 
 #: tfmmain.achelpnet.hint
 msgid "Открыть руководство пользователя в репозитории (онлайн)"
-msgstr "Открыть руководство пользователя в репозитории (онлайн)"
+msgstr ""
 
 #: tfmmain.acinfo.caption
 msgid "О приложении"
-msgstr "О приложении"
+msgstr ""
 
 #: tfmmain.acinfo.hint
 msgid "Информация о приложении"
-msgstr "Информация о приложении"
+msgstr ""
 
 #: tfmmain.aclastfileslist.caption
 msgid "Открыть недавний"
-msgstr "Открыть недавний"
+msgstr ""
 
 #: tfmmain.aclastfileslist.hint
 msgid "Список ранее открытых файлов"
-msgstr "Список ранее открытых файлов"
+msgstr ""
 
 #: tfmmain.acmenuedit.caption
 msgid "Правка"
-msgstr "Правка"
+msgstr ""
 
 #: tfmmain.acmenufile.caption
 msgctxt "tfmmain.acmenufile.caption"
 msgid "Файл"
-msgstr "Файл"
+msgstr ""
 
 #: tfmmain.acmenufont.caption
 msgid "Шрифт"
-msgstr "Шрифт"
+msgstr ""
 
 #: tfmmain.acmenufontcenter.caption
 msgid "Центрировать символы"
-msgstr "Центрировать символы"
+msgstr ""
 
 #: tfmmain.acmenufontmirror.caption
 msgid "Отобразить символы"
-msgstr "Отобразить символы"
+msgstr ""
 
 #: tfmmain.acmenufontshift.caption
 msgid "Сдвиг символов"
-msgstr "Сдвиг символов"
+msgstr ""
 
 #: tfmmain.acmenufontsnap.caption
 msgid "Прижать символы"
-msgstr "Прижать символы"
+msgstr ""
 
 #: tfmmain.acmenuhelp.caption
 msgctxt "tfmmain.acmenuhelp.caption"
 msgid "Справка"
-msgstr "Справка"
+msgstr ""
 
 #: tfmmain.acmenupanels.caption
 msgid "Панели"
-msgstr "Панели"
+msgstr ""
 
 #: tfmmain.acmenupaste.caption
 msgid "Режим вставки"
-msgstr "Режим вставки"
+msgstr ""
 
 #: tfmmain.acmenusymbol.caption
 msgid "Эффекты"
-msgstr "Эффекты"
+msgstr ""
 
 #: tfmmain.acmenusymbolcenter.caption
 msgid "Центрировать"
-msgstr "Центрировать"
+msgstr ""
 
 #: tfmmain.acmenusymbolmirror.caption
 msgid "Отобразить"
-msgstr "Отобразить"
+msgstr ""
 
 #: tfmmain.acmenusymbolshift.caption
 msgid "Сдвиг"
-msgstr "Сдвиг"
+msgstr ""
 
 #: tfmmain.acmenusymbolsnap.caption
 msgid "Прижать"
-msgstr "Прижать"
+msgstr ""
 
 #: tfmmain.acmenuview.caption
+msgctxt "tfmmain.acmenuview.caption"
 msgid "Вид"
-msgstr "Вид"
+msgstr ""
 
 #: tfmmain.acnewfont.caption
 msgid "Новый шрифт..."
-msgstr "Новый шрифт..."
+msgstr ""
 
 #: tfmmain.acnewfont.hint
 msgctxt "tfmmain.acnewfont.hint"
 msgid "Создать новый шрифт"
-msgstr "Создать новый шрифт"
-
-#: tfmmain.acpastemodeand.caption
-msgid "AND"
-msgstr "AND"
+msgstr ""
 
 #: tfmmain.acpastemodeand.hint
 msgid "Операция И между вставляемым и текущим"
-msgstr "Операция И между вставляемым и текущим"
+msgstr ""
 
 #: tfmmain.acpastemodenorm.caption
 msgid "Замена"
-msgstr "Замена"
+msgstr ""
 
 #: tfmmain.acpastemodenorm.hint
 msgid "Нормальная вставка - замена текущего вставляемым"
-msgstr "Нормальная вставка - замена текущего вставляемым"
-
-#: tfmmain.acpastemodeor.caption
-msgid "OR"
-msgstr "OR"
+msgstr ""
 
 #: tfmmain.acpastemodeor.hint
 msgid "Операция ИЛИ между вставляемым и текущим"
-msgstr "Операция ИЛИ между вставляемым и текущим"
-
-#: tfmmain.acpastemodexor.caption
-msgid "XOR"
-msgstr "XOR"
+msgstr ""
 
 #: tfmmain.acpastemodexor.hint
 msgid "Операция Искл. ИЛИ между вставляемым и текущим"
-msgstr "Операция Искл. ИЛИ между вставляемым и текущим"
+msgstr ""
 
 #: tfmmain.acreset.caption
-msgctxt "TFMMAIN.ACRESET.CAPTION"
+msgctxt "tfmmain.acreset.caption"
 msgid "Сброс"
-msgstr "Сброс"
+msgstr ""
 
 #: tfmmain.acsave.caption
 msgid "Сохранить"
-msgstr "Сохранить"
+msgstr ""
 
 #: tfmmain.acsave.hint
 msgid "Сохранить шрифт в файл RHF"
-msgstr "Сохранить шрифт в файл RHF"
+msgstr ""
 
 #: tfmmain.acsaveas.caption
 msgid "Сохранить как ..."
-msgstr "Сохранить как ..."
+msgstr ""
 
 #: tfmmain.acsaveas.dialog.title
 msgid "Сохранить файл шрифта"
-msgstr "Сохранить файл шрифта"
+msgstr ""
 
 #: tfmmain.acsaveas.hint
 msgid "Сохранить шрифт в новый файл RHF"
-msgstr "Сохранить шрифт в новый файл RHF"
+msgstr ""
 
 #: tfmmain.acsetting.caption
-msgctxt "TFMMAIN.ACSETTING.CAPTION"
+msgctxt "tfmmain.acsetting.caption"
 msgid "Настройки"
-msgstr "Настройки"
+msgstr ""
 
 #: tfmmain.acsetting.hint
 msgid "Настройки приложения"
-msgstr "Настройки приложения"
+msgstr ""
 
 #: tfmmain.acstayontoptoggle.caption
 msgid "Поверх всех окон"
-msgstr "Поверх всех окон"
+msgstr ""
 
 #: tfmmain.acstayontoptoggle.hint
 msgid "Вкл/выкл отображение окна поверх других"
-msgstr "Вкл/выкл отображение окна поверх других"
+msgstr ""
 
 #: tfmmain.acsymbolcenterh.caption
 msgctxt "tfmmain.acsymbolcenterh.caption"
 msgid "Горизонтально"
-msgstr "Горизонтально"
+msgstr ""
 
 #: tfmmain.acsymbolcenterh.hint
 msgid "Центрировать символ горизонтально"
-msgstr "Центрировать символ горизонтально"
+msgstr ""
 
 #: tfmmain.acsymbolcenterv.caption
 msgctxt "tfmmain.acsymbolcenterv.caption"
 msgid "Вертикально"
-msgstr "Вертикально"
+msgstr ""
 
 #: tfmmain.acsymbolcenterv.hint
 msgid "Центрировать символ вертикально"
-msgstr "Центрировать символ вертикально"
+msgstr ""
 
 #: tfmmain.acsymbolclear.caption
 msgctxt "tfmmain.acsymbolclear.caption"
 msgid "Очистить"
-msgstr "Очистить"
+msgstr ""
 
 #: tfmmain.acsymbolclear.hint
 msgid "Очистить холст"
-msgstr "Очистить холст"
+msgstr ""
 
 #: tfmmain.acsymbolcopy.caption
-msgctxt "TFMMAIN.ACSYMBOLCOPY.CAPTION"
+msgctxt "tfmmain.acsymbolcopy.caption"
 msgid "Копировать"
-msgstr "Копировать"
+msgstr ""
 
 #: tfmmain.acsymbolcopy.hint
 msgid "Копировать содержимое холста в буфер"
-msgstr "Копировать содержимое холста в буфер"
+msgstr ""
 
 #: tfmmain.acsymbolcut.caption
 msgid "Вырезать"
-msgstr "Вырезать"
+msgstr ""
 
 #: tfmmain.acsymbolcut.hint
 msgid "Вырезать содержимое холста в буфер"
-msgstr "Вырезать содержимое холста в буфер"
+msgstr ""
 
 #: tfmmain.acsymbolfind.caption
 msgid "Найти символ"
-msgstr "Найти символ"
+msgstr ""
 
 #: tfmmain.acsymbolfind.hint
 msgid "Поиск символа по названию или коду"
-msgstr "Поиск символа по названию или коду"
+msgstr ""
 
 #: tfmmain.acsymbolimportimage.caption
-#| msgid "Импорт из изображения ..."
 msgid "Импорт изображения ..."
-msgstr "Импорт изображения ..."
+msgstr ""
 
 #: tfmmain.acsymbolimportimage.hint
-#| msgid "Импортировать изображение символа из PNG"
 msgid "Импортировать изображение на холст символа"
-msgstr "Импортировать изображение на холст символа"
+msgstr ""
 
 #: tfmmain.acsymbolinvert.caption
 msgctxt "tfmmain.acsymbolinvert.caption"
 msgid "Инвертировать"
-msgstr "Инвертировать"
+msgstr ""
 
 #: tfmmain.acsymbolinvert.hint
 msgid "Инвертировать изображение символа"
-msgstr "Инвертировать изображение символа"
+msgstr ""
 
 #: tfmmain.acsymbolmirrorhorz.caption
 msgctxt "tfmmain.acsymbolmirrorhorz.caption"
 msgid "Горизонтально"
-msgstr "Горизонтально"
+msgstr ""
 
 #: tfmmain.acsymbolmirrorhorz.hint
 msgid "Отобразить символ горизонтально"
-msgstr "Отобразить символ горизонтально"
+msgstr ""
 
 #: tfmmain.acsymbolmirrorvert.caption
 msgctxt "tfmmain.acsymbolmirrorvert.caption"
 msgid "Вертикально"
-msgstr "Вертикально"
+msgstr ""
 
 #: tfmmain.acsymbolmirrorvert.hint
 msgid "Отобразить символ вертикально"
-msgstr "Отобразить символ вертикально"
+msgstr ""
 
 #: tfmmain.acsymbolpaste.caption
 msgid "Вставить"
-msgstr "Вставить"
+msgstr ""
 
 #: tfmmain.acsymbolpaste.hint
 msgid "Вставить содержимое буфера на холст"
-msgstr "Вставить содержимое буфера на холст"
+msgstr ""
 
 #: tfmmain.acsymbolredo.caption
 msgctxt "tfmmain.acsymbolredo.caption"
 msgid "Повторить"
-msgstr "Повторить"
+msgstr ""
 
 #: tfmmain.acsymbolredo.hint
 msgid "Повторить последнюю отмененную операцию над символом"
-msgstr "Повторить последнюю отмененную операцию над символом"
+msgstr ""
 
 #: tfmmain.acsymbolshiftdown.caption
 msgctxt "tfmmain.acsymbolshiftdown.caption"
 msgid "Вниз"
-msgstr "Вниз"
+msgstr ""
 
 #: tfmmain.acsymbolshiftdown.hint
 msgid "Сдвинуть символ вниз на 1 строку"
-msgstr "Сдвинуть символ вниз на 1 строку"
+msgstr ""
 
 #: tfmmain.acsymbolshiftleft.caption
 msgctxt "tfmmain.acsymbolshiftleft.caption"
 msgid "Влево"
-msgstr "Влево"
+msgstr ""
 
 #: tfmmain.acsymbolshiftleft.hint
 msgid "Сдвинуть символ влево на 1 столбец"
-msgstr "Сдвинуть символ влево на 1 столбец"
+msgstr ""
 
 #: tfmmain.acsymbolshiftright.caption
 msgctxt "tfmmain.acsymbolshiftright.caption"
 msgid "Вправо"
-msgstr "Вправо"
+msgstr ""
 
 #: tfmmain.acsymbolshiftright.hint
 msgid "Сдвинуть символ вправо на 1 столбец"
-msgstr "Сдвинуть символ вправо на 1 столбец"
+msgstr ""
 
 #: tfmmain.acsymbolshiftup.caption
 msgctxt "tfmmain.acsymbolshiftup.caption"
 msgid "Вверх"
-msgstr "Вверх"
+msgstr ""
 
 #: tfmmain.acsymbolshiftup.hint
 msgid "Сдвинуть символ вверх на 1 строку"
-msgstr "Сдвинуть символ вверх на 1 строку"
+msgstr ""
 
 #: tfmmain.acsymbolsnapdown.caption
 msgctxt "tfmmain.acsymbolsnapdown.caption"
 msgid "К нижнему краю"
-msgstr "К нижнему краю"
+msgstr ""
 
 #: tfmmain.acsymbolsnapdown.hint
 msgid "Прижать символ к нижнему краю холста"
-msgstr "Прижать символ к нижнему краю холста"
+msgstr ""
 
 #: tfmmain.acsymbolsnapleft.caption
 msgctxt "tfmmain.acsymbolsnapleft.caption"
 msgid "К левому краю"
-msgstr "К левому краю"
+msgstr ""
 
 #: tfmmain.acsymbolsnapleft.hint
 msgid "Прижать символ к левому краю холста"
-msgstr "Прижать символ к левому краю холста"
+msgstr ""
 
 #: tfmmain.acsymbolsnapright.caption
 msgctxt "tfmmain.acsymbolsnapright.caption"
 msgid "К правому краю"
-msgstr "К правому краю"
+msgstr ""
 
 #: tfmmain.acsymbolsnapright.hint
 msgid "Прижать символ к правому краю холста"
-msgstr "Прижать символ к правому краю холста"
+msgstr ""
 
 #: tfmmain.acsymbolsnapup.caption
 msgctxt "tfmmain.acsymbolsnapup.caption"
 msgid "К верхнему краю"
-msgstr "К верхнему краю"
+msgstr ""
 
 #: tfmmain.acsymbolsnapup.hint
 msgid "Прижать символ к верхнему краю холста"
-msgstr "Прижать символ к верхнему краю холста"
+msgstr ""
 
 #: tfmmain.acsymbolundo.caption
 msgctxt "tfmmain.acsymbolundo.caption"
 msgid "Отменить"
-msgstr "Отменить"
+msgstr ""
 
 #: tfmmain.acsymbolundo.hint
 msgid "Отменить последнюю операцию над символом"
-msgstr "Отменить последнюю операцию над символом"
+msgstr ""
 
 #: tfmmain.acviewtbcommon.caption
-msgctxt "TFMMAIN.ACVIEWTBCOMMON.CAPTION"
+msgctxt "tfmmain.acviewtbcommon.caption"
 msgid "Файл"
-msgstr "Файл"
+msgstr ""
 
 #: tfmmain.acviewtbeditchar.caption
 msgid "Правка символа"
-msgstr "Правка символа"
+msgstr ""
 
 #: tfmmain.acviewtbeditfont.caption
 msgid "Правка шрифта"
-msgstr "Правка шрифта"
+msgstr ""
 
 #: tfmmain.acviewtbeffectschar.caption
 msgid "Эффекты символа"
-msgstr "Эффекты символа"
+msgstr ""
 
 #: tfmmain.acviewtbeffectsfont.caption
 msgid "Эффекты шрифта"
-msgstr "Эффекты шрифта"
+msgstr ""
 
 #: tfmmain.acwebsite.caption
 msgid "Сайт"
-msgstr "Сайт"
+msgstr ""
 
 #: tfmmain.acwebsite.hint
 msgid "Открыть репозиторий приложения"
-msgstr "Открыть репозиторий приложения"
+msgstr ""
 
 #: tfmmain.aczoomfit.caption
 msgid "Вписать"
-msgstr "Вписать"
+msgstr ""
 
 #: tfmmain.aczoomfit.hint
 msgid "Вписать изображение в видимые границы холста"
-msgstr "Вписать изображение в видимые границы холста"
+msgstr ""
 
 #: tfmmain.aczoomin.caption
-msgctxt "tfmmain.aczoomin.caption"
 msgid "Увеличить"
-msgstr "Увеличить"
+msgstr ""
 
 #: tfmmain.aczoomin.hint
 msgid "Увеличить изображение холста"
-msgstr "Увеличить изображение холста"
+msgstr ""
 
 #: tfmmain.aczoomout.caption
-msgctxt "tfmmain.aczoomout.caption"
 msgid "Уменьшить"
-msgstr "Уменьшить"
+msgstr ""
 
 #: tfmmain.aczoomout.hint
 msgid "Уменьшить изображение холста"
-msgstr "Уменьшить изображение холста"
+msgstr ""
 
 #: tfmmain.dlgimport.title
 msgid "Импортировать изображение"
-msgstr "Импортировать изображение"
+msgstr ""
 
 #: tfmmain.dlgopen.title
 msgid "Открыть файл шрифта"
-msgstr "Открыть файл шрифта"
+msgstr ""
 
 #: tfmmain.lbeditfind.caption
 msgctxt "tfmmain.lbeditfind.caption"
 msgid "Символ"
-msgstr "Символ"
-
-#: tfmmain.lbedithex.caption
-msgid "lbEditHEX"
-msgstr "lbEditHEX"
-
-#: tfmmain.lbeditor.caption
-msgid "lbEditor"
-msgstr "lbEditor"
-
-#: tfmmain.lbnavigator.caption
-msgid "lbNavigator"
-msgstr "lbNavigator"
+msgstr ""
 
 #: tfmmain.lbspeditfind.caption
 msgctxt "tfmmain.lbspeditfind.caption"
 msgid "Код"
-msgstr "Код"
+msgstr ""
 
 #: tfmmain.lbspeditfind.hint
 msgid "Код символа [DEC]"
-msgstr "Код символа [DEC]"
-
-#: tfmmain.menuitem100.caption
-msgctxt "TFMMAIN.MENUITEM100.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem109.caption
-msgctxt "tfmmain.menuitem109.caption"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem16.caption
-msgctxt "TFMMAIN.MENUITEM16.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem22.caption
-msgctxt "TFMMAIN.MENUITEM22.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem43.caption
-msgctxt "TFMMAIN.MENUITEM43.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem48.caption
-msgctxt "TFMMAIN.MENUITEM48.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem56.caption
-msgctxt "TFMMAIN.MENUITEM56.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem62.caption
-msgctxt "TFMMAIN.MENUITEM62.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem65.caption
-msgctxt "TFMMAIN.MENUITEM65.CAPTION"
-msgid "-"
-msgstr "-"
+msgstr ""
 
 #: tfmmain.menuitem68.caption
 msgid "Масштаб"
-msgstr "Масштаб"
+msgstr ""
 
-#: tfmmain.menuitem69.caption
-msgctxt "TFMMAIN.MENUITEM69.CAPTION"
-msgid "-"
-msgstr "-"
+#: tfmmain.sgnavigator.columns[0].title.caption
+msgctxt "tfmmain.sgnavigator.columns[0].title.caption"
+msgid "Символ"
+msgstr ""
 
-#: tfmmain.menuitem7.caption
-msgctxt "TFMMAIN.MENUITEM7.CAPTION"
-msgid "-"
-msgstr "-"
+#: tfmmain.sgnavigator.columns[1].title.caption
+msgctxt "tfmmain.sgnavigator.columns[1].title.caption"
+msgid "Код"
+msgstr ""
 
-#: tfmmain.menuitem70.caption
-msgctxt "TFMMAIN.MENUITEM70.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem71.caption
-msgctxt "TFMMAIN.MENUITEM71.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem74.caption
-msgctxt "TFMMAIN.MENUITEM74.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem76.caption
-msgctxt "TFMMAIN.MENUITEM76.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem77.caption
-msgctxt "TFMMAIN.MENUITEM77.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem87.caption
-msgctxt "TFMMAIN.MENUITEM87.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.menuitem89.caption
-msgctxt "TFMMAIN.MENUITEM89.CAPTION"
-msgid "-"
-msgstr "-"
-
-#: tfmmain.toolbutton13.caption
-msgid "ToolButton13"
-msgstr "ToolButton13"
-
-#: tfmmain.toolbutton16.caption
-msgid "ToolButton16"
-msgstr "ToolButton16"
-
-#: tfmmain.toolbutton18.caption
-msgid "ToolButton18"
-msgstr "ToolButton18"
-
-#: tfmmain.toolbutton24.caption
-msgid "ToolButton24"
-msgstr "ToolButton24"
-
-#: tfmmain.toolbutton30.caption
-msgid "ToolButton30"
-msgstr "ToolButton30"
-
-#: tfmmain.toolbutton33.caption
-msgid "ToolButton33"
-msgstr "ToolButton33"
-
-#: tfmmain.toolbutton38.caption
-msgid "ToolButton38"
-msgstr "ToolButton38"
-
-#: tfmmain.toolbutton4.caption
-msgid "ToolButton4"
-msgstr "ToolButton4"
-
-#: tfmmain.toolbutton43.caption
-msgid "ToolButton43"
-msgstr "ToolButton43"
-
-#: tfmmain.toolbutton45.caption
-msgctxt "TFMMAIN.TOOLBUTTON45.CAPTION"
-msgid "ToolButton5"
-msgstr "ToolButton5"
-
-#: tfmmain.toolbutton47.caption
-msgid "ToolButton47"
-msgstr "ToolButton47"
-
-#: tfmmain.toolbutton5.caption
-msgctxt "tfmmain.toolbutton5.caption"
-msgid "ToolButton5"
-msgstr "ToolButton5"
-
-#: tfmmain.toolbutton50.caption
-msgid "ToolButton50"
-msgstr "ToolButton50"
-
-#: tfmmain.toolbutton56.caption
-msgid "ToolButton56"
-msgstr "ToolButton56"
-
-#: tfmmain.toolbutton63.caption
-msgctxt "TFMMAIN.TOOLBUTTON63.CAPTION"
-msgid "ToolButton7"
-msgstr "ToolButton7"
-
-#: tfmmain.toolbutton67.caption
-msgid "ToolButton67"
-msgstr "ToolButton67"
-
-#: tfmmain.toolbutton7.caption
-msgctxt "tfmmain.toolbutton7.caption"
-msgid "ToolButton7"
-msgstr "ToolButton7"
+#: tfmmain.sgnavigator.columns[2].title.caption
+msgctxt "tfmmain.sgnavigator.columns[2].title.caption"
+msgid "Вид"
+msgstr ""
 
 #: tfmnew.bbok.caption
 msgid "Создать"
-msgstr "Создать"
+msgstr ""
 
 #: tfmnew.caption
-msgctxt "TFMNEW.CAPTION"
+msgctxt "tfmnew.caption"
 msgid "Создать новый шрифт"
-msgstr "Создать новый шрифт"
+msgstr ""
 
 #: tfmnew.lbauthor.caption
 msgctxt "tfmnew.lbauthor.caption"
 msgid "Автор"
-msgstr "Автор"
+msgstr ""
 
 #: tfmnew.lbencoding.caption
 msgctxt "tfmnew.lbencoding.caption"
 msgid "Кодировка"
-msgstr "Кодировка"
+msgstr ""
 
 #: tfmnew.lbfontname.caption
 msgctxt "tfmnew.lbfontname.caption"
 msgid "Название"
-msgstr "Название"
+msgstr ""
 
 #: tfmnew.lbfontname1.caption
-msgctxt "TFMNEW.LBFONTNAME1.CAPTION"
+msgctxt "tfmnew.lbfontname1.caption"
 msgid "Диапазон символов"
-msgstr "Диапазон символов"
+msgstr ""
 
 #: tfmnew.lbfontname2.caption
 msgid "Размеры холста"
-msgstr "Размеры холста"
+msgstr ""
 
 #: tfmnew.lbheight.caption
 msgid "высота"
-msgstr "высота"
+msgstr ""
 
 #: tfmnew.lblastitem.caption
 msgid "последний"
-msgstr "последний"
+msgstr ""
 
 #: tfmnew.lbstartitem.caption
 msgid "первый"
-msgstr "первый"
+msgstr ""
 
 #: tfmnew.lbwidth.caption
 msgid "ширина"
-msgstr "ширина"
+msgstr ""
 
 #: tfmoptimize.bbapply.caption
 msgctxt "tfmoptimize.bbapply.caption"
 msgid "Применить"
-msgstr "Применить"
+msgstr ""
 
 #: tfmoptimize.caption
 msgid "Оптимизация размера холста"
-msgstr "Оптимизация размера холста"
+msgstr ""
 
 #: tfmoptimize.gbborders.caption
 msgid "Границы оптимизации"
-msgstr "Границы оптимизации"
+msgstr ""
 
 #: tfmoptimize.lbdown.caption
 msgid "строк снизу:"
-msgstr "строк снизу:"
-
-#: tfmoptimize.lbdownvalue.caption
-msgctxt "TFMOPTIMIZE.LBDOWNVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmoptimize.lbleft.caption
 msgid "столбцов слева:"
-msgstr "столбцов слева:"
-
-#: tfmoptimize.lbleftvalue.caption
-msgctxt "TFMOPTIMIZE.LBLEFTVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmoptimize.lbnew.caption
 msgctxt "tfmoptimize.lbnew.caption"
 msgid "Новый размер:"
-msgstr "Новый размер:"
-
-#: tfmoptimize.lbnewvalue.caption
-msgctxt "TFMOPTIMIZE.LBNEWVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmoptimize.lbold.caption
 msgctxt "tfmoptimize.lbold.caption"
 msgid "Исходный размер:"
-msgstr "Исходный размер:"
-
-#: tfmoptimize.lboldvalue.caption
-msgctxt "TFMOPTIMIZE.LBOLDVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmoptimize.lbright.caption
 msgid "столбцов справа:"
-msgstr "столбцов справа:"
-
-#: tfmoptimize.lbrightvalue.caption
-msgctxt "TFMOPTIMIZE.LBRIGHTVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmoptimize.lbup.caption
 msgid "строк сверху:"
-msgstr "строк сверху:"
-
-#: tfmoptimize.lbupvalue.caption
-msgctxt "tfmoptimize.lbupvalue.caption"
-msgid "0"
-msgstr "0"
-
-#: tfmoptimize.lbwarning.caption
-msgctxt "tfmoptimize.lbwarning.caption"
-msgid "lbWarning"
-msgstr "lbWarning"
+msgstr ""
 
 #: tfmoptimize.rgdelete.caption
 msgid "Будет удалено"
-msgstr "Будет удалено"
+msgstr ""
 
 #: tfmoptimize.rgresult.caption
 msgctxt "tfmoptimize.rgresult.caption"
 msgid "Результат"
-msgstr "Результат"
+msgstr ""
 
 #: tfmoptimize.sbdown.hint
 msgid "Удалить пустое пространство снизу"
-msgstr "Удалить пустое пространство снизу"
+msgstr ""
 
 #: tfmoptimize.sbleft.hint
 msgid "Удалить пустое пространство слева"
-msgstr "Удалить пустое пространство слева"
+msgstr ""
 
 #: tfmoptimize.sbreset.hint
 msgid "Удалить пустое пространство вокруг символа"
-msgstr "Удалить пустое пространство вокруг символа"
+msgstr ""
 
 #: tfmoptimize.sbright.hint
 msgid "Удалить пустое пространство справа"
-msgstr "Удалить пустое пространство справа"
+msgstr ""
 
 #: tfmoptimize.sbup.hint
 msgid "Удалить пустое пространство сверху"
-msgstr "Удалить пустое пространство сверху"
+msgstr ""
 
 #: tfmpreview.acedittext.caption
 msgid "Текст"
-msgstr "Текст"
+msgstr ""
 
 #: tfmpreview.acedittext.hint
 msgid "Редактировать текст примера"
-msgstr "Редактировать текст примера"
+msgstr ""
 
 #: tfmpreview.acexportimage.caption
 msgid "Экспорт ..."
-msgstr "Экспорт ..."
+msgstr ""
 
 #: tfmpreview.acexportimage.hint
 msgid "Сохранить пример как изображение"
-msgstr "Сохранить пример как изображение"
+msgstr ""
 
 #: tfmpreview.acrefresh.caption
 msgctxt "tfmpreview.acrefresh.caption"
 msgid "Обновить"
-msgstr "Обновить"
+msgstr ""
 
 #: tfmpreview.acrefresh.hint
 msgid "Обновить образец текста"
-msgstr "Обновить образец текста"
+msgstr ""
 
 #: tfmpreview.acresettext.caption
 msgid "По умолчанию"
-msgstr "По умолчанию"
+msgstr ""
 
 #: tfmpreview.acresettext.hint
 msgid "Восстановить текст примера по умолчанию"
-msgstr "Восстановить текст примера по умолчанию"
-
-#: tfmpreview.lbbackground.caption
-msgid "   "
-msgstr "   "
+msgstr ""
 
 #: tfmpreview.rbmono.caption
 msgctxt "tfmpreview.rbmono.caption"
 msgid "Моноширинный"
-msgstr "Моноширинный"
+msgstr ""
 
 #: tfmpreview.rbprop.caption
 msgctxt "tfmpreview.rbprop.caption"
 msgid "Пропорциональный"
-msgstr "Пропорциональный"
+msgstr ""
 
 #: tfmpreview.savedlg.title
 msgid "Экспорт изображения текста предпросмотра"
-msgstr "Экспорт изображения текста предпросмотра"
+msgstr ""
 
 #: tfmpreview.sedelta.hint
 msgid "Дистанция между строками"
-msgstr "Дистанция между строками"
+msgstr ""
 
 #: tfmpreview.sespace.hint
 msgid "Дистанция между символами"
-msgstr "Дистанция между символами"
+msgstr ""
 
 #: tfmpreview.tabpreview.caption
 msgid "Предпросмотр"
-msgstr "Предпросмотр"
+msgstr ""
 
 #: tfmpreview.tabtxt.caption
 msgid "Выводимый текст"
-msgstr "Выводимый текст"
-
-#: tfmpreview.tbcontrols.caption
-msgid "tbControls"
-msgstr "tbControls"
+msgstr ""
 
 #: tfmprop.bbapply.caption
-msgctxt "TFMPROP.BBAPPLY.CAPTION"
+msgctxt "tfmprop.bbapply.caption"
 msgid "Применить"
-msgstr "Применить"
+msgstr ""
 
 #: tfmprop.caption
-msgctxt "TFMPROP.CAPTION"
+msgctxt "tfmprop.caption"
 msgid "Свойства шрифта"
-msgstr "Свойства шрифта"
+msgstr ""
 
 #: tfmprop.lbauthor.caption
-msgctxt "TFMPROP.LBAUTHOR.CAPTION"
+msgctxt "tfmprop.lbauthor.caption"
 msgid "Автор"
-msgstr "Автор"
+msgstr ""
 
 #: tfmprop.lbdatechange.caption
 msgid "Изменен"
-msgstr "Изменен"
+msgstr ""
 
 #: tfmprop.lbdatecreate.caption
 msgid "Создан"
-msgstr "Создан"
+msgstr ""
 
 #: tfmprop.lbfontencoding.caption
-msgctxt "TFMPROP.LBFONTENCODING.CAPTION"
+msgctxt "tfmprop.lbfontencoding.caption"
 msgid "Кодировка"
-msgstr "Кодировка"
+msgstr ""
 
 #: tfmprop.lbheight.caption
 msgid "Высота символа"
-msgstr "Высота символа"
+msgstr ""
 
 #: tfmprop.lblast.caption
 msgctxt "tfmprop.lblast.caption"
 msgid "Последний символ"
-msgstr "Последний символ"
+msgstr ""
 
 #: tfmprop.lbname.caption
-msgctxt "TFMPROP.LBNAME.CAPTION"
+msgctxt "tfmprop.lbname.caption"
 msgid "Название"
-msgstr "Название"
+msgstr ""
 
 #: tfmprop.lbpath.caption
-msgctxt "TFMPROP.LBPATH.CAPTION"
+msgctxt "tfmprop.lbpath.caption"
 msgid "Файл"
-msgstr "Файл"
+msgstr ""
 
 #: tfmprop.lbstart.caption
 msgctxt "tfmprop.lbstart.caption"
 msgid "Первый символ"
-msgstr "Первый символ"
+msgstr ""
 
 #: tfmprop.lbwidth.caption
 msgid "Ширина символа"
-msgstr "Ширина символа"
+msgstr ""
 
 #: tfmrange.bbapply.caption
-msgctxt "TFMRANGE.BBAPPLY.CAPTION"
+msgctxt "tfmrange.bbapply.caption"
 msgid "Применить"
-msgstr "Применить"
+msgstr ""
 
 #: tfmrange.caption
 msgid "Задать диапазон"
-msgstr "Задать диапазон"
+msgstr ""
 
 #: tfmrange.gbrange.caption
 msgid "Диапазон"
-msgstr "Диапазон"
+msgstr ""
 
 #: tfmrange.lbend.caption
-msgctxt "TFMRANGE.LBEND.CAPTION"
+msgctxt "tfmrange.lbend.caption"
 msgid "Последний символ"
-msgstr "Последний символ"
+msgstr ""
 
 #: tfmrange.lbstart.caption
-msgctxt "TFMRANGE.LBSTART.CAPTION"
+msgctxt "tfmrange.lbstart.caption"
 msgid "Первый символ"
-msgstr "Первый символ"
-
-#: tfmrange.lbwarning.caption
-msgctxt "TFMRANGE.LBWARNING.CAPTION"
-msgid "lbWarning"
-msgstr "lbWarning"
+msgstr ""
 
 #: tfmsettings.accancel.caption
-msgctxt "TFMSETTINGS.ACCANCEL.CAPTION"
+msgctxt "tfmsettings.accancel.caption"
 msgid "Отмена"
-msgstr "Отмена"
+msgstr ""
 
 #: tfmsettings.acok.caption
-msgctxt "TFMSETTINGS.ACOK.CAPTION"
+msgctxt "tfmsettings.acok.caption"
 msgid "Применить"
-msgstr "Применить"
+msgstr ""
 
 #: tfmsettings.caption
-msgctxt "TFMSETTINGS.CAPTION"
+msgctxt "tfmsettings.caption"
 msgid "Настройки"
-msgstr "Настройки"
+msgstr ""
 
 #: tfmsettings.cbcharname.caption
-msgctxt "TFMSETTINGS.CBCHARNAME.CAPTION"
+msgctxt "tfmsettings.cbcharname.caption"
 msgid "Название"
-msgstr "Название"
-
-#: tfmsettings.cbcharnamefont.text
-msgctxt "tfmsettings.cbcharnamefont.text"
-msgid "Consolas"
-msgstr "Consolas"
+msgstr ""
 
 #: tfmsettings.cbchessgrid.caption
 msgid "Редактор символа: шахматный фон"
-msgstr "Редактор символа: шахматный фон"
-
-#: tfmsettings.cbcodehex.caption
-msgctxt "tfmsettings.cbcodehex.caption"
-msgid "HEX"
-msgstr "HEX"
+msgstr ""
 
 #: tfmsettings.cbcodename.caption
-msgctxt "TFMSETTINGS.CBCODENAME.CAPTION"
+msgctxt "tfmsettings.cbcodename.caption"
 msgid "Код"
-msgstr "Код"
-
-#: tfmsettings.cbcodenamefont.text
-msgctxt "TFMSETTINGS.CBCODENAMEFONT.TEXT"
-msgid "Consolas"
-msgstr "Consolas"
+msgstr ""
 
 #: tfmsettings.cbmagnetpreview.caption
 msgid "Примагничивать окно предпросмотра к низу редактора"
-msgstr "Примагничивать окно предпросмотра к низу редактора"
+msgstr ""
 
 #: tfmsettings.cbnaviinvert.caption
 msgid "Навигатор: отображать выделенный символ инверсно"
-msgstr "Навигатор: отображать выделенный символ инверсно"
+msgstr ""
 
 #: tfmsettings.cbnaviscroll.caption
 msgid "Навигатор: смена символов прокруткой"
-msgstr "Навигатор: смена символов прокруткой"
+msgstr ""
 
 #: tfmsettings.cbnaviscroll.hint
 msgid "Прокрутка колесом перемещает по символам (выбрано) или прокручивает список (не выбрано)"
-msgstr "Прокрутка колесом перемещает по символам (выбрано) или прокручивает список (не выбрано)"
+msgstr ""
 
 #: tfmsettings.cbnavitransparent.caption
 msgid "Навигатор: фоновый цвет символа прозрачный"
-msgstr "Навигатор: фоновый цвет символа прозрачный"
+msgstr ""
 
 #: tfmsettings.cbpreviewrefresh.caption
 msgid "Обновлять образец текста предпросмотра автоматически"
-msgstr "Обновлять образец текста предпросмотра автоматически"
+msgstr ""
 
 #: tfmsettings.lbauthor.caption
-msgctxt "TFMSETTINGS.LBAUTHOR.CAPTION"
+msgctxt "tfmsettings.lbauthor.caption"
 msgid "Автор"
-msgstr "Автор"
+msgstr ""
 
 #: tfmsettings.lbbwtreshold.caption
 msgid "Порог черного при импорте изображения"
-msgstr "Порог черного при импорте изображения"
+msgstr ""
 
 #: tfmsettings.lbcolora.caption
 msgctxt "tfmsettings.lbcolora.caption"
 msgid "Цвет пикселя"
-msgstr "Цвет пикселя"
+msgstr ""
 
 #: tfmsettings.lbcolorbg.caption
 msgctxt "tfmsettings.lbcolorbg.caption"
 msgid "Цвет фона"
-msgstr "Цвет фона"
+msgstr ""
 
 #: tfmsettings.lbcoloreditor.caption
 msgid "Редактор"
-msgstr "Редактор"
+msgstr ""
 
 #: tfmsettings.lbcolorgrid.caption
 msgid "Цвет сетки"
-msgstr "Цвет сетки"
+msgstr ""
 
 #: tfmsettings.lbcolorimport.caption
 msgid "Образец импорта"
-msgstr "Образец импорта"
+msgstr ""
 
 #: tfmsettings.lbcolorimporta.caption
 msgid "Цвет текста"
-msgstr "Цвет текста"
+msgstr ""
 
 #: tfmsettings.lbcolorimportbg.caption
-msgctxt "TFMSETTINGS.LBCOLORIMPORTBG.CAPTION"
+msgctxt "tfmsettings.lbcolorimportbg.caption"
 msgid "Цвет фона"
-msgstr "Цвет фона"
+msgstr ""
 
 #: tfmsettings.lbcolornavi.caption
 msgctxt "tfmsettings.lbcolornavi.caption"
 msgid "Навигатор"
-msgstr "Навигатор"
+msgstr ""
 
 #: tfmsettings.lbcolornavia.caption
-msgctxt "TFMSETTINGS.LBCOLORNAVIA.CAPTION"
+msgctxt "tfmsettings.lbcolornavia.caption"
 msgid "Цвет пикселя"
-msgstr "Цвет пикселя"
+msgstr ""
 
 #: tfmsettings.lbcolornavibg.caption
-msgctxt "TFMSETTINGS.LBCOLORNAVIBG.CAPTION"
+msgctxt "tfmsettings.lbcolornavibg.caption"
 msgid "Цвет фона"
-msgstr "Цвет фона"
+msgstr ""
 
 #: tfmsettings.lbcolorpreview.caption
-msgctxt "TFMSETTINGS.LBCOLORPREVIEW.CAPTION"
+msgctxt "tfmsettings.lbcolorpreview.caption"
 msgid "Образец текста"
-msgstr "Образец текста"
+msgstr ""
 
 #: tfmsettings.lbcolorpreviewa.caption
-msgctxt "TFMSETTINGS.LBCOLORPREVIEWA.CAPTION"
+msgctxt "tfmsettings.lbcolorpreviewa.caption"
 msgid "Цвет пикселя"
-msgstr "Цвет пикселя"
+msgstr ""
 
 #: tfmsettings.lbcolorpreviewbg.caption
-msgctxt "TFMSETTINGS.LBCOLORPREVIEWBG.CAPTION"
+msgctxt "tfmsettings.lbcolorpreviewbg.caption"
 msgid "Цвет фона"
-msgstr "Цвет фона"
-
-#: tfmsettings.lbempty1.caption
-msgctxt "tfmsettings.lbempty1.caption"
-msgid " "
-msgstr " "
+msgstr ""
 
 #: tfmsettings.lbfontencoding.caption
-msgctxt "TFMSETTINGS.LBFONTENCODING.CAPTION"
+msgctxt "tfmsettings.lbfontencoding.caption"
 msgid "Кодировка"
-msgstr "Кодировка"
+msgstr ""
 
 #: tfmsettings.lbfontname.caption
-msgctxt "TFMSETTINGS.LBFONTNAME.CAPTION"
+msgctxt "tfmsettings.lbfontname.caption"
 msgid "Название"
-msgstr "Название"
+msgstr ""
 
 #: tfmsettings.lbgridthickness.caption
 msgid "Толщина линий пиксельной сетки редактора"
-msgstr "Толщина линий пиксельной сетки редактора"
+msgstr ""
 
 #: tfmsettings.lblanguage.caption
 msgid "Язык интерфейса"
-msgstr "Язык интерфейса"
+msgstr ""
 
 #: tfmsettings.lbnavicolumns.caption
 msgid "Столбцы навигатора: видимость и шрифт"
-msgstr "Столбцы навигатора: видимость и шрифт"
+msgstr ""
 
 #: tfmsettings.lbnaviheight.caption
 msgid "Высота строки навигатора (Ctrl + колесо)"
-msgstr "Высота строки навигатора (Ctrl + колесо)"
+msgstr ""
 
 #: tfmsettings.lbnewdefaults.caption
 msgid "Значения по умолчанию для нового шрифта"
-msgstr "Значения по умолчанию для нового шрифта"
+msgstr ""
 
 #: tfmsettings.lbnewheight.caption
 msgid "Высота холста символа"
-msgstr "Высота холста символа"
+msgstr ""
 
 #: tfmsettings.lbnewitemlast.caption
-msgctxt "TFMSETTINGS.LBNEWITEMLAST.CAPTION"
+msgctxt "tfmsettings.lbnewitemlast.caption"
 msgid "Последний символ"
-msgstr "Последний символ"
+msgstr ""
 
 #: tfmsettings.lbnewitemstart.caption
-msgctxt "TFMSETTINGS.LBNEWITEMSTART.CAPTION"
+msgctxt "tfmsettings.lbnewitemstart.caption"
 msgid "Первый символ"
-msgstr "Первый символ"
+msgstr ""
 
 #: tfmsettings.lbnewwidth.caption
 msgid "Ширина холста символа"
-msgstr "Ширина холста символа"
+msgstr ""
 
 #: tfmsettings.secharnamefontsize.hint
 msgctxt "tfmsettings.secharnamefontsize.hint"
 msgid "Размер шрифта"
-msgstr "Размер шрифта"
+msgstr ""
 
 #: tfmsettings.secodenamefontsize.hint
-msgctxt "TFMSETTINGS.SECODENAMEFONTSIZE.HINT"
+msgctxt "tfmsettings.secodenamefontsize.hint"
 msgid "Размер шрифта"
-msgstr "Размер шрифта"
+msgstr ""
 
 #: tfmsettings.tscolors.caption
 msgid "Цвета"
-msgstr "Цвета"
+msgstr ""
 
 #: tfmsettings.tsgeneral.caption
 msgid "Общие"
-msgstr "Общие"
+msgstr ""
 
 #: tfmsettings.tsnewdefaults.caption
 msgid "Новый шрифт"
-msgstr "Новый шрифт"
+msgstr ""
 
 #: tfmsizes.bbapply.caption
-msgctxt "TFMSIZES.BBAPPLY.CAPTION"
+msgctxt "tfmsizes.bbapply.caption"
 msgid "Применить"
-msgstr "Применить"
+msgstr ""
 
 #: tfmsizes.caption
 msgid "Изменение размеров холста"
-msgstr "Изменение размеров холста"
+msgstr ""
 
 #: tfmsizes.lbdown.caption
 msgid "Снизу"
-msgstr "Снизу"
-
-#: tfmsizes.lbempty5.caption
-msgctxt "TFMSIZES.LBEMPTY5.CAPTION"
-msgid " "
-msgstr " "
-
-#: tfmsizes.lbempty6.caption
-msgctxt "TFMSIZES.LBEMPTY6.CAPTION"
-msgid " "
-msgstr " "
+msgstr ""
 
 #: tfmsizes.lbleft.caption
 msgid "Слева"
-msgstr "Слева"
+msgstr ""
 
 #: tfmsizes.lbnew.caption
-msgctxt "TFMSIZES.LBNEW.CAPTION"
+msgctxt "tfmsizes.lbnew.caption"
 msgid "Новый размер:"
-msgstr "Новый размер:"
-
-#: tfmsizes.lbnewvalue.caption
-msgctxt "TFMSIZES.LBNEWVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmsizes.lbold.caption
-msgctxt "TFMSIZES.LBOLD.CAPTION"
+msgctxt "tfmsizes.lbold.caption"
 msgid "Исходный размер:"
-msgstr "Исходный размер:"
-
-#: tfmsizes.lboldvalue.caption
-msgctxt "TFMSIZES.LBOLDVALUE.CAPTION"
-msgid "0"
-msgstr "0"
+msgstr ""
 
 #: tfmsizes.lbright.caption
 msgid "Справа"
-msgstr "Справа"
+msgstr ""
 
 #: tfmsizes.lbup.caption
 msgid "Сверху"
-msgstr "Сверху"
-
-#: tfmsizes.lbwarning.caption
-msgctxt "TFMSIZES.LBWARNING.CAPTION"
-msgid "lbWarning"
-msgstr "lbWarning"
+msgstr ""
 
 #: tfmsizes.rgmode.caption
 msgid "Операция"
-msgstr "Операция"
+msgstr ""
 
 #: tfmsizes.rgresult.caption
-msgctxt "TFMSIZES.RGRESULT.CAPTION"
+msgctxt "tfmsizes.rgresult.caption"
 msgid "Результат"
-msgstr "Результат"
+msgstr ""
 
 #: tfmsizes.sbreset.caption
-msgctxt "TFMSIZES.SBRESET.CAPTION"
+msgctxt "tfmsizes.sbreset.caption"
 msgid "Сброс"
-msgstr "Сброс"
+msgstr ""
 
 #: tfmsizes.sbreset.hint
 msgid "Сброс значений"
-msgstr "Сброс значений"
+msgstr ""
 
 #: u_encodings.enc_1250
 msgid "1250 (ANSI - центрально-европейская)"
-msgstr "1250 (ANSI - центрально-европейская)"
+msgstr ""
 
 #: u_encodings.enc_1251
 msgid "1251 (ANSI - кириллица)"
-msgstr "1251 (ANSI - кириллица)"
+msgstr ""
 
 #: u_encodings.enc_1252
 msgid "1252 (ANSI - западно-европейская, лат. 1)"
-msgstr "1252 (ANSI - западно-европейская, лат. 1)"
+msgstr ""
 
 #: u_encodings.enc_1253
 msgid "1253 (ANSI - греческая)"
-msgstr "1253 (ANSI - греческая)"
+msgstr ""
 
 #: u_encodings.enc_1254
 msgid "1254 (ANSI - турецкая)"
-msgstr "1254 (ANSI - турецкая)"
+msgstr ""
 
 #: u_encodings.enc_1255
 msgid "1255 (ANSI - иврит)"
-msgstr "1255 (ANSI - иврит)"
+msgstr ""
 
 #: u_encodings.enc_1256
 msgid "1256 (ANSI - арабская)"
-msgstr "1256 (ANSI - арабская)"
+msgstr ""
 
 #: u_encodings.enc_1257
 msgid "1257 (ANSI - балтийская)"
-msgstr "1257 (ANSI - балтийская)"
+msgstr ""
 
 #: u_encodings.enc_1258
 msgid "1258 (ANSI - вьетнамская)"
-msgstr "1258 (ANSI - вьетнамская)"
+msgstr ""
 
 #: u_encodings.enc_437
 msgid "437 (DOS - латиница)"
-msgstr "437 (DOS - латиница)"
+msgstr ""
 
 #: u_encodings.enc_850
 msgid "850 (DOS - западно-европейская, лат.)"
-msgstr "850 (DOS - западно-европейская, лат.)"
+msgstr ""
 
 #: u_encodings.enc_852
 msgid "852 (DOS - центрально-европейская, лат.)"
-msgstr "852 (DOS - центрально-европейская, лат.)"
+msgstr ""
 
 #: u_encodings.enc_866
 msgid "866 (DOS - кириллица)"
-msgstr "866 (DOS - кириллица)"
+msgstr ""
 
 #: u_encodings.enc_874
 msgid "874 (DOS - тайская)"
-msgstr "874 (DOS - тайская)"
+msgstr ""
 
 #: u_encodings.enc_88591
 msgid "8859-1 (ISO/IEC - западно-европейская, лат. 1)"
-msgstr "8859-1 (ISO/IEC - западно-европейская, лат. 1)"
+msgstr ""
 
 #: u_encodings.enc_885915
 msgid "8859-15 (ISO/IEC - западно-европейская новая, лат. 9)"
-msgstr "8859-15 (ISO/IEC - западно-европейская новая, лат. 9)"
+msgstr ""
 
 #: u_encodings.enc_88592
 msgid "8859-2 (ISO/IEC - центрально-европейская, лат. 2)"
-msgstr "8859-2 (ISO/IEC - центрально-европейская, лат. 2)"
+msgstr ""
 
 #: u_encodings.enc_ansi
-#| msgid "ANSI (только ASCII, 7 бит)"
 msgid "ANSI (ASCII 7-битная)"
-msgstr "ANSI (ASCII 7-битная)"
+msgstr ""
 
-#: u_encodings.enc_koi8
-msgid "КОИ-8 (ANSI - русская)"
-msgstr "КОИ-8 (ANSI - русская)"
+#: u_encodings.enc_koi8r
+msgid "KOI8-R (русская)"
+msgstr ""
+
+#: u_encodings.enc_koi8ru
+msgid "KOI8-RU (русско-белорусско-украинская)"
+msgstr ""
+
+#: u_encodings.enc_koi8u
+msgid "KOI8-U (русско-украинская)"
+msgstr ""
 
 #: u_encodings.enc_macr
 msgid "Macintosh (MAC - латиница)"
-msgstr "Macintosh (MAC - латиница)"
+msgstr ""
 
 #: u_strings.txt_confirm
 msgid "Подтверждение"
-msgstr "Подтверждение"
+msgstr ""
 
 #: u_strings.txt_error
 msgid "Ошибка"
-msgstr "Ошибка"
+msgstr ""
 
 #: u_strings.txt_reset
 msgctxt "u_strings.txt_reset"
 msgid "Сброс"
-msgstr "Сброс"
+msgstr ""
 
 #: u_strings.txt_warning
 msgid "Предупреждение"
-msgstr "Предупреждение"
+msgstr ""
 
 #: u_strings.warn_create
-msgid "Не удалось создать проект шрифта!\\nВозникла критическая ошибка. Перезапустите приложение.\\nЗавершить работу приложения?"
-msgstr "Не удалось создать проект шрифта!\\nВозникла критическая ошибка. Перезапустите приложение.\\nЗавершить работу приложения?"
+msgid ""
+"Не удалось создать проект шрифта!\n"
+"Возникла критическая ошибка. Перезапустите приложение.\n"
+"Завершить работу приложения?"
+msgstr ""
 
 #: u_strings.warn_load
-msgid "Не удалось загрузить проект шрифта!\\nВозможно файл поврежден или возникла другая критическая ошибка."
-msgstr "Не удалось загрузить проект шрифта!\\nВозможно файл поврежден или возникла другая критическая ошибка."
+msgid ""
+"Не удалось загрузить проект шрифта!\n"
+"Возможно файл поврежден или возникла другая критическая ошибка."
+msgstr ""
 
 #: u_strings.warn_noredo
 msgid "Внимание! История правок символов будет очищена. Данную операцию невозможно отменить после применения."
-msgstr "Внимание! История правок символов будет очищена. Данную операцию невозможно отменить после применения."
+msgstr ""
 
 #: u_strings.warn_notsaved
-msgid "Изменения в текущем файле не сохранены.\\nСохранить?"
-msgstr "Изменения в текущем файле не сохранены.\\nСохранить?"
+msgid ""
+"Изменения в текущем файле не сохранены.\n"
+"Сохранить?"
+msgstr ""
 
 #: u_strings.warn_optimize
 msgid "Все символы шрифта пусты. Оптимизация недоступна"
-msgstr "Все символы шрифта пусты. Оптимизация недоступна"
+msgstr ""
 
 #: u_strings.warn_reset
-msgid "При следующем запуске приложения будут загружены\\nнастройки по умолчанию. Продолжить?"
-msgstr "При следующем запуске приложения будут загружены\\nнастройки по умолчанию. Продолжить?"
+msgid ""
+"При следующем запуске приложения будут загружены\n"
+"настройки по умолчанию. Продолжить?"
+msgstr ""
 
 #: u_strings.warn_settings
-msgid "Не удалось применить все настройки!\\nВозникла критическая ошибка. Перезапустите приложение.\\nЗавершить работу приложения?"
-msgstr "Не удалось применить все настройки!\\nВозникла критическая ошибка. Перезапустите приложение.\\nЗавершить работу приложения?"
+msgid ""
+"Не удалось применить все настройки!\n"
+"Возникла критическая ошибка. Перезапустите приложение.\n"
+"Завершить работу приложения?"
+msgstr ""
+

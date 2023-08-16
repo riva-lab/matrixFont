@@ -44,7 +44,7 @@ procedure TfmRange.FormCreate(Sender: TObject);
 
 procedure TfmRange.FormShow(Sender: TObject);
   begin
-    lbWarning.Caption := MultiString(WARN_NOREDO);
+    lbWarning.Caption := WARN_NOREDO;
   end;
 
 procedure TfmRange.seStartChange(Sender: TObject);

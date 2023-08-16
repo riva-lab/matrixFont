@@ -1,15 +1,16 @@
 object fmSizes: TfmSizes
-  Left = 354
-  Height = 269
-  Top = 277
-  Width = 635
+  Left = 358
+  Height = 336
+  Top = 159
+  Width = 794
   AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   BorderWidth = 10
   Caption = 'Изменение размеров холста'
-  ClientHeight = 269
-  ClientWidth = 635
+  ClientHeight = 336
+  ClientWidth = 794
+  DesignTimePPI = 120
   Icon.Data = {
     7E04000000000100010010100000010020006804000016000000280000001000
     0000200000000100200000000000000400006400000064000000000000000000
@@ -52,29 +53,29 @@ object fmSizes: TfmSizes
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '2.2.0.4'
   object pMain: TPanel
     AnchorSideLeft.Side = asrCenter
     AnchorSideBottom.Side = asrBottom
-    Left = 30
-    Height = 177
-    Top = 35
-    Width = 538
+    Left = 38
+    Height = 217
+    Top = 44
+    Width = 654
     AutoSize = True
     BevelOuter = bvNone
     ChildSizing.HorizontalSpacing = 10
     ChildSizing.VerticalSpacing = 10
     ChildSizing.Layout = cclTopToBottomThenLeftToRight
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 177
-    ClientWidth = 538
+    ClientHeight = 217
+    ClientWidth = 654
     TabOrder = 0
     object gbLimits: TGroupBox
       AnchorSideBottom.Side = asrBottom
       Left = 0
-      Height = 177
+      Height = 217
       Top = 0
-      Width = 226
+      Width = 274
       AutoSize = True
       ChildSizing.LeftRightSpacing = 5
       ChildSizing.TopBottomSpacing = 5
@@ -83,54 +84,52 @@ object fmSizes: TfmSizes
       ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 157
-      ClientWidth = 222
+      ClientHeight = 192
+      ClientWidth = 270
       TabOrder = 0
       object lbEmpty1: TLabel
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Side = asrBottom
         Left = 5
-        Height = 40
+        Height = 50
         Top = 5
-        Width = 64
-        ParentColor = False
+        Width = 80
       end
       object pValueU: TPanel
         AnchorSideLeft.Side = asrCenter
         AnchorSideBottom.Side = asrBottom
-        Left = 79
-        Height = 40
+        Left = 95
+        Height = 50
         Top = 5
-        Width = 64
+        Width = 80
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 2
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 40
-        ClientWidth = 64
+        ClientHeight = 50
+        ClientWidth = 80
         TabOrder = 0
         object lbUp: TLabel
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 15
+          Height = 20
           Top = 0
-          Width = 64
+          Width = 80
           Alignment = taCenter
           AutoSize = False
           Caption = 'Сверху'
-          ParentColor = False
         end
         object seUp: TSpinEdit
           AnchorSideLeft.Side = asrCenter
           Left = 0
-          Height = 23
-          Top = 17
-          Width = 64
+          Height = 28
+          Top = 22
+          Width = 80
           AutoSize = False
-          Constraints.MinWidth = 64
+          Constraints.MinWidth = 80
           OnChange = seUpChange
           TabOrder = 0
         end
@@ -138,46 +137,44 @@ object fmSizes: TfmSizes
       object lbEmpty2: TLabel
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Side = asrBottom
-        Left = 153
-        Height = 40
+        Left = 185
+        Height = 50
         Top = 5
-        Width = 64
-        ParentColor = False
+        Width = 80
       end
       object pValueL: TPanel
         AnchorSideLeft.Side = asrCenter
         AnchorSideBottom.Side = asrBottom
         Left = 5
-        Height = 57
-        Top = 50
-        Width = 64
+        Height = 72
+        Top = 60
+        Width = 80
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 2
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 57
-        ClientWidth = 64
+        ClientHeight = 72
+        ClientWidth = 80
         TabOrder = 1
         object lbLeft: TLabel
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 15
+          Height = 20
           Top = 0
-          Width = 64
+          Width = 80
           AutoSize = False
           Caption = 'Слева'
-          ParentColor = False
         end
         object seLeft: TSpinEdit
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 23
-          Top = 17
-          Width = 64
+          Height = 28
+          Top = 22
+          Width = 80
           AutoSize = False
-          Constraints.MinWidth = 64
+          Constraints.MinWidth = 80
           OnChange = seUpChange
           TabOrder = 0
         end
@@ -185,25 +182,24 @@ object fmSizes: TfmSizes
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 15
-          Top = 42
-          Width = 64
+          Height = 20
+          Top = 52
+          Width = 80
           Caption = ' '
-          ParentColor = False
         end
       end
       object sbReset: TSpeedButton
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Side = asrCenter
-        Left = 87
-        Height = 48
+        Left = 105
+        Height = 60
         Hint = 'Сброс значений'
-        Top = 54
-        Width = 48
+        Top = 66
+        Width = 60
         BorderSpacing.CellAlignHorizontal = ccaCenter
         BorderSpacing.CellAlignVertical = ccaCenter
-        Constraints.MinHeight = 48
-        Constraints.MinWidth = 48
+        Constraints.MinHeight = 60
+        Constraints.MinWidth = 60
         Caption = 'Сброс'
         Color = clDefault
         Flat = True
@@ -347,42 +343,41 @@ object fmSizes: TfmSizes
       object pValueR: TPanel
         AnchorSideLeft.Side = asrCenter
         AnchorSideBottom.Side = asrBottom
-        Left = 153
-        Height = 57
-        Top = 50
-        Width = 64
+        Left = 185
+        Height = 72
+        Top = 60
+        Width = 80
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 2
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 57
-        ClientWidth = 64
+        ClientHeight = 72
+        ClientWidth = 80
         TabOrder = 2
         object lbRight: TLabel
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Left = 0
-          Height = 15
+          Height = 20
           Top = 0
-          Width = 64
+          Width = 80
           AutoSize = False
           BidiMode = bdRightToLeft
           Caption = 'Справа'
           ParentBidiMode = False
-          ParentColor = False
         end
         object seRight: TSpinEdit
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
           Left = 0
-          Height = 23
-          Top = 17
-          Width = 64
+          Height = 28
+          Top = 22
+          Width = 80
           AutoSize = False
-          Constraints.MinWidth = 64
+          Constraints.MinWidth = 80
           OnChange = seUpChange
           TabOrder = 0
         end
@@ -390,47 +385,45 @@ object fmSizes: TfmSizes
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 15
-          Top = 42
-          Width = 64
+          Height = 20
+          Top = 52
+          Width = 80
           Caption = ' '
-          ParentColor = False
         end
       end
       object lbEmpty3: TLabel
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Side = asrBottom
         Left = 5
-        Height = 40
-        Top = 112
-        Width = 64
-        ParentColor = False
+        Height = 50
+        Top = 137
+        Width = 80
       end
       object pValueD: TPanel
         AnchorSideLeft.Side = asrCenter
         AnchorSideBottom.Side = asrBottom
-        Left = 79
-        Height = 40
-        Top = 112
-        Width = 64
+        Left = 95
+        Height = 50
+        Top = 137
+        Width = 80
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 2
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 40
-        ClientWidth = 64
+        ClientHeight = 50
+        ClientWidth = 80
         TabOrder = 3
         object seDown: TSpinEdit
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 23
+          Height = 28
           Top = 0
-          Width = 64
+          Width = 80
           AutoSize = False
-          Constraints.MinWidth = 64
+          Constraints.MinWidth = 80
           OnChange = seUpChange
           TabOrder = 0
         end
@@ -438,32 +431,30 @@ object fmSizes: TfmSizes
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
           Left = 0
-          Height = 15
-          Top = 25
-          Width = 64
+          Height = 20
+          Top = 30
+          Width = 80
           Alignment = taCenter
           AutoSize = False
           Caption = 'Снизу'
-          ParentColor = False
         end
       end
       object lbEmpty4: TLabel
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Side = asrBottom
-        Left = 153
-        Height = 40
-        Top = 112
-        Width = 64
-        ParentColor = False
+        Left = 185
+        Height = 50
+        Top = 137
+        Width = 80
       end
     end
     object pResult: TPanel
       AnchorSideLeft.Side = asrCenter
       AnchorSideBottom.Side = asrBottom
-      Left = 236
-      Height = 177
+      Left = 284
+      Height = 217
       Top = 0
-      Width = 142
+      Width = 172
       AutoSize = True
       BevelOuter = bvNone
       ChildSizing.HorizontalSpacing = 10
@@ -471,16 +462,16 @@ object fmSizes: TfmSizes
       ChildSizing.EnlargeVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 177
-      ClientWidth = 142
+      ClientHeight = 217
+      ClientWidth = 172
       TabOrder = 1
       object rgMode: TRadioGroup
         AnchorSideLeft.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 32
+        Height = 42
         Top = 0
-        Width = 142
+        Width = 172
         AutoFill = True
         Caption = 'Операция'
         ChildSizing.LeftRightSpacing = 10
@@ -493,8 +484,6 @@ object fmSizes: TfmSizes
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclTopToBottomThenLeftToRight
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 12
-        ClientWidth = 138
         OnClick = rgModeClick
         TabOrder = 0
       end
@@ -503,9 +492,9 @@ object fmSizes: TfmSizes
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 135
-        Top = 42
-        Width = 142
+        Height = 165
+        Top = 52
+        Width = 172
         AutoFill = True
         Caption = 'Результат'
         ChildSizing.LeftRightSpacing = 10
@@ -518,56 +507,52 @@ object fmSizes: TfmSizes
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 115
-        ClientWidth = 138
+        ClientHeight = 140
+        ClientWidth = 168
         Columns = 2
         TabOrder = 1
         object lbOld: TLabel
           Left = 10
-          Height = 15
-          Top = 29
-          Width = 102
+          Height = 20
+          Top = 34
+          Width = 130
           Alignment = taRightJustify
           Caption = 'Исходный размер:'
-          ParentColor = False
         end
         object lbOldValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 122
-          Height = 15
-          Top = 29
-          Width = 6
+          Left = 150
+          Height = 20
+          Top = 34
+          Width = 8
           Caption = '0'
-          ParentColor = False
         end
         object lbNew: TLabel
           AnchorSideTop.Side = asrBottom
           Left = 10
-          Height = 15
-          Top = 73
-          Width = 102
+          Height = 20
+          Top = 88
+          Width = 130
           Alignment = taRightJustify
           Caption = 'Новый размер:'
-          ParentColor = False
         end
         object lbNewValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 122
-          Height = 15
-          Top = 73
-          Width = 6
+          Left = 150
+          Height = 20
+          Top = 88
+          Width = 8
           Caption = '0'
-          ParentColor = False
         end
       end
     end
     object pControls: TPanel
-      Left = 388
-      Height = 177
+      Left = 466
+      Height = 217
       Top = 0
-      Width = 150
+      Width = 188
       AutoSize = True
       BevelOuter = bvNone
       ChildSizing.HorizontalSpacing = 10
@@ -576,24 +561,23 @@ object fmSizes: TfmSizes
       ChildSizing.EnlargeVertical = crsHomogenousChildResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 177
-      ClientWidth = 150
+      ClientHeight = 217
+      ClientWidth = 188
       TabOrder = 2
       object lbWarning: TLabel
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 15
+        Height = 20
         Top = 0
-        Width = 150
+        Width = 188
         Alignment = taCenter
         AutoSize = False
         BorderSpacing.CellAlignVertical = ccaLeftTop
         Caption = 'lbWarning'
         Color = 13158655
         Layout = tlCenter
-        ParentColor = False
         Transparent = False
         WordWrap = True
       end
@@ -602,13 +586,13 @@ object fmSizes: TfmSizes
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Side = asrBottom
         Left = 0
-        Height = 58
-        Top = 119
-        Width = 150
-        BorderSpacing.InnerBorder = 8
+        Height = 62
+        Top = 155
+        Width = 188
+        BorderSpacing.InnerBorder = 10
         BorderSpacing.CellAlignVertical = ccaRightBottom
         Caption = 'Применить'
-        Constraints.MinWidth = 150
+        Constraints.MinWidth = 188
         Glyph.Data = {
           36100000424D3610000000000000360000002800000020000000200000000100
           2000000000000010000064000000640000000000000000000000FFFFFF00FFFF

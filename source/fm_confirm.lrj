@@ -1,0 +1,6 @@
+{"version":1,"strings":[
+{"hash":12285,"name":"tfmconfirm.lbmessage.caption","sourcebytes":[45,45,45],"value":"---"},
+{"hash":893360,"name":"tfmconfirm.bbyes.caption","sourcebytes":[208,148,208,176],"value":"\u0414\u0430"},
+{"hash":229294738,"name":"tfmconfirm.bbno.caption","sourcebytes":[208,157,208,181,209,130],"value":"\u041D\u0435\u0442"},
+{"hash":69809520,"name":"tfmconfirm.bbcancel.caption","sourcebytes":[208,158,209,130,208,188,208,181,208,189,208,176],"value":"\u041E\u0442\u043C\u0435\u043D\u0430"}
+]}

@@ -7,42 +7,42 @@ interface
 uses
   Classes, SysUtils, SynHighlighterCpp, SynEdit, Forms, Clipbrd, strutils, Graphics,
   ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8,
-  symbol, font, fm_about, u_encodings;
+  symbol, font, fm_about, u_encodings, u_utilities;
 
 
 resourcestring
   FM_GEN_CAPTION = 'Генератор кода';
 
 
-  FM_GEN_SCUD_1 = 'Сначала столбцы';
-  FM_GEN_SCUD_2 = 'Сначала строки';
+  FM_GEN_SCUD_1  = 'Сначала столбцы';
+  FM_GEN_SCUD_2  = 'Сначала строки';
 
-  FM_GEN_SCLR_1 = 'Слева направо';
-  FM_GEN_SCLR_2 = 'Справа налево';
+  FM_GEN_SCLR_1  = 'Слева направо';
+  FM_GEN_SCLR_2  = 'Справа налево';
 
-  FM_GEN_SRUD_1 = 'Сверху вниз';
-  FM_GEN_SRUD_2 = 'Снизу вверх';
+  FM_GEN_SRUD_1  = 'Сверху вниз';
+  FM_GEN_SRUD_2  = 'Снизу вверх';
 
-  FM_GEN_FT_1 = 'Моноширинный';
-  FM_GEN_FT_2 = 'Пропорциональный';
+  FM_GEN_FT_1    = 'Моноширинный';
+  FM_GEN_FT_2    = 'Пропорциональный';
 
-  FM_GEN_NV_1 = 'HEX';
-  FM_GEN_NV_2 = 'BIN';
-  FM_GEN_NV_3 = 'DEC';
-  FM_GEN_NV_4 = 'HEX (Инверсия)';
-  FM_GEN_NV_5 = 'BIN (Инверсия)';
-  FM_GEN_NV_6 = 'DEC (Инверсия)';
+  FM_GEN_NV_1    = 'HEX';
+  FM_GEN_NV_2    = 'BIN';
+  FM_GEN_NV_3    = 'DEC';
+  FM_GEN_NV_4    = 'HEX (Инверсия)';
+  FM_GEN_NV_5    = 'BIN (Инверсия)';
+  FM_GEN_NV_6    = 'DEC (Инверсия)';
 
-  FM_GEN_EB_1 = '0 - нули';
-  FM_GEN_EB_2 = '1 - единицы ';
+  FM_GEN_EB_1    = '0 - нули';
+  FM_GEN_EB_2    = '1 - единицы ';
 
-  FM_GEN_NB_1 = '8 (uint8_t, unsigned char)';
-  FM_GEN_NB_2 = '16 (uint16_t, unsigned short int)';
-  FM_GEN_NB_3 = '24 (uint24_t)';
-  FM_GEN_NB_4 = '32 (uint32_t, unsigned long int)';
+  FM_GEN_NB_1    = '8 (uint8_t, unsigned char)';
+  FM_GEN_NB_2    = '16 (uint16_t, unsigned short int)';
+  FM_GEN_NB_3    = '24 (uint24_t)';
+  FM_GEN_NB_4    = '32 (uint32_t, unsigned long int)';
 
-  FM_GEN_LNG_1 = 'C (C99)';
-  FM_GEN_LNG_2 = 'C (C89)';
+  FM_GEN_LNG_1   = 'C (C99)';
+  FM_GEN_LNG_2   = 'C (C89)';
 
 type
 
@@ -127,7 +127,7 @@ type
     // выбор вкладки для отображения
     procedure TabSelExecute(Sender: TObject);
 
-  PRIVATE
+  private
 
     // обновление выпадающего списка значениями из массива
     procedure UpdateComboBox(AComponent: TComboBox; AList: array of String);
@@ -141,11 +141,13 @@ implementation
 
 {$R *.lfm}
 
-{ TfmGen }
+ { TfmGen }
 
-// инициализация формы при показе
+ // инициализация формы при показе
 procedure TfmGen.FormShow(Sender: TObject);
   begin
+    BeginFormUpdate;
+
     // обновляем строки выпадающих списков
     UpdateComboBox(cbScanColsFirst, [FM_GEN_SCUD_1, FM_GEN_SCUD_2]);
     UpdateComboBox(cbScanColsToRight, [FM_GEN_SCLR_1, FM_GEN_SCLR_2]);
@@ -157,28 +159,32 @@ procedure TfmGen.FormShow(Sender: TObject);
     UpdateComboBox(cbNumbersView, [FM_GEN_NV_1, FM_GEN_NV_2, FM_GEN_NV_3,
       FM_GEN_NV_4, FM_GEN_NV_5, FM_GEN_NV_6]);
 
-    lbInfo.Caption          := fmAbout.AppIntName + LineEnding + fmAbout.AppCopyright;
-    tbSelector.ButtonHeight := pSelector.Height;
-    tbCode.ButtonHeight     := pCode.Height;
-    snEdit.TopLine          := 0;
-    pcPages.ShowTabs        := False;
-    acTabSelSettings.Execute;
+    if FontSet <> nil then
+      with FontSet do
+        begin
+        SaveDlg.FileName := AnsiReplaceText(LowerCase(Name), ' ', '_') + '_font.h';
+        edDefPrefix.Text := Transliterate(UpperCase('FONT_' + AnsiReplaceText(Name, ' ', '_')));
+        end;
 
-    // установка минимальных размеров формы
+    EndFormUpdate;
+
+    // установка минимальных размеров формы и инициализация
     if Tag = 0 then
       begin
-      AutoSize := True;
+      acTabSelSettings.Execute;
+      if not Showing then Exit;
+
+      lbInfo.Caption          := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
+      tbSelector.ButtonHeight := pSelector.Height;
+      tbCode.ButtonHeight     := pCode.Height;
+      pcPages.ShowTabs        := False;
+
       Tag      := 1;
+      AutoSize := True;
       AutoSize := False;
 
       Constraints.MinWidth  := Width;
       Constraints.MinHeight := Height;
-      end;
-
-    with FontSet do
-      begin
-      SaveDlg.FileName := AnsiReplaceText(LowerCase(Name), ' ', '_') + '_font.h';
-      edDefPrefix.Text := Transliterate(UpperCase('FONT_' + AnsiReplaceText(Name, ' ', '_')));
       end;
 
     acResetRangeExecute(nil);
@@ -197,6 +203,8 @@ procedure TfmGen.edDefPrefixChange(Sender: TObject);
   var
     cursor_position, old_str_length, new_str_length: Integer;
   begin
+    if FontSet = nil then Exit;
+
     with edDefPrefix do
       begin
       cursor_position := SelStart;
@@ -224,6 +232,8 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
   var
     TopLine_: Integer;
   begin
+    if FontSet = nil then Exit;
+
     with FontSet do
       begin
       ScanColsFirst    := cbScanColsFirst.ItemIndex = 0;
@@ -238,14 +248,18 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
       DefPrefix        := edDefPrefix.Text;
       end;
 
+    BeginFormUpdate;
     TopLine_       := snEdit.TopLine; // запоминаем положение текста
     snEdit.Text    := FontSet.GenerateCode(seStart.Value, seEnd.Value);
-    snEdit.TopLine := TopLine_; // восстанивливаем положение текста
+    snEdit.TopLine := TopLine_;       // восстанивливаем положение текста
+    EndFormUpdate;
   end;
 
 // восстановление диапазона вывода
 procedure TfmGen.acResetRangeExecute(Sender: TObject);
   begin
+    if FontSet = nil then Exit;
+
     with FontSet do
       begin
       seStart.MinValue := FontStartItem;

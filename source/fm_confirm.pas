@@ -94,8 +94,8 @@ function TfmConfirm.Show(ACaption, AText: String;
   AButtons: TMsgDlgButtons; AParent: TForm): TModalResult;
   begin
     WindowParent  := AParent;
-    WindowText    := MultiString(AText);
-    WindowCaption := MultiString(ACaption);
+    WindowText    := AText;
+    WindowCaption := ACaption;
     Buttons       := AButtons;
     Result        := fmConfirm.ShowModal;
 

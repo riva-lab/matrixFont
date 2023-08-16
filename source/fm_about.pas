@@ -5,11 +5,11 @@ unit fm_about;
 interface
 
 uses
-  SysUtils, Forms, Controls, ExtCtrls, StdCtrls, LCLType, LCLIntf,
-  app_ver, u_strings, Classes;
+  Classes, SysUtils, Forms, Controls, ExtCtrls, StdCtrls, LCLType, LCLIntf,
+  app_ver;
 
 resourcestring
-  ABOUT_RIGHTS  = 'Все права защищены\nСвободное ПО';
+  ABOUT_RIGHTS  = 'Все права защищены' + LineEnding + 'Свободное ПО';
   ABOUT_VERSION = 'версия';
   ABOUT_BIT     = '-битная';
   ABOUT_BUILD   = 'сборка';
@@ -21,8 +21,8 @@ const
   APP_SITE_ADDRESS = 'https://gitlab.com/riva-lab/matrixFont';
   APP_SITE         = 'gitlab.com'; // отображаемое имя сайта
 
-  FILE_LICENSE = 'license.md';
-  FILE_README  = 'readme.md';
+  FILE_LICENSE     = 'license.md';
+  FILE_README      = 'readme.md';
 
 type
 
@@ -35,13 +35,14 @@ type
     lbSite:       TLabel;
     lbCopyRights: TLabel;
     pInfo:        TPanel;
+    lbHardware:   TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
     procedure lbLicenseClick(Sender: TObject);
     procedure lbSiteClick(Sender: TObject);
     procedure lbCopyRightsClick(Sender: TObject);
-  PRIVATE
+  private
     FAppArc:           String;
     FAppAuthor:        String;
     FAppBrief:         String;
@@ -55,7 +56,7 @@ type
     FAppComments:      String;
 
     { private declarations }
-  PUBLIC
+  public
     { public declarations }
     procedure ShowSplash(IsShow: Boolean = True);
     procedure VisitSite;
@@ -85,9 +86,9 @@ implementation
 procedure TfmAbout.FormCreate(Sender: TObject);
   begin
     UpdateInfo;
-    pInfo.ControlStyle    := pInfo.ControlStyle - [csOpaque] + [csParentBackground];
-    Constraints.MaxWidth  := imLogo.Width;
-    Constraints.MaxHeight := imLogo.Height;
+    pInfo.ControlStyle := pInfo.ControlStyle - [csOpaque] + [csParentBackground];
+    lbHardware.Caption := Format('Screen:' + LineEnding + '%d x %d' + LineEnding + '%d DPI',
+      [Screen.Width, Screen.Height, Screen.PixelsPerInch]);
   end;
 
 procedure TfmAbout.FormDeactivate(Sender: TObject);
@@ -187,9 +188,9 @@ procedure TfmAbout.UpdateInfo;
     info := app_info.InternalName + LineEnding;
     info += FAppVersion + ', ' + FAppArc + LineEnding;
     info += FAppBuild + LineEnding + LineEnding;
-    info += MultiString(FAppComments) + LineEnding + LineEnding;
+    info += FAppComments + LineEnding + LineEnding;
     info += FAppCopyright + LineEnding;
-    info += MultiString(ABOUT_RIGHTS) + LineEnding;
+    info += ABOUT_RIGHTS + LineEnding;
     info += FAppAuthor;
 
     lbInfo.Caption    := info;

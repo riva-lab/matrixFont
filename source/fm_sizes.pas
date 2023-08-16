@@ -76,13 +76,18 @@ procedure TfmSizes.FormCreate(Sender: TObject);
   end;
 
 procedure TfmSizes.FormShow(Sender: TObject);
+  var
+    _item: Integer;
   begin
-    lbWarning.Caption               := MultiString(WARN_NOREDO);
+    lbWarning.Caption               := WARN_NOREDO;
     lbOldValue.Constraints.MinWidth := Canvas.GetTextWidth('000 x 000');
 
+    _item := rgMode.ItemIndex;
+    if _item < 0 then _item := 0;
     rgMode.Items.Clear;
     rgMode.Items.Add(FM_SIZES_EXPAND);
     rgMode.Items.Add(FM_SIZES_CROP);
+    rgMode.ItemIndex := _item;
     rgModeClick(Sender);
   end;
 
@@ -107,7 +112,7 @@ procedure TfmSizes.rgModeClick(Sender: TObject);
 
 procedure TfmSizes.seUpChange(Sender: TObject);
   begin
-    lbOldValue.Caption := IntToStr(oldWidth) + ' x ' + IntToStr(oldHeight);
+    lbOldValue.Caption   := IntToStr(oldWidth) + ' x ' + IntToStr(oldHeight);
     if rgMode.ItemIndex = 0 then
       lbNewValue.Caption :=
         IntToStr(oldWidth + seLeft.Value + seRight.Value) + ' x ' +

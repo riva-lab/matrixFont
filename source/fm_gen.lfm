@@ -1,38 +1,40 @@
 object fmGen: TfmGen
-  Left = 321
-  Height = 430
-  Top = 252
-  Width = 583
+  Left = 352
+  Height = 538
+  Top = 152
+  Width = 729
   AutoSize = True
   BorderIcons = [biSystemMenu, biMaximize]
-  ClientHeight = 430
-  ClientWidth = 583
-  Constraints.MinHeight = 200
-  Constraints.MinWidth = 500
+  ClientHeight = 538
+  ClientWidth = 729
+  Constraints.MinHeight = 250
+  Constraints.MinWidth = 600
+  DesignTimePPI = 120
   OnShow = FormShow
   Position = poMainFormCenter
   ShowHint = True
   ShowInTaskBar = stAlways
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '2.2.6.0'
   object pcPages: TPageControl
     Left = 0
-    Height = 390
+    Height = 490
     Top = 0
-    Width = 583
+    Width = 729
     ActivePage = tsGenSettings
     Align = alClient
     Anchors = [akBottom]
+    Style = tsButtons
     TabIndex = 0
     TabOrder = 0
     object tsGenSettings: TTabSheet
       Caption = 'Настройки'
-      ClientHeight = 362
-      ClientWidth = 575
+      ClientHeight = 457
+      ClientWidth = 721
       object pSettings: TPanel
         Left = 0
-        Height = 362
+        Height = 457
         Top = 0
-        Width = 575
+        Width = 721
         Align = alClient
         BevelOuter = bvNone
         ChildSizing.LeftRightSpacing = 10
@@ -42,17 +44,17 @@ object fmGen: TfmGen
         ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 362
-        ClientWidth = 575
+        ClientHeight = 457
+        ClientWidth = 721
         Color = clForm
         ParentColor = False
         TabOrder = 0
         object lbScanColsFirst: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
+          Height = 28
           Top = 10
-          Width = 286
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Очередность считывания'
           Layout = tlCenter
@@ -61,11 +63,11 @@ object fmGen: TfmGen
         object cbScanColsFirst: TComboBox
           AnchorSideLeft.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
+          Left = 387
+          Height = 28
           Top = 10
-          Width = 259
-          ItemHeight = 15
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -78,9 +80,9 @@ object fmGen: TfmGen
         object lbScanColsToRight: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 38
-          Width = 286
+          Height = 28
+          Top = 43
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Считывание столбцов'
           Layout = tlCenter
@@ -89,11 +91,11 @@ object fmGen: TfmGen
         object cbScanColsToRight: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 38
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 43
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -106,9 +108,9 @@ object fmGen: TfmGen
         object lbScanRowsToDown: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 66
-          Width = 286
+          Height = 28
+          Top = 76
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Считывание строк'
           Layout = tlCenter
@@ -117,11 +119,11 @@ object fmGen: TfmGen
         object cbScanRowsToDown: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 66
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 76
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -134,9 +136,9 @@ object fmGen: TfmGen
         object lbFontType: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 94
-          Width = 286
+          Height = 28
+          Top = 109
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Тип шрифта'
           Layout = tlCenter
@@ -145,11 +147,11 @@ object fmGen: TfmGen
         object cbFontType: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 94
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 109
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -162,9 +164,9 @@ object fmGen: TfmGen
         object lbNumbersView: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 122
-          Width = 286
+          Height = 28
+          Top = 142
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Отображение чисел'
           Layout = tlCenter
@@ -173,11 +175,11 @@ object fmGen: TfmGen
         object cbNumbersView: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 122
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 142
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -190,9 +192,9 @@ object fmGen: TfmGen
         object lbEmptyBits: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 150
-          Width = 286
+          Height = 28
+          Top = 175
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Заполнение пустых разрядов'
           Layout = tlCenter
@@ -201,11 +203,11 @@ object fmGen: TfmGen
         object cbEmptyBits: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 150
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 175
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -218,9 +220,9 @@ object fmGen: TfmGen
         object lbNumbersBits: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 178
-          Width = 286
+          Height = 28
+          Top = 208
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Разрядность чисел'
           Layout = tlCenter
@@ -229,11 +231,11 @@ object fmGen: TfmGen
         object cbNumbersBits: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 178
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 208
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -246,9 +248,9 @@ object fmGen: TfmGen
         object lbLanguage: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 206
-          Width = 286
+          Height = 28
+          Top = 241
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Генерируемый код'
           Layout = tlCenter
@@ -257,11 +259,11 @@ object fmGen: TfmGen
         object cbLanguage: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 206
-          Width = 259
-          ItemHeight = 15
+          Left = 387
+          Height = 28
+          Top = 241
+          Width = 324
+          ItemHeight = 20
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -274,9 +276,9 @@ object fmGen: TfmGen
         object lbDefPrefix: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 23
-          Top = 234
-          Width = 286
+          Height = 28
+          Top = 274
+          Width = 367
           Alignment = taRightJustify
           Caption = 'Префикс для определений'
           Layout = tlCenter
@@ -285,10 +287,10 @@ object fmGen: TfmGen
         object edDefPrefix: TEdit
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
-          Left = 306
-          Height = 23
-          Top = 234
-          Width = 259
+          Left = 387
+          Height = 28
+          Top = 274
+          Width = 324
           CharCase = ecUppercase
           MaxLength = 32
           OnChange = edDefPrefixChange
@@ -296,22 +298,22 @@ object fmGen: TfmGen
         end
         object pRangeTxt: TPanel
           Left = 10
-          Height = 23
-          Top = 262
-          Width = 286
+          Height = 28
+          Top = 307
+          Width = 367
           BevelOuter = bvNone
           ChildSizing.HorizontalSpacing = 10
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 23
-          ClientWidth = 286
+          ClientHeight = 28
+          ClientWidth = 367
           TabOrder = 9
           object lbRangeReset: TLabel
             Cursor = crHandPoint
-            Left = 243
-            Height = 23
+            Left = 314
+            Height = 28
             Top = 0
-            Width = 43
+            Width = 53
             Align = alRight
             Alignment = taRightJustify
             Caption = '[Сброс]'
@@ -324,10 +326,10 @@ object fmGen: TfmGen
           end
           object lbRange: TLabel
             AnchorSideLeft.Side = asrBottom
-            Left = 137
-            Height = 23
+            Left = 179
+            Height = 28
             Top = 0
-            Width = 96
+            Width = 125
             Align = alRight
             Alignment = taRightJustify
             Caption = 'Диапазон вывода'
@@ -336,24 +338,24 @@ object fmGen: TfmGen
           end
         end
         object pRange: TPanel
-          Left = 306
-          Height = 23
-          Top = 262
-          Width = 259
+          Left = 387
+          Height = 28
+          Top = 307
+          Width = 324
           BevelOuter = bvNone
           ChildSizing.HorizontalSpacing = 10
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 23
-          ClientWidth = 259
+          ClientHeight = 28
+          ClientWidth = 324
           TabOrder = 10
           object seStart: TSpinEdit
             AnchorSideTop.Side = asrBottom
             Left = 0
-            Height = 23
+            Height = 28
             Top = 0
-            Width = 92
+            Width = 117
             MaxValue = 255
             MinValue = -1
             OnChange = seStartChange
@@ -362,10 +364,10 @@ object fmGen: TfmGen
           object lbDots: TLabel
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Side = asrCenter
-            Left = 102
-            Height = 23
+            Left = 127
+            Height = 28
             Top = 0
-            Width = 57
+            Width = 71
             Alignment = taCenter
             AutoSize = False
             Caption = '. . .'
@@ -374,10 +376,10 @@ object fmGen: TfmGen
           end
           object seEnd: TSpinEdit
             AnchorSideTop.Side = asrBottom
-            Left = 169
-            Height = 23
+            Left = 208
+            Height = 28
             Top = 0
-            Width = 90
+            Width = 116
             MaxValue = 1000
             OnChange = acRefreshOutExecute
             TabOrder = 1
@@ -388,18 +390,18 @@ object fmGen: TfmGen
     end
     object tsCode: TTabSheet
       Caption = 'Вывод'
-      ClientHeight = 362
-      ClientWidth = 575
+      ClientHeight = 457
+      ClientWidth = 721
       inline snEdit: TSynEdit
         Left = 0
-        Height = 362
+        Height = 457
         Top = 0
-        Width = 575
+        Width = 721
         Align = alClient
         Anchors = []
-        Constraints.MinWidth = 200
+        Constraints.MinWidth = 250
         Color = clNone
-        Font.Height = 18
+        Font.Height = 23
         Font.Name = 'Consolas'
         Font.Pitch = fpFixed
         Font.Quality = fqCleartype
@@ -407,7 +409,7 @@ object fmGen: TfmGen
         ParentFont = False
         TabOrder = 0
         BorderStyle = bsNone
-        Gutter.Width = 19
+        Gutter.Width = 26
         Gutter.MouseActions = <>
         RightGutter.Visible = False
         RightGutter.Width = 0
@@ -865,12 +867,12 @@ object fmGen: TfmGen
         LineHighlightColor.Foreground = clNone
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
-            Width = 24
+            Width = 30
             Visible = False
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 17
+            Width = 23
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -880,19 +882,20 @@ object fmGen: TfmGen
             LeadingZeros = False
           end
           object SynGutterChanges1: TSynGutterChanges
-            Width = 4
+            Width = 5
             Visible = False
             MouseActions = <>
             ModifiedColor = 59900
             SavedColor = clGreen
           end
           object SynGutterSeparator1: TSynGutterSeparator
-            Width = 2
+            Width = 3
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
+            Width = 13
             Visible = False
             MouseActions = <>
             MarkupInfo.Background = clNone
@@ -906,39 +909,40 @@ object fmGen: TfmGen
   end
   object pControls: TPanel
     Left = 0
-    Height = 40
-    Top = 390
-    Width = 583
+    Height = 48
+    Top = 490
+    Width = 729
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
     ChildSizing.LeftRightSpacing = 4
     ChildSizing.TopBottomSpacing = 4
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 40
-    ClientWidth = 583
+    ClientHeight = 48
+    ClientWidth = 729
     Color = cl3DLight
     ParentColor = False
     TabOrder = 1
     object pSelector: TPanel
       Left = 4
-      Height = 32
+      Height = 40
       Top = 4
-      Width = 198
+      Width = 246
       Align = alLeft
       AutoSize = True
       BevelOuter = bvNone
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 32
-      ClientWidth = 198
+      ClientHeight = 40
+      ClientWidth = 246
       TabOrder = 0
       object tbSelector: TToolBar
         Left = 0
+        Height = 40
         Top = 0
-        Width = 198
+        Width = 246
         AutoSize = True
-        ButtonHeight = 32
-        ButtonWidth = 48
+        ButtonHeight = 40
+        ButtonWidth = 60
         Caption = 'tbSelector'
         EdgeInner = esNone
         EdgeOuter = esNone
@@ -947,20 +951,19 @@ object fmGen: TfmGen
         TabStop = True
         Wrapable = False
         object ToolButton1: TToolButton
-          Left = 102
+          Left = 126
           Top = 0
           Action = fmMain.acGenFormOnTop
         end
         object ToolButton2: TToolButton
-          Left = 150
+          Left = 186
           Top = 0
           Action = fmMain.acGenFormMagnit
         end
         object ToolButton3: TToolButton
-          Left = 97
-          Height = 32
+          Left = 121
+          Height = 40
           Top = 0
-          Width = 5
           Caption = 'ToolButton3'
           Style = tbsDivider
         end
@@ -970,31 +973,32 @@ object fmGen: TfmGen
           Action = acTabSelSettings
         end
         object ToolButton5: TToolButton
-          Left = 49
+          Left = 61
           Top = 0
           Action = acTabSelCode
         end
       end
     end
     object pCode: TPanel
-      Left = 434
-      Height = 32
+      Left = 544
+      Height = 40
       Top = 4
-      Width = 145
+      Width = 181
       Align = alRight
       AutoSize = True
       BevelOuter = bvNone
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 32
-      ClientWidth = 145
+      ClientHeight = 40
+      ClientWidth = 181
       TabOrder = 1
       object tbCode: TToolBar
         Left = 0
+        Height = 40
         Top = 0
-        Width = 145
+        Width = 181
         AutoSize = True
-        ButtonHeight = 32
-        ButtonWidth = 48
+        ButtonHeight = 40
+        ButtonWidth = 60
         Caption = 'tbCode'
         EdgeInner = esNone
         EdgeOuter = esNone
@@ -1003,7 +1007,7 @@ object fmGen: TfmGen
         TabStop = True
         Wrapable = False
         object ToolButton6: TToolButton
-          Left = 97
+          Left = 121
           Top = 0
           Action = acExport
         end
@@ -1013,29 +1017,30 @@ object fmGen: TfmGen
           Action = acRefreshOut
         end
         object ToolButton10: TToolButton
-          Left = 49
+          Left = 61
           Top = 0
           Action = acCopyToClipboard
         end
       end
     end
     object lbInfo: TLabel
-      Left = 202
-      Height = 32
+      Left = 250
+      Height = 40
       Top = 4
-      Width = 232
+      Width = 294
       Align = alClient
       Alignment = taCenter
-      AutoSize = False
       Caption = 'lbInfo'
+      Color = cl3DLight
       Layout = tlCenter
       ParentColor = False
+      Transparent = False
     end
   end
   object ActionList1: TActionList
     Images = fmMain.ImListNew16A
-    left = 60
-    top = 145
+    Left = 75
+    Top = 181
     object acCopyToClipboard: TAction
       Caption = 'Копировать'
       Hint = 'Копировать в буфер'
@@ -1091,15 +1096,15 @@ object fmGen: TfmGen
     DirecAttri.Foreground = clGreen
     KeyAttri.Foreground = clNavy
     KeyAttri.Style = []
-    left = 60
-    top = 65
+    Left = 75
+    Top = 81
   end
   object SaveDlg: TSaveDialog
     Title = 'Экспорт заголовочного файла шрифта'
     DefaultExt = '.*.h'
     Filter = 'Файл заголовка C|*.h'
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
-    left = 60
-    top = 235
+    Left = 75
+    Top = 294
   end
 end

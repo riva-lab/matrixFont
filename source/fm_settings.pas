@@ -7,11 +7,12 @@ interface
 uses
   Classes, SysUtils, Forms, Graphics, Dialogs, ComCtrls, Spin, StdCtrls,
   ExtCtrls, ActnList, Controls, IniPropStorage, LCLTranslator, Buttons,
-  LazFileUtils, LazUTF8, u_encodings;
+  LazFileUtils, LazUTF8, u_encodings, u_utilities;
 
 const
   LANGUAGE_DEFAULT = 'RU, Russian - Русский';
-  LANGUAGES_DIR    = DirectorySeparator + 'lang';
+  LANGUAGES_DIR    = 'lang';
+  LANGUAGE_FILE    = LANGUAGES_DIR + DirectorySeparator + 'matrixFont';
   LANGUAGES_FILE   = LANGUAGES_DIR + DirectorySeparator + 'languages.ini';
   SETTINGS_FILE    = DirectorySeparator + 'settings.ini';
 
@@ -22,8 +23,8 @@ type
   TfmSettings = class(TForm)
     IniStorageSettings: TIniPropStorage;
     SettingsActionList: TActionList;
-    acOK:               TAction;
-    acCancel:           TAction;
+    acOK:     TAction;
+    acCancel: TAction;
 
     PageCtrl:      TPageControl;
     tsGeneral:     TTabSheet;
@@ -122,7 +123,8 @@ type
     procedure IniStorageSettingsSavingProperties(Sender: TObject);
     procedure cbLanguageChange(Sender: TObject);
 
-  PRIVATE
+  private
+    FLangList:       TStringList;
     FLanguage:       String;
     FLanguageIndex:  Integer;
     FChessGrid:      Boolean;
@@ -166,7 +168,7 @@ type
     procedure LoadComponentsFromFields;
     procedure LoadFieldsFromComponents;
 
-  PUBLIC
+  public
     property Language: String read FLanguage;
     property MagnetPreview: Boolean read FMagnetPreview;
     property PreviewRefresh: Boolean read FPreviewRefresh;
@@ -220,8 +222,9 @@ implementation
 
 procedure TfmSettings.FormCreate(Sender: TObject);
   begin
+    FLangList                := TStringList.Create;
     IniStorageSettings.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
-    PageCtrl.ActivePageIndex       := 0;
+    PageCtrl.ActivePageIndex := 0;
 
     IniStorageLangLoad;
     EncodingsListAssign(cbEncoding.Items);
@@ -302,7 +305,7 @@ procedure TfmSettings.LoadComponentsFromFields;
 procedure TfmSettings.LoadFieldsFromComponents;
   begin
     FLanguageIndex  := cbLanguage.ItemIndex;
-    FLanguage       := LowerCase(Copy(cbLanguage.Text, 1, 2));
+    FLanguage       := FLangList[cbLanguage.ItemIndex];
     FGridThickness  := seGridThickness.Value;
     FBWTreshold     := seBWTreshold.Value;
     FMagnetPreview  := cbMagnetPreview.Checked;
@@ -364,12 +367,13 @@ procedure TfmSettings.IniStorageLangLoad;
     i, cnt: Integer;
   begin
     cbLanguage.Clear;
-    cbLanguage.Items.Append(LANGUAGE_DEFAULT);
+    FLangList.Append(GetLangCode(LANGUAGE_DEFAULT));
+    cbLanguage.Items.Append(GetLangCaption(LANGUAGE_DEFAULT));
 
     IniStorageLang := TIniPropStorage.Create(nil);
     with IniStorageLang do
       begin
-      IniFileName := ExtractFileDir(ParamStrUTF8(0)) + LANGUAGES_FILE;
+      IniFileName := ExtractFilePath(ParamStrUTF8(0)) + LANGUAGES_FILE;
       Active      := True;
       IniSection  := 'Languages List';
 
@@ -386,7 +390,10 @@ procedure TfmSettings.IniStorageLangLoad;
 
       if cnt > 1 then
         for i := 2 to cnt do
-          cbLanguage.Items.Append(ReadString('L-' + i.ToString, ''));
+          begin
+          FLangList.Append(GetLangCode(ReadString('L-' + i.ToString, '')));
+          cbLanguage.Items.Append(GetLangCaption(ReadString('L-' + i.ToString, '')));
+          end;
       end;
   end;
 
@@ -408,13 +415,17 @@ procedure TfmSettings.acCancelExecute(Sender: TObject);
 
 
 procedure TfmSettings.cbLanguageChange(Sender: TObject);
+  var
+    _item: Integer;
   begin
+    _item := cbEncoding.ItemIndex; // бекап индекса кодировки
+
     // применяем язык интерфейса не выходя из настроек
-    SetDefaultLang(LowerCase(Copy(cbLanguage.Text, 1, 2)),
-      ExtractFileDir(ParamStrUTF8(0)) + LANGUAGES_DIR);
+    SetDefaultLang(FLangList[cbLanguage.ItemIndex], '', LANGUAGE_FILE);
 
     // перерисовываем форму, чтобы более длинные метки полностью помещались
     FormShow(nil);
+    cbEncoding.ItemIndex := _item; // восстан. индекса кодировки
   end;
 
 procedure TfmSettings.cbCharNameClick(Sender: TObject);

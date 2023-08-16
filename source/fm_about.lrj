@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":254431007,"name":"tfmabout.lblicense.caption","sourcebytes":[208,187,208,184,209,134,208,181,208,189,208,183,208,184,209,143],"value":"\u043B\u0438\u0446\u0435\u043D\u0437\u0438\u044F"},
+{"hash":64266415,"name":"tfmabout.lbcopyrights.caption","sourcebytes":[208,184,208,189,209,132,208,190,209,128,208,188,208,176,209,134,208,184,209,143],"value":"\u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"},
+{"hash":120037541,"name":"tfmabout.lbsite.caption","sourcebytes":[108,98,83,105,116,101],"value":"lbSite"},
+{"hash":119997647,"name":"tfmabout.lbinfo.caption","sourcebytes":[108,98,73,110,102,111],"value":"lbInfo"},
+{"hash":143457893,"name":"tfmabout.lbhardware.caption","sourcebytes":[108,98,72,97,114,100,119,97,114,101],"value":"lbHardware"}
+]}

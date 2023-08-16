@@ -68,7 +68,7 @@ procedure TfmOptimize.FormCreate(Sender: TObject);
 
 procedure TfmOptimize.FormShow(Sender: TObject);
   begin
-    lbWarning.Caption := MultiString(WARN_NOREDO);
+    lbWarning.Caption := WARN_NOREDO;
     sbUp.Down         := False;
     sbReset.Click;
   end;

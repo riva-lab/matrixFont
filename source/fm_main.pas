@@ -10,12 +10,12 @@ uses
   LazUTF8, Types, strutils, LCLIntf, LCLTranslator, PairSplitter, LazFileUtils,
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
   fm_optimize, fm_range, fm_about, fm_settings, cOpenFileList, u_utilities,
-  u_strings, font, app_ver, symbol, u_encodings;
+  u_strings, font, app_ver, symbol, u_encodings, LCLType;
 
 resourcestring
-  TXT_NAVIGATOR = 'Навигатор';
-  TXT_SYMBOL    = 'Символ';
-  TXT_CHANGED   = 'изменен';
+  TXT_NAVIGATOR   = 'Навигатор';
+  TXT_SYMBOL      = 'Символ';
+  TXT_CHANGED     = 'изменен';
 
 const
   HELP_DIR        = 'help';
@@ -66,97 +66,97 @@ type
     ImListNew16A: TImageList;
     ImListNew16D: TImageList;
 
-    acAppExit:             TAction;
+    acAppExit:          TAction;
     acDeleteLastFilesList: TAction;
-    acFontCenterH:         TAction;
-    acFontCenterV:         TAction;
-    acFontChangeSizes:     TAction;
-    acFontCharset:         TAction;
-    acFontClear:           TAction;
-    acFontImport:          TAction;
-    acFontInvert:          TAction;
-    acFontMirrorHorz:      TAction;
-    acFontMirrorVert:      TAction;
-    acFontOpen:            TAction;
-    acFontOptimize:        TAction;
-    acFontPaste:           TAction;
-    acFontPreview:         TAction;
-    acFontProperties:      TAction;
-    acFontRedo:            TAction;
-    acFontShiftDown:       TAction;
-    acFontShiftLeft:       TAction;
-    acFontShiftRight:      TAction;
-    acFontShiftRollover:   TAction;
-    acFontShiftUp:         TAction;
-    acFontSnapDown:        TAction;
-    acFontSnapLeft:        TAction;
-    acFontSnapRight:       TAction;
-    acFontSnapUp:          TAction;
-    acFontUndo:            TAction;
-    acGenerate:            TAction;
-    acGenFormMagnit:       TAction;
-    acGenFormOnTop:        TAction;
-    acGridToggle:          TAction;
-    acHelp:                TAction;
-    acHelpMD:              TAction;
-    acHelpNet:             TAction;
-    acInfo:                TAction;
-    acLastFilesList:       TAction;
-    acMenuEdit:            TAction;
-    acMenuFile:            TAction;
-    acMenuFont:            TAction;
-    acMenuFontCenter:      TAction;
-    acMenuFontMirror:      TAction;
-    acMenuFontShift:       TAction;
-    acMenuFontSnap:        TAction;
-    acMenuHelp:            TAction;
-    acMenuPanels:          TAction;
-    acMenuPaste:           TAction;
-    acMenuSymbol:          TAction;
-    acMenuSymbolCenter:    TAction;
-    acMenuSymbolMirror:    TAction;
-    acMenuSymbolShift:     TAction;
-    acMenuSymbolSnap:      TAction;
-    acMenuView:            TAction;
-    acNewFont:             TAction;
-    acPasteModeAnd:        TAction;
-    acPasteModeNorm:       TAction;
-    acPasteModeOr:         TAction;
-    acPasteModeXor:        TAction;
-    acReset:               TAction;
-    acSave:                TAction;
-    acSetting:             TAction;
-    acStayOnTopToggle:     TAction;
-    acSymbolCenterH:       TAction;
-    acSymbolCenterV:       TAction;
-    acSymbolClear:         TAction;
-    acSymbolCopy:          TAction;
-    acSymbolCut:           TAction;
-    acSymbolFind:          TAction;
-    acSymbolImportImage:   TAction;
-    acSymbolInvert:        TAction;
-    acSymbolMirrorHorz:    TAction;
-    acSymbolMirrorVert:    TAction;
-    acSymbolPaste:         TAction;
-    acSymbolRedo:          TAction;
-    acSymbolShiftDown:     TAction;
-    acSymbolShiftLeft:     TAction;
-    acSymbolShiftRight:    TAction;
-    acSymbolShiftUp:       TAction;
-    acSymbolSnapDown:      TAction;
-    acSymbolSnapLeft:      TAction;
-    acSymbolSnapRight:     TAction;
-    acSymbolSnapUp:        TAction;
-    acSymbolUndo:          TAction;
-    acViewTBCommon:        TAction;
-    acViewTBEditChar:      TAction;
-    acViewTBEditFont:      TAction;
-    acViewTBEffectsChar:   TAction;
-    acViewTBEffectsFont:   TAction;
-    acWebsite:             TAction;
-    acZoomFit:             TAction;
-    acZoomIn:              TAction;
-    acZoomOut:             TAction;
+    acFontCenterH:      TAction;
+    acFontCenterV:      TAction;
+    acFontChangeSizes:  TAction;
+    acFontCharset:      TAction;
+    acFontClear:        TAction;
+    acFontImport:       TAction;
+    acFontInvert:       TAction;
+    acFontMirrorHorz:   TAction;
+    acFontMirrorVert:   TAction;
+    acFontOpen:         TAction;
+    acFontOptimize:     TAction;
+    acFontPaste:        TAction;
+    acFontPreview:      TAction;
+    acFontProperties:   TAction;
+    acFontRedo:         TAction;
+    acFontShiftDown:    TAction;
+    acFontShiftLeft:    TAction;
+    acFontShiftRight:   TAction;
+    acFontShiftRollover: TAction;
+    acFontShiftUp:      TAction;
+    acFontSnapDown:     TAction;
+    acFontSnapLeft:     TAction;
+    acFontSnapRight:    TAction;
+    acFontSnapUp:       TAction;
+    acFontUndo:         TAction;
+    acGenerate:         TAction;
+    acGenFormMagnit:    TAction;
+    acGenFormOnTop:     TAction;
+    acGridToggle:       TAction;
+    acHelp:             TAction;
+    acHelpMD:           TAction;
+    acHelpNet:          TAction;
+    acInfo:             TAction;
+    acLastFilesList:    TAction;
+    acMenuEdit:         TAction;
+    acMenuFile:         TAction;
+    acMenuFont:         TAction;
+    acMenuFontCenter:   TAction;
+    acMenuFontMirror:   TAction;
+    acMenuFontShift:    TAction;
+    acMenuFontSnap:     TAction;
+    acMenuHelp:         TAction;
+    acMenuPanels:       TAction;
+    acMenuPaste:        TAction;
+    acMenuSymbol:       TAction;
+    acMenuSymbolCenter: TAction;
+    acMenuSymbolMirror: TAction;
+    acMenuSymbolShift:  TAction;
+    acMenuSymbolSnap:   TAction;
+    acMenuView:         TAction;
+    acNewFont:          TAction;
+    acPasteModeAnd:     TAction;
+    acPasteModeNorm:    TAction;
+    acPasteModeOr:      TAction;
+    acPasteModeXor:     TAction;
+    acReset:            TAction;
+    acSave:             TAction;
+    acSetting:          TAction;
+    acStayOnTopToggle:  TAction;
+    acSymbolCenterH:    TAction;
+    acSymbolCenterV:    TAction;
+    acSymbolClear:      TAction;
+    acSymbolCopy:       TAction;
+    acSymbolCut:        TAction;
+    acSymbolFind:       TAction;
+    acSymbolImportImage: TAction;
+    acSymbolInvert:     TAction;
+    acSymbolMirrorHorz: TAction;
+    acSymbolMirrorVert: TAction;
+    acSymbolPaste:      TAction;
+    acSymbolRedo:       TAction;
+    acSymbolShiftDown:  TAction;
+    acSymbolShiftLeft:  TAction;
+    acSymbolShiftRight: TAction;
+    acSymbolShiftUp:    TAction;
+    acSymbolSnapDown:   TAction;
+    acSymbolSnapLeft:   TAction;
+    acSymbolSnapRight:  TAction;
+    acSymbolSnapUp:     TAction;
+    acSymbolUndo:       TAction;
+    acViewTBCommon:     TAction;
+    acViewTBEditChar:   TAction;
+    acViewTBEditFont:   TAction;
+    acViewTBEffectsChar: TAction;
+    acViewTBEffectsFont: TAction;
+    acWebsite:          TAction;
+    acZoomFit:          TAction;
+    acZoomIn:           TAction;
+    acZoomOut:          TAction;
 
     MenuItem1:   TMenuItem;
     MenuItem2:   TMenuItem;
@@ -355,6 +355,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
     procedure FormWindowStateChange(Sender: TObject);
+    procedure FormConstrainedResize(Sender: TObject; var MinWidth, MinHeight,
+      MaxWidth, MaxHeight: TConstraintSize);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 
     procedure SettingsSaveToIni;
@@ -396,6 +398,7 @@ type
     procedure actionSymbolGeneral(Sender: TObject);
     procedure actionFontGeneral(Sender: TObject);
     procedure actionService(Sender: TObject);
+    procedure edFindUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
 
     procedure acFontCharsetExecute(Sender: TObject);
     procedure acFontOptimizeExecute(Sender: TObject);
@@ -409,7 +412,7 @@ type
 
     procedure SettingsApplyToCurrentSession(Sender: TObject = nil);
 
-  PRIVATE
+  private
     FLastFileMenuItem:  array [0..LAST_FILES_LIST_SIZE - 1] of TMenuItem;
     FLastFileMenuItem2: array [0..LAST_FILES_LIST_SIZE - 1] of TMenuItem;
     FOpenFileList:      TOpenFileList;
@@ -439,11 +442,11 @@ var
   i, cnt, frames: Integer;
 {$R *.lfm}
 
-{ TfmMain }
+ { TfmMain }
 
-{ ***  Обработка событий главной формы  *** }
+ { ***  Обработка событий главной формы  *** }
 
-// инициализация
+ // инициализация
 procedure TfmMain.FormCreate(Sender: TObject);
   begin
     ReadAppInfo;
@@ -470,9 +473,6 @@ procedure TfmMain.FormCreate(Sender: TObject);
       Items[2].Width := Canvas.GetTextWidth('X,Y: 0000, 0000 ');
       Items[3].Width := Canvas.GetTextWidth('0.0.0.00000') + stStatusBar.Height;
       end;
-
-    // показываем п.м. Справка, если доступен файл справки
-    //acHelp.Visible := FileExists(HELP_FILE);
   end;
 
 // появление формы главного окна на экране
@@ -499,6 +499,7 @@ procedure TfmMain.FormShow(Sender: TObject);
     ImListNew16A.GetIcon(28, fmProp.Icon);
     ImListNew16A.GetIcon(0, fmNew.Icon);
     ImListNew16A.GetIcon(7, fmGen.Icon);
+    ImListNew32A.GetBitmap(2, imFindIcon.Picture.Bitmap);
 
     SettingsLoadFromIni;
     SettingsApplyToCurrentSession;
@@ -562,8 +563,8 @@ procedure TfmMain.FormWindowStateChange(Sender: TObject);
             begin
             fmPreview.Width := fmPreview.Constraints.MinWidth;
             GetWindowRect(fmPreview.Handle, RP);
-            fmPreview.Top  := R.Bottom + R.Top - RP.Bottom + RP.Top;
-            fmPreview.Left := R.Right + R.Left - RP.Right + RP.Left;
+            fmPreview.Top   := R.Bottom + R.Top - RP.Bottom + RP.Top;
+            fmPreview.Left  := R.Right + R.Left - RP.Right + RP.Left;
             end;
 
           // развернутое состояние - окно генератора в правом нижнем углу
@@ -582,6 +583,14 @@ procedure TfmMain.FormWindowStateChange(Sender: TObject);
       Items[0].Width := Width - Items[1].Width - Items[2].Width - Items[3].Width;
   end;
 
+// изменение положения или размера формы
+procedure TfmMain.FormConstrainedResize(Sender: TObject; var MinWidth,
+  MinHeight, MaxWidth, MaxHeight: TConstraintSize);
+  begin
+    if fmMain.Showing then
+      FormWindowStateChange(Sender);
+  end;
+
 // действие при попытке закрыть приложение
 procedure TfmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   begin
@@ -592,9 +601,9 @@ procedure TfmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   end;
 
 
-{ ***  Работа с хранилищем настроек  *** }
+ { ***  Работа с хранилищем настроек  *** }
 
-// сохранение настроек в файл INI
+ // сохранение настроек в файл INI
 procedure TfmMain.SettingsSaveToIni;
   begin
     with IniStorageMain do
@@ -622,7 +631,7 @@ procedure TfmMain.SettingsSaveToIni;
 
       // запись списка последних открытых файлов в INI-файл
       IniSection := 'Last Opened Files';
-      for i := 0 to LAST_FILES_LIST_SIZE - 1 do
+      for i      := 0 to LAST_FILES_LIST_SIZE - 1 do
         WriteString('File_' + IntToStr(i), FOpenFileList.FilePath[i]);
 
       // выход из текущей секции
@@ -648,7 +657,7 @@ procedure TfmMain.SettingsLoadFromIni;
         fmMain.Height := ReadInteger('WindowMainHeight', 420);
         end;
       fmMain.WindowState := TWindowState(ReadInteger('WindowMainState', 0));
-      psSplit.Position   := ReadInteger('Splitter', 170);
+      psSplit.Position := ReadInteger('Splitter', 170);
 
       acGridToggle.Checked        := ReadBoolean('Grid', True);
       acFontShiftRollover.Checked := ReadBoolean('Rollover', True);
@@ -660,7 +669,7 @@ procedure TfmMain.SettingsLoadFromIni;
 
       // считывание списка последних открытых файлов из INI-файла
       IniSection := 'Last Opened Files';
-      for i := LAST_FILES_LIST_SIZE - 1 downto 0 do
+      for i      := LAST_FILES_LIST_SIZE - 1 downto 0 do
         FOpenFileList.FilePath[0] := ReadString('File_' + IntToStr(i), '');
       LastFileAdd(''); // обновление списка последних открытых файлов
       end;
@@ -696,7 +705,7 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
       miFPS.Caption := IntToStr(round(frames * 100 / 33)) + ' FPS';
       frames        := 0;
       {$EndIf}
-      cnt           := 0;
+      cnt := 0;
       end;
 
     if cnt mod 4 = 0 then
@@ -715,9 +724,9 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
   end;
 
 
-{ ***  Обработчики навигатора  *** }
+ { ***  Обработчики навигатора  *** }
 
-// рисование превьюшки в таблице
+ // рисование превьюшки в таблице
 procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
   aRect: TRect; aState: TGridDrawState);
   var
@@ -744,7 +753,7 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
             Cells[1, aRow] := IntToHex(FontSet.FontStartItem + aRow - 1, 2) else
             Cells[1, aRow] := IntToStr(FontSet.FontStartItem + aRow - 1);
 
-          // превью символа
+            // превью символа
           if fmSettings.NaviInvert and (aRow = Row) then
             // выделенная строка в навигаторе
             FontSet.Item[aRow - 1].DrawPreview(bm_tmp, fmSettings.NaviTransparent,
@@ -819,9 +828,9 @@ procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
   end;
 
 
-{ ***  Обработчики холста символа  *** }
+ { ***  Обработчики холста символа  *** }
 
-// обработка нажатия мышью на рабочем холсте
+ // обработка нажатия мышью на рабочем холсте
 procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
   var
@@ -864,7 +873,7 @@ procedure TfmMain.imEditorMouseMove(Sender: TObject; Shift: TShiftState; X, Y: I
   begin
     if timer_up then
       begin
-      if ssLeft in Shift then Button := mbLeft;
+      if ssLeft in Shift then Button  := mbLeft;
       if ssRight in Shift then Button := mbRight;
       imEditorMouseDown(Sender, Button, Shift, X, Y);
 
@@ -894,9 +903,9 @@ procedure TfmMain.imMouseWheel(Sender: TObject; Shift: TShiftState;
   end;
 
 
-{ ***  Действия c файлами и новыми проектами  *** }
+ { ***  Действия c файлами и новыми проектами  *** }
 
-// действие: открыть окно создания нового шрифта
+ // действие: открыть окно создания нового шрифта
 procedure TfmMain.acNewFontExecute(Sender: TObject);
   begin
     if not GetConfirmation then Exit;
@@ -1034,6 +1043,7 @@ procedure TfmMain.acFontPropertiesExecute(Sender: TObject);
         Encoding     := GetEncodingByIndex(cbEncoding.ItemIndex);
 
         FileStatusUpdate();
+        ReDrawContent;
         end;
       end;
   end;
@@ -1055,10 +1065,10 @@ procedure TfmMain.acFontPreviewExecute(Sender: TObject);
   end;
 
 
-{ ***  Действия c внешним видом и поведением  *** }
+ { ***  Действия c внешним видом и поведением  *** }
 
 
-// действие: окно генератора Поверх окна редактора
+ // действие: окно генератора Поверх окна редактора
 procedure TfmMain.acGenFormOnTopExecute(Sender: TObject);
   var
     tmp_top, tmp_left: Integer;
@@ -1074,8 +1084,8 @@ procedure TfmMain.acGenFormOnTopExecute(Sender: TObject);
       Left      := tmp_left;
 
       // двойное применение устраняет отсутствие прорисовки полос прокрутки
-      snEdit.ScrollBars := ssAutoVertical;
-      snEdit.ScrollBars := ssAutoBoth;
+      //snEdit.ScrollBars := ssAutoVertical;
+      //snEdit.ScrollBars := ssAutoBoth;
       end;
   end;
 
@@ -1153,19 +1163,14 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
       if TSpinEdit(Sender).Name = 'seFind' then
         if (seFind.Value >= FontSet.FontStartItem) and
           (seFind.Value < FontSet.FontStartItem + FontSet.FontLength) then
-          begin
           edFind.Text := EncodingToUTF8(Char(seFind.Value), FontSet.Encoding);
-          end;
 
       // поиск и выделение найденного символа по названию
       if TEdit(Sender).Name = 'edFind' then
         if edFind.Text <> '' then
-          begin
           seFind.Value := Ord(UTF8ToEncoding(edFind.Text, FontSet.Encoding)[1]);
-          edFind.SelectAll;
-          end;
 
-      sgNavigator.Row := seFind.Value - FontSet.FontStartItem + 1;
+      sgNavigator.Row   := seFind.Value - FontSet.FontStartItem + 1;
       sgNavigatorSelection(Sender, 1, sgNavigator.Row);
       lbEditHEX.Caption := '  HEX = ' + IntToHex(seFind.Value, 2);
       end;
@@ -1364,6 +1369,11 @@ procedure TfmMain.actionService(Sender: TObject);
       end;
   end;
 
+procedure TfmMain.edFindUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
+  begin
+    edFind.Text := '';
+  end;
+
 
 // действие: изменение диапазона символов шрифта
 procedure TfmMain.acFontCharsetExecute(Sender: TObject);
@@ -1400,17 +1410,17 @@ procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
         (opt_oldWidth - opt_left - opt_right > 0)) then
         fmConfirm.Show(TXT_WARNING, WARN_OPTIMIZE, [mbCancel], Self)
       else
-        if ShowModal = mrOk then
-          begin
-          ChangeSize(res_up, res_down, res_left, res_right, True);
+      if ShowModal = mrOk then
+        begin
+        ChangeSize(res_up, res_down, res_left, res_right, True);
 
-          imEditor.Width  := Item[0].WidthInPixels;
-          imEditor.Height := Item[0].HeightInPixels;
+        imEditor.Width  := Item[0].WidthInPixels;
+        imEditor.Height := Item[0].HeightInPixels;
 
-          acZoomFit.Execute;
-          FontActionExecute;
-          FileStatusUpdate();
-          end;
+        acZoomFit.Execute;
+        FontActionExecute;
+        FileStatusUpdate();
+        end;
       end;
   end;
 
@@ -1440,9 +1450,9 @@ procedure TfmMain.acFontChangeSizesExecute(Sender: TObject);
   end;
 
 
-{ ***  Работа со списком последних открытых файлов  *** }
+ { ***  Работа со списком последних открытых файлов  *** }
 
-// действие: очистка списка последних открытых файлов
+ // действие: очистка списка последних открытых файлов
 procedure TfmMain.acDeleteLastFilesListExecute(Sender: TObject);
   begin
     FOpenFileList.Clear;
@@ -1500,7 +1510,7 @@ procedure TfmMain.acGenerateExecute(Sender: TObject);
       end;
 
     acGenFormOnTopExecute(Sender);
-    fmGen.Show;
+    if Sender <> nil then fmGen.Show else fmGen.FormShow(nil);
     FormWindowStateChange(Sender);
   end;
 
@@ -1508,6 +1518,8 @@ procedure TfmMain.acGenerateExecute(Sender: TObject);
 // действие: применение настроек к текущей сессии
 procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
   begin
+    BeginFormUpdate;
+
     if FontSet <> nil then
         try
         with FontSet do
@@ -1558,14 +1570,16 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         MouseWheelOption := mwGrid;
       end;
 
+    LanguageChange;
+    acGenerateExecute(nil);
     actionZooming(nil);
     sgNavigatorChangeBounds(nil);
     ReDrawContent;
     ReDrawImage;
-    LanguageChange;
 
     // опция главной формы 'поверх всех окон'
     FormStyle := CheckBoolean(acStayOnTopToggle.Checked, fsSystemStayOnTop, fsNormal);
+    EndFormUpdate;
   end;
 
 // загрузка файла шрифта
@@ -1685,13 +1699,15 @@ function TfmMain.GetConfirmation: Boolean;
   end;
 
 
-{ ***  Обновление состояния компонентов  *** }
+ { ***  Обновление состояния компонентов  *** }
 
-// обновление информации о состоянии файла
+ // обновление информации о состоянии файла
 procedure TfmMain.FileStatusUpdate;
   var
     s: String;
   begin
+    BeginFormUpdate;
+
     s := FontSet.Name;
     if dlgOpen.FileName <> '' then s += ' [' + ExtractFileName(dlgOpen.FileName) + ']';
     if file_changed then s += ' (' + TXT_CHANGED + ')';
@@ -1704,6 +1720,8 @@ procedure TfmMain.FileStatusUpdate;
     with FontSet do
       miFontInfo.Caption := UpperCase(Encoding) + '   '
         + Width.ToString + ' x ' + Height.ToString;
+
+    EndFormUpdate;
   end;
 
 // действия после применения эффекта ко всем символам шрифта
@@ -1747,7 +1765,7 @@ procedure TfmMain.ReDrawImage;
     imEditor.Visible := True; // отображаем готовое изображение
   end;
 
-// обновление контента (навигатор, предпросмотр)
+ // обновление контента (навигатор, предпросмотр)
 procedure TfmMain.ReDrawContent;
   begin
     // обновление изображения символов в навигаторе
@@ -1762,7 +1780,7 @@ procedure TfmMain.ReDrawContent;
 // перевод интерфейса
 procedure TfmMain.LanguageChange;
   begin
-    SetDefaultLang(fmSettings.Language, ExtractFileDir(ParamStrUTF8(0)) + LANGUAGES_DIR);
+    SetDefaultLang(fmSettings.Language, '', LANGUAGE_FILE);
 
     fmAbout.UpdateInfo; // обновляем инфо на новом языке
 

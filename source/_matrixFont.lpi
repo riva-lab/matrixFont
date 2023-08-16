@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="10"/>
+    <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
+      <Flags>
+        <CompatibilityMode Value="True"/>
+      </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
       <Title Value="matrixFont"/>
+      <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
@@ -17,15 +20,87 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
+      <ExcludedIdentifiers Count="70">
+        <Item1 Value="TfmAbout.lbInfo.Caption"/>
+        <Item2 Value="TfmAbout.lbHardware.Caption"/>
+        <Item3 Value="tfmabout.lbsite.caption"/>
+        <Item4 Value="tfmconfirm.lbmessage.caption"/>
+        <Item5 Value="tfmgen.cbemptybits.text"/>
+        <Item6 Value="tfmgen.cbfonttype.text"/>
+        <Item7 Value="tfmgen.cblanguage.text"/>
+        <Item8 Value="tfmgen.cbnumbersbits.text"/>
+        <Item9 Value="tfmgen.cbnumbersview.text"/>
+        <Item10 Value="tfmgen.cbscancolsfirst.text"/>
+        <Item11 Value="tfmgen.cbscancolstoright.text"/>
+        <Item12 Value="tfmgen.cbscanrowstodown.text"/>
+        <Item13 Value="tfmgen.lbdots.caption"/>
+        <Item14 Value="tfmgen.lbinfo.caption"/>
+        <Item15 Value="tfmgen.tbcode.caption"/>
+        <Item16 Value="tfmgen.tbselector.caption"/>
+        <Item17 Value="tfmgen.toolbutton3.caption"/>
+        <Item18 Value="tfmimport.cbfontlist.text"/>
+        <Item19 Value="tfmimport.lbscale.caption"/>
+        <Item20 Value="TfmMain.lbNavigator.Caption"/>
+        <Item21 Value="tfmmain.lbeditor.caption"/>
+        <Item22 Value="tfmmain.lbedithex.caption"/>
+        <Item23 Value="tfmmain.acpastemodeand.caption"/>
+        <Item24 Value="tfmmain.acpastemodeor.caption"/>
+        <Item25 Value="tfmmain.acpastemodexor.caption"/>
+        <Item26 Value="tfmmain.toolbutton13.caption"/>
+        <Item27 Value="tfmmain.toolbutton16.caption"/>
+        <Item28 Value="tfmmain.toolbutton18.caption"/>
+        <Item29 Value="tfmmain.toolbutton24.caption"/>
+        <Item30 Value="tfmmain.toolbutton30.caption"/>
+        <Item31 Value="tfmmain.toolbutton33.caption"/>
+        <Item32 Value="tfmmain.toolbutton38.caption"/>
+        <Item33 Value="tfmmain.toolbutton4.caption"/>
+        <Item34 Value="tfmmain.toolbutton43.caption"/>
+        <Item35 Value="tfmmain.toolbutton45.caption"/>
+        <Item36 Value="tfmmain.toolbutton47.caption"/>
+        <Item37 Value="tfmmain.toolbutton5.caption"/>
+        <Item38 Value="tfmmain.toolbutton50.caption"/>
+        <Item39 Value="tfmmain.toolbutton56.caption"/>
+        <Item40 Value="tfmmain.toolbutton63.caption"/>
+        <Item41 Value="tfmmain.toolbutton67.caption"/>
+        <Item42 Value="tfmmain.toolbutton7.caption"/>
+        <Item43 Value="tfmoptimize.lbdownvalue.caption"/>
+        <Item44 Value="tfmoptimize.lbleftvalue.caption"/>
+        <Item45 Value="tfmoptimize.lbnewvalue.caption"/>
+        <Item46 Value="tfmoptimize.lboldvalue.caption"/>
+        <Item47 Value="tfmoptimize.lbrightvalue.caption"/>
+        <Item48 Value="tfmoptimize.lbupvalue.caption"/>
+        <Item49 Value="tfmoptimize.lbwarning.caption"/>
+        <Item50 Value="tfmpreview.lbbackground.caption"/>
+        <Item51 Value="tfmpreview.tbcontrols.caption"/>
+        <Item52 Value="tfmrange.lbwarning.caption"/>
+        <Item53 Value="tfmsettings.cbcharnamefont.text"/>
+        <Item54 Value="tfmsettings.cbcodehex.caption"/>
+        <Item55 Value="tfmsettings.cbcodenamefont.text"/>
+        <Item56 Value="tfmsettings.lbempty1.caption"/>
+        <Item57 Value="tfmsizes.lbempty5.caption"/>
+        <Item58 Value="tfmsizes.lbempty6.caption"/>
+        <Item59 Value="tfmsizes.lbnewvalue.caption"/>
+        <Item60 Value="tfmsizes.lboldvalue.caption"/>
+        <Item61 Value="tfmsizes.lbwarning.caption"/>
+        <Item62 Value="fm_gen.fm_gen_lng_1"/>
+        <Item63 Value="fm_gen.fm_gen_lng_2"/>
+        <Item64 Value="fm_gen.fm_gen_nb_1"/>
+        <Item65 Value="fm_gen.fm_gen_nb_2"/>
+        <Item66 Value="fm_gen.fm_gen_nb_3"/>
+        <Item67 Value="fm_gen.fm_gen_nb_4"/>
+        <Item68 Value="fm_gen.fm_gen_nv_1"/>
+        <Item69 Value="fm_gen.fm_gen_nv_2"/>
+        <Item70 Value="fm_gen.fm_gen_nv_3"/>
+      </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="1"/>
-      <BuildNr Value="53"/>
+      <MinorVersionNr Value="2"/>
+      <BuildNr Value="55"/>
       <Language Value="0419"/>
-      <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2017, 2021" OriginalFilename="matrixFont" ProductName="matrixFont" ProductVersion=""/>
+      <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2017, 2021, 2023" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
     <BuildModes Count="4">
       <Item1 Name="x64-Debug" Default="True"/>
@@ -95,6 +170,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
               <UseExternalDbgSyms Value="True"/>
             </Debugging>
             <Options>
@@ -146,6 +222,11 @@
               </Win32>
             </Options>
           </Linking>
+          <Other>
+            <OtherDefines Count="1">
+              <Define0 Value="DEBUG"/>
+            </OtherDefines>
+          </Other>
         </CompilerOptions>
       </Item4>
     </BuildModes>
@@ -153,9 +234,10 @@
       <Version Value="2"/>
     </PublishOptions>
     <RunParams>
-      <local>
-        <FormatVersion Value="1"/>
-      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default"/>
+      </Modes>
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
@@ -319,7 +401,7 @@
     </CodeGeneration>
     <Linking>
       <Debugging>
-        <UseExternalDbgSyms Value="True"/>
+        <DebugInfoType Value="dsDwarf2"/>
       </Debugging>
       <Options>
         <Win32>

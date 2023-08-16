@@ -10,7 +10,7 @@ uses
 
 resourcestring
   //FM_IMPORT_EXAMPLE = 'Образец';
-  FM_IMPORT_SCALE = 'предпросмотр';
+  FM_IMPORT_SCALE        = 'предпросмотр';
 
 const
   IMPORT_EXAMPLE_DEFAULT = 'AaBbCcXxYyZz АаБбВвЭэЮюЯя' + LineEnding + 'Example Пример 12345';
@@ -20,51 +20,51 @@ type
   { TfmImport }
 
   TfmImport = class(TForm)
-    cbEncoding:       TComboBox;
-    cbSnapLeft:       TCheckBox;
-    cbOptimize:       TCheckBox;
-    cbStyleBold:      TCheckBox;
-    cbStyleStrike:    TCheckBox;
-    cbStyleItalic:    TCheckBox;
-    cbStyleUnder:     TCheckBox;
-    cbExampleEdit:    TCheckBox;
-    dlgFont:          TFontDialog;
-    imPreview:        TImage;
+    cbEncoding:    TComboBox;
+    cbSnapLeft:    TCheckBox;
+    cbOptimize:    TCheckBox;
+    cbStyleBold:   TCheckBox;
+    cbStyleStrike: TCheckBox;
+    cbStyleItalic: TCheckBox;
+    cbStyleUnder:  TCheckBox;
+    cbExampleEdit: TCheckBox;
+    dlgFont:       TFontDialog;
+    imPreview:     TImage;
     IniStorageImport: TIniPropStorage;
-    lbScale:          TLabel;
-    lbItemStart:      TLabel;
-    lbItemLast:       TLabel;
-    lbFontSystem:     TLabel;
-    lbFontSize:       TLabel;
-    lbRange:          TLabel;
-    lbSize:           TLabel;
-    lbEmpty:          TLabel;
-    mmExample:        TMemo;
-    pcPages:          TPageControl;
-    pFontSize:        TPanel;
-    pControls:        TPanel;
-    pOptions:         TPanel;
-    cbFontList:       TComboBox;
-    bbImport:         TBitBtn;
-    lbItemWidth:      TLabel;
-    lbItemHeight:     TLabel;
-    pSize:            TPanel;
-    pRange:           TPanel;
-    pValues:          TPanel;
-    pFontStyle:       TPanel;
-    pFont:            TPanel;
-    pMain:            TPanel;
-    pFontName:        TPanel;
-    scbImage:         TScrollBox;
-    seLastItem:       TSpinEdit;
-    seStartItem:      TSpinEdit;
-    seW:              TSpinEdit;
-    seH:              TSpinEdit;
-    seSize:           TSpinEdit;
-    sbMore:           TSpeedButton;
-    shPreviewBG:      TShape;
-    tsExample:        TTabSheet;
-    tsExampleText:    TTabSheet;
+    lbScale:       TLabel;
+    lbItemStart:   TLabel;
+    lbItemLast:    TLabel;
+    lbFontSystem:  TLabel;
+    lbFontSize:    TLabel;
+    lbRange:       TLabel;
+    lbSize:        TLabel;
+    lbEmpty:       TLabel;
+    mmExample:     TMemo;
+    pcPages:       TPageControl;
+    pFontSize:     TPanel;
+    pControls:     TPanel;
+    pOptions:      TPanel;
+    cbFontList:    TComboBox;
+    bbImport:      TBitBtn;
+    lbItemWidth:   TLabel;
+    lbItemHeight:  TLabel;
+    pSize:         TPanel;
+    pRange:        TPanel;
+    pValues:       TPanel;
+    pFontStyle:    TPanel;
+    pFont:         TPanel;
+    pMain:         TPanel;
+    pFontName:     TPanel;
+    scbImage:      TScrollBox;
+    seLastItem:    TSpinEdit;
+    seStartItem:   TSpinEdit;
+    seW:           TSpinEdit;
+    seH:           TSpinEdit;
+    seSize:        TSpinEdit;
+    sbMore:        TSpeedButton;
+    shPreviewBG:   TShape;
+    tsExample:     TTabSheet;
+    tsExampleText: TTabSheet;
 
     // создание формы импорта системного шрифта
     procedure FormCreate(Sender: TObject);
@@ -79,9 +79,6 @@ type
     // выбор шрифта из списка доступных
     procedure fontChange(Sender: TObject);
 
-    // изменение начертания шрифта
-    procedure cgFontViewItemClick(Sender: TObject; Index: Integer);
-
     // изменение текста предпросмотра
     procedure mmExampleChange(Sender: TObject);
 
@@ -89,13 +86,14 @@ type
     procedure scbImageMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 
-  PRIVATE
-    FScale: Integer;
+  private
+    FFontName: String;
+    FScale:    Integer;
 
     // применение взаимосвязанных изменений
     procedure ApplyChange;
 
-  PUBLIC
+  public
     { public declarations }
   end;
 
@@ -106,19 +104,18 @@ implementation
 
 {$R *.lfm}
 
-{ TfmImport }
+ { TfmImport }
 
-// создание формы импорта системного шрифта
+ // создание формы импорта системного шрифта
 procedure TfmImport.FormCreate(Sender: TObject);
   begin
     IniStorageImport.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
     cbFontList.Items.Assign(Screen.Fonts);
 
     FScale               := 3;
+    FFontName            := 'Tahoma';
     dlgFont.Font.Size    := 8;
-    dlgFont.Font.Name    := 'Tahoma';
     dlgFont.Font.Quality := fqNonAntialiased;
-    cbFontList.Text      := dlgFont.Font.Name;
     mmExample.Text       := IMPORT_EXAMPLE_DEFAULT;
   end;
 
@@ -126,6 +123,8 @@ procedure TfmImport.FormCreate(Sender: TObject);
 procedure TfmImport.FormShow(Sender: TObject);
   begin
     EncodingsListAssign(cbEncoding.Items);
+    dlgFont.Font.Name       := FFontName;
+    cbFontList.Text         := FFontName;
     cbEncoding.ItemIndex    := fmSettings.NewEncoding;
     pcPages.ShowTabs        := False;
     pcPages.ActivePageIndex := 0;
@@ -156,7 +155,7 @@ procedure TfmImport.btnMoreClick(Sender: TObject);
         end;
   end;
 
-// выбор шрифта из списка доступных
+  // выбор шрифта из списка доступных
 procedure TfmImport.fontChange(Sender: TObject);
 
   // применение стиля по флагу
@@ -175,8 +174,9 @@ procedure TfmImport.fontChange(Sender: TObject);
       try
       with dlgFont.Font do
         begin
-        Name := cbFontList.Text;
-        Size := seSize.Value;
+        Name      := cbFontList.Text;
+        Size      := seSize.Value;
+        FFontName := Name;
         end;
 
       SetStyleByFlag(cbStyleBold.Checked, [fsBold]);
@@ -189,13 +189,7 @@ procedure TfmImport.fontChange(Sender: TObject);
       end;
   end;
 
-// изменение начертания шрифта
-procedure TfmImport.cgFontViewItemClick(Sender: TObject; Index: Integer);
-  begin
-    fontChange(Sender);
-  end;
-
-// изменение текста предпросмотра
+    // изменение текста предпросмотра
 procedure TfmImport.mmExampleChange(Sender: TObject);
   begin
     // пустое поле - сброс текста
@@ -232,10 +226,10 @@ procedure TfmImport.ApplyChange;
       Canvas.Font.Quality := fqNonAntialiased; // сглаживание откл.
 
       // расчет размеров изображения
-      w := 0;
+      w     := 0;
       for i := 0 to mmExample.Lines.Count - 1 do
         begin
-        h := Canvas.GetTextWidth(mmExample.Lines.Strings[i]);
+        h   := Canvas.GetTextWidth(mmExample.Lines.Strings[i]);
         if h > w then w := h;
         end;
       h1 := Canvas.GetTextHeight(mmExample.Text) + 1;
@@ -258,10 +252,10 @@ procedure TfmImport.ApplyChange;
       ch := 0;
       for i := seStartItem.Value to seLastItem.Value do
         begin
-        ct := Canvas.TextWidth(EncodingToUTF8ByIndex(chr(i), cbEncoding.ItemIndex));
+        ct                 := Canvas.TextWidth(EncodingToUTF8ByIndex(chr(i), cbEncoding.ItemIndex));
         if ct > cw then cw := ct;
 
-        ct := Canvas.TextHeight(EncodingToUTF8ByIndex(chr(i), cbEncoding.ItemIndex));
+        ct                 := Canvas.TextHeight(EncodingToUTF8ByIndex(chr(i), cbEncoding.ItemIndex));
         if ct > ch then ch := ct;
         end;
       seW.Value := cw + 2; // +2 для предотвращения срезания правой части,
@@ -274,9 +268,9 @@ procedure TfmImport.ApplyChange;
     // применение масштабирования
     if FScale < 1 then  FScale := 1;
     if FScale > 16 then FScale := 16;
-    imPreview.Width            := w * FScale;
-    imPreview.Height           := h * FScale;
-    lbScale.Caption            := FM_IMPORT_SCALE + LineEnding + FScale.ToString + ' : 1';
+    imPreview.Width := w * FScale;
+    imPreview.Height := h * FScale;
+    lbScale.Caption := FM_IMPORT_SCALE + LineEnding + FScale.ToString + ' : 1';
     //tsExample.Caption          := FM_IMPORT_EXAMPLE + ' [' + FScale.ToString + ':1]';
 
     bmp.Free;

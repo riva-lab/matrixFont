@@ -1,54 +1,55 @@
 object fmOptimize: TfmOptimize
-  Left = 349
-  Height = 391
-  Top = 192
-  Width = 671
+  Left = 362
+  Height = 489
+  Top = 151
+  Width = 839
   AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   BorderWidth = 10
   Caption = 'Оптимизация размера холста'
-  ClientHeight = 391
-  ClientWidth = 671
+  ClientHeight = 489
+  ClientWidth = 839
+  DesignTimePPI = 120
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '2.2.0.4'
   object pMain: TPanel
-    Left = 35
-    Height = 220
-    Top = 25
-    Width = 512
+    Left = 44
+    Height = 260
+    Top = 31
+    Width = 616
     AutoSize = True
     BevelOuter = bvNone
     ChildSizing.HorizontalSpacing = 10
     ChildSizing.VerticalSpacing = 10
     ChildSizing.Layout = cclTopToBottomThenLeftToRight
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 220
-    ClientWidth = 512
+    ClientHeight = 260
+    ClientWidth = 616
     TabOrder = 0
     object gbBorders: TGroupBox
       Left = 0
-      Height = 220
+      Height = 260
       Top = 0
-      Width = 200
+      Width = 236
       AutoSize = True
       Caption = 'Границы оптимизации'
       ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
       ChildSizing.EnlargeVertical = crsHomogenousChildResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 200
-      ClientWidth = 196
+      ClientHeight = 235
+      ClientWidth = 232
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       object pControls1: TPanel
         Left = 0
-        Height = 196
-        Top = 2
-        Width = 196
+        Height = 232
+        Top = 1
+        Width = 232
         AutoSize = True
         BorderSpacing.CellAlignHorizontal = ccaCenter
         BorderSpacing.CellAlignVertical = ccaCenter
@@ -61,29 +62,28 @@ object fmOptimize: TfmOptimize
         ChildSizing.EnlargeVertical = crsHomogenousChildResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 3
-        ClientHeight = 196
-        ClientWidth = 196
+        ClientHeight = 232
+        ClientWidth = 232
         TabOrder = 0
         object lbEmpty1: TLabel
           Left = 10
-          Height = 48
+          Height = 60
           Top = 10
-          Width = 48
-          ParentColor = False
+          Width = 60
         end
         object sbUp: TSpeedButton
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
-          Left = 74
-          Height = 48
+          Left = 86
+          Height = 60
           Hint = 'Удалить пустое пространство сверху'
           Top = 10
-          Width = 48
+          Width = 60
           AllowAllUp = True
-          Constraints.MaxHeight = 48
-          Constraints.MaxWidth = 48
-          Constraints.MinHeight = 48
-          Constraints.MinWidth = 48
+          Constraints.MaxHeight = 60
+          Constraints.MaxWidth = 60
+          Constraints.MinHeight = 60
+          Constraints.MinWidth = 60
           Down = True
           Flat = True
           Glyph.Data = {
@@ -126,24 +126,23 @@ object fmOptimize: TfmOptimize
           OnClick = sbArrowClick
         end
         object lbEmpty2: TLabel
-          Left = 138
-          Height = 48
+          Left = 162
+          Height = 60
           Top = 10
-          Width = 48
-          ParentColor = False
+          Width = 60
         end
         object sbLeft: TSpeedButton
           AnchorSideTop.Side = asrCenter
           Left = 10
-          Height = 48
+          Height = 60
           Hint = 'Удалить пустое пространство слева'
-          Top = 74
-          Width = 48
+          Top = 86
+          Width = 60
           AllowAllUp = True
-          Constraints.MaxHeight = 48
-          Constraints.MaxWidth = 48
-          Constraints.MinHeight = 48
-          Constraints.MinWidth = 48
+          Constraints.MaxHeight = 60
+          Constraints.MaxWidth = 60
+          Constraints.MinHeight = 60
+          Constraints.MinWidth = 60
           Down = True
           Flat = True
           Glyph.Data = {
@@ -188,15 +187,15 @@ object fmOptimize: TfmOptimize
         object sbReset: TSpeedButton
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 48
+          Left = 86
+          Height = 60
           Hint = 'Удалить пустое пространство вокруг символа'
-          Top = 74
-          Width = 48
-          Constraints.MaxHeight = 48
-          Constraints.MaxWidth = 48
-          Constraints.MinHeight = 48
-          Constraints.MinWidth = 48
+          Top = 86
+          Width = 60
+          Constraints.MaxHeight = 60
+          Constraints.MaxWidth = 60
+          Constraints.MinHeight = 60
+          Constraints.MinWidth = 60
           Flat = True
           Glyph.Data = {
             36100000424D3610000000000000360000002800000020000000200000000100
@@ -335,16 +334,16 @@ object fmOptimize: TfmOptimize
         object sbRight: TSpeedButton
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 138
-          Height = 48
+          Left = 162
+          Height = 60
           Hint = 'Удалить пустое пространство справа'
-          Top = 74
-          Width = 48
+          Top = 86
+          Width = 60
           AllowAllUp = True
-          Constraints.MaxHeight = 48
-          Constraints.MaxWidth = 48
-          Constraints.MinHeight = 48
-          Constraints.MinWidth = 48
+          Constraints.MaxHeight = 60
+          Constraints.MaxWidth = 60
+          Constraints.MinHeight = 60
+          Constraints.MinWidth = 60
           Down = True
           Flat = True
           Glyph.Data = {
@@ -388,24 +387,23 @@ object fmOptimize: TfmOptimize
         end
         object lbEmpty3: TLabel
           Left = 10
-          Height = 48
-          Top = 138
-          Width = 48
-          ParentColor = False
+          Height = 60
+          Top = 162
+          Width = 60
         end
         object sbDown: TSpeedButton
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Side = asrBottom
-          Left = 74
-          Height = 48
+          Left = 86
+          Height = 60
           Hint = 'Удалить пустое пространство снизу'
-          Top = 138
-          Width = 48
+          Top = 162
+          Width = 60
           AllowAllUp = True
-          Constraints.MaxHeight = 48
-          Constraints.MaxWidth = 48
-          Constraints.MinHeight = 48
-          Constraints.MinWidth = 48
+          Constraints.MaxHeight = 60
+          Constraints.MaxWidth = 60
+          Constraints.MinHeight = 60
+          Constraints.MinWidth = 60
           Down = True
           Flat = True
           Glyph.Data = {
@@ -448,35 +446,34 @@ object fmOptimize: TfmOptimize
           OnClick = sbArrowClick
         end
         object lbEmpty4: TLabel
-          Left = 138
-          Height = 48
-          Top = 138
-          Width = 48
-          ParentColor = False
+          Left = 162
+          Height = 60
+          Top = 162
+          Width = 60
         end
       end
     end
     object pResult: TPanel
-      Left = 210
-      Height = 220
+      Left = 246
+      Height = 260
       Top = 0
-      Width = 142
+      Width = 172
       AutoSize = True
       BevelOuter = bvNone
       ChildSizing.HorizontalSpacing = 10
       ChildSizing.VerticalSpacing = 10
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 220
-      ClientWidth = 142
+      ClientHeight = 260
+      ClientWidth = 172
       TabOrder = 1
       object rgDelete: TRadioGroup
         AnchorSideLeft.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 130
+        Height = 155
         Top = 0
-        Width = 142
+        Width = 172
         AutoFill = True
         AutoSize = True
         Caption = 'Будет удалено'
@@ -490,104 +487,96 @@ object fmOptimize: TfmOptimize
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 110
-        ClientWidth = 138
+        ClientHeight = 130
+        ClientWidth = 168
         Columns = 2
         TabOrder = 0
         object lbUp: TLabel
           AnchorSideBottom.Control = lbDown
           Left = 10
-          Height = 15
+          Height = 20
           Top = 10
-          Width = 99
+          Width = 126
           Alignment = taRightJustify
           Caption = 'строк сверху:'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbUpValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 119
-          Height = 15
+          Left = 146
+          Height = 20
           Top = 10
-          Width = 9
+          Width = 12
           Caption = '0'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbDown: TLabel
           Left = 10
-          Height = 15
-          Top = 35
-          Width = 99
+          Height = 20
+          Top = 40
+          Width = 126
           Alignment = taRightJustify
           Caption = 'строк снизу:'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbDownValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 119
-          Height = 15
-          Top = 35
-          Width = 9
+          Left = 146
+          Height = 20
+          Top = 40
+          Width = 12
           Caption = '0'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbLeft: TLabel
           AnchorSideTop.Side = asrBottom
           Left = 10
-          Height = 15
-          Top = 60
-          Width = 99
+          Height = 20
+          Top = 70
+          Width = 126
           Alignment = taRightJustify
           Caption = 'столбцов слева:'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbLeftValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 119
-          Height = 15
-          Top = 60
-          Width = 9
+          Left = 146
+          Height = 20
+          Top = 70
+          Width = 12
           Caption = '0'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbRight: TLabel
           AnchorSideTop.Side = asrBottom
           Left = 10
-          Height = 15
-          Top = 85
-          Width = 99
+          Height = 20
+          Top = 100
+          Width = 126
           Alignment = taRightJustify
           Caption = 'столбцов справа:'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbRightValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 119
-          Height = 15
-          Top = 85
-          Width = 9
+          Left = 146
+          Height = 20
+          Top = 100
+          Width = 12
           Caption = '0'
           Layout = tlCenter
-          ParentColor = False
         end
       end
       object rgResult: TRadioGroup
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 80
-        Top = 140
-        Width = 142
+        Height = 95
+        Top = 165
+        Width = 172
         AutoFill = True
         AutoSize = True
         Caption = 'Результат'
@@ -601,62 +590,58 @@ object fmOptimize: TfmOptimize
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 60
-        ClientWidth = 138
+        ClientHeight = 70
+        ClientWidth = 168
         Columns = 2
         TabOrder = 1
         object lbOld: TLabel
           Left = 10
-          Height = 15
+          Height = 20
           Top = 10
-          Width = 102
+          Width = 130
           Alignment = taRightJustify
           Caption = 'Исходный размер:'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbOldValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 122
-          Height = 15
+          Left = 150
+          Height = 20
           Top = 10
-          Width = 6
+          Width = 8
           AutoSize = False
           Caption = '0'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbNew: TLabel
           AnchorSideTop.Side = asrBottom
           Left = 10
-          Height = 15
-          Top = 35
-          Width = 102
+          Height = 20
+          Top = 40
+          Width = 130
           Alignment = taRightJustify
           Caption = 'Новый размер:'
           Layout = tlCenter
-          ParentColor = False
         end
         object lbNewValue: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 122
-          Height = 15
-          Top = 35
-          Width = 6
+          Left = 150
+          Height = 20
+          Top = 40
+          Width = 8
           AutoSize = False
           Caption = '0'
           Layout = tlCenter
-          ParentColor = False
         end
       end
     end
     object pControls: TPanel
-      Left = 362
-      Height = 220
+      Left = 428
+      Height = 260
       Top = 0
-      Width = 150
+      Width = 188
       AutoSize = True
       BevelOuter = bvNone
       ChildSizing.HorizontalSpacing = 10
@@ -665,34 +650,33 @@ object fmOptimize: TfmOptimize
       ChildSizing.EnlargeVertical = crsHomogenousChildResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 220
-      ClientWidth = 150
+      ClientHeight = 260
+      ClientWidth = 188
       TabOrder = 2
       object lbWarning: TLabel
         Left = 0
-        Height = 15
+        Height = 20
         Top = 0
-        Width = 150
+        Width = 188
         Align = alTop
         Alignment = taCenter
         BorderSpacing.CellAlignVertical = ccaLeftTop
         Caption = 'lbWarning'
         Color = 13158655
         Layout = tlBottom
-        ParentColor = False
         Transparent = False
         WordWrap = True
       end
       object bbApply: TBitBtn
         Left = 0
-        Height = 58
-        Top = 162
-        Width = 150
+        Height = 62
+        Top = 198
+        Width = 188
         AutoSize = True
-        BorderSpacing.InnerBorder = 8
+        BorderSpacing.InnerBorder = 10
         BorderSpacing.CellAlignVertical = ccaRightBottom
         Caption = 'Применить'
-        Constraints.MinWidth = 150
+        Constraints.MinWidth = 188
         Glyph.Data = {
           36100000424D3610000000000000360000002800000020000000200000000100
           2000000000000010000064000000640000000000000000000000FFFFFF00FFFF
