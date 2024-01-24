@@ -1,6 +1,8 @@
 # riva-lab specific items
 bin/settings.ini
 bin/*.exe
+bin/lang/matrixFont.*
+bin/lang/matrixFont-*32-*
 install/
 source/backup/
 source/lib/

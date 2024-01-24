@@ -66,97 +66,97 @@ type
     ImListNew16A: TImageList;
     ImListNew16D: TImageList;
 
-    acAppExit:          TAction;
+    acAppExit:             TAction;
     acDeleteLastFilesList: TAction;
-    acFontCenterH:      TAction;
-    acFontCenterV:      TAction;
-    acFontChangeSizes:  TAction;
-    acFontCharset:      TAction;
-    acFontClear:        TAction;
-    acFontImport:       TAction;
-    acFontInvert:       TAction;
-    acFontMirrorHorz:   TAction;
-    acFontMirrorVert:   TAction;
-    acFontOpen:         TAction;
-    acFontOptimize:     TAction;
-    acFontPaste:        TAction;
-    acFontPreview:      TAction;
-    acFontProperties:   TAction;
-    acFontRedo:         TAction;
-    acFontShiftDown:    TAction;
-    acFontShiftLeft:    TAction;
-    acFontShiftRight:   TAction;
-    acFontShiftRollover: TAction;
-    acFontShiftUp:      TAction;
-    acFontSnapDown:     TAction;
-    acFontSnapLeft:     TAction;
-    acFontSnapRight:    TAction;
-    acFontSnapUp:       TAction;
-    acFontUndo:         TAction;
-    acGenerate:         TAction;
-    acGenFormMagnit:    TAction;
-    acGenFormOnTop:     TAction;
-    acGridToggle:       TAction;
-    acHelp:             TAction;
-    acHelpMD:           TAction;
-    acHelpNet:          TAction;
-    acInfo:             TAction;
-    acLastFilesList:    TAction;
-    acMenuEdit:         TAction;
-    acMenuFile:         TAction;
-    acMenuFont:         TAction;
-    acMenuFontCenter:   TAction;
-    acMenuFontMirror:   TAction;
-    acMenuFontShift:    TAction;
-    acMenuFontSnap:     TAction;
-    acMenuHelp:         TAction;
-    acMenuPanels:       TAction;
-    acMenuPaste:        TAction;
-    acMenuSymbol:       TAction;
-    acMenuSymbolCenter: TAction;
-    acMenuSymbolMirror: TAction;
-    acMenuSymbolShift:  TAction;
-    acMenuSymbolSnap:   TAction;
-    acMenuView:         TAction;
-    acNewFont:          TAction;
-    acPasteModeAnd:     TAction;
-    acPasteModeNorm:    TAction;
-    acPasteModeOr:      TAction;
-    acPasteModeXor:     TAction;
-    acReset:            TAction;
-    acSave:             TAction;
-    acSetting:          TAction;
-    acStayOnTopToggle:  TAction;
-    acSymbolCenterH:    TAction;
-    acSymbolCenterV:    TAction;
-    acSymbolClear:      TAction;
-    acSymbolCopy:       TAction;
-    acSymbolCut:        TAction;
-    acSymbolFind:       TAction;
-    acSymbolImportImage: TAction;
-    acSymbolInvert:     TAction;
-    acSymbolMirrorHorz: TAction;
-    acSymbolMirrorVert: TAction;
-    acSymbolPaste:      TAction;
-    acSymbolRedo:       TAction;
-    acSymbolShiftDown:  TAction;
-    acSymbolShiftLeft:  TAction;
-    acSymbolShiftRight: TAction;
-    acSymbolShiftUp:    TAction;
-    acSymbolSnapDown:   TAction;
-    acSymbolSnapLeft:   TAction;
-    acSymbolSnapRight:  TAction;
-    acSymbolSnapUp:     TAction;
-    acSymbolUndo:       TAction;
-    acViewTBCommon:     TAction;
-    acViewTBEditChar:   TAction;
-    acViewTBEditFont:   TAction;
-    acViewTBEffectsChar: TAction;
-    acViewTBEffectsFont: TAction;
-    acWebsite:          TAction;
-    acZoomFit:          TAction;
-    acZoomIn:           TAction;
-    acZoomOut:          TAction;
+    acFontCenterH:         TAction;
+    acFontCenterV:         TAction;
+    acFontChangeSizes:     TAction;
+    acFontCharset:         TAction;
+    acFontClear:           TAction;
+    acFontImport:          TAction;
+    acFontInvert:          TAction;
+    acFontMirrorHorz:      TAction;
+    acFontMirrorVert:      TAction;
+    acFontOpen:            TAction;
+    acFontOptimize:        TAction;
+    acFontPaste:           TAction;
+    acFontPreview:         TAction;
+    acFontProperties:      TAction;
+    acFontRedo:            TAction;
+    acFontShiftDown:       TAction;
+    acFontShiftLeft:       TAction;
+    acFontShiftRight:      TAction;
+    acFontShiftRollover:   TAction;
+    acFontShiftUp:         TAction;
+    acFontSnapDown:        TAction;
+    acFontSnapLeft:        TAction;
+    acFontSnapRight:       TAction;
+    acFontSnapUp:          TAction;
+    acFontUndo:            TAction;
+    acGenerate:            TAction;
+    acGenFormMagnit:       TAction;
+    acGenFormOnTop:        TAction;
+    acGridToggle:          TAction;
+    acHelp:                TAction;
+    acHelpMD:              TAction;
+    acHelpNet:             TAction;
+    acInfo:                TAction;
+    acLastFilesList:       TAction;
+    acMenuEdit:            TAction;
+    acMenuFile:            TAction;
+    acMenuFont:            TAction;
+    acMenuFontCenter:      TAction;
+    acMenuFontMirror:      TAction;
+    acMenuFontShift:       TAction;
+    acMenuFontSnap:        TAction;
+    acMenuHelp:            TAction;
+    acMenuPanels:          TAction;
+    acMenuPaste:           TAction;
+    acMenuSymbol:          TAction;
+    acMenuSymbolCenter:    TAction;
+    acMenuSymbolMirror:    TAction;
+    acMenuSymbolShift:     TAction;
+    acMenuSymbolSnap:      TAction;
+    acMenuView:            TAction;
+    acNewFont:             TAction;
+    acPasteModeAnd:        TAction;
+    acPasteModeNorm:       TAction;
+    acPasteModeOr:         TAction;
+    acPasteModeXor:        TAction;
+    acReset:               TAction;
+    acSave:                TAction;
+    acSetting:             TAction;
+    acStayOnTopToggle:     TAction;
+    acSymbolCenterH:       TAction;
+    acSymbolCenterV:       TAction;
+    acSymbolClear:         TAction;
+    acSymbolCopy:          TAction;
+    acSymbolCut:           TAction;
+    acSymbolFind:          TAction;
+    acSymbolImportImage:   TAction;
+    acSymbolInvert:        TAction;
+    acSymbolMirrorHorz:    TAction;
+    acSymbolMirrorVert:    TAction;
+    acSymbolPaste:         TAction;
+    acSymbolRedo:          TAction;
+    acSymbolShiftDown:     TAction;
+    acSymbolShiftLeft:     TAction;
+    acSymbolShiftRight:    TAction;
+    acSymbolShiftUp:       TAction;
+    acSymbolSnapDown:      TAction;
+    acSymbolSnapLeft:      TAction;
+    acSymbolSnapRight:     TAction;
+    acSymbolSnapUp:        TAction;
+    acSymbolUndo:          TAction;
+    acViewTBCommon:        TAction;
+    acViewTBEditChar:      TAction;
+    acViewTBEditFont:      TAction;
+    acViewTBEffectsChar:   TAction;
+    acViewTBEffectsFont:   TAction;
+    acWebsite:             TAction;
+    acZoomFit:             TAction;
+    acZoomIn:              TAction;
+    acZoomOut:             TAction;
 
     MenuItem1:   TMenuItem;
     MenuItem2:   TMenuItem;
@@ -266,8 +266,11 @@ type
     MenuItem106: TMenuItem;
     MenuItem107: TMenuItem;
     MenuItem108: TMenuItem;
+    MenuItem110: TMenuItem;
+    MenuItem111: TMenuItem;
     miFontInfo:  TMenuItem;
     miFPS:       TMenuItem;
+    Separator1:  TMenuItem;
 
     ToolBtnLastFiles: TToolButton;
     ToolButton1:      TToolButton;
@@ -344,11 +347,16 @@ type
     ToolButton71:     TToolButton;
     ToolButton72:     TToolButton;
 
-    tbCommon:      TToolBar;
-    tbEditChar:    TToolBar;
-    tbEditFont:    TToolBar;
-    tbEffectsChar: TToolBar;
-    tbEffectsFont: TToolBar;
+    tbCommon:         TToolBar;
+    tbEditChar:       TToolBar;
+    tbEditFont:       TToolBar;
+    tbEffectsChar:    TToolBar;
+    tbEffectsFont:    TToolBar;
+    acSymbolMoveDown: TAction;
+    acSymbolMoveUp:   TAction;
+    ToolButton74:     TToolButton;
+    ToolButton75:     TToolButton;
+    ToolButton76:     TToolButton;
 
     procedure acResetExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -1281,7 +1289,11 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
 
 // действия с шрифтом (пакетное редактирование символов)
 procedure TfmMain.actionFontGeneral(Sender: TObject);
+  var
+    curr: Integer;
   begin
+    curr := sgNavigator.Row - 1;
+
     case TAction(Sender).Name of
 
       'acFontClear':      // действие: очистка символов шрифта
@@ -1332,6 +1344,15 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
 
       'acFontPaste':      // действие: пакетная вставка
         FontSet.Paste(FPasteMode);
+
+
+      'acSymbolMoveUp':   // действие: переместить символ вверх
+        if FontSet.SwapChars(curr, curr - 1) then
+          sgNavigator.Row := curr;
+
+      'acSymbolMoveDown': // действие: переместить символ вниз
+        if FontSet.SwapChars(curr, curr + 1) then
+          sgNavigator.Row := curr + 2;
       end;
 
     FontActionExecute;

@@ -149,6 +149,9 @@ type
     // центрирование всех символов шрифта
     procedure Center(AVertical: Boolean);
 
+    // обменять местами символы в таблице
+    function SwapChars(AIndex1, AIndex2: Integer): Boolean;
+
     // генерировать код шрифта
     function GenerateCode(StartChar: Integer = 0; EndChar: Integer = 0): String;
 
@@ -419,6 +422,49 @@ procedure TFont.Center(AVertical: Boolean);
       FSymbol[i - 1].Center(AVertical);
       FSymbol[i - 1].SaveChange;
       end;
+  end;
+
+// обменять местами символы в таблице
+function TFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
+
+  procedure DrawNewChar(AIndex: Integer; AData: TSymbolField);
+    var
+      action: array[Boolean] of TPixelAction = (paClear, paSet);
+      w, h:   Integer;
+    begin
+      for w := 0 to FWidth - 1 do
+        for h := 0 to FHeight - 1 do
+          FSymbol[AIndex].PixelAction(w, h, action[AData[w, h]]);
+
+      SetLength(AData, 0, 0);
+    end;
+
+  var
+    sf1, sf2: TSymbolField;
+    w, h, i:  Integer;
+
+  begin
+    Result := False;
+    if not (AIndex1 in [0..FFontLength - 1]) then Exit;
+    if not (AIndex2 in [0..FFontLength - 1]) then Exit;
+
+    SetLength(sf1, FWidth, FHeight);
+    SetLength(sf2, FWidth, FHeight);
+
+    for w := 0 to FWidth - 1 do
+      for h := 0 to FHeight - 1 do
+        begin
+        sf1[w, h] := FSymbol[AIndex1].Symbol[w, h];
+        sf2[w, h] := FSymbol[AIndex2].Symbol[w, h];
+        end;
+
+    DrawNewChar(AIndex2, sf1);
+    DrawNewChar(AIndex1, sf2);
+
+    for i := 1 to FFontLength do
+      FSymbol[i - 1].SaveChange;
+
+    Result := True;
   end;
 
 // генерировать код шрифта

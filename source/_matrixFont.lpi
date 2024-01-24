@@ -20,7 +20,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="70">
+      <ExcludedIdentifiers Count="71">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="TfmAbout.lbHardware.Caption"/>
         <Item3 Value="tfmabout.lbsite.caption"/>
@@ -63,44 +63,45 @@
         <Item40 Value="tfmmain.toolbutton63.caption"/>
         <Item41 Value="tfmmain.toolbutton67.caption"/>
         <Item42 Value="tfmmain.toolbutton7.caption"/>
-        <Item43 Value="tfmoptimize.lbdownvalue.caption"/>
-        <Item44 Value="tfmoptimize.lbleftvalue.caption"/>
-        <Item45 Value="tfmoptimize.lbnewvalue.caption"/>
-        <Item46 Value="tfmoptimize.lboldvalue.caption"/>
-        <Item47 Value="tfmoptimize.lbrightvalue.caption"/>
-        <Item48 Value="tfmoptimize.lbupvalue.caption"/>
-        <Item49 Value="tfmoptimize.lbwarning.caption"/>
-        <Item50 Value="tfmpreview.lbbackground.caption"/>
-        <Item51 Value="tfmpreview.tbcontrols.caption"/>
-        <Item52 Value="tfmrange.lbwarning.caption"/>
-        <Item53 Value="tfmsettings.cbcharnamefont.text"/>
-        <Item54 Value="tfmsettings.cbcodehex.caption"/>
-        <Item55 Value="tfmsettings.cbcodenamefont.text"/>
-        <Item56 Value="tfmsettings.lbempty1.caption"/>
-        <Item57 Value="tfmsizes.lbempty5.caption"/>
-        <Item58 Value="tfmsizes.lbempty6.caption"/>
-        <Item59 Value="tfmsizes.lbnewvalue.caption"/>
-        <Item60 Value="tfmsizes.lboldvalue.caption"/>
-        <Item61 Value="tfmsizes.lbwarning.caption"/>
-        <Item62 Value="fm_gen.fm_gen_lng_1"/>
-        <Item63 Value="fm_gen.fm_gen_lng_2"/>
-        <Item64 Value="fm_gen.fm_gen_nb_1"/>
-        <Item65 Value="fm_gen.fm_gen_nb_2"/>
-        <Item66 Value="fm_gen.fm_gen_nb_3"/>
-        <Item67 Value="fm_gen.fm_gen_nb_4"/>
-        <Item68 Value="fm_gen.fm_gen_nv_1"/>
-        <Item69 Value="fm_gen.fm_gen_nv_2"/>
-        <Item70 Value="fm_gen.fm_gen_nv_3"/>
+        <Item43 Value="tfmmain.toolbutton76.caption"/>
+        <Item44 Value="tfmoptimize.lbdownvalue.caption"/>
+        <Item45 Value="tfmoptimize.lbleftvalue.caption"/>
+        <Item46 Value="tfmoptimize.lbnewvalue.caption"/>
+        <Item47 Value="tfmoptimize.lboldvalue.caption"/>
+        <Item48 Value="tfmoptimize.lbrightvalue.caption"/>
+        <Item49 Value="tfmoptimize.lbupvalue.caption"/>
+        <Item50 Value="tfmoptimize.lbwarning.caption"/>
+        <Item51 Value="tfmpreview.lbbackground.caption"/>
+        <Item52 Value="tfmpreview.tbcontrols.caption"/>
+        <Item53 Value="tfmrange.lbwarning.caption"/>
+        <Item54 Value="tfmsettings.cbcharnamefont.text"/>
+        <Item55 Value="tfmsettings.cbcodehex.caption"/>
+        <Item56 Value="tfmsettings.cbcodenamefont.text"/>
+        <Item57 Value="tfmsettings.lbempty1.caption"/>
+        <Item58 Value="tfmsizes.lbempty5.caption"/>
+        <Item59 Value="tfmsizes.lbempty6.caption"/>
+        <Item60 Value="tfmsizes.lbnewvalue.caption"/>
+        <Item61 Value="tfmsizes.lboldvalue.caption"/>
+        <Item62 Value="tfmsizes.lbwarning.caption"/>
+        <Item63 Value="fm_gen.fm_gen_lng_1"/>
+        <Item64 Value="fm_gen.fm_gen_lng_2"/>
+        <Item65 Value="fm_gen.fm_gen_nb_1"/>
+        <Item66 Value="fm_gen.fm_gen_nb_2"/>
+        <Item67 Value="fm_gen.fm_gen_nb_3"/>
+        <Item68 Value="fm_gen.fm_gen_nb_4"/>
+        <Item69 Value="fm_gen.fm_gen_nv_1"/>
+        <Item70 Value="fm_gen.fm_gen_nv_2"/>
+        <Item71 Value="fm_gen.fm_gen_nv_3"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="2"/>
-      <BuildNr Value="55"/>
+      <MinorVersionNr Value="3"/>
+      <BuildNr Value="56"/>
       <Language Value="0419"/>
-      <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2017, 2021, 2023" OriginalFilename="matrixFont" ProductName="matrixFont"/>
+      <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
     <BuildModes Count="4">
       <Item1 Name="x64-Debug" Default="True"/>
