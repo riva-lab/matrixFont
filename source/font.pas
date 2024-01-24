@@ -22,7 +22,7 @@ resourcestring
   RHF_CHAR_CYR       = 'Кириллица, строчные';
 
 const
-  FILE_EXTENSION = 'RHF';
+  FILE_EXTENSION     = 'RHF';
 
 type
   TFontSet         = array of TSymbol;
@@ -65,7 +65,7 @@ type
   { TFont }
 
   TFont = class
-  PRIVATE
+  private
     FAuthor:        String;        // автор шрифта
     FName:          String;        // имя шрифта
     FAppAdditional: String;        // название компании-разработчика приложения-генератора
@@ -128,7 +128,7 @@ type
     procedure SetHeight(AHeight: Integer);
     procedure SetGridStep(AGridStep: Integer);
 
-  PUBLIC
+  public
     // =================================== Методы ==============================
 
     // очистить все символы шрифта
@@ -193,7 +193,7 @@ type
 
     //======================== Конструкторы и деструкторы ======================
     constructor Create;
-    destructor Destroy; OVERRIDE;
+    destructor Destroy; override;
     //==========================================================================
 
     // =========================== Свойства ====================================
@@ -345,7 +345,9 @@ function Transliterate(cyr: String): String;
         end;
   end;
 
-{ TFont }
+{ -----
+  TFont
+  ----- }
 
 // очистить все символы шрифта
 procedure TFont.Clear;
@@ -427,11 +429,12 @@ function TFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
     id, dfs, dfl, dfw, dfh, dft, dfa, ew: String;
     com_s, com_e, com_m: String;
 
-    ch_s, ch_e:    Integer;
+    ch_s, ch_e: Integer;
     i, len, len_c: Integer;
-    s:             String = '';
-    muls:          String = '';
-    int_str:       array[0..3] of String = (
+
+    s:       String = '';
+    muls:    String = '';
+    int_str: array[0..3] of String = (
       'unsigned char ',
       'unsigned short',
       'unsigned long ',
@@ -467,7 +470,7 @@ function TFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
     len          := (length(id) - 10) and not 3 + 4;
     if len < 0 then
       len := 0;
-    len   := len + tab_spaces;
+    len := len + tab_spaces;
 
     dfl := (id) + '_LENGTH';
     dfs := (id) + '_START_CHAR';
@@ -478,13 +481,13 @@ function TFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
 
     if FScanColsFirst then
       begin
-      ew := dfw;
+      ew     := dfw;
       if (FHeight - 1) div FNumbersBits > 0 then
         muls := ' * ' + IntToStr((FHeight - 1) div FNumbersBits + 1);
       end
     else
       begin
-      ew := dfh;
+      ew     := dfh;
       if (FWidth - 1) div FNumbersBits > 0 then
         muls := ' * ' + IntToStr((FWidth - 1) div FNumbersBits + 1);
       end;
@@ -834,9 +837,9 @@ procedure TFont.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
   begin
     if Crop then // при обрезке: если значение < 0, то применяем оптимизацию
       begin
-      if Up < 0 then Up := CanOptimize(TCanOptimize.coUp);
-      if Down < 0 then Down := CanOptimize(TCanOptimize.coDown);
-      if Left < 0 then Left := CanOptimize(TCanOptimize.coLeft);
+      if Up < 0 then Up       := CanOptimize(TCanOptimize.coUp);
+      if Down < 0 then Down   := CanOptimize(TCanOptimize.coDown);
+      if Left < 0 then Left   := CanOptimize(TCanOptimize.coLeft);
       if Right < 0 then Right := CanOptimize(TCanOptimize.coRight);
       end;
 
@@ -857,7 +860,7 @@ function TFont.CanOptimize(Direction: TCanOptimize): Integer;
 
     for i := 1 to FFontLength do
       begin
-      tmp := FSymbol[i - 1].CanOptimize(Direction);
+      tmp   := FSymbol[i - 1].CanOptimize(Direction);
       if tmp < min then
         min := tmp;
       end;
@@ -934,6 +937,7 @@ procedure TFont.SetRange(StartCode: Integer; EndCode: Integer);
 
 // получение имени символа по его коду
 function TFont.GetCharName(ACode: Integer; AFull: Boolean): String;
+
   const
     // https://ru.wikipedia.org/wiki/Управляющие_символы
     char_name: array [0..32] of String = (
@@ -941,6 +945,7 @@ function TFont.GetCharName(ACode: Integer; AFull: Boolean): String;
       'BS', 'HT', 'LF', 'VT', 'FF', 'CR', 'SO', 'SI',
       'DLE', 'DC1', 'DC2', 'DC3', 'DC4', 'NAK', 'SYN', 'ETB',
       'CAN', 'EM', 'SUB', 'ESC', 'FS', 'GS', 'RS', 'US', 'DEL');
+
     char_name_full: array [0..32] of String = (
       'NULL',
       'START OF HEADING',
