@@ -1,18 +1,17 @@
-# User, 2021.
-# User, 2021.
-# User, 2021.
-# Riva <@@@>, 2021.
-# user, 2023.
+# Riva, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-08-14 18:03+0300\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2024-01-25 12:39+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Poedit 3.4\n"
 
 #: fm_about.about_bit
 msgid "-битная"
@@ -48,7 +47,7 @@ msgstr "0 - zeros"
 
 #: fm_gen.fm_gen_eb_2
 msgid "1 - единицы "
-msgstr "1 - ones"
+msgstr "1 - ones "
 
 #: fm_gen.fm_gen_ft_1
 msgctxt "fm_gen.fm_gen_ft_1"
@@ -923,6 +922,22 @@ msgstr "Vertically"
 msgid "Отобразить символ вертикально"
 msgstr "Mirror char vertically"
 
+#: tfmmain.acsymbolmovedown.caption
+msgid "Переместить вниз"
+msgstr "Move down"
+
+#: tfmmain.acsymbolmovedown.hint
+msgid "Обменять местами текущий символ и следующий за ним"
+msgstr "Swap current char and one after it"
+
+#: tfmmain.acsymbolmoveup.caption
+msgid "Переместить вверх"
+msgstr "Move up"
+
+#: tfmmain.acsymbolmoveup.hint
+msgid "Обменять местами текущий символ и предыдущий"
+msgstr "Swap current char and one before it"
+
 #: tfmmain.acsymbolpaste.caption
 msgid "Вставить"
 msgstr "Paste"
@@ -1360,7 +1375,7 @@ msgstr "Apply"
 
 #: tfmrange.caption
 msgid "Задать диапазон"
-msgstr "Set range ..."
+msgstr "Set range"
 
 #: tfmrange.gbrange.caption
 msgid "Диапазон"
@@ -1759,7 +1774,7 @@ msgstr ""
 
 #: u_strings.warn_optimize
 msgid "Все символы шрифта пусты. Оптимизация недоступна"
-msgstr "All font chars are blank. Optimization is not available."
+msgstr "All font chars are blank. Optimization is not available"
 
 #: u_strings.warn_reset
 msgid ""
@@ -1778,4 +1793,3 @@ msgstr ""
 "Can not apply all settings!\n"
 "Fatal error has occurred. Restart application.\n"
 "Exit application?"
-

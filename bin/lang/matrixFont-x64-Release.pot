@@ -908,6 +908,22 @@ msgstr ""
 msgid "Отобразить символ вертикально"
 msgstr ""
 
+#: tfmmain.acsymbolmovedown.caption
+msgid "Переместить вниз"
+msgstr ""
+
+#: tfmmain.acsymbolmovedown.hint
+msgid "Обменять местами текущий символ и следующий за ним"
+msgstr ""
+
+#: tfmmain.acsymbolmoveup.caption
+msgid "Переместить вверх"
+msgstr ""
+
+#: tfmmain.acsymbolmoveup.hint
+msgid "Обменять местами текущий символ и предыдущий"
+msgstr ""
+
 #: tfmmain.acsymbolpaste.caption
 msgid "Вставить"
 msgstr ""
