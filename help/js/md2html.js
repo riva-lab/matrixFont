@@ -263,7 +263,7 @@ function makePage(html) {
     loadExternalSection(getLinkHref('markdown-menu', 'menu'), false, false);
     loadExternalSection(getLinkHref('html', 'header'), false, true);
     loadExternalSection(getLinkHref('html', 'footer'), true, true);
-    Prism.highlightAll();
+    try { Prism.highlightAll(); } catch { }
     updateColorScheme();
 
     document.querySelectorAll('div#sec-langs ul li p a').forEach(element => {
