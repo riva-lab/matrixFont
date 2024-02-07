@@ -5,8 +5,8 @@ unit font;
 interface
 
 uses
-  Classes, SysUtils, LazUTF8, LConvEncoding, strutils, symbol, u_encodings,
-  Graphics;
+  Classes, SysUtils, LazUTF8, LConvEncoding, StrUtils, Graphics, regexpr,
+  symbol, u_encodings, u_helpers;
 
 resourcestring
   RHF_COMMENT_NAME   = 'Название шрифта';
@@ -23,8 +23,10 @@ resourcestring
 
 const
   FILE_EXTENSION     = 'RHF';
+  IMPORTC_EXTENSION  = 'C,CPP,H,HPP,TXT';
 
 type
+  TQWordArray      = array of QWord;
   TFontSet         = array of TSymbol;
   TCanOptimize     = symbol.TCanOptimize;
   TDirection       = symbol.TDirection;
@@ -33,6 +35,7 @@ type
   TSymbolField     = symbol.TSymbolField;
   TClipboardAction = symbol.TClipboardAction;
   TPasteMode       = symbol.TPasteMode;
+  TImportMode      = (imOwn, imAdafruit, imLCDVision, imCustom);
 
   TFileRHFHeader = record
     AppVersion: String[16];
@@ -182,7 +185,12 @@ type
     // импорт системного шрифта для растеризации
     procedure Import(Font: Graphics.TFont; Width, Height: Integer);
 
+    // импорт кода C
+    function Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
+      ): Boolean;
+
     // изменение размеров холста символов шрифта
+    // при обрезке: если значение < 0, то применяем оптимизацию
     procedure ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
 
     // определение возможности усечь символ
@@ -874,6 +882,451 @@ procedure TFont.Import(Font: Graphics.TFont; Width, Height: Integer);
       FSymbol[i - 1].Import(Font, FFontStartItem + i - 1, FEncoding);
       FSymbol[i - 1].SaveChange;
       end;
+  end;
+
+// импорт кода C
+function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode): Boolean;
+
+  type
+    TGFXglyph = record           // Data stored PER GLYPH
+      bitmapOffset:     Integer; //  Pointer into GFXfont->bitmap
+      bwidth, bheight:  Integer; //  Bitmap dimensions in pixels
+      xAdvance:         Integer; //  Distance to advance cursor (x axis)
+      xOffset, yOffset: Integer; //  Dist from cursor pos to UL corner
+      end;
+
+    TGFXArray = array of TGFXglyph;
+
+  function NormalizeCode(AStr: String): String;
+    var
+      i: Integer;
+      r: array of String = (         // Transformations:
+        '\/\*(?:.|\s)*?\*\/', ' ',   // - remove block comments
+        '\/\/.*?$', ' ',             // - remove line comments
+        '\{', ' { ',                 // - opening brace {
+        '\}', ' } '                  // - closing brace }
+        );
+    begin
+      Result := AStr;
+
+      for i := 0 to High(r) div 2 do
+        Result := ReplaceRegExpr(
+          r[i * 2], Result, r[i * 2 + 1], [rroModifierI, rroModifierM]);
+
+      Result := Result.Replace(#13, #10).Replace(#10, ' ');
+
+      for i := 0 to 8 do
+        Result := Result.Replace('  ', ' ');
+    end;
+
+  function GetBits(AStr: String): Integer;
+    begin
+      Result := 0;
+      case LowerCase(AStr) of
+
+        'char', 'byte', 'uint8_t':
+          Result := 8;
+
+        'short', 'uint16_t':
+          Result := 16;
+
+        'uint24_t':
+          Result := 24;
+
+        'int', 'long', 'uint32_t':
+          Result := 32;
+
+        'long long', 'uint64_t':
+          Result := 64;
+        end;
+    end;
+
+  function GetValue(APrefix, AStr: String): QWord;
+    var
+      prefix: Char;
+    begin
+      case LowerCase(APrefix) of
+        '0x':
+          prefix := '$';
+        '0b':
+          prefix := '%';
+        '0':
+          prefix := '&';
+        else
+          prefix := ' ';
+        end;
+
+      Result := StrToQWord(prefix + AStr);
+    end;
+
+  function GetValueInt(APrefix, AStr: String): Integer;
+    begin
+      Result := GetValue(APrefix, AStr);
+      if APrefix = '-' then Result := -Result;
+    end;
+
+  function StrToArray(AStr: String; var AArray: TQWordArray; out OBits: Integer; out OName: String): Boolean;
+    label
+      _end;
+    var
+      re:        TRegExpr;
+      byteCount: Integer = 0;
+    begin
+      Result := False;
+      re     := TRegExpr.Create;
+
+        try
+        // STAGE 1. Get array as string from code
+        re.ModifierI   := True;
+        re.InputString := UnicodeString(AStr);
+        re.Expression  :=
+          '(?: (char|byte|int|short|long|long long|uint8_t|uint16_t|uint24_t' +
+          '|uint32_t|uint64_t) (?:[^;:,]*? )?)?([a-z_][a-z\d_]*?)\[( ?' +
+          '[_a-z][a-z\d_]*? ?)?\](?:[^=]*?)=\s*?\{([,a-z\d\s#_]*?)\}';
+        if not re.Exec then goto _end;
+
+        AStr  := String(re.Match[4]) + ',';    // array as string
+        OBits := GetBits(String(re.Match[1]));
+        OName := String(re.Match[2]);
+
+        // STAGE 2. Read data from array string to array
+        re.InputString := UnicodeString(AStr);
+        re.Expression  := '[,\s](0x|0b|0)?([\da-f]+?)(?:,| )';
+        SetLength(AArray, Length(AStr));
+
+        if re.Exec then
+          repeat
+            AArray[byteCount] := GetValue(String(re.Match[1]), String(re.Match[2]));
+            Inc(byteCount);
+          until not re.ExecNext;
+
+        Result := True;
+
+        _end: ;
+        except
+        end;
+
+      SetLength(AArray, byteCount);
+      re.Free;
+    end;
+
+  function StrToArrayAdafruit(AStr: String; var AArray: TQWordArray; var AGFXArray: TGFXArray; out OName: String): Boolean;
+    label
+      _end;
+    var
+      re:           TRegExpr;
+      byteCount:    Integer = 0;
+      xAdvMax:      Integer = 0;
+      intVal:       Integer;
+      _bmpID, _gID: String;
+    begin
+      Result := False;
+      re     := TRegExpr.Create;
+
+      // STAGE 1. Get GFXfont structure from code
+      //   typedef struct { // Data stored for FONT AS A WHOLE:
+      //     uint8_t  *bitmap;      // Glyph bitmaps, concatenated
+      //     GFXglyph *glyph;       // Glyph array
+      //     uint8_t   first, last; // ASCII extents
+      //     uint8_t   yAdvance;    // Newline distance (y axis)
+      //   } GFXfont;
+      re.ModifierI   := True;
+      re.InputString := UnicodeString(AStr);
+      re.Expression  :=
+        '\s+?GFXfont(?:\s+[\w\d_]*)?\s+?([a-z_][a-z\d_]*?)\s+?(?:[^{]*?)\s*?=\s*\{\s*' +
+        '(?:\([^)]*\))?([a-z_][a-z\d_]*?)\s*,\s*' +
+        '(?:\([^)]*\))?([a-z_][a-z\d_]*?)\s*,\s*' +
+        '[,\s](0x|0b|0)?([\da-f]+?)\s*,\s*' +
+        '[,\s](0x|0b|0)?([\da-f]+?)\s*,\s*' +
+        '[,\s](0x|0b|0)?([\da-f]+?)\s*\}';
+      if not re.Exec then goto _end;
+
+      OName         := String(re.Match[1]);
+      _bmpID        := String(re.Match[2]);
+      _gID          := String(re.Match[3]);
+      FontStartItem := GetValue(String(re.Match[4]), String(re.Match[5]));
+      FontLength    := GetValue(String(re.Match[6]), String(re.Match[7])) - FontStartItem + 1;
+      Height        := Round(GetValue(String(re.Match[8]), String(re.Match[9])) * 1.8);
+
+      // STAGE 2. Get array of GFXglyph structures as string
+      re.InputString := UnicodeString(AStr);
+      re.Expression  :=
+        '\s+?GFXglyph(?:\s+[\w\d_]*)?\s+?' + _gID +
+        '\s*?\[\]\s+?(?:[^{]*?)\s*?=\s*\{(.*?)\}\s*;';
+      if not re.Exec then goto _end;
+
+      SetLength(AArray, Length(AStr));
+      SetLength(AGFXArray, 256);
+
+      // STAGE 3. Read glyphs data
+      re.InputString := re.Match[1]; // glyphs structure
+      re.Expression  := '[,\s](0x|0b|0|-)?([\da-f]+?)(?:,| )';
+      if not re.Exec then
+        goto _end
+      else
+        repeat
+          intVal := GetValueInt(String(re.Match[1]), String(re.Match[2]));
+          case byteCount mod 6 of
+            0: AGFXArray[byteCount div 6].bitmapOffset := intVal;
+            1: AGFXArray[byteCount div 6].bwidth := intVal;
+            2: AGFXArray[byteCount div 6].bheight := intVal;
+            3:
+              begin
+              AGFXArray[byteCount div 6].xAdvance := intVal;
+              if xAdvMax < intVal then xAdvMax := intVal; // accumulate max value
+              end;
+            4: AGFXArray[byteCount div 6].xOffset := intVal;
+            5: AGFXArray[byteCount div 6].yOffset := intVal;
+            end;
+
+          Inc(byteCount);
+        until not re.ExecNext;
+
+      Width := Round(xAdvMax * 1.8) + 8;
+
+      // STAGE 4. Get bitmap array as string
+      re.InputString := UnicodeString(AStr);
+      re.Expression  :=
+        '\s+?uint8_t(?:\s+[\w\d_]*)?\s+?' + _bmpID +
+        '\s*?\[\]\s+?(?:[^{]*?)\s*?=\s*\{(.*?)\}\s*;';
+      if not re.Exec then goto _end;
+
+      // STAGE 5. Read bitmap data
+      byteCount      := 0;
+      re.InputString := re.Match[1]; // bitmap array
+      re.Expression  := '[,\s](0x|0b|0)?([\da-f]+?)(?:,| )';
+      if not re.Exec then
+        goto _end
+      else
+        repeat
+          AArray[byteCount] := GetValue(String(re.Match[1]), String(re.Match[2]));
+          Inc(byteCount);
+        until not re.ExecNext;
+
+      SetLength(AArray, byteCount);
+      Result := True;
+
+      _end: ;
+      re.Free;
+    end;
+
+  procedure SwapInts(var Int1, Int2: Integer);
+    var
+      tmp: QWord;
+    begin
+      tmp  := Int1;
+      Int1 := Int2;
+      Int2 := tmp;
+    end;
+
+  procedure GetMatrixFontParams(ACode: String);
+
+    function GetMatrixFontParamInt(AKey: String): Integer;
+      begin
+        Result := 0;
+        with TRegExpr.Create do
+            try
+            ModifierI   := True;
+            InputString := ACode;
+            Expression  := AKey + '\s+?(0x|0b|0)?([\da-f]+)';
+            if Exec then Result := GetValue(Match[1], Match[2]);
+            finally
+            Free;
+            end;
+      end;
+
+    function GetMatrixFontParamStr(AKey: String): String;
+      begin
+        Result := '';
+        with TRegExpr.Create do
+            try
+            ModifierI   := True;
+            InputString := ACode;
+            Expression  := AKey + '\s+?\((\w[^\s]*)\)';
+            if Exec then Result := Match[1];
+            finally
+            Free;
+            end;
+      end;
+
+    begin
+      Width         := GetMatrixFontParamInt('char_width');
+      Height        := GetMatrixFontParamInt('char_height');
+      FontStartItem := GetMatrixFontParamInt('start_char');
+      FontLength    := GetMatrixFontParamInt('length');
+      NumbersBits   := 0;
+      AOffset       := 0;
+      ASkip         := 0;
+      if GetMatrixFontParamStr('font_type') = 'FONT_TYPE_PROPORTIONAL' then
+        ASkip := 1;
+      FontType := TFontType(ASkip);
+    end;
+
+  procedure GetLCDVisionFontParams(AArray: TQWordArray);
+    var
+      i: Integer;
+      w: QWord = 0;
+    begin
+        try
+        if Length(AArray) < 4 then Exit;
+        Width         := Integer(AArray[0] and $3FF);
+        Height        := Integer(AArray[1] and $3FF);
+        FontStartItem := Integer(AArray[2] and $3FF);
+        FontLength    := Integer(AArray[3] and $3FF);
+        NumbersBits   := 8;
+        AOffset       := 4;
+        ASkip         := 0;
+        FontType      := ftMONOSPACE;
+
+        if Width = 0 then
+          begin
+          if Length(AArray) < AOffset + FontLength then Exit;
+          for i := 0 to FontLength - 1 do
+            if AArray[AOffset + i] > w then w := AArray[AOffset + i];
+
+          Width    := Integer(w and $3FF);
+          AOffset  += FontLength;
+          FontType := ftPROPORTIONAL;
+          end;
+
+        if ExecRegExpr('#ifndef\s+?_GLCD_DATA_BYTEY_', ACode) then
+          ScanColsFirst := False;
+        except
+        end;
+    end;
+
+  procedure AdjustParameters(AArray: TQWordArray);
+    begin
+      case AType of
+
+        imOwn:
+          GetMatrixFontParams(ACode);
+
+        imAdafruit:
+          begin
+          FontType    := ftPROPORTIONAL;
+          NumbersBits := 8;
+          AOffset     := 0;
+          ASkip       := 0;
+          end;
+
+        imLCDVision:
+          GetLCDVisionFontParams(AArray);
+        end;
+    end;
+
+  procedure ReadAdafruitChar(AChar: Integer; AGFXArr: TGFXArray; ABitmap: TQWordArray);
+    var
+      x:     Integer = 0;
+      y:     Integer = 0;
+      b, i:  Integer;
+      _data: QWord;
+    begin
+      if AGFXArr[AChar].bwidth = 0 then Exit;
+      if AGFXArr[AChar].bheight = 0 then Exit;
+      i := AGFXArr[AChar].bitmapOffset;
+
+      while True do
+        begin
+        _data := ABitmap[i];
+        Inc(i);
+
+        for b := 0 to 7 do
+          begin
+          FSymbol[AChar].PixelAction(
+            x + AGFXArr[AChar].xOffset + 8,
+            y + AGFXArr[AChar].yOffset + Round(Height / 1.8) + 1,
+            (_data and $80 > 0).Select(paSet, paClear));
+
+          _data := _data shl 1;
+          Inc(x);
+          if x >= AGFXArr[AChar].bwidth then
+            begin
+            x := 0;
+            Inc(y);
+            if y >= AGFXArr[AChar].bheight then Exit;
+            end;
+          end;
+        end;
+    end;
+
+  procedure ReadChar();
+    begin
+      { #todo : перенести сюда код }
+    end;
+
+  var
+    values:             TQWordArray;
+    gfxArr:             TGFXArray;
+    currentValue:       QWord;
+    ready:              Boolean;
+    i, j, b, sx, sy:    Integer;
+    ch, chSize, chLine: Integer;
+
+  begin
+    Clear;
+    ClearChanges;
+    Result := False;
+    ACode  := NormalizeCode(ACode);
+
+    if AType = imAdafruit then
+      ready := StrToArrayAdafruit(ACode, values, gfxArr, FName)
+    else
+      ready := StrToArray(ACode, values, b, FName);
+
+    if not ready then Exit;
+    AdjustParameters(values);
+
+    // check fields
+    if AOffset > High(values) then Exit;
+    if FNumbersBits = 0 then FNumbersBits := b;
+    if FNumbersBits = 0 then Exit;
+    if FWidth = 0 then Exit;
+    if FHeight = 0 then Exit;
+    if FFontLength = 0 then Exit;
+
+    sx := FWidth;
+    sy := FHeight;
+    if FScanColsFirst then SwapInts(sx, sy);
+
+    chLine := (sx - 1) div FNumbersBits + 1;
+    chSize := chLine * sy - 1;
+    i      := AOffset;
+    Result := True;
+
+    for ch := 0 to FFontLength - 1 do
+      if AType = imAdafruit then
+        ReadAdafruitChar(ch, gfxArr, values)
+      else
+        begin
+        i += ASkip;
+
+        if (AType = imLCDVision) and (FontType = ftPROPORTIONAL) then
+          begin
+          chLine := (values[4 + ch] - 1) div FNumbersBits + 1;
+          chSize := chLine * Height - 1;
+          end;
+
+        for j := 0 to chSize do
+          begin
+          if i > High(values) then Exit;
+          currentValue := values[i];
+
+          for b := 0 to FNumbersBits - 1 do
+            begin
+            sx := (j mod chLine) * FNumbersBits + b;
+            sy := j div chLine;
+            if FScanColsFirst then SwapInts(sx, sy);
+
+            FSymbol[ch].PixelAction(sx, sy,
+              (currentValue and 1 > 0).Select(paSet, paClear));
+
+            currentValue := currentValue shr 1;
+            end;
+
+          Inc(i);
+          end;
+        end;
   end;
 
 // изменение размеров холста символов шрифта

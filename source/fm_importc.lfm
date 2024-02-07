@@ -1,0 +1,1359 @@
+object fmImportC: TfmImportC
+  Left = 355
+  Height = 587
+  Top = 191
+  Width = 828
+  AllowDropFiles = True
+  BorderIcons = [biSystemMenu, biMaximize]
+  ChildSizing.EnlargeHorizontal = crsScaleChilds
+  ChildSizing.EnlargeVertical = crsScaleChilds
+  ChildSizing.Layout = cclTopToBottomThenLeftToRight
+  ClientHeight = 587
+  ClientWidth = 828
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnShow = FormShow
+  PopupMode = pmExplicit
+  Position = poDefault
+  SessionProperties = 'acTabCode.Checked;acTabParams.Checked;cbImpExample.Checked;cbImpNBits.ItemIndex;cbImpOptimize.Checked;cbImpOrder.ItemIndex;cbImpSnapLeft.Checked;cbImpType.ItemIndex;edImpExample.Text;seImpHeight.Value;seImpLastItem.Value;seImpOffset.Value;seImpSkip.Value;seImpStartItem.Value;seImpWidth.Value;seImpCharCode.Value'
+  ShowHint = True
+  LCLVersion = '2.2.6.0'
+  object pLeft: TPanel
+    Left = 0
+    Height = 587
+    Top = 0
+    Width = 259
+    BevelOuter = bvNone
+    ClientHeight = 587
+    ClientWidth = 259
+    ParentColor = False
+    TabOrder = 0
+    object lbInfo: TLabel
+      Left = 0
+      Height = 20
+      Top = 567
+      Width = 259
+      Align = alBottom
+      Alignment = taCenter
+      Caption = 'lbInfo'
+      Color = cl3DLight
+      Layout = tlCenter
+      ParentColor = False
+      Transparent = False
+    end
+    object pPreview: TPanel
+      Left = 0
+      Height = 567
+      Top = 0
+      Width = 259
+      Align = alClient
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 4
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 567
+      ClientWidth = 259
+      TabOrder = 0
+      object pCharSelect: TPanel
+        Left = 8
+        Height = 153
+        Top = 410
+        Width = 243
+        Align = alBottom
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.TopBottomSpacing = 8
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 8
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 153
+        ClientWidth = 243
+        ParentColor = False
+        TabOrder = 1
+        object edImpChar: TEdit
+          Left = 0
+          Height = 27
+          Top = 8
+          Width = 100
+          Alignment = taCenter
+          BorderSpacing.CellAlignVertical = ccaCenter
+          Constraints.MinWidth = 80
+          Font.Height = -16
+          Font.Name = 'Consolas'
+          MaxLength = 2
+          OnChange = actionExecute
+          OnUTF8KeyPress = edImpCharUTF8KeyPress
+          ParentFont = False
+          TabOrder = 0
+        end
+        object lbImpChar: TLabel
+          Left = 110
+          Height = 27
+          Top = 8
+          Width = 54
+          Caption = 'Символ'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seImpCharCode: TSpinEdit
+          Left = 0
+          Height = 28
+          Top = 43
+          Width = 100
+          Alignment = taCenter
+          BorderSpacing.CellAlignVertical = ccaCenter
+          Constraints.MinWidth = 80
+          MaxValue = 255
+          OnChange = actionExecute
+          TabOrder = 1
+          Value = 32
+        end
+        object lbImpCharCode: TLabel
+          Left = 110
+          Height = 28
+          Hint = 'Код символа [DEC]'
+          Top = 43
+          Width = 54
+          Caption = 'Код'
+          Layout = tlCenter
+          ParentColor = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object edImpCharHex: TEdit
+          Left = 0
+          Height = 27
+          Top = 79
+          Width = 100
+          Alignment = taCenter
+          BorderSpacing.CellAlignVertical = ccaCenter
+          Color = clForm
+          Constraints.MinWidth = 80
+          Font.Height = -16
+          Font.Name = 'Consolas'
+          MaxLength = 2
+          OnChange = actionExecute
+          OnUTF8KeyPress = edImpCharUTF8KeyPress
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object lbImpCharHex: TLabel
+          Left = 110
+          Height = 27
+          Hint = 'Код символа [HEX]'
+          Top = 79
+          Width = 54
+          Caption = 'HEX'
+          Layout = tlCenter
+          ParentColor = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object pSpacer: TPanel
+          Left = 0
+          Height = 23
+          Top = 122
+          Width = 100
+          BorderSpacing.Top = 16
+          BevelOuter = bvNone
+          ChildSizing.HorizontalSpacing = 10
+          ChildSizing.VerticalSpacing = 2
+          ChildSizing.EnlargeHorizontal = crsScaleChilds
+          ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 2
+          Constraints.MinHeight = 23
+          TabOrder = 3
+        end
+      end
+      object pCharPreview: TPanel
+        Left = 8
+        Height = 406
+        Top = 4
+        Width = 243
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 406
+        ClientWidth = 243
+        Color = cl3DLight
+        Constraints.MinHeight = 200
+        Constraints.MinWidth = 200
+        ParentColor = False
+        TabOrder = 0
+        object imImpChar: TImage
+          Left = 0
+          Height = 406
+          Top = 0
+          Width = 243
+          Align = alClient
+          Center = True
+          Proportional = True
+          Stretch = True
+          Transparent = True
+        end
+      end
+    end
+  end
+  object pRight: TPanel
+    Left = 259
+    Height = 587
+    Top = 0
+    Width = 569
+    BevelOuter = bvNone
+    ChildSizing.VerticalSpacing = 2
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 587
+    ClientWidth = 569
+    TabOrder = 1
+    object pcPages: TPageControl
+      Left = 2
+      Height = 529
+      Top = 0
+      Width = 567
+      ActivePage = tsCode
+      Align = alClient
+      Style = tsButtons
+      TabIndex = 0
+      TabOrder = 0
+      object tsCode: TTabSheet
+        AutoSize = True
+        Caption = 'tsCode'
+        ClientHeight = 493
+        ClientWidth = 559
+        object pFilename: TPanel
+          Left = 0
+          Height = 28
+          Top = 0
+          Width = 559
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ChildSizing.LeftRightSpacing = 4
+          ChildSizing.TopBottomSpacing = 4
+          ChildSizing.HorizontalSpacing = 10
+          ChildSizing.VerticalSpacing = 2
+          ChildSizing.ControlsPerLine = 2
+          ClientHeight = 28
+          ClientWidth = 559
+          TabOrder = 1
+          Visible = False
+          object lbImpFile: TLabel
+            Left = 4
+            Height = 20
+            Top = 4
+            Width = 39
+            Align = alLeft
+            Caption = 'Файл:'
+            Layout = tlBottom
+            ParentColor = False
+          end
+          object edImpFileName: TEdit
+            Left = 53
+            Height = 20
+            Top = 4
+            Width = 502
+            Align = alClient
+            BorderStyle = bsNone
+            Color = clForm
+            ReadOnly = True
+            TabOrder = 0
+          end
+        end
+        inline snImpEdit: TSynEdit
+          Left = 0
+          Height = 445
+          Top = 28
+          Width = 559
+          Align = alClient
+          Constraints.MinWidth = 250
+          Color = clNone
+          Font.Height = -13
+          Font.Name = 'Consolas'
+          Font.Pitch = fpFixed
+          Font.Quality = fqCleartype
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 0
+          BorderStyle = bsNone
+          Gutter.Width = 18
+          Gutter.MouseActions = <>
+          RightGutter.Visible = False
+          RightGutter.Width = 0
+          RightGutter.MouseActions = <>
+          Highlighter = snCppSyntax
+          Keystrokes = <          
+            item
+              Command = ecUp
+              ShortCut = 38
+            end          
+            item
+              Command = ecSelUp
+              ShortCut = 8230
+            end          
+            item
+              Command = ecScrollUp
+              ShortCut = 16422
+            end          
+            item
+              Command = ecDown
+              ShortCut = 40
+            end          
+            item
+              Command = ecSelDown
+              ShortCut = 8232
+            end          
+            item
+              Command = ecScrollDown
+              ShortCut = 16424
+            end          
+            item
+              Command = ecLeft
+              ShortCut = 37
+            end          
+            item
+              Command = ecSelLeft
+              ShortCut = 8229
+            end          
+            item
+              Command = ecWordLeft
+              ShortCut = 16421
+            end          
+            item
+              Command = ecSelWordLeft
+              ShortCut = 24613
+            end          
+            item
+              Command = ecRight
+              ShortCut = 39
+            end          
+            item
+              Command = ecSelRight
+              ShortCut = 8231
+            end          
+            item
+              Command = ecWordRight
+              ShortCut = 16423
+            end          
+            item
+              Command = ecSelWordRight
+              ShortCut = 24615
+            end          
+            item
+              Command = ecPageDown
+              ShortCut = 34
+            end          
+            item
+              Command = ecSelPageDown
+              ShortCut = 8226
+            end          
+            item
+              Command = ecPageBottom
+              ShortCut = 16418
+            end          
+            item
+              Command = ecSelPageBottom
+              ShortCut = 24610
+            end          
+            item
+              Command = ecPageUp
+              ShortCut = 33
+            end          
+            item
+              Command = ecSelPageUp
+              ShortCut = 8225
+            end          
+            item
+              Command = ecPageTop
+              ShortCut = 16417
+            end          
+            item
+              Command = ecSelPageTop
+              ShortCut = 24609
+            end          
+            item
+              Command = ecLineStart
+              ShortCut = 36
+            end          
+            item
+              Command = ecSelLineStart
+              ShortCut = 8228
+            end          
+            item
+              Command = ecEditorTop
+              ShortCut = 16420
+            end          
+            item
+              Command = ecSelEditorTop
+              ShortCut = 24612
+            end          
+            item
+              Command = ecLineEnd
+              ShortCut = 35
+            end          
+            item
+              Command = ecSelLineEnd
+              ShortCut = 8227
+            end          
+            item
+              Command = ecEditorBottom
+              ShortCut = 16419
+            end          
+            item
+              Command = ecSelEditorBottom
+              ShortCut = 24611
+            end          
+            item
+              Command = ecToggleMode
+              ShortCut = 45
+            end          
+            item
+              Command = ecCopy
+              ShortCut = 16429
+            end          
+            item
+              Command = ecPaste
+              ShortCut = 8237
+            end          
+            item
+              Command = ecDeleteChar
+              ShortCut = 46
+            end          
+            item
+              Command = ecCut
+              ShortCut = 8238
+            end          
+            item
+              Command = ecDeleteLastChar
+              ShortCut = 8
+            end          
+            item
+              Command = ecDeleteLastChar
+              ShortCut = 8200
+            end          
+            item
+              Command = ecDeleteLastWord
+              ShortCut = 16392
+            end          
+            item
+              Command = ecUndo
+              ShortCut = 32776
+            end          
+            item
+              Command = ecRedo
+              ShortCut = 40968
+            end          
+            item
+              Command = ecLineBreak
+              ShortCut = 13
+            end          
+            item
+              Command = ecSelectAll
+              ShortCut = 16449
+            end          
+            item
+              Command = ecCopy
+              ShortCut = 16451
+            end          
+            item
+              Command = ecBlockIndent
+              ShortCut = 24649
+            end          
+            item
+              Command = ecLineBreak
+              ShortCut = 16461
+            end          
+            item
+              Command = ecInsertLine
+              ShortCut = 16462
+            end          
+            item
+              Command = ecDeleteWord
+              ShortCut = 16468
+            end          
+            item
+              Command = ecBlockUnindent
+              ShortCut = 24661
+            end          
+            item
+              Command = ecPaste
+              ShortCut = 16470
+            end          
+            item
+              Command = ecCut
+              ShortCut = 16472
+            end          
+            item
+              Command = ecDeleteLine
+              ShortCut = 16473
+            end          
+            item
+              Command = ecDeleteEOL
+              ShortCut = 24665
+            end          
+            item
+              Command = ecUndo
+              ShortCut = 16474
+            end          
+            item
+              Command = ecRedo
+              ShortCut = 24666
+            end          
+            item
+              Command = ecGotoMarker0
+              ShortCut = 16432
+            end          
+            item
+              Command = ecGotoMarker1
+              ShortCut = 16433
+            end          
+            item
+              Command = ecGotoMarker2
+              ShortCut = 16434
+            end          
+            item
+              Command = ecGotoMarker3
+              ShortCut = 16435
+            end          
+            item
+              Command = ecGotoMarker4
+              ShortCut = 16436
+            end          
+            item
+              Command = ecGotoMarker5
+              ShortCut = 16437
+            end          
+            item
+              Command = ecGotoMarker6
+              ShortCut = 16438
+            end          
+            item
+              Command = ecGotoMarker7
+              ShortCut = 16439
+            end          
+            item
+              Command = ecGotoMarker8
+              ShortCut = 16440
+            end          
+            item
+              Command = ecGotoMarker9
+              ShortCut = 16441
+            end          
+            item
+              Command = ecSetMarker0
+              ShortCut = 24624
+            end          
+            item
+              Command = ecSetMarker1
+              ShortCut = 24625
+            end          
+            item
+              Command = ecSetMarker2
+              ShortCut = 24626
+            end          
+            item
+              Command = ecSetMarker3
+              ShortCut = 24627
+            end          
+            item
+              Command = ecSetMarker4
+              ShortCut = 24628
+            end          
+            item
+              Command = ecSetMarker5
+              ShortCut = 24629
+            end          
+            item
+              Command = ecSetMarker6
+              ShortCut = 24630
+            end          
+            item
+              Command = ecSetMarker7
+              ShortCut = 24631
+            end          
+            item
+              Command = ecSetMarker8
+              ShortCut = 24632
+            end          
+            item
+              Command = ecSetMarker9
+              ShortCut = 24633
+            end          
+            item
+              Command = EcFoldLevel1
+              ShortCut = 41009
+            end          
+            item
+              Command = EcFoldLevel2
+              ShortCut = 41010
+            end          
+            item
+              Command = EcFoldLevel3
+              ShortCut = 41011
+            end          
+            item
+              Command = EcFoldLevel4
+              ShortCut = 41012
+            end          
+            item
+              Command = EcFoldLevel5
+              ShortCut = 41013
+            end          
+            item
+              Command = EcFoldLevel6
+              ShortCut = 41014
+            end          
+            item
+              Command = EcFoldLevel7
+              ShortCut = 41015
+            end          
+            item
+              Command = EcFoldLevel8
+              ShortCut = 41016
+            end          
+            item
+              Command = EcFoldLevel9
+              ShortCut = 41017
+            end          
+            item
+              Command = EcFoldLevel0
+              ShortCut = 41008
+            end          
+            item
+              Command = EcFoldCurrent
+              ShortCut = 41005
+            end          
+            item
+              Command = EcUnFoldCurrent
+              ShortCut = 41003
+            end          
+            item
+              Command = EcToggleMarkupWord
+              ShortCut = 32845
+            end          
+            item
+              Command = ecNormalSelect
+              ShortCut = 24654
+            end          
+            item
+              Command = ecColumnSelect
+              ShortCut = 24643
+            end          
+            item
+              Command = ecLineSelect
+              ShortCut = 24652
+            end          
+            item
+              Command = ecTab
+              ShortCut = 9
+            end          
+            item
+              Command = ecShiftTab
+              ShortCut = 8201
+            end          
+            item
+              Command = ecMatchBracket
+              ShortCut = 24642
+            end          
+            item
+              Command = ecColSelUp
+              ShortCut = 40998
+            end          
+            item
+              Command = ecColSelDown
+              ShortCut = 41000
+            end          
+            item
+              Command = ecColSelLeft
+              ShortCut = 40997
+            end          
+            item
+              Command = ecColSelRight
+              ShortCut = 40999
+            end          
+            item
+              Command = ecColSelPageDown
+              ShortCut = 40994
+            end          
+            item
+              Command = ecColSelPageBottom
+              ShortCut = 57378
+            end          
+            item
+              Command = ecColSelPageUp
+              ShortCut = 40993
+            end          
+            item
+              Command = ecColSelPageTop
+              ShortCut = 57377
+            end          
+            item
+              Command = ecColSelLineStart
+              ShortCut = 40996
+            end          
+            item
+              Command = ecColSelLineEnd
+              ShortCut = 40995
+            end          
+            item
+              Command = ecColSelEditorTop
+              ShortCut = 57380
+            end          
+            item
+              Command = ecColSelEditorBottom
+              ShortCut = 57379
+            end>
+          MouseActions = <>
+          MouseTextActions = <>
+          MouseSelActions = <>
+          MaxUndo = 0
+          Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          Options2 = [eoFoldedCopyPaste, eoOverwriteBlock, eoColorSelectionTillEol]
+          MouseOptions = [emCtrlWheelZoom]
+          VisibleSpecialChars = [vscSpace, vscTabAtLast]
+          RightEdge = -1
+          ScrollBars = ssAutoBoth
+          SelectedColor.BackPriority = 50
+          SelectedColor.ForePriority = 50
+          SelectedColor.FramePriority = 50
+          SelectedColor.BoldPriority = 50
+          SelectedColor.ItalicPriority = 50
+          SelectedColor.UnderlinePriority = 50
+          SelectedColor.StrikeOutPriority = 50
+          BracketHighlightStyle = sbhsBoth
+          BracketMatchColor.Background = clNone
+          BracketMatchColor.Foreground = clNone
+          BracketMatchColor.Style = [fsBold]
+          FoldedCodeColor.Background = clNone
+          FoldedCodeColor.Foreground = clGray
+          FoldedCodeColor.FrameColor = clGray
+          MouseLinkColor.Background = clNone
+          MouseLinkColor.Foreground = clBlue
+          LineHighlightColor.Background = clNone
+          LineHighlightColor.Foreground = clNone
+          inline SynLeftGutterPartList1: TSynGutterPartList
+            object SynGutterMarks1: TSynGutterMarks
+              Width = 30
+              Visible = False
+              MouseActions = <>
+            end
+            object SynGutterLineNumber1: TSynGutterLineNumber
+              Width = 15
+              MouseActions = <>
+              MarkupInfo.Background = clBtnFace
+              MarkupInfo.Foreground = clNone
+              DigitCount = 2
+              ShowOnlyLineNumbersMultiplesOf = 1
+              ZeroStart = False
+              LeadingZeros = False
+            end
+            object SynGutterChanges1: TSynGutterChanges
+              Width = 5
+              Visible = False
+              MouseActions = <>
+              ModifiedColor = 59900
+              SavedColor = clGreen
+            end
+            object SynGutterSeparator1: TSynGutterSeparator
+              Width = 3
+              MouseActions = <>
+              MarkupInfo.Background = clWhite
+              MarkupInfo.Foreground = clGray
+            end
+            object SynGutterCodeFolding1: TSynGutterCodeFolding
+              Width = 13
+              Visible = False
+              MouseActions = <>
+              MarkupInfo.Background = clNone
+              MarkupInfo.Foreground = clGray
+              MouseActionsExpanded = <>
+              MouseActionsCollapsed = <>
+            end
+          end
+        end
+        object lbImpDropFile: TLabel
+          Left = 0
+          Height = 20
+          Top = 473
+          Width = 559
+          Align = alBottom
+          Alignment = taCenter
+          Caption = 'Бросьте файл в окно или вставьте код Ctrl+V'
+          Layout = tlBottom
+          ParentColor = False
+        end
+      end
+      object tsParams: TTabSheet
+        AutoSize = True
+        Caption = 'tsParams'
+        ChildSizing.LeftRightSpacing = 4
+        ClientHeight = 493
+        ClientWidth = 559
+        object pParams: TPanel
+          Left = 4
+          Height = 493
+          Top = 0
+          Width = 551
+          Align = alClient
+          AutoSize = True
+          BevelOuter = bvNone
+          ChildSizing.HorizontalSpacing = 10
+          ChildSizing.VerticalSpacing = 2
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ControlsPerLine = 2
+          ClientHeight = 493
+          ClientWidth = 551
+          TabOrder = 0
+          object pMain: TPanel
+            Left = 0
+            Height = 303
+            Top = 190
+            Width = 551
+            Align = alBottom
+            AutoSize = True
+            BevelOuter = bvNone
+            ChildSizing.TopBottomSpacing = 4
+            ChildSizing.HorizontalSpacing = 10
+            ChildSizing.VerticalSpacing = 8
+            ChildSizing.EnlargeHorizontal = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 2
+            ClientHeight = 303
+            ClientWidth = 551
+            TabOrder = 1
+            object edImpExample: TEdit
+              Left = 0
+              Height = 27
+              Top = 4
+              Width = 263
+              BorderSpacing.Bottom = 20
+              BorderSpacing.CellAlignVertical = ccaCenter
+              Font.Height = -16
+              Font.Name = 'Consolas'
+              MaxLength = 8
+              OnChange = actionExecute
+              OnUTF8KeyPress = edImpCharUTF8KeyPress
+              ParentFont = False
+              TabOrder = 0
+              Text = 'ABC, 123'
+              TextHint = 'Образец текста'
+            end
+            object cbImpExample: TCheckBox
+              Left = 273
+              Height = 27
+              Hint = 'Произвольный текст длиной до 8 символов.'#13#10'При подборе параметров на больших разрешениях'#13#10'может немного замедлять обновление'
+              Top = 4
+              Width = 278
+              Caption = 'Образец текста'
+              Checked = True
+              OnChange = actionExecute
+              State = cbChecked
+              TabOrder = 1
+            end
+            object cbImpType: TComboBox
+              Left = 0
+              Height = 28
+              Top = 51
+              Width = 263
+              ItemHeight = 20
+              Items.Strings = (
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+              )
+              OnChange = actionParamExecute
+              Style = csDropDownList
+              TabOrder = 2
+            end
+            object lbImpType: TLabel
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 51
+              Width = 278
+              Caption = 'Тип шрифта'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object cbImpOrder: TComboBox
+              Left = 0
+              Height = 28
+              Top = 87
+              Width = 263
+              ItemHeight = 20
+              Items.Strings = (
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+              )
+              OnChange = actionParamExecute
+              Style = csDropDownList
+              TabOrder = 3
+            end
+            object lbImpOrder: TLabel
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 87
+              Width = 278
+              Caption = 'Очередность считывания'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object cbImpNBits: TComboBox
+              Left = 0
+              Height = 28
+              Top = 123
+              Width = 263
+              ItemHeight = 20
+              Items.Strings = (
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+                ''
+              )
+              OnChange = actionParamExecute
+              Style = csDropDownList
+              TabOrder = 4
+            end
+            object lbImpNBits: TLabel
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 123
+              Width = 278
+              Caption = 'Разрядность чисел'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object pImpRange: TPanel
+              Left = 0
+              Height = 28
+              Top = 159
+              Width = 263
+              AutoSize = True
+              BevelOuter = bvNone
+              Caption = '...'
+              ChildSizing.HorizontalSpacing = 32
+              ChildSizing.VerticalSpacing = 2
+              ChildSizing.EnlargeHorizontal = crsScaleChilds
+              ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+              ChildSizing.Layout = cclLeftToRightThenTopToBottom
+              ChildSizing.ControlsPerLine = 2
+              ClientHeight = 28
+              ClientWidth = 263
+              TabOrder = 5
+              object seImpStartItem: TSpinEdit
+                AnchorSideTop.Side = asrBottom
+                Left = 0
+                Height = 28
+                Hint = 'Код первого символа'
+                Top = 0
+                Width = 116
+                Constraints.MinWidth = 80
+                MaxValue = 255
+                OnChange = actionParamExecute
+                TabOrder = 0
+                Value = 32
+              end
+              object seImpLastItem: TSpinEdit
+                AnchorSideTop.Side = asrBottom
+                Left = 148
+                Height = 28
+                Hint = 'Код последнего символа'
+                Top = 0
+                Width = 115
+                Constraints.MinWidth = 80
+                MaxValue = 255
+                OnChange = actionParamExecute
+                TabOrder = 1
+                Value = 255
+              end
+            end
+            object lbImpRange: TLabel
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 159
+              Width = 278
+              Caption = 'Диапазон символов'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object pImpSizes: TPanel
+              Left = 0
+              Height = 28
+              Top = 195
+              Width = 263
+              AutoSize = True
+              BevelOuter = bvNone
+              Caption = 'x'
+              ChildSizing.HorizontalSpacing = 32
+              ChildSizing.VerticalSpacing = 2
+              ChildSizing.EnlargeHorizontal = crsScaleChilds
+              ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+              ChildSizing.Layout = cclLeftToRightThenTopToBottom
+              ChildSizing.ControlsPerLine = 2
+              ClientHeight = 28
+              ClientWidth = 263
+              TabOrder = 6
+              object seImpWidth: TSpinEdit
+                AnchorSideTop.Side = asrCenter
+                Left = 0
+                Height = 28
+                Hint = 'Ширина'
+                Top = 0
+                Width = 116
+                Constraints.MinWidth = 80
+                MaxValue = 512
+                MinValue = 1
+                OnChange = actionParamExecute
+                TabOrder = 0
+                Value = 5
+              end
+              object seImpHeight: TSpinEdit
+                AnchorSideTop.Side = asrCenter
+                Left = 148
+                Height = 28
+                Hint = 'Высота'
+                Top = 0
+                Width = 115
+                Constraints.MinWidth = 80
+                MaxValue = 512
+                MinValue = 1
+                OnChange = actionParamExecute
+                TabOrder = 1
+                Value = 7
+              end
+            end
+            object lbImpSizes: TLabel
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 195
+              Width = 278
+              Caption = 'Размер холста'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object pImpOffset: TPanel
+              Left = 0
+              Height = 28
+              Top = 231
+              Width = 263
+              AutoSize = True
+              BevelOuter = bvNone
+              Caption = ';'
+              ChildSizing.HorizontalSpacing = 32
+              ChildSizing.VerticalSpacing = 2
+              ChildSizing.EnlargeHorizontal = crsScaleChilds
+              ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+              ChildSizing.Layout = cclLeftToRightThenTopToBottom
+              ChildSizing.ControlsPerLine = 2
+              ClientHeight = 28
+              ClientWidth = 263
+              TabOrder = 7
+              object seImpOffset: TSpinEdit
+                AnchorSideTop.Side = asrBottom
+                Left = 0
+                Height = 28
+                Hint = 'Смещение от начала массива'
+                Top = 0
+                Width = 116
+                Constraints.MinWidth = 80
+                MaxValue = 255
+                OnChange = actionParamExecute
+                TabOrder = 0
+              end
+              object seImpSkip: TSpinEdit
+                AnchorSideTop.Side = asrBottom
+                Left = 148
+                Height = 28
+                Hint = 'Пропуск значений в начале символа'
+                Top = 0
+                Width = 115
+                Constraints.MinWidth = 80
+                MaxValue = 255
+                OnChange = actionParamExecute
+                TabOrder = 1
+              end
+            end
+            object lbImpOffset: TLabel
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 231
+              Width = 278
+              Caption = 'Смещение массива/символа'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object cbImpSnapLeft: TCheckBox
+              Left = 0
+              Height = 24
+              Hint = 'Прижать все символы к левому краю холста'
+              Top = 275
+              Width = 263
+              BorderSpacing.Top = 16
+              Caption = 'Прижать к левому краю'
+              OnChange = actionParamExecute
+              TabOrder = 8
+            end
+            object cbImpOptimize: TCheckBox
+              Left = 273
+              Height = 24
+              Hint = 'Убрать общее пустое пространство вокруг символов'
+              Top = 275
+              Width = 278
+              Caption = 'Оптимизировать холст'
+              Checked = True
+              OnChange = actionParamExecute
+              State = cbChecked
+              TabOrder = 9
+            end
+          end
+          object pImpExample: TPanel
+            Left = 0
+            Height = 188
+            Top = 0
+            Width = 551
+            Align = alClient
+            BevelOuter = bvNone
+            ClientHeight = 188
+            ClientWidth = 551
+            Color = clForm
+            Constraints.MinHeight = 150
+            Constraints.MinWidth = 200
+            ParentColor = False
+            TabOrder = 0
+            object imImpExample: TImage
+              Left = 0
+              Height = 188
+              Top = 0
+              Width = 551
+              Align = alClient
+              Center = True
+              Proportional = True
+              Stretch = True
+              Transparent = True
+            end
+          end
+        end
+      end
+    end
+    object pImpControls: TPanel
+      Left = 0
+      Height = 56
+      Top = 531
+      Width = 569
+      Align = alBottom
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 8
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 56
+      ClientWidth = 569
+      Color = cl3DLight
+      ParentColor = False
+      TabOrder = 1
+      object pSelector: TPanel
+        Left = 8
+        Height = 40
+        Top = 8
+        Width = 246
+        Align = alLeft
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 40
+        ClientWidth = 246
+        TabOrder = 0
+        object tbSelector: TToolBar
+          Left = 0
+          Height = 40
+          Top = 0
+          Width = 246
+          AutoSize = True
+          ButtonHeight = 40
+          ButtonWidth = 60
+          Caption = 'tbSelector'
+          EdgeInner = esNone
+          EdgeOuter = esNone
+          Images = fmMain.ImListNew16A
+          TabOrder = 0
+          TabStop = True
+          Wrapable = False
+          object ToolButton1: TToolButton
+            Left = 1
+            Top = 0
+            Action = acTabCode
+          end
+          object ToolButton2: TToolButton
+            Left = 61
+            Top = 0
+            Action = acTabParams
+          end
+          object ToolButton3: TToolButton
+            Left = 126
+            Top = 0
+            Action = fmMain.acHelp
+          end
+          object ToolButton5: TToolButton
+            Left = 186
+            Top = 0
+            Action = acUpdatePreview
+          end
+          object ToolButton6: TToolButton
+            Left = 121
+            Height = 40
+            Top = 0
+            Style = tbsDivider
+          end
+        end
+      end
+      object pCode: TPanel
+        Left = 380
+        Height = 40
+        Top = 8
+        Width = 181
+        Align = alRight
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 40
+        ClientWidth = 181
+        TabOrder = 2
+        object tbCode: TToolBar
+          Left = 0
+          Height = 40
+          Top = 0
+          Width = 181
+          AutoSize = True
+          ButtonHeight = 40
+          ButtonWidth = 180
+          Caption = 'tbCode'
+          EdgeInner = esNone
+          EdgeOuter = esNone
+          Flat = False
+          Images = fmMain.ImListNew16A
+          List = True
+          ShowCaptions = True
+          TabOrder = 0
+          TabStop = True
+          Wrapable = False
+          object ToolButton4: TToolButton
+            Left = 1
+            Top = 0
+            Action = acImportDo
+          end
+        end
+      end
+      object pSpacerCtrl: TPanel
+        Left = 254
+        Height = 40
+        Top = 8
+        Width = 126
+        Align = alClient
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 2
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        Constraints.MinWidth = 32
+        TabOrder = 1
+      end
+    end
+    object bvDivider: TBevel
+      Left = 0
+      Height = 523
+      Top = 4
+      Width = 2
+      Align = alLeft
+      BorderSpacing.Top = 4
+      BorderSpacing.Bottom = 4
+      Constraints.MaxWidth = 2
+      Shape = bsLeftLine
+    end
+  end
+  object alActionListImpC: TActionList
+    Images = fmMain.ImListNew16A
+    Left = 72
+    Top = 328
+    object acTabCode: TAction
+      AutoCheck = True
+      GroupIndex = 1
+      Hint = 'Код С'
+      ImageIndex = 7
+      OnExecute = actionExecute
+    end
+    object acTabParams: TAction
+      AutoCheck = True
+      GroupIndex = 1
+      Hint = 'Параметры декодера'
+      ImageIndex = 3
+      OnExecute = actionExecute
+    end
+    object acImportDo: TAction
+      Caption = 'Импортировать'
+      Hint = 'Импортировать шрифт'
+      ImageIndex = 31
+      OnExecute = actionExecute
+    end
+    object acUpdatePreview: TAction
+      Caption = 'Обновить'
+      Hint = 'Обновить предпросмотр'
+      ImageIndex = 42
+      OnExecute = actionParamExecute
+    end
+  end
+  object snCppSyntax: TSynCppSyn
+    DefaultFilter = 'Файлы C++ (*.c,*.cpp,*.h,*.hpp,*.hh)|*.c;*.cpp;*.h;*.hpp;*.hh'
+    Enabled = False
+    CommentAttri.Foreground = clOlive
+    DirecAttri.Foreground = clGreen
+    KeyAttri.Foreground = clNavy
+    KeyAttri.Style = []
+    Left = 72
+    Top = 208
+  end
+  object IniStorageImportC: TIniPropStorage
+    StoredValues = <>
+    Left = 72
+    Top = 112
+  end
+end

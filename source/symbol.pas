@@ -5,8 +5,9 @@ unit symbol;
 interface
 
 uses
-  Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LConvEncoding, LazFileUtils,
-  LCLType, GraphUtil, u_encodings, fm_import, u_utilities;
+  Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LazFileUtils,
+  LCLType, GraphUtil,
+  u_encodings, u_utilities, u_helpers;
 
 const
   EXCHANGE_BUFFER_TYPE_ID = 'matrixFontApp'; // ID буфера обмена
@@ -963,8 +964,10 @@ procedure TSymbol.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
         for w := 0 to FWidth - 1 - Right - Left do
           Symbol[w, h] := tmp[w + Left, h + Up];
 
-      SetHeight(FHeight - Up - Down);
-      SetWidth(FWidth - Left - Right);
+      h := FHeight - Up - Down;
+      w := FWidth - Left - Right;
+      SetHeight((h < 1).Select(1, h));
+      SetWidth((w < 1).Select(1, w));
       end
     else
 
@@ -996,87 +999,83 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
 
       // кол-во пустых строк сверху
       coUp:
-        begin
-        for h := 0 to FHeight - 1 do
-          begin
-          exit_ := False;
+        if FHeight > 1 then
+          for h := 0 to FHeight - 2 do
+            begin
+            exit_ := False;
 
-          for w := 0 to FWidth - 1 do
-            if FSymbol[w, h] = True then
-              begin
-              exit_ := True;
-              break;
-              end;
+            for w := 0 to FWidth - 1 do
+              if FSymbol[w, h] = True then
+                begin
+                exit_ := True;
+                break;
+                end;
 
-          if exit_ then
-            break
-          else
-            Inc(Count);
-          end;
-        end;
+            if exit_ then
+              break
+            else
+              Inc(Count);
+            end;
 
       // кол-во пустых строк снизу
       coDown:
-        begin
-        for h := FHeight - 1 downto 0 do
-          begin
-          exit_ := False;
+        if FHeight > 1 then
+          for h := FHeight - 2 downto 0 do
+            begin
+            exit_ := False;
 
-          for w := 0 to FWidth - 1 do
-            if FSymbol[w, h] = True then
-              begin
-              exit_ := True;
-              break;
-              end;
+            for w := 0 to FWidth - 1 do
+              if FSymbol[w, h] = True then
+                begin
+                exit_ := True;
+                break;
+                end;
 
-          if exit_ then
-            break
-          else
-            Inc(Count);
-          end;
-        end;
+            if exit_ then
+              break
+            else
+              Inc(Count);
+            end;
 
       // кол-во пустых столбцов слева
       coLeft:
-        begin
-        for w := 0 to FWidth - 1 do
-          begin
-          exit_ := False;
+        if FWidth > 1 then
+          for w := 0 to FWidth - 2 do
+            begin
+            exit_ := False;
 
-          for h := 0 to FHeight - 1 do
-            if FSymbol[w, h] = True then
-              begin
-              exit_ := True;
-              break;
-              end;
+            for h := 0 to FHeight - 1 do
+              if FSymbol[w, h] = True then
+                begin
+                exit_ := True;
+                break;
+                end;
 
-          if exit_ then
-            break
-          else
-            Inc(Count);
-          end;
-        end;
+            if exit_ then
+              break
+            else
+              Inc(Count);
+            end;
 
       // кол-во пустых столбцов справа
       coRight:
-        begin
-        for w := FWidth - 1 downto 0 do
-          begin
-          exit_ := False;
+        if FWidth > 1 then
+          for w := FWidth - 2 downto 0 do
+            begin
+            exit_ := False;
 
-          for h := 0 to FHeight - 1 do
-            if FSymbol[w, h] = True then
-              begin
-              exit_ := True;
-              break;
-              end;
+            for h := 0 to FHeight - 1 do
+              if FSymbol[w, h] = True then
+                begin
+                exit_ := True;
+                break;
+                end;
 
-          if exit_ then
-            break
-          else
-            Inc(Count);
-          end;
-        end;
+            if exit_ then
+              break
+            else
+              Inc(Count);
+            end;
       end;
 
     Result := Count;

@@ -20,7 +20,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="71">
+      <ExcludedIdentifiers Count="80">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="TfmAbout.lbHardware.Caption"/>
         <Item3 Value="tfmabout.lbsite.caption"/>
@@ -92,14 +92,24 @@
         <Item69 Value="fm_gen.fm_gen_nv_1"/>
         <Item70 Value="fm_gen.fm_gen_nv_2"/>
         <Item71 Value="fm_gen.fm_gen_nv_3"/>
+        <Item72 Value="tfmimportc.edimpexample.text"/>
+        <Item73 Value="tfmimportc.lbinfo.caption"/>
+        <Item74 Value="tfmimportc.pimpoffset.caption"/>
+        <Item75 Value="tfmimportc.pimprange.caption"/>
+        <Item76 Value="tfmimportc.pimpsizes.caption"/>
+        <Item77 Value="tfmimportc.tbcode.caption"/>
+        <Item78 Value="tfmimportc.tbselector.caption"/>
+        <Item79 Value="tfmimportc.tscode.caption"/>
+        <Item80 Value="tfmimportc.tsparams.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="3"/>
-      <BuildNr Value="56"/>
+      <MinorVersionNr Value="4"/>
+      <RevisionNr Value="3"/>
+      <BuildNr Value="60"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -240,18 +250,15 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="3">
+    <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="lhelpcontrolpkg"/>
+        <PackageName Value="SynEdit"/>
       </Item1>
       <Item2>
-        <PackageName Value="SynEdit"/>
-      </Item2>
-      <Item3>
         <PackageName Value="LCL"/>
-      </Item3>
+      </Item2>
     </RequiredPackages>
-    <Units Count="21">
+    <Units Count="23">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -373,6 +380,17 @@
         <Filename Value="u_encodings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit20>
+      <Unit21>
+        <Filename Value="fm_importc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fmImportC"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="u_helpers.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit22>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -214,6 +214,7 @@ object fmMain: TfmMain
         Width = 177
         Align = alClient
         AlternateColor = 16119285
+        AutoFillColumns = True
         BorderStyle = bsNone
         ColCount = 3
         Columns = <        
@@ -227,7 +228,7 @@ object fmMain: TfmMain
             Title.ImageLayout = blGlyphTop
             Title.MultiLine = True
             Title.Caption = 'Символ'
-            Width = 88
+            Width = 68
           end        
           item
             Alignment = taCenter
@@ -236,15 +237,16 @@ object fmMain: TfmMain
             MaxSize = 250
             Title.Alignment = taCenter
             Title.Caption = 'Код'
-            Width = 50
+            Width = 68
           end        
           item
             Alignment = taCenter
             MinSize = 12
             MaxSize = 250
+            SizePriority = 0
             Title.Alignment = taCenter
             Title.Caption = 'Вид'
-            Width = 62
+            Width = 40
           end>
         DefaultRowHeight = 44
         ExtendedSelect = False
@@ -255,14 +257,13 @@ object fmMain: TfmMain
         TabOrder = 0
         TitleStyle = tsNative
         UseXORFeatures = True
-        OnChangeBounds = sgNavigatorChangeBounds
         OnDrawCell = sgNavigatorDrawCell
         OnMouseWheel = sgNavigatorMouseWheel
         OnSelection = sgNavigatorSelection
         ColWidths = (
-          88
-          50
-          62
+          68
+          68
+          40
         )
         Cells = (
           4
@@ -732,7 +733,7 @@ object fmMain: TfmMain
       Left = 4
       Height = 30
       Top = 4
-      Width = 316
+      Width = 346
       Align = alNone
       AutoSize = True
       BorderSpacing.Right = 20
@@ -753,37 +754,37 @@ object fmMain: TfmMain
         Action = acNewFont
       end
       object ToolButton5: TToolButton
-        Left = 61
+        Left = 91
         Height = 30
         Top = 0
         Caption = 'ToolButton5'
         Style = tbsDivider
       end
       object ToolBtnLastFiles: TToolButton
-        Left = 66
+        Left = 96
         Top = 0
         Action = acFontOpen
         PopupMenu = pmLastFiles
       end
       object ToolButton6: TToolButton
-        Left = 96
+        Left = 126
         Top = 0
         Action = acSave
       end
       object ToolButton7: TToolButton
-        Left = 156
+        Left = 186
         Height = 30
         Top = 0
         Caption = 'ToolButton7'
         Style = tbsDivider
       end
       object ToolButton9: TToolButton
-        Left = 221
+        Left = 251
         Top = 0
         Action = acGenerate
       end
       object ToolButton39: TToolButton
-        Left = 161
+        Left = 191
         Top = 0
         Action = acFontProperties
       end
@@ -793,35 +794,40 @@ object fmMain: TfmMain
         Action = acFontImport
       end
       object ToolButton44: TToolButton
-        Left = 191
+        Left = 221
         Top = 0
         Action = acFontPreview
       end
       object ToolButton16: TToolButton
-        Left = 251
+        Left = 281
         Height = 30
         Top = 0
         Caption = 'ToolButton16'
         Style = tbsDivider
       end
       object ToolButton29: TToolButton
-        Left = 256
+        Left = 286
         Top = 0
         Action = acSetting
       end
       object ToolButton34: TToolButton
-        Left = 126
+        Left = 156
         Top = 0
         Action = acSaveAs
       end
       object ToolButton35: TToolButton
-        Left = 286
+        Left = 316
         Top = 0
         Action = acHelp
       end
+      object ToolButton77: TToolButton
+        Left = 61
+        Top = 0
+        Action = acFontImportCCode
+      end
     end
     object tbEditFont: TToolBar
-      Left = 340
+      Left = 370
       Height = 30
       Top = 4
       Width = 221
@@ -901,6 +907,9 @@ object fmMain: TfmMain
       end
       object MenuItem85: TMenuItem
         Action = acFontImport
+      end
+      object MenuItem112: TMenuItem
+        Action = acFontImportCCode
       end
       object MenuItem76: TMenuItem
         Caption = '-'
@@ -1271,7 +1280,7 @@ object fmMain: TfmMain
       Category = 'Генерация'
       Caption = 'Генерировать код ...'
       Hint = 'Открыть окно генератора кода Си'
-      ImageIndex = 7
+      ImageIndex = 29
       OnExecute = acGenerateExecute
       ShortCut = 16466
     end
@@ -1499,88 +1508,6 @@ object fmMain: TfmMain
       Category = 'Файл'
       Caption = 'Файл'
       DisableIfNoHandler = False
-    end
-    object acNewFont: TAction
-      Category = 'Файл'
-      Caption = 'Новый шрифт...'
-      Hint = 'Создать новый шрифт'
-      ImageIndex = 0
-      OnExecute = acNewFontExecute
-      ShortCut = 16462
-    end
-    object acFontImport: TAction
-      Category = 'Файл'
-      Caption = 'Импорт шрифта ...'
-      Hint = 'Создать новый шрифт на основе системного'
-      ImageIndex = 31
-      OnExecute = acFontImportExecute
-      ShortCut = 16429
-    end
-    object acFontOpen: TAction
-      Category = 'Файл'
-      Caption = 'Открыть ...'
-      Hint = 'Загрузить шрифт из файла RHF'
-      ImageIndex = 1
-      OnExecute = acFontOpenExecute
-      ShortCut = 16463
-    end
-    object acSave: TAction
-      Category = 'Файл'
-      Caption = 'Сохранить'
-      Hint = 'Сохранить шрифт в файл RHF'
-      ImageIndex = 2
-      OnExecute = acSaveExecute
-      ShortCut = 16467
-    end
-    object acSaveAs: TFileSaveAs
-      Category = 'Файл'
-      Caption = 'Сохранить как ...'
-      Dialog.Title = 'Сохранить файл шрифта'
-      Dialog.Filter = 'Raster H/W Font|*.RHF'
-      Dialog.Options = [ofOverwritePrompt, ofEnableSizing]
-      Hint = 'Сохранить шрифт в новый файл RHF'
-      ImageIndex = 55
-      ShortCut = 49235
-      BeforeExecute = acSaveAsBeforeExecute
-      OnAccept = acSaveAsAccept
-    end
-    object acFontProperties: TAction
-      Category = 'Файл'
-      Caption = 'Свойства шрифта'
-      Hint = 'Просмотр свойств шрифта'
-      ImageIndex = 28
-      OnExecute = acFontPropertiesExecute
-      ShortCut = 32781
-    end
-    object acFontPreview: TAction
-      Category = 'Файл'
-      Caption = 'Образец текста'
-      Hint = 'Вывести образец текста текущим шрифтом'
-      ImageIndex = 27
-      OnExecute = acFontPreviewExecute
-      ShortCut = 120
-    end
-    object acLastFilesList: TAction
-      Category = 'Файл'
-      Caption = 'Открыть недавний'
-      DisableIfNoHandler = False
-      Hint = 'Список ранее открытых файлов'
-      ImageIndex = 1
-      Visible = False
-    end
-    object acDeleteLastFilesList: TAction
-      Category = 'Файл'
-      Caption = 'Очистить список'
-      ImageIndex = 45
-      OnExecute = acDeleteLastFilesListExecute
-    end
-    object acAppExit: TAction
-      Category = 'Файл'
-      Caption = 'Выход'
-      Hint = 'Завершить работу приложения'
-      ImageIndex = 4
-      OnExecute = actionService
-      ShortCut = 16465
     end
     object acMenuView: TAction
       Category = 'Вид'
@@ -1969,6 +1896,96 @@ object fmMain: TfmMain
       ImageIndex = 60
       OnExecute = actionFontGeneral
       ShortCut = 16572
+    end
+    object acNewFont: TAction
+      Category = 'Файл'
+      Caption = 'Новый шрифт...'
+      Hint = 'Создать новый шрифт'
+      ImageIndex = 0
+      OnExecute = acNewFontExecute
+      ShortCut = 16462
+    end
+    object acFontImport: TAction
+      Category = 'Файл'
+      Caption = 'Импорт шрифта ...'
+      Hint = 'Создать новый шрифт на основе системного'
+      ImageIndex = 31
+      OnExecute = acFontImportExecute
+      ShortCut = 16429
+    end
+    object acFontImportCCode: TAction
+      Category = 'Файл'
+      Caption = 'Импорт кода C ...'
+      Hint = 'Создать новый шрифт на основе кода C'
+      ImageIndex = 7
+      OnExecute = acFontImportCCodeExecute
+      ShortCut = 24662
+    end
+    object acFontOpen: TAction
+      Category = 'Файл'
+      Caption = 'Открыть ...'
+      Hint = 'Загрузить шрифт из файла RHF'
+      ImageIndex = 1
+      OnExecute = acFontOpenExecute
+      ShortCut = 16463
+    end
+    object acSave: TAction
+      Category = 'Файл'
+      Caption = 'Сохранить'
+      Hint = 'Сохранить шрифт в файл RHF'
+      ImageIndex = 2
+      OnExecute = acSaveExecute
+      ShortCut = 16467
+    end
+    object acSaveAs: TFileSaveAs
+      Category = 'Файл'
+      Caption = 'Сохранить как ...'
+      Dialog.Title = 'Сохранить файл шрифта'
+      Dialog.Filter = 'Raster H/W Font|*.RHF'
+      Dialog.Options = [ofOverwritePrompt, ofEnableSizing]
+      Hint = 'Сохранить шрифт в новый файл RHF'
+      ImageIndex = 55
+      ShortCut = 49235
+      BeforeExecute = acSaveAsBeforeExecute
+      OnAccept = acSaveAsAccept
+    end
+    object acFontProperties: TAction
+      Category = 'Файл'
+      Caption = 'Свойства шрифта'
+      Hint = 'Просмотр свойств шрифта'
+      ImageIndex = 28
+      OnExecute = acFontPropertiesExecute
+      ShortCut = 32781
+    end
+    object acFontPreview: TAction
+      Category = 'Файл'
+      Caption = 'Образец текста'
+      Hint = 'Вывести образец текста текущим шрифтом'
+      ImageIndex = 27
+      OnExecute = acFontPreviewExecute
+      ShortCut = 120
+    end
+    object acLastFilesList: TAction
+      Category = 'Файл'
+      Caption = 'Открыть недавний'
+      DisableIfNoHandler = False
+      Hint = 'Список ранее открытых файлов'
+      ImageIndex = 1
+      Visible = False
+    end
+    object acDeleteLastFilesList: TAction
+      Category = 'Файл'
+      Caption = 'Очистить список'
+      ImageIndex = 45
+      OnExecute = acDeleteLastFilesListExecute
+    end
+    object acAppExit: TAction
+      Category = 'Файл'
+      Caption = 'Выход'
+      Hint = 'Завершить работу приложения'
+      ImageIndex = 4
+      OnExecute = actionService
+      ShortCut = 16465
     end
   end
   object dlgOpen: TOpenDialog

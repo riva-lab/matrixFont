@@ -9,8 +9,9 @@ uses
   Windows, Graphics, Menus, StdActns, Dialogs, Spin, IniPropStorage, SysUtils,
   LazUTF8, Types, strutils, LCLIntf, LCLTranslator, PairSplitter, LazFileUtils,
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
-  fm_optimize, fm_range, fm_about, fm_settings, cOpenFileList, u_utilities,
-  u_strings, font, app_ver, symbol, u_encodings, LCLType;
+  fm_optimize, fm_range, fm_about, fm_settings, fm_importc,
+  cOpenFileList, u_utilities, u_strings,
+  font, app_ver, symbol, u_encodings, LCLType;
 
 resourcestring
   TXT_NAVIGATOR   = 'Навигатор';
@@ -74,6 +75,7 @@ type
     acFontCharset:         TAction;
     acFontClear:           TAction;
     acFontImport:          TAction;
+    acFontImportCCode:     TAction;
     acFontInvert:          TAction;
     acFontMirrorHorz:      TAction;
     acFontMirrorVert:      TAction;
@@ -137,6 +139,8 @@ type
     acSymbolInvert:        TAction;
     acSymbolMirrorHorz:    TAction;
     acSymbolMirrorVert:    TAction;
+    acSymbolMoveDown:      TAction;
+    acSymbolMoveUp:        TAction;
     acSymbolPaste:         TAction;
     acSymbolRedo:          TAction;
     acSymbolShiftDown:     TAction;
@@ -268,6 +272,7 @@ type
     MenuItem108: TMenuItem;
     MenuItem110: TMenuItem;
     MenuItem111: TMenuItem;
+    MenuItem112: TMenuItem;
     miFontInfo:  TMenuItem;
     miFPS:       TMenuItem;
     Separator1:  TMenuItem;
@@ -346,25 +351,23 @@ type
     ToolButton70:     TToolButton;
     ToolButton71:     TToolButton;
     ToolButton72:     TToolButton;
-
-    tbCommon:         TToolBar;
-    tbEditChar:       TToolBar;
-    tbEditFont:       TToolBar;
-    tbEffectsChar:    TToolBar;
-    tbEffectsFont:    TToolBar;
-    acSymbolMoveDown: TAction;
-    acSymbolMoveUp:   TAction;
     ToolButton74:     TToolButton;
     ToolButton75:     TToolButton;
     ToolButton76:     TToolButton;
+    ToolButton77:     TToolButton;
+
+    tbCommon:      TToolBar;
+    tbEditChar:    TToolBar;
+    tbEditFont:    TToolBar;
+    tbEffectsChar: TToolBar;
+    tbEffectsFont: TToolBar;
 
     procedure acResetExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
     procedure FormWindowStateChange(Sender: TObject);
-    procedure FormConstrainedResize(Sender: TObject; var MinWidth, MinHeight,
-      MaxWidth, MaxHeight: TConstraintSize);
+    procedure FormConstrainedResize(Sender: TObject; var MinWidth, MinHeight, MaxWidth, MaxHeight: TConstraintSize);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 
     procedure SettingsSaveToIni;
@@ -372,20 +375,14 @@ type
 
     procedure tmrMain10msTimer(Sender: TObject);
 
-    procedure sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
-      aRect: TRect; aState: TGridDrawState);
+    procedure sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
     procedure sgNavigatorSelection(Sender: TObject; aCol, aRow: Integer);
-    procedure sgNavigatorChangeBounds(Sender: TObject);
-    procedure sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 
-    procedure imEditorMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure imEditorMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure imEditorMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure imEditorMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState;
-      X, Y: Integer);
-    procedure imMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure imEditorMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure imMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 
     procedure acNewFontExecute(Sender: TObject);
     procedure acFontOpenExecute(Sender: TObject);
@@ -394,6 +391,7 @@ type
     procedure acSaveAsBeforeExecute(Sender: TObject);
 
     procedure acFontImportExecute(Sender: TObject);
+    procedure acFontImportCCodeExecute(Sender: TObject);
     procedure acFontPropertiesExecute(Sender: TObject);
     procedure acFontPreviewExecute(Sender: TObject);
 
@@ -433,6 +431,7 @@ type
 
     procedure FileStatusUpdate;
     procedure FontActionExecute;
+    procedure FontCreateFinish;
     procedure ReDrawAfterAction;
     procedure ReDrawImage;
     procedure ReDrawContent;
@@ -506,7 +505,8 @@ procedure TfmMain.FormShow(Sender: TObject);
     ImListNew16A.GetIcon(31, fmImport.Icon);
     ImListNew16A.GetIcon(28, fmProp.Icon);
     ImListNew16A.GetIcon(0, fmNew.Icon);
-    ImListNew16A.GetIcon(7, fmGen.Icon);
+    ImListNew16A.GetIcon(29, fmGen.Icon);
+    ImListNew16A.GetIcon(7, fmImportC.Icon);
     ImListNew32A.GetBitmap(2, imFindIcon.Picture.Bitmap);
 
     SettingsLoadFromIni;
@@ -525,13 +525,22 @@ procedure TfmMain.FormShow(Sender: TObject);
 // загрузка файла при перетаскивании его на форму или на значок приложения
 procedure TfmMain.FormDropFiles(Sender: TObject; const FileNames: array of String);
   begin
+    // загрузка проекта шрифта
     if FileExtCheck(FileNames[0], FILE_EXTENSION) then
-      // загрузка проекта шрифта
-      FontLoadFromFile(FileNames[0]) else
+      FontLoadFromFile(FileNames[0]);
+
+    // бездиалоговый импорт изображений
+    if FileExtCheck(FileNames[0], CHAR_IMPORT_FORMATS) then
       begin
-      // бездиалоговый импорт изображений
       dlgImport.FileName := FileNames[0];
       acSymbolImportImage.Execute;
+      end;
+
+    // import font from C-code
+    if FileExtCheck(FileNames[0], IMPORTC_EXTENSION) then
+      begin
+      fmImportC.FormDropFiles(Sender, FileNames);
+      acFontImportCCode.Execute;
       end;
   end;
 
@@ -794,34 +803,6 @@ procedure TfmMain.sgNavigatorSelection(Sender: TObject; aCol, aRow: Integer);
     ReDrawImage;
   end;
 
-// выравнивание ширины столбцов навигатора
-procedure TfmMain.sgNavigatorChangeBounds(Sender: TObject);
-  var
-    vsbWidth: Integer = 0;
-  begin
-    with sgNavigator, sgNavigator.Columns do
-      begin
-      // если полоса прокрутки есть - получаем ее ширину
-      if VisibleRowCount < (RowCount - 1) then
-        vsbWidth := VertScrollBar.Size;
-
-      if FontSet <> nil then
-        Items[2].Width := round(DefaultRowHeight / FontSet.Height * FontSet.Width);
-
-      if not fmSettings.NaviColName then
-        Items[1].Width := Width - Items[2].Width - vsbWidth;
-
-      if not fmSettings.NaviColCode then
-        Items[0].Width := Width - Items[2].Width - vsbWidth;
-
-      if fmSettings.NaviColName and fmSettings.NaviColCode then
-        begin
-        Items[1].Width := (Width - Items[2].Width - vsbWidth) div 2;
-        Items[0].Width := Width - Items[1].Width - Items[2].Width - vsbWidth;
-        end;
-      end;
-  end;
-
 // изменение высоты строки навигатора мышью [+Ctrl]
 procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
@@ -831,7 +812,6 @@ procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
         begin
         NaviHeight := NaviHeight + WheelDelta div abs(WheelDelta);
         sgNavigator.DefaultRowHeight := NaviHeight;
-        sgNavigatorChangeBounds(Sender);
         end;
   end;
 
@@ -1013,14 +993,31 @@ procedure TfmMain.acFontImportExecute(Sender: TObject);
 
         if cbSnapLeft.Checked then acFontSnapLeft.Execute else acFontCenterH.Execute;
         if cbOptimize.Checked then FontSet.ChangeSize(-1, -1, -1, -1, True);
-        FontSet.ClearChanges;
 
-        imEditor.Width  := FontSet.Item[0].WidthInPixels;
-        imEditor.Height := FontSet.Item[0].HeightInPixels;
+        FontCreateFinish;
+        end;
+      end;
+  end;
 
-        acZoomFit.Execute;
-        FontActionExecute;
-        sgNavigatorChangeBounds(Sender);
+// действие: импорт шрифта из кода C
+procedure TfmMain.acFontImportCCodeExecute(Sender: TObject);
+  begin
+    if not GetConfirmation then Exit;
+
+    with fmImportC do
+      begin
+      FontImp.Encoding := FontSet.Encoding;
+
+      if ShowModal = mrOk then
+        begin
+        dlgOpen.FileName := '';
+
+        FontCreateNew(
+          seImpWidth.Value, seImpHeight.Value,
+          seImpStartItem.Value, seImpLastItem.Value - seImpStartItem.Value + 1,
+          fmSettings.NewEncoding, fmSettings.NewName, fmSettings.NewAuthor);
+        UpdateFont(FontSet);
+        FontCreateFinish;
         end;
       end;
   end;
@@ -1435,12 +1432,7 @@ procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
         begin
         ChangeSize(res_up, res_down, res_left, res_right, True);
 
-        imEditor.Width  := Item[0].WidthInPixels;
-        imEditor.Height := Item[0].HeightInPixels;
-
-        acZoomFit.Execute;
-        FontActionExecute;
-        FileStatusUpdate();
+        FontCreateFinish;
         end;
       end;
   end;
@@ -1460,12 +1452,7 @@ procedure TfmMain.acFontChangeSizesExecute(Sender: TObject);
           seLeft.Value, seRight.Value,
           rgMode.ItemIndex = 1);
 
-        imEditor.Width  := FontSet.Item[0].WidthInPixels;
-        imEditor.Height := FontSet.Item[0].HeightInPixels;
-
-        acZoomFit.Execute;
-        FontActionExecute;
-        FileStatusUpdate();
+        FontCreateFinish;
         end;
       end;
   end;
@@ -1594,7 +1581,6 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
     LanguageChange;
     acGenerateExecute(nil);
     actionZooming(nil);
-    sgNavigatorChangeBounds(nil);
     ReDrawContent;
     ReDrawImage;
 
@@ -1634,9 +1620,6 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
 
         acSymbolRedo.Enabled     := False;
         acSymbolUndo.Enabled     := False;
-        file_changed             := False;
-        imEditor.Width           := Item[0].WidthInPixels;
-        imEditor.Height          := Item[0].HeightInPixels;
         AppAdditional            := app_info.CompanyName;
         AppCurrent               := app_info.ProductName + ' v' + app_info.FileVersion;
         dlgOpen.FileName         := AFileName;
@@ -1646,10 +1629,10 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
         LastFileAdd(AFileName);
         end;
 
-      acZoomFit.Execute;
-      FileStatusUpdate();
+      FontCreateFinish;
+      file_changed := False;
+      FileStatusUpdate;
       SettingsApplyToCurrentSession;
-      ReDrawImage;
       end;
   end;
 
@@ -1663,7 +1646,6 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
         FontSet              := TFont.Create;
         acSymbolRedo.Enabled := False;
         acSymbolUndo.Enabled := False;
-        file_changed         := False;
 
         Name          := n;
         Author        := a;
@@ -1677,17 +1659,13 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
         FontStartItem        := si;
         FontLength           := l;
         sgNavigator.RowCount := FontLength + 1;
-
-        imEditor.Width  := Item[0].WidthInPixels;
-        imEditor.Height := Item[0].HeightInPixels;
         end;
 
+      FontCreateFinish;
       dlgOpen.FileName := '';
-      acZoomFit.Execute;
-      FileStatusUpdate();
-
+      file_changed     := False;
+      FileStatusUpdate;
       SettingsApplyToCurrentSession;
-      ReDrawImage;
       except
       if fmConfirm.Show(TXT_ERROR, WARN_CREATE, mbYesNo, self) = mrYes then
         Close;
@@ -1754,6 +1732,18 @@ procedure TfmMain.FontActionExecute;
     acSymbolRedo.Enabled := False;
     file_changed         := True;
     FileStatusUpdate();
+  end;
+
+// завершение создания шрифта
+procedure TfmMain.FontCreateFinish;
+  begin
+    FontSet.ClearChanges;
+
+    imEditor.Width  := FontSet.Item[0].WidthInPixels;
+    imEditor.Height := FontSet.Item[0].HeightInPixels;
+
+    acZoomFit.Execute;
+    FontActionExecute;
   end;
 
 // действия после применения изменений к символу

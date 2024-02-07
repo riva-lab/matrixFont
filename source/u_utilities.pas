@@ -5,7 +5,7 @@ unit u_utilities;
 interface
 
 uses
-  SysUtils, LazFileUtils, LazUTF8, ShellApi;
+  Classes, SysUtils, LazFileUtils, LazUTF8, ShellApi, StdCtrls, Spin;
 
 
  // удаление указанного файла, по умолчанию - в корзину
@@ -34,6 +34,13 @@ function GetLangCode(ALangStr: String; ADelimiter: Char = ','): String;
 
  // убирает из строки копирайта даты
 function GetAuthorName(ACopyrightStr: String): String;
+
+// обновление выпадающего списка значениями из массива
+procedure UpdateComboBox(AComponent: TComboBox; AList: array of String);
+
+// установка значения в компонент без вызова обработчика по изменению
+procedure SetValueWithoutAction(AComponent: TComponent; AValue: Integer);
+
 
 implementation
 
@@ -144,6 +151,49 @@ function GetAuthorName(ACopyrightStr: String): String;
     for i := ACopyrightStr.Length downto 1 do
       if LowerCase(ACopyrightStr[i]) in ['a'..'z'] then
         Exit(Result.Remove(i));
+  end;
+
+// обновление выпадающего списка значениями из массива
+procedure UpdateComboBox(AComponent: TComboBox; AList: array of String);
+  var
+    i, index: Integer;
+  begin
+    with AComponent do
+      begin
+      index := ItemIndex;
+      if index < 0 then index := 0;
+      Clear;
+      for i := 0 to High(AList) do
+        Items.Append(AList[i]);
+      ItemIndex := index;
+      end;
+  end;
+
+// установка значения в компонент без вызова обработчика по изменению
+procedure SetValueWithoutAction(AComponent: TComponent; AValue: Integer);
+  var
+    tmp: TNotifyEvent;
+  begin
+    case AComponent.ClassName of
+
+      'TComboBox':
+        with TComboBox(AComponent) do
+          begin
+          tmp       := OnChange;
+          OnChange  := nil;
+          ItemIndex := AValue;
+          OnChange  := tmp;
+          end;
+
+      'TSpinEdit':
+        with TSpinEdit(AComponent) do
+          begin
+          tmp      := OnChange;
+          OnChange := nil;
+          Value    := AValue;
+          OnChange := tmp;
+          end;
+      end;
   end;
 
 end.

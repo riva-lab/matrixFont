@@ -7,16 +7,25 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, fm_main, fm_gen, fm_new, symbol, font, fm_prop, fm_confirm, app_ver,
-  fm_import, fm_preview, fm_sizes, fm_optimize, fm_range, fm_about, fm_settings,
-  lhelpcontrolpkg, help, u_strings, cOpenFileList, u_utilities, u_encodings;
+  Forms,
+
+  // project forms
+  fm_about, fm_confirm, fm_gen, fm_import, fm_importc, fm_main, fm_new,
+  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes,
+
+  // functional units
+  font, symbol, app_ver, help, cOpenFileList,
+
+  // additional units
+  u_strings, u_utilities, u_encodings, u_helpers;
 
 {$R *.res}
 
 begin
-  Application.Scaled := True;
-  Application.Title := 'matrixFont';
+  Application.Scaled         := True;
+  Application.Title          := 'matrixFont';
   RequireDerivedFormResource := True;
+
   Application.Initialize;
   Application.CreateForm(TfmMain, fmMain);
   Application.CreateForm(TfmGen, fmGen);
@@ -30,6 +39,7 @@ begin
   Application.CreateForm(TfmRange, fmRange);
   Application.CreateForm(TfmAbout, fmAbout);
   Application.CreateForm(TfmSettings, fmSettings);
+  Application.CreateForm(TfmImportC, fmImportC);
   Application.Run;
 end.
 

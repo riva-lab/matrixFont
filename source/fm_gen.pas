@@ -127,10 +127,6 @@ type
     // выбор вкладки для отображения
     procedure TabSelExecute(Sender: TObject);
 
-  private
-
-    // обновление выпадающего списка значениями из массива
-    procedure UpdateComboBox(AComponent: TComboBox; AList: array of String);
   end;
 
 var
@@ -302,20 +298,5 @@ procedure TfmGen.TabSelExecute(Sender: TObject);
     Caption := FM_GEN_CAPTION + '.  ' + TAction(Sender).Caption;
   end;
 
-// обновление выпадающего списка значениями из массива
-procedure TfmGen.UpdateComboBox(AComponent: TComboBox; AList: array of String);
-  var
-    i, index: Integer;
-  begin
-    with AComponent do
-      begin
-      index := ItemIndex;
-      if index < 0 then index := 0;
-      Clear;
-      for i := 0 to High(AList) do
-        Items.Append(AList[i]);
-      ItemIndex := index;
-      end;
-  end;
 
 end.
