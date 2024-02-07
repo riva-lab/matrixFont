@@ -66,10 +66,12 @@ msgid "Справа налево"
 msgstr ""
 
 #: fm_gen.fm_gen_scud_1
+msgctxt "fm_gen.fm_gen_scud_1"
 msgid "Сначала столбцы"
 msgstr ""
 
 #: fm_gen.fm_gen_scud_2
+msgctxt "fm_gen.fm_gen_scud_2"
 msgid "Сначала строки"
 msgstr ""
 
@@ -83,6 +85,49 @@ msgstr ""
 
 #: fm_import.fm_import_scale
 msgid "предпросмотр"
+msgstr ""
+
+#: fm_importc.fm_impc_bits_1
+msgid "Определить автоматически"
+msgstr ""
+
+#: fm_importc.fm_impc_bits_2
+msgid "8 бит"
+msgstr ""
+
+#: fm_importc.fm_impc_bits_3
+msgid "16 бит"
+msgstr ""
+
+#: fm_importc.fm_impc_bits_4
+msgid "24 бита"
+msgstr ""
+
+#: fm_importc.fm_impc_bits_5
+msgid "32 бита"
+msgstr ""
+
+#: fm_importc.fm_impc_bits_6
+msgid "64 бита"
+msgstr ""
+
+#: fm_importc.fm_impc_caption
+msgctxt "fm_importc.fm_impc_caption"
+msgid "Импорт шрифта из кода C"
+msgstr ""
+
+#: fm_importc.fm_impc_order_1
+msgctxt "fm_importc.fm_impc_order_1"
+msgid "Сначала столбцы"
+msgstr ""
+
+#: fm_importc.fm_impc_order_2
+msgctxt "fm_importc.fm_impc_order_2"
+msgid "Сначала строки"
+msgstr ""
+
+#: fm_importc.fm_impc_type_4
+msgid "Настройка вручную"
 msgstr ""
 
 #: fm_main.txt_changed
@@ -248,6 +293,7 @@ msgid "Заполнение пустых разрядов"
 msgstr ""
 
 #: tfmgen.lbfonttype.caption
+msgctxt "tfmgen.lbfonttype.caption"
 msgid "Тип шрифта"
 msgstr ""
 
@@ -256,6 +302,7 @@ msgid "Генерируемый код"
 msgstr ""
 
 #: tfmgen.lbnumbersbits.caption
+msgctxt "tfmgen.lbnumbersbits.caption"
 msgid "Разрядность чисел"
 msgstr ""
 
@@ -272,6 +319,7 @@ msgid "[Сброс]"
 msgstr ""
 
 #: tfmgen.lbscancolsfirst.caption
+msgctxt "tfmgen.lbscancolsfirst.caption"
 msgid "Очередность считывания"
 msgstr ""
 
@@ -298,6 +346,7 @@ msgid "Настройки"
 msgstr ""
 
 #: tfmimport.bbimport.caption
+msgctxt "tfmimport.bbimport.caption"
 msgid "Импортировать"
 msgstr ""
 
@@ -310,14 +359,17 @@ msgid "Изменить текст образца"
 msgstr ""
 
 #: tfmimport.cboptimize.caption
+msgctxt "tfmimport.cboptimize.caption"
 msgid "Оптимизировать холст"
 msgstr ""
 
 #: tfmimport.cboptimize.hint
+msgctxt "tfmimport.cboptimize.hint"
 msgid "Убрать общее пустое пространство вокруг символов"
 msgstr ""
 
 #: tfmimport.cbsnapleft.caption
+msgctxt "tfmimport.cbsnapleft.caption"
 msgid "Прижать к левому краю"
 msgstr ""
 
@@ -351,6 +403,7 @@ msgid "Системный шрифт"
 msgstr ""
 
 #: tfmimport.lbitemheight.caption
+msgctxt "tfmimport.lbitemheight.caption"
 msgid "Высота"
 msgstr ""
 
@@ -363,6 +416,7 @@ msgid "Первый"
 msgstr ""
 
 #: tfmimport.lbitemwidth.caption
+msgctxt "tfmimport.lbitemwidth.caption"
 msgid "Ширина"
 msgstr ""
 
@@ -372,6 +426,7 @@ msgid "Диапазон символов"
 msgstr ""
 
 #: tfmimport.lbsize.caption
+msgctxt "tfmimport.lbsize.caption"
 msgid "Размер холста"
 msgstr ""
 
@@ -385,6 +440,163 @@ msgstr ""
 
 #: tfmimport.tsexampletext.caption
 msgid "Текст образца"
+msgstr ""
+
+#: tfmimportc.acimportdo.caption
+msgctxt "tfmimportc.acimportdo.caption"
+msgid "Импортировать"
+msgstr ""
+
+#: tfmimportc.acimportdo.hint
+msgid "Импортировать шрифт"
+msgstr ""
+
+#: tfmimportc.actabcode.hint
+msgid "Код С"
+msgstr ""
+
+#: tfmimportc.actabparams.hint
+msgid "Параметры декодера"
+msgstr ""
+
+#: tfmimportc.acupdatepreview.caption
+msgctxt "tfmimportc.acupdatepreview.caption"
+msgid "Обновить"
+msgstr ""
+
+#: tfmimportc.acupdatepreview.hint
+msgid "Обновить предпросмотр"
+msgstr ""
+
+#: tfmimportc.cbimpexample.caption
+msgctxt "tfmimportc.cbimpexample.caption"
+msgid "Образец текста"
+msgstr ""
+
+#: tfmimportc.cbimpexample.hint
+msgid ""
+"Произвольный текст длиной до 8 символов.\n"
+"При подборе параметров на больших разрешениях\n"
+"может немного замедлять обновление"
+msgstr ""
+
+#: tfmimportc.cbimpoptimize.caption
+msgctxt "tfmimportc.cbimpoptimize.caption"
+msgid "Оптимизировать холст"
+msgstr ""
+
+#: tfmimportc.cbimpoptimize.hint
+msgctxt "tfmimportc.cbimpoptimize.hint"
+msgid "Убрать общее пустое пространство вокруг символов"
+msgstr ""
+
+#: tfmimportc.cbimpsnapleft.caption
+msgctxt "tfmimportc.cbimpsnapleft.caption"
+msgid "Прижать к левому краю"
+msgstr ""
+
+#: tfmimportc.cbimpsnapleft.hint
+msgctxt "tfmimportc.cbimpsnapleft.hint"
+msgid "Прижать все символы к левому краю холста"
+msgstr ""
+
+#: tfmimportc.edimpexample.texthint
+msgctxt "tfmimportc.edimpexample.texthint"
+msgid "Образец текста"
+msgstr ""
+
+#: tfmimportc.lbimpchar.caption
+msgctxt "tfmimportc.lbimpchar.caption"
+msgid "Символ"
+msgstr ""
+
+#: tfmimportc.lbimpcharcode.caption
+msgctxt "tfmimportc.lbimpcharcode.caption"
+msgid "Код"
+msgstr ""
+
+#: tfmimportc.lbimpcharcode.hint
+msgctxt "tfmimportc.lbimpcharcode.hint"
+msgid "Код символа [DEC]"
+msgstr ""
+
+#: tfmimportc.lbimpcharhex.caption
+msgctxt "tfmimportc.lbimpcharhex.caption"
+msgid "HEX"
+msgstr ""
+
+#: tfmimportc.lbimpcharhex.hint
+msgctxt "tfmimportc.lbimpcharhex.hint"
+msgid "Код символа [HEX]"
+msgstr ""
+
+#: tfmimportc.lbimpdropfile.caption
+msgctxt "tfmimportc.lbimpdropfile.caption"
+msgid "Бросьте файл в окно или вставьте код Ctrl+V"
+msgstr ""
+
+#: tfmimportc.lbimpfile.caption
+msgctxt "tfmimportc.lbimpfile.caption"
+msgid "Файл:"
+msgstr ""
+
+#: tfmimportc.lbimpnbits.caption
+msgctxt "tfmimportc.lbimpnbits.caption"
+msgid "Разрядность чисел"
+msgstr ""
+
+#: tfmimportc.lbimpoffset.caption
+msgid "Смещение массива/символа"
+msgstr ""
+
+#: tfmimportc.lbimporder.caption
+msgctxt "tfmimportc.lbimporder.caption"
+msgid "Очередность считывания"
+msgstr ""
+
+#: tfmimportc.lbimprange.caption
+msgctxt "tfmimportc.lbimprange.caption"
+msgid "Диапазон символов"
+msgstr ""
+
+#: tfmimportc.lbimpsizes.caption
+msgctxt "tfmimportc.lbimpsizes.caption"
+msgid "Размер холста"
+msgstr ""
+
+#: tfmimportc.lbimptype.caption
+msgctxt "tfmimportc.lbimptype.caption"
+msgid "Тип шрифта"
+msgstr ""
+
+#: tfmimportc.seimpheight.hint
+msgctxt "tfmimportc.seimpheight.hint"
+msgid "Высота"
+msgstr ""
+
+#: tfmimportc.seimplastitem.hint
+msgctxt "tfmimportc.seimplastitem.hint"
+msgid "Код последнего символа"
+msgstr ""
+
+#: tfmimportc.seimpoffset.hint
+msgctxt "tfmimportc.seimpoffset.hint"
+msgid "Смещение от начала массива"
+msgstr ""
+
+#: tfmimportc.seimpskip.hint
+msgctxt "tfmimportc.seimpskip.hint"
+msgid "Пропуск значений в начале символа"
+msgstr ""
+
+#: tfmimportc.seimpstartitem.hint
+msgctxt "tfmimportc.seimpstartitem.hint"
+msgid "Код первого символа"
+msgstr ""
+
+#: tfmimportc.seimpwidth.hint
+msgctxt "tfmimportc.seimpwidth.hint"
+msgid "Ширина"
 msgstr ""
 
 #: tfmmain.acappexit.caption
@@ -448,6 +660,16 @@ msgstr ""
 
 #: tfmmain.acfontimport.hint
 msgid "Создать новый шрифт на основе системного"
+msgstr ""
+
+#: tfmmain.acfontimportccode.caption
+msgctxt "tfmmain.acfontimportccode.caption"
+msgid "Импорт кода C ..."
+msgstr ""
+
+#: tfmmain.acfontimportccode.hint
+msgctxt "tfmmain.acfontimportccode.hint"
+msgid "Создать новый шрифт на основе кода C"
 msgstr ""
 
 #: tfmmain.acfontinvert.caption
@@ -1094,6 +1316,7 @@ msgid "Код"
 msgstr ""
 
 #: tfmmain.lbspeditfind.hint
+msgctxt "tfmmain.lbspeditfind.hint"
 msgid "Код символа [DEC]"
 msgstr ""
 
@@ -1146,22 +1369,27 @@ msgid "Диапазон символов"
 msgstr ""
 
 #: tfmnew.lbfontname2.caption
+msgctxt "tfmnew.lbfontname2.caption"
 msgid "Размеры холста"
 msgstr ""
 
 #: tfmnew.lbheight.caption
+msgctxt "tfmnew.lbheight.caption"
 msgid "высота"
 msgstr ""
 
 #: tfmnew.lblastitem.caption
+msgctxt "tfmnew.lblastitem.caption"
 msgid "последний"
 msgstr ""
 
 #: tfmnew.lbstartitem.caption
+msgctxt "tfmnew.lbstartitem.caption"
 msgid "первый"
 msgstr ""
 
 #: tfmnew.lbwidth.caption
+msgctxt "tfmnew.lbwidth.caption"
 msgid "ширина"
 msgstr ""
 
