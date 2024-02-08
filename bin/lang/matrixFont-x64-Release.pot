@@ -981,6 +981,15 @@ msgctxt "tfmmain.acnewfont.hint"
 msgid "Создать новый шрифт"
 msgstr ""
 
+#: tfmmain.acopenrepo.caption
+msgid "Репозиторий проекта"
+msgstr ""
+
+#: tfmmain.acopenrepo.hint
+msgctxt "tfmmain.acopenrepo.hint"
+msgid "Открыть репозиторий приложения"
+msgstr ""
+
 #: tfmmain.acpastemodeand.hint
 msgid "Операция И между вставляемым и текущим"
 msgstr ""
@@ -1266,11 +1275,12 @@ msgid "Эффекты шрифта"
 msgstr ""
 
 #: tfmmain.acwebsite.caption
-msgid "Сайт"
+msgid "Домашняя страница"
 msgstr ""
 
 #: tfmmain.acwebsite.hint
-msgid "Открыть репозиторий приложения"
+msgctxt "tfmmain.acwebsite.hint"
+msgid "Домашняя страница приложения"
 msgstr ""
 
 #: tfmmain.aczoomfit.caption

@@ -15,10 +15,10 @@ object fmNew: TfmNew
   OnShow = FormShow
   PopupMode = pmExplicit
   Position = poMainFormCenter
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.6.0'
   object pMain: TPanel
     Left = 62
-    Height = 338
+    Height = 314
     Top = 25
     Width = 500
     AutoSize = True
@@ -29,7 +29,7 @@ object fmNew: TfmNew
     ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 338
+    ClientHeight = 314
     ClientWidth = 500
     TabOrder = 0
     object pName: TPanel
@@ -57,6 +57,7 @@ object fmNew: TfmNew
         Width = 500
         Caption = 'Название'
         Color = cl3DLight
+        ParentColor = False
         Transparent = False
       end
       object edFontName: TEdit
@@ -94,6 +95,7 @@ object fmNew: TfmNew
         Width = 500
         Caption = 'Автор'
         Color = cl3DLight
+        ParentColor = False
         Transparent = False
       end
       object edAuthor: TEdit
@@ -131,6 +133,7 @@ object fmNew: TfmNew
         Width = 500
         Caption = 'Кодировка'
         Color = cl3DLight
+        ParentColor = False
         Transparent = False
       end
       object cbEncoding: TComboBox
@@ -168,6 +171,7 @@ object fmNew: TfmNew
         Width = 245
         Caption = 'Диапазон символов'
         Color = cl3DLight
+        ParentColor = False
         Transparent = False
       end
       object lbFontName2: TLabel
@@ -179,6 +183,7 @@ object fmNew: TfmNew
         Width = 245
         Caption = 'Размеры холста'
         Color = cl3DLight
+        ParentColor = False
         Transparent = False
       end
       object pRange: TPanel
@@ -230,6 +235,7 @@ object fmNew: TfmNew
           Width = 118
           Caption = 'первый'
           Layout = tlBottom
+          ParentColor = False
         end
         object lbLastItem: TLabel
           AnchorSideTop.Side = asrCenter
@@ -239,6 +245,7 @@ object fmNew: TfmNew
           Width = 117
           Caption = 'последний'
           Layout = tlBottom
+          ParentColor = False
         end
       end
       object pSizes: TPanel
@@ -290,6 +297,7 @@ object fmNew: TfmNew
           Width = 118
           Caption = 'ширина'
           Layout = tlBottom
+          ParentColor = False
         end
         object lbHeight: TLabel
           AnchorSideTop.Side = asrCenter
@@ -299,12 +307,13 @@ object fmNew: TfmNew
           Width = 117
           Caption = 'высота'
           Layout = tlBottom
+          ParentColor = False
         end
       end
     end
     object pControls: TPanel
       Left = 0
-      Height = 68
+      Height = 44
       Top = 270
       Width = 500
       AutoSize = True
@@ -315,57 +324,24 @@ object fmNew: TfmNew
       ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 68
+      ClientHeight = 44
       ClientWidth = 500
       Constraints.MinWidth = 500
       TabOrder = 4
       object bbOK: TBitBtn
         Left = 250
-        Height = 68
+        Height = 44
         Top = 0
         Width = 250
         AutoSize = True
-        BorderSpacing.InnerBorder = 19
+        BorderSpacing.InnerBorder = 6
         BorderSpacing.CellAlignHorizontal = ccaRightBottom
         Caption = 'Создать'
+        Constraints.MinHeight = 44
         Constraints.MinWidth = 250
-        Glyph.Data = {
-          36040000424D3604000000000000360000002800000010000000100000000100
-          200000000000000400006400000064000000000000000000000000690F7A003D
-          08C5002A06DF002D06DF002D06DF002D06DF002D06DF002D06DF002D06DF002D
-          06DF002D06DF002D06DF002D06DF002906DF003B08C500640E85003D09D80000
-          00FF002C06FA002405FA002405FA002405FA002405FA002405FA002405FA0024
-          05FA002405FA002405FA002405FA002D06FA000000FF002F06E6003607CD001F
-          05FF009D1500008A130000891300008913000089130000891300008913000089
-          130000891300008913000089130000A01600002A06FA002905E0003908CD001B
-          04FF008612000076100000751000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06E0003908CC001B
-          04FF008612030076100000751000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF003908CC001B
-          04FF008612030076100000751000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF003908CC001B
-          04FF008612030076100000751000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF003808CE001D
-          04FF008712000076100000751000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF002F07D90017
-          03FF009514000075100000751000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF005D0DA30000
-          00FF004D0ABF0091140000741000007510000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF008B13030051
-          0BBE000000FF004F0BBF00911400007410000075100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF007410000091
-          140000500BBF000000FF004F0BBF009114000074100000751000007510000075
-          100000751000007510000075100000891300002405FA002D06DF007510000074
-          10000091140000500BBF000000FF004F0BBF0091140000751000007510000076
-          1000007610000076100000761000008A1300002405FA002D06E0007510000075
-          1000007410000091140000500BBF000000FF004D0BBF00931411008713030086
-          1203008612030086120300861203009D1603002906FA002905DF007510000075
-          100000751000007410000091140000500BBE000000FF001E04FF001D04FF001B
-          04FF001B04FF001B04FF001B04FF002205FF000000FF003307E6007510000075
-          1000007510000075100000741000008B1300005C0CA0003707C9003808CC0039
-          08CC003908CC003908CC003908CC003507CC004609B900690E7A
-        }
         ModalResult = 1
+        Images = fmMain.ImListNew16A
+        ImageIndex = 44
         Spacing = 10
         TabOrder = 0
       end

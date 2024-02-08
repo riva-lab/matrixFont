@@ -108,8 +108,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
-      <RevisionNr Value="3"/>
-      <BuildNr Value="60"/>
+      <RevisionNr Value="5"/>
+      <BuildNr Value="62"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -250,15 +250,18 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="2">
+    <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="SynEdit"/>
+        <PackageName Value="ImageSVGListDsgn"/>
       </Item1>
       <Item2>
-        <PackageName Value="LCL"/>
+        <PackageName Value="SynEdit"/>
       </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
     </RequiredPackages>
-    <Units Count="23">
+    <Units Count="24">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -391,6 +394,10 @@
         <Filename Value="u_helpers.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="fm_main_controls.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit23>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

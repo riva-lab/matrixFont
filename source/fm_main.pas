@@ -8,10 +8,17 @@ uses
   Classes, Forms, ExtCtrls, Controls, StdCtrls, Grids, ComCtrls, ActnList,
   Windows, Graphics, Menus, StdActns, Dialogs, Spin, IniPropStorage, SysUtils,
   LazUTF8, Types, strutils, LCLIntf, LCLTranslator, PairSplitter, LazFileUtils,
+  LCLType, ImageSVGList,
+
+  // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc,
-  cOpenFileList, u_utilities, u_strings,
-  font, app_ver, symbol, u_encodings, LCLType;
+
+  // functional units
+  font, symbol, app_ver, cOpenFileList,
+
+  // additional units
+  u_utilities, u_strings, u_helpers, u_encodings;
 
 resourcestring
   TXT_NAVIGATOR   = 'Навигатор';
@@ -28,339 +35,7 @@ type
   { TfmMain }
 
   TfmMain = class(TForm)
-    lbEditor:     TLabel;
-    lbNavigator:  TLabel;
-    lbEditHEX:    TLabel;
-    lbEditFind:   TLabel;
-    lbSpEditFind: TLabel;
-    MenuItem109:  TMenuItem;
-
-    pEditChar:    TPanel;
-    pEffectsFont: TPanel;
-    pEffectsChar: TPanel;
-    pToolbarTop:  TPanel;
-    pEditor:      TPanel;
-    pFind:        TPanel;
-
-    psSplit: TPairSplitter;
-    psSide1: TPairSplitterSide;
-    psSide2: TPairSplitterSide;
-
-    imFindIcon: TImage;
-    imEditor:   TImage;
-
-    MainMenu1:      TMainMenu;
-    pmLastFiles:    TPopupMenu;
-    tmrMain10ms:    TTimer;
-    stStatusBar:    TStatusBar;
-    IniStorageMain: TIniPropStorage;
-    ActionList1:    TActionList;
-    sgNavigator:    TStringGrid;
-    scbEditor:      TScrollBox;
-    edFind:         TEdit;
-    seFind:         TSpinEdit;
-    dlgImport:      TOpenDialog;
-    dlgOpen:        TOpenDialog;
-    acSaveAs:       TFileSaveAs;
-
-    ImListNew32A: TImageList;
-    ImListNew16A: TImageList;
-    ImListNew16D: TImageList;
-
-    acAppExit:             TAction;
-    acDeleteLastFilesList: TAction;
-    acFontCenterH:         TAction;
-    acFontCenterV:         TAction;
-    acFontChangeSizes:     TAction;
-    acFontCharset:         TAction;
-    acFontClear:           TAction;
-    acFontImport:          TAction;
-    acFontImportCCode:     TAction;
-    acFontInvert:          TAction;
-    acFontMirrorHorz:      TAction;
-    acFontMirrorVert:      TAction;
-    acFontOpen:            TAction;
-    acFontOptimize:        TAction;
-    acFontPaste:           TAction;
-    acFontPreview:         TAction;
-    acFontProperties:      TAction;
-    acFontRedo:            TAction;
-    acFontShiftDown:       TAction;
-    acFontShiftLeft:       TAction;
-    acFontShiftRight:      TAction;
-    acFontShiftRollover:   TAction;
-    acFontShiftUp:         TAction;
-    acFontSnapDown:        TAction;
-    acFontSnapLeft:        TAction;
-    acFontSnapRight:       TAction;
-    acFontSnapUp:          TAction;
-    acFontUndo:            TAction;
-    acGenerate:            TAction;
-    acGenFormMagnit:       TAction;
-    acGenFormOnTop:        TAction;
-    acGridToggle:          TAction;
-    acHelp:                TAction;
-    acHelpMD:              TAction;
-    acHelpNet:             TAction;
-    acInfo:                TAction;
-    acLastFilesList:       TAction;
-    acMenuEdit:            TAction;
-    acMenuFile:            TAction;
-    acMenuFont:            TAction;
-    acMenuFontCenter:      TAction;
-    acMenuFontMirror:      TAction;
-    acMenuFontShift:       TAction;
-    acMenuFontSnap:        TAction;
-    acMenuHelp:            TAction;
-    acMenuPanels:          TAction;
-    acMenuPaste:           TAction;
-    acMenuSymbol:          TAction;
-    acMenuSymbolCenter:    TAction;
-    acMenuSymbolMirror:    TAction;
-    acMenuSymbolShift:     TAction;
-    acMenuSymbolSnap:      TAction;
-    acMenuView:            TAction;
-    acNewFont:             TAction;
-    acPasteModeAnd:        TAction;
-    acPasteModeNorm:       TAction;
-    acPasteModeOr:         TAction;
-    acPasteModeXor:        TAction;
-    acReset:               TAction;
-    acSave:                TAction;
-    acSetting:             TAction;
-    acStayOnTopToggle:     TAction;
-    acSymbolCenterH:       TAction;
-    acSymbolCenterV:       TAction;
-    acSymbolClear:         TAction;
-    acSymbolCopy:          TAction;
-    acSymbolCut:           TAction;
-    acSymbolFind:          TAction;
-    acSymbolImportImage:   TAction;
-    acSymbolInvert:        TAction;
-    acSymbolMirrorHorz:    TAction;
-    acSymbolMirrorVert:    TAction;
-    acSymbolMoveDown:      TAction;
-    acSymbolMoveUp:        TAction;
-    acSymbolPaste:         TAction;
-    acSymbolRedo:          TAction;
-    acSymbolShiftDown:     TAction;
-    acSymbolShiftLeft:     TAction;
-    acSymbolShiftRight:    TAction;
-    acSymbolShiftUp:       TAction;
-    acSymbolSnapDown:      TAction;
-    acSymbolSnapLeft:      TAction;
-    acSymbolSnapRight:     TAction;
-    acSymbolSnapUp:        TAction;
-    acSymbolUndo:          TAction;
-    acViewTBCommon:        TAction;
-    acViewTBEditChar:      TAction;
-    acViewTBEditFont:      TAction;
-    acViewTBEffectsChar:   TAction;
-    acViewTBEffectsFont:   TAction;
-    acWebsite:             TAction;
-    acZoomFit:             TAction;
-    acZoomIn:              TAction;
-    acZoomOut:             TAction;
-
-    MenuItem1:   TMenuItem;
-    MenuItem2:   TMenuItem;
-    MenuItem3:   TMenuItem;
-    MenuItem4:   TMenuItem;
-    MenuItem5:   TMenuItem;
-    MenuItem6:   TMenuItem;
-    MenuItem7:   TMenuItem;
-    MenuItem8:   TMenuItem;
-    MenuItem9:   TMenuItem;
-    MenuItem10:  TMenuItem;
-    MenuItem11:  TMenuItem;
-    MenuItem12:  TMenuItem;
-    MenuItem13:  TMenuItem;
-    MenuItem14:  TMenuItem;
-    MenuItem15:  TMenuItem;
-    MenuItem16:  TMenuItem;
-    MenuItem17:  TMenuItem;
-    MenuItem18:  TMenuItem;
-    MenuItem19:  TMenuItem;
-    MenuItem20:  TMenuItem;
-    MenuItem21:  TMenuItem;
-    MenuItem22:  TMenuItem;
-    MenuItem23:  TMenuItem;
-    MenuItem24:  TMenuItem;
-    MenuItem25:  TMenuItem;
-    MenuItem26:  TMenuItem;
-    MenuItem27:  TMenuItem;
-    MenuItem28:  TMenuItem;
-    MenuItem29:  TMenuItem;
-    MenuItem30:  TMenuItem;
-    MenuItem31:  TMenuItem;
-    MenuItem32:  TMenuItem;
-    MenuItem33:  TMenuItem;
-    MenuItem34:  TMenuItem;
-    MenuItem35:  TMenuItem;
-    MenuItem36:  TMenuItem;
-    MenuItem37:  TMenuItem;
-    MenuItem38:  TMenuItem;
-    MenuItem39:  TMenuItem;
-    MenuItem40:  TMenuItem;
-    MenuItem41:  TMenuItem;
-    MenuItem42:  TMenuItem;
-    MenuItem43:  TMenuItem;
-    MenuItem44:  TMenuItem;
-    MenuItem45:  TMenuItem;
-    MenuItem46:  TMenuItem;
-    MenuItem47:  TMenuItem;
-    MenuItem48:  TMenuItem;
-    MenuItem49:  TMenuItem;
-    MenuItem50:  TMenuItem;
-    MenuItem51:  TMenuItem;
-    MenuItem52:  TMenuItem;
-    MenuItem53:  TMenuItem;
-    MenuItem54:  TMenuItem;
-    MenuItem55:  TMenuItem;
-    MenuItem56:  TMenuItem;
-    MenuItem57:  TMenuItem;
-    MenuItem58:  TMenuItem;
-    MenuItem59:  TMenuItem;
-    MenuItem60:  TMenuItem;
-    MenuItem61:  TMenuItem;
-    MenuItem62:  TMenuItem;
-    MenuItem63:  TMenuItem;
-    MenuItem64:  TMenuItem;
-    MenuItem65:  TMenuItem;
-    MenuItem66:  TMenuItem;
-    MenuItem67:  TMenuItem;
-    MenuItem68:  TMenuItem;
-    MenuItem69:  TMenuItem;
-    MenuItem70:  TMenuItem;
-    MenuItem71:  TMenuItem;
-    MenuItem72:  TMenuItem;
-    MenuItem73:  TMenuItem;
-    MenuItem74:  TMenuItem;
-    MenuItem75:  TMenuItem;
-    MenuItem76:  TMenuItem;
-    MenuItem77:  TMenuItem;
-    MenuItem78:  TMenuItem;
-    MenuItem79:  TMenuItem;
-    MenuItem80:  TMenuItem;
-    MenuItem81:  TMenuItem;
-    MenuItem82:  TMenuItem;
-    MenuItem83:  TMenuItem;
-    MenuItem84:  TMenuItem;
-    MenuItem85:  TMenuItem;
-    MenuItem86:  TMenuItem;
-    MenuItem87:  TMenuItem;
-    MenuItem88:  TMenuItem;
-    MenuItem89:  TMenuItem;
-    MenuItem90:  TMenuItem;
-    MenuItem91:  TMenuItem;
-    MenuItem92:  TMenuItem;
-    MenuItem93:  TMenuItem;
-    MenuItem94:  TMenuItem;
-    MenuItem95:  TMenuItem;
-    MenuItem96:  TMenuItem;
-    MenuItem97:  TMenuItem;
-    MenuItem98:  TMenuItem;
-    MenuItem99:  TMenuItem;
-    MenuItem100: TMenuItem;
-    MenuItem101: TMenuItem;
-    MenuItem102: TMenuItem;
-    MenuItem103: TMenuItem;
-    MenuItem104: TMenuItem;
-    MenuItem105: TMenuItem;
-    MenuItem106: TMenuItem;
-    MenuItem107: TMenuItem;
-    MenuItem108: TMenuItem;
-    MenuItem110: TMenuItem;
-    MenuItem111: TMenuItem;
-    MenuItem112: TMenuItem;
-    miFontInfo:  TMenuItem;
-    miFPS:       TMenuItem;
-    Separator1:  TMenuItem;
-
-    ToolBtnLastFiles: TToolButton;
-    ToolButton1:      TToolButton;
-    ToolButton2:      TToolButton;
-    ToolButton3:      TToolButton;
-    ToolButton4:      TToolButton;
-    ToolButton5:      TToolButton;
-    ToolButton6:      TToolButton;
-    ToolButton7:      TToolButton;
-    ToolButton73:     TToolButton;
-    ToolButton8:      TToolButton;
-    ToolButton9:      TToolButton;
-    ToolButton10:     TToolButton;
-    ToolButton11:     TToolButton;
-    ToolButton12:     TToolButton;
-    ToolButton13:     TToolButton;
-    ToolButton14:     TToolButton;
-    ToolButton15:     TToolButton;
-    ToolButton16:     TToolButton;
-    ToolButton17:     TToolButton;
-    ToolButton18:     TToolButton;
-    ToolButton19:     TToolButton;
-    ToolButton20:     TToolButton;
-    ToolButton21:     TToolButton;
-    ToolButton22:     TToolButton;
-    ToolButton23:     TToolButton;
-    ToolButton24:     TToolButton;
-    ToolButton25:     TToolButton;
-    ToolButton26:     TToolButton;
-    ToolButton27:     TToolButton;
-    ToolButton28:     TToolButton;
-    ToolButton29:     TToolButton;
-    ToolButton30:     TToolButton;
-    ToolButton31:     TToolButton;
-    ToolButton32:     TToolButton;
-    ToolButton33:     TToolButton;
-    ToolButton34:     TToolButton;
-    ToolButton35:     TToolButton;
-    ToolButton36:     TToolButton;
-    ToolButton37:     TToolButton;
-    ToolButton38:     TToolButton;
-    ToolButton39:     TToolButton;
-    ToolButton40:     TToolButton;
-    ToolButton41:     TToolButton;
-    ToolButton42:     TToolButton;
-    ToolButton43:     TToolButton;
-    ToolButton44:     TToolButton;
-    ToolButton45:     TToolButton;
-    ToolButton46:     TToolButton;
-    ToolButton47:     TToolButton;
-    ToolButton48:     TToolButton;
-    ToolButton49:     TToolButton;
-    ToolButton50:     TToolButton;
-    ToolButton51:     TToolButton;
-    ToolButton52:     TToolButton;
-    ToolButton53:     TToolButton;
-    ToolButton54:     TToolButton;
-    ToolButton55:     TToolButton;
-    ToolButton56:     TToolButton;
-    ToolButton57:     TToolButton;
-    ToolButton58:     TToolButton;
-    ToolButton59:     TToolButton;
-    ToolButton60:     TToolButton;
-    ToolButton61:     TToolButton;
-    ToolButton62:     TToolButton;
-    ToolButton63:     TToolButton;
-    ToolButton64:     TToolButton;
-    ToolButton65:     TToolButton;
-    ToolButton67:     TToolButton;
-    ToolButton68:     TToolButton;
-    ToolButton66:     TToolButton;
-    ToolButton69:     TToolButton;
-    ToolButton70:     TToolButton;
-    ToolButton71:     TToolButton;
-    ToolButton72:     TToolButton;
-    ToolButton74:     TToolButton;
-    ToolButton75:     TToolButton;
-    ToolButton76:     TToolButton;
-    ToolButton77:     TToolButton;
-
-    tbCommon:      TToolBar;
-    tbEditChar:    TToolBar;
-    tbEditFont:    TToolBar;
-    tbEffectsChar: TToolBar;
-    tbEffectsFont: TToolBar;
+    {$INCLUDE fm_main_controls.inc}
 
     procedure acResetExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -435,6 +110,8 @@ type
     procedure ReDrawAfterAction;
     procedure ReDrawImage;
     procedure ReDrawContent;
+    procedure AdjustComponentSizes;
+    procedure AdjustThemeDependentValues;
     procedure LanguageChange;
   end;
 
@@ -487,6 +164,9 @@ procedure TfmMain.FormShow(Sender: TObject);
   begin
     LanguageChange;
 
+    // fix splitter cursor bug
+    psSplit.Cursor := crHSplit;
+
     // загрузка файла, если он был перетащен на значок приложения
     // или открыт системой по аасоциации с расширением
     if (LazUTF8.ParamStrUTF8(1) <> '')
@@ -496,18 +176,6 @@ procedure TfmMain.FormShow(Sender: TObject);
         FontCreateNew(
           NewWidth, NewHeight, NewItemStart, NewItemLast - NewItemStart + 1,
           NewEncoding, NewName, NewAuthor);
-
-    // иконки-значки в заголовке окон
-    ImListNew16A.GetIcon(3, fmSettings.Icon);
-    ImListNew16A.GetIcon(32, fmRange.Icon);
-    ImListNew16A.GetIcon(36, fmOptimize.Icon);
-    ImListNew16A.GetIcon(25, fmSizes.Icon);
-    ImListNew16A.GetIcon(31, fmImport.Icon);
-    ImListNew16A.GetIcon(28, fmProp.Icon);
-    ImListNew16A.GetIcon(0, fmNew.Icon);
-    ImListNew16A.GetIcon(29, fmGen.Icon);
-    ImListNew16A.GetIcon(7, fmImportC.Icon);
-    ImListNew32A.GetBitmap(2, imFindIcon.Picture.Bitmap);
 
     SettingsLoadFromIni;
     SettingsApplyToCurrentSession;
@@ -1376,7 +1044,10 @@ procedure TfmMain.actionService(Sender: TObject);
       'acHelpNet': // действие: вызов справки онлайн
         OpenURL(APP_SITE_ADDRESS + '/' + HELP_DIR_ONLINE + '/' + HELP_FILE + '.md');
 
-      'acWebsite': // действие: информация о программе
+      'acWebsite': // действие: домашняя страница
+        OpenURL(APP_SITE_ADDRESS);
+
+      'acOpenRepo':// действие: репозиторий проекта
         OpenURL(APP_SITE_ADDRESS);
 
       'acInfo':    // действие: информация о программе
@@ -1578,6 +1249,8 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         MouseWheelOption := mwGrid;
       end;
 
+    AdjustComponentSizes;
+    AdjustThemeDependentValues;
     LanguageChange;
     acGenerateExecute(nil);
     actionZooming(nil);
@@ -1787,6 +1460,129 @@ procedure TfmMain.ReDrawContent;
       fmPreview.UpdatePreview;
   end;
 
+// adjust sizes of UI elements
+procedure TfmMain.AdjustComponentSizes;
+
+  procedure SetToolbarButtonSize(AToolbars: array of TToolBar; W: Integer; H: Integer = -1);
+    var
+      item: TToolBar;
+      b:    Integer;
+    begin
+      if Length(AToolbars) = 0 then Exit;
+
+      for item in AToolbars do
+        begin
+        item.ButtonHeight   := (H < 0).Select(W, H);
+        item.ButtonWidth    := W;
+        item.DisabledImages := ImListNew16D;
+
+        // fix incorrect divider height in vertical toolbars
+        for b := 0 to item.ButtonCount - 1 do
+          with item.Buttons[b] do
+            if Style = tbsDivider then
+              begin
+              Style := tbsButton;
+              Style := tbsDivider;
+              end;
+        end;
+    end;
+
+  procedure RenderSVGIcons(ASize: Integer; A, D: TImageList);
+    begin
+      imSVGList.Rendering      := False;
+      imSVGList.RenderSize     := ASize;
+      imSVGList.ImagesActive   := A;
+      imSVGList.ImagesDisabled := D;
+      imSVGList.Rendering      := True;
+    end;
+
+  var
+    w, h, i: Integer;
+
+  begin
+    BeginFormUpdate;
+
+    // on 96dpi's screen at 100% resolution muat be 16px
+    RenderSVGIcons(Round(Scale96ToScreen(16) * 101 / 100), ImListNew16A, ImListNew16D);
+
+    // иконки-значки в заголовке окон
+    ImListNew16A.GetIcon(3, fmSettings.Icon);
+    ImListNew16A.GetIcon(32, fmRange.Icon);
+    ImListNew16A.GetIcon(36, fmOptimize.Icon);
+    ImListNew16A.GetIcon(25, fmSizes.Icon);
+    ImListNew16A.GetIcon(31, fmImport.Icon);
+    ImListNew16A.GetIcon(28, fmProp.Icon);
+    ImListNew16A.GetIcon(0, fmNew.Icon);
+    ImListNew16A.GetIcon(29, fmGen.Icon);
+    ImListNew16A.GetIcon(7, fmImportC.Icon);
+    ImListNew16A.GetIcon(27, fmPreview.Icon);
+    ImListNew32A.GetBitmap(26, imFindIcon.Picture.Bitmap);
+
+    Font.Height := 0; // set default size as reference
+    Font.Height := Round(Canvas.GetTextHeight('0') * 101 / 100);
+
+    // adjust font height for all forms
+    for i := 0 to Screen.FormCount - 1 do
+      begin
+      Screen.Forms[i].Font.Height := Font.Height;
+
+      // adjust font for some components with custom font
+      with Screen.Forms[i] do
+        for w := 0 to ComponentCount - 1 do
+          if (Components[w].ClassName = TLabel.ClassName)
+            or (Components[w].ClassName = TComboBox.ClassName) then
+            TControl(Components[w]).Font.Height := Font.Height;
+      end;
+
+    Screen.HintFont.Height := Font.Height;
+    Screen.MenuFont.Height := Font.Height;
+
+    // allow adjusting components with autosize option
+    EndFormUpdate;
+
+    BeginFormUpdate;
+
+    h := Canvas.GetTextHeight('0');
+    stStatusBar.Height := h + 2;
+
+    // set size of toolbar's buttons which depends on size of icons
+    h := Max(16, round(imSVGList.RenderSize * 1.4));
+    SetToolbarButtonSize([tbCommon, tbEditChar, tbEffectsChar, tbEffectsFont, tbEditFont], h);
+
+    RenderSVGIcons(imSVGList.RenderSize * 2, ImListNew32A, nil);
+
+    EndFormUpdate;
+  end;
+
+// adjust colors and some other values according to theme
+procedure TfmMain.AdjustThemeDependentValues;
+
+  procedure SetFont(AFont: Graphics.TFont; AIndex, ASize: Integer; AColor: TColor);
+    begin
+      AFont.Name  := Screen.Fonts[AIndex];
+      AFont.Size  := ASize;
+      AFont.Color := AColor;
+    end;
+
+  begin
+    {$IFDEF ALLOW_DARK_THEME}
+    if IsDarkModeEnabled then
+      begin                        // dark theme, if available
+
+      // iconspack for dark theme located in resources
+      imSVGList.LoadRes       := 'ICONSPACK-DARK';
+      imSVGList.DisabledLevel := 96;
+
+      MetaDarkFormChanged(self);
+      end
+    else
+      {$ENDIF}
+      begin                        // light theme, default
+
+      // iconspack for light theme is loaded in component already
+
+      end;
+  end;
 
 // перевод интерфейса
 procedure TfmMain.LanguageChange;

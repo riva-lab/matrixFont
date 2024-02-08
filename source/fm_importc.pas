@@ -154,7 +154,9 @@ procedure TfmImportC.FormShow(Sender: TObject);
   begin
     BeginFormUpdate;
 
+    Caption        := FM_IMPC_CAPTION;
     lbInfo.Caption := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
+
     UpdateComboBox(cbImpType, [FM_IMPC_TYPE_1, FM_IMPC_TYPE_2, FM_IMPC_TYPE_3, FM_IMPC_TYPE_4]);
     UpdateComboBox(cbImpOrder, [FM_IMPC_ORDER_1, FM_IMPC_ORDER_2]);
     UpdateComboBox(cbImpNBits, [FM_IMPC_BITS_1, FM_IMPC_BITS_2, FM_IMPC_BITS_3, FM_IMPC_BITS_4, FM_IMPC_BITS_5, FM_IMPC_BITS_6]);
@@ -178,7 +180,6 @@ procedure TfmImportC.FormShow(Sender: TObject);
       AutoSize := True;
       AutoSize := False;
       Position := poMainFormCenter;
-      Caption  := FM_IMPC_CAPTION;
 
       Constraints.MinWidth  := Width;
       Constraints.MinHeight := Height;
