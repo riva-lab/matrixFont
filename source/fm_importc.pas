@@ -451,22 +451,27 @@ procedure TfmImportC.UpdateFont(AFont: TFont);
       FontLength    := seImpLastItem.Value - FontStartItem + 1;
 
       // try to decode C-code
-      if Import(snImpEdit.Text, seImpOffset.Value, seImpSkip.Value, TImportMode(cbImpType.ItemIndex)) then
-        begin
-
-        // apply post decoding operations
-        if cbImpSnapLeft.Checked then Snap(TBorder.brLeft);
-        if cbImpOptimize.Checked then ChangeSize(-1, -1, -1, -1, True);
-
-        // set some parameters with autodetected values
-        if TImportMode(cbImpType.ItemIndex) <> imCustom then
+        try
+        if Import(snImpEdit.Text, seImpOffset.Value, seImpSkip.Value, TImportMode(cbImpType.ItemIndex)) then
           begin
-          seImpLastItem.MinValue := 1;
-          SetValueWithoutAction(seImpWidth, Width);
-          SetValueWithoutAction(seImpHeight, Height);
-          SetValueWithoutAction(seImpStartItem, FontStartItem);
-          SetValueWithoutAction(seImpLastItem, FontLength + FontStartItem - 1);
+
+          // apply post decoding operations
+          if cbImpSnapLeft.Checked then Snap(TBorder.brLeft);
+          if cbImpOptimize.Checked then ChangeSize(-1, -1, -1, -1, True);
+
+          // set some parameters with autodetected values
+          if TImportMode(cbImpType.ItemIndex) <> imCustom then
+            begin
+            seImpLastItem.MinValue := 1;
+            SetValueWithoutAction(seImpWidth, Width);
+            SetValueWithoutAction(seImpHeight, Height);
+            SetValueWithoutAction(seImpStartItem, FontStartItem);
+            SetValueWithoutAction(seImpLastItem, FontLength + FontStartItem - 1);
+            end;
           end;
+        except
+        EndFormUpdate;
+        Exit;
         end;
       end;
 
