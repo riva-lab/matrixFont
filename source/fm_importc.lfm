@@ -229,25 +229,23 @@ object fmImportC: TfmImportC
         ClientWidth = 559
         object pFilename: TPanel
           Left = 0
-          Height = 28
+          Height = 24
           Top = 0
           Width = 559
           Align = alTop
           AutoSize = True
           BevelOuter = bvNone
-          ChildSizing.LeftRightSpacing = 4
-          ChildSizing.TopBottomSpacing = 4
           ChildSizing.HorizontalSpacing = 10
           ChildSizing.VerticalSpacing = 2
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 28
+          ClientHeight = 24
           ClientWidth = 559
           TabOrder = 1
           Visible = False
           object lbImpFile: TLabel
-            Left = 4
+            Left = 0
             Height = 20
-            Top = 4
+            Top = 0
             Width = 39
             Align = alLeft
             Caption = 'Файл:'
@@ -255,21 +253,30 @@ object fmImportC: TfmImportC
             ParentColor = False
           end
           object edImpFileName: TEdit
-            Left = 53
+            Left = 49
             Height = 20
-            Top = 4
-            Width = 502
+            Top = 0
+            Width = 510
             Align = alClient
             BorderStyle = bsNone
             Color = clForm
             ReadOnly = True
             TabOrder = 0
           end
+          object bvDivider2: TBevel
+            Left = 0
+            Height = 2
+            Top = 22
+            Width = 559
+            Align = alBottom
+            Constraints.MaxHeight = 2
+            Shape = bsBottomLine
+          end
         end
         inline snImpEdit: TSynEdit
           Left = 0
-          Height = 445
-          Top = 28
+          Height = 443
+          Top = 24
           Width = 559
           Align = alClient
           Constraints.MinWidth = 250
@@ -712,7 +719,7 @@ object fmImportC: TfmImportC
           MouseActions = <>
           MouseTextActions = <>
           MouseSelActions = <>
-          MaxUndo = 0
+          MaxUndo = 128
           Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           Options2 = [eoFoldedCopyPaste, eoOverwriteBlock, eoColorSelectionTillEol]
           MouseOptions = [emCtrlWheelZoom]
@@ -778,16 +785,53 @@ object fmImportC: TfmImportC
             end
           end
         end
-        object lbImpDropFile: TLabel
+        object pFileBar: TPanel
           Left = 0
-          Height = 20
-          Top = 473
+          Height = 24
+          Top = 469
           Width = 559
           Align = alBottom
-          Alignment = taCenter
-          Caption = 'Бросьте файл в окно или вставьте код Ctrl+V'
-          Layout = tlBottom
-          ParentColor = False
+          AutoSize = True
+          BevelOuter = bvNone
+          ChildSizing.HorizontalSpacing = 10
+          ChildSizing.ControlsPerLine = 2
+          ClientHeight = 24
+          ClientWidth = 559
+          TabOrder = 2
+          object lbImpDropFile: TLabel
+            Left = 34
+            Height = 24
+            Top = 0
+            Width = 525
+            Align = alClient
+            Alignment = taCenter
+            Caption = 'Бросьте файл в окно или вставьте код Ctrl+V'
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object sbClearCode: TSpeedButton
+            Left = 0
+            Height = 24
+            Top = 0
+            Width = 24
+            Action = acClearCode
+            Align = alLeft
+            AutoSize = True
+            Flat = True
+            Images = fmMain.ImListNew16A
+            ImageIndex = 45
+            Margin = 4
+            ShowCaption = False
+          end
+        end
+        object bvDivider3: TBevel
+          Left = 0
+          Height = 2
+          Top = 467
+          Width = 559
+          Align = alBottom
+          Constraints.MaxHeight = 2
+          Shape = bsBottomLine
         end
       end
       object tsParams: TTabSheet
@@ -1228,12 +1272,12 @@ object fmImportC: TfmImportC
             Action = acTabParams
           end
           object ToolButton3: TToolButton
-            Left = 126
+            Left = 186
             Top = 0
             Action = fmMain.acHelp
           end
           object ToolButton5: TToolButton
-            Left = 186
+            Left = 126
             Top = 0
             Action = acUpdatePreview
           end
@@ -1299,7 +1343,7 @@ object fmImportC: TfmImportC
         TabOrder = 1
       end
     end
-    object bvDivider: TBevel
+    object bvDivider1: TBevel
       Left = 0
       Height = 523
       Top = 4
@@ -1317,6 +1361,7 @@ object fmImportC: TfmImportC
     Top = 328
     object acTabCode: TAction
       AutoCheck = True
+      Checked = True
       GroupIndex = 1
       Hint = 'Код С'
       ImageIndex = 7
@@ -1340,6 +1385,12 @@ object fmImportC: TfmImportC
       Hint = 'Обновить предпросмотр'
       ImageIndex = 42
       OnExecute = actionParamExecute
+    end
+    object acClearCode: TAction
+      Caption = 'Очистить'
+      Hint = 'Очистить код'
+      ImageIndex = 45
+      OnExecute = actionExecute
     end
   end
   object snCppSyntax: TSynCppSyn

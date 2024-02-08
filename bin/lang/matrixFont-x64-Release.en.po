@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-08 16:03+0200\n"
+"PO-Revision-Date: 2024-02-08 16:51+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -455,6 +455,15 @@ msgstr "Sample"
 #: tfmimport.tsexampletext.caption
 msgid "Текст образца"
 msgstr "Sample text"
+
+#: tfmimportc.acclearcode.caption
+msgctxt "tfmimportc.acclearcode.caption"
+msgid "Очистить"
+msgstr "Clear"
+
+#: tfmimportc.acclearcode.hint
+msgid "Очистить код"
+msgstr "Clear code"
 
 #: tfmimportc.acimportdo.caption
 msgctxt "tfmimportc.acimportdo.caption"

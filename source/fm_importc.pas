@@ -7,6 +7,7 @@ interface
 uses
   Classes, SysUtils, LCLType, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   ComCtrls, ActnList, StdCtrls, Spin, IniPropStorage, SynEdit, LazUTF8, SynHighlighterCpp,
+  Buttons,
   fm_settings, fm_about,
   font, u_utilities, u_encodings, u_helpers;
 
@@ -42,7 +43,9 @@ type
     acUpdatePreview:  TAction;
     alActionListImpC: TActionList;
 
-    bvDivider: TBevel;
+    bvDivider1: TBevel;
+    bvDivider3: TBevel;
+    bvDivider2: TBevel;
 
     cbImpExample:  TCheckBox;
     cbImpNBits:    TComboBox;
@@ -64,7 +67,6 @@ type
     lbImpChar:     TLabel;
     lbImpCharCode: TLabel;
     lbImpCharHex:  TLabel;
-    lbImpDropFile: TLabel;
     lbImpFile:     TLabel;
     lbImpNBits:    TLabel;
     lbImpOffset:   TLabel;
@@ -114,8 +116,12 @@ type
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
 
-    tsCode:   TTabSheet;
-    tsParams: TTabSheet;
+    tsCode:        TTabSheet;
+    tsParams:      TTabSheet;
+    acClearCode:   TAction;
+    pFileBar:      TPanel;
+    lbImpDropFile: TLabel;
+    sbClearCode:   TSpeedButton;
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -242,6 +248,9 @@ procedure TfmImportC.actionExecute(Sender: TObject);
 
       'acImportDo':
         ModalResult := mrOk;
+
+      'acClearCode':
+        snImpEdit.ClearAll;
 
       'edImpChar':
         begin

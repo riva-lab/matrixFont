@@ -442,6 +442,15 @@ msgstr ""
 msgid "Текст образца"
 msgstr ""
 
+#: tfmimportc.acclearcode.caption
+msgctxt "tfmimportc.acclearcode.caption"
+msgid "Очистить"
+msgstr ""
+
+#: tfmimportc.acclearcode.hint
+msgid "Очистить код"
+msgstr ""
+
 #: tfmimportc.acimportdo.caption
 msgctxt "tfmimportc.acimportdo.caption"
 msgid "Импортировать"
