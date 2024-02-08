@@ -590,12 +590,12 @@ msgstr ""
 
 #: tfmimportc.seimpoffset.hint
 msgctxt "tfmimportc.seimpoffset.hint"
-msgid "Смещение от начала массива"
+msgid "Смещение от начала массива (в числах)"
 msgstr ""
 
 #: tfmimportc.seimpskip.hint
 msgctxt "tfmimportc.seimpskip.hint"
-msgid "Пропуск значений в начале символа"
+msgid "Пропуск значений в начале символа (в числах)"
 msgstr ""
 
 #: tfmimportc.seimpstartitem.hint

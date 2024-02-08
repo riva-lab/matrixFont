@@ -1133,7 +1133,7 @@ object fmImportC: TfmImportC
                 AnchorSideTop.Side = asrBottom
                 Left = 0
                 Height = 28
-                Hint = 'Смещение от начала массива'
+                Hint = 'Смещение от начала массива (в числах)'
                 Top = 0
                 Width = 116
                 Constraints.MinWidth = 80
@@ -1145,7 +1145,7 @@ object fmImportC: TfmImportC
                 AnchorSideTop.Side = asrBottom
                 Left = 148
                 Height = 28
-                Hint = 'Пропуск значений в начале символа'
+                Hint = 'Пропуск значений в начале символа (в числах)'
                 Top = 0
                 Width = 115
                 Constraints.MinWidth = 80

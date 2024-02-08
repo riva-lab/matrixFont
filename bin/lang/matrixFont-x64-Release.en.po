@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-08 16:51+0200\n"
+"PO-Revision-Date: 2024-02-08 19:22+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -607,13 +607,13 @@ msgstr "Last char code"
 
 #: tfmimportc.seimpoffset.hint
 msgctxt "tfmimportc.seimpoffset.hint"
-msgid "Смещение от начала массива"
-msgstr "Offset from beginning of array"
+msgid "Смещение от начала массива (в числах)"
+msgstr "Offset from beginning of array (in numbers)"
 
 #: tfmimportc.seimpskip.hint
 msgctxt "tfmimportc.seimpskip.hint"
-msgid "Пропуск значений в начале символа"
-msgstr "Values skipped at beginning of char"
+msgid "Пропуск значений в начале символа (в числах)"
+msgstr "Values skipped at beginning of char (in numbers)"
 
 #: tfmimportc.seimpstartitem.hint
 msgctxt "tfmimportc.seimpstartitem.hint"
@@ -691,7 +691,7 @@ msgstr "Create new font based on system font"
 #: tfmmain.acfontimportccode.caption
 msgctxt "tfmmain.acfontimportccode.caption"
 msgid "Импорт кода C ..."
-msgstr "Import C code"
+msgstr "Import C code ..."
 
 #: tfmmain.acfontimportccode.hint
 msgctxt "tfmmain.acfontimportccode.hint"
