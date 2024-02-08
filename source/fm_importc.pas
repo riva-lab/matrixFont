@@ -194,22 +194,9 @@ procedure TfmImportC.FormShow(Sender: TObject);
       actionParamExecute(seImpLastItem);
       actionParamExecute(cbImpType);
 
-      actionExecute(acTabCode);
-      actionExecute(acTabParams);
+      if acTabCode.Checked then actionExecute(acTabCode);
+      if acTabParams.Checked then actionExecute(acTabParams);
       actionExecute(seImpCharCode);
-
-      // for test
-      //if edImpFileName.Text = '' then
-      //    try
-      //    FormDropFiles(Sender, ['ex\matrixFont\_verdana_10_special_font-mono.h']);
-      //    //FormDropFiles(Sender, ['ex\LCDVision\_lcdvisionCourier13.h']);
-      //    //FormDropFiles(Sender, ['ex\LCDVision\_lcdvisionArialNarrow16.h']);
-      //    //cbImpType.ItemIndex := 2;
-      //    //FormDropFiles(Sender, ['ex\Adafruit\1\Font5x7FixedMono.h']);
-      //    //cbImpType.ItemIndex := 1;
-      //    acTabParams.Execute;
-      //    except
-      //    end;
       end;
   end;
 
@@ -235,14 +222,14 @@ procedure TfmImportC.actionExecute(Sender: TObject);
 
       'acTabCode':
         begin
-        acTabCode.Checked := acTabCode.Checked;
-        if acTabCode.Checked then tsCode.Show;
+        acTabCode.Checked := True;
+        tsCode.Show;
         end;
 
       'acTabParams':
         begin
-        acTabParams.Checked := acTabParams.Checked;
-        if acTabParams.Checked then tsParams.Show;
+        acTabParams.Checked := True;
+        tsParams.Show;
         UpdateFont;
         end;
 
