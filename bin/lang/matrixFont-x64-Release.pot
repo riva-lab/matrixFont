@@ -87,6 +87,14 @@ msgstr ""
 msgid "предпросмотр"
 msgstr ""
 
+#: fm_importc.fm_impc_bitor_1
+msgid "LSB первый"
+msgstr ""
+
+#: fm_importc.fm_impc_bitor_2
+msgid "MSB первый"
+msgstr ""
+
 #: fm_importc.fm_impc_bits_1
 msgid "Определить автоматически"
 msgstr ""
@@ -512,6 +520,10 @@ msgstr ""
 #: tfmimportc.edimpexample.texthint
 msgctxt "tfmimportc.edimpexample.texthint"
 msgid "Образец текста"
+msgstr ""
+
+#: tfmimportc.lbimpbitorder.caption
+msgid "Порядок бит чисел"
 msgstr ""
 
 #: tfmimportc.lbimpchar.caption

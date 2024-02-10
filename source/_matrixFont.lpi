@@ -20,7 +20,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="80">
+      <ExcludedIdentifiers Count="81">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="TfmAbout.lbHardware.Caption"/>
         <Item3 Value="tfmabout.lbsite.caption"/>
@@ -101,6 +101,7 @@
         <Item78 Value="tfmimportc.tbselector.caption"/>
         <Item79 Value="tfmimportc.tscode.caption"/>
         <Item80 Value="tfmimportc.tsparams.caption"/>
+        <Item81 Value="tfmimportc.cbimpbitorder.text"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -108,8 +109,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
-      <RevisionNr Value="5"/>
-      <BuildNr Value="62"/>
+      <RevisionNr Value="6"/>
+      <BuildNr Value="63"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>

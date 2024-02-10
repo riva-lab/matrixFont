@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-08 19:22+0200\n"
+"PO-Revision-Date: 2024-02-10 17:38+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -100,6 +100,14 @@ msgstr "Bottom to top"
 #: fm_import.fm_import_scale
 msgid "предпросмотр"
 msgstr "preview"
+
+#: fm_importc.fm_impc_bitor_1
+msgid "LSB первый"
+msgstr "LSB first"
+
+#: fm_importc.fm_impc_bitor_2
+msgid "MSB первый"
+msgstr "MSB first"
 
 #: fm_importc.fm_impc_bits_1
 msgid "Определить автоматически"
@@ -530,6 +538,10 @@ msgstr "Snap all chars to left border of canvas"
 msgctxt "tfmimportc.edimpexample.texthint"
 msgid "Образец текста"
 msgstr "Sample text"
+
+#: tfmimportc.lbimpbitorder.caption
+msgid "Порядок бит чисел"
+msgstr "Numbers bit order"
 
 #: tfmimportc.lbimpchar.caption
 msgctxt "tfmimportc.lbimpchar.caption"

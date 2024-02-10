@@ -22,8 +22,8 @@ uses
 {$R *.res}
 
 begin
-  Application.Scaled         := True;
-  Application.Title          := 'matrixFont';
+  Application.Scaled := True;
+  Application.Title := 'matrixFont';
   RequireDerivedFormResource := True;
 
   Application.Initialize;

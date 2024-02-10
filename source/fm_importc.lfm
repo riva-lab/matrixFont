@@ -16,7 +16,7 @@ object fmImportC: TfmImportC
   OnShow = FormShow
   PopupMode = pmExplicit
   Position = poDefault
-  SessionProperties = 'acTabCode.Checked;acTabParams.Checked;cbImpExample.Checked;cbImpNBits.ItemIndex;cbImpOptimize.Checked;cbImpOrder.ItemIndex;cbImpSnapLeft.Checked;cbImpType.ItemIndex;edImpExample.Text;seImpHeight.Value;seImpLastItem.Value;seImpOffset.Value;seImpSkip.Value;seImpStartItem.Value;seImpWidth.Value;seImpCharCode.Value'
+  SessionProperties = 'acTabCode.Checked;acTabParams.Checked;cbImpExample.Checked;cbImpNBits.ItemIndex;cbImpOptimize.Checked;cbImpOrder.ItemIndex;cbImpSnapLeft.Checked;cbImpType.ItemIndex;edImpExample.Text;seImpCharCode.Value;seImpHeight.Value;seImpLastItem.Value;seImpOffset.Value;seImpSkip.Value;seImpStartItem.Value;seImpWidth.Value;cbImpBitOrder.ItemIndex'
   ShowHint = True
   LCLVersion = '2.2.6.0'
   object pLeft: TPanel
@@ -858,8 +858,8 @@ object fmImportC: TfmImportC
           TabOrder = 0
           object pMain: TPanel
             Left = 0
-            Height = 303
-            Top = 190
+            Height = 339
+            Top = 154
             Width = 551
             Align = alBottom
             AutoSize = True
@@ -870,7 +870,7 @@ object fmImportC: TfmImportC
             ChildSizing.EnlargeHorizontal = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 303
+            ClientHeight = 339
             ClientWidth = 551
             TabOrder = 1
             object edImpExample: TEdit
@@ -964,10 +964,36 @@ object fmImportC: TfmImportC
               Layout = tlCenter
               ParentColor = False
             end
-            object cbImpNBits: TComboBox
+            object cbImpBitOrder: TComboBox
               Left = 0
               Height = 28
               Top = 123
+              Width = 263
+              ItemHeight = 20
+              ItemIndex = 0
+              Items.Strings = (
+                'lsb'
+                'msb'
+              )
+              OnChange = actionParamExecute
+              Style = csDropDownList
+              TabOrder = 4
+              Text = 'lsb'
+            end
+            object lbImpBitOrder: TLabel
+              AnchorSideTop.Side = asrCenter
+              Left = 273
+              Height = 28
+              Top = 123
+              Width = 278
+              Caption = 'Порядок бит чисел'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object cbImpNBits: TComboBox
+              Left = 0
+              Height = 28
+              Top = 159
               Width = 263
               ItemHeight = 20
               Items.Strings = (
@@ -988,13 +1014,13 @@ object fmImportC: TfmImportC
               )
               OnChange = actionParamExecute
               Style = csDropDownList
-              TabOrder = 4
+              TabOrder = 5
             end
             object lbImpNBits: TLabel
               AnchorSideTop.Side = asrCenter
               Left = 273
               Height = 28
-              Top = 123
+              Top = 159
               Width = 278
               Caption = 'Разрядность чисел'
               Layout = tlCenter
@@ -1003,7 +1029,7 @@ object fmImportC: TfmImportC
             object pImpRange: TPanel
               Left = 0
               Height = 28
-              Top = 159
+              Top = 195
               Width = 263
               AutoSize = True
               BevelOuter = bvNone
@@ -1016,7 +1042,7 @@ object fmImportC: TfmImportC
               ChildSizing.ControlsPerLine = 2
               ClientHeight = 28
               ClientWidth = 263
-              TabOrder = 5
+              TabOrder = 6
               object seImpStartItem: TSpinEdit
                 AnchorSideTop.Side = asrBottom
                 Left = 0
@@ -1049,7 +1075,7 @@ object fmImportC: TfmImportC
               AnchorSideTop.Side = asrCenter
               Left = 273
               Height = 28
-              Top = 159
+              Top = 195
               Width = 278
               Caption = 'Диапазон символов'
               Layout = tlCenter
@@ -1058,7 +1084,7 @@ object fmImportC: TfmImportC
             object pImpSizes: TPanel
               Left = 0
               Height = 28
-              Top = 195
+              Top = 231
               Width = 263
               AutoSize = True
               BevelOuter = bvNone
@@ -1071,7 +1097,7 @@ object fmImportC: TfmImportC
               ChildSizing.ControlsPerLine = 2
               ClientHeight = 28
               ClientWidth = 263
-              TabOrder = 6
+              TabOrder = 7
               object seImpWidth: TSpinEdit
                 AnchorSideTop.Side = asrCenter
                 Left = 0
@@ -1106,7 +1132,7 @@ object fmImportC: TfmImportC
               AnchorSideTop.Side = asrCenter
               Left = 273
               Height = 28
-              Top = 195
+              Top = 231
               Width = 278
               Caption = 'Размер холста'
               Layout = tlCenter
@@ -1115,7 +1141,7 @@ object fmImportC: TfmImportC
             object pImpOffset: TPanel
               Left = 0
               Height = 28
-              Top = 231
+              Top = 267
               Width = 263
               AutoSize = True
               BevelOuter = bvNone
@@ -1128,7 +1154,7 @@ object fmImportC: TfmImportC
               ChildSizing.ControlsPerLine = 2
               ClientHeight = 28
               ClientWidth = 263
-              TabOrder = 7
+              TabOrder = 8
               object seImpOffset: TSpinEdit
                 AnchorSideTop.Side = asrBottom
                 Left = 0
@@ -1159,7 +1185,7 @@ object fmImportC: TfmImportC
               AnchorSideTop.Side = asrCenter
               Left = 273
               Height = 28
-              Top = 231
+              Top = 267
               Width = 278
               Caption = 'Смещение массива/символа'
               Layout = tlCenter
@@ -1169,34 +1195,34 @@ object fmImportC: TfmImportC
               Left = 0
               Height = 24
               Hint = 'Прижать все символы к левому краю холста'
-              Top = 275
+              Top = 311
               Width = 263
               BorderSpacing.Top = 16
               Caption = 'Прижать к левому краю'
               OnChange = actionParamExecute
-              TabOrder = 8
+              TabOrder = 9
             end
             object cbImpOptimize: TCheckBox
               Left = 273
               Height = 24
               Hint = 'Убрать общее пустое пространство вокруг символов'
-              Top = 275
+              Top = 311
               Width = 278
               Caption = 'Оптимизировать холст'
               Checked = True
               OnChange = actionParamExecute
               State = cbChecked
-              TabOrder = 9
+              TabOrder = 10
             end
           end
           object pImpExample: TPanel
             Left = 0
-            Height = 188
+            Height = 152
             Top = 0
             Width = 551
             Align = alClient
             BevelOuter = bvNone
-            ClientHeight = 188
+            ClientHeight = 152
             ClientWidth = 551
             Color = clForm
             Constraints.MinHeight = 150
@@ -1205,7 +1231,7 @@ object fmImportC: TfmImportC
             TabOrder = 0
             object imImpExample: TImage
               Left = 0
-              Height = 188
+              Height = 152
               Top = 0
               Width = 551
               Align = alClient

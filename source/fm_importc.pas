@@ -19,6 +19,9 @@ resourcestring
   FM_IMPC_ORDER_1 = 'Сначала столбцы';
   FM_IMPC_ORDER_2 = 'Сначала строки';
 
+  FM_IMPC_BITOR_1 = 'LSB первый';
+  FM_IMPC_BITOR_2 = 'MSB первый';
+
   FM_IMPC_BITS_1  = 'Определить автоматически';
   FM_IMPC_BITS_2  = '8 бит';
   FM_IMPC_BITS_3  = '16 бит';
@@ -37,6 +40,7 @@ type
 
   TfmImportC = class(TForm)
 
+    acClearCode:      TAction;
     acImportDo:       TAction;
     acTabCode:        TAction;
     acTabParams:      TAction;
@@ -47,6 +51,7 @@ type
     bvDivider3: TBevel;
     bvDivider2: TBevel;
 
+    cbImpBitOrder: TComboBox;
     cbImpExample:  TCheckBox;
     cbImpNBits:    TComboBox;
     cbImpOptimize: TCheckBox;
@@ -64,9 +69,11 @@ type
 
     IniStorageImportC: TIniPropStorage;
 
+    lbImpBitOrder: TLabel;
     lbImpChar:     TLabel;
     lbImpCharCode: TLabel;
     lbImpCharHex:  TLabel;
+    lbImpDropFile: TLabel;
     lbImpFile:     TLabel;
     lbImpNBits:    TLabel;
     lbImpOffset:   TLabel;
@@ -80,6 +87,7 @@ type
     pCharSelect:  TPanel;
     pCode:        TPanel;
     pFilename:    TPanel;
+    pFileBar:     TPanel;
     pImpControls: TPanel;
     pImpExample:  TPanel;
     pImpOffset:   TPanel;
@@ -95,6 +103,8 @@ type
     pSpacerCtrl:  TPanel;
 
     pcPages: TPageControl;
+
+    sbClearCode: TSpeedButton;
 
     seImpCharCode:  TSpinEdit;
     seImpHeight:    TSpinEdit;
@@ -116,12 +126,8 @@ type
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
 
-    tsCode:        TTabSheet;
-    tsParams:      TTabSheet;
-    acClearCode:   TAction;
-    pFileBar:      TPanel;
-    lbImpDropFile: TLabel;
-    sbClearCode:   TSpeedButton;
+    tsCode:   TTabSheet;
+    tsParams: TTabSheet;
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -164,6 +170,7 @@ procedure TfmImportC.FormShow(Sender: TObject);
     lbInfo.Caption := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
 
     UpdateComboBox(cbImpType, [FM_IMPC_TYPE_1, FM_IMPC_TYPE_2, FM_IMPC_TYPE_3, FM_IMPC_TYPE_4]);
+    UpdateComboBox(cbImpBitOrder, [FM_IMPC_BITOR_1, FM_IMPC_BITOR_2]);
     UpdateComboBox(cbImpOrder, [FM_IMPC_ORDER_1, FM_IMPC_ORDER_2]);
     UpdateComboBox(cbImpNBits, [FM_IMPC_BITS_1, FM_IMPC_BITS_2, FM_IMPC_BITS_3, FM_IMPC_BITS_4, FM_IMPC_BITS_5, FM_IMPC_BITS_6]);
 
@@ -273,7 +280,8 @@ procedure TfmImportC.actionExecute(Sender: TObject);
 
 procedure TfmImportC.actionParamExecute(Sender: TObject);
   var
-    _enabled: Boolean;
+    _enabled:    Boolean;
+    _importMode: TImportMode;
   begin
     if Sender = nil then Exit;
     BeginFormUpdate;
@@ -282,8 +290,10 @@ procedure TfmImportC.actionParamExecute(Sender: TObject);
 
       'cbImpType':
         begin
-        _enabled               := TImportMode(cbImpType.ItemIndex) = imCustom;
-        cbImpOrder.Enabled     := TImportMode(cbImpType.ItemIndex) <> imAdafruit;
+        _importMode            := TImportMode(cbImpType.ItemIndex);
+        _enabled               := _importMode = imCustom;
+        cbImpOrder.Enabled     := _importMode <> imAdafruit;
+        cbImpBitOrder.Enabled  := not (_importMode in [imAdafruit, imLCDVision]);
         cbImpNBits.Enabled     := _enabled;
         lbImpNBits.Enabled     := _enabled;
         seImpStartItem.Enabled := _enabled;
@@ -445,6 +455,7 @@ procedure TfmImportC.UpdateFont(AFont: TFont);
       // set font parameters
       ScanColsFirst := cbImpOrder.ItemIndex = 0;
       NumbersBits   := cbImpNBits.ItemIndex * 8;
+      MSBFirst      := cbImpBitOrder.ItemIndex > 0;
       Width         := seImpWidth.Value;
       Height        := seImpHeight.Value;
       FontStartItem := seImpStartItem.Value;

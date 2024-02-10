@@ -109,6 +109,7 @@ type
     FScanColsToRight:  Boolean;     // поле - флаг направления сканирования столбцов
     FScanRowsToDown:   Boolean;     // поле - флаг направления сканирования строк
     FNumbersView:      TNumberView; // поле - настройка представления выходных чисел
+    FMSBFirst:         Boolean;     // поле - порядок вывода бит (используется только в импорте из кода)
     FNumbersInversion: Boolean;     // поле - битовая инверсия представления выходных чисел
     FEmptyBits:        TEmptyBit;   // поле - настройка заполнения пустых разрядов
     FFontType:         TFontType;   // поле - тип шрифта
@@ -261,6 +262,9 @@ type
 
     // настройка представления выходных чисел
     property NumbersView: TNumberView read FNumbersView write FNumbersView;
+
+    // порядок вывода бит (используется только в импорте из кода)
+    property MSBFirst: Boolean read FMSBFirst write FMSBFirst;
 
     // битовая инверсия представления выходных чисел
     property NumbersInversion: Boolean read FNumbersInversion write FNumbersInversion;
@@ -903,6 +907,7 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
       r: array of String = (         // Transformations:
         '\/\*(?:.|\s)*?\*\/', ' ',   // - remove block comments
         '\/\/.*?$', ' ',             // - remove line comments
+        ',', ', ',                   // - commas
         '\{', ' { ',                 // - opening brace {
         '\}', ' } '                  // - closing brace }
         );
@@ -1215,6 +1220,29 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
         end;
     end;
 
+  procedure ChangeBitOrder(var AArray: TQWordArray);
+
+    function ChangeBitOrder(AValue: QWord): QWord;
+      var
+        i: Integer;
+      begin
+        Result   := 0;
+        for i    := 1 to FNumbersBits do
+          begin
+          Result := Result shl 1;
+          if (AValue and 1) <> 0 then
+            Result := Result or 1;
+          AValue := AValue shr 1;
+          end;
+      end;
+
+    var
+      i: Integer;
+    begin
+      for i := 0 to High(AArray) do
+        AArray[i] := ChangeBitOrder(AArray[i]);
+    end;
+
   procedure ReadAdafruitChar(AChar: Integer; AGFXArr: TGFXArray; ABitmap: TQWordArray);
     var
       x:     Integer = 0;
@@ -1288,6 +1316,8 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
     sx := FWidth;
     sy := FHeight;
     if FScanColsFirst then SwapInts(sx, sy);
+    if not (AType in [imAdafruit, imLCDVision]) then
+      if FMSBFirst then ChangeBitOrder(values);
 
     chLine := (sx - 1) div FNumbersBits + 1;
     chSize := chLine * sy - 1;
