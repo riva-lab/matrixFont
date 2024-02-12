@@ -20,7 +20,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="81">
+      <ExcludedIdentifiers Count="83">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="TfmAbout.lbHardware.Caption"/>
         <Item3 Value="tfmabout.lbsite.caption"/>
@@ -102,6 +102,8 @@
         <Item79 Value="tfmimportc.tscode.caption"/>
         <Item80 Value="tfmimportc.tsparams.caption"/>
         <Item81 Value="tfmimportc.cbimpbitorder.text"/>
+        <Item82 Value="tfmmap.caption"/>
+        <Item83 Value="tfmmap.cbmapwidth.text"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -109,8 +111,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
-      <RevisionNr Value="6"/>
-      <BuildNr Value="63"/>
+      <RevisionNr Value="7"/>
+      <BuildNr Value="64"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -262,7 +264,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="24">
+    <Units Count="25">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -399,6 +401,13 @@
         <Filename Value="fm_main_controls.inc"/>
         <IsPartOfProject Value="True"/>
       </Unit23>
+      <Unit24>
+        <Filename Value="fm_map.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fmMap"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit24>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

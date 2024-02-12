@@ -152,6 +152,11 @@ msgctxt "fm_main.txt_symbol"
 msgid "Символ"
 msgstr ""
 
+#: fm_map.fm_map_caption
+msgctxt "fm_map.fm_map_caption"
+msgid "Карта символов"
+msgstr ""
+
 #: fm_preview.fm_prev_example
 msgctxt "fm_preview.fm_prev_example"
 msgid "Образец текста"
@@ -926,6 +931,15 @@ msgstr ""
 msgid "Список ранее открытых файлов"
 msgstr ""
 
+#: tfmmain.acmap.caption
+msgctxt "tfmmain.acmap.caption"
+msgid "Карта символов"
+msgstr ""
+
+#: tfmmain.acmap.hint
+msgid "Отобразить окно с картой всех символов"
+msgstr ""
+
 #: tfmmain.acmenuedit.caption
 msgid "Правка"
 msgstr ""
@@ -1368,6 +1382,24 @@ msgstr ""
 #: tfmmain.sgnavigator.columns[2].title.caption
 msgctxt "tfmmain.sgnavigator.columns[2].title.caption"
 msgid "Вид"
+msgstr ""
+
+#: tfmmap.lbmapcols.caption
+msgctxt "tfmmap.lbmapcols.caption"
+msgid "Столбцы:"
+msgstr ""
+
+#: tfmmap.lbmapoffset.caption
+msgctxt "tfmmap.lbmapoffset.caption"
+msgid "Дистанция:"
+msgstr ""
+
+#: tfmmap.sespacex.hint
+msgid "Дистанция между символами по горизонтали"
+msgstr ""
+
+#: tfmmap.sespacey.hint
+msgid "Дистанция между символами по вертикали"
 msgstr ""
 
 #: tfmnew.bbok.caption

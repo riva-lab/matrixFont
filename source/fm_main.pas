@@ -12,7 +12,7 @@ uses
 
   // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
-  fm_optimize, fm_range, fm_about, fm_settings, fm_importc,
+  fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map,
 
   // functional units
   font, symbol, app_ver, cOpenFileList,
@@ -103,6 +103,7 @@ type
     procedure FontCreateNew(w, h, si, l, e: Integer; n, a: String);
     procedure FontSave(AFileName: String);
     function GetConfirmation: Boolean;
+    procedure OnMapSelectChar(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
     procedure FileStatusUpdate;
     procedure FontActionExecute;
@@ -182,6 +183,8 @@ procedure TfmMain.FormShow(Sender: TObject);
     acZoomFit.Execute;
     tmrMain10msTimer(Sender);
     actionPasteMode(Sender);
+
+    fmMap.OnMouseEvent := @OnMapSelectChar;
 
     {$IfDef DEBUG}
     miFPS.Visible := True;
@@ -1028,6 +1031,12 @@ procedure TfmMain.actionService(Sender: TObject);
   begin
     case TAction(Sender).Name of
 
+      'acMap':     // действие: показать окно "Карта символов"
+        begin
+        fmMap.FontX := FontSet;
+        fmMap.Show;
+        end;
+
       'acSetting': // действие: открыть окно "настройки приложения"
         if fmSettings.ShowModal = mrOk then
           begin
@@ -1370,6 +1379,13 @@ function TfmMain.GetConfirmation: Boolean;
     Result := not file_changed;
   end;
 
+// event on select char in map
+procedure TfmMain.OnMapSelectChar(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+  begin
+    if (Button = mbLeft) and (Shift = [ssDouble]) then
+      sgNavigator.Row := fmMap.SelectedIndex + 1;
+  end;
+
 
  { ***  Обновление состояния компонентов  *** }
 
@@ -1458,6 +1474,10 @@ procedure TfmMain.ReDrawContent;
     // обновление изображения предпросмотра
     if (fmPreview <> nil) and fmPreview.Visible and fmSettings.PreviewRefresh then
       fmPreview.UpdatePreview;
+
+    // обновление карты символов
+    if (fmMap <> nil) and fmMap.Visible then
+      fmMap.UpdateMap;
   end;
 
 // adjust sizes of UI elements
@@ -1516,6 +1536,7 @@ procedure TfmMain.AdjustComponentSizes;
     ImListNew16A.GetIcon(29, fmGen.Icon);
     ImListNew16A.GetIcon(7, fmImportC.Icon);
     ImListNew16A.GetIcon(27, fmPreview.Icon);
+    ImListNew16A.GetIcon(64, fmMap.Icon);
     ImListNew32A.GetBitmap(26, imFindIcon.Picture.Bitmap);
 
     Font.Height := 0; // set default size as reference

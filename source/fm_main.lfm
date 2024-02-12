@@ -734,7 +734,7 @@ object fmMain: TfmMain
       Left = 4
       Height = 30
       Top = 4
-      Width = 346
+      Width = 376
       Align = alNone
       AutoSize = True
       BorderSpacing.Right = 20
@@ -780,7 +780,7 @@ object fmMain: TfmMain
         Style = tbsDivider
       end
       object ToolButton9: TToolButton
-        Left = 251
+        Left = 281
         Top = 0
         Action = acGenerate
       end
@@ -795,19 +795,19 @@ object fmMain: TfmMain
         Action = acFontImport
       end
       object ToolButton44: TToolButton
-        Left = 221
+        Left = 251
         Top = 0
         Action = acFontPreview
       end
       object ToolButton16: TToolButton
-        Left = 281
+        Left = 311
         Height = 30
         Top = 0
         Caption = 'ToolButton16'
         Style = tbsDivider
       end
       object ToolButton29: TToolButton
-        Left = 286
+        Left = 316
         Top = 0
         Action = acSetting
       end
@@ -817,7 +817,7 @@ object fmMain: TfmMain
         Action = acSaveAs
       end
       object ToolButton35: TToolButton
-        Left = 316
+        Left = 346
         Top = 0
         Action = acHelp
       end
@@ -826,9 +826,14 @@ object fmMain: TfmMain
         Top = 0
         Action = acFontImportCCode
       end
+      object ToolButton78: TToolButton
+        Left = 221
+        Top = 0
+        Action = acMap
+      end
     end
     object tbEditFont: TToolBar
-      Left = 370
+      Left = 400
       Height = 30
       Top = 4
       Width = 221
@@ -938,6 +943,9 @@ object fmMain: TfmMain
       end
       object MenuItem83: TMenuItem
         Action = acFontProperties
+      end
+      object MenuItem114: TMenuItem
+        Action = acMap
       end
       object MenuItem90: TMenuItem
         Action = acFontPreview
@@ -2003,6 +2011,14 @@ object fmMain: TfmMain
       ImageIndex = 54
       OnExecute = actionService
     end
+    object acMap: TAction
+      Category = 'Вид'
+      Caption = 'Карта символов'
+      Hint = 'Отобразить окно с картой всех символов'
+      ImageIndex = 64
+      OnExecute = actionService
+      ShortCut = 119
+    end
   end
   object dlgOpen: TOpenDialog
     Title = 'Открыть файл шрифта'
@@ -2110,6 +2126,7 @@ object fmMain: TfmMain
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m14 8-6 6-6-6"/><path d="m8 2v12"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m14 8-6 6-6-6"/><path d="m8 2v12"/></g></svg>'
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m8 2-6 6 6 6"/><path d="m14 8h-12"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m8 2-6 6 6 6"/><path d="m14 8h-12"/></g></svg>'
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m8 2 6 6-6 6"/><path d="m2 8h12"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m8 2 6 6-6 6"/><path d="m2 8h12"/></g></svg>'
+      '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></g></svg>'
     )
     List.SVGNames = (
       'new-file'
@@ -2176,6 +2193,7 @@ object fmMain: TfmMain
       'arrow-down'
       'arrow-left'
       'arrow-right'
+      'map'
     )
     Left = 275
     Top = 194

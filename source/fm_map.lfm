@@ -1,0 +1,137 @@
+object fmMap: TfmMap
+  Left = 338
+  Height = 428
+  Top = 177
+  Width = 525
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'fmMap'
+  ClientHeight = 428
+  ClientWidth = 525
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 400
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  SessionProperties = 'cbMapWidth.ItemIndex;Height;seSpaceX.Value;seSpaceY.Value;Width;pMapControls.Tag'
+  ShowHint = True
+  LCLVersion = '2.2.6.0'
+  object sgMap: TStringGrid
+    Left = 0
+    Height = 384
+    Top = 0
+    Width = 525
+    Align = alClient
+    AutoFillColumns = True
+    BorderStyle = bsNone
+    ColCount = 8
+    DefaultColWidth = 80
+    DoubleBuffered = True
+    GridLineColor = cl3DLight
+    GridLineWidth = 0
+    MouseWheelOption = mwGrid
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goThumbTracking, goSmoothScroll]
+    ParentDoubleBuffered = False
+    TabOrder = 0
+    TitleStyle = tsNative
+    UseXORFeatures = True
+    OnChangeBounds = sgMapChangeBounds
+    OnDblClick = sgMapDblClick
+    OnDrawCell = sgMapDrawCell
+    OnSelection = sgMapSelection
+    OnSelectCell = sgMapSelectCell
+    ColWidths = (
+      65
+      65
+      65
+      65
+      65
+      65
+      65
+      70
+    )
+  end
+  object pMapControls: TPanel
+    Left = 0
+    Height = 44
+    Top = 384
+    Width = 525
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 8
+    ChildSizing.TopBottomSpacing = 8
+    ChildSizing.HorizontalSpacing = 10
+    ChildSizing.Layout = cclTopToBottomThenLeftToRight
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 44
+    ClientWidth = 525
+    TabOrder = 1
+    object lbMapCols: TLabel
+      Left = 8
+      Height = 28
+      Top = 8
+      Width = 64
+      Caption = 'Столбцы:'
+      Layout = tlCenter
+      ParentColor = False
+    end
+    object cbMapWidth: TComboBox
+      Left = 82
+      Height = 28
+      Top = 8
+      Width = 125
+      ItemHeight = 20
+      ItemIndex = 3
+      Items.Strings = (
+        '2'
+        '4'
+        '8'
+        '16'
+        '32'
+        '64'
+      )
+      OnChange = sgMapChangeBounds
+      Style = csDropDownList
+      TabOrder = 0
+      Text = '16'
+    end
+    object lbMapOffset: TLabel
+      Left = 227
+      Height = 28
+      Top = 8
+      Width = 78
+      BorderSpacing.Left = 20
+      Caption = 'Дистанция:'
+      Layout = tlCenter
+      ParentColor = False
+    end
+    object seSpaceX: TSpinEdit
+      Left = 315
+      Height = 28
+      Hint = 'Дистанция между символами по горизонтали'
+      Top = 8
+      Width = 63
+      MaxValue = 16
+      OnChange = sgMapChangeBounds
+      TabOrder = 1
+      Value = 2
+    end
+    object seSpaceY: TSpinEdit
+      Left = 388
+      Height = 28
+      Hint = 'Дистанция между символами по вертикали'
+      Top = 8
+      Width = 63
+      MaxValue = 16
+      OnChange = sgMapChangeBounds
+      TabOrder = 2
+      Value = 2
+    end
+  end
+  object IniStorageMap: TIniPropStorage
+    StoredValues = <>
+    Left = 104
+    Top = 88
+  end
+end

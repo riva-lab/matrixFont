@@ -11,7 +11,7 @@ uses
 
   // project forms
   fm_about, fm_confirm, fm_gen, fm_import, fm_importc, fm_main, fm_new,
-  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes,
+  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map,
 
   // functional units
   font, symbol, app_ver, help, cOpenFileList,
@@ -40,6 +40,7 @@ begin
   Application.CreateForm(TfmAbout, fmAbout);
   Application.CreateForm(TfmSettings, fmSettings);
   Application.CreateForm(TfmImportC, fmImportC);
+  Application.CreateForm(TfmMap, fmMap);
   Application.Run;
 end.
 
