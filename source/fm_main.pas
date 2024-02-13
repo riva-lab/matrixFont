@@ -950,6 +950,13 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
 
       'acSymbolCenterV':    // действие: центрирование символа вертикально
         item.Center(True);
+
+
+      'acSymbolRotateCW':   // действие: поворот символа по ч.с.
+        item.Rotate(True);
+
+      'acSymbolRotateCCW':  // действие: поворот символа против ч.с.
+        item.Rotate(False);
       end;
 
     ReDrawAfterAction;
@@ -1008,6 +1015,13 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
 
       'acFontCenterV':    // действие: центрирование символов шрифта вертикально
         FontSet.Center(True);
+
+
+      'acFontRotateCW':   // действие: поворот символов шрифта по ч.с.
+        FontSet.Rotate(True);
+
+      'acFontRotateCCW':  // действие: поворот символов шрифта против ч.с.
+        FontSet.Rotate(False);
 
 
       'acFontPaste':      // действие: пакетная вставка

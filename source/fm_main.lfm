@@ -1,13 +1,13 @@
 object fmMain: TfmMain
   Left = 350
-  Height = 588
+  Height = 620
   Top = 142
   Width = 750
   HelpContext = 41
   AllowDropFiles = True
-  ClientHeight = 563
+  ClientHeight = 595
   ClientWidth = 750
-  Constraints.MinHeight = 588
+  Constraints.MinHeight = 620
   Constraints.MinWidth = 750
   DesignTimePPI = 120
   Menu = MainMenu1
@@ -25,7 +25,7 @@ object fmMain: TfmMain
   object stStatusBar: TStatusBar
     Left = 0
     Height = 29
-    Top = 534
+    Top = 566
     Width = 750
     AutoHint = True
     Panels = <    
@@ -47,7 +47,7 @@ object fmMain: TfmMain
   object psSplit: TPairSplitter
     Cursor = crDefault
     Left = 0
-    Height = 491
+    Height = 523
     Top = 43
     Width = 750
     Align = alClient
@@ -56,11 +56,11 @@ object fmMain: TfmMain
     object psSide1: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 491
+      Height = 523
       Top = 0
       Width = 216
       ClientWidth = 216
-      ClientHeight = 491
+      ClientHeight = 523
       Constraints.MinWidth = 188
       object lbNavigator: TLabel
         Left = 0
@@ -77,7 +77,7 @@ object fmMain: TfmMain
       end
       object pEffectsFont: TPanel
         Left = 0
-        Height = 465
+        Height = 497
         Top = 26
         Width = 39
         Align = alLeft
@@ -86,13 +86,13 @@ object fmMain: TfmMain
         ChildSizing.LeftRightSpacing = 4
         ChildSizing.EnlargeVertical = crsHomogenousChildResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ClientHeight = 465
+        ClientHeight = 497
         ClientWidth = 39
         TabOrder = 1
         object tbEffectsFont: TToolBar
           Left = 4
-          Height = 440
-          Top = 12
+          Height = 505
+          Top = 0
           Width = 31
           Align = alNone
           AutoSize = True
@@ -139,78 +139,95 @@ object fmMain: TfmMain
           end
           object ToolButton51: TToolButton
             Left = 1
-            Top = 100
+            Top = 230
             Action = acFontShiftLeft
           end
           object ToolButton52: TToolButton
             Left = 1
-            Top = 130
+            Top = 260
             Action = acFontShiftRight
           end
           object ToolButton53: TToolButton
             Left = 1
-            Top = 160
+            Top = 290
             Action = acFontShiftUp
           end
           object ToolButton54: TToolButton
             Left = 1
-            Top = 190
+            Top = 320
             Action = acFontShiftDown
           end
           object ToolButton55: TToolButton
             Left = 1
-            Top = 220
+            Top = 350
             Action = acFontShiftRollover
           end
           object ToolButton56: TToolButton
             Left = 1
-            Top = 250
+            Top = 160
             Width = 30
             Caption = 'ToolButton56'
             Style = tbsDivider
           end
           object ToolButton57: TToolButton
             Left = 1
-            Top = 255
+            Top = 385
             Action = acFontSnapLeft
           end
           object ToolButton58: TToolButton
             Left = 1
-            Top = 285
+            Top = 415
             Action = acFontSnapRight
           end
           object ToolButton59: TToolButton
             Left = 1
-            Top = 315
+            Top = 445
             Action = acFontSnapUp
           end
           object ToolButton60: TToolButton
             Left = 1
-            Top = 345
+            Top = 475
             Action = acFontSnapDown
           end
           object ToolButton4: TToolButton
             Left = 1
-            Top = 375
+            Top = 225
             Width = 30
             Caption = 'ToolButton4'
             Style = tbsDivider
           end
           object ToolButton64: TToolButton
             Left = 1
-            Top = 380
+            Top = 100
             Action = acFontCenterH
           end
           object ToolButton65: TToolButton
             Left = 1
-            Top = 410
+            Top = 130
             Action = acFontCenterV
+          end
+          object ToolButton82: TToolButton
+            Left = 1
+            Top = 380
+            Width = 30
+            Caption = 'ToolButton82'
+            Style = tbsDivider
+          end
+          object ToolButton83: TToolButton
+            Left = 1
+            Top = 165
+            Action = acFontRotateCW
+          end
+          object ToolButton84: TToolButton
+            Left = 1
+            Top = 195
+            Action = acFontRotateCCW
           end
         end
       end
       object sgNavigator: TStringGrid
         Left = 39
-        Height = 465
+        Height = 497
         Top = 26
         Width = 177
         Align = alClient
@@ -286,25 +303,25 @@ object fmMain: TfmMain
     object psSide2: TPairSplitterSide
       Cursor = crArrow
       Left = 221
-      Height = 491
+      Height = 523
       Top = 0
       Width = 529
       ClientWidth = 529
-      ClientHeight = 491
+      ClientHeight = 523
       Constraints.MinWidth = 300
       object pEditor: TPanel
         Left = 0
-        Height = 465
+        Height = 497
         Top = 26
         Width = 490
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 465
+        ClientHeight = 497
         ClientWidth = 490
         TabOrder = 0
         object scbEditor: TScrollBox
           Left = 0
-          Height = 306
+          Height = 338
           Top = 0
           Width = 490
           HorzScrollBar.Page = 113
@@ -318,14 +335,14 @@ object fmMain: TfmMain
           ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
           ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ClientHeight = 306
+          ClientHeight = 338
           ClientWidth = 490
           TabOrder = 0
           OnMouseWheel = imMouseWheel
           object imEditor: TImage
             Left = 189
             Height = 113
-            Top = 97
+            Top = 113
             Width = 113
             AntialiasingMode = amOff
             AutoSize = True
@@ -337,7 +354,7 @@ object fmMain: TfmMain
         object pEditChar: TPanel
           Left = 0
           Height = 159
-          Top = 306
+          Top = 338
           Width = 490
           Align = alBottom
           AutoSize = True
@@ -580,7 +597,7 @@ object fmMain: TfmMain
       end
       object pEffectsChar: TPanel
         Left = 490
-        Height = 465
+        Height = 497
         Top = 26
         Width = 39
         Align = alRight
@@ -589,13 +606,13 @@ object fmMain: TfmMain
         ChildSizing.LeftRightSpacing = 4
         ChildSizing.EnlargeVertical = crsHomogenousChildResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ClientHeight = 465
+        ClientHeight = 497
         ClientWidth = 39
         TabOrder = 1
         object tbEffectsChar: TToolBar
           Left = 4
-          Height = 440
-          Top = 12
+          Height = 505
+          Top = 0
           Width = 31
           Align = alNone
           AutoSize = True
@@ -630,55 +647,55 @@ object fmMain: TfmMain
           end
           object ToolButton19: TToolButton
             Left = 1
-            Top = 100
+            Top = 230
             Action = acSymbolShiftLeft
           end
           object ToolButton20: TToolButton
             Left = 1
-            Top = 130
+            Top = 260
             Action = acSymbolShiftRight
           end
           object ToolButton21: TToolButton
             Left = 1
-            Top = 160
+            Top = 290
             Action = acSymbolShiftUp
           end
           object ToolButton22: TToolButton
             Left = 1
-            Top = 190
+            Top = 320
             Action = acSymbolShiftDown
           end
           object ToolButton23: TToolButton
             Left = 1
-            Top = 220
+            Top = 350
             Action = acFontShiftRollover
             Style = tbsCheck
           end
           object ToolButton24: TToolButton
             Left = 1
-            Top = 250
+            Top = 160
             Width = 30
             Caption = 'ToolButton24'
             Style = tbsDivider
           end
           object ToolButton25: TToolButton
             Left = 1
-            Top = 255
+            Top = 385
             Action = acSymbolSnapLeft
           end
           object ToolButton26: TToolButton
             Left = 1
-            Top = 285
+            Top = 415
             Action = acSymbolSnapRight
           end
           object ToolButton27: TToolButton
             Left = 1
-            Top = 315
+            Top = 445
             Action = acSymbolSnapUp
           end
           object ToolButton28: TToolButton
             Left = 1
-            Top = 345
+            Top = 475
             Action = acSymbolSnapDown
           end
           object ToolButton15: TToolButton
@@ -695,20 +712,37 @@ object fmMain: TfmMain
           end
           object ToolButton67: TToolButton
             Left = 1
-            Top = 375
+            Top = 225
             Width = 30
             Caption = 'ToolButton67'
             Style = tbsDivider
           end
           object ToolButton68: TToolButton
             Left = 1
-            Top = 380
+            Top = 100
             Action = acSymbolCenterH
           end
           object ToolButton72: TToolButton
             Left = 1
-            Top = 410
+            Top = 130
             Action = acSymbolCenterV
+          end
+          object ToolButton79: TToolButton
+            Left = 1
+            Top = 380
+            Width = 30
+            Caption = 'ToolButton79'
+            Style = tbsDivider
+          end
+          object ToolButton80: TToolButton
+            Left = 1
+            Top = 165
+            Action = acSymbolRotateCW
+          end
+          object ToolButton81: TToolButton
+            Left = 1
+            Top = 195
+            Action = acSymbolRotateCCW
           end
         end
       end
@@ -1104,6 +1138,24 @@ object fmMain: TfmMain
           Action = acSymbolMirrorVert
         end
       end
+      object MenuItem102: TMenuItem
+        Action = acMenuSymbolCenter
+        object MenuItem103: TMenuItem
+          Action = acSymbolCenterH
+        end
+        object MenuItem104: TMenuItem
+          Action = acSymbolCenterV
+        end
+      end
+      object MenuItem115: TMenuItem
+        Action = acMenuSymbolRotate
+        object MenuItem116: TMenuItem
+          Action = acSymbolRotateCW
+        end
+        object MenuItem117: TMenuItem
+          Action = acSymbolRotateCCW
+        end
+      end
       object MenuItem14: TMenuItem
         Action = acMenuSymbolShift
         object MenuItem18: TMenuItem
@@ -1141,15 +1193,6 @@ object fmMain: TfmMain
           Action = acSymbolSnapDown
         end
       end
-      object MenuItem102: TMenuItem
-        Action = acMenuSymbolCenter
-        object MenuItem103: TMenuItem
-          Action = acSymbolCenterH
-        end
-        object MenuItem104: TMenuItem
-          Action = acSymbolCenterV
-        end
-      end
     end
     object MenuItem21: TMenuItem
       Action = acMenuFont
@@ -1172,6 +1215,24 @@ object fmMain: TfmMain
         end
         object MenuItem44: TMenuItem
           Action = acFontMirrorVert
+        end
+      end
+      object MenuItem105: TMenuItem
+        Action = acMenuFontCenter
+        object MenuItem106: TMenuItem
+          Action = acFontCenterH
+        end
+        object MenuItem107: TMenuItem
+          Action = acFontCenterV
+        end
+      end
+      object MenuItem118: TMenuItem
+        Action = acMenuFontRotate
+        object MenuItem119: TMenuItem
+          Action = acFontRotateCW
+        end
+        object MenuItem120: TMenuItem
+          Action = acFontRotateCCW
         end
       end
       object MenuItem26: TMenuItem
@@ -1209,15 +1270,6 @@ object fmMain: TfmMain
         end
         object MenuItem53: TMenuItem
           Action = acFontSnapDown
-        end
-      end
-      object MenuItem105: TMenuItem
-        Action = acMenuFontCenter
-        object MenuItem106: TMenuItem
-          Action = acFontCenterH
-        end
-        object MenuItem107: TMenuItem
-          Action = acFontCenterV
         end
       end
       object MenuItem70: TMenuItem
@@ -1479,7 +1531,7 @@ object fmMain: TfmMain
       Hint = 'Вкл/выкл сдвиг с переносом'
       ImageIndex = 35
       OnExecute = SettingsApplyToCurrentSession
-      ShortCut = 32850
+      ShortCut = 32849
     end
     object acMenuFontSnap: TAction
       Category = 'Шрифт - Прижать'
@@ -2008,7 +2060,7 @@ object fmMain: TfmMain
       Category = 'Справка'
       Caption = 'Репозиторий проекта'
       Hint = 'Открыть репозиторий приложения'
-      ImageIndex = 54
+      ImageIndex = 65
       OnExecute = actionService
     end
     object acMap: TAction
@@ -2018,6 +2070,50 @@ object fmMain: TfmMain
       ImageIndex = 64
       OnExecute = actionService
       ShortCut = 119
+    end
+    object acMenuSymbolRotate: TAction
+      Category = 'Символ - Повернуть'
+      Caption = 'Повернуть'
+      DisableIfNoHandler = False
+      ImageIndex = 42
+    end
+    object acSymbolRotateCW: TAction
+      Category = 'Символ - Повернуть'
+      Caption = '+90 / по ч.с.'
+      Hint = 'Повернуть по часовой стрелке на 90 гр.'
+      ImageIndex = 66
+      OnExecute = actionSymbolGeneral
+      ShortCut = 32852
+    end
+    object acSymbolRotateCCW: TAction
+      Category = 'Символ - Повернуть'
+      Caption = '-90 / против ч.с.'
+      Hint = 'Повернуть против часовой стрелки на 90 гр.'
+      ImageIndex = 67
+      OnExecute = actionSymbolGeneral
+      ShortCut = 32837
+    end
+    object acMenuFontRotate: TAction
+      Category = 'Шрифт - Повернуть'
+      Caption = 'Повернуть символы'
+      DisableIfNoHandler = False
+      ImageIndex = 42
+    end
+    object acFontRotateCW: TAction
+      Category = 'Шрифт - Повернуть'
+      Caption = '+90 / по ч.с.'
+      Hint = 'Повернуть все символы '#13#10'по часовой стрелке на 90 гр.'
+      ImageIndex = 66
+      OnExecute = actionFontGeneral
+      ShortCut = 41044
+    end
+    object acFontRotateCCW: TAction
+      Category = 'Шрифт - Повернуть'
+      Caption = '-90 / против ч.с.'
+      Hint = 'Повернуть все символы '#13#10'против часовой стрелки на 90 гр.'
+      ImageIndex = 67
+      OnExecute = actionFontGeneral
+      ShortCut = 41029
     end
   end
   object dlgOpen: TOpenDialog
@@ -2127,6 +2223,9 @@ object fmMain: TfmMain
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m8 2-6 6 6 6"/><path d="m14 8h-12"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m8 2-6 6 6 6"/><path d="m14 8h-12"/></g></svg>'
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m8 2 6 6-6 6"/><path d="m2 8h12"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m8 2 6 6-6 6"/><path d="m2 8h12"/></g></svg>'
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></g></svg>'
+      '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><circle cx="5" cy="3.5" r="1.5"/><circle cx="11.5" cy="4.5" r="1.5"/><circle cx="5" cy="12.5" r="1.5"/><path d="m5 5v6"/><path d="m5 10.271c1.2728-2.2684 4.1081-1.8554 5.7181-4.4913"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><circle cx="5" cy="3.5" r="1.5"/><circle cx="11.5" cy="4.5" r="1.5"/><circle cx="5" cy="12.5" r="1.5"/><path d="m5 5v6"/><path d="m5 10.271c1.2728-2.2684 4.1081-1.8554 5.7181-4.4913"/></g></svg>'
+      '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m13.561 4-1 4-3.4334-2.4752"/><path transform="scale(-1,1)" d="m-12.558 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m13.561 4-1 4-3.4334-2.4752"/><path transform="scale(-1,1)" d="m-12.558 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g></svg>'
+      '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m2.5613 4 1 4 3.4334-2.4752"/><path d="m3.5638 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m2.5613 4 1 4 3.4334-2.4752"/><path d="m3.5638 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g></svg>'
     )
     List.SVGNames = (
       'new-file'
@@ -2194,6 +2293,9 @@ object fmMain: TfmMain
       'arrow-left'
       'arrow-right'
       'map'
+      'git-branch'
+      'rotate-cw'
+      'rotate-cсw'
     )
     Left = 275
     Top = 194

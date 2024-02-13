@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LazFileUtils,
-  LCLType, GraphUtil,
+  LCLType, GraphUtil, Math,
   u_encodings, u_utilities, u_helpers;
 
 const
@@ -31,7 +31,7 @@ type
   { TSymbol }
 
   TSymbol = class
-  PRIVATE
+  private
     // ================================ Поля ===================================
     FSymbol: TSymbolField; // холст символа
 
@@ -71,7 +71,7 @@ type
 
     //==========================================================================
 
-  PUBLIC
+  public
     // =================================== Методы ==============================
 
     // работа с пикселем (установка/очистка/инверсия)
@@ -94,6 +94,9 @@ type
 
     // центрирование символа
     procedure Center(AVertical: Boolean);
+
+    // поворот символа
+    procedure Rotate(AClockWise: Boolean);
 
     // вывести изображение символа в битмап
     procedure Draw(bmp: TBitmap);
@@ -156,7 +159,7 @@ type
 
     //======================== Конструкторы и деструкторы ======================
     constructor Create;
-    destructor Destroy; OVERRIDE;
+    destructor Destroy; override;
     //==========================================================================
 
     // =========================== Свойства ====================================
@@ -269,6 +272,7 @@ procedure TSymbol.PixelAction(AX, AY: Integer; AAction: TPixelAction);
     state: Boolean;
   begin
     state := AAction = paSet;
+
     if (AX >= 0) and (AY >= 0) and (AX < FWidth) and (AY < FHeight) then
       FSymbol[AX, AY] := state or (AAction = paInvert) and not FSymbol[AX, AY];
   end;
@@ -523,6 +527,30 @@ procedure TSymbol.Center(AVertical: Boolean);
 
   end;
 
+// поворот символа
+procedure TSymbol.Rotate(AClockWise: Boolean);
+  var
+    s, h, w: Integer;
+    tmp:     TSymbolField;
+  begin
+    s := Min(FWidth, FHeight);
+    SetLength(tmp, s, s);
+    s -= 1;
+
+    // rotate to temp var
+    for h := 0 to s do
+      for w := 0 to s do
+        tmp[
+          AClockWise.Select(s - h, h),
+          AClockWise.Select(w, s - w)] := FSymbol[w, h];
+
+    // copy from temp var
+    Clear;
+    for h := 0 to s do
+      for w := 0 to s do
+        FSymbol[w, h] := tmp[w, h];
+  end;
+
 // вывести изображение символа в битмап
 procedure TSymbol.Draw(bmp: TBitmap);
   var
@@ -548,10 +576,10 @@ procedure TSymbol.Draw(bmp: TBitmap);
           if FSymbol[w, h] then
             Brush.Color := FActiveColor
           else
-            if FShowGrid and FGridChessBackground and ((w + h) mod 2 = 0) then
-              Brush.Color := FGridColor
-            else
-              Brush.Color := FBackgroundColor;
+          if FShowGrid and FGridChessBackground and ((w + h) mod 2 = 0) then
+            Brush.Color := FGridColor
+          else
+            Brush.Color := FBackgroundColor;
 
           FillRect(start_x - 1, start_y - 1, end_x, end_y);
 
@@ -614,8 +642,13 @@ function TSymbol.GenerateCode(
       max    := trunc(fnNumbersBits / 10 * 3);
       number := StrToQWord('%' + stb);
       case fnNView of
-        nvBIN: Result := '0b' + stb;
-        nvHEX: Result := '0x' + IntToHex(number, fnNumbersBits div 4);
+
+        nvBIN:
+          Result := '0b' + stb;
+
+        nvHEX:
+          Result := '0x' + IntToHex(number, fnNumbersBits div 4);
+
         nvDEC:
           begin
           Result := IntToStr(number);
@@ -655,12 +688,12 @@ function TSymbol.GenerateCode(
       end;
 
     if fnScanColsToRight then
-      w_st := 0 // сканирование столбцов слева направо
+      w_st := 0            // сканирование столбцов слева направо
     else
-      w_st := FWidth - 1; // сканирование столбцов справа налево
+      w_st := FWidth - 1;  // сканирование столбцов справа налево
 
     if fnScanRowsToDown then
-      h_st := 0 // сканирование строк снизу вверх
+      h_st := 0            // сканирование строк снизу вверх
     else
       h_st := FHeight - 1; // сканирование строк сверху вниз
 
@@ -727,8 +760,8 @@ procedure TSymbol.ClearChanges;
   begin
     FHistoryPosition := 1;
     SaveChange;
-    FHistoryEmpty  := True;
-    FHistoryNoRedo := True;
+    FHistoryEmpty    := True;
+    FHistoryNoRedo   := True;
   end;
 
 // сохранить текущую правку символа в историю
@@ -781,8 +814,8 @@ procedure TSymbol.ZoomIn;
     if tmp = FGridStep then
       SetGridStep(FGridStep + 1)
     else
-      if FGridStep < 150 then
-        SetGridStep(tmp);
+    if FGridStep < 150 then
+      SetGridStep(tmp);
   end;
 
 // уменьшение масштаба изображения символа (-10%)
@@ -826,7 +859,7 @@ procedure TSymbol.Import(Font: TFont; Index: Integer; AEncoding: String);
 
     with tmp.Canvas do
       begin
-      Brush.Color := 1;
+      Brush.Color  := 1;
       Clear;
       Clear;
       Pen.Color    := 0;
@@ -1000,7 +1033,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
       // кол-во пустых строк сверху
       coUp:
         if FHeight > 1 then
-          for h := 0 to FHeight - 2 do
+          for h := 0 to FHeight - 1 do
             begin
             exit_ := False;
 
@@ -1020,7 +1053,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
       // кол-во пустых строк снизу
       coDown:
         if FHeight > 1 then
-          for h := FHeight - 2 downto 0 do
+          for h := FHeight - 1 downto 0 do
             begin
             exit_ := False;
 
@@ -1040,7 +1073,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
       // кол-во пустых столбцов слева
       coLeft:
         if FWidth > 1 then
-          for w := 0 to FWidth - 2 do
+          for w := 0 to FWidth - 1 do
             begin
             exit_ := False;
 
@@ -1060,7 +1093,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
       // кол-во пустых столбцов справа
       coRight:
         if FWidth > 1 then
-          for w := FWidth - 2 downto 0 do
+          for w := FWidth - 1 downto 0 do
             begin
             exit_ := False;
 

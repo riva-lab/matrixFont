@@ -153,6 +153,9 @@ type
     // центрирование всех символов шрифта
     procedure Center(AVertical: Boolean);
 
+    // поворот всех символов шрифта
+    procedure Rotate(AClockWise: Boolean);
+
     // обменять местами символы в таблице
     function SwapChars(AIndex1, AIndex2: Integer): Boolean;
 
@@ -432,6 +435,18 @@ procedure TFont.Center(AVertical: Boolean);
     for i := 1 to FFontLength do
       begin
       FSymbol[i - 1].Center(AVertical);
+      FSymbol[i - 1].SaveChange;
+      end;
+  end;
+
+// поворот всех символов шрифта
+procedure TFont.Rotate(AClockWise: Boolean);
+  var
+    i: Integer;
+  begin
+    for i := 1 to FFontLength do
+      begin
+      FSymbol[i - 1].Rotate(AClockWise);
       FSymbol[i - 1].SaveChange;
       end;
   end;
