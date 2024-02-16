@@ -19,7 +19,7 @@ object fmMain: TfmMain
   OnShow = FormShow
   OnWindowStateChange = FormWindowStateChange
   Position = poScreenCenter
-  SessionProperties = 'acViewTBCommon.Checked;acViewTBEffectsChar.Checked;acViewTBEffectsFont.Checked;acViewTBEditChar.Checked;acViewTBEditFont.Checked'
+  SessionProperties = 'acViewTBCharTools.Checked;acViewTBFile.Checked;acViewTBFontTools.Checked;acViewTBTools.Checked'
   ShowHint = True
   LCLVersion = '2.2.6.0'
   object stStatusBar: TStatusBar
@@ -75,161 +75,493 @@ object fmMain: TfmMain
         ParentColor = False
         Transparent = False
       end
-      object pEffectsFont: TPanel
+      object pFontToolsBox: TPanel
         Left = 0
         Height = 497
         Top = 26
-        Width = 39
+        Width = 95
         Align = alLeft
         AutoSize = True
+        BorderSpacing.Right = 6
         BevelOuter = bvNone
-        ChildSizing.LeftRightSpacing = 4
-        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.LeftRightSpacing = 2
+        ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ClientHeight = 497
-        ClientWidth = 39
-        TabOrder = 1
-        object tbEffectsFont: TToolBar
-          Left = 4
-          Height = 505
-          Top = 0
-          Width = 31
-          Align = alNone
+        ClientWidth = 95
+        Color = cl3DLight
+        ParentColor = False
+        TabOrder = 0
+        object pFontTools: TPanel
+          Left = 2
+          Height = 402
+          Top = 48
+          Width = 91
           AutoSize = True
-          BorderSpacing.CellAlignVertical = ccaCenter
-          ButtonHeight = 30
-          ButtonWidth = 30
-          Color = clNone
-          DisabledImages = ImListNew16D
-          EdgeBorders = []
-          Images = ImListNew16A
-          ParentColor = False
-          ParentShowHint = False
-          ShowHint = True
+          BevelOuter = bvNone
+          ChildSizing.VerticalSpacing = 2
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 1
+          ClientHeight = 402
+          ClientWidth = 91
           TabOrder = 0
-          Transparent = True
-          object ToolButton46: TToolButton
-            Left = 1
+          object tbFontTools1: TToolBar
+            Left = 15
+            Height = 30
             Top = 0
-            Action = acFontInvert
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 0
+            Transparent = True
+            object ToolButton120: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontUndo
+            end
+            object ToolButton121: TToolButton
+              Left = 31
+              Top = 0
+              Action = acFontRedo
+            end
           end
-          object ToolButton47: TToolButton
-            Left = 1
-            Top = 30
-            Width = 30
-            Caption = 'ToolButton47'
-            Style = tbsDivider
+          object Bevel9: TBevel
+            Left = 0
+            Height = 2
+            Top = 32
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton48: TToolButton
-            Left = 1
-            Top = 35
-            Action = acFontMirrorHorz
+          object tbFontTools2: TToolBar
+            Left = 0
+            Height = 30
+            Top = 36
+            Width = 91
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 1
+            Transparent = True
+            object ToolButton148: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontCharset
+            end
+            object ToolButton149: TToolButton
+              Left = 31
+              Top = 0
+              Action = acFontOptimize
+            end
+            object ToolButton87: TToolButton
+              Left = 61
+              Top = 0
+              Action = acFontChangeSizes
+            end
           end
-          object ToolButton49: TToolButton
-            Left = 1
-            Top = 65
-            Action = acFontMirrorVert
+          object Bevel10: TBevel
+            Left = 0
+            Height = 2
+            Top = 68
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton50: TToolButton
-            Left = 1
-            Top = 95
-            Width = 30
-            Caption = 'ToolButton50'
-            Style = tbsDivider
+          object tbFontTools3: TToolBar
+            Left = 0
+            Height = 30
+            Top = 72
+            Width = 91
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 2
+            Transparent = True
+            object ToolButton122: TToolButton
+              Left = 61
+              Top = 0
+              Action = acFontInvert
+            end
+            object ToolButton123: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontClear
+            end
+            object ToolButton85: TToolButton
+              Left = 31
+              Top = 0
+              Action = acFontPaste
+            end
           end
-          object ToolButton51: TToolButton
-            Left = 1
-            Top = 230
-            Action = acFontShiftLeft
+          object Bevel11: TBevel
+            Left = 0
+            Height = 2
+            Top = 104
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton52: TToolButton
-            Left = 1
-            Top = 260
-            Action = acFontShiftRight
+          object tbFontTools4: TToolBar
+            Left = 15
+            Height = 30
+            Top = 108
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 3
+            Transparent = True
+            object ToolButton124: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontMirrorHorz
+            end
+            object ToolButton125: TToolButton
+              Left = 31
+              Top = 0
+              Action = acFontMirrorVert
+            end
           end
-          object ToolButton53: TToolButton
-            Left = 1
-            Top = 290
-            Action = acFontShiftUp
+          object Bevel12: TBevel
+            Left = 0
+            Height = 2
+            Top = 140
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton54: TToolButton
-            Left = 1
-            Top = 320
-            Action = acFontShiftDown
+          object tbFontTools5: TToolBar
+            Left = 15
+            Height = 30
+            Top = 144
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            BorderSpacing.CellAlignVertical = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 4
+            Transparent = True
+            object ToolButton128: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontRotateCCW
+            end
+            object ToolButton129: TToolButton
+              Left = 31
+              Top = 0
+              Action = acFontRotateCW
+            end
           end
-          object ToolButton55: TToolButton
-            Left = 1
-            Top = 350
-            Action = acFontShiftRollover
+          object Bevel13: TBevel
+            Left = 0
+            Height = 2
+            Top = 176
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton56: TToolButton
-            Left = 1
-            Top = 160
-            Width = 30
-            Caption = 'ToolButton56'
-            Style = tbsDivider
+          object pFontToolsShift: TPanel
+            Left = 0
+            Height = 90
+            Top = 180
+            Width = 91
+            AutoSize = True
+            BevelOuter = bvNone
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ClientHeight = 90
+            ClientWidth = 91
+            TabOrder = 5
+            object tbFontTools6: TToolBar
+              Left = 0
+              Height = 30
+              Top = 0
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 0
+              Transparent = True
+              object ToolButton101: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton102: TToolButton
+                Left = 31
+                Top = 0
+                Action = acFontShiftUp
+              end
+              object ToolButton103: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
+            object tbFontTools7: TToolBar
+              Left = 0
+              Height = 30
+              Top = 30
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 1
+              Transparent = True
+              object ToolButton104: TToolButton
+                Left = 1
+                Top = 0
+                Action = acFontShiftLeft
+              end
+              object ToolButton105: TToolButton
+                Left = 31
+                Top = 0
+                Action = acFontShiftRollover
+              end
+              object ToolButton108: TToolButton
+                Left = 61
+                Top = 0
+                Action = acFontShiftRight
+              end
+            end
+            object tbFontTools8: TToolBar
+              Left = 0
+              Height = 30
+              Top = 60
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 2
+              Transparent = True
+              object ToolButton109: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton110: TToolButton
+                Left = 31
+                Top = 0
+                Action = acFontShiftDown
+              end
+              object ToolButton113: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
           end
-          object ToolButton57: TToolButton
-            Left = 1
-            Top = 385
-            Action = acFontSnapLeft
+          object Bevel14: TBevel
+            Left = 0
+            Height = 2
+            Top = 272
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton58: TToolButton
-            Left = 1
-            Top = 415
-            Action = acFontSnapRight
+          object pFontToolsSnap: TPanel
+            Left = 0
+            Height = 90
+            Top = 276
+            Width = 91
+            AutoSize = True
+            BevelOuter = bvNone
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ClientHeight = 90
+            ClientWidth = 91
+            TabOrder = 6
+            object tbFontTools9: TToolBar
+              Left = 0
+              Height = 30
+              Top = 0
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 0
+              Transparent = True
+              object ToolButton154: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton159: TToolButton
+                Left = 31
+                Top = 0
+                Action = acFontSnapUp
+              end
+              object ToolButton160: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
+            object tbFontTools10: TToolBar
+              Left = 0
+              Height = 30
+              Top = 30
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 1
+              Transparent = True
+              object ToolButton161: TToolButton
+                Left = 1
+                Top = 0
+                Action = acFontSnapLeft
+              end
+              object ToolButton162: TToolButton
+                Left = 61
+                Top = 0
+                Action = acFontSnapRight
+              end
+              object ToolButton4: TToolButton
+                Left = 31
+                Top = 0
+                Caption = 'ToolButton2'
+                Enabled = False
+              end
+            end
+            object tbFontTools11: TToolBar
+              Left = 0
+              Height = 30
+              Top = 60
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 2
+              Transparent = True
+              object ToolButton163: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton164: TToolButton
+                Left = 31
+                Top = 0
+                Action = acFontSnapDown
+              end
+              object ToolButton165: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
           end
-          object ToolButton59: TToolButton
-            Left = 1
-            Top = 445
-            Action = acFontSnapUp
+          object Bevel15: TBevel
+            Left = 0
+            Height = 2
+            Top = 368
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton60: TToolButton
-            Left = 1
-            Top = 475
-            Action = acFontSnapDown
-          end
-          object ToolButton4: TToolButton
-            Left = 1
-            Top = 225
-            Width = 30
-            Caption = 'ToolButton4'
-            Style = tbsDivider
-          end
-          object ToolButton64: TToolButton
-            Left = 1
-            Top = 100
-            Action = acFontCenterH
-          end
-          object ToolButton65: TToolButton
-            Left = 1
-            Top = 130
-            Action = acFontCenterV
-          end
-          object ToolButton82: TToolButton
-            Left = 1
-            Top = 380
-            Width = 30
-            Caption = 'ToolButton82'
-            Style = tbsDivider
-          end
-          object ToolButton83: TToolButton
-            Left = 1
-            Top = 165
-            Action = acFontRotateCW
-          end
-          object ToolButton84: TToolButton
-            Left = 1
-            Top = 195
-            Action = acFontRotateCCW
+          object tbFontTools12: TToolBar
+            Left = 15
+            Height = 30
+            Top = 372
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            BorderSpacing.CellAlignVertical = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 7
+            Transparent = True
+            object ToolButton126: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontCenterH
+            end
+            object ToolButton127: TToolButton
+              Left = 31
+              Top = 0
+              Action = acFontCenterV
+            end
           end
         end
       end
       object sgNavigator: TStringGrid
-        Left = 39
+        Left = 101
         Height = 497
         Top = 26
-        Width = 177
+        Width = 115
         Align = alClient
         AlternateColor = 16119285
         AutoFillColumns = True
@@ -246,7 +578,7 @@ object fmMain: TfmMain
             Title.ImageLayout = blGlyphTop
             Title.MultiLine = True
             Title.Caption = 'Символ'
-            Width = 68
+            Width = 37
           end        
           item
             Alignment = taCenter
@@ -255,7 +587,7 @@ object fmMain: TfmMain
             MaxSize = 250
             Title.Alignment = taCenter
             Title.Caption = 'Код'
-            Width = 68
+            Width = 37
           end        
           item
             Alignment = taCenter
@@ -272,15 +604,15 @@ object fmMain: TfmMain
         MouseWheelOption = mwGrid
         Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRowSelect, goThumbTracking, goSmoothScroll]
         RowCount = 3
-        TabOrder = 0
+        TabOrder = 1
         TitleStyle = tsNative
         UseXORFeatures = True
         OnDrawCell = sgNavigatorDrawCell
         OnMouseWheel = sgNavigatorMouseWheel
         OnSelection = sgNavigatorSelection
         ColWidths = (
-          68
-          68
+          37
+          37
           40
         )
         Cells = (
@@ -313,17 +645,17 @@ object fmMain: TfmMain
         Left = 0
         Height = 497
         Top = 26
-        Width = 490
+        Width = 428
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 497
-        ClientWidth = 490
+        ClientWidth = 428
         TabOrder = 0
         object scbEditor: TScrollBox
           Left = 0
-          Height = 338
+          Height = 370
           Top = 0
-          Width = 490
+          Width = 428
           HorzScrollBar.Page = 113
           HorzScrollBar.Tracking = True
           VertScrollBar.Page = 113
@@ -335,14 +667,14 @@ object fmMain: TfmMain
           ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
           ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ClientHeight = 338
-          ClientWidth = 490
+          ClientHeight = 370
+          ClientWidth = 428
           TabOrder = 0
           OnMouseWheel = imMouseWheel
           object imEditor: TImage
-            Left = 189
+            Left = 158
             Height = 113
-            Top = 113
+            Top = 129
             Width = 113
             AntialiasingMode = amOff
             AutoSize = True
@@ -351,26 +683,28 @@ object fmMain: TfmMain
             OnMouseUp = imEditorMouseUp
           end
         end
-        object pEditChar: TPanel
+        object pFindBox: TPanel
           Left = 0
-          Height = 159
-          Top = 338
-          Width = 490
+          Height = 127
+          Top = 370
+          Width = 428
           Align = alBottom
           AutoSize = True
           BevelOuter = bvNone
           ChildSizing.TopBottomSpacing = 2
           ChildSizing.VerticalSpacing = 2
-          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ClientHeight = 159
-          ClientWidth = 490
+          ClientHeight = 127
+          ClientWidth = 428
+          Color = cl3DLight
+          ParentColor = False
           TabOrder = 1
           object pFind: TPanel
-            Left = 0
+            Left = 33
             Height = 123
             Top = 2
-            Width = 492
+            Width = 363
             AutoSize = True
             BevelOuter = bvNone
             ChildSizing.LeftRightSpacing = 10
@@ -381,9 +715,7 @@ object fmMain: TfmMain
             ChildSizing.Layout = cclTopToBottomThenLeftToRight
             ChildSizing.ControlsPerLine = 1
             ClientHeight = 123
-            ClientWidth = 492
-            Color = cl3DLight
-            ParentColor = False
+            ClientWidth = 363
             TabOrder = 0
             Visible = False
             object imFindIcon: TImage
@@ -395,22 +727,23 @@ object fmMain: TfmMain
               Center = True
             end
             object lbEditFind: TLabel
-              Left = 128
+              Left = 139
               Height = 113
               Top = 5
               Width = 54
+              BorderSpacing.Left = 16
               Caption = 'Символ'
               Layout = tlCenter
               ParentColor = False
             end
             object edFind: TEdit
-              Left = 187
+              Left = 198
               Height = 27
               Top = 48
-              Width = 100
+              Width = 32
               Alignment = taCenter
               BorderSpacing.CellAlignVertical = ccaCenter
-              Constraints.MinWidth = 80
+              Constraints.MaxWidth = 32
               Font.Height = -16
               Font.Name = 'Consolas'
               MaxLength = 2
@@ -420,7 +753,7 @@ object fmMain: TfmMain
               TabOrder = 0
             end
             object lbSpEditFind: TLabel
-              Left = 299
+              Left = 242
               Height = 113
               Hint = 'Код символа [DEC]'
               Top = 5
@@ -433,7 +766,7 @@ object fmMain: TfmMain
               ShowHint = True
             end
             object seFind: TSpinEdit
-              Left = 330
+              Left = 273
               Height = 28
               Top = 47
               Width = 80
@@ -444,140 +777,6 @@ object fmMain: TfmMain
               OnChange = actionSymbolFind
               TabOrder = 1
               Value = 32
-            end
-            object lbEditHEX: TLabel
-              Left = 415
-              Height = 113
-              Top = 5
-              Width = 67
-              Caption = 'lbEditHEX'
-              Layout = tlCenter
-              ParentColor = False
-            end
-          end
-          object tbEditChar: TToolBar
-            Left = 23
-            Height = 30
-            Top = 127
-            Width = 446
-            Align = alNone
-            AutoSize = True
-            BorderSpacing.CellAlignHorizontal = ccaCenter
-            ButtonHeight = 30
-            ButtonWidth = 30
-            Color = clNone
-            DisabledImages = ImListNew16D
-            EdgeBorders = []
-            Images = ImListNew16A
-            ParentColor = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            Transparent = True
-            object ToolButton10: TToolButton
-              Left = 161
-              Top = 0
-              Action = acSymbolCut
-            end
-            object ToolButton11: TToolButton
-              Left = 191
-              Top = 0
-              Action = acSymbolCopy
-            end
-            object ToolButton12: TToolButton
-              Left = 221
-              Top = 0
-              Action = acSymbolPaste
-            end
-            object ToolButton31: TToolButton
-              Left = 1
-              Top = 0
-              Action = acSymbolUndo
-            end
-            object ToolButton32: TToolButton
-              Left = 31
-              Top = 0
-              Action = acSymbolRedo
-            end
-            object ToolButton33: TToolButton
-              Left = 61
-              Height = 30
-              Top = 0
-              Caption = 'ToolButton33'
-              Style = tbsDivider
-            end
-            object ToolButton30: TToolButton
-              Left = 316
-              Height = 30
-              Top = 0
-              Caption = 'ToolButton30'
-              Style = tbsDivider
-            end
-            object ToolButton14: TToolButton
-              Left = 416
-              Top = 0
-              Action = acSymbolClear
-            end
-            object ToolButton36: TToolButton
-              Left = 96
-              Top = 0
-              Action = acZoomIn
-            end
-            object ToolButton37: TToolButton
-              Left = 66
-              Top = 0
-              Action = acZoomOut
-            end
-            object ToolButton38: TToolButton
-              Left = 156
-              Height = 30
-              Top = 0
-              Caption = 'ToolButton38'
-              Style = tbsDivider
-            end
-            object ToolButton40: TToolButton
-              Left = 126
-              Top = 0
-              Action = acZoomFit
-            end
-            object ToolButton42: TToolButton
-              Left = 321
-              Top = 0
-              Action = acSymbolFind
-            end
-            object ToolButton43: TToolButton
-              Left = 381
-              Height = 30
-              Top = 0
-              Caption = 'ToolButton43'
-              Style = tbsDivider
-            end
-            object ToolButton8: TToolButton
-              Left = 351
-              Top = 0
-              Action = acGridToggle
-            end
-            object ToolButton73: TToolButton
-              Left = 386
-              Top = 0
-              Action = acSymbolImportImage
-            end
-            object ToolButton74: TToolButton
-              Left = 256
-              Top = 0
-              Action = acSymbolMoveUp
-            end
-            object ToolButton75: TToolButton
-              Left = 286
-              Top = 0
-              Action = acSymbolMoveDown
-            end
-            object ToolButton76: TToolButton
-              Left = 251
-              Height = 30
-              Top = 0
-              Caption = 'ToolButton76'
-              Style = tbsDivider
             end
           end
         end
@@ -595,154 +794,520 @@ object fmMain: TfmMain
         ParentColor = False
         Transparent = False
       end
-      object pEffectsChar: TPanel
-        Left = 490
+      object pCharToolsBox: TPanel
+        Left = 434
         Height = 497
         Top = 26
-        Width = 39
+        Width = 95
         Align = alRight
         AutoSize = True
+        BorderSpacing.Left = 6
         BevelOuter = bvNone
-        ChildSizing.LeftRightSpacing = 4
-        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.LeftRightSpacing = 2
+        ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
         ClientHeight = 497
-        ClientWidth = 39
+        ClientWidth = 95
+        Color = cl3DLight
+        ParentColor = False
         TabOrder = 1
-        object tbEffectsChar: TToolBar
-          Left = 4
-          Height = 505
-          Top = 0
-          Width = 31
-          Align = alNone
+        object pCharTools: TPanel
+          Left = 2
+          Height = 438
+          Top = 30
+          Width = 91
           AutoSize = True
-          BorderSpacing.CellAlignVertical = ccaCenter
-          ButtonHeight = 30
-          ButtonWidth = 30
-          Color = clNone
-          DisabledImages = ImListNew16D
-          EdgeBorders = []
-          Images = ImListNew16A
-          ParentColor = False
-          ParentShowHint = False
-          ShowHint = True
+          BevelOuter = bvNone
+          ChildSizing.VerticalSpacing = 2
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 1
+          ClientHeight = 438
+          ClientWidth = 91
           TabOrder = 0
-          Transparent = True
-          object ToolButton1: TToolButton
-            Left = 1
-            Top = 65
-            Action = acSymbolMirrorVert
-          end
-          object ToolButton2: TToolButton
-            Left = 1
-            Top = 35
-            Action = acSymbolMirrorHorz
-          end
-          object ToolButton18: TToolButton
-            Left = 1
-            Top = 95
-            Width = 30
-            Caption = 'ToolButton18'
-            Style = tbsDivider
-          end
-          object ToolButton19: TToolButton
-            Left = 1
-            Top = 230
-            Action = acSymbolShiftLeft
-          end
-          object ToolButton20: TToolButton
-            Left = 1
-            Top = 260
-            Action = acSymbolShiftRight
-          end
-          object ToolButton21: TToolButton
-            Left = 1
-            Top = 290
-            Action = acSymbolShiftUp
-          end
-          object ToolButton22: TToolButton
-            Left = 1
-            Top = 320
-            Action = acSymbolShiftDown
-          end
-          object ToolButton23: TToolButton
-            Left = 1
-            Top = 350
-            Action = acFontShiftRollover
-            Style = tbsCheck
-          end
-          object ToolButton24: TToolButton
-            Left = 1
-            Top = 160
-            Width = 30
-            Caption = 'ToolButton24'
-            Style = tbsDivider
-          end
-          object ToolButton25: TToolButton
-            Left = 1
-            Top = 385
-            Action = acSymbolSnapLeft
-          end
-          object ToolButton26: TToolButton
-            Left = 1
-            Top = 415
-            Action = acSymbolSnapRight
-          end
-          object ToolButton27: TToolButton
-            Left = 1
-            Top = 445
-            Action = acSymbolSnapUp
-          end
-          object ToolButton28: TToolButton
-            Left = 1
-            Top = 475
-            Action = acSymbolSnapDown
-          end
-          object ToolButton15: TToolButton
-            Left = 1
+          object tbCharTools1: TToolBar
+            Left = 15
+            Height = 30
             Top = 0
-            Action = acSymbolInvert
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 0
+            Transparent = True
+            object ToolButton88: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolUndo
+            end
+            object ToolButton89: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolRedo
+            end
           end
-          object ToolButton13: TToolButton
-            Left = 1
-            Top = 30
-            Width = 30
-            Caption = 'ToolButton13'
-            Style = tbsDivider
+          object Bevel6: TBevel
+            Left = 0
+            Height = 2
+            Top = 32
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton67: TToolButton
-            Left = 1
-            Top = 225
-            Width = 30
-            Caption = 'ToolButton67'
-            Style = tbsDivider
+          object tbCharTools2: TToolBar
+            Left = 0
+            Height = 30
+            Top = 36
+            Width = 91
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 1
+            Transparent = True
+            object ToolButton115: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolCut
+            end
+            object ToolButton117: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolCopy
+            end
+            object ToolButton86: TToolButton
+              Left = 61
+              Top = 0
+              Action = acSymbolPaste
+            end
           end
-          object ToolButton68: TToolButton
-            Left = 1
-            Top = 100
-            Action = acSymbolCenterH
+          object Bevel8: TBevel
+            Left = 0
+            Height = 2
+            Top = 68
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton72: TToolButton
-            Left = 1
-            Top = 130
-            Action = acSymbolCenterV
+          object tbCharTools3: TToolBar
+            Left = 0
+            Height = 30
+            Top = 72
+            Width = 91
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 2
+            Transparent = True
+            object ToolButton114: TToolButton
+              Left = 61
+              Top = 0
+              Action = acSymbolInvert
+            end
+            object ToolButton116: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolClear
+            end
+            object ToolButton1: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolImportImage
+            end
           end
-          object ToolButton79: TToolButton
-            Left = 1
-            Top = 380
-            Width = 30
-            Caption = 'ToolButton79'
-            Style = tbsDivider
+          object Bevel1: TBevel
+            Left = 0
+            Height = 2
+            Top = 104
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
           end
-          object ToolButton80: TToolButton
-            Left = 1
-            Top = 165
-            Action = acSymbolRotateCW
+          object tbCharTools4: TToolBar
+            Left = 15
+            Height = 30
+            Top = 108
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 3
+            Transparent = True
+            object ToolButton90: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolMirrorHorz
+            end
+            object ToolButton91: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolMirrorVert
+            end
           end
-          object ToolButton81: TToolButton
-            Left = 1
-            Top = 195
-            Action = acSymbolRotateCCW
+          object Bevel2: TBevel
+            Left = 0
+            Height = 2
+            Top = 140
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
+          end
+          object tbCharTools5: TToolBar
+            Left = 15
+            Height = 30
+            Top = 144
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            BorderSpacing.CellAlignVertical = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 4
+            Transparent = True
+            object ToolButton111: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolRotateCCW
+            end
+            object ToolButton112: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolRotateCW
+            end
+          end
+          object Bevel3: TBevel
+            Left = 0
+            Height = 2
+            Top = 176
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
+          end
+          object pCharToolsShift: TPanel
+            Left = 0
+            Height = 90
+            Top = 180
+            Width = 91
+            AutoSize = True
+            BevelOuter = bvNone
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ClientHeight = 90
+            ClientWidth = 91
+            TabOrder = 7
+            object tbCharTools6: TToolBar
+              Left = 0
+              Height = 30
+              Top = 0
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 0
+              Transparent = True
+              object ToolButton92: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton97: TToolButton
+                Left = 31
+                Top = 0
+                Action = acSymbolShiftUp
+              end
+              object ToolButton93: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
+            object tbCharTools7: TToolBar
+              Left = 0
+              Height = 30
+              Top = 30
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 1
+              Transparent = True
+              object ToolButton94: TToolButton
+                Left = 1
+                Top = 0
+                Action = acSymbolShiftLeft
+              end
+              object ToolButton98: TToolButton
+                Left = 31
+                Top = 0
+                Action = acFontShiftRollover
+              end
+              object ToolButton95: TToolButton
+                Left = 61
+                Top = 0
+                Action = acSymbolShiftRight
+              end
+            end
+            object tbCharTools8: TToolBar
+              Left = 0
+              Height = 30
+              Top = 60
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 2
+              Transparent = True
+              object ToolButton96: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton99: TToolButton
+                Left = 31
+                Top = 0
+                Action = acSymbolShiftDown
+              end
+              object ToolButton100: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
+          end
+          object Bevel4: TBevel
+            Left = 0
+            Height = 2
+            Top = 272
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
+          end
+          object pCharToolsSnap: TPanel
+            Left = 0
+            Height = 90
+            Top = 276
+            Width = 91
+            AutoSize = True
+            BevelOuter = bvNone
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ClientHeight = 90
+            ClientWidth = 91
+            TabOrder = 8
+            object tbCharTools9: TToolBar
+              Left = 0
+              Height = 30
+              Top = 0
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 0
+              Transparent = True
+              object ToolButton150: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton151: TToolButton
+                Left = 31
+                Top = 0
+                Action = acSymbolSnapUp
+              end
+              object ToolButton152: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
+            object tbCharTools10: TToolBar
+              Left = 0
+              Height = 30
+              Top = 30
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 1
+              Transparent = True
+              object ToolButton153: TToolButton
+                Left = 1
+                Top = 0
+                Action = acSymbolSnapLeft
+              end
+              object ToolButton155: TToolButton
+                Left = 61
+                Top = 0
+                Action = acSymbolSnapRight
+              end
+              object ToolButton2: TToolButton
+                Left = 31
+                Top = 0
+                Caption = 'ToolButton2'
+                Enabled = False
+              end
+            end
+            object tbCharTools11: TToolBar
+              Left = 0
+              Height = 30
+              Top = 60
+              Width = 91
+              Align = alNone
+              AutoSize = True
+              BorderSpacing.CellAlignHorizontal = ccaCenter
+              BorderSpacing.CellAlignVertical = ccaCenter
+              ButtonHeight = 30
+              ButtonWidth = 30
+              DisabledImages = ImListNew16D
+              EdgeBorders = []
+              Images = ImListNew16A
+              TabOrder = 2
+              Transparent = True
+              object ToolButton156: TToolButton
+                Left = 1
+                Top = 0
+                Caption = 'ToolButton92'
+                Enabled = False
+              end
+              object ToolButton157: TToolButton
+                Left = 31
+                Top = 0
+                Action = acSymbolSnapDown
+              end
+              object ToolButton158: TToolButton
+                Left = 61
+                Top = 0
+                Caption = 'ToolButton93'
+                Enabled = False
+              end
+            end
+          end
+          object Bevel5: TBevel
+            Left = 0
+            Height = 2
+            Top = 368
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
+          end
+          object tbCharTools12: TToolBar
+            Left = 15
+            Height = 30
+            Top = 372
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            BorderSpacing.CellAlignVertical = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 5
+            Transparent = True
+            object ToolButton106: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolCenterH
+            end
+            object ToolButton107: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolCenterV
+            end
+          end
+          object Bevel7: TBevel
+            Left = 0
+            Height = 2
+            Top = 404
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
+          end
+          object tbCharTools13: TToolBar
+            Left = 15
+            Height = 30
+            Top = 408
+            Width = 61
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 6
+            Transparent = True
+            object ToolButton118: TToolButton
+              Left = 1
+              Top = 0
+              Action = acSymbolMoveUp
+            end
+            object ToolButton119: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolMoveDown
+            end
           end
         end
       end
@@ -763,24 +1328,20 @@ object fmMain: TfmMain
     ClientHeight = 38
     ClientWidth = 750
     ParentColor = False
-    TabOrder = 2
-    object tbCommon: TToolBar
+    TabOrder = 0
+    object tbFile: TToolBar
       Left = 4
       Height = 30
       Top = 4
-      Width = 376
+      Width = 251
       Align = alNone
       AutoSize = True
       BorderSpacing.Right = 20
       ButtonHeight = 30
       ButtonWidth = 30
-      Color = clNone
       DisabledImages = ImListNew16D
       EdgeBorders = []
       Images = ImListNew16A
-      ParentColor = False
-      ParentShowHint = False
-      ShowHint = True
       TabOrder = 0
       Transparent = True
       object ToolButton3: TToolButton
@@ -813,35 +1374,13 @@ object fmMain: TfmMain
         Caption = 'ToolButton7'
         Style = tbsDivider
       end
-      object ToolButton9: TToolButton
-        Left = 281
-        Top = 0
-        Action = acGenerate
-      end
-      object ToolButton39: TToolButton
-        Left = 191
-        Top = 0
-        Action = acFontProperties
-      end
       object ToolButton41: TToolButton
         Left = 31
         Top = 0
         Action = acFontImport
       end
-      object ToolButton44: TToolButton
-        Left = 251
-        Top = 0
-        Action = acFontPreview
-      end
-      object ToolButton16: TToolButton
-        Left = 311
-        Height = 30
-        Top = 0
-        Caption = 'ToolButton16'
-        Style = tbsDivider
-      end
       object ToolButton29: TToolButton
-        Left = 316
+        Left = 191
         Top = 0
         Action = acSetting
       end
@@ -851,7 +1390,7 @@ object fmMain: TfmMain
         Action = acSaveAs
       end
       object ToolButton35: TToolButton
-        Left = 346
+        Left = 221
         Top = 0
         Action = acHelp
       end
@@ -860,79 +1399,92 @@ object fmMain: TfmMain
         Top = 0
         Action = acFontImportCCode
       end
-      object ToolButton78: TToolButton
-        Left = 221
-        Top = 0
-        Action = acMap
-      end
     end
-    object tbEditFont: TToolBar
-      Left = 400
+    object tbTools: TToolBar
+      Left = 275
       Height = 30
       Top = 4
-      Width = 221
+      Width = 316
       Align = alNone
       AutoSize = True
       BorderSpacing.Right = 20
       ButtonHeight = 30
       ButtonWidth = 30
-      Color = clNone
       DisabledImages = ImListNew16D
       EdgeBorders = []
       Images = ImListNew16A
-      ParentColor = False
-      ParentShowHint = False
-      ShowHint = True
       TabOrder = 1
       Transparent = True
       object ToolButton17: TToolButton
-        Left = 66
+        Left = 186
         Top = 0
-        Action = acFontClear
+        Action = acZoomFit
       end
       object ToolButton45: TToolButton
-        Left = 61
+        Left = 216
         Height = 30
         Top = 0
         Caption = 'ToolButton5'
         Style = tbsDivider
       end
       object ToolButton61: TToolButton
-        Left = 31
+        Left = 156
         Top = 0
-        Action = acFontRedo
+        Action = acZoomIn
       end
       object ToolButton62: TToolButton
-        Left = 96
+        Left = 221
         Top = 0
-        Action = acFontPaste
+        Action = acSymbolFind
       end
       object ToolButton63: TToolButton
-        Left = 126
+        Left = 281
         Height = 30
         Top = 0
         Caption = 'ToolButton7'
         Style = tbsDivider
       end
       object ToolButton66: TToolButton
-        Left = 1
+        Left = 126
         Top = 0
-        Action = acFontUndo
+        Action = acZoomOut
       end
       object ToolButton69: TToolButton
-        Left = 131
+        Left = 251
         Top = 0
-        Action = acFontCharset
+        Action = acGridToggle
       end
       object ToolButton70: TToolButton
-        Left = 161
+        Left = 286
         Top = 0
-        Action = acFontOptimize
+        Action = acStayOnTopToggle
       end
-      object ToolButton71: TToolButton
-        Left = 191
+      object ToolButton39: TToolButton
+        Left = 91
         Top = 0
-        Action = acFontChangeSizes
+        Action = acFontProperties
+      end
+      object ToolButton78: TToolButton
+        Left = 61
+        Top = 0
+        Action = acMap
+      end
+      object ToolButton44: TToolButton
+        Left = 31
+        Top = 0
+        Action = acFontPreview
+      end
+      object ToolButton9: TToolButton
+        Left = 1
+        Top = 0
+        Action = acGenerate
+      end
+      object ToolButton16: TToolButton
+        Left = 121
+        Height = 30
+        Top = 0
+        Caption = 'ToolButton16'
+        Style = tbsDivider
       end
     end
   end
@@ -1025,23 +1577,19 @@ object fmMain: TfmMain
       object MenuItem96: TMenuItem
         Action = acMenuPanels
         object MenuItem58: TMenuItem
-          Action = acViewTBCommon
-          AutoCheck = True
-        end
-        object MenuItem59: TMenuItem
-          Action = acViewTBEditChar
-          AutoCheck = True
-        end
-        object MenuItem60: TMenuItem
-          Action = acViewTBEffectsChar
+          Action = acViewTBFile
           AutoCheck = True
         end
         object MenuItem97: TMenuItem
-          Action = acViewTBEditFont
+          Action = acViewTBTools
+          AutoCheck = True
+        end
+        object MenuItem60: TMenuItem
+          Action = acViewTBCharTools
           AutoCheck = True
         end
         object MenuItem61: TMenuItem
-          Action = acViewTBEffectsFont
+          Action = acViewTBFontTools
           AutoCheck = True
         end
       end
@@ -1397,7 +1945,7 @@ object fmMain: TfmMain
       Category = 'Символ - Прижать'
       Caption = 'К левому краю'
       Hint = 'Прижать символ к левому краю холста'
-      ImageIndex = 22
+      ImageIndex = 48
       OnExecute = actionSymbolGeneral
       ShortCut = 32840
     end
@@ -1405,7 +1953,7 @@ object fmMain: TfmMain
       Category = 'Символ - Прижать'
       Caption = 'К правому краю'
       Hint = 'Прижать символ к правому краю холста'
-      ImageIndex = 23
+      ImageIndex = 47
       OnExecute = actionSymbolGeneral
       ShortCut = 32843
     end
@@ -1413,7 +1961,7 @@ object fmMain: TfmMain
       Category = 'Символ - Прижать'
       Caption = 'К верхнему краю'
       Hint = 'Прижать символ к верхнему краю холста'
-      ImageIndex = 21
+      ImageIndex = 49
       OnExecute = actionSymbolGeneral
       ShortCut = 32853
     end
@@ -1421,7 +1969,7 @@ object fmMain: TfmMain
       Category = 'Символ - Прижать'
       Caption = 'К нижнему краю'
       Hint = 'Прижать символ к нижнему краю холста'
-      ImageIndex = 24
+      ImageIndex = 50
       OnExecute = actionSymbolGeneral
       ShortCut = 32842
     end
@@ -1543,7 +2091,7 @@ object fmMain: TfmMain
       Category = 'Шрифт - Прижать'
       Caption = 'К левому краю'
       Hint = 'Прижать все символы к левому краю холста'
-      ImageIndex = 22
+      ImageIndex = 48
       OnExecute = actionFontGeneral
       ShortCut = 41032
     end
@@ -1551,7 +2099,7 @@ object fmMain: TfmMain
       Category = 'Шрифт - Прижать'
       Caption = 'К правому краю'
       Hint = 'Прижать все символы к правому краю холста'
-      ImageIndex = 23
+      ImageIndex = 47
       OnExecute = actionFontGeneral
       ShortCut = 41035
     end
@@ -1559,7 +2107,7 @@ object fmMain: TfmMain
       Category = 'Шрифт - Прижать'
       Caption = 'К верхнему краю'
       Hint = 'Прижать все символы к верхнему краю холста'
-      ImageIndex = 21
+      ImageIndex = 49
       OnExecute = actionFontGeneral
       ShortCut = 41045
     end
@@ -1567,7 +2115,7 @@ object fmMain: TfmMain
       Category = 'Шрифт - Прижать'
       Caption = 'К нижнему краю'
       Hint = 'Прижать все символы к нижнему краю холста'
-      ImageIndex = 24
+      ImageIndex = 50
       OnExecute = actionFontGeneral
       ShortCut = 41034
     end
@@ -1843,38 +2391,31 @@ object fmMain: TfmMain
       Caption = 'Панели'
       DisableIfNoHandler = False
     end
-    object acViewTBCommon: TAction
+    object acViewTBFile: TAction
       Category = 'Вид'
       AutoCheck = True
       Caption = 'Файл'
       Checked = True
       DisableIfNoHandler = False
     end
-    object acViewTBEditChar: TAction
+    object acViewTBTools: TAction
       Category = 'Вид'
       AutoCheck = True
-      Caption = 'Правка символа'
+      Caption = 'Инструменты'
       Checked = True
       DisableIfNoHandler = False
     end
-    object acViewTBEffectsChar: TAction
+    object acViewTBCharTools: TAction
       Category = 'Вид'
       AutoCheck = True
-      Caption = 'Эффекты символа'
+      Caption = 'Инструменты символа'
       Checked = True
       DisableIfNoHandler = False
     end
-    object acViewTBEditFont: TAction
+    object acViewTBFontTools: TAction
       Category = 'Вид'
       AutoCheck = True
-      Caption = 'Правка шрифта'
-      Checked = True
-      DisableIfNoHandler = False
-    end
-    object acViewTBEffectsFont: TAction
-      Category = 'Вид'
-      AutoCheck = True
-      Caption = 'Эффекты шрифта'
+      Caption = 'Инструменты шрифта'
       Checked = True
       DisableIfNoHandler = False
     end

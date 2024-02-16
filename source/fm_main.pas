@@ -404,11 +404,10 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
       end;
 
     // управление видимостью панелей кнопок
-    tbCommon.Visible      := acViewTBCommon.Checked;
-    tbEditChar.Visible    := acViewTBEditChar.Checked;
-    tbEditFont.Visible    := acViewTBEditFont.Checked;
-    tbEffectsChar.Visible := acViewTBEffectsChar.Checked;
-    tbEffectsFont.Visible := acViewTBEffectsFont.Checked;
+    tbFile.Visible     := acViewTBFile.Checked;
+    tbTools.Visible    := acViewTBTools.Checked;
+    pCharTools.Visible := acViewTBCharTools.Checked;
+    pFontTools.Visible := acViewTBFontTools.Checked;
   end;
 
 
@@ -846,9 +845,8 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
         if edFind.Text <> '' then
           seFind.Value := Ord(UTF8ToEncoding(edFind.Text, FontSet.Encoding)[1]);
 
-      sgNavigator.Row   := seFind.Value - FontSet.FontStartItem + 1;
+      sgNavigator.Row := seFind.Value - FontSet.FontStartItem + 1;
       sgNavigatorSelection(Sender, 1, sgNavigator.Row);
-      lbEditHEX.Caption := '  HEX = ' + IntToHex(seFind.Value, 2);
       end;
   end;
 
@@ -1572,6 +1570,8 @@ procedure TfmMain.AdjustComponentSizes;
     Screen.HintFont.Height := Font.Height;
     Screen.MenuFont.Height := Font.Height;
 
+    edFind.Constraints.MaxWidth := 2 * Font.Height;
+
     // allow adjusting components with autosize option
     EndFormUpdate;
 
@@ -1581,8 +1581,10 @@ procedure TfmMain.AdjustComponentSizes;
     stStatusBar.Height := h + 2;
 
     // set size of toolbar's buttons which depends on size of icons
-    h := Max(16, round(imSVGList.RenderSize * 1.4));
-    SetToolbarButtonSize([tbCommon, tbEditChar, tbEffectsChar, tbEffectsFont, tbEditFont], h);
+    h     := Max(16, round(imSVGList.RenderSize * 1.5));
+    for w := 0 to ComponentCount - 1 do
+      if (Components[w].ClassName = TToolBar.ClassName) then
+        SetToolbarButtonSize([TToolBar(Components[w])], h);
 
     RenderSVGIcons(imSVGList.RenderSize * 2, ImListNew32A, nil);
 
