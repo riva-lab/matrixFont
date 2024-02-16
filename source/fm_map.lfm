@@ -16,6 +16,7 @@ object fmMap: TfmMap
   SessionProperties = 'cbMapWidth.ItemIndex;Height;seSpaceX.Value;seSpaceY.Value;Width;pMapControls.Tag'
   ShowHint = True
   LCLVersion = '2.2.6.0'
+  Scaled = False
   object sgMap: TStringGrid
     Left = 0
     Height = 384

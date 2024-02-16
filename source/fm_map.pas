@@ -80,12 +80,15 @@ procedure TfmMap.FormShow(Sender: TObject);
       w        := Width;
       h        := Height;
       Tag      := 1;
+      Scaled   := True;
       AutoSize := True;
       AutoSize := False;
       Position := poMainFormCenter;
 
       Constraints.MinWidth  := Width;
       Constraints.MinHeight := Height;
+      Constraints.MaxWidth  := Screen.Width;
+      Constraints.MaxHeight := Screen.Height;
 
       // for correct restoring form W/H
       Width            := (pMapControls.Tag = 1).Select(w, Width);
