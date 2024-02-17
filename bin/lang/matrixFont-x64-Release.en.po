@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-12 19:43+0200\n"
+"PO-Revision-Date: 2024-02-17 11:52+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -768,8 +768,8 @@ msgstr "Paste clipboard content to all chars"
 
 #: tfmmain.acfontpreview.caption
 msgctxt "tfmmain.acfontpreview.caption"
-msgid "Образец текста"
-msgstr "Sample text"
+msgid "Образец текста ..."
+msgstr "Sample text ..."
 
 #: tfmmain.acfontpreview.hint
 msgid "Вывести образец текста текущим шрифтом"
@@ -777,8 +777,8 @@ msgstr "Display sample text by current font"
 
 #: tfmmain.acfontproperties.caption
 msgctxt "tfmmain.acfontproperties.caption"
-msgid "Свойства шрифта"
-msgstr "Font properties"
+msgid "Свойства шрифта ..."
+msgstr "Font properties ..."
 
 #: tfmmain.acfontproperties.hint
 msgid "Просмотр свойств шрифта"
@@ -792,6 +792,32 @@ msgstr "Redo"
 #: tfmmain.acfontredo.hint
 msgid "Повтор последней отмененной правки в каждом символе"
 msgstr "Redo the last undone edit in every char"
+
+#: tfmmain.acfontrotateccw.caption
+msgctxt "tfmmain.acfontrotateccw.caption"
+msgid "-90 / против ч.с."
+msgstr "-90 / CCW"
+
+#: tfmmain.acfontrotateccw.hint
+msgid ""
+"Повернуть все символы\n"
+"против часовой стрелки на 90°"
+msgstr ""
+"Rotate all chars\n"
+"counterclockwise by 90°"
+
+#: tfmmain.acfontrotatecw.caption
+msgctxt "tfmmain.acfontrotatecw.caption"
+msgid "+90 / по ч.с."
+msgstr "+90 / CW"
+
+#: tfmmain.acfontrotatecw.hint
+msgid ""
+"Повернуть все символы\n"
+"по часовой стрелке на 90°"
+msgstr ""
+"Rotate all chars\n"
+"clockwise by 90°"
 
 #: tfmmain.acfontshiftdown.caption
 msgctxt "TFMMAIN.ACFONTSHIFTDOWN.CAPTION"
@@ -950,16 +976,12 @@ msgstr "Last opened files list"
 
 #: tfmmain.acmap.caption
 msgctxt "tfmmain.acmap.caption"
-msgid "Карта символов"
-msgstr "Char map"
+msgid "Карта символов ..."
+msgstr "Char map ..."
 
 #: tfmmain.acmap.hint
 msgid "Отобразить окно с картой всех символов"
 msgstr "Show window with map of all chars"
-
-#: tfmmain.acmenuedit.caption
-msgid "Правка"
-msgstr "Edit"
 
 #: tfmmain.acmenufile.caption
 msgctxt "tfmmain.acmenufile.caption"
@@ -978,6 +1000,10 @@ msgstr "Center chars"
 msgid "Отобразить символы"
 msgstr "Mirror chars"
 
+#: tfmmain.acmenufontrotate.caption
+msgid "Повернуть символы"
+msgstr "Rotate chars"
+
 #: tfmmain.acmenufontshift.caption
 msgid "Сдвиг символов"
 msgstr "Shift chars"
@@ -992,16 +1018,17 @@ msgid "Справка"
 msgstr "Help"
 
 #: tfmmain.acmenupanels.caption
-msgid "Панели"
-msgstr "Toolbars"
+msgid "Панели:"
+msgstr "Toolbars:"
 
 #: tfmmain.acmenupaste.caption
 msgid "Режим вставки"
 msgstr "Insert mode"
 
 #: tfmmain.acmenusymbol.caption
-msgid "Эффекты"
-msgstr "Effects"
+msgctxt "tfmmain.acmenusymbol.caption"
+msgid "Символ"
+msgstr "Char"
 
 #: tfmmain.acmenusymbolcenter.caption
 msgid "Центрировать"
@@ -1011,6 +1038,10 @@ msgstr "Center"
 msgid "Отобразить"
 msgstr "Mirror"
 
+#: tfmmain.acmenusymbolrotate.caption
+msgid "Повернуть"
+msgstr "Rotate"
+
 #: tfmmain.acmenusymbolshift.caption
 msgid "Сдвиг"
 msgstr "Shift"
@@ -1018,6 +1049,11 @@ msgstr "Shift"
 #: tfmmain.acmenusymbolsnap.caption
 msgid "Прижать"
 msgstr "Snap"
+
+#: tfmmain.acmenutools.caption
+msgctxt "tfmmain.acmenutools.caption"
+msgid "Инструменты"
+msgstr "Tools"
 
 #: tfmmain.acmenuview.caption
 msgctxt "tfmmain.acmenuview.caption"
@@ -1224,6 +1260,24 @@ msgstr "Redo"
 msgid "Повторить последнюю отмененную операцию над символом"
 msgstr "Redo the last undone edit of char"
 
+#: tfmmain.acsymbolrotateccw.caption
+msgctxt "tfmmain.acsymbolrotateccw.caption"
+msgid "-90 / против ч.с."
+msgstr "-90 / CCW"
+
+#: tfmmain.acsymbolrotateccw.hint
+msgid "Повернуть против часовой стрелки на 90°"
+msgstr "Rotate char counterclockwise by 90°"
+
+#: tfmmain.acsymbolrotatecw.caption
+msgctxt "tfmmain.acsymbolrotatecw.caption"
+msgid "+90 / по ч.с."
+msgstr "+90 / CW"
+
+#: tfmmain.acsymbolrotatecw.hint
+msgid "Повернуть по часовой стрелке на 90°"
+msgstr "Rotate char clockwise by 90°"
+
 #: tfmmain.acsymbolshiftdown.caption
 msgctxt "tfmmain.acsymbolshiftdown.caption"
 msgid "Вниз"
@@ -1305,26 +1359,23 @@ msgstr "Undo"
 msgid "Отменить последнюю операцию над символом"
 msgstr "Undo last operation with char"
 
-#: tfmmain.acviewtbcommon.caption
-msgctxt "TFMMAIN.ACVIEWTBCOMMON.CAPTION"
+#: tfmmain.acviewtbchartools.caption
+msgid "Инструменты символа"
+msgstr "Char tools"
+
+#: tfmmain.acviewtbfile.caption
+msgctxt "tfmmain.acviewtbfile.caption"
 msgid "Файл"
 msgstr "File"
 
-#: tfmmain.acviewtbeditchar.caption
-msgid "Правка символа"
-msgstr "Char editing"
+#: tfmmain.acviewtbfonttools.caption
+msgid "Инструменты шрифта"
+msgstr "Font tools"
 
-#: tfmmain.acviewtbeditfont.caption
-msgid "Правка шрифта"
-msgstr "Font editing"
-
-#: tfmmain.acviewtbeffectschar.caption
-msgid "Эффекты символа"
-msgstr "Char effects"
-
-#: tfmmain.acviewtbeffectsfont.caption
-msgid "Эффекты шрифта"
-msgstr "Font effects"
+#: tfmmain.acviewtbtools.caption
+msgctxt "tfmmain.acviewtbtools.caption"
+msgid "Инструменты"
+msgstr "Tools"
 
 #: tfmmain.acwebsite.caption
 msgid "Домашняя страница"
@@ -1342,6 +1393,10 @@ msgstr "Fit"
 #: tfmmain.aczoomfit.hint
 msgid "Вписать изображение в видимые границы холста"
 msgstr "Fit image to visible canvas borders"
+
+#: tfmmain.aczoomhdr.caption
+msgid "Масштаб:"
+msgstr "Scale:"
 
 #: tfmmain.aczoomin.caption
 msgctxt "tfmmain.aczoomin.caption"
@@ -1383,10 +1438,6 @@ msgstr "Code"
 msgctxt "tfmmain.lbspeditfind.hint"
 msgid "Код символа [DEC]"
 msgstr "Char code [DEC]"
-
-#: tfmmain.menuitem68.caption
-msgid "Масштаб"
-msgstr "Scale"
 
 #: tfmmain.sgnavigator.columns[0].title.caption
 msgctxt "tfmmain.sgnavigator.columns[0].title.caption"

@@ -1589,6 +1589,11 @@ procedure TfmMain.AdjustComponentSizes;
     RenderSVGIcons(imSVGList.RenderSize * 2, ImListNew32A, nil);
 
     EndFormUpdate;
+
+    // set form size limits
+    Constraints.MinWidth           := tbFile.Width + tbTools.Width + 120;
+    Constraints.MinHeight          := max(pCharTools.Height, pFontTools.Height) + tbFile.Height * 4 + stStatusBar.Height;
+    fmPreview.Constraints.MinWidth := Constraints.MinWidth;
   end;
 
 // adjust colors and some other values according to theme

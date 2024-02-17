@@ -52,21 +52,21 @@ object fmMain: TfmMain
     Width = 750
     Align = alClient
     BorderSpacing.Top = 5
-    Position = 216
+    Position = 300
     object psSide1: TPairSplitterSide
       Cursor = crArrow
       Left = 0
       Height = 523
       Top = 0
-      Width = 216
-      ClientWidth = 216
+      Width = 300
+      ClientWidth = 300
       ClientHeight = 523
       Constraints.MinWidth = 188
       object lbNavigator: TLabel
         Left = 0
         Height = 20
         Top = 0
-        Width = 216
+        Width = 300
         Align = alTop
         Alignment = taCenter
         BorderSpacing.Bottom = 6
@@ -561,7 +561,7 @@ object fmMain: TfmMain
         Left = 101
         Height = 497
         Top = 26
-        Width = 115
+        Width = 199
         Align = alClient
         AlternateColor = 16119285
         AutoFillColumns = True
@@ -578,7 +578,7 @@ object fmMain: TfmMain
             Title.ImageLayout = blGlyphTop
             Title.MultiLine = True
             Title.Caption = 'Символ'
-            Width = 37
+            Width = 79
           end        
           item
             Alignment = taCenter
@@ -587,7 +587,7 @@ object fmMain: TfmMain
             MaxSize = 250
             Title.Alignment = taCenter
             Title.Caption = 'Код'
-            Width = 37
+            Width = 79
           end        
           item
             Alignment = taCenter
@@ -611,8 +611,8 @@ object fmMain: TfmMain
         OnMouseWheel = sgNavigatorMouseWheel
         OnSelection = sgNavigatorSelection
         ColWidths = (
-          37
-          37
+          79
+          79
           40
         )
         Cells = (
@@ -634,28 +634,28 @@ object fmMain: TfmMain
     end
     object psSide2: TPairSplitterSide
       Cursor = crArrow
-      Left = 221
+      Left = 305
       Height = 523
       Top = 0
-      Width = 529
-      ClientWidth = 529
+      Width = 445
+      ClientWidth = 445
       ClientHeight = 523
       Constraints.MinWidth = 300
       object pEditor: TPanel
         Left = 0
         Height = 497
         Top = 26
-        Width = 428
+        Width = 344
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 497
-        ClientWidth = 428
+        ClientWidth = 344
         TabOrder = 0
         object scbEditor: TScrollBox
           Left = 0
           Height = 370
           Top = 0
-          Width = 428
+          Width = 344
           HorzScrollBar.Page = 113
           HorzScrollBar.Tracking = True
           VertScrollBar.Page = 113
@@ -668,11 +668,11 @@ object fmMain: TfmMain
           ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ClientHeight = 370
-          ClientWidth = 428
+          ClientWidth = 344
           TabOrder = 0
           OnMouseWheel = imMouseWheel
           object imEditor: TImage
-            Left = 158
+            Left = 116
             Height = 113
             Top = 129
             Width = 113
@@ -687,7 +687,7 @@ object fmMain: TfmMain
           Left = 0
           Height = 127
           Top = 370
-          Width = 428
+          Width = 344
           Align = alBottom
           AutoSize = True
           BevelOuter = bvNone
@@ -696,12 +696,12 @@ object fmMain: TfmMain
           ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ClientHeight = 127
-          ClientWidth = 428
+          ClientWidth = 344
           Color = cl3DLight
           ParentColor = False
           TabOrder = 1
           object pFind: TPanel
-            Left = 33
+            Left = 0
             Height = 123
             Top = 2
             Width = 363
@@ -785,7 +785,7 @@ object fmMain: TfmMain
         Left = 0
         Height = 20
         Top = 0
-        Width = 529
+        Width = 445
         Align = alTop
         Alignment = taCenter
         BorderSpacing.Bottom = 6
@@ -795,7 +795,7 @@ object fmMain: TfmMain
         Transparent = False
       end
       object pCharToolsBox: TPanel
-        Left = 434
+        Left = 350
         Height = 497
         Top = 26
         Width = 95
@@ -1328,6 +1328,7 @@ object fmMain: TfmMain
     ClientHeight = 38
     ClientWidth = 750
     ParentColor = False
+    PopupMenu = pmPanels
     TabOrder = 0
     object tbFile: TToolBar
       Left = 4
@@ -1465,12 +1466,12 @@ object fmMain: TfmMain
         Action = acFontProperties
       end
       object ToolButton78: TToolButton
-        Left = 61
+        Left = 31
         Top = 0
         Action = acMap
       end
       object ToolButton44: TToolButton
-        Left = 31
+        Left = 61
         Top = 0
         Action = acFontPreview
       end
@@ -1496,6 +1497,9 @@ object fmMain: TfmMain
       Action = acMenuFile
       object MenuItem75: TMenuItem
         Action = acNewFont
+      end
+      object Separator3: TMenuItem
+        Caption = '-'
       end
       object MenuItem85: TMenuItem
         Action = acFontImport
@@ -1527,21 +1531,6 @@ object fmMain: TfmMain
       object MenuItem7: TMenuItem
         Caption = '-'
       end
-      object MenuItem83: TMenuItem
-        Action = acFontProperties
-      end
-      object MenuItem114: TMenuItem
-        Action = acMap
-      end
-      object MenuItem90: TMenuItem
-        Action = acFontPreview
-      end
-      object MenuItem15: TMenuItem
-        Action = acGenerate
-      end
-      object MenuItem89: TMenuItem
-        Caption = '-'
-      end
       object MenuItem17: TMenuItem
         Action = acSetting
       end
@@ -1554,44 +1543,50 @@ object fmMain: TfmMain
     end
     object MenuItem3: TMenuItem
       Action = acMenuView
-      object MenuItem68: TMenuItem
-        Caption = 'Масштаб'
-        ImageIndex = 39
-        object MenuItem82: TMenuItem
-          Action = acZoomOut
-        end
-        object MenuItem81: TMenuItem
-          Action = acZoomIn
-        end
-        object MenuItem84: TMenuItem
-          Action = acZoomFit
-        end
+      object MenuItem86: TMenuItem
+        Action = acSymbolFind
+        AutoCheck = True
       end
       object MenuItem9: TMenuItem
         Action = acGridToggle
         AutoCheck = True
+      end
+      object MenuItem87: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem68: TMenuItem
+        Action = acZoomHdr
+      end
+      object MenuItem82: TMenuItem
+        Action = acZoomOut
+      end
+      object MenuItem81: TMenuItem
+        Action = acZoomIn
+      end
+      object MenuItem84: TMenuItem
+        Action = acZoomFit
       end
       object MenuItem74: TMenuItem
         Caption = '-'
       end
       object MenuItem96: TMenuItem
         Action = acMenuPanels
-        object MenuItem58: TMenuItem
-          Action = acViewTBFile
-          AutoCheck = True
-        end
-        object MenuItem97: TMenuItem
-          Action = acViewTBTools
-          AutoCheck = True
-        end
-        object MenuItem60: TMenuItem
-          Action = acViewTBCharTools
-          AutoCheck = True
-        end
-        object MenuItem61: TMenuItem
-          Action = acViewTBFontTools
-          AutoCheck = True
-        end
+      end
+      object MenuItem58: TMenuItem
+        Action = acViewTBFile
+        AutoCheck = True
+      end
+      object MenuItem97: TMenuItem
+        Action = acViewTBTools
+        AutoCheck = True
+      end
+      object MenuItem60: TMenuItem
+        Action = acViewTBCharTools
+        AutoCheck = True
+      end
+      object MenuItem61: TMenuItem
+        Action = acViewTBFontTools
+        AutoCheck = True
       end
       object MenuItem62: TMenuItem
         Caption = '-'
@@ -1601,8 +1596,38 @@ object fmMain: TfmMain
         AutoCheck = True
       end
     end
+    object MenuItem80: TMenuItem
+      Action = acMenuTools
+      object MenuItem15: TMenuItem
+        Action = acGenerate
+      end
+      object MenuItem89: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem114: TMenuItem
+        Action = acMap
+      end
+      object MenuItem90: TMenuItem
+        Action = acFontPreview
+      end
+      object MenuItem83: TMenuItem
+        Action = acFontProperties
+      end
+      object MenuItem71: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem13: TMenuItem
+        Action = acFontCharset
+      end
+      object MenuItem67: TMenuItem
+        Action = acFontOptimize
+      end
+      object MenuItem91: TMenuItem
+        Action = acFontChangeSizes
+      end
+    end
     object MenuItem10: TMenuItem
-      Action = acMenuEdit
+      Action = acMenuSymbol
       object MenuItem79: TMenuItem
         Action = acSymbolUndo
       end
@@ -1643,39 +1668,8 @@ object fmMain: TfmMain
       object Separator1: TMenuItem
         Caption = '-'
       end
-      object MenuItem111: TMenuItem
-        Action = acSymbolMoveUp
-      end
-      object MenuItem110: TMenuItem
-        Action = acSymbolMoveDown
-      end
-      object MenuItem109: TMenuItem
-        Caption = '-'
-      end
-      object MenuItem108: TMenuItem
-        Action = acSymbolImportImage
-      end
-      object MenuItem22: TMenuItem
-        Caption = '-'
-      end
-      object MenuItem86: TMenuItem
-        Action = acSymbolFind
-        AutoCheck = True
-      end
-      object MenuItem87: TMenuItem
-        Caption = '-'
-      end
-      object MenuItem19: TMenuItem
-        Action = acSymbolClear
-      end
-    end
-    object MenuItem80: TMenuItem
-      Action = acMenuSymbol
       object MenuItem20: TMenuItem
         Action = acSymbolInvert
-      end
-      object MenuItem69: TMenuItem
-        Caption = '-'
       end
       object MenuItem33: TMenuItem
         Action = acMenuSymbolMirror
@@ -1740,6 +1734,27 @@ object fmMain: TfmMain
         object MenuItem41: TMenuItem
           Action = acSymbolSnapDown
         end
+      end
+      object MenuItem69: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem111: TMenuItem
+        Action = acSymbolMoveUp
+      end
+      object MenuItem110: TMenuItem
+        Action = acSymbolMoveDown
+      end
+      object MenuItem109: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem108: TMenuItem
+        Action = acSymbolImportImage
+      end
+      object MenuItem22: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem19: TMenuItem
+        Action = acSymbolClear
       end
     end
     object MenuItem21: TMenuItem
@@ -1828,18 +1843,6 @@ object fmMain: TfmMain
       end
       object MenuItem66: TMenuItem
         Action = acFontPaste
-      end
-      object MenuItem71: TMenuItem
-        Caption = '-'
-      end
-      object MenuItem13: TMenuItem
-        Action = acFontCharset
-      end
-      object MenuItem67: TMenuItem
-        Action = acFontOptimize
-      end
-      object MenuItem91: TMenuItem
-        Action = acFontChangeSizes
       end
     end
     object MenuItem28: TMenuItem
@@ -2148,38 +2151,14 @@ object fmMain: TfmMain
       OnExecute = SettingsApplyToCurrentSession
       ShortCut = 113
     end
-    object acZoomIn: TAction
-      Category = 'Вид'
-      Caption = 'Увеличить'
-      Hint = 'Увеличить изображение холста'
-      ImageIndex = 37
-      OnExecute = actionZooming
-      ShortCut = 117
-    end
-    object acZoomOut: TAction
-      Category = 'Вид'
-      Caption = 'Уменьшить'
-      Hint = 'Уменьшить изображение холста'
-      ImageIndex = 38
-      OnExecute = actionZooming
-      ShortCut = 116
-    end
-    object acZoomFit: TAction
-      Category = 'Вид'
-      Caption = 'Вписать'
-      Hint = 'Вписать изображение в видимые границы холста'
-      ImageIndex = 40
-      OnExecute = actionZooming
-      ShortCut = 118
-    end
-    object acMenuEdit: TAction
-      Category = 'Символ'
-      Caption = 'Правка'
+    object acMenuTools: TAction
+      Category = 'Инструменты'
+      Caption = 'Инструменты'
       DisableIfNoHandler = False
     end
     object acMenuSymbol: TAction
       Category = 'Символ'
-      Caption = 'Эффекты'
+      Caption = 'Символ'
       DisableIfNoHandler = False
     end
     object acSymbolUndo: TAction
@@ -2241,7 +2220,7 @@ object fmMain: TfmMain
       ShortCut = 16457
     end
     object acSymbolFind: TAction
-      Category = 'Символ'
+      Category = 'Вид'
       AutoCheck = True
       Caption = 'Найти символ'
       Hint = 'Поиск символа по названию или коду'
@@ -2361,63 +2340,6 @@ object fmMain: TfmMain
       ImageIndex = 13
       OnExecute = actionFontGeneral
       ShortCut = 16430
-    end
-    object acFontCharset: TAction
-      Category = 'Шрифт'
-      Caption = 'Задать диапазон ...'
-      Hint = 'Задать диапазон символов шрифта'
-      ImageIndex = 32
-      OnExecute = acFontCharsetExecute
-      ShortCut = 49220
-    end
-    object acFontOptimize: TAction
-      Category = 'Шрифт'
-      Caption = 'Оптимизация размера холста ...'
-      Hint = 'Установить оптимальный размер холста всех символов'
-      ImageIndex = 36
-      OnExecute = acFontOptimizeExecute
-      ShortCut = 49233
-    end
-    object acFontChangeSizes: TAction
-      Category = 'Шрифт'
-      Caption = 'Изменить размер холста ...'
-      Hint = 'Изменить размер холста всех символов'
-      ImageIndex = 25
-      OnExecute = acFontChangeSizesExecute
-      ShortCut = 49219
-    end
-    object acMenuPanels: TAction
-      Category = 'Вид'
-      Caption = 'Панели'
-      DisableIfNoHandler = False
-    end
-    object acViewTBFile: TAction
-      Category = 'Вид'
-      AutoCheck = True
-      Caption = 'Файл'
-      Checked = True
-      DisableIfNoHandler = False
-    end
-    object acViewTBTools: TAction
-      Category = 'Вид'
-      AutoCheck = True
-      Caption = 'Инструменты'
-      Checked = True
-      DisableIfNoHandler = False
-    end
-    object acViewTBCharTools: TAction
-      Category = 'Вид'
-      AutoCheck = True
-      Caption = 'Инструменты символа'
-      Checked = True
-      DisableIfNoHandler = False
-    end
-    object acViewTBFontTools: TAction
-      Category = 'Вид'
-      AutoCheck = True
-      Caption = 'Инструменты шрифта'
-      Checked = True
-      DisableIfNoHandler = False
     end
     object acHelpMD: TAction
       Category = 'Справка'
@@ -2559,22 +2481,6 @@ object fmMain: TfmMain
       BeforeExecute = acSaveAsBeforeExecute
       OnAccept = acSaveAsAccept
     end
-    object acFontProperties: TAction
-      Category = 'Файл'
-      Caption = 'Свойства шрифта'
-      Hint = 'Просмотр свойств шрифта'
-      ImageIndex = 28
-      OnExecute = acFontPropertiesExecute
-      ShortCut = 32781
-    end
-    object acFontPreview: TAction
-      Category = 'Файл'
-      Caption = 'Образец текста'
-      Hint = 'Вывести образец текста текущим шрифтом'
-      ImageIndex = 27
-      OnExecute = acFontPreviewExecute
-      ShortCut = 120
-    end
     object acLastFilesList: TAction
       Category = 'Файл'
       Caption = 'Открыть недавний'
@@ -2604,14 +2510,6 @@ object fmMain: TfmMain
       ImageIndex = 65
       OnExecute = actionService
     end
-    object acMap: TAction
-      Category = 'Вид'
-      Caption = 'Карта символов'
-      Hint = 'Отобразить окно с картой всех символов'
-      ImageIndex = 64
-      OnExecute = actionService
-      ShortCut = 119
-    end
     object acMenuSymbolRotate: TAction
       Category = 'Символ - Повернуть'
       Caption = 'Повернуть'
@@ -2621,7 +2519,7 @@ object fmMain: TfmMain
     object acSymbolRotateCW: TAction
       Category = 'Символ - Повернуть'
       Caption = '+90 / по ч.с.'
-      Hint = 'Повернуть по часовой стрелке на 90 гр.'
+      Hint = 'Повернуть по часовой стрелке на 90°'
       ImageIndex = 66
       OnExecute = actionSymbolGeneral
       ShortCut = 32852
@@ -2629,7 +2527,7 @@ object fmMain: TfmMain
     object acSymbolRotateCCW: TAction
       Category = 'Символ - Повернуть'
       Caption = '-90 / против ч.с.'
-      Hint = 'Повернуть против часовой стрелки на 90 гр.'
+      Hint = 'Повернуть против часовой стрелки на 90°'
       ImageIndex = 67
       OnExecute = actionSymbolGeneral
       ShortCut = 32837
@@ -2643,7 +2541,7 @@ object fmMain: TfmMain
     object acFontRotateCW: TAction
       Category = 'Шрифт - Повернуть'
       Caption = '+90 / по ч.с.'
-      Hint = 'Повернуть все символы '#13#10'по часовой стрелке на 90 гр.'
+      Hint = 'Повернуть все символы'#13#10'по часовой стрелке на 90°'
       ImageIndex = 66
       OnExecute = actionFontGeneral
       ShortCut = 41044
@@ -2651,10 +2549,118 @@ object fmMain: TfmMain
     object acFontRotateCCW: TAction
       Category = 'Шрифт - Повернуть'
       Caption = '-90 / против ч.с.'
-      Hint = 'Повернуть все символы '#13#10'против часовой стрелки на 90 гр.'
+      Hint = 'Повернуть все символы'#13#10'против часовой стрелки на 90°'
       ImageIndex = 67
       OnExecute = actionFontGeneral
       ShortCut = 41029
+    end
+    object acZoomHdr: TAction
+      Category = 'Вид'
+      Caption = 'Масштаб:'
+    end
+    object acZoomIn: TAction
+      Category = 'Вид'
+      Caption = 'Увеличить'
+      Hint = 'Увеличить изображение холста'
+      ImageIndex = 37
+      OnExecute = actionZooming
+      ShortCut = 117
+    end
+    object acZoomOut: TAction
+      Category = 'Вид'
+      Caption = 'Уменьшить'
+      Hint = 'Уменьшить изображение холста'
+      ImageIndex = 38
+      OnExecute = actionZooming
+      ShortCut = 116
+    end
+    object acZoomFit: TAction
+      Category = 'Вид'
+      Caption = 'Вписать'
+      Hint = 'Вписать изображение в видимые границы холста'
+      ImageIndex = 40
+      OnExecute = actionZooming
+      ShortCut = 118
+    end
+    object acMenuPanels: TAction
+      Category = 'Вид'
+      Caption = 'Панели:'
+    end
+    object acViewTBFile: TAction
+      Category = 'Вид'
+      AutoCheck = True
+      Caption = 'Файл'
+      Checked = True
+      DisableIfNoHandler = False
+    end
+    object acViewTBTools: TAction
+      Category = 'Вид'
+      AutoCheck = True
+      Caption = 'Инструменты'
+      Checked = True
+      DisableIfNoHandler = False
+    end
+    object acViewTBCharTools: TAction
+      Category = 'Вид'
+      AutoCheck = True
+      Caption = 'Инструменты символа'
+      Checked = True
+      DisableIfNoHandler = False
+    end
+    object acViewTBFontTools: TAction
+      Category = 'Вид'
+      AutoCheck = True
+      Caption = 'Инструменты шрифта'
+      Checked = True
+      DisableIfNoHandler = False
+    end
+    object acMap: TAction
+      Category = 'Инструменты'
+      Caption = 'Карта символов ...'
+      Hint = 'Отобразить окно с картой всех символов'
+      ImageIndex = 64
+      OnExecute = actionService
+      ShortCut = 119
+    end
+    object acFontPreview: TAction
+      Category = 'Инструменты'
+      Caption = 'Образец текста ...'
+      Hint = 'Вывести образец текста текущим шрифтом'
+      ImageIndex = 27
+      OnExecute = acFontPreviewExecute
+      ShortCut = 120
+    end
+    object acFontProperties: TAction
+      Category = 'Инструменты'
+      Caption = 'Свойства шрифта ...'
+      Hint = 'Просмотр свойств шрифта'
+      ImageIndex = 28
+      OnExecute = acFontPropertiesExecute
+      ShortCut = 32781
+    end
+    object acFontCharset: TAction
+      Category = 'Инструменты'
+      Caption = 'Задать диапазон ...'
+      Hint = 'Задать диапазон символов шрифта'
+      ImageIndex = 32
+      OnExecute = acFontCharsetExecute
+      ShortCut = 49220
+    end
+    object acFontOptimize: TAction
+      Category = 'Инструменты'
+      Caption = 'Оптимизация размера холста ...'
+      Hint = 'Установить оптимальный размер холста всех символов'
+      ImageIndex = 36
+      OnExecute = acFontOptimizeExecute
+      ShortCut = 49233
+    end
+    object acFontChangeSizes: TAction
+      Category = 'Инструменты'
+      Caption = 'Изменить размер холста ...'
+      Hint = 'Изменить размер холста всех символов'
+      ImageIndex = 25
+      OnExecute = acFontChangeSizesExecute
+      ShortCut = 49219
     end
   end
   object dlgOpen: TOpenDialog
@@ -2844,5 +2850,26 @@ object fmMain: TfmMain
   object ImListNew32A: TImageList
     Left = 500
     Top = 300
+  end
+  object pmPanels: TPopupMenu
+    Images = ImListNew16A
+    Left = 500
+    Top = 194
+    object MenuItem59: TMenuItem
+      Action = acViewTBFile
+      AutoCheck = True
+    end
+    object MenuItem121: TMenuItem
+      Action = acViewTBTools
+      AutoCheck = True
+    end
+    object MenuItem122: TMenuItem
+      Action = acViewTBCharTools
+      AutoCheck = True
+    end
+    object MenuItem123: TMenuItem
+      Action = acViewTBFontTools
+      AutoCheck = True
+    end
   end
 end
