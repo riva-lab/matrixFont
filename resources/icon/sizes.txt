@@ -1,0 +1,8 @@
+https://wiki.freepascal.org/Windows_Icon
+
+The most used High DPI settings are 120 & 144.
+If you want quality icons in High DPI you must include in your set:
+
+16x16 ; 32x32 ; 48x48 ; 256x256 // Default set 96 DPI
+20x20 ; 40x40 ; 60x60           // Additional used in 120 DPI
+24x24 ; 72x72                   // Additional used in 144 DPI
