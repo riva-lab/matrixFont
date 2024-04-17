@@ -7,21 +7,19 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms,
+  Forms, SysUtils, LazUTF8, AppTuner, config_record,
 
   // project forms
   fm_about, fm_confirm, fm_gen, fm_import, fm_importc, fm_main, fm_new,
-  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map,
-
-  // functional units
-  font, symbol, app_ver, help, cOpenFileList,
-
-  // additional units
-  u_strings, u_utilities, u_encodings, u_helpers;
+  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map;
 
 {$R *.res}
 
-begin
+begin            
+  { CRITICAL! Load INI file as soon as possible to support dark theme.
+    INI file should be loaded before Application.Initialize method! }
+  appTunerEx.IniFile := ExtractFilePath(ParamStrUTF8(0)) + SETTINGS_FILE;
+
   Application.Scaled := True;
   Application.Title := 'matrixFont';
   RequireDerivedFormResource := True;

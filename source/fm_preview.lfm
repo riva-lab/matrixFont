@@ -14,8 +14,7 @@ object fmPreview: TfmPreview
   OnShow = FormShow
   PopupMode = pmAuto
   Position = poMainFormCenter
-  SessionProperties = 'mmPreview.Lines;seDelta.Value;seSpace.Value;rbMono.Checked;rbProp.Checked'
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pcPages: TPageControl
     Left = 0
     Height = 190
@@ -85,11 +84,11 @@ object fmPreview: TfmPreview
         Anchors = []
         BorderStyle = bsNone
         Font.Name = 'Consolas'
-        OnChange = rbPropChange
         ParentFont = False
         ScrollBars = ssAutoBoth
         TabOrder = 0
         WordWrap = False
+        OnChange = rbPropChange
       end
     end
   end
@@ -114,7 +113,7 @@ object fmPreview: TfmPreview
       Left = 4
       Height = 40
       Top = 4
-      Width = 330
+      Width = 324
       AutoSize = True
       BorderSpacing.CellAlignHorizontal = ccaLeftTop
       BevelOuter = bvNone
@@ -123,7 +122,7 @@ object fmPreview: TfmPreview
       ChildSizing.EnlargeVertical = crsScaleChilds
       ChildSizing.Layout = cclTopToBottomThenLeftToRight
       ClientHeight = 40
-      ClientWidth = 330
+      ClientWidth = 324
       TabOrder = 0
       object rbProp: TRadioButton
         Tag = 1
@@ -131,26 +130,26 @@ object fmPreview: TfmPreview
         Left = 5
         Height = 40
         Top = 0
-        Width = 169
+        Width = 166
         Caption = 'Пропорциональный'
         Checked = True
-        OnChange = rbPropChange
-        OnClick = rbPropChange
         TabOrder = 0
         TabStop = True
+        OnChange = rbPropChange
+        OnClick = rbPropChange
       end
       object rbMono: TRadioButton
         Tag = 1
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Side = asrCenter
-        Left = 184
+        Left = 181
         Height = 40
         Top = 0
-        Width = 141
+        Width = 138
         Caption = 'Моноширинный'
+        TabOrder = 1
         OnChange = rbPropChange
         OnClick = rbPropChange
-        TabOrder = 1
       end
     end
     object pButtons: TPanel
@@ -280,11 +279,6 @@ object fmPreview: TfmPreview
     Filter = 'Portable Network Graphics File|*.png'
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     Left = 181
-    Top = 94
-  end
-  object IniStoragePV: TIniPropStorage
-    StoredValues = <>
-    Left = 294
     Top = 94
   end
 end

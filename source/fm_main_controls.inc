@@ -132,8 +132,6 @@ ImListNew16D: TImageList;
 ImListNew32A: TImageList;
 imSVGList:    TImageSVGList;
 
-IniStorageMain: TIniPropStorage;
-
 lbEditFind:   TLabel;
 lbEditor:     TLabel;
 lbNavigator:  TLabel;

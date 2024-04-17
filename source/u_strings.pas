@@ -25,13 +25,25 @@ resourcestring
   WARN_NOREDO = 'Внимание! История правок символов будет очищена. '
     + 'Данную операцию невозможно отменить после применения.';
 
-  WARN_RESET = 'При следующем запуске приложения будут загружены' + LineEnding
-    + 'настройки по умолчанию. Продолжить?';
+  WARN_RESET = 'Приложение будет закрыто, а текущие настройки вернутся к значениям по умолчанию.' + LineEnding
+    + 'Вы действительно хотите сбросить настройки?';
 
   TXT_CONFIRM = 'Подтверждение';
   TXT_WARNING = 'Предупреждение';
   TXT_ERROR   = 'Ошибка';
   TXT_RESET   = 'Сброс';
+
+
+  { Theme }
+
+  TXT_THEME_ALLOWDARK = 'Системная';
+  TXT_THEME_LIGHT     = 'Светлая';
+  TXT_THEME_DARK      = 'Темная';
+
+
+const
+  TXT_THEME: array[0..2] of String = (TXT_THEME_ALLOWDARK, TXT_THEME_LIGHT, TXT_THEME_DARK);
+
 
 implementation
 

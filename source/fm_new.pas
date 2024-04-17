@@ -5,7 +5,9 @@ unit fm_new;
 interface
 
 uses
-  Forms, StdCtrls, Buttons, Spin, ExtCtrls, fm_settings, u_strings;
+  Forms, StdCtrls, Buttons, Spin, ExtCtrls,
+  fm_settings,
+  u_strings, config_record;
 
 type
 
@@ -55,13 +57,13 @@ implementation
 procedure TfmNew.FormShow(Sender: TObject);
   begin
     cbEncoding.Items.Assign(fmSettings.cbEncoding.Items);
-    cbEncoding.ItemIndex := fmSettings.NewEncoding;
-    seWidth.Value        := fmSettings.NewWidth;
-    seHeight.Value       := fmSettings.NewHeight;
-    seStartItem.Value    := fmSettings.NewItemStart;
-    seLastItem.Value     := fmSettings.NewItemLast;
-    edFontName.Text      := fmSettings.NewName;
-    edAuthor.Text        := fmSettings.NewAuthor;
+    cbEncoding.ItemIndex := cfg.new.enc;
+    seWidth.Value        := cfg.new.w;
+    seHeight.Value       := cfg.new.h;
+    seStartItem.Value    := cfg.new.start;
+    seLastItem.Value     := cfg.new.last;
+    edFontName.Text      := cfg.new.title;
+    edAuthor.Text        := cfg.new.author;
     edFontName.TextHint  := lbFontName.Caption;
     edAuthor.TextHint    := lbAuthor.Caption;
   end;

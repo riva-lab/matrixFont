@@ -13,9 +13,8 @@ object fmMap: TfmMap
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  SessionProperties = 'cbMapWidth.ItemIndex;Height;seSpaceX.Value;seSpaceY.Value;Width;pMapControls.Tag'
   ShowHint = True
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   Scaled = False
   object sgMap: TStringGrid
     Left = 0
@@ -43,13 +42,13 @@ object fmMap: TfmMap
     OnSelectCell = sgMapSelectCell
     ColWidths = (
       65
+      66
+      66
+      66
+      66
+      66
       65
       65
-      65
-      65
-      65
-      65
-      70
     )
   end
   object pMapControls: TPanel
@@ -92,10 +91,10 @@ object fmMap: TfmMap
         '32'
         '64'
       )
-      OnChange = sgMapChangeBounds
       Style = csDropDownList
       TabOrder = 0
       Text = '16'
+      OnChange = sgMapChangeBounds
     end
     object lbMapOffset: TLabel
       Left = 227
@@ -129,10 +128,5 @@ object fmMap: TfmMap
       TabOrder = 2
       Value = 2
     end
-  end
-  object IniStorageMap: TIniPropStorage
-    StoredValues = <>
-    Left = 104
-    Top = 88
   end
 end

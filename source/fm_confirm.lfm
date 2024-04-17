@@ -8,11 +8,12 @@ object fmConfirm: TfmConfirm
   BorderStyle = bsToolWindow
   ClientHeight = 154
   ClientWidth = 702
+  Color = clForm
   Constraints.MinWidth = 600
   DesignTimePPI = 120
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pMessage: TPanel
     Left = 0
     Height = 58
@@ -23,7 +24,8 @@ object fmConfirm: TfmConfirm
     BevelOuter = bvNone
     ClientHeight = 58
     ClientWidth = 702
-    Color = clWhite
+    Color = clWindow
+    ParentBackground = False
     ParentColor = False
     TabOrder = 1
     object lbMessage: TLabel
@@ -46,10 +48,9 @@ object fmConfirm: TfmConfirm
     AnchorSideTop.Side = asrBottom
     Left = 64
     Height = 74
-    Top = 64
+    Top = 58
     Width = 575
     AutoSize = True
-    BorderSpacing.Top = 6
     BevelOuter = bvNone
     ChildSizing.LeftRightSpacing = 15
     ChildSizing.TopBottomSpacing = 15
@@ -59,6 +60,7 @@ object fmConfirm: TfmConfirm
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 74
     ClientWidth = 575
+    ParentBackground = False
     TabOrder = 0
     object bbYes: TBitBtn
       Left = 15

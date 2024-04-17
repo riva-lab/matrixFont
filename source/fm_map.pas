@@ -6,9 +6,8 @@ interface
 
 uses
   Classes, Types, SysUtils, Forms, Controls, Graphics, Grids, ExtCtrls, StdCtrls,
-  Spin, IniPropStorage, LazUTF8,
-  fm_settings,
-  font, u_encodings, u_helpers;
+  Spin, LazUTF8, AppSettings,
+  font, u_encodings, u_helpers, config_record;
 
 resourcestring
   FM_MAP_CAPTION = 'Карта символов';
@@ -18,14 +17,13 @@ type
   { TfmMap }
 
   TfmMap = class(TForm)
-    cbMapWidth:    TComboBox;
-    IniStorageMap: TIniPropStorage;
-    lbMapCols:     TLabel;
-    lbMapOffset:   TLabel;
-    pMapControls:  TPanel;
-    seSpaceX:      TSpinEdit;
-    seSpaceY:      TSpinEdit;
-    sgMap:         TStringGrid;
+    cbMapWidth:   TComboBox;
+    lbMapCols:    TLabel;
+    lbMapOffset:  TLabel;
+    pMapControls: TPanel;
+    seSpaceX:     TSpinEdit;
+    seSpaceY:     TSpinEdit;
+    sgMap:        TStringGrid;
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -46,6 +44,8 @@ type
     SelectedIndex: Integer;
 
     procedure UpdateMap;
+    procedure InitConfig;
+    procedure SaveConfig;
   end;
 
 var
@@ -63,7 +63,7 @@ procedure TfmMap.FormCreate(Sender: TObject);
     OnMouseEvent    := nil;
     WantSingleClick := False;
 
-    IniStorageMap.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
+    InitConfig;
   end;
 
 procedure TfmMap.FormShow(Sender: TObject);
@@ -73,6 +73,9 @@ procedure TfmMap.FormShow(Sender: TObject);
     // init block, executed only once
     if Tag = 0 then
       begin
+      Height := cfg.map.h;
+      Width  := cfg.map.w;
+
       if not Showing then Exit;
 
       cbMapWidth.Constraints.MaxWidth := Canvas.TextWidth('0') * 8;
@@ -91,9 +94,9 @@ procedure TfmMap.FormShow(Sender: TObject);
       Constraints.MaxHeight := Screen.Height;
 
       // for correct restoring form W/H
-      Width            := (pMapControls.Tag = 1).Select(w, Width);
-      Height           := (pMapControls.Tag = 1).Select(h, Height);
-      pMapControls.Tag := 1;
+      Width        := cfg.map.init.Select(Width, w);
+      Height       := cfg.map.init.Select(Height, h);
+      cfg.map.init := False;
       end;
 
     UpdateMap;
@@ -110,7 +113,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
     with sgMap do
       begin
       Canvas.Brush.Style := bsSolid;
-      Canvas.Brush.Color := fmSettings.ColorNaviBG;
+      Canvas.Brush.Color := cfg.color.nav.bg;
       Canvas.Pen.Width   := 0;
       Canvas.Pen.Style   := psSolid;
       Canvas.Pen.Color   := Canvas.Brush.Color;
@@ -153,8 +156,8 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
               aRect.Bottom  := aRect.Bottom - dh div 2;
 
               FontX.Item[i].DrawPreview(bm_tmp, False,
-                _isSelected.Select(fmSettings.ColorPreviewBG, fmSettings.ColorNaviBG),
-                _isSelected.Select(fmSettings.ColorPreviewA, fmSettings.ColorNaviA));
+                _isSelected.Select(cfg.color.prev.bg, cfg.color.nav.bg),
+                _isSelected.Select(cfg.color.prev.active, cfg.color.nav.active));
 
               Canvas.StretchDraw(aRect, bm_tmp);
 
@@ -223,6 +226,22 @@ procedure TfmMap.DoMouseClick(IsDouble: Boolean);
 procedure TfmMap.UpdateMap;
   begin
     sgMapChangeBounds(nil);
+  end;
+
+procedure TfmMap.InitConfig;
+  begin
+    Settings.Add(cbMapWidth, @cfg.map.cols);
+    Settings.Add(seSpaceX, @cfg.map.spacex);
+    Settings.Add(seSpaceY, @cfg.map.spacey);
+    Settings.Add('_cfg.map.h', stInt, @cfg.map.h, Height.ToString);
+    Settings.Add('_cfg.map.w', stInt, @cfg.map.w, Width.ToString);
+    Settings.Add('_cfg.map.init', stBool, @cfg.map.init, '1');
+  end;
+
+procedure TfmMap.SaveConfig;
+  begin
+    cfg.map.h := Height;
+    cfg.map.w := Width;
   end;
 
 end.

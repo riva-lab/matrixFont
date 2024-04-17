@@ -16,9 +16,8 @@ object fmImportC: TfmImportC
   OnShow = FormShow
   PopupMode = pmExplicit
   Position = poDefault
-  SessionProperties = 'acTabCode.Checked;acTabParams.Checked;cbImpExample.Checked;cbImpNBits.ItemIndex;cbImpOptimize.Checked;cbImpOrder.ItemIndex;cbImpSnapLeft.Checked;cbImpType.ItemIndex;edImpExample.Text;seImpCharCode.Value;seImpHeight.Value;seImpLastItem.Value;seImpOffset.Value;seImpSkip.Value;seImpStartItem.Value;seImpWidth.Value;cbImpBitOrder.ItemIndex'
   ShowHint = True
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pLeft: TPanel
     Left = 0
     Height = 587
@@ -87,10 +86,10 @@ object fmImportC: TfmImportC
           Font.Height = -16
           Font.Name = 'Consolas'
           MaxLength = 2
-          OnChange = actionExecute
-          OnUTF8KeyPress = edImpCharUTF8KeyPress
           ParentFont = False
           TabOrder = 0
+          OnChange = actionExecute
+          OnUTF8KeyPress = edImpCharUTF8KeyPress
         end
         object lbImpChar: TLabel
           Left = 110
@@ -138,11 +137,11 @@ object fmImportC: TfmImportC
           Font.Height = -16
           Font.Name = 'Consolas'
           MaxLength = 2
-          OnChange = actionExecute
-          OnUTF8KeyPress = edImpCharUTF8KeyPress
           ParentFont = False
           ReadOnly = True
           TabOrder = 2
+          OnChange = actionExecute
+          OnUTF8KeyPress = edImpCharUTF8KeyPress
         end
         object lbImpCharHex: TLabel
           Left = 110
@@ -185,6 +184,7 @@ object fmImportC: TfmImportC
         Color = cl3DLight
         Constraints.MinHeight = 200
         Constraints.MinWidth = 200
+        ParentBackground = False
         ParentColor = False
         TabOrder = 0
         object imImpChar: TImage
@@ -217,10 +217,10 @@ object fmImportC: TfmImportC
       Height = 529
       Top = 0
       Width = 567
-      ActivePage = tsCode
+      ActivePage = tsParams
       Align = alClient
       Style = tsButtons
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object tsCode: TTabSheet
         AutoSize = True
@@ -883,12 +883,12 @@ object fmImportC: TfmImportC
               Font.Height = -16
               Font.Name = 'Consolas'
               MaxLength = 8
-              OnChange = actionExecute
-              OnUTF8KeyPress = edImpCharUTF8KeyPress
               ParentFont = False
               TabOrder = 0
               Text = 'ABC, 123'
               TextHint = 'Образец текста'
+              OnChange = actionExecute
+              OnUTF8KeyPress = edImpCharUTF8KeyPress
             end
             object cbImpExample: TCheckBox
               Left = 273
@@ -898,9 +898,9 @@ object fmImportC: TfmImportC
               Width = 278
               Caption = 'Образец текста'
               Checked = True
-              OnChange = actionExecute
               State = cbChecked
               TabOrder = 1
+              OnChange = actionExecute
             end
             object cbImpType: TComboBox
               Left = 0
@@ -908,6 +908,7 @@ object fmImportC: TfmImportC
               Top = 51
               Width = 263
               ItemHeight = 20
+              ItemIndex = 0
               Items.Strings = (
                 ''
                 ''
@@ -922,9 +923,9 @@ object fmImportC: TfmImportC
                 ''
                 ''
               )
-              OnChange = actionParamExecute
               Style = csDropDownList
               TabOrder = 2
+              OnChange = actionParamExecute
             end
             object lbImpType: TLabel
               AnchorSideTop.Side = asrCenter
@@ -942,6 +943,7 @@ object fmImportC: TfmImportC
               Top = 87
               Width = 263
               ItemHeight = 20
+              ItemIndex = 0
               Items.Strings = (
                 ''
                 ''
@@ -950,9 +952,9 @@ object fmImportC: TfmImportC
                 ''
                 ''
               )
-              OnChange = actionParamExecute
               Style = csDropDownList
               TabOrder = 3
+              OnChange = actionParamExecute
             end
             object lbImpOrder: TLabel
               AnchorSideTop.Side = asrCenter
@@ -975,10 +977,10 @@ object fmImportC: TfmImportC
                 'lsb'
                 'msb'
               )
-              OnChange = actionParamExecute
               Style = csDropDownList
               TabOrder = 4
               Text = 'lsb'
+              OnChange = actionParamExecute
             end
             object lbImpBitOrder: TLabel
               AnchorSideTop.Side = asrCenter
@@ -996,6 +998,7 @@ object fmImportC: TfmImportC
               Top = 159
               Width = 263
               ItemHeight = 20
+              ItemIndex = 0
               Items.Strings = (
                 ''
                 ''
@@ -1012,9 +1015,9 @@ object fmImportC: TfmImportC
                 ''
                 ''
               )
-              OnChange = actionParamExecute
               Style = csDropDownList
               TabOrder = 5
+              OnChange = actionParamExecute
             end
             object lbImpNBits: TLabel
               AnchorSideTop.Side = asrCenter
@@ -1199,8 +1202,8 @@ object fmImportC: TfmImportC
               Width = 263
               BorderSpacing.Top = 16
               Caption = 'Прижать к левому краю'
-              OnChange = actionParamExecute
               TabOrder = 9
+              OnChange = actionParamExecute
             end
             object cbImpOptimize: TCheckBox
               Left = 273
@@ -1210,9 +1213,9 @@ object fmImportC: TfmImportC
               Width = 278
               Caption = 'Оптимизировать холст'
               Checked = True
-              OnChange = actionParamExecute
               State = cbChecked
               TabOrder = 10
+              OnChange = actionParamExecute
             end
           end
           object pImpExample: TPanel
@@ -1227,6 +1230,7 @@ object fmImportC: TfmImportC
             Color = clForm
             Constraints.MinHeight = 150
             Constraints.MinWidth = 200
+            ParentBackground = False
             ParentColor = False
             TabOrder = 0
             object imImpExample: TImage
@@ -1258,6 +1262,7 @@ object fmImportC: TfmImportC
       ClientHeight = 56
       ClientWidth = 569
       Color = cl3DLight
+      ParentBackground = False
       ParentColor = False
       TabOrder = 1
       object pSelector: TPanel
@@ -1271,6 +1276,7 @@ object fmImportC: TfmImportC
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 40
         ClientWidth = 246
+        ParentBackground = False
         TabOrder = 0
         object tbSelector: TToolBar
           Left = 0
@@ -1326,6 +1332,7 @@ object fmImportC: TfmImportC
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 40
         ClientWidth = 181
+        ParentBackground = False
         TabOrder = 2
         object tbCode: TToolBar
           Left = 0
@@ -1366,6 +1373,7 @@ object fmImportC: TfmImportC
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         Constraints.MinWidth = 32
+        ParentBackground = False
         TabOrder = 1
       end
     end
@@ -1428,10 +1436,5 @@ object fmImportC: TfmImportC
     KeyAttri.Style = []
     Left = 72
     Top = 208
-  end
-  object IniStorageImportC: TIniPropStorage
-    StoredValues = <>
-    Left = 72
-    Top = 112
   end
 end

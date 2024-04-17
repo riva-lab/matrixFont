@@ -8,7 +8,7 @@ uses
   Classes, Forms, ExtCtrls, Controls, StdCtrls, Grids, ComCtrls, ActnList,
   Windows, Graphics, Menus, StdActns, Dialogs, Spin, IniPropStorage, SysUtils,
   LazUTF8, Types, strutils, LCLIntf, LCLTranslator, PairSplitter, LazFileUtils,
-  LCLType, ImageSVGList,
+  LCLType, ImageSVGList, AppTuner, AppLocalizer, AppSettings, config_record,
 
   // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
@@ -37,16 +37,12 @@ type
   TfmMain = class(TForm)
     {$INCLUDE fm_main_controls.inc}
 
-    procedure acResetExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
     procedure FormWindowStateChange(Sender: TObject);
     procedure FormConstrainedResize(Sender: TObject; var MinWidth, MinHeight, MaxWidth, MaxHeight: TConstraintSize);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-
-    procedure SettingsSaveToIni;
-    procedure SettingsLoadFromIni;
 
     procedure tmrMain10msTimer(Sender: TObject);
 
@@ -114,6 +110,10 @@ type
     procedure AdjustComponentSizes;
     procedure AdjustThemeDependentValues;
     procedure LanguageChange;
+
+    procedure InitConfig;
+    procedure AfterLoadConfig;
+    procedure BeforeSaveConfig;
   end;
 
 var
@@ -122,22 +122,27 @@ var
 implementation
 
 var
-  file_changed:   Boolean;
-  timer_up:       Boolean;
-  i, cnt, frames: Integer;
-{$R *.lfm}
+  file_changed: Boolean;
+  timer_up:     Boolean;
+  cnt, frames:  Integer;
 
- { TfmMain }
+  {$R *.lfm}
 
- { ***  Обработка событий главной формы  *** }
 
- // инициализация
+  { TfmMain }
+
+
+  { ***  Main form event handlers  *** }
+
+// инициализация
 procedure TfmMain.FormCreate(Sender: TObject);
+  var
+    i: Integer;
   begin
     ReadAppInfo;
+    InitConfig;
 
-    IniStorageMain.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
-    FOpenFileList              := TOpenFileList.Create;
+    FOpenFileList := TOpenFileList.Create;
 
     // создаем пункты меню под список последних открытых файлов
     for i := 0 to LAST_FILES_LIST_SIZE - 1 do
@@ -150,41 +155,46 @@ procedure TfmMain.FormCreate(Sender: TObject);
       FLastFileMenuItem2[i].OnClick := @LastFileOpen;
       pmLastFiles.Items.Insert(i, FLastFileMenuItem2[i]);
       end;
-
-    // установка ширины малых панелей статусной строки
-    with stStatusBar.Panels do
-      begin
-      Items[1].Width := Canvas.GetTextWidth('NORM12');
-      Items[2].Width := Canvas.GetTextWidth('X,Y: 0000, 0000 ');
-      Items[3].Width := Canvas.GetTextWidth('0.0.0.00000') + stStatusBar.Height;
-      end;
   end;
 
 // появление формы главного окна на экране
 procedure TfmMain.FormShow(Sender: TObject);
   begin
-    LanguageChange;
+    OnShow := nil;
 
-    // fix splitter cursor bug
-    psSplit.Cursor := crHSplit;
+    appLocalizerEx.EnumerateComponents;
+
+    // init tuner
+    appTunerEx.IniFile := Settings.IniFile;
+    appTunerEx.AddForm(Self);
+    appTunerEx.LoadProperties;
+
+    Settings.SyncValues;
+    Settings.Load;
+    Settings.SyncComponents;
+    AfterLoadConfig;
+
+    // load property values to controls
+    acStayOnTopToggle.Checked := appTunerEx.Form[Self].StayOnTop;
+
+    LanguageChange;
 
     // загрузка файла, если он был перетащен на значок приложения
     // или открыт системой по аасоциации с расширением
     if (LazUTF8.ParamStrUTF8(1) <> '')
       and FileExtCheck(LazUTF8.ParamStrUTF8(1), FILE_EXTENSION) then
       FontLoadFromFile(LazUTF8.ParamStrUTF8(1)) else
-      with fmSettings do
-        FontCreateNew(
-          NewWidth, NewHeight, NewItemStart, NewItemLast - NewItemStart + 1,
-          NewEncoding, NewName, NewAuthor);
+      with cfg.new do
+        FontCreateNew(w, h, start, last - start + 1, enc, title, author);
 
-    SettingsLoadFromIni;
     SettingsApplyToCurrentSession;
     acZoomFit.Execute;
     tmrMain10msTimer(Sender);
     actionPasteMode(Sender);
 
-    fmMap.OnMouseEvent := @OnMapSelectChar;
+    psSplit.Cursor      := crHSplit; // fix splitter cursor bug
+    fmMap.OnMouseEvent  := @OnMapSelectChar;
+    tmrMain10ms.Enabled := True;
 
     {$IfDef DEBUG}
     miFPS.Visible := True;
@@ -228,7 +238,7 @@ procedure TfmMain.FormWindowStateChange(Sender: TObject);
         // нормальное состояние - окно предпросмотра примагничено к низу главного
         wsNormal:
           begin
-          if fmSettings.MagnetPreview then
+          if cfg.prev.magnet then
             begin
             fmPreview.Top   := Top + R.Bottom - R.Top;
             fmPreview.Left  := Left;
@@ -247,7 +257,7 @@ procedure TfmMain.FormWindowStateChange(Sender: TObject);
         // развернутое состояние - окно предпросмотра в правом нижнем углу
         wsMaximized:
           begin
-          if fmSettings.MagnetPreview then
+          if cfg.prev.magnet then
             begin
             fmPreview.Width := fmPreview.Constraints.MinWidth;
             GetWindowRect(fmPreview.Handle, RP);
@@ -285,100 +295,13 @@ procedure TfmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     CanClose := GetConfirmation;
 
     if CanClose then
-      SettingsSaveToIni;
-  end;
-
-
- { ***  Работа с хранилищем настроек  *** }
-
- // сохранение настроек в файл INI
-procedure TfmMain.SettingsSaveToIni;
-  begin
-    with IniStorageMain do
       begin
-      if not Active then Exit;
-
-      // параметры состояния формы и компонентов
-      IniSection := 'Last Parameters';
-      if fmMain.WindowState = wsNormal then
-        begin
-        WriteInteger('WindowPosition', 1);
-        WriteInteger('WindowMainTop', fmMain.Top);
-        WriteInteger('WindowMainLeft', fmMain.Left);
-        WriteInteger('WindowMainWidth', fmMain.Width);
-        WriteInteger('WindowMainHeight', fmMain.Height);
-        end;
-
-      WriteInteger('WindowMainState', Ord(fmMain.WindowState));
-      WriteInteger('Splitter', psSplit.Position);
-      WriteBoolean('Grid', acGridToggle.Checked);
-      WriteBoolean('Rollover', acFontShiftRollover.Checked);
-      WriteBoolean('OnTop', acStayOnTopToggle.Checked);
-      WriteBoolean('Preview', fmPreview.Visible);
-      WriteInteger('CodeFontSize', fmGen.snEdit.Font.Height);
-
-      // запись списка последних открытых файлов в INI-файл
-      IniSection := 'Last Opened Files';
-      for i      := 0 to LAST_FILES_LIST_SIZE - 1 do
-        WriteString('File_' + IntToStr(i), FOpenFileList.FilePath[i]);
-
-      // выход из текущей секции
-      IniSection := '';
+      Settings.SyncValues;
+      BeforeSaveConfig;
+      Settings.Save;
+      appTunerEx.SaveProperties;
       end;
   end;
-
-// загрузка настроек из файла INI
-procedure TfmMain.SettingsLoadFromIni;
-  var
-    cnt: Integer;
-  begin
-    with IniStorageMain do
-      begin
-
-      // параметры состояния формы и компонентов
-      IniSection := 'Last Parameters';
-      if ReadInteger('WindowPosition', -1) = 1 then
-        begin
-        fmMain.Top    := ReadInteger('WindowMainTop', 0);
-        fmMain.Left   := ReadInteger('WindowMainLeft', 0);
-        fmMain.Width  := ReadInteger('WindowMainWidth', 650);
-        fmMain.Height := ReadInteger('WindowMainHeight', 420);
-        end;
-      fmMain.WindowState := TWindowState(ReadInteger('WindowMainState', 0));
-      psSplit.Position := ReadInteger('Splitter', 170);
-
-      acGridToggle.Checked        := ReadBoolean('Grid', True);
-      acFontShiftRollover.Checked := ReadBoolean('Rollover', True);
-      acStayOnTopToggle.Checked   := ReadBoolean('OnTop', False);
-      fmGen.snEdit.Font.Height    := ReadInteger('CodeFontSize', 17);
-
-      if ReadBoolean('Preview', False) then
-        acFontPreview.Execute;
-
-      // считывание списка последних открытых файлов из INI-файла
-      IniSection := 'Last Opened Files';
-      for i      := LAST_FILES_LIST_SIZE - 1 downto 0 do
-        FOpenFileList.FilePath[0] := ReadString('File_' + IntToStr(i), '');
-      LastFileAdd(''); // обновление списка последних открытых файлов
-      end;
-  end;
-
-// сброс настроек
-procedure TfmMain.acResetExecute(Sender: TObject);
-  begin
-    if fmConfirm.Show(TXT_RESET, WARN_RESET, [mbYes, mbNo], Self) <> mrYes then Exit;
-
-    // при сбросе настроек отключаем хранилища
-    IniStorageMain.Active                := False;
-    fmImport.IniStorageImport.Active     := False;
-    fmPreview.IniStoragePV.Active        := False;
-    fmSettings.IniStorageSettings.Active := False;
-
-    // восстанавливаем настройки - удаляем файл настроек
-    if FileExistsUTF8(IniStorageMain.IniFileName) then
-      DeleteFileUTF8(IniStorageMain.IniFileName);
-  end;
-
 
 // таймер 10 мс
 procedure TfmMain.tmrMain10msTimer(Sender: TObject);
@@ -430,32 +353,32 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
           DefaultRowHeight * FontSet.Width div FontSet.Height;
 
         if (aRow >= TopRow) and (aRow - TopRow <= VisibleRowCount) and
-          (aCol = ColCount - 1) and (aRow > 0) then
+          (aCol = ColCount - 1) and (aRow >= FixedRows) then
           begin
           // символ
-          Cells[0, aRow] := FontSet.GetCharName(FontSet.FontStartItem + aRow - 1);
+          Cells[0, aRow] := FontSet.GetCharName(FontSet.FontStartItem + aRow - FixedRows);
 
           // код символа
-          if fmSettings.CodeHex then
-            Cells[1, aRow] := IntToHex(FontSet.FontStartItem + aRow - 1, 2) else
-            Cells[1, aRow] := IntToStr(FontSet.FontStartItem + aRow - 1);
+          if cfg.nav.code.hex then
+            Cells[1, aRow] := IntToHex(FontSet.FontStartItem + aRow - FixedRows, 2) else
+            Cells[1, aRow] := IntToStr(FontSet.FontStartItem + aRow - FixedRows);
 
-            // превью символа
-          if fmSettings.NaviInvert and (aRow = Row) then
+          // превью символа
+          if cfg.nav.invert and (aRow = Row) then
             // выделенная строка в навигаторе
-            FontSet.Item[aRow - 1].DrawPreview(bm_tmp, fmSettings.NaviTransparent,
-              fmSettings.ColorNaviA, fmSettings.ColorNaviBG)
+            FontSet.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
+              cfg.color.nav.active, cfg.color.nav.bg)
           else
             // невыделенная строка в навигаторе
-            FontSet.Item[aRow - 1].DrawPreview(bm_tmp, fmSettings.NaviTransparent,
-              fmSettings.ColorNaviBG, fmSettings.ColorNaviA);
+            FontSet.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
+              cfg.color.nav.bg, cfg.color.nav.active);
           Canvas.StretchDraw(aRect, bm_tmp);
           end;
 
         // заголовок редактора
         lbEditor.Caption := TXT_SYMBOL + '  <' + sgNavigator.Cells[0, Row] + '>'
-          + '  DEC = ' + IntToStr(FontSet.FontStartItem + Row - 1)
-          + ';  HEX = ' + IntToHex(FontSet.FontStartItem + Row - 1, 2);
+          + '  DEC = ' + IntToStr(FontSet.FontStartItem + Row - FixedRows)
+          + ';  HEX = ' + IntToHex(FontSet.FontStartItem + Row - FixedRows, 2);
         end;
       finally
       FreeAndNil(bm_tmp);
@@ -467,7 +390,7 @@ procedure TfmMain.sgNavigatorSelection(Sender: TObject; aCol, aRow: Integer);
   var
     item: TSymbol;
   begin
-    item                 := FontSet.Item[sgNavigator.Row - 1];
+    item                 := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
     acSymbolUndo.Enabled := not item.HistoryEmpty;
     acSymbolRedo.Enabled := not item.HistoryNoRedo;
     ReDrawImage;
@@ -478,10 +401,10 @@ procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   begin
     if ssCtrl in Shift then
-      with fmSettings do
+      with cfg.nav do
         begin
-        NaviHeight := NaviHeight + WheelDelta div abs(WheelDelta);
-        sgNavigator.DefaultRowHeight := NaviHeight;
+        Height := Height + WheelDelta div abs(WheelDelta);
+        sgNavigator.DefaultRowHeight := Height;
         end;
   end;
 
@@ -507,7 +430,7 @@ procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
       X := (X - FontSet.GridThickness div 2) div FontSet.GridStep;
       Y := (Y - FontSet.GridThickness div 2) div FontSet.GridStep;
 
-      item := FontSet.Item[sgNavigator.Row - 1];
+      item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
       if ssCtrl in Shift then
         for i := 0 to FontSet.Width - 1 do
@@ -648,8 +571,8 @@ procedure TfmMain.acFontImportExecute(Sender: TObject);
 
     with fmImport do
       begin
-      seStartItem.Value := fmSettings.NewItemStart;
-      seLastItem.Value  := fmSettings.NewItemLast;
+      seStartItem.Value := cfg.new.start;
+      seLastItem.Value  := cfg.new.last;
 
       if ShowModal = mrOk then
         begin
@@ -658,7 +581,7 @@ procedure TfmMain.acFontImportExecute(Sender: TObject);
         FontCreateNew(
           seW.Value, seH.Value, seStartItem.Value, seLastItem.Value - seStartItem.Value + 1,
           cbEncoding.ItemIndex, dlgFont.Font.Name + ' ' + dlgFont.Font.Size.ToString,
-          fmSettings.NewAuthor);
+          cfg.new.author);
         FontSet.Import(dlgFont.Font, seW.Value, seH.Value);
 
         if cbSnapLeft.Checked then acFontSnapLeft.Execute else acFontCenterH.Execute;
@@ -685,7 +608,7 @@ procedure TfmMain.acFontImportCCodeExecute(Sender: TObject);
         FontCreateNew(
           seImpWidth.Value, seImpHeight.Value,
           seImpStartItem.Value, seImpLastItem.Value - seImpStartItem.Value + 1,
-          fmSettings.NewEncoding, fmSettings.NewName, fmSettings.NewAuthor);
+          cfg.new.enc, cfg.new.title, cfg.new.author);
         UpdateFont(FontSet);
         FontCreateFinish;
         end;
@@ -753,7 +676,7 @@ procedure TfmMain.acGenFormOnTopExecute(Sender: TObject);
       tmp_top   := Top;
       tmp_left  := Left;
       OnShow    := nil;
-      PopupMode := CheckBoolean(acGenFormOnTop.Checked, pmExplicit, pmNone);
+      PopupMode := acGenFormOnTop.Checked.Select(pmExplicit, pmNone);
       OnShow    := @FormShow;
       Top       := tmp_top;
       Left      := tmp_left;
@@ -772,7 +695,7 @@ procedure TfmMain.actionZooming(Sender: TObject);
   var
     item: TSymbol;
   begin
-    item := FontSet.Item[sgNavigator.Row - 1];
+    item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
     if Sender <> nil then
       case TAction(Sender).Name of
@@ -798,7 +721,7 @@ procedure TfmMain.actionSymbolHistory(Sender: TObject);
   var
     item: TSymbol;
   begin
-    item := FontSet.Item[sgNavigator.Row - 1];
+    item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
     case TAction(Sender).Name of
 
@@ -828,7 +751,7 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
       begin
       // показать/скрыть панель поиска символа в таблице
       pFind.Visible := acSymbolFind.Checked;
-      seFind.Value  := sgNavigator.Row + FontSet.FontStartItem - 1;
+      seFind.Value  := sgNavigator.Row + FontSet.FontStartItem - sgNavigator.FixedRows;
       edFind.Text   := EncodingToUTF8(Char(seFind.Value), FontSet.Encoding);
       end
     else
@@ -845,7 +768,7 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
         if edFind.Text <> '' then
           seFind.Value := Ord(UTF8ToEncoding(edFind.Text, FontSet.Encoding)[1]);
 
-      sgNavigator.Row := seFind.Value - FontSet.FontStartItem + 1;
+      sgNavigator.Row := seFind.Value - FontSet.FontStartItem + sgNavigator.FixedRows;
       sgNavigatorSelection(Sender, 1, sgNavigator.Row);
       end;
   end;
@@ -881,7 +804,7 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
   var
     item: TSymbol;
   begin
-    item := FontSet.Item[sgNavigator.Row - 1];
+    item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
     case TAction(Sender).Name of
 
@@ -905,7 +828,7 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
         with dlgImport do
           begin
           if (FileName <> '') or Execute then
-            item.ImportImage(FileName, fmSettings.BWTreshold);
+            item.ImportImage(FileName, cfg.import.bwlevel);
           FileName := '';
           end;
 
@@ -965,7 +888,7 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
   var
     curr: Integer;
   begin
-    curr := sgNavigator.Row - 1;
+    curr := sgNavigator.Row - sgNavigator.FixedRows;
 
     case TAction(Sender).Name of
 
@@ -1028,11 +951,11 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
 
       'acSymbolMoveUp':   // действие: переместить символ вверх
         if FontSet.SwapChars(curr, curr - 1) then
-          sgNavigator.Row := curr;
+          sgNavigator.Row := sgNavigator.FixedRows + curr - 1;
 
       'acSymbolMoveDown': // действие: переместить символ вниз
         if FontSet.SwapChars(curr, curr + 1) then
-          sgNavigator.Row := curr + 2;
+          sgNavigator.Row := sgNavigator.FixedRows + curr + 1;
       end;
 
     FontActionExecute;
@@ -1056,6 +979,14 @@ procedure TfmMain.actionService(Sender: TObject);
           ReDrawImage;
           end;
 
+      'acReset':   // действие: сброс настроек
+        if fmConfirm.Show(TXT_RESET, WARN_RESET, [mbYes, mbNo], Self) = mrYes then
+          begin
+          Settings.Clear;
+          appTunerEx.ClearProperties;
+          Close;
+          end;
+
       'acHelp':    // действие: вызов справки
         OpenURL('..' + DirectorySeparator + HELP_DIR + DirectorySeparator + HELP_FILE + '.html');
 
@@ -1076,6 +1007,10 @@ procedure TfmMain.actionService(Sender: TObject);
 
       'acAppExit': // действие: выход из приложения
         fmMain.Close;
+
+      'acStayOnTopToggle': // действие: поверх всех окон
+        appTunerEx.Form[Self].StayOnTop := acStayOnTopToggle.Checked;
+
       end;
   end;
 
@@ -1097,7 +1032,7 @@ procedure TfmMain.acFontCharsetExecute(Sender: TObject);
         begin
         SetRange(seStart.Value, seEnd.Value);
 
-        sgNavigator.RowCount := FontSet.FontLength + 1;
+        sgNavigator.RowCount := FontSet.FontLength + sgNavigator.FixedRows;
         FontActionExecute;
         FileStatusUpdate();
         end;
@@ -1161,6 +1096,8 @@ procedure TfmMain.acDeleteLastFilesListExecute(Sender: TObject);
 
 // добавление файла в список последних открытых
 procedure TfmMain.LastFileAdd(FileName: String);
+  var
+    i: Integer;
   begin
     FOpenFileList.FilePath[0] := FileName;
 
@@ -1221,51 +1158,51 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
     BeginFormUpdate;
 
     if FontSet <> nil then
-        try
-        with FontSet do
-          begin
-          ShowGrid              := acGridToggle.Checked;
-          FontSet.ShiftRollover := acFontShiftRollover.Checked;
+      try
+      with FontSet do
+        begin
+        ShowGrid              := acGridToggle.Checked;
+        FontSet.ShiftRollover := acFontShiftRollover.Checked;
 
-          BackgroundColor     := fmSettings.ColorBackground;
-          ActiveColor         := fmSettings.ColorActive;
-          GridColor           := fmSettings.ColorGrid;
-          GridThickness       := fmSettings.GridThickness;
-          GridChessBackground := fmSettings.ChessGrid;
+        BackgroundColor     := cfg.color.editor.bg;
+        ActiveColor         := cfg.color.editor.active;
+        GridColor           := cfg.color.editor.grid;
+        GridThickness       := cfg.grid.size;
+        GridChessBackground := cfg.grid.chess;
 
-          // заголовок навигатора
-          lbNavigator.Caption := TXT_NAVIGATOR + ': ' + IntToStr(FontStartItem) + ' - ' +
-            IntToStr(FontStartItem + FontLength - 1) + ' ';
+        // заголовок навигатора
+        lbNavigator.Caption := TXT_NAVIGATOR + ': ' + IntToStr(FontStartItem) + ' - ' +
+          IntToStr(FontStartItem + FontLength - 1) + ' ';
 
-          imEditor.Width  := Item[0].WidthInPixels;
-          imEditor.Height := Item[0].HeightInPixels;
-          end;
-
-        with sgNavigator.Columns do
-          begin
-          Items[0].Visible := fmSettings.NaviColName;
-          Items[1].Visible := fmSettings.NaviColCode;
-
-          Items[0].Font.Name := fmSettings.CharNameFont;
-          Items[0].Font.Size := fmSettings.CharNameFontSize;
-          Items[1].Font.Name := fmSettings.CodeNameFont;
-          Items[1].Font.Size := fmSettings.CodeNameFontSize;
-          end;
-
-        sgNavigator.DefaultRowHeight := fmSettings.NaviHeight;
-
-        if fmSettings <> nil then
-          begin
-          FormWindowStateChange(self);
-          end;
-        except
-        if fmConfirm.Show(TXT_ERROR, WARN_SETTINGS, mbYesNo, self) = mrYes then
-          Close;
+        imEditor.Width  := Item[0].WidthInPixels;
+        imEditor.Height := Item[0].HeightInPixels;
         end;
+
+      with sgNavigator.Columns do
+        begin
+        Items[0].Visible := cfg.nav.char.enable;
+        Items[1].Visible := cfg.nav.code.enable;
+
+        Items[0].Font.Name := Screen.Fonts[cfg.nav.char.font];
+        Items[0].Font.Size := cfg.nav.char.fontsize;
+        Items[1].Font.Name := Screen.Fonts[cfg.nav.code.font];
+        Items[1].Font.Size := cfg.nav.code.fontsize;
+        end;
+
+      sgNavigator.DefaultRowHeight := cfg.nav.Height;
+
+      if fmSettings <> nil then
+        begin
+        FormWindowStateChange(self);
+        end;
+      except
+      if fmConfirm.Show(TXT_ERROR, WARN_SETTINGS, mbYesNo, self) = mrYes then
+        Close;
+      end;
 
     with sgNavigator do
       begin
-      if fmSettings.NaviScroll then
+      if cfg.nav.scroll then
         MouseWheelOption := mwCursor else
         MouseWheelOption := mwGrid;
       end;
@@ -1278,8 +1215,6 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
     ReDrawContent;
     ReDrawImage;
 
-    // опция главной формы 'поверх всех окон'
-    FormStyle := CheckBoolean(acStayOnTopToggle.Checked, fsSystemStayOnTop, fsNormal);
     EndFormUpdate;
   end;
 
@@ -1318,7 +1253,7 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
         AppCurrent               := app_info.ProductName + ' v' + app_info.FileVersion;
         dlgOpen.FileName         := AFileName;
         acSaveAs.Dialog.FileName := AFileName;
-        sgNavigator.RowCount     := FontLength + 1;
+        sgNavigator.RowCount     := FontLength + sgNavigator.FixedRows;
 
         LastFileAdd(AFileName);
         end;
@@ -1352,7 +1287,7 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
         Height               := h;
         FontStartItem        := si;
         FontLength           := l;
-        sgNavigator.RowCount := FontLength + 1;
+        sgNavigator.RowCount := FontLength + sgNavigator.FixedRows;
         end;
 
       FontCreateFinish;
@@ -1395,7 +1330,7 @@ function TfmMain.GetConfirmation: Boolean;
 procedure TfmMain.OnMapSelectChar(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   begin
     if (Button = mbLeft) and (Shift = [ssDouble]) then
-      sgNavigator.Row := fmMap.SelectedIndex + 1;
+      sgNavigator.Row := fmMap.SelectedIndex + sgNavigator.FixedRows;
   end;
 
 
@@ -1429,7 +1364,7 @@ procedure TfmMain.FontActionExecute;
   begin
     ReDrawImage;
     ReDrawContent;
-    acSymbolUndo.Enabled := not FontSet.Item[sgNavigator.Row - 1].HistoryEmpty;
+    acSymbolUndo.Enabled := not FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows].HistoryEmpty;
     acSymbolRedo.Enabled := False;
     file_changed         := True;
     FileStatusUpdate();
@@ -1450,7 +1385,7 @@ procedure TfmMain.FontCreateFinish;
 // действия после применения изменений к символу
 procedure TfmMain.ReDrawAfterAction;
   begin
-    FontSet.Item[sgNavigator.Row - 1].SaveChange;
+    FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows].SaveChange;
     file_changed         := True;
     acSymbolUndo.Enabled := True;
     acSymbolRedo.Enabled := False;
@@ -1464,7 +1399,7 @@ procedure TfmMain.ReDrawImage;
   var
     index: Integer;
   begin
-    index            := sgNavigator.Row - 1;
+    index            := sgNavigator.Row - sgNavigator.FixedRows;
     imEditor.Visible := False; // откл. видимость (и автообновление) компонента
 
     with imEditor.Picture do
@@ -1484,7 +1419,7 @@ procedure TfmMain.ReDrawContent;
     sgNavigator.Repaint;
 
     // обновление изображения предпросмотра
-    if (fmPreview <> nil) and fmPreview.Visible and fmSettings.PreviewRefresh then
+    if (fmPreview <> nil) and fmPreview.Visible and cfg.prev.refresh then
       fmPreview.UpdatePreview;
 
     // обновление карты символов
@@ -1519,6 +1454,17 @@ procedure TfmMain.AdjustComponentSizes;
         end;
     end;
 
+  procedure SetStatusBarPanelWidth(AIndex: Integer; ASample: String);
+    begin
+      with stStatusBar.Panels do
+        if AIndex in [0..Count - 1] then
+          with Items[AIndex] do
+            begin
+            Width := Canvas.GetTextWidth(ASample);
+            if AIndex = Count - 1 then Width := Width + stStatusBar.Height;
+            end;
+    end;
+
   procedure RenderSVGIcons(ASize: Integer; A, D: TImageList);
     begin
       imSVGList.Rendering      := False;
@@ -1527,10 +1473,8 @@ procedure TfmMain.AdjustComponentSizes;
       imSVGList.ImagesDisabled := D;
       imSVGList.Rendering      := True;
     end;
-
   var
     w, h, i: Integer;
-
   begin
     BeginFormUpdate;
 
@@ -1572,6 +1516,10 @@ procedure TfmMain.AdjustComponentSizes;
 
     edFind.Constraints.MaxWidth := 2 * Font.Height;
 
+    SetStatusBarPanelWidth(1, 'NORMAL');
+    SetStatusBarPanelWidth(2, 'X,Y: 0000, 0000 ');
+    SetStatusBarPanelWidth(3, '0.0.0.00000');
+
     // allow adjusting components with autosize option
     EndFormUpdate;
 
@@ -1605,37 +1553,84 @@ procedure TfmMain.AdjustThemeDependentValues;
       AFont.Size  := ASize;
       AFont.Color := AColor;
     end;
-
   begin
-    {$IFDEF ALLOW_DARK_THEME}
-    if IsDarkModeEnabled then
+    if appTunerEx.IsDarkTheme then
       begin                        // dark theme, if available
 
-      // iconspack for dark theme located in resources
-      imSVGList.LoadRes       := 'ICONSPACK-DARK';
-      imSVGList.DisabledLevel := 96;
+      imSVGList.List.Text := imSVGList.List.Text
+        .Replace('#000', '#49d095')
+        .Replace('stroke-width="1.7"', 'stroke-width="1.0"');
 
-      MetaDarkFormChanged(self);
+      sgNavigator.AlternateColor := $222222;
+      sgNavigator.GridLineColor  := $555555;
       end
     else
-      {$ENDIF}
       begin                        // light theme, default
 
-      // iconspack for light theme is loaded in component already
-
+      pFontToolsBox.Color := cl3DLight;
+      pCharToolsBox.Color := cl3DLight;
       end;
   end;
 
 // перевод интерфейса
 procedure TfmMain.LanguageChange;
   begin
-    SetDefaultLang(fmSettings.Language, '', LANGUAGE_FILE);
+    appLocalizerEx.CurrentLanguage := cfg.app.lang;
+    appTunerEx.TuneComboboxes      := True;
 
     fmAbout.UpdateInfo; // обновляем инфо на новом языке
-
-    // обновляем список кодировок
-    EncodingsListUpdate;
-    EncodingsListAssign(fmSettings.cbEncoding.Items);
   end;
+
+
+ { ***  App config  *** }
+
+// configure app settings
+procedure TfmMain.InitConfig;
+  var
+    i: Integer;
+  begin
+    Settings.Add(acViewTBCharTools, @cfg.toolbar.chars);
+    Settings.Add(acViewTBFontTools, @cfg.toolbar.fonts);
+    Settings.Add(acViewTBFile, @cfg.toolbar.files);
+    Settings.Add(acViewTBTools, @cfg.toolbar.tools);
+
+    Settings.Add(psSplit, @cfg.app.splitter);
+    Settings.Add(acGridToggle, @cfg.grid.enable);
+    Settings.Add(acFontShiftRollover, @cfg.app.rollover);
+
+    Settings.Add('_cfg.gen.fontsize', stInt, @cfg.gen.fontsize, '17');
+    Settings.Add('_cfg.prev.enable', stBool, @cfg.prev.enable, '0');
+
+    for i := 0 to LAST_FILES_LIST_SIZE - 1 do
+      Settings.Add(Format('_cfg.app.lastfiles[%d]', [i]), stString, @cfg.app.lastfiles[i]);
+  end;
+
+// load some config variables
+procedure TfmMain.AfterLoadConfig;
+  var
+    i: Integer;
+  begin
+    fmGen.snEdit.Font.Height := cfg.gen.fontsize;
+    if cfg.prev.enable then acFontPreview.Execute;
+
+    for i := LAST_FILES_LIST_SIZE - 1 downto 0 do
+      FOpenFileList.FilePath[0] := cfg.app.lastfiles[i];
+    LastFileAdd(''); // обновление списка последних открытых файлов
+  end;
+
+// save some config variables
+procedure TfmMain.BeforeSaveConfig;
+  var
+    i: Integer;
+  begin
+    cfg.gen.fontsize := fmGen.snEdit.Font.Height;
+    cfg.prev.enable  := fmPreview.Visible;
+
+    for i := 0 to LAST_FILES_LIST_SIZE - 1 do
+      cfg.app.lastfiles[i] := FOpenFileList.FilePath[i];
+
+    fmMap.SaveConfig;
+  end;
+
 
 end.

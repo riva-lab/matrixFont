@@ -6,10 +6,10 @@ interface
 
 uses
   Classes, SysUtils, LCLType, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, ActnList, StdCtrls, Spin, IniPropStorage, SynEdit, LazUTF8, SynHighlighterCpp,
-  Buttons,
-  fm_settings, fm_about,
-  font, u_utilities, u_encodings, u_helpers;
+  ComCtrls, ActnList, StdCtrls, Spin, SynEdit, LazUTF8, SynHighlighterCpp,
+  Buttons, AppLocalizer,
+  fm_about,
+  font, u_utilities, u_encodings, u_helpers, config_record;
 
 resourcestring
   FM_IMPC_CAPTION = 'Импорт шрифта из кода C';
@@ -66,8 +66,6 @@ type
 
     imImpChar:    TImage;
     imImpExample: TImage;
-
-    IniStorageImportC: TIniPropStorage;
 
     lbImpBitOrder: TLabel;
     lbImpChar:     TLabel;
@@ -140,7 +138,11 @@ type
     procedure CheckRanges;
     procedure UpdatePreview(ASingle: Boolean = False);
 
-  public
+  private
+    procedure InitConfig;
+
+  public                                      
+    procedure OnLanguageChange;
     procedure UpdateFont(AFont: TFont = nil);
 
   end;
@@ -157,7 +159,7 @@ implementation
 
 procedure TfmImportC.FormCreate(Sender: TObject);
   begin
-    IniStorageImportC.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
+    InitConfig;
 
     acTabCode.Execute;
   end;
@@ -169,11 +171,6 @@ procedure TfmImportC.FormShow(Sender: TObject);
     Caption        := FM_IMPC_CAPTION;
     lbInfo.Caption := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
 
-    UpdateComboBox(cbImpType, [FM_IMPC_TYPE_1, FM_IMPC_TYPE_2, FM_IMPC_TYPE_3, FM_IMPC_TYPE_4]);
-    UpdateComboBox(cbImpBitOrder, [FM_IMPC_BITOR_1, FM_IMPC_BITOR_2]);
-    UpdateComboBox(cbImpOrder, [FM_IMPC_ORDER_1, FM_IMPC_ORDER_2]);
-    UpdateComboBox(cbImpNBits, [FM_IMPC_BITS_1, FM_IMPC_BITS_2, FM_IMPC_BITS_3, FM_IMPC_BITS_4, FM_IMPC_BITS_5, FM_IMPC_BITS_6]);
-
     EndFormUpdate;
 
     // init block, executed only once
@@ -184,7 +181,7 @@ procedure TfmImportC.FormShow(Sender: TObject);
       tbSelector.ButtonHeight       := pSelector.Height;
       tbCode.ButtonHeight           := pCode.Height;
       pcPages.ShowTabs              := False;
-      pImpExample.Color             := fmSettings.ColorImportBG;
+      pImpExample.Color             := cfg.color.import.bg;
       lbInfo.Constraints.MinHeight  := pImpControls.Height;
       pSpacer.Constraints.MinHeight := cbImpSnapLeft.Height - 1;
       snImpEdit.SetFocus;
@@ -372,7 +369,7 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
     begin
       with ADest do
         begin
-        Canvas.Brush.Color := AIsSingle.Select(fmSettings.ColorPreviewBG, fmSettings.ColorImportBG);
+        Canvas.Brush.Color := AIsSingle.Select(cfg.color.prev.bg, cfg.color.import.bg);
         Canvas.Clear;
         Canvas.Clear;
         end;
@@ -387,7 +384,7 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
 
         if not AIsSingle and (AX <= 1) then
           begin
-          Canvas.Brush.Color := fmSettings.ColorImportBG;
+          Canvas.Brush.Color := cfg.color.import.bg;
           Canvas.Clear;
           Canvas.Clear;
           end;
@@ -396,8 +393,8 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
           begin
           FontImp.Item[AChar].DrawPreview(
             bmp, False,
-            AIsSingle.Select(fmSettings.ColorPreviewBG, fmSettings.ColorImportBG),
-            AIsSingle.Select(fmSettings.ColorPreviewA, fmSettings.ColorImportA));
+            AIsSingle.Select(cfg.color.prev.bg, cfg.color.import.bg),
+            AIsSingle.Select(cfg.color.prev.active, cfg.color.import.active));
 
           Canvas.Draw(AX, 0, bmp);
           end;
@@ -442,6 +439,38 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
           end;
 
     EndFormUpdate;
+  end;
+
+procedure TfmImportC.InitConfig;
+  begin
+    Settings.Add(cbImpOptimize, @cfg.importc.optimize);
+    Settings.Add(cbImpSnapLeft, @cfg.importc.snapleft);
+    Settings.Add(cbImpBitOrder, @cfg.importc.metrics.bitorder);
+    Settings.Add(cbImpType, @cfg.importc.metrics.codetype);
+    Settings.Add(seImpHeight, @cfg.importc.metrics.h);
+    Settings.Add(seImpLastItem, @cfg.importc.metrics.last);
+    Settings.Add(cbImpNBits, @cfg.importc.metrics.nbits);
+    Settings.Add(seImpOffset, @cfg.importc.metrics.offset);
+    Settings.Add(cbImpOrder, @cfg.importc.metrics.order); 
+    Settings.Add(seImpSkip, @cfg.importc.metrics.skip);
+    Settings.Add(seImpStartItem, @cfg.importc.metrics.start);  
+    Settings.Add(seImpWidth, @cfg.importc.metrics.w);
+    Settings.Add(cbImpExample, @cfg.importc.example.enable);
+    Settings.Add(seImpCharCode, @cfg.importc.example.char);
+    Settings.Add(edImpExample, @cfg.importc.example.str);
+    Settings.Add(acTabCode, @cfg.importc.tab.code);
+    Settings.Add(acTabParams, @cfg.importc.tab.params);
+  end;        
+
+procedure TfmImportC.OnLanguageChange;
+  begin
+    with appLocalizerEx do
+      begin
+      Localize(cbImpType, [FM_IMPC_TYPE_1, FM_IMPC_TYPE_2, FM_IMPC_TYPE_3, FM_IMPC_TYPE_4]);
+      Localize(cbImpBitOrder, [FM_IMPC_BITOR_1, FM_IMPC_BITOR_2]);
+      Localize(cbImpOrder, [FM_IMPC_ORDER_1, FM_IMPC_ORDER_2]);
+      Localize(cbImpNBits, [FM_IMPC_BITS_1, FM_IMPC_BITS_2, FM_IMPC_BITS_3, FM_IMPC_BITS_4, FM_IMPC_BITS_5, FM_IMPC_BITS_6]);
+      end;
   end;
 
 procedure TfmImportC.UpdateFont(AFont: TFont);

@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Graphics, ExtCtrls, Spin,
-  StdCtrls, ActnList, LazUTF8, ComCtrls, Dialogs, IniPropStorage, Types,
-  fm_settings, font, u_encodings;
+  StdCtrls, ActnList, LazUTF8, ComCtrls, Dialogs, Types, AppSettings,
+  font, u_encodings, config_record;
 
 resourcestring
   FM_PREV_EXAMPLE = 'Образец текста';
@@ -20,7 +20,6 @@ type
   TfmPreview = class(TForm)
     acRefresh:     TAction;
     imPreview:     TImage;
-    IniStoragePV:  TIniPropStorage;
     mmPreview:     TMemo;
     pControls:     TPanel;
     pFontType:     TPanel;
@@ -78,7 +77,8 @@ type
     procedure UpdatePreview;
 
   PRIVATE
-    { private declarations }
+    procedure InitConfig;
+
   PUBLIC
     { public declarations }
     PFontCustom: TPFontCustom;
@@ -97,7 +97,6 @@ const
   PREVIEW_SCALE_MAX    = 16; // макс. масштаб изображения
 var
   fmPreview: TfmPreview;
-  scale:     Integer = 2; // масштаб изображения (кол-во пикселей на 1 пиксель символа)
 
 implementation
 
@@ -108,7 +107,7 @@ implementation
 // создание окна предпросмотра
 procedure TfmPreview.FormCreate(Sender: TObject);
   begin
-    IniStoragePV.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
+    InitConfig;
     pcPages.ActivePageIndex  := 0;
     pcPages.ShowTabs         := False;
   end;
@@ -133,14 +132,14 @@ procedure TfmPreview.acResetTextExecute(Sender: TObject);
 // увеличение масштаба изображения
 procedure TfmPreview.acZoomInExecute(Sender: TObject);
   begin
-    if scale < PREVIEW_SCALE_MAX then Inc(scale);
+    if cfg.prev.scale < PREVIEW_SCALE_MAX then Inc(cfg.prev.scale);
     UpdatePreview;
   end;
 
 // уменьшение масштаба изображения
 procedure TfmPreview.acZoomOutExecute(Sender: TObject);
   begin
-    if scale > 1 then Dec(scale);
+    if cfg.prev.scale > 1 then Dec(cfg.prev.scale);
     UpdatePreview;
   end;
 
@@ -164,10 +163,10 @@ procedure TfmPreview.acExportImageExecute(Sender: TObject);
 
           with pic.Bitmap do
             begin
-            Width  := imPreview.Picture.Bitmap.Width * scale;
-            Height := imPreview.Picture.Bitmap.Height * scale;
+            Width  := imPreview.Picture.Bitmap.Width * cfg.prev.scale;
+            Height := imPreview.Picture.Bitmap.Height * cfg.prev.scale;
 
-            // создание увеличенного в scale раз изображения
+            // создание увеличенного в cfg.prev.scale раз изображения
             Canvas.StretchDraw(Rect(0, 0, Width, Height), imPreview.Picture.Graphic);
             end;
 
@@ -226,7 +225,7 @@ procedure TfmPreview.UpdatePreview;
     CharWidth  := PFontCustom^.Width;
     CharHeight := PFontCustom^.Height + seDelta.Value;
 
-    lbBackground.Color := fmSettings.ColorPreviewBG;
+    lbBackground.Color := cfg.color.prev.bg;
 
     // определяем ширину текста
     x := 0;
@@ -261,8 +260,8 @@ procedure TfmPreview.UpdatePreview;
       // очищаем холст
       //Canvas.Brush.Color := PFontCustom^.BackgroundColor;
       //Canvas.Pen.Color   := PFontCustom^.ActiveColor;
-      Canvas.Brush.Color := fmSettings.ColorPreviewBG;
-      Canvas.Pen.Color   := fmSettings.ColorPreviewA;
+      Canvas.Brush.Color := cfg.color.prev.bg;
+      Canvas.Pen.Color   := cfg.color.prev.active;
       Canvas.Clear;
       Canvas.Clear;
 
@@ -280,7 +279,7 @@ procedure TfmPreview.UpdatePreview;
             if (char_code >= 0) and (char_code <= FontLength - 1) then
               begin
               Item[char_code].DrawPreview(bm_tmp, False,
-                fmSettings.ColorPreviewBG, fmSettings.ColorPreviewA);
+                cfg.color.prev.bg, cfg.color.prev.active);
 
               Canvas.Draw(1 + x, 1 + y * CharHeight, bm_tmp);
 
@@ -294,11 +293,21 @@ procedure TfmPreview.UpdatePreview;
 
 
       // масштабирование
-      imPreview.Width  := Width * scale;
-      imPreview.Height := Height * scale;
+      imPreview.Width  := Width * cfg.prev.scale;
+      imPreview.Height := Height * cfg.prev.scale;
       end;
     FreeAndNil(bm_tmp);
-    Caption := FM_PREV_EXAMPLE + ' - ' + IntToStr(scale) + ':1';
+    Caption := FM_PREV_EXAMPLE + ' - ' + IntToStr(cfg.prev.scale) + ':1';
+  end;
+
+procedure TfmPreview.InitConfig;
+  begin
+    Settings.Add(mmPreview, @cfg.prev.example);
+    Settings.Add(seDelta, @cfg.prev.delta);
+    Settings.Add(seSpace, @cfg.prev.space);
+    Settings.Add(rbMono, @cfg.prev.mono);
+    Settings.Add(rbProp, @cfg.prev.prop);
+    Settings.Add('_cfg.prev.scale', stInt, @cfg.prev.scale, '2');
   end;
 
 

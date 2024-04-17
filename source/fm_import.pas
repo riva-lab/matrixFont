@@ -6,7 +6,8 @@ interface
 
 uses
   SysUtils, Forms, Graphics, Dialogs, StdCtrls, ExtCtrls, Spin, Buttons,
-  ComCtrls, IniPropStorage, fm_settings, u_encodings, LazUTF8, Classes, Types;
+  ComCtrls, LazUTF8, Classes, Types,
+  u_encodings, config_record;
 
 resourcestring
   //FM_IMPORT_EXAMPLE = 'Образец';
@@ -30,7 +31,6 @@ type
     cbExampleEdit: TCheckBox;
     dlgFont:       TFontDialog;
     imPreview:     TImage;
-    IniStorageImport: TIniPropStorage;
     lbScale:       TLabel;
     lbItemStart:   TLabel;
     lbItemLast:    TLabel;
@@ -93,6 +93,8 @@ type
     // применение взаимосвязанных изменений
     procedure ApplyChange;
 
+    procedure InitConfig;
+
   public
     { public declarations }
   end;
@@ -109,7 +111,7 @@ implementation
  // создание формы импорта системного шрифта
 procedure TfmImport.FormCreate(Sender: TObject);
   begin
-    IniStorageImport.IniFileName := ExtractFileDir(ParamStrUTF8(0)) + SETTINGS_FILE;
+    InitConfig;
     cbFontList.Items.Assign(Screen.Fonts);
 
     FScale               := 3;
@@ -125,15 +127,15 @@ procedure TfmImport.FormShow(Sender: TObject);
     EncodingsListAssign(cbEncoding.Items);
     dlgFont.Font.Name       := FFontName;
     cbFontList.Text         := FFontName;
-    cbEncoding.ItemIndex    := fmSettings.NewEncoding;
+    cbEncoding.ItemIndex    := cfg.new.enc;
     pcPages.ShowTabs        := False;
     pcPages.ActivePageIndex := 0;
     cbExampleEdit.Checked   := False;
     AutoSize                := False;
     Constraints.MinHeight   := Height;
     Constraints.MinWidth    := Width;
-    shPreviewBG.Brush.Color := fmSettings.ColorImportBG;
-    shPreviewBG.Pen.Color   := fmSettings.ColorImportBG;
+    shPreviewBG.Brush.Color := cfg.color.import.bg;
+    shPreviewBG.Pen.Color   := cfg.color.import.bg;
     ApplyChange;
   end;
 
@@ -238,8 +240,8 @@ procedure TfmImport.ApplyChange;
       SetSize(w, h);
 
       // подготовка буфера
-      Canvas.Brush.Color := fmSettings.ColorImportBG;
-      Canvas.Font.Color  := fmSettings.ColorImportA;
+      Canvas.Brush.Color := cfg.color.import.bg;
+      Canvas.Font.Color  := cfg.color.import.active;
       Canvas.Clear;
       Canvas.Clear;
 
@@ -274,6 +276,13 @@ procedure TfmImport.ApplyChange;
     //tsExample.Caption          := FM_IMPORT_EXAMPLE + ' [' + FScale.ToString + ':1]';
 
     bmp.Free;
+  end;
+
+procedure TfmImport.InitConfig;
+  begin
+    Settings.Add(cbOptimize, @cfg.import.optimize);
+    Settings.Add(cbSnapLeft, @cfg.import.snapleft);
+    Settings.Add(mmExample, @cfg.import.example);
   end;
 
 end.

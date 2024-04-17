@@ -1,29 +1,30 @@
 object fmSettings: TfmSettings
   Left = 354
-  Height = 550
+  Height = 513
   Top = 146
-  Width = 648
+  Width = 823
   AutoSize = True
   BorderIcons = [biSystemMenu]
   Caption = 'Настройки'
-  ClientHeight = 550
-  ClientWidth = 648
+  ClientHeight = 513
+  ClientWidth = 823
   DesignTimePPI = 120
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  SessionProperties = 'cbCharName.Checked;cbCharNameFont.Text;cbChessGrid.Checked;cbCodeHex.Checked;cbCodeName.Checked;cbCodeNameFont.Text;cbEncoding.ItemIndex;cbLanguage.ItemIndex;cbMagnetPreview.Checked;cbNaviInvert.Checked;cbNaviScroll.Checked;cbNaviTransparent.Checked;cbtnActive.ButtonColor;cbtnBackground.Color;cbtnGrid.ButtonColor;cbtnImportA.ButtonColor;cbtnImportBG.ButtonColor;cbtnNaviA.ButtonColor;cbtnNaviBG.ButtonColor;cbtnPreviewA.ButtonColor;cbtnPreviewBG.ButtonColor;edAuthor.Text;edFontName.Text;seBWTreshold.Value;seCharNameFontSize.Value;seCodeNameFontSize.Value;seGridThickness.Value;seHeight.Value;seItemLast.Value;seItemStart.Value;seNaviHeight.Value;seNewHeight.Value;seNewItemLast.Value;seNewItemStart.Value;seNewWidth.Value;seWidth.Value;cbPreviewRefresh.Checked'
   ShowHint = True
-  LCLVersion = '2.2.6.0'
-  object PageCtrl: TPageControl
-    Left = 0
-    Height = 490
+  LCLVersion = '3.0.0.3'
+  object pcPageCtrl: TPageControl
+    Left = 134
+    Height = 461
     Top = 0
-    Width = 648
+    Width = 689
     ActivePage = tsGeneral
     Align = alClient
+    MultiLine = True
     TabIndex = 0
-    TabOrder = 0
+    TabOrder = 1
+    Options = [nboMultiLine]
     object tsGeneral: TTabSheet
       Caption = 'Общие'
       ChildSizing.LeftRightSpacing = 10
@@ -33,310 +34,141 @@ object fmSettings: TfmSettings
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 457
-      ClientWidth = 640
-      object pLanguage: TPanel
+      ClientHeight = 428
+      ClientWidth = 681
+      object pTitle1: TPanel
+        Left = 10
+        Height = 24
+        Top = 10
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 0
+        object lbLanguage: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 120
+          BorderSpacing.Around = 2
+          Caption = 'Язык / Language'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+      end
+      object cbLanguage: TComboBox
         Left = 10
         Height = 28
-        Top = 10
-        Width = 620
-        AutoSize = True
-        BevelOuter = bvNone
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 10
-        ChildSizing.EnlargeHorizontal = crsScaleChilds
-        ChildSizing.Layout = cclTopToBottomThenLeftToRight
-        ChildSizing.ControlsPerLine = 1
-        ClientHeight = 28
-        ClientWidth = 620
-        TabOrder = 0
-        object cbLanguage: TComboBox
-          Left = 0
-          Height = 28
-          Top = 0
-          Width = 435
-          Constraints.MinWidth = 300
-          ItemHeight = 20
-          OnChange = cbLanguageChange
-          Style = csDropDownList
-          TabOrder = 0
-        end
-        object lbLanguage: TLabel
-          Left = 445
-          Height = 28
-          Top = 0
-          Width = 175
-          Caption = 'Язык интерфейса'
-          Layout = tlCenter
-          ParentColor = False
-        end
-      end
-      object pValues: TPanel
-        Left = 10
-        Height = 104
-        Top = 43
-        Width = 620
-        AutoSize = True
-        BevelOuter = bvNone
-        ChildSizing.TopBottomSpacing = 5
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 5
-        ChildSizing.EnlargeHorizontal = crsScaleChilds
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 2
-        ClientHeight = 104
-        ClientWidth = 620
+        Top = 42
+        Width = 661
+        Constraints.MinWidth = 300
+        ItemHeight = 20
+        Style = csDropDownList
         TabOrder = 1
-        object seGridThickness: TSpinEdit
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Left = 0
-          Height = 28
-          Top = 5
-          Width = 123
-          Constraints.MinWidth = 80
-          MaxValue = 9
-          TabOrder = 0
-          Value = 1
-        end
-        object lbGridThickness: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 133
-          Height = 28
-          Top = 5
-          Width = 487
-          Caption = 'Толщина линий пиксельной сетки редактора'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object seNaviHeight: TSpinEdit
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Left = 0
-          Height = 28
-          Top = 38
-          Width = 123
-          Constraints.MinWidth = 80
-          MinValue = 10
-          TabOrder = 1
-          Value = 35
-        end
-        object lbNaviHeight: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 133
-          Height = 28
-          Top = 38
-          Width = 487
-          Caption = 'Высота строки навигатора (Ctrl + колесо)'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object seBWTreshold: TSpinEdit
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Left = 0
-          Height = 28
-          Top = 71
-          Width = 123
-          Constraints.MinWidth = 80
-          MaxValue = 255
-          TabOrder = 2
-          Value = 128
-        end
-        object lbBWTreshold: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 133
-          Height = 28
-          Top = 71
-          Width = 487
-          Caption = 'Порог черного при импорте изображения'
-          Layout = tlCenter
-          ParentColor = False
-        end
+        OnChange = cbLanguageChange
       end
-      object cbNaviInvert: TCheckBox
-        AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Side = asrBottom
+      object pSpacer1: TPanel
         Left = 10
-        Height = 24
-        Top = 152
-        Width = 620
-        Caption = 'Навигатор: отображать выделенный символ инверсно'
-        Checked = True
-        State = cbChecked
+        Height = 20
+        Top = 75
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 20
         TabOrder = 2
       end
-      object cbNaviTransparent: TCheckBox
-        AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Side = asrBottom
+      object pTitle9: TPanel
         Left = 10
         Height = 24
-        Top = 181
-        Width = 620
-        Caption = 'Навигатор: фоновый цвет символа прозрачный'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object cbNaviScroll: TCheckBox
-        AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Side = asrBottom
-        Left = 10
-        Height = 24
-        Hint = 'Прокрутка колесом перемещает по символам (выбрано) или прокручивает список (не выбрано)'
-        Top = 210
-        Width = 620
-        Caption = 'Навигатор: смена символов прокруткой'
-        TabOrder = 7
-      end
-      object cbChessGrid: TCheckBox
-        Left = 10
-        Height = 24
-        Top = 239
-        Width = 620
-        Caption = 'Редактор символа: шахматный фон'
-        TabOrder = 4
-      end
-      object cbMagnetPreview: TCheckBox
-        AnchorSideTop.Side = asrBottom
-        Left = 10
-        Height = 24
-        Top = 268
-        Width = 620
-        Caption = 'Примагничивать окно предпросмотра к низу редактора'
-        Checked = True
-        State = cbChecked
-        TabOrder = 5
-      end
-      object cbPreviewRefresh: TCheckBox
-        AnchorSideTop.Side = asrBottom
-        Left = 10
-        Height = 24
-        Top = 297
-        Width = 620
-        Caption = 'Обновлять образец текста предпросмотра автоматически'
-        Checked = True
-        State = cbChecked
-        TabOrder = 8
-      end
-      object lbNaviColumns: TLabel
-        Left = 10
-        Height = 25
-        Top = 333
-        Width = 620
-        Alignment = taCenter
-        AutoSize = False
-        BorderSpacing.Top = 12
-        Caption = 'Столбцы навигатора: видимость и шрифт'
+        Top = 100
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
         Color = cl3DLight
-        Constraints.MinHeight = 25
-        Font.Style = [fsBold]
-        Layout = tlCenter
+        ParentBackground = False
         ParentColor = False
-        ParentFont = False
-        Transparent = False
+        TabOrder = 3
+        object lbInterface: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 81
+          BorderSpacing.Around = 2
+          Caption = 'Интерфейс'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
       end
-      object pNaviColumns: TPanel
+      object pValues3: TPanel
         Left = 10
-        Height = 71
-        Top = 363
-        Width = 620
+        Height = 61
+        Top = 132
+        Width = 661
         AutoSize = True
         BevelOuter = bvNone
-        ChildSizing.TopBottomSpacing = 5
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 5
-        ChildSizing.EnlargeHorizontal = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 4
-        ClientHeight = 71
-        ClientWidth = 620
-        TabOrder = 6
-        object cbCharName: TCheckBox
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 61
+        ClientWidth = 661
+        TabOrder = 4
+        object cbTheme: TComboBox
           Left = 0
           Height = 28
-          Top = 5
-          Width = 164
-          Caption = 'Название'
-          Checked = True
-          OnClick = cbCharNameClick
-          State = cbChecked
+          Top = 0
+          Width = 150
+          Constraints.MinWidth = 150
+          ItemHeight = 20
+          Style = csDropDownList
           TabOrder = 0
+          OnChange = cbLanguageChange
         end
-        object lbEmpty1: TLabel
-          Left = 174
+        object lbTheme: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 160
           Height = 28
-          Top = 5
-          Width = 92
-          Caption = ' '
+          Hint = 'Доступна только на Windows 1809+'
+          Top = 0
+          Width = 181
+          Caption = 'Тема (после перезапуска)'
+          Layout = tlCenter
           ParentColor = False
         end
-        object cbCharNameFont: TComboBox
-          Left = 276
-          Height = 28
-          Top = 5
-          Width = 222
-          ItemHeight = 20
-          ParentFont = False
-          TabOrder = 1
-          Text = 'Consolas'
-        end
-        object seCharNameFontSize: TSpinEdit
-          Left = 508
-          Height = 28
-          Hint = 'Размер шрифта'
-          Top = 5
-          Width = 112
-          MaxValue = 48
-          MinValue = 3
-          TabOrder = 2
-          Value = 23
-        end
-        object cbCodeName: TCheckBox
+        object seIconsScale: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
           Left = 0
           Height = 28
-          Top = 38
-          Width = 164
-          Caption = 'Код'
-          Checked = True
-          OnClick = cbCharNameClick
-          State = cbChecked
-          TabOrder = 3
+          Top = 33
+          Width = 150
+          Constraints.MinWidth = 150
+          MaxValue = 200
+          MinValue = 70
+          TabOrder = 1
+          Value = 100
         end
-        object cbCodeHex: TCheckBox
-          Left = 174
+        object lbIconsScale: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 160
           Height = 28
-          Top = 38
-          Width = 92
-          Caption = 'HEX'
-          TabOrder = 4
-        end
-        object cbCodeNameFont: TComboBox
-          Left = 276
-          Height = 28
-          Top = 38
-          Width = 222
-          ItemHeight = 20
-          ParentFont = False
-          TabOrder = 5
-          Text = 'Consolas'
-        end
-        object seCodeNameFontSize: TSpinEdit
-          Left = 508
-          Height = 28
-          Hint = 'Размер шрифта'
-          Top = 38
-          Width = 112
-          MaxValue = 48
-          MinValue = 3
-          TabOrder = 6
-          Value = 12
+          Top = 33
+          Width = 181
+          Caption = 'Размер иконок, %'
+          Layout = tlCenter
+          ParentColor = False
         end
       end
     end
@@ -349,76 +181,96 @@ object fmSettings: TfmSettings
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 457
-      ClientWidth = 640
-      object lbColorEditor: TLabel
+      ClientHeight = 428
+      ClientWidth = 681
+      object pTitle2: TPanel
         Left = 10
-        Height = 25
+        Height = 24
         Top = 10
-        Width = 300
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Редактор'
+        Width = 321
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 321
         Color = cl3DLight
-        Constraints.MinHeight = 25
-        Font.Style = [fsBold]
-        Layout = tlCenter
+        ParentBackground = False
         ParentColor = False
-        ParentFont = False
-        Transparent = False
+        TabOrder = 0
+        object lbColorEditor: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 67
+          BorderSpacing.Around = 2
+          Caption = 'Редактор'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
       end
-      object lbColorNavi: TLabel
-        Left = 330
-        Height = 25
+      object pTitle3: TPanel
+        Left = 351
+        Height = 24
         Top = 10
-        Width = 300
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Навигатор'
+        Width = 320
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 320
         Color = cl3DLight
-        Constraints.MinHeight = 25
-        Font.Style = [fsBold]
-        Layout = tlCenter
+        ParentBackground = False
         ParentColor = False
-        ParentFont = False
-        Transparent = False
+        TabOrder = 1
+        object lbColorNavi: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 76
+          BorderSpacing.Around = 2
+          Caption = 'Навигатор'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
       end
       object pColorEditor: TPanel
         Left = 10
-        Height = 130
-        Top = 45
-        Width = 300
+        Height = 82
+        Top = 44
+        Width = 321
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 130
-        ClientWidth = 300
-        Color = clNone
-        ParentColor = False
-        TabOrder = 1
+        ClientHeight = 82
+        ClientWidth = 321
+        TabOrder = 2
         object cbtnActive: TColorButton
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
+          Height = 24
           Top = 0
-          Width = 80
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clBlack
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Flat = True
         end
         object lbColorA: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
+          Left = 74
+          Height = 24
           Top = 0
           Width = 93
           Caption = 'Цвет пикселя'
@@ -429,23 +281,23 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
-          Top = 45
-          Width = 80
+          Height = 24
+          Top = 29
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clWhite
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Color = clDefault
           Flat = True
         end
         object lbColorBG: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
-          Top = 45
+          Left = 74
+          Height = 24
+          Top = 29
           Width = 93
           Caption = 'Цвет фона'
           Layout = tlCenter
@@ -455,22 +307,22 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
-          Top = 90
-          Width = 80
+          Height = 24
+          Top = 58
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = 12303291
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Flat = True
         end
         object lbColorGrid: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
-          Top = 90
+          Left = 74
+          Height = 24
+          Top = 58
           Width = 93
           Caption = 'Цвет сетки'
           Layout = tlCenter
@@ -478,40 +330,38 @@ object fmSettings: TfmSettings
         end
       end
       object pColorNavi: TPanel
-        Left = 330
-        Height = 130
-        Top = 45
-        Width = 300
+        Left = 351
+        Height = 82
+        Top = 44
+        Width = 320
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 130
-        ClientWidth = 300
-        Color = clNone
-        ParentColor = False
-        TabOrder = 2
+        ClientHeight = 82
+        ClientWidth = 320
+        TabOrder = 3
         object cbtnNaviA: TColorButton
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
+          Height = 24
           Top = 0
-          Width = 80
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clBlack
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Flat = True
         end
         object lbColorNaviA: TLabel
           AnchorSideLeft.Side = asrBottom
-          Left = 90
-          Height = 40
+          Left = 74
+          Height = 24
           Top = 0
           Width = 93
           Caption = 'Цвет пикселя'
@@ -522,96 +372,136 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
-          Top = 45
-          Width = 80
+          Height = 24
+          Top = 29
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clWhite
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Color = clDefault
           Flat = True
         end
         object lbColorNaviBG: TLabel
           AnchorSideLeft.Side = asrBottom
-          Left = 90
-          Height = 40
-          Top = 45
+          Left = 74
+          Height = 24
+          Top = 29
           Width = 93
           Caption = 'Цвет фона'
           Layout = tlCenter
           ParentColor = False
         end
       end
-      object lbColorPreview: TLabel
+      object pSpacer2: TPanel
         Left = 10
-        Height = 25
-        Top = 185
-        Width = 300
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Образец текста'
-        Color = cl3DLight
-        Constraints.MinHeight = 25
-        Font.Style = [fsBold]
-        Layout = tlCenter
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
+        Height = 8
+        Top = 136
+        Width = 321
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 4
       end
-      object lbColorImport: TLabel
-        Left = 330
-        Height = 25
-        Top = 185
-        Width = 300
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Образец импорта'
+      object pSpacer3: TPanel
+        Left = 351
+        Height = 8
+        Top = 136
+        Width = 320
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 5
+      end
+      object pTitle4: TPanel
+        Left = 10
+        Height = 24
+        Top = 154
+        Width = 321
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 321
         Color = cl3DLight
-        Constraints.MinHeight = 25
-        Font.Style = [fsBold]
-        Layout = tlCenter
+        ParentBackground = False
         ParentColor = False
-        ParentFont = False
-        Transparent = False
+        TabOrder = 6
+        object lbColorPreview: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 111
+          BorderSpacing.Around = 2
+          Caption = 'Образец текста'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
+      end
+      object pTitle5: TPanel
+        Left = 351
+        Height = 24
+        Top = 154
+        Width = 320
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 320
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 7
+        object lbColorImport: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 129
+          BorderSpacing.Around = 2
+          Caption = 'Образец импорта'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
       end
       object pColorPreview: TPanel
         Left = 10
-        Height = 85
-        Top = 220
-        Width = 300
+        Height = 53
+        Top = 188
+        Width = 321
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 85
-        ClientWidth = 300
-        Color = clNone
-        ParentColor = False
-        TabOrder = 0
+        ClientHeight = 53
+        ClientWidth = 321
+        TabOrder = 8
         object cbtnPreviewA: TColorButton
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
+          Height = 24
           Top = 0
-          Width = 80
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clWhite
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Flat = True
         end
         object lbColorPreviewA: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
+          Left = 74
+          Height = 24
           Top = 0
           Width = 93
           Caption = 'Цвет пикселя'
@@ -622,23 +512,23 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
-          Top = 45
-          Width = 80
+          Height = 24
+          Top = 29
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = 10485760
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Color = clDefault
           Flat = True
         end
         object lbColorPreviewBG: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
-          Top = 45
+          Left = 74
+          Height = 24
+          Top = 29
           Width = 93
           Caption = 'Цвет фона'
           Layout = tlCenter
@@ -646,41 +536,39 @@ object fmSettings: TfmSettings
         end
       end
       object pColorImport: TPanel
-        Left = 330
-        Height = 85
-        Top = 220
-        Width = 300
+        Left = 351
+        Height = 53
+        Top = 188
+        Width = 320
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 85
-        ClientWidth = 300
-        Color = clNone
-        ParentColor = False
-        TabOrder = 3
+        ClientHeight = 53
+        ClientWidth = 320
+        TabOrder = 9
         object cbtnImportA: TColorButton
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
+          Height = 24
           Top = 0
-          Width = 80
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clWhite
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Flat = True
         end
         object lbColorImportA: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
+          Left = 74
+          Height = 24
           Top = 0
           Width = 79
           Caption = 'Цвет текста'
@@ -691,23 +579,23 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrBottom
           Cursor = crHandPoint
           Left = 0
-          Height = 40
-          Top = 45
-          Width = 80
+          Height = 24
+          Top = 29
+          Width = 64
           BorderWidth = 0
           ButtonColorSize = 16
           ButtonColor = clGreen
-          Constraints.MinHeight = 40
-          Constraints.MinWidth = 80
+          Constraints.MinHeight = 24
+          Constraints.MinWidth = 64
           Color = clDefault
           Flat = True
         end
         object lbColorImportBG: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 90
-          Height = 40
-          Top = 45
+          Left = 74
+          Height = 24
+          Top = 29
           Width = 79
           Caption = 'Цвет фона'
           Layout = tlCenter
@@ -723,29 +611,41 @@ object fmSettings: TfmSettings
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 457
-      ClientWidth = 640
-      object lbNewDefaults: TLabel
+      ClientHeight = 428
+      ClientWidth = 681
+      object pTitle6: TPanel
         Left = 10
-        Height = 25
+        Height = 24
         Top = 10
-        Width = 620
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Значения по умолчанию для нового шрифта'
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
         Color = cl3DLight
-        Constraints.MinHeight = 25
-        Font.Style = [fsBold]
-        Layout = tlCenter
+        ParentBackground = False
         ParentColor = False
-        ParentFont = False
-        Transparent = False
+        TabOrder = 0
+        object lbNewDefaults: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 329
+          Alignment = taCenter
+          BorderSpacing.Around = 2
+          Caption = 'Значения по умолчанию для нового шрифта'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
       end
       object pNewDefaults1: TPanel
         Left = 10
         Height = 94
-        Top = 40
-        Width = 620
+        Top = 42
+        Width = 661
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
@@ -754,26 +654,27 @@ object fmSettings: TfmSettings
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 94
-        ClientWidth = 620
-        TabOrder = 0
+        ClientWidth = 661
+        TabOrder = 1
         object edFontName: TEdit
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Left = 0
           Height = 28
           Top = 0
-          Width = 487
+          Width = 520
           Constraints.MinWidth = 300
           MaxLength = 64
           TabOrder = 0
+          Text = 'New'
         end
         object lbFontName: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 497
+          Left = 530
           Height = 28
           Top = 0
-          Width = 123
+          Width = 131
           Caption = 'Название'
           Layout = tlCenter
           ParentColor = False
@@ -784,18 +685,19 @@ object fmSettings: TfmSettings
           Left = 0
           Height = 28
           Top = 33
-          Width = 487
+          Width = 520
           Constraints.MinWidth = 300
           MaxLength = 64
           TabOrder = 1
+          Text = 'Anonymous'
         end
         object lbAuthor: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 497
+          Left = 530
           Height = 28
           Top = 33
-          Width = 123
+          Width = 131
           Caption = 'Автор'
           Layout = tlCenter
           ParentColor = False
@@ -804,46 +706,49 @@ object fmSettings: TfmSettings
           Left = 0
           Height = 28
           Top = 66
-          Width = 487
+          Width = 520
           ItemHeight = 20
+          ItemIndex = 0
+          Items.Strings = (
+            ''
+          )
           Style = csDropDownList
           TabOrder = 2
         end
         object lbFontEncoding: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 497
+          Left = 530
           Height = 28
           Top = 66
-          Width = 123
+          Width = 131
           Caption = 'Кодировка'
           Layout = tlCenter
           ParentColor = False
         end
       end
-      object lbNewDefaults2: TPanel
+      object pNewDefaults2: TPanel
         Left = 10
         Height = 127
-        Top = 139
-        Width = 620
+        Top = 141
+        Width = 661
         AutoSize = True
         BevelOuter = bvNone
         ChildSizing.HorizontalSpacing = 10
         ChildSizing.VerticalSpacing = 5
-        ChildSizing.EnlargeHorizontal = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 127
-        ClientWidth = 620
-        TabOrder = 1
+        ClientWidth = 661
+        TabOrder = 2
         object seNewItemStart: TSpinEdit
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrBottom
           Left = 0
           Height = 28
           Top = 0
-          Width = 195
-          Constraints.MinWidth = 80
+          Width = 100
+          Constraints.MinWidth = 100
           MaxValue = 255
           TabOrder = 0
           Value = 32
@@ -851,10 +756,10 @@ object fmSettings: TfmSettings
         object lbNewItemStart: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 205
+          Left = 110
           Height = 28
           Top = 0
-          Width = 415
+          Width = 171
           Caption = 'Первый символ'
           Layout = tlCenter
           ParentColor = False
@@ -864,7 +769,7 @@ object fmSettings: TfmSettings
           Left = 0
           Height = 28
           Top = 33
-          Width = 195
+          Width = 100
           Constraints.MinWidth = 80
           MaxValue = 255
           TabOrder = 1
@@ -873,10 +778,10 @@ object fmSettings: TfmSettings
         object lbNewItemLast: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 205
+          Left = 110
           Height = 28
           Top = 33
-          Width = 415
+          Width = 171
           Caption = 'Последний символ'
           Layout = tlCenter
           ParentColor = False
@@ -886,7 +791,7 @@ object fmSettings: TfmSettings
           Left = 0
           Height = 28
           Top = 66
-          Width = 195
+          Width = 100
           Constraints.MinWidth = 80
           MaxValue = 512
           MinValue = 1
@@ -896,10 +801,10 @@ object fmSettings: TfmSettings
         object lbNewWidth: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 205
+          Left = 110
           Height = 28
           Top = 66
-          Width = 415
+          Width = 171
           Caption = 'Ширина холста символа'
           Layout = tlCenter
           ParentColor = False
@@ -909,7 +814,7 @@ object fmSettings: TfmSettings
           Left = 0
           Height = 28
           Top = 99
-          Width = 195
+          Width = 100
           Constraints.MinWidth = 80
           MaxValue = 512
           MinValue = 1
@@ -919,87 +824,498 @@ object fmSettings: TfmSettings
         object lbNewHeight: TLabel
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Side = asrCenter
-          Left = 205
+          Left = 110
           Height = 28
           Top = 99
-          Width = 415
+          Width = 171
           Caption = 'Высота холста символа'
           Layout = tlCenter
           ParentColor = False
         end
       end
     end
-  end
-  object pControls: TPanel
-    Left = 0
-    Height = 60
-    Top = 490
-    Width = 648
-    Align = alBottom
-    AutoSize = True
-    BevelOuter = bvNone
-    ChildSizing.HorizontalSpacing = 10
-    ChildSizing.VerticalSpacing = 10
-    ChildSizing.Layout = cclTopToBottomThenLeftToRight
-    ChildSizing.ControlsPerLine = 1
-    ClientHeight = 60
-    ClientWidth = 648
-    TabOrder = 1
-    object pButtons: TPanel
-      Left = 93
-      Height = 60
-      Top = 0
-      Width = 555
-      Align = alRight
-      AutoSize = True
-      BevelOuter = bvNone
+    object tsNavigator: TTabSheet
+      Caption = 'Навигатор'
       ChildSizing.LeftRightSpacing = 10
       ChildSizing.TopBottomSpacing = 10
       ChildSizing.HorizontalSpacing = 5
-      ChildSizing.VerticalSpacing = 10
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 428
+      ClientWidth = 681
+      object pValues1: TPanel
+        Left = 10
+        Height = 28
+        Top = 10
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 28
+        ClientWidth = 661
+        TabOrder = 0
+        object seNaviHeight: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 0
+          Width = 100
+          Constraints.MinWidth = 100
+          MinValue = 10
+          TabOrder = 0
+          Value = 35
+        end
+        object lbNaviHeight: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 110
+          Height = 28
+          Top = 0
+          Width = 288
+          Caption = 'Высота строки навигатора (Ctrl + колесо)'
+          Layout = tlCenter
+          ParentColor = False
+        end
+      end
+      object pSpacer4: TPanel
+        Left = 10
+        Height = 8
+        Top = 43
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 1
+      end
+      object pTitle7: TPanel
+        Left = 10
+        Height = 24
+        Top = 56
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 2
+        object lbNaviOptions: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 48
+          BorderSpacing.Around = 2
+          Caption = 'Опции'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
+      end
+      object cbNaviScroll: TCheckBox
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 10
+        Height = 24
+        Hint = 'Прокрутка колесом перемещает по символам (выбрано) или прокручивает список (не выбрано)'
+        Top = 88
+        Width = 661
+        Caption = 'Навигатор: смена символов прокруткой'
+        TabOrder = 3
+      end
+      object cbNaviTransparent: TCheckBox
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 10
+        Height = 24
+        Top = 117
+        Width = 661
+        Caption = 'Навигатор: фоновый цвет символа прозрачный'
+        Checked = True
+        State = cbChecked
+        TabOrder = 4
+      end
+      object cbNaviInvert: TCheckBox
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 10
+        Height = 24
+        Top = 146
+        Width = 661
+        Caption = 'Навигатор: отображать выделенный символ инверсно'
+        Checked = True
+        State = cbChecked
+        TabOrder = 5
+      end
+      object pSpacer5: TPanel
+        Left = 10
+        Height = 8
+        Top = 175
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 6
+      end
+      object pTitle8: TPanel
+        Left = 10
+        Height = 24
+        Top = 188
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 7
+        object lbNaviColumns: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 65
+          BorderSpacing.Around = 2
+          Caption = 'Столбцы'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
+      end
+      object pNaviColumns: TPanel
+        Left = 10
+        Height = 61
+        Top = 220
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 4
+        ClientHeight = 61
+        ClientWidth = 661
+        TabOrder = 8
+        object cbCharName: TCheckBox
+          Left = 0
+          Height = 28
+          Top = 0
+          Width = 153
+          Caption = 'Название'
+          Checked = True
+          ParentFont = False
+          State = cbChecked
+          TabOrder = 0
+          OnClick = cbCharNameClick
+        end
+        object pSpacer6: TPanel
+          Left = 163
+          Height = 28
+          Top = 0
+          Width = 84
+          AutoSize = True
+          BevelOuter = bvNone
+          Constraints.MinHeight = 8
+          TabOrder = 1
+        end
+        object cbCharNameFont: TComboBox
+          Left = 257
+          Height = 28
+          Top = 0
+          Width = 257
+          Constraints.MinWidth = 150
+          ItemHeight = 20
+          ParentFont = False
+          TabOrder = 2
+          Text = 'Consolas'
+        end
+        object seCharNameFontSize: TSpinEdit
+          Left = 524
+          Height = 28
+          Hint = 'Размер шрифта'
+          Top = 0
+          Width = 137
+          Constraints.MinWidth = 80
+          MaxValue = 48
+          MinValue = 3
+          TabOrder = 3
+          Value = 23
+        end
+        object cbCodeName: TCheckBox
+          Left = 0
+          Height = 28
+          Top = 33
+          Width = 153
+          Caption = 'Код'
+          Checked = True
+          ParentFont = False
+          State = cbChecked
+          TabOrder = 4
+          OnClick = cbCharNameClick
+        end
+        object cbCodeHex: TCheckBox
+          Left = 163
+          Height = 28
+          Top = 33
+          Width = 84
+          Caption = 'HEX'
+          TabOrder = 5
+        end
+        object cbCodeNameFont: TComboBox
+          Left = 257
+          Height = 28
+          Top = 33
+          Width = 257
+          Constraints.MinWidth = 150
+          ItemHeight = 20
+          ParentFont = False
+          TabOrder = 6
+          Text = 'Consolas'
+        end
+        object seCodeNameFontSize: TSpinEdit
+          Left = 524
+          Height = 28
+          Hint = 'Размер шрифта'
+          Top = 33
+          Width = 137
+          Constraints.MinWidth = 80
+          MaxValue = 48
+          MinValue = 3
+          TabOrder = 7
+          Value = 12
+        end
+      end
+    end
+    object tsEditor: TTabSheet
+      Caption = 'Редактор'
+      ChildSizing.LeftRightSpacing = 10
+      ChildSizing.TopBottomSpacing = 10
+      ChildSizing.HorizontalSpacing = 5
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 428
+      ClientWidth = 681
+      object pValues2: TPanel
+        Left = 10
+        Height = 90
+        Top = 10
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 90
+        ClientWidth = 661
+        TabOrder = 0
+        object seBWTreshold: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 0
+          Width = 100
+          Constraints.MinWidth = 100
+          MaxValue = 255
+          TabOrder = 0
+          Value = 128
+        end
+        object lbBWTreshold: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 110
+          Height = 28
+          Top = 0
+          Width = 315
+          Caption = 'Порог черного при импорте изображения'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seGridThickness: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 33
+          Width = 100
+          Constraints.MinWidth = 100
+          MaxValue = 9
+          TabOrder = 1
+          Value = 1
+        end
+        object lbGridThickness: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 110
+          Height = 28
+          Top = 33
+          Width = 315
+          Caption = 'Толщина линий пиксельной сетки редактора'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object pSpacer7: TPanel
+          Left = 0
+          Height = 24
+          Top = 66
+          Width = 100
+          AutoSize = True
+          BevelOuter = bvNone
+          Constraints.MinHeight = 8
+          TabOrder = 2
+        end
+        object cbChessGrid: TCheckBox
+          Left = 110
+          Height = 24
+          Top = 66
+          Width = 315
+          Caption = 'Редактор символа: шахматный фон'
+          TabOrder = 3
+        end
+      end
+    end
+    object tsPreview: TTabSheet
+      Caption = 'Предпросмотр'
+      ChildSizing.LeftRightSpacing = 10
+      ChildSizing.TopBottomSpacing = 10
+      ChildSizing.HorizontalSpacing = 5
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 428
+      ClientWidth = 681
+      object cbMagnetPreview: TCheckBox
+        AnchorSideTop.Side = asrBottom
+        Left = 10
+        Height = 24
+        Top = 10
+        Width = 661
+        Caption = 'Примагничивать окно предпросмотра к низу редактора'
+        Checked = True
+        State = cbChecked
+        TabOrder = 0
+      end
+      object cbPreviewRefresh: TCheckBox
+        AnchorSideTop.Side = asrBottom
+        Left = 10
+        Height = 24
+        Top = 39
+        Width = 661
+        Caption = 'Обновлять образец текста предпросмотра автоматически'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+      end
+    end
+  end
+  object pControls: TPanel
+    Left = 0
+    Height = 52
+    Top = 461
+    Width = 823
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.HorizontalSpacing = 6
+    ChildSizing.VerticalSpacing = 6
+    ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+    ChildSizing.Layout = cclTopToBottomThenLeftToRight
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 52
+    ClientWidth = 823
+    TabOrder = 2
+    object pButtons: TPanel
+      Left = 462
+      Height = 40
+      Top = 6
+      Width = 355
+      Align = alRight
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 5
       ChildSizing.Layout = cclTopToBottomThenLeftToRight
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 60
-      ClientWidth = 555
-      TabOrder = 0
-      object bbDefaults: TBitBtn
-        Left = 10
+      ClientHeight = 40
+      ClientWidth = 355
+      TabOrder = 1
+      object bbApply: TBitBtn
+        Left = 0
         Height = 40
-        Top = 10
+        Top = 0
         Width = 175
-        Action = fmMain.acReset
+        Action = acOK
         BorderSpacing.InnerBorder = 5
+        Caption = 'OK'
         Constraints.MinWidth = 175
-        Images = fmMain.ImListNew16A
-        ImageIndex = 42
-        TabOrder = 2
+        TabOrder = 0
       end
       object bbCancel: TBitBtn
-        Left = 190
+        Left = 180
         Height = 40
-        Top = 10
+        Top = 0
         Width = 175
         Action = acCancel
         BorderSpacing.InnerBorder = 5
         Constraints.MinWidth = 175
         TabOrder = 1
       end
-      object bbApply: TBitBtn
-        Left = 370
-        Height = 40
-        Top = 10
-        Width = 175
-        Action = acOK
-        BorderSpacing.InnerBorder = 5
-        Constraints.MinWidth = 175
-        TabOrder = 0
-      end
+    end
+    object bbDefaults: TBitBtn
+      Left = 6
+      Height = 40
+      Top = 6
+      Width = 175
+      Action = fmMain.acReset
+      BorderSpacing.InnerBorder = 5
+      Constraints.MinWidth = 175
+      Images = fmMain.ImListNew16A
+      ImageIndex = 42
+      TabOrder = 0
     end
   end
-  object SettingsActionList: TActionList
+  object tvTabs: TTreeView
+    Left = 2
+    Height = 457
+    Top = 2
+    Width = 128
+    Align = alLeft
+    AutoExpand = True
+    BorderSpacing.Right = 2
+    BorderSpacing.Around = 2
+    BorderStyle = bsNone
+    HideSelection = False
+    ReadOnly = True
+    RowSelect = True
+    ScrollBars = ssAutoVertical
+    ShowRoot = False
+    TabOrder = 0
+    OnSelectionChanged = tvTabsSelectionChanged
+    Options = [tvoAutoExpand, tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoToolTips, tvoThemedDraw]
+  end
+  object alSettings: TActionList
     Images = fmMain.ImListNew16A
-    Left = 550
-    Top = 163
+    Left = 48
+    Top = 24
     object acOK: TAction
       Caption = 'Применить'
       ImageIndex = 44
@@ -1011,12 +1327,5 @@ object fmSettings: TfmSettings
       OnExecute = acCancelExecute
       ShortCut = 27
     end
-  end
-  object IniStorageSettings: TIniPropStorage
-    StoredValues = <>
-    OnSavingProperties = IniStorageSettingsSavingProperties
-    OnRestoreProperties = IniStorageSettingsRestore
-    Left = 550
-    Top = 94
   end
 end

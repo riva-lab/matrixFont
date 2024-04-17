@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SynHighlighterCpp, SynEdit, Forms, Clipbrd, strutils, Graphics,
-  ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8,
+  ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8, AppLocalizer,
   symbol, font, fm_about, u_encodings, u_utilities;
 
 
@@ -127,6 +127,9 @@ type
     // выбор вкладки для отображения
     procedure TabSelExecute(Sender: TObject);
 
+  public
+    procedure OnLanguageChange;
+
   end;
 
 var
@@ -143,17 +146,6 @@ implementation
 procedure TfmGen.FormShow(Sender: TObject);
   begin
     BeginFormUpdate;
-
-    // обновляем строки выпадающих списков
-    UpdateComboBox(cbScanColsFirst, [FM_GEN_SCUD_1, FM_GEN_SCUD_2]);
-    UpdateComboBox(cbScanColsToRight, [FM_GEN_SCLR_1, FM_GEN_SCLR_2]);
-    UpdateComboBox(cbScanRowsToDown, [FM_GEN_SRUD_1, FM_GEN_SRUD_2]);
-    UpdateComboBox(cbFontType, [FM_GEN_FT_1, FM_GEN_FT_2]);
-    UpdateComboBox(cbEmptyBits, [FM_GEN_EB_1, FM_GEN_EB_2]);
-    UpdateComboBox(cbNumbersBits, [FM_GEN_NB_1, FM_GEN_NB_2, FM_GEN_NB_3, FM_GEN_NB_4]);
-    UpdateComboBox(cbLanguage, [FM_GEN_LNG_1, FM_GEN_LNG_2]);
-    UpdateComboBox(cbNumbersView, [FM_GEN_NV_1, FM_GEN_NV_2, FM_GEN_NV_3,
-      FM_GEN_NV_4, FM_GEN_NV_5, FM_GEN_NV_6]);
 
     if FontSet <> nil then
       with FontSet do
@@ -296,6 +288,22 @@ procedure TfmGen.TabSelExecute(Sender: TObject);
       end;
 
     Caption := FM_GEN_CAPTION + '.  ' + TAction(Sender).Caption;
+  end;
+
+
+procedure TfmGen.OnLanguageChange;
+  begin
+    with appLocalizerEx do
+      begin
+      Localize(cbScanColsFirst, [FM_GEN_SCUD_1, FM_GEN_SCUD_2]);
+      Localize(cbScanColsToRight, [FM_GEN_SCLR_1, FM_GEN_SCLR_2]);
+      Localize(cbScanRowsToDown, [FM_GEN_SRUD_1, FM_GEN_SRUD_2]);
+      Localize(cbFontType, [FM_GEN_FT_1, FM_GEN_FT_2]);
+      Localize(cbEmptyBits, [FM_GEN_EB_1, FM_GEN_EB_2]);
+      Localize(cbNumbersBits, [FM_GEN_NB_1, FM_GEN_NB_2, FM_GEN_NB_3, FM_GEN_NB_4]);
+      Localize(cbLanguage, [FM_GEN_LNG_1, FM_GEN_LNG_2]);
+      Localize(cbNumbersView, [FM_GEN_NV_1, FM_GEN_NV_2, FM_GEN_NV_3, FM_GEN_NV_4, FM_GEN_NV_5, FM_GEN_NV_6]);
+      end;
   end;
 
 

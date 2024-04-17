@@ -20,7 +20,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="100">
+      <ExcludedIdentifiers Count="103">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="TfmAbout.lbHardware.Caption"/>
         <Item3 Value="tfmabout.lbsite.caption"/>
@@ -121,15 +121,17 @@
         <Item98 Value="tfmimportc.cbimpbitorder.text"/>
         <Item99 Value="tfmmap.caption"/>
         <Item100 Value="tfmmap.cbmapwidth.text"/>
+        <Item101 Value="AT_THEME_ALLOWDARK"/>
+        <Item102 Value="AT_THEME_LIGHT"/>
+        <Item103 Value="AT_THEME_DARK"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="5"/>
-      <RevisionNr Value="2"/>
-      <BuildNr Value="67"/>
+      <MinorVersionNr Value="6"/>
+      <BuildNr Value="68"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -144,15 +146,13 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="settings"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
             <TargetCPU Value="x86_64"/>
             <TargetOS Value="win64"/>
-            <Optimizations>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
@@ -182,6 +182,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="settings"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -231,19 +232,18 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="settings"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
             <TargetCPU Value="i386"/>
             <TargetOS Value="win32"/>
-            <Optimizations>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
+              <DebugInfoType Value="dsDwarf3"/>
               <StripSymbols Value="True"/>
             </Debugging>
             <LinkSmart Value="True"/>
@@ -270,18 +270,21 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="3">
+    <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="ImageSVGListDsgn"/>
+        <PackageName Value="AppFeaturesPkg"/>
       </Item1>
       <Item2>
-        <PackageName Value="SynEdit"/>
+        <PackageName Value="ImageSVGListDsgn"/>
       </Item2>
       <Item3>
-        <PackageName Value="LCL"/>
+        <PackageName Value="SynEdit"/>
       </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
     </RequiredPackages>
-    <Units Count="25">
+    <Units Count="26">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -425,6 +428,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit24>
+      <Unit25>
+        <Filename Value="settings\config_record.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit25>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -435,6 +442,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="settings"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
