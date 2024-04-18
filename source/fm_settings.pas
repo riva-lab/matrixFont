@@ -277,7 +277,7 @@ procedure TfmSettings.InitConfig;
     Settings.Add(cbtnImportA, @cfg.color.import.active);
     Settings.Add(cbtnImportBG, @cfg.color.import.bg);
 
-    Settings.Add(seNaviHeight, @cfg.nav.Height);
+    Settings.Add(seNaviHeight, @cfg.nav.rowheight);
     Settings.Add(cbNaviTransparent, @cfg.nav.transparent);
     Settings.Add(cbNaviInvert, @cfg.nav.invert);
     Settings.Add(cbNaviScroll, @cfg.nav.scroll);

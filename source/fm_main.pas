@@ -124,6 +124,7 @@ implementation
 var
   file_changed: Boolean;
   timer_up:     Boolean;
+  syncSettings: Boolean = False;
   cnt, frames:  Integer;
 
   {$R *.lfm}
@@ -317,6 +318,13 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
       frames        := 0;
       {$EndIf}
       cnt := 0;
+
+      // synchronize changed settings for correct saving/restoring
+      if syncSettings then
+        begin
+        Settings.SyncComponents;
+        syncSettings := False;
+        end;
       end;
 
     if cnt mod 4 = 0 then
@@ -403,8 +411,9 @@ procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
     if ssCtrl in Shift then
       with cfg.nav do
         begin
-        Height := Height + WheelDelta div abs(WheelDelta);
-        sgNavigator.DefaultRowHeight := Height;
+        if WheelDelta <> 0 then rowheight := rowheight + WheelDelta div abs(WheelDelta);
+        sgNavigator.DefaultRowHeight := rowheight;
+        syncSettings := True;
         end;
   end;
 
@@ -1189,7 +1198,7 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         Items[1].Font.Size := cfg.nav.code.fontsize;
         end;
 
-      sgNavigator.DefaultRowHeight := cfg.nav.Height;
+      sgNavigator.DefaultRowHeight := cfg.nav.rowheight;
 
       if fmSettings <> nil then
         begin

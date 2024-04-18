@@ -115,7 +115,7 @@ type
       end;
 
     nav: record
-      Height:      Integer;
+      rowheight:   Integer;
       transparent: Boolean;
       invert:      Boolean;
       scroll:      Boolean;
