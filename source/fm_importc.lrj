@@ -1,10 +1,10 @@
 {"version":1,"strings":[
-{"hash":119997647,"name":"tfmimportc.lbinfo.caption","sourcebytes":[108,98,73,110,102,111],"value":"lbInfo"},
 {"hash":68259451,"name":"tfmimportc.lbimpchar.caption","sourcebytes":[208,161,208,184,208,188,208,178,208,190,208,187],"value":"\u0421\u0438\u043C\u0432\u043E\u043B"},
 {"hash":267009901,"name":"tfmimportc.lbimpcharcode.hint","sourcebytes":[208,154,208,190,208,180,32,209,129,208,184,208,188,208,178,208,190,208,187,208,176,32,91,68,69,67,93],"value":"\u041A\u043E\u0434 \u0441\u0438\u043C\u0432\u043E\u043B\u0430 [DEC]"},
 {"hash":229100468,"name":"tfmimportc.lbimpcharcode.caption","sourcebytes":[208,154,208,190,208,180],"value":"\u041A\u043E\u0434"},
 {"hash":267025469,"name":"tfmimportc.lbimpcharhex.hint","sourcebytes":[208,154,208,190,208,180,32,209,129,208,184,208,188,208,178,208,190,208,187,208,176,32,91,72,69,88,93],"value":"\u041A\u043E\u0434 \u0441\u0438\u043C\u0432\u043E\u043B\u0430 [HEX]"},
 {"hash":19624,"name":"tfmimportc.lbimpcharhex.caption","sourcebytes":[72,69,88],"value":"HEX"},
+{"hash":119997647,"name":"tfmimportc.lbinfo.caption","sourcebytes":[108,98,73,110,102,111],"value":"lbInfo"},
 {"hash":129476005,"name":"tfmimportc.tscode.caption","sourcebytes":[116,115,67,111,100,101],"value":"tsCode"},
 {"hash":199012602,"name":"tfmimportc.lbimpfile.caption","sourcebytes":[208,164,208,176,208,185,208,187,58],"value":"\u0424\u0430\u0439\u043B:"},
 {"hash":120159110,"name":"tfmimportc.lbimpdropfile.caption","sourcebytes":[208,145,209,128,208,190,209,129,209,140,209,130,208,181,32,209,132,208,176,208,185,208,187,32,208,178,32,208,190,208,186,208,189,208,190,32,208,184,208,187,208,184,32,208,178,209,129,209,130,208,176,208,178,209,140,209,130,208,181,32,208,186,208,190,208,180,32,67,116,114,108,43,86],"value":"\u0411\u0440\u043E\u0441\u044C\u0442\u0435 \u0444\u0430\u0439\u043B \u0432 \u043E\u043A\u043D\u043E \u0438\u043B\u0438 \u0432\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u043A\u043E\u0434 Ctrl+V"},

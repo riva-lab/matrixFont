@@ -28,22 +28,9 @@ object fmImportC: TfmImportC
     ClientWidth = 259
     ParentColor = False
     TabOrder = 0
-    object lbInfo: TLabel
-      Left = 0
-      Height = 20
-      Top = 567
-      Width = 259
-      Align = alBottom
-      Alignment = taCenter
-      Caption = 'lbInfo'
-      Color = cl3DLight
-      Layout = tlCenter
-      ParentColor = False
-      Transparent = False
-    end
     object pPreview: TPanel
       Left = 0
-      Height = 567
+      Height = 566
       Top = 0
       Width = 259
       Align = alClient
@@ -53,13 +40,13 @@ object fmImportC: TfmImportC
       ChildSizing.TopBottomSpacing = 4
       ChildSizing.HorizontalSpacing = 10
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 567
+      ClientHeight = 566
       ClientWidth = 259
       TabOrder = 0
       object pCharSelect: TPanel
         Left = 8
         Height = 153
-        Top = 410
+        Top = 409
         Width = 243
         Align = alBottom
         AutoSize = True
@@ -174,12 +161,12 @@ object fmImportC: TfmImportC
       end
       object pCharPreview: TPanel
         Left = 8
-        Height = 406
+        Height = 405
         Top = 4
         Width = 243
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 406
+        ClientHeight = 405
         ClientWidth = 243
         Color = cl3DLight
         Constraints.MinHeight = 200
@@ -189,7 +176,7 @@ object fmImportC: TfmImportC
         TabOrder = 0
         object imImpChar: TImage
           Left = 0
-          Height = 406
+          Height = 405
           Top = 0
           Width = 243
           Align = alClient
@@ -200,6 +187,36 @@ object fmImportC: TfmImportC
         end
       end
     end
+    object pSeparator1: TPanel
+      Left = 4
+      Height = 1
+      Top = 566
+      Width = 255
+      Align = alBottom
+      AutoSize = True
+      BorderSpacing.Left = 4
+      BevelColor = clForm
+      BevelOuter = bvNone
+      Color = clGrayText
+      Constraints.MinHeight = 1
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 1
+      Visible = False
+    end
+    object lbInfo: TLabel
+      Left = 0
+      Height = 20
+      Top = 567
+      Width = 259
+      Align = alBottom
+      Alignment = taCenter
+      Caption = 'lbInfo'
+      Color = cl3DLight
+      Layout = tlCenter
+      ParentColor = False
+      Transparent = False
+    end
   end
   object pRight: TPanel
     Left = 259
@@ -207,25 +224,36 @@ object fmImportC: TfmImportC
     Top = 0
     Width = 569
     BevelOuter = bvNone
-    ChildSizing.VerticalSpacing = 2
     ChildSizing.ControlsPerLine = 2
     ClientHeight = 587
     ClientWidth = 569
     TabOrder = 1
+    object bvDivider1: TBevel
+      Left = 0
+      Height = 522
+      Top = 4
+      Width = 2
+      Align = alLeft
+      BorderSpacing.Top = 4
+      BorderSpacing.Bottom = 4
+      Constraints.MaxWidth = 2
+      Shape = bsLeftLine
+    end
     object pcPages: TPageControl
       Left = 2
-      Height = 529
+      Height = 528
       Top = 0
       Width = 567
       ActivePage = tsParams
       Align = alClient
+      BorderSpacing.Bottom = 2
       Style = tsButtons
       TabIndex = 1
       TabOrder = 0
       object tsCode: TTabSheet
         AutoSize = True
         Caption = 'tsCode'
-        ClientHeight = 493
+        ClientHeight = 492
         ClientWidth = 559
         object pFilename: TPanel
           Left = 0
@@ -275,12 +303,13 @@ object fmImportC: TfmImportC
         end
         inline snImpEdit: TSynEdit
           Left = 0
-          Height = 443
+          Height = 442
           Top = 24
           Width = 559
           Align = alClient
           Constraints.MinWidth = 250
-          Color = clNone
+          Color = clWindow
+          Font.Color = clMenuText
           Font.Height = -13
           Font.Name = 'Consolas'
           Font.Pitch = fpFixed
@@ -754,7 +783,7 @@ object fmImportC: TfmImportC
               Width = 15
               MouseActions = <>
               MarkupInfo.Background = clBtnFace
-              MarkupInfo.Foreground = clNone
+              MarkupInfo.Foreground = clGrayText
               DigitCount = 2
               ShowOnlyLineNumbersMultiplesOf = 1
               ZeroStart = False
@@ -771,8 +800,8 @@ object fmImportC: TfmImportC
               Width = 3
               MouseActions = <>
               LineOnRight = False
-              MarkupInfo.Background = clWhite
-              MarkupInfo.Foreground = cl3DLight
+              MarkupInfo.Background = clWindow
+              MarkupInfo.Foreground = clScrollBar
             end
             object SynGutterCodeFolding1: TSynGutterCodeFolding
               Width = 13
@@ -788,7 +817,7 @@ object fmImportC: TfmImportC
         object pFileBar: TPanel
           Left = 0
           Height = 24
-          Top = 469
+          Top = 468
           Width = 559
           Align = alBottom
           AutoSize = True
@@ -827,7 +856,7 @@ object fmImportC: TfmImportC
         object bvDivider3: TBevel
           Left = 0
           Height = 2
-          Top = 467
+          Top = 466
           Width = 559
           Align = alBottom
           Constraints.MaxHeight = 2
@@ -838,11 +867,11 @@ object fmImportC: TfmImportC
         AutoSize = True
         Caption = 'tsParams'
         ChildSizing.LeftRightSpacing = 4
-        ClientHeight = 493
+        ClientHeight = 492
         ClientWidth = 559
         object pParams: TPanel
           Left = 4
-          Height = 493
+          Height = 492
           Top = 0
           Width = 551
           Align = alClient
@@ -853,13 +882,13 @@ object fmImportC: TfmImportC
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.EnlargeVertical = crsHomogenousChildResize
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 493
+          ClientHeight = 492
           ClientWidth = 551
           TabOrder = 0
           object pMain: TPanel
             Left = 0
             Height = 339
-            Top = 154
+            Top = 153
             Width = 551
             Align = alBottom
             AutoSize = True
@@ -1220,12 +1249,12 @@ object fmImportC: TfmImportC
           end
           object pImpExample: TPanel
             Left = 0
-            Height = 152
+            Height = 151
             Top = 0
             Width = 551
             Align = alClient
             BevelOuter = bvNone
-            ClientHeight = 152
+            ClientHeight = 151
             ClientWidth = 551
             Color = clForm
             Constraints.MinHeight = 150
@@ -1235,7 +1264,7 @@ object fmImportC: TfmImportC
             TabOrder = 0
             object imImpExample: TImage
               Left = 0
-              Height = 152
+              Height = 151
               Top = 0
               Width = 551
               Align = alClient
@@ -1247,6 +1276,23 @@ object fmImportC: TfmImportC
           end
         end
       end
+    end
+    object pSeparator2: TPanel
+      Left = 0
+      Height = 1
+      Top = 530
+      Width = 565
+      Align = alBottom
+      AutoSize = True
+      BorderSpacing.Right = 4
+      BevelColor = clForm
+      BevelOuter = bvNone
+      Color = clGrayText
+      Constraints.MinHeight = 1
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 2
+      Visible = False
     end
     object pImpControls: TPanel
       Left = 0
@@ -1376,17 +1422,6 @@ object fmImportC: TfmImportC
         ParentBackground = False
         TabOrder = 1
       end
-    end
-    object bvDivider1: TBevel
-      Left = 0
-      Height = 523
-      Top = 4
-      Width = 2
-      Align = alLeft
-      BorderSpacing.Top = 4
-      BorderSpacing.Bottom = 4
-      Constraints.MaxWidth = 2
-      Shape = bsLeftLine
     end
   end
   object alActionListImpC: TActionList

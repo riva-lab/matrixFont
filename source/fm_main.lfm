@@ -87,6 +87,7 @@ object fmMain: TfmMain
         ClientHeight = 522
         ClientWidth = 95
         ParentBackground = False
+        PopupMenu = pmPanels
         TabOrder = 0
         object pFontTools: TPanel
           Left = 2
@@ -856,6 +857,7 @@ object fmMain: TfmMain
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 522
         ClientWidth = 95
+        PopupMenu = pmPanels
         TabOrder = 1
         object pCharTools: TPanel
           Left = 2
@@ -2942,6 +2944,12 @@ object fmMain: TfmMain
     Images = ImListNew16A
     Left = 500
     Top = 194
+    object MenuItem124: TMenuItem
+      Action = acMenuPanels
+    end
+    object Separator4: TMenuItem
+      Caption = '-'
+    end
     object MenuItem59: TMenuItem
       Action = acViewTBFile
       AutoCheck = True

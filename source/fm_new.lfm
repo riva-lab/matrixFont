@@ -15,7 +15,7 @@ object fmNew: TfmNew
   OnShow = FormShow
   PopupMode = pmExplicit
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pMain: TPanel
     Left = 62
     Height = 314
@@ -339,6 +339,7 @@ object fmNew: TfmNew
         Caption = 'Создать'
         Constraints.MinHeight = 44
         Constraints.MinWidth = 250
+        Default = True
         ModalResult = 1
         Images = fmMain.ImListNew16A
         ImageIndex = 44

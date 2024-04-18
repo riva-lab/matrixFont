@@ -45,7 +45,7 @@ type
 
     procedure edPathClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-  PUBLIC
+  public
     prName, prAuthor, prDTCreate, prDTChange: String;
     prFirst, prLast, prW, prH, prEnc:         Integer;
     prAppCreate, prAppChange, prPath:         String;
@@ -75,6 +75,10 @@ procedure TfmProp.FormShow(Sender: TObject);
     edLast.Text          := IntToStr(prLast);
     edHeight.Text        := IntToStr(prH);
     edWidth.Text         := IntToStr(prW);
+
+    // fix image of button
+    bbApply.ImageIndex := 0;
+    bbApply.ImageIndex := 44;
   end;
 
 procedure TfmProp.edPathClick(Sender: TObject);
@@ -83,4 +87,3 @@ procedure TfmProp.edPathClick(Sender: TObject);
   end;
 
 end.
-

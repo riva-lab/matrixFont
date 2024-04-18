@@ -167,6 +167,7 @@ MenuItem120: TMenuItem;
 MenuItem121: TMenuItem;
 MenuItem122: TMenuItem;
 MenuItem123: TMenuItem;
+MenuItem124: TMenuItem;
 MenuItem13:  TMenuItem;
 MenuItem14:  TMenuItem;
 MenuItem15:  TMenuItem;
@@ -267,6 +268,7 @@ miFPS:       TMenuItem;
 Separator1:  TMenuItem;
 Separator2:  TMenuItem;
 Separator3:  TMenuItem;
+Separator4:  TMenuItem;
 
 pFindBox:        TPanel;
 pEditor:         TPanel;

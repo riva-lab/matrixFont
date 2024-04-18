@@ -14,10 +14,10 @@ object fmGen: TfmGen
   Position = poMainFormCenter
   ShowHint = True
   ShowInTaskBar = stAlways
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pcPages: TPageControl
     Left = 0
-    Height = 490
+    Height = 487
     Top = 0
     Width = 729
     ActivePage = tsGenSettings
@@ -28,11 +28,11 @@ object fmGen: TfmGen
     TabOrder = 0
     object tsGenSettings: TTabSheet
       Caption = 'Настройки'
-      ClientHeight = 457
+      ClientHeight = 451
       ClientWidth = 721
       object pSettings: TPanel
         Left = 0
-        Height = 457
+        Height = 451
         Top = 0
         Width = 721
         Align = alClient
@@ -44,9 +44,10 @@ object fmGen: TfmGen
         ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 457
+        ClientHeight = 451
         ClientWidth = 721
         Color = clForm
+        ParentBackground = False
         ParentColor = False
         TabOrder = 0
         object lbScanColsFirst: TLabel
@@ -72,10 +73,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 0
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbScanColsToRight: TLabel
           AnchorSideTop.Side = asrCenter
@@ -100,10 +101,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 1
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbScanRowsToDown: TLabel
           AnchorSideTop.Side = asrCenter
@@ -128,10 +129,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 2
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbFontType: TLabel
           AnchorSideTop.Side = asrCenter
@@ -156,10 +157,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 3
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbNumbersView: TLabel
           AnchorSideTop.Side = asrCenter
@@ -184,10 +185,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 4
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbEmptyBits: TLabel
           AnchorSideTop.Side = asrCenter
@@ -212,10 +213,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 5
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbNumbersBits: TLabel
           AnchorSideTop.Side = asrCenter
@@ -240,10 +241,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 6
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbLanguage: TLabel
           AnchorSideTop.Side = asrCenter
@@ -268,10 +269,10 @@ object fmGen: TfmGen
           Items.Strings = (
             '-'
           )
-          OnChange = acRefreshOutExecute
           Style = csDropDownList
           TabOrder = 7
           Text = '-'
+          OnChange = acRefreshOutExecute
         end
         object lbDefPrefix: TLabel
           AnchorSideTop.Side = asrCenter
@@ -293,8 +294,8 @@ object fmGen: TfmGen
           Width = 324
           CharCase = ecUppercase
           MaxLength = 32
-          OnChange = edDefPrefixChange
           TabOrder = 8
+          OnChange = edDefPrefixChange
         end
         object pRangeTxt: TPanel
           Left = 10
@@ -307,6 +308,7 @@ object fmGen: TfmGen
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 28
           ClientWidth = 367
+          ParentBackground = False
           TabOrder = 9
           object lbRangeReset: TLabel
             Cursor = crHandPoint
@@ -317,7 +319,7 @@ object fmGen: TfmGen
             Align = alRight
             Alignment = taRightJustify
             Caption = '[Сброс]'
-            Font.Color = clBlue
+            Font.Color = clHighlight
             Font.Style = [fsUnderline]
             Layout = tlCenter
             ParentColor = False
@@ -349,6 +351,7 @@ object fmGen: TfmGen
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 28
           ClientWidth = 324
+          ParentBackground = False
           TabOrder = 10
           object seStart: TSpinEdit
             AnchorSideTop.Side = asrBottom
@@ -390,17 +393,18 @@ object fmGen: TfmGen
     end
     object tsCode: TTabSheet
       Caption = 'Вывод'
-      ClientHeight = 457
+      ClientHeight = 451
       ClientWidth = 721
       inline snEdit: TSynEdit
         Left = 0
-        Height = 457
+        Height = 451
         Top = 0
         Width = 721
         Align = alClient
         Anchors = []
         Constraints.MinWidth = 250
-        Color = clNone
+        Color = clWindow
+        Font.Color = clWindowText
         Font.Height = 23
         Font.Name = 'Consolas'
         Font.Pitch = fpFixed
@@ -875,7 +879,7 @@ object fmGen: TfmGen
             Width = 23
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
-            MarkupInfo.Foreground = clNone
+            MarkupInfo.Foreground = clGrayText
             DigitCount = 2
             ShowOnlyLineNumbersMultiplesOf = 1
             ZeroStart = False
@@ -891,8 +895,9 @@ object fmGen: TfmGen
           object SynGutterSeparator1: TSynGutterSeparator
             Width = 3
             MouseActions = <>
-            MarkupInfo.Background = clWhite
-            MarkupInfo.Foreground = clGray
+            LineOnRight = False
+            MarkupInfo.Background = clWindow
+            MarkupInfo.Foreground = clScrollBar
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
             Width = 13
@@ -906,6 +911,23 @@ object fmGen: TfmGen
         end
       end
     end
+  end
+  object pSeparator: TPanel
+    Left = 2
+    Height = 3
+    Top = 487
+    Width = 725
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Left = 2
+    BorderSpacing.Right = 2
+    BevelColor = clForm
+    Color = clGrayText
+    Constraints.MinHeight = 3
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 2
+    Visible = False
   end
   object pControls: TPanel
     Left = 0
@@ -921,6 +943,7 @@ object fmGen: TfmGen
     ClientHeight = 48
     ClientWidth = 729
     Color = cl3DLight
+    ParentBackground = False
     ParentColor = False
     TabOrder = 1
     object pSelector: TPanel
@@ -934,6 +957,7 @@ object fmGen: TfmGen
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 40
       ClientWidth = 246
+      ParentBackground = False
       TabOrder = 0
       object tbSelector: TToolBar
         Left = 0
@@ -949,6 +973,7 @@ object fmGen: TfmGen
         Images = fmMain.ImListNew16A
         TabOrder = 0
         TabStop = True
+        Transparent = True
         Wrapable = False
         object ToolButton1: TToolButton
           Left = 126
@@ -990,6 +1015,7 @@ object fmGen: TfmGen
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 40
       ClientWidth = 181
+      ParentBackground = False
       TabOrder = 1
       object tbCode: TToolBar
         Left = 0
@@ -1005,6 +1031,7 @@ object fmGen: TfmGen
         Images = fmMain.ImListNew16A
         TabOrder = 0
         TabStop = True
+        Transparent = True
         Wrapable = False
         object ToolButton6: TToolButton
           Left = 121
@@ -1031,10 +1058,7 @@ object fmGen: TfmGen
       Align = alClient
       Alignment = taCenter
       Caption = 'lbInfo'
-      Color = cl3DLight
       Layout = tlCenter
-      ParentColor = False
-      Transparent = False
     end
   end
   object ActionList1: TActionList

@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, SynHighlighterCpp, SynEdit, Forms, Clipbrd, strutils, Graphics,
-  ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8, AppLocalizer,
+  ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8,
+  AppLocalizer, AppTuner,
   symbol, font, fm_about, u_encodings, u_utilities;
 
 
@@ -55,6 +56,7 @@ type
     pSettings:         TPanel;
     pControls:         TPanel;
     pSelector:         TPanel;
+    pSeparator:        TPanel;
     pCode:             TPanel;
     SaveDlg:           TSaveDialog;
     snCppSyntax:       TSynCppSyn;
@@ -145,6 +147,12 @@ implementation
  // инициализация формы при показе
 procedure TfmGen.FormShow(Sender: TObject);
   begin
+    if appTunerEx.IsDarkTheme then
+      begin
+      pSeparator.Show;
+      pControls.ParentColor := True;
+      end;
+
     BeginFormUpdate;
 
     if FontSet <> nil then

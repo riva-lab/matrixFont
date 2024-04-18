@@ -5,7 +5,8 @@ unit fm_sizes;
 interface
 
 uses
-  SysUtils, Forms, ExtCtrls, StdCtrls, Spin, Buttons, u_strings, Classes;
+  Classes, SysUtils, Forms, ExtCtrls, StdCtrls, Spin, Buttons, Math,
+  u_strings;
 
 resourcestring
   FM_SIZES_ADD    = 'Добавить строки и столбцы';
@@ -89,6 +90,12 @@ procedure TfmSizes.FormShow(Sender: TObject);
     rgMode.Items.Add(FM_SIZES_CROP);
     rgMode.ItemIndex := _item;
     rgModeClick(Sender);
+
+    with sbReset do
+      begin
+      Constraints.MinHeight := Max(60, Images.Width + Scale96ToScreen(16));
+      Constraints.MinWidth  := Constraints.MinHeight;
+      end;
   end;
 
 

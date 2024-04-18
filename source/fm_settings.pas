@@ -69,6 +69,7 @@ type
     lbColorPreviewBG:   TLabel;
     lbFontEncoding:     TLabel;
     lbFontName:         TLabel;
+    lbFontScale:        TLabel;
     lbGridThickness:    TLabel;
     lbIconsScale:       TLabel;
     lbInterface:        TLabel;
@@ -114,6 +115,7 @@ type
     seBWTreshold:       TSpinEdit;
     seCharNameFontSize: TSpinEdit;
     seCodeNameFontSize: TSpinEdit;
+    seFontScale:        TSpinEdit;
     seGridThickness:    TSpinEdit;
     seIconsScale:       TSpinEdit;
     seNaviHeight:       TSpinEdit;
@@ -188,6 +190,9 @@ procedure TfmSettings.FormCreate(Sender: TObject);
     Settings.IniFile := ExtractFilePath(ParamStrUTF8(0)) + SETTINGS_FILE;
     InitConfig;
 
+    EncodingsListAssign(cbEncoding.Items);
+    cbEncoding.ItemIndex := 0;
+
     pcPageCtrl.ActivePageIndex := 0;
     pcPageCtrl.ShowTabs        := False;
 
@@ -202,9 +207,6 @@ procedure TfmSettings.FormShow(Sender: TObject);
     if Tag = 0 then
       begin
       Tag := 1;
-
-      EncodingsListAssign(cbEncoding.Items);
-      cbEncoding.ItemIndex := 0;
 
       Settings.SyncComponents;
       cbCharNameClick(nil);

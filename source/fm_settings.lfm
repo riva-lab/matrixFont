@@ -111,7 +111,7 @@ object fmSettings: TfmSettings
       end
       object pValues3: TPanel
         Left = 10
-        Height = 61
+        Height = 94
         Top = 132
         Width = 661
         AutoSize = True
@@ -120,7 +120,7 @@ object fmSettings: TfmSettings
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 61
+        ClientHeight = 94
         ClientWidth = 661
         TabOrder = 4
         object cbTheme: TComboBox
@@ -154,6 +154,7 @@ object fmSettings: TfmSettings
           Top = 33
           Width = 150
           Constraints.MinWidth = 150
+          Increment = 10
           MaxValue = 200
           MinValue = 70
           TabOrder = 1
@@ -167,6 +168,31 @@ object fmSettings: TfmSettings
           Top = 33
           Width = 181
           Caption = 'Размер иконок, %'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seFontScale: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 66
+          Width = 150
+          Constraints.MinWidth = 150
+          Increment = 10
+          MaxValue = 200
+          MinValue = 70
+          TabOrder = 2
+          Value = 100
+        end
+        object lbFontScale: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 160
+          Height = 28
+          Top = 66
+          Width = 181
+          Caption = 'Размер шрифта, %'
           Layout = tlCenter
           ParentColor = False
         end
@@ -773,7 +799,7 @@ object fmSettings: TfmSettings
           Constraints.MinWidth = 80
           MaxValue = 255
           TabOrder = 1
-          Value = 255
+          Value = 127
         end
         object lbNewItemLast: TLabel
           AnchorSideLeft.Side = asrBottom
@@ -1265,8 +1291,9 @@ object fmSettings: TfmSettings
         Width = 175
         Action = acOK
         BorderSpacing.InnerBorder = 5
-        Caption = 'OK'
         Constraints.MinWidth = 175
+        Images = fmMain.ImListNew16A
+        ImageIndex = 44
         TabOrder = 0
       end
       object bbCancel: TBitBtn
@@ -1277,6 +1304,8 @@ object fmSettings: TfmSettings
         Action = acCancel
         BorderSpacing.InnerBorder = 5
         Constraints.MinWidth = 175
+        Images = fmMain.ImListNew16A
+        ImageIndex = 46
         TabOrder = 1
       end
     end
@@ -1317,7 +1346,7 @@ object fmSettings: TfmSettings
     Left = 48
     Top = 24
     object acOK: TAction
-      Caption = 'Применить'
+      Caption = 'OK'
       ImageIndex = 44
       OnExecute = acOKExecute
     end

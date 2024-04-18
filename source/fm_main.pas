@@ -15,7 +15,7 @@ uses
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map,
 
   // functional units
-  font, symbol, app_ver, cOpenFileList,
+  font, symbol, app_ver, cOpenFileList, Buttons,
 
   // additional units
   u_utilities, u_strings, u_helpers, u_encodings;
@@ -165,20 +165,24 @@ procedure TfmMain.FormShow(Sender: TObject);
 
     appLocalizerEx.EnumerateComponents;
 
-    // init tuner
-    appTunerEx.IniFile := Settings.IniFile;
-    appTunerEx.AddForm(Self);
-    appTunerEx.LoadProperties;
+    with appTunerEx do
+      begin
+      IniFile := Settings.IniFile;
 
-    Settings.SyncValues;
-    Settings.Load;
-    Settings.SyncComponents;
-    AfterLoadConfig;
+      AddAllForms;
+      Form[Self].SaveProps := True; // save/restore props only for main form
+      LoadProperties;
+
+      // load font scale value into control
+      fmSettings.seFontScale.Value := Form[Self].Scale;
+      end;
+
+    Settings.SyncValues;     // load default values to fields of 'cfg' record
+    Settings.Load;           // load settings from ini file to 'cfg' record
+    Settings.SyncComponents; // load controls from fields of 'cfg' record
 
     // load property values to controls
     acStayOnTopToggle.Checked := appTunerEx.Form[Self].StayOnTop;
-
-    LanguageChange;
 
     // загрузка файла, если он был перетащен на значок приложения
     // или открыт системой по аасоциации с расширением
@@ -188,14 +192,17 @@ procedure TfmMain.FormShow(Sender: TObject);
       with cfg.new do
         FontCreateNew(w, h, start, last - start + 1, enc, title, author);
 
-    SettingsApplyToCurrentSession;
     acZoomFit.Execute;
     tmrMain10msTimer(Sender);
     actionPasteMode(Sender);
+    AfterLoadConfig;
 
     psSplit.Cursor      := crHSplit; // fix splitter cursor bug
     fmMap.OnMouseEvent  := @OnMapSelectChar;
     tmrMain10ms.Enabled := True;
+
+    // enable custom menu drawing
+    appTunerEx.Form[Self].MenuShow := True;
 
     {$IfDef DEBUG}
     miFPS.Visible := True;
@@ -1134,6 +1141,8 @@ procedure TfmMain.LastFileAdd(FileName: String);
         begin
         ToolBtnLastFiles.DropdownMenu := pmLastFiles;
         ToolBtnLastFiles.Style        := tbsDropDown;
+
+        appTunerEx.Form[Self].MenuShow := True;
         end
       else
         begin
@@ -1223,8 +1232,8 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         MouseWheelOption := mwGrid;
       end;
 
-    AdjustComponentSizes;
     AdjustThemeDependentValues;
+    AdjustComponentSizes;
     LanguageChange;
     acGenerateExecute(nil);
     actionZooming(nil);
@@ -1498,13 +1507,19 @@ procedure TfmMain.AdjustComponentSizes;
       imSVGList.ImagesDisabled := D;
       imSVGList.Rendering      := True;
     end;
+
+  const
+    firstCall: Boolean = True;
   var
     w, h, i: Integer;
   begin
     BeginFormUpdate;
 
     // on 96dpi's screen at 100% resolution muat be 16px
-    RenderSVGIcons(Round(Scale96ToScreen(16) * 101 / 100), ImListNew16A, ImListNew16D);
+    RenderSVGIcons(Round(Scale96ToScreen(16) * cfg.app.iconscale / 100), ImListNew16A, ImListNew16D);
+    RenderSVGIcons(Round(Scale96ToScreen(16) * cfg.app.iconscale / 50), ImListNew32A, nil);
+
+    ImListNew32A.GetBitmap(26, imFindIcon.Picture.Bitmap);
 
     // иконки-значки в заголовке окон
     ImListNew16A.GetIcon(3, fmSettings.Icon);
@@ -1518,28 +1533,6 @@ procedure TfmMain.AdjustComponentSizes;
     ImListNew16A.GetIcon(7, fmImportC.Icon);
     ImListNew16A.GetIcon(27, fmPreview.Icon);
     ImListNew16A.GetIcon(64, fmMap.Icon);
-    ImListNew32A.GetBitmap(26, imFindIcon.Picture.Bitmap);
-
-    Font.Height := 0; // set default size as reference
-    Font.Height := Round(Canvas.GetTextHeight('0') * 101 / 100);
-
-    // adjust font height for all forms
-    for i := 0 to Screen.FormCount - 1 do
-      begin
-      Screen.Forms[i].Font.Height := Font.Height;
-
-      // adjust font for some components with custom font
-      with Screen.Forms[i] do
-        for w := 0 to ComponentCount - 1 do
-          if (Components[w].ClassName = TLabel.ClassName)
-            or (Components[w].ClassName = TComboBox.ClassName) then
-            TControl(Components[w]).Font.Height := Font.Height;
-      end;
-
-    Screen.HintFont.Height := Font.Height;
-    Screen.MenuFont.Height := Font.Height;
-
-    edFind.Constraints.MaxWidth := 2 * Font.Height;
 
     SetStatusBarPanelWidth(1, 'NORMAL');
     SetStatusBarPanelWidth(2, 'X,Y: 0000, 0000 ');
@@ -1551,22 +1544,37 @@ procedure TfmMain.AdjustComponentSizes;
     BeginFormUpdate;
 
     h := Canvas.GetTextHeight('0');
-    stStatusBar.Height := h + 2;
+
+    stStatusBar.Height          := h + 2;
+    Screen.HintFont.Height      := h;
+    Screen.MenuFont.Height      := h;
+    edFind.Constraints.MaxWidth := h * 2;
 
     // set size of toolbar's buttons which depends on size of icons
-    h     := Max(16, round(imSVGList.RenderSize * 1.5));
+    h     := Max(16, round(ImListNew16A.Width * 1.5));
     for w := 0 to ComponentCount - 1 do
       if (Components[w].ClassName = TToolBar.ClassName) then
         SetToolbarButtonSize([TToolBar(Components[w])], h);
 
-    RenderSVGIcons(imSVGList.RenderSize * 2, ImListNew32A, nil);
+    // custom menu drawing setup
+    appTunerEx.Form[Self].MenuAddHeight := Scale96ToScreen(2);
+    appTunerEx.Form[Self].MenuTune      := True;
+
+    // scale font for all forms
+    appTunerEx.Scale := fmSettings.seFontScale.Value;
 
     EndFormUpdate;
 
     // set form size limits
-    Constraints.MinWidth           := tbFile.Width + tbTools.Width + 120;
-    Constraints.MinHeight          := max(pCharTools.Height, pFontTools.Height) + tbFile.Height * 4 + stStatusBar.Height;
+    if firstCall then
+      begin
+      Constraints.MinWidth  := tbFile.Width + tbTools.Width + 120;
+      Constraints.MinHeight := max(pCharTools.Height, pFontTools.Height) + tbFile.Height * 4 + stStatusBar.Height;
+      end;
+
     fmPreview.Constraints.MinWidth := Constraints.MinWidth;
+
+    firstCall := False;
   end;
 
 // adjust colors and some other values according to theme

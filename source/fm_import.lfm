@@ -509,7 +509,7 @@ object fmImport: TfmImport
         Width = 189
         Alignment = taCenter
         Caption = 'lbScale'
-        Font.Color = clBtnShadow
+        Font.Color = clGrayText
         ParentColor = False
         ParentFont = False
       end
@@ -526,6 +526,7 @@ object fmImport: TfmImport
         Caption = 'Импортировать'
         Constraints.MinHeight = 44
         Constraints.MinWidth = 188
+        Default = True
         ModalResult = 1
         Images = fmMain.ImListNew16A
         ImageIndex = 44

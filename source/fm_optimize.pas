@@ -5,7 +5,8 @@ unit fm_optimize;
 interface
 
 uses
-  SysUtils, Forms, Buttons, StdCtrls, ExtCtrls, u_strings, Classes;
+  Classes, SysUtils, Forms, Buttons, StdCtrls, ExtCtrls, Math,
+  u_strings;
 
 type
 
@@ -67,10 +68,18 @@ procedure TfmOptimize.FormCreate(Sender: TObject);
   end;
 
 procedure TfmOptimize.FormShow(Sender: TObject);
+  var
+    sb: TSpeedButton;
   begin
     lbWarning.Caption := WARN_NOREDO;
     sbUp.Down         := False;
     sbReset.Click;
+
+    for sb in [sbDown, sbLeft, sbReset, sbRight, sbUp] do
+      begin
+      sb.Constraints.MinHeight := Max(60, sb.Images.Width + Scale96ToScreen(16));
+      sb.Constraints.MinWidth  := sb.Constraints.MinHeight;
+      end;
   end;
 
 procedure TfmOptimize.sbResetClick(Sender: TObject);

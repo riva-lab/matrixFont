@@ -14,7 +14,7 @@ object fmRange: TfmRange
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pMain: TPanel
     AnchorSideLeft.Side = asrCenter
     AnchorSideBottom.Side = asrBottom
@@ -123,8 +123,8 @@ object fmRange: TfmRange
         Alignment = taCenter
         BorderSpacing.CellAlignVertical = ccaLeftTop
         Caption = 'lbWarning'
-        Color = 13158655
-        ParentColor = False
+        Font.Color = clRed
+        ParentFont = False
         Transparent = False
         WordWrap = True
       end
@@ -138,6 +138,7 @@ object fmRange: TfmRange
         Caption = 'Применить'
         Constraints.MinHeight = 44
         Constraints.MinWidth = 250
+        Default = True
         ModalResult = 1
         Images = fmMain.ImListNew16A
         ImageIndex = 44

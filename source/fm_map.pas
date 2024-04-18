@@ -123,7 +123,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
       Canvas.TextStyle    := _txtStyle;
       _txtExt             := Canvas.TextExtent('0');
       Canvas.Font.Height  := trunc(ColWidths[1] / 4 / _txtExt.Width * _txtExt.Height);
-      Canvas.Font.Color   := clBlack;
+      Canvas.Font.Color   := cfg.color.nav.active;
 
       Canvas.Rectangle(aRect);
 

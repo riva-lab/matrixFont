@@ -66,6 +66,10 @@ procedure TfmNew.FormShow(Sender: TObject);
     edAuthor.Text        := cfg.new.author;
     edFontName.TextHint  := lbFontName.Caption;
     edAuthor.TextHint    := lbAuthor.Caption;
+
+    // fix image of button
+    bbOK.ImageIndex := 0;
+    bbOK.ImageIndex := 44;
   end;
 
 procedure TfmNew.seLastItemChange(Sender: TObject);

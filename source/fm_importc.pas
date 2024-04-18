@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, LCLType, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   ComCtrls, ActnList, StdCtrls, Spin, SynEdit, LazUTF8, SynHighlighterCpp,
-  Buttons, AppLocalizer,
+  Buttons, AppLocalizer, AppTuner,
   fm_about,
   font, u_utilities, u_encodings, u_helpers, config_record;
 
@@ -97,6 +97,8 @@ type
     pPreview:     TPanel;
     pRight:       TPanel;
     pSelector:    TPanel;
+    pSeparator1:  TPanel;
+    pSeparator2:  TPanel;
     pSpacer:      TPanel;
     pSpacerCtrl:  TPanel;
 
@@ -141,7 +143,7 @@ type
   private
     procedure InitConfig;
 
-  public                                      
+  public
     procedure OnLanguageChange;
     procedure UpdateFont(AFont: TFont = nil);
 
@@ -160,6 +162,14 @@ implementation
 procedure TfmImportC.FormCreate(Sender: TObject);
   begin
     InitConfig;
+
+    if appTunerEx.IsDarkTheme then
+      begin
+      pSeparator1.Show;
+      pSeparator2.Show;
+      pImpControls.ParentColor := True;
+      lbInfo.ParentColor       := True;
+      end;
 
     acTabCode.Execute;
   end;
@@ -415,28 +425,28 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
       end
     else
       with FontImp do
-          try
-          bmp        := TBitmap.Create;
-          bmp.Width  := Width;
-          bmp.Height := Height;
+        try
+        bmp        := TBitmap.Create;
+        bmp.Width  := Width;
+        bmp.Height := Height;
 
-          // draw single char preview
-          DrawChar(
-            seImpCharCode.Value - FontStartItem, 0, bmp.Width,
-            imImpChar.Picture.Bitmap, True);
+        // draw single char preview
+        DrawChar(
+          seImpCharCode.Value - FontStartItem, 0, bmp.Width,
+          imImpChar.Picture.Bitmap, True);
 
-          // draw text example preview
-          if cbImpExample.Checked and not ASingle then
-            for i := 1 to Length(edImpExample.Text) do
-              DrawChar(
-                Ord(UTF8ToEncoding(edImpExample.Text[i], Encoding)[1]) - FontStartItem,
-                1 + (i - 1) * (Width + 1),
-                1 + Length(edImpExample.Text) * (Width + 1),
-                imImpExample.Picture.Bitmap, False);
+        // draw text example preview
+        if cbImpExample.Checked and not ASingle then
+          for i := 1 to Length(edImpExample.Text) do
+            DrawChar(
+              Ord(UTF8ToEncoding(edImpExample.Text[i], Encoding)[1]) - FontStartItem,
+              1 + (i - 1) * (Width + 1),
+              1 + Length(edImpExample.Text) * (Width + 1),
+              imImpExample.Picture.Bitmap, False);
 
-          finally
-          bmp.Free;
-          end;
+        finally
+        bmp.Free;
+        end;
 
     EndFormUpdate;
   end;
@@ -451,16 +461,16 @@ procedure TfmImportC.InitConfig;
     Settings.Add(seImpLastItem, @cfg.importc.metrics.last);
     Settings.Add(cbImpNBits, @cfg.importc.metrics.nbits);
     Settings.Add(seImpOffset, @cfg.importc.metrics.offset);
-    Settings.Add(cbImpOrder, @cfg.importc.metrics.order); 
+    Settings.Add(cbImpOrder, @cfg.importc.metrics.order);
     Settings.Add(seImpSkip, @cfg.importc.metrics.skip);
-    Settings.Add(seImpStartItem, @cfg.importc.metrics.start);  
+    Settings.Add(seImpStartItem, @cfg.importc.metrics.start);
     Settings.Add(seImpWidth, @cfg.importc.metrics.w);
     Settings.Add(cbImpExample, @cfg.importc.example.enable);
     Settings.Add(seImpCharCode, @cfg.importc.example.char);
     Settings.Add(edImpExample, @cfg.importc.example.str);
     Settings.Add(acTabCode, @cfg.importc.tab.code);
     Settings.Add(acTabParams, @cfg.importc.tab.params);
-  end;        
+  end;
 
 procedure TfmImportC.OnLanguageChange;
   begin

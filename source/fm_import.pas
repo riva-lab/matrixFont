@@ -6,7 +6,7 @@ interface
 
 uses
   SysUtils, Forms, Graphics, Dialogs, StdCtrls, ExtCtrls, Spin, Buttons,
-  ComCtrls, LazUTF8, Classes, Types,
+  ComCtrls, LazUTF8, Classes, Types, AppTuner,
   u_encodings, config_record;
 
 resourcestring
@@ -137,6 +137,7 @@ procedure TfmImport.FormShow(Sender: TObject);
     shPreviewBG.Brush.Color := cfg.color.import.bg;
     shPreviewBG.Pen.Color   := cfg.color.import.bg;
     ApplyChange;
+    appTunerEx.Form[Self].TuneComboboxes;
   end;
 
 

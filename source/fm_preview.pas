@@ -216,7 +216,8 @@ procedure TfmPreview.UpdatePreview;
     bm_tmp: TBitmap;
     CharWidth, CharHeight, char_code, txt_length, x, xl, y, i: Integer;
   begin
-    if PFontCustom = nil then Exit;
+    if not Assigned(PFontCustom) then Exit;
+    if not Assigned(PFontCustom^) then Exit;
 
     bm_tmp        := TBitmap.Create;
     bm_tmp.Width  := PFontCustom^.Item[0].Width;

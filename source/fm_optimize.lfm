@@ -14,7 +14,7 @@ object fmOptimize: TfmOptimize
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object pMain: TPanel
     Left = 44
     Height = 260
@@ -200,6 +200,7 @@ object fmOptimize: TfmOptimize
       BevelOuter = bvNone
       ChildSizing.HorizontalSpacing = 10
       ChildSizing.VerticalSpacing = 10
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 260
@@ -412,9 +413,9 @@ object fmOptimize: TfmOptimize
         Alignment = taCenter
         BorderSpacing.CellAlignVertical = ccaLeftTop
         Caption = 'lbWarning'
-        Color = 13158655
+        Font.Color = clRed
         Layout = tlBottom
-        ParentColor = False
+        ParentFont = False
         Transparent = False
         WordWrap = True
       end
@@ -429,6 +430,7 @@ object fmOptimize: TfmOptimize
         Caption = 'Применить'
         Constraints.MinHeight = 44
         Constraints.MinWidth = 188
+        Default = True
         ModalResult = 1
         Images = fmMain.ImListNew16A
         ImageIndex = 44
