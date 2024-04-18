@@ -1131,8 +1131,15 @@ procedure TfmMain.LastFileAdd(FileName: String);
         end;
 
       if acLastFilesList.Visible then
-        ToolBtnLastFiles.PopupMenu := pmLastFiles else
-        ToolBtnLastFiles.PopupMenu := nil;
+        begin
+        ToolBtnLastFiles.DropdownMenu := pmLastFiles;
+        ToolBtnLastFiles.Style        := tbsDropDown;
+        end
+      else
+        begin
+        ToolBtnLastFiles.DropdownMenu := nil;
+        ToolBtnLastFiles.Style        := tbsButton;
+        end;
       end;
   end;
 

@@ -1454,7 +1454,6 @@ object fmMain: TfmMain
         Left = 96
         Top = 0
         Action = acFontOpen
-        PopupMenu = pmLastFiles
       end
       object ToolButton6: TToolButton
         Left = 126
@@ -2579,7 +2578,6 @@ object fmMain: TfmMain
       Caption = 'Открыть недавний'
       DisableIfNoHandler = False
       Hint = 'Список ранее открытых файлов'
-      ImageIndex = 1
       Visible = False
     end
     object acDeleteLastFilesList: TAction
