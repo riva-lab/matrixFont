@@ -312,22 +312,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 0
               Transparent = True
-              object ToolButton101: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton102: TToolButton
                 Left = 31
                 Top = 0
                 Action = acFontShiftUp
               end
-              object ToolButton103: TToolButton
-                Left = 61
+              object pTBSpacer1: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer2: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
             object tbFontTools7: TToolBar
@@ -378,22 +388,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 2
               Transparent = True
-              object ToolButton109: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton110: TToolButton
                 Left = 31
                 Top = 0
                 Action = acFontShiftDown
               end
-              object ToolButton113: TToolButton
-                Left = 61
+              object pTBSpacer3: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer4: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
           end
@@ -433,22 +453,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 0
               Transparent = True
-              object ToolButton154: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton159: TToolButton
                 Left = 31
                 Top = 0
                 Action = acFontSnapUp
               end
-              object ToolButton160: TToolButton
-                Left = 61
+              object pTBSpacer5: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer6: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
             object tbFontTools10: TToolBar
@@ -477,11 +507,16 @@ object fmMain: TfmMain
                 Top = 0
                 Action = acFontSnapRight
               end
-              object ToolButton4: TToolButton
+              object pTBSpacer7: TPanel
                 Left = 31
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton2'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
               end
             end
             object tbFontTools11: TToolBar
@@ -500,22 +535,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 2
               Transparent = True
-              object ToolButton163: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton164: TToolButton
                 Left = 31
                 Top = 0
                 Action = acFontSnapDown
               end
-              object ToolButton165: TToolButton
-                Left = 61
+              object pTBSpacer8: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer9: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
           end
@@ -562,7 +607,7 @@ object fmMain: TfmMain
         Top = 26
         Width = 199
         Align = alClient
-        AlternateColor = clBtnFace
+        AlternateColor = 16514043
         AutoFillColumns = True
         BorderStyle = bsNone
         ColCount = 3
@@ -1036,22 +1081,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 0
               Transparent = True
-              object ToolButton92: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton97: TToolButton
                 Left = 31
                 Top = 0
                 Action = acSymbolShiftUp
               end
-              object ToolButton93: TToolButton
-                Left = 61
+              object pTBSpacer10: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer11: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
             object tbCharTools7: TToolBar
@@ -1102,22 +1157,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 2
               Transparent = True
-              object ToolButton96: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton99: TToolButton
                 Left = 31
                 Top = 0
                 Action = acSymbolShiftDown
               end
-              object ToolButton100: TToolButton
-                Left = 61
+              object pTBSpacer12: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer13: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
           end
@@ -1157,22 +1222,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 0
               Transparent = True
-              object ToolButton150: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton151: TToolButton
                 Left = 31
                 Top = 0
                 Action = acSymbolSnapUp
               end
-              object ToolButton152: TToolButton
-                Left = 61
+              object pTBSpacer14: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer15: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
             object tbCharTools10: TToolBar
@@ -1201,11 +1276,16 @@ object fmMain: TfmMain
                 Top = 0
                 Action = acSymbolSnapRight
               end
-              object ToolButton2: TToolButton
+              object pTBSpacer16: TPanel
                 Left = 31
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton2'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
               end
             end
             object tbCharTools11: TToolBar
@@ -1224,22 +1304,32 @@ object fmMain: TfmMain
               Images = ImListNew16A
               TabOrder = 2
               Transparent = True
-              object ToolButton156: TToolButton
-                Left = 1
-                Top = 0
-                Caption = 'ToolButton92'
-                Enabled = False
-              end
               object ToolButton157: TToolButton
                 Left = 31
                 Top = 0
                 Action = acSymbolSnapDown
               end
-              object ToolButton158: TToolButton
-                Left = 61
+              object pTBSpacer17: TPanel
+                Left = 1
+                Height = 30
                 Top = 0
-                Caption = 'ToolButton93'
-                Enabled = False
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 0
+              end
+              object pTBSpacer18: TPanel
+                Left = 61
+                Height = 30
+                Top = 0
+                Width = 30
+                AutoSize = True
+                BevelOuter = bvNone
+                Constraints.MinHeight = 30
+                Constraints.MinWidth = 30
+                TabOrder = 1
               end
             end
           end

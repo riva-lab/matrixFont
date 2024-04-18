@@ -1460,6 +1460,15 @@ procedure TfmMain.AdjustComponentSizes;
               Style := tbsButton;
               Style := tbsDivider;
               end;
+
+        // set sizes of panels-spacers
+        for b := 0 to item.ControlCount - 1 do
+          if item.Controls[b].ClassName = 'TPanel' then
+            with TPanel(item.Controls[b]) do
+              begin
+              Constraints.MinHeight := item.ButtonHeight;
+              Constraints.MinWidth  := item.ButtonWidth;
+              end;
         end;
     end;
 
