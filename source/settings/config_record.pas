@@ -10,6 +10,33 @@ uses
 
 type
 
+  { Colors (used to support for different themes)
+  }
+  TAppCfgColors = record
+
+    editor: record
+      active: TColor;
+      bg:     TColor;
+      grid:   TColor;
+      end;
+
+    prev: record
+      active: TColor;
+      bg:     TColor;
+      end;
+
+    nav: record
+      active: TColor;
+      bg:     TColor;
+      txt:    TColor;
+      end;
+
+    import: record
+      active: TColor;
+      bg:     TColor;
+      end;
+  end;
+
   { Project settings.
     Saved and restored from INI file by TAppSettings class.
   }
@@ -90,29 +117,9 @@ type
       prop:    Boolean;
       end;
 
-    color: record
-
-      editor: record
-        active: TColor;
-        bg:     TColor;
-        grid:   TColor;
-        end;
-
-      prev: record
-        active: TColor;
-        bg:     TColor;
-        end;
-
-      nav: record
-        active: TColor;
-        bg:     TColor;
-        end;
-
-      import: record
-        active: TColor;
-        bg:     TColor;
-        end;
-      end;
+    color:  TAppCfgColors;
+    colorl: TAppCfgColors;
+    colord: TAppCfgColors;
 
     nav: record
       rowheight:   Integer;

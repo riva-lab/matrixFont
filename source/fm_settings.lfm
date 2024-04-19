@@ -202,431 +202,641 @@ object fmSettings: TfmSettings
       Caption = 'Цвета'
       ChildSizing.LeftRightSpacing = 10
       ChildSizing.TopBottomSpacing = 10
-      ChildSizing.HorizontalSpacing = 20
-      ChildSizing.VerticalSpacing = 10
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 2
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
-      ChildSizing.ControlsPerLine = 2
+      ChildSizing.ControlsPerLine = 3
       ClientHeight = 428
       ClientWidth = 681
       object pTitle2: TPanel
         Left = 10
         Height = 24
         Top = 10
-        Width = 321
+        Width = 159
         AutoSize = True
         BorderSpacing.Bottom = 8
         BevelOuter = bvNone
+        ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ClientHeight = 24
-        ClientWidth = 321
+        ClientWidth = 159
         Color = cl3DLight
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
-        object lbColorEditor: TLabel
-          Left = 2
+        object lbColorsL: TLabel
+          Left = 50
           Height = 20
           Top = 2
-          Width = 67
+          Width = 59
           BorderSpacing.Around = 2
-          Caption = 'Редактор'
+          Caption = 'Светлая'
           Font.Style = [fsBold]
           Layout = tlCenter
           ParentFont = False
-          Transparent = False
         end
       end
       object pTitle3: TPanel
-        Left = 351
+        Left = 179
         Height = 24
         Top = 10
-        Width = 320
+        Width = 323
         AutoSize = True
         BorderSpacing.Bottom = 8
         BevelOuter = bvNone
+        ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ClientHeight = 24
-        ClientWidth = 320
+        ClientWidth = 323
         Color = cl3DLight
         ParentBackground = False
         ParentColor = False
         TabOrder = 1
-        object lbColorNavi: TLabel
-          Left = 2
+        object lbColorsTheme: TLabel
+          Left = 99
           Height = 20
           Top = 2
-          Width = 76
+          Width = 126
+          Alignment = taCenter
           BorderSpacing.Around = 2
-          Caption = 'Навигатор'
+          Caption = '<<<   Тема   >>>'
           Font.Style = [fsBold]
           Layout = tlCenter
           ParentFont = False
           Transparent = False
         end
       end
-      object pColorEditor: TPanel
-        Left = 10
-        Height = 82
-        Top = 44
-        Width = 321
+      object pTitle4: TPanel
+        Left = 512
+        Height = 24
+        Top = 10
+        Width = 159
         AutoSize = True
+        BorderSpacing.Bottom = 8
         BevelOuter = bvNone
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 2
-        ClientHeight = 82
-        ClientWidth = 321
+        ClientHeight = 24
+        ClientWidth = 159
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
         TabOrder = 2
-        object cbtnActive: TColorButton
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 0
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clBlack
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Flat = True
-        end
-        object lbColorA: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 0
-          Width = 93
-          Caption = 'Цвет пикселя'
+        object lbColorsD: TLabel
+          Left = 53
+          Height = 20
+          Top = 2
+          Width = 54
+          BorderSpacing.Around = 2
+          Caption = 'Темная'
+          Font.Style = [fsBold]
           Layout = tlCenter
-          ParentColor = False
-        end
-        object cbtnBackground: TColorButton
-          AnchorSideTop.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 29
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clWhite
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Color = clDefault
-          Flat = True
-        end
-        object lbColorBG: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 29
-          Width = 93
-          Caption = 'Цвет фона'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object cbtnGrid: TColorButton
-          AnchorSideTop.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 58
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = 12303291
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Flat = True
-        end
-        object lbColorGrid: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 58
-          Width = 93
-          Caption = 'Цвет сетки'
-          Layout = tlCenter
-          ParentColor = False
-        end
-      end
-      object pColorNavi: TPanel
-        Left = 351
-        Height = 82
-        Top = 44
-        Width = 320
-        AutoSize = True
-        BevelOuter = bvNone
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 5
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 2
-        ClientHeight = 82
-        ClientWidth = 320
-        TabOrder = 3
-        object cbtnNaviA: TColorButton
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 0
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clBlack
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Flat = True
-        end
-        object lbColorNaviA: TLabel
-          AnchorSideLeft.Side = asrBottom
-          Left = 74
-          Height = 24
-          Top = 0
-          Width = 93
-          Caption = 'Цвет пикселя'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object cbtnNaviBG: TColorButton
-          AnchorSideTop.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 29
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clWhite
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Color = clDefault
-          Flat = True
-        end
-        object lbColorNaviBG: TLabel
-          AnchorSideLeft.Side = asrBottom
-          Left = 74
-          Height = 24
-          Top = 29
-          Width = 93
-          Caption = 'Цвет фона'
-          Layout = tlCenter
-          ParentColor = False
+          ParentFont = False
         end
       end
       object pSpacer2: TPanel
         Left = 10
-        Height = 8
-        Top = 136
-        Width = 321
+        Height = 20
+        Top = 42
+        Width = 159
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 3
+      end
+      object lbColorEditor: TLabel
+        Left = 179
+        Height = 20
+        Top = 42
+        Width = 323
+        Alignment = taCenter
+        BorderSpacing.Top = 4
+        Caption = 'Редактор'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentFont = False
+      end
+      object pSpacer3: TPanel
+        Left = 512
+        Height = 20
+        Top = 42
+        Width = 159
         AutoSize = True
         BevelOuter = bvNone
         Constraints.MinHeight = 8
         TabOrder = 4
       end
-      object pSpacer3: TPanel
-        Left = 351
-        Height = 8
-        Top = 136
-        Width = 320
+      object cbtnActive: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 64
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clBlack
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object lbColorA: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 64
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Пиксель'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnActiveD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 64
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clRed
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object cbtnBackground: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 90
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clWhite
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object lbColorBG: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 90
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Фон'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnBackgroundD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 90
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 64
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object cbtnGrid: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 116
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 12303291
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object lbColorGrid: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 116
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Сетка'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnGridD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 116
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clMaroon
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object pSpacer8: TPanel
+        Left = 10
+        Height = 20
+        Top = 144
+        Width = 159
         AutoSize = True
         BevelOuter = bvNone
         Constraints.MinHeight = 8
         TabOrder = 5
       end
-      object pTitle4: TPanel
-        Left = 10
-        Height = 24
-        Top = 154
-        Width = 321
+      object lbColorNavi: TLabel
+        Left = 179
+        Height = 20
+        Top = 144
+        Width = 323
+        Alignment = taCenter
+        BorderSpacing.Top = 4
+        Caption = 'Навигатор'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentFont = False
+      end
+      object pSpacer9: TPanel
+        Left = 512
+        Height = 20
+        Top = 144
+        Width = 159
         AutoSize = True
-        BorderSpacing.Bottom = 8
         BevelOuter = bvNone
-        ClientHeight = 24
-        ClientWidth = 321
-        Color = cl3DLight
-        ParentBackground = False
-        ParentColor = False
+        Constraints.MinHeight = 8
         TabOrder = 6
-        object lbColorPreview: TLabel
-          Left = 2
-          Height = 20
-          Top = 2
-          Width = 111
-          BorderSpacing.Around = 2
-          Caption = 'Образец текста'
-          Font.Style = [fsBold]
-          Layout = tlCenter
-          ParentFont = False
-          Transparent = False
-        end
       end
-      object pTitle5: TPanel
-        Left = 351
-        Height = 24
-        Top = 154
-        Width = 320
-        AutoSize = True
-        BorderSpacing.Bottom = 8
-        BevelOuter = bvNone
-        ClientHeight = 24
-        ClientWidth = 320
-        Color = cl3DLight
-        ParentBackground = False
-        ParentColor = False
-        TabOrder = 7
-        object lbColorImport: TLabel
-          Left = 2
-          Height = 20
-          Top = 2
-          Width = 129
-          BorderSpacing.Around = 2
-          Caption = 'Образец импорта'
-          Font.Style = [fsBold]
-          Layout = tlCenter
-          ParentFont = False
-          Transparent = False
-        end
-      end
-      object pColorPreview: TPanel
+      object cbtnNaviA: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
         Left = 10
-        Height = 53
-        Top = 188
-        Width = 321
-        AutoSize = True
-        BevelOuter = bvNone
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 5
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 2
-        ClientHeight = 53
-        ClientWidth = 321
-        TabOrder = 8
-        object cbtnPreviewA: TColorButton
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 0
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clWhite
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Flat = True
-        end
-        object lbColorPreviewA: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 0
-          Width = 93
-          Caption = 'Цвет пикселя'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object cbtnPreviewBG: TColorButton
-          AnchorSideTop.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 29
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = 10485760
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Color = clDefault
-          Flat = True
-        end
-        object lbColorPreviewBG: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 29
-          Width = 93
-          Caption = 'Цвет фона'
-          Layout = tlCenter
-          ParentColor = False
-        end
+        Height = 24
+        Top = 166
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clBlack
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
       end
-      object pColorImport: TPanel
-        Left = 351
-        Height = 53
-        Top = 188
-        Width = 320
+      object lbColorNaviA: TLabel
+        AnchorSideLeft.Side = asrBottom
+        Left = 179
+        Height = 24
+        Top = 166
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Пиксель'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnNaviAD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 166
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clRed
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object cbtnNaviBG: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 192
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clWhite
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object lbColorNaviBG: TLabel
+        AnchorSideLeft.Side = asrBottom
+        Left = 179
+        Height = 24
+        Top = 192
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Фон'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnNaviBGD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 192
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 64
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object cbtnNaviT: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 218
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 5592405
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object lbColorNaviT: TLabel
+        AnchorSideLeft.Side = asrBottom
+        Left = 179
+        Height = 24
+        Top = 218
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Текст'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnNaviTD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 218
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clSilver
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object pSpacer10: TPanel
+        Left = 10
+        Height = 20
+        Top = 246
+        Width = 159
         AutoSize = True
         BevelOuter = bvNone
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 5
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 2
-        ClientHeight = 53
-        ClientWidth = 320
+        Constraints.MinHeight = 8
+        TabOrder = 7
+      end
+      object lbColorPreview: TLabel
+        Left = 179
+        Height = 20
+        Top = 246
+        Width = 323
+        Alignment = taCenter
+        BorderSpacing.Top = 4
+        Caption = 'Образец текста'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentFont = False
+      end
+      object pSpacer11: TPanel
+        Left = 512
+        Height = 20
+        Top = 246
+        Width = 159
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 8
+      end
+      object cbtnPreviewA: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 268
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clWhite
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object lbColorPreviewA: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 268
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Пиксель'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnPreviewAD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 268
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 6579455
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object cbtnPreviewBG: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 294
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 10485760
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object lbColorPreviewBG: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 294
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Фон'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnPreviewBGD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 294
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 64
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object pSpacer12: TPanel
+        Left = 10
+        Height = 20
+        Top = 322
+        Width = 159
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
         TabOrder = 9
-        object cbtnImportA: TColorButton
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 0
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clWhite
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Flat = True
-        end
-        object lbColorImportA: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 0
-          Width = 79
-          Caption = 'Цвет текста'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object cbtnImportBG: TColorButton
-          AnchorSideTop.Side = asrBottom
-          Cursor = crHandPoint
-          Left = 0
-          Height = 24
-          Top = 29
-          Width = 64
-          BorderWidth = 0
-          ButtonColorSize = 16
-          ButtonColor = clGreen
-          Constraints.MinHeight = 24
-          Constraints.MinWidth = 64
-          Color = clDefault
-          Flat = True
-        end
-        object lbColorImportBG: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 74
-          Height = 24
-          Top = 29
-          Width = 79
-          Caption = 'Цвет фона'
-          Layout = tlCenter
-          ParentColor = False
-        end
+      end
+      object lbColorImport: TLabel
+        Left = 179
+        Height = 20
+        Top = 322
+        Width = 323
+        Alignment = taCenter
+        BorderSpacing.Top = 4
+        Caption = 'Образец импорта'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentFont = False
+      end
+      object pSpacer13: TPanel
+        Left = 512
+        Height = 20
+        Top = 322
+        Width = 159
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 10
+      end
+      object cbtnImportA: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 344
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clWhite
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object lbColorImportA: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 344
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Текст'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnImportAD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 344
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 7716721
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Flat = True
+      end
+      object cbtnImportBG: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 10
+        Height = 24
+        Top = 370
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = clGreen
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
+      end
+      object lbColorImportBG: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 179
+        Height = 24
+        Top = 370
+        Width = 323
+        Alignment = taCenter
+        Caption = 'Фон'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbtnImportBGD: TColorButton
+        AnchorSideTop.Side = asrBottom
+        Cursor = crHandPoint
+        Left = 512
+        Height = 24
+        Top = 370
+        Width = 159
+        BorderWidth = 0
+        ButtonColorSize = 16
+        ButtonColor = 16384
+        Constraints.MinHeight = 24
+        Constraints.MinWidth = 64
+        Color = clDefault
+        Flat = True
       end
     end
     object tsNewDefaults: TTabSheet

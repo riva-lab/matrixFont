@@ -1181,6 +1181,7 @@ procedure TfmMain.acGenerateExecute(Sender: TObject);
 procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
   begin
     BeginFormUpdate;
+    AdjustThemeDependentValues;
 
     if FontSet <> nil then
       try
@@ -1212,6 +1213,9 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         Items[0].Font.Size := cfg.nav.char.fontsize;
         Items[1].Font.Name := Screen.Fonts[cfg.nav.code.font];
         Items[1].Font.Size := cfg.nav.code.fontsize;
+
+        Items[0].Font.Color := cfg.color.nav.txt;
+        Items[1].Font.Color := cfg.color.nav.txt;
         end;
 
       sgNavigator.DefaultRowHeight := cfg.nav.rowheight;
@@ -1232,7 +1236,6 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         MouseWheelOption := mwGrid;
       end;
 
-    AdjustThemeDependentValues;
     AdjustComponentSizes;
     LanguageChange;
     acGenerateExecute(nil);
@@ -1586,9 +1589,11 @@ procedure TfmMain.AdjustThemeDependentValues;
       AFont.Size  := ASize;
       AFont.Color := AColor;
     end;
+
   begin
     if appTunerEx.IsDarkTheme then
-      begin                        // dark theme, if available
+      begin
+      cfg.color := cfg.colord; // load dark colorset for char drawing  
 
       imSVGList.List.Text := imSVGList.List.Text
         .Replace('#000', '#49d095')
@@ -1598,7 +1603,8 @@ procedure TfmMain.AdjustThemeDependentValues;
       sgNavigator.GridLineColor  := $555555;
       end
     else
-      begin                        // light theme, default
+      begin
+      cfg.color := cfg.colorl; // load light colorset for char drawing   
 
       pFontToolsBox.Color := cl3DLight;
       pCharToolsBox.Color := cl3DLight;

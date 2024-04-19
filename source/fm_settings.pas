@@ -42,14 +42,25 @@ type
     cbPreviewRefresh:   TCheckBox;
     cbTheme:            TComboBox;
     cbtnActive:         TColorButton;
+    cbtnActiveD:        TColorButton;
     cbtnBackground:     TColorButton;
+    cbtnBackgroundD:    TColorButton;
     cbtnGrid:           TColorButton;
+    cbtnGridD:          TColorButton;
     cbtnImportA:        TColorButton;
+    cbtnImportAD:       TColorButton;
     cbtnImportBG:       TColorButton;
+    cbtnImportBGD:      TColorButton;
     cbtnNaviA:          TColorButton;
+    cbtnNaviAD:         TColorButton;
     cbtnNaviBG:         TColorButton;
+    cbtnNaviBGD:        TColorButton;
+    cbtnNaviT:          TColorButton;
+    cbtnNaviTD:         TColorButton;
     cbtnPreviewA:       TColorButton;
+    cbtnPreviewAD:      TColorButton;
     cbtnPreviewBG:      TColorButton;
+    cbtnPreviewBGD:     TColorButton;
     edAuthor:           TEdit;
     edFontName:         TEdit;
     lbAuthor:           TLabel;
@@ -64,9 +75,13 @@ type
     lbColorNavi:        TLabel;
     lbColorNaviA:       TLabel;
     lbColorNaviBG:      TLabel;
+    lbColorNaviT:       TLabel;
     lbColorPreview:     TLabel;
     lbColorPreviewA:    TLabel;
     lbColorPreviewBG:   TLabel;
+    lbColorsD:          TLabel;
+    lbColorsL:          TLabel;
+    lbColorsTheme:      TLabel;
     lbFontEncoding:     TLabel;
     lbFontName:         TLabel;
     lbFontScale:        TLabel;
@@ -84,27 +99,28 @@ type
     lbNewWidth:         TLabel;
     lbTheme:            TLabel;
     pButtons:           TPanel;
-    pColorEditor:       TPanel;
-    pColorImport:       TPanel;
-    pColorNavi:         TPanel;
-    pColorPreview:      TPanel;
     pControls:          TPanel;
     pcPageCtrl:         TPageControl;
     pNaviColumns:       TPanel;
     pNewDefaults1:      TPanel;
     pNewDefaults2:      TPanel;
     pSpacer1:           TPanel;
+    pSpacer10:          TPanel;
+    pSpacer11:          TPanel;
+    pSpacer12:          TPanel;
+    pSpacer13:          TPanel;
     pSpacer2:           TPanel;
     pSpacer3:           TPanel;
     pSpacer4:           TPanel;
     pSpacer5:           TPanel;
     pSpacer6:           TPanel;
     pSpacer7:           TPanel;
+    pSpacer8:           TPanel;
+    pSpacer9:           TPanel;
     pTitle1:            TPanel;
     pTitle2:            TPanel;
     pTitle3:            TPanel;
     pTitle4:            TPanel;
-    pTitle5:            TPanel;
     pTitle6:            TPanel;
     pTitle7:            TPanel;
     pTitle8:            TPanel;
@@ -165,6 +181,7 @@ procedure TfmSettings.FormCreate(Sender: TObject);
     i: Integer;
     a: TComboBox;
     s: String;
+    c: TControl;
   begin
     for a in [cbCharNameFont, cbCodeNameFont] do
       begin
@@ -199,6 +216,21 @@ procedure TfmSettings.FormCreate(Sender: TObject);
     // add chapter titles to treeview
     for i := 0 to pcPageCtrl.PageCount - 1 do
       tvTabs.Items.Add(TTreeNode.Create(nil), pcPageCtrl.Page[i].Caption);
+
+    // disable dark theme color buttons if dark theme is not available
+    if not appTunerEx.IsDarkThemeAvailable then
+      begin
+      for c in [pTitle2, pTitle4, pTitle3, pSpacer3, pSpacer9, pSpacer11, pSpacer13,
+          cbtnActiveD, cbtnBackgroundD, cbtnGridD, cbtnImportAD, cbtnImportBGD,
+          cbtnNaviAD, cbtnNaviBGD, cbtnNaviTD, cbtnPreviewAD, cbtnPreviewBGD] do
+        c.Visible := False;
+
+      for i := 0 to tsColors.ControlCount - 1 do
+        if tsColors.Controls[i].ClassName = 'TLabel' then
+          TLabel(tsColors.Controls[i]).Alignment := taLeftJustify;
+
+      tsColors.ChildSizing.ControlsPerLine := 2;
+      end;
   end;
 
 procedure TfmSettings.FormShow(Sender: TObject);
@@ -269,15 +301,27 @@ procedure TfmSettings.InitConfig;
     Settings.Add(cbMagnetPreview, @cfg.prev.magnet);
     Settings.Add(cbPreviewRefresh, @cfg.prev.refresh);
 
-    Settings.Add(cbtnActive, @cfg.color.editor.active);
-    Settings.Add(cbtnBackground, @cfg.color.editor.bg);
-    Settings.Add(cbtnGrid, @cfg.color.editor.grid);
-    Settings.Add(cbtnPreviewA, @cfg.color.prev.active);
-    Settings.Add(cbtnPreviewBG, @cfg.color.prev.bg);
-    Settings.Add(cbtnNaviA, @cfg.color.nav.active);
-    Settings.Add(cbtnNaviBG, @cfg.color.nav.bg);
-    Settings.Add(cbtnImportA, @cfg.color.import.active);
-    Settings.Add(cbtnImportBG, @cfg.color.import.bg);
+    Settings.Add(cbtnActive, @cfg.colorl.editor.active);
+    Settings.Add(cbtnBackground, @cfg.colorl.editor.bg);
+    Settings.Add(cbtnGrid, @cfg.colorl.editor.grid);
+    Settings.Add(cbtnPreviewA, @cfg.colorl.prev.active);
+    Settings.Add(cbtnPreviewBG, @cfg.colorl.prev.bg);
+    Settings.Add(cbtnNaviA, @cfg.colorl.nav.active);
+    Settings.Add(cbtnNaviBG, @cfg.colorl.nav.bg);
+    Settings.Add(cbtnNaviT, @cfg.colorl.nav.txt);
+    Settings.Add(cbtnImportA, @cfg.colorl.import.active);
+    Settings.Add(cbtnImportBG, @cfg.colorl.import.bg);
+
+    Settings.Add(cbtnActiveD, @cfg.colord.editor.active);
+    Settings.Add(cbtnBackgroundD, @cfg.colord.editor.bg);
+    Settings.Add(cbtnGridD, @cfg.colord.editor.grid);
+    Settings.Add(cbtnPreviewAD, @cfg.colord.prev.active);
+    Settings.Add(cbtnPreviewBGD, @cfg.colord.prev.bg);
+    Settings.Add(cbtnNaviAD, @cfg.colord.nav.active);
+    Settings.Add(cbtnNaviBGD, @cfg.colord.nav.bg);
+    Settings.Add(cbtnNaviTD, @cfg.colord.nav.txt);
+    Settings.Add(cbtnImportAD, @cfg.colord.import.active);
+    Settings.Add(cbtnImportBGD, @cfg.colord.import.bg);
 
     Settings.Add(seNaviHeight, @cfg.nav.rowheight);
     Settings.Add(cbNaviTransparent, @cfg.nav.transparent);

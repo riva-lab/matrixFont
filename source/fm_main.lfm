@@ -649,6 +649,7 @@ object fmMain: TfmMain
         FixedRows = 0
         MouseWheelOption = mwGrid
         Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRowSelect, goThumbTracking, goSmoothScroll]
+        ParentFont = False
         RowCount = 3
         TabOrder = 1
         TitleStyle = tsNative
