@@ -346,6 +346,8 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
     tbTools.Visible    := acViewTBTools.Checked;
     pCharTools.Visible := acViewTBCharTools.Checked;
     pFontTools.Visible := acViewTBFontTools.Checked;
+
+    sgNavigator.Visible := acViewNavigator.Checked;
   end;
 
 
@@ -1027,6 +1029,12 @@ procedure TfmMain.actionService(Sender: TObject);
       'acStayOnTopToggle': // действие: поверх всех окон
         appTunerEx.Form[Self].StayOnTop := acStayOnTopToggle.Checked;
 
+      'acViewTBFontTools', 'acViewNavigator':
+        begin
+        tmrMain10msTimer(Sender);
+        FileStatusUpdate;
+        end;
+
       end;
   end;
 
@@ -1195,10 +1203,6 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         GridColor           := cfg.color.editor.grid;
         GridThickness       := cfg.grid.size;
         GridChessBackground := cfg.grid.chess;
-
-        // заголовок навигатора
-        lbNavigator.Caption := TXT_NAVIGATOR + ': ' + IntToStr(FontStartItem) + ' - ' +
-          IntToStr(FontStartItem + FontLength - 1) + ' ';
 
         imEditor.Width  := Item[0].WidthInPixels;
         imEditor.Height := Item[0].HeightInPixels;
@@ -1383,6 +1387,21 @@ procedure TfmMain.FileStatusUpdate;
     with FontSet do
       miFontInfo.Caption := UpperCase(Encoding) + '   '
         + Width.ToString + ' x ' + Height.ToString;
+
+    // visibility of controls in navigator on the left side
+    with FontSet, psSide1 do
+      if acViewNavigator.Checked then
+        begin
+        lbNavigator.Caption  := Format(' %s: %d - %d ', [TXT_NAVIGATOR, FontStartItem, FontStartItem + FontLength - 1]);
+        Constraints.MaxWidth := 0;
+        Constraints.MinWidth := pFontToolsBox.Width + sgNavigator.Constraints.MinWidth + 16;
+        end
+      else
+        begin
+        lbNavigator.Caption  := ' ';
+        Constraints.MaxWidth := acViewTBFontTools.Checked.Select(pFontToolsBox.Width, 1);
+        Constraints.MinWidth := pFontToolsBox.Width;
+        end;
 
     EndFormUpdate;
   end;
@@ -1632,6 +1651,7 @@ procedure TfmMain.InitConfig;
     Settings.Add(acViewTBFontTools, @cfg.toolbar.fonts);
     Settings.Add(acViewTBFile, @cfg.toolbar.files);
     Settings.Add(acViewTBTools, @cfg.toolbar.tools);
+    Settings.Add(acViewNavigator, @cfg.toolbar.nav);
 
     Settings.Add(psSplit, @cfg.app.splitter);
     Settings.Add(acGridToggle, @cfg.grid.enable);

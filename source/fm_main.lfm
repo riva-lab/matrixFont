@@ -643,6 +643,7 @@ object fmMain: TfmMain
             Title.Caption = 'Вид'
             Width = 40
           end>
+        Constraints.MinWidth = 100
         DefaultRowHeight = 44
         ExtendedSelect = False
         FixedCols = 0
@@ -1683,6 +1684,10 @@ object fmMain: TfmMain
         Action = acViewTBFontTools
         AutoCheck = True
       end
+      object MenuItem125: TMenuItem
+        Action = acViewNavigator
+        AutoCheck = True
+      end
       object MenuItem62: TMenuItem
         Caption = '-'
       end
@@ -2707,6 +2712,7 @@ object fmMain: TfmMain
       Caption = 'Инструменты шрифта'
       Checked = True
       DisableIfNoHandler = False
+      OnExecute = actionService
     end
     object acMap: TAction
       Category = 'Инструменты'
@@ -2755,6 +2761,14 @@ object fmMain: TfmMain
       ImageIndex = 25
       OnExecute = acFontChangeSizesExecute
       ShortCut = 49219
+    end
+    object acViewNavigator: TAction
+      Category = 'Вид'
+      AutoCheck = True
+      Caption = 'Навигатор'
+      Checked = True
+      DisableIfNoHandler = False
+      OnExecute = actionService
     end
   end
   object dlgOpen: TOpenDialog
@@ -2965,6 +2979,10 @@ object fmMain: TfmMain
     end
     object MenuItem123: TMenuItem
       Action = acViewTBFontTools
+      AutoCheck = True
+    end
+    object MenuItem126: TMenuItem
+      Action = acViewNavigator
       AutoCheck = True
     end
   end

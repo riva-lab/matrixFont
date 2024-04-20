@@ -155,6 +155,7 @@ type
       fonts: Boolean;
       files: Boolean;
       tools: Boolean;
+      nav:   Boolean;
       end;
   end;
 
