@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, LCLType, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   ComCtrls, ActnList, StdCtrls, Spin, SynEdit, LazUTF8, SynHighlighterCpp,
   Buttons, AppLocalizer, AppTuner,
-  fm_about,
+  fm_about, fm_gen,
   font, u_utilities, u_encodings, u_helpers, config_record;
 
 resourcestring
@@ -114,8 +114,7 @@ type
     seImpStartItem: TSpinEdit;
     seImpWidth:     TSpinEdit;
 
-    snCppSyntax: TSynCppSyn;
-    snImpEdit:   TSynEdit;
+    snImpEdit: TSynEdit;
 
     tbCode:      TToolBar;
     tbSelector:  TToolBar;
@@ -180,6 +179,8 @@ procedure TfmImportC.FormShow(Sender: TObject);
 
     Caption        := FM_IMPC_CAPTION;
     lbInfo.Caption := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
+
+    snImpEdit.Highlighter := fmGen.snCppSyntax;
 
     EndFormUpdate;
 

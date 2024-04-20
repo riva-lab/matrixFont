@@ -323,7 +323,6 @@ object fmImportC: TfmImportC
           RightGutter.Visible = False
           RightGutter.Width = 0
           RightGutter.MouseActions = <>
-          Highlighter = snCppSyntax
           Keystrokes = <          
             item
               Command = ecUp
@@ -1461,15 +1460,5 @@ object fmImportC: TfmImportC
       ImageIndex = 45
       OnExecute = actionExecute
     end
-  end
-  object snCppSyntax: TSynCppSyn
-    DefaultFilter = 'Файлы C++ (*.c,*.cpp,*.h,*.hpp,*.hh)|*.c;*.cpp;*.h;*.hpp;*.hh'
-    Enabled = False
-    CommentAttri.Foreground = clOlive
-    DirecAttri.Foreground = clGreen
-    KeyAttri.Foreground = clNavy
-    KeyAttri.Style = []
-    Left = 72
-    Top = 208
   end
 end

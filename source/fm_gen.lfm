@@ -413,7 +413,7 @@ object fmGen: TfmGen
         ParentFont = False
         TabOrder = 0
         BorderStyle = bsNone
-        Gutter.Width = 26
+        Gutter.Width = 39
         Gutter.MouseActions = <>
         RightGutter.Visible = False
         RightGutter.Width = 0
@@ -1118,7 +1118,7 @@ object fmGen: TfmGen
     Enabled = False
     CommentAttri.Foreground = clOlive
     DirecAttri.Foreground = clGreen
-    KeyAttri.Foreground = clNavy
+    KeyAttri.Foreground = clHighlight
     KeyAttri.Style = []
     Left = 75
     Top = 81
