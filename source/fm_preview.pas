@@ -110,15 +110,12 @@ procedure TfmPreview.FormCreate(Sender: TObject);
     InitConfig;
     pcPages.ActivePageIndex  := 0;
     pcPages.ShowTabs         := False;
+    mmPreview.Text           := PREVIEW_TEXT_DEFAULT;
   end;
 
 // показ формы предпросмотра
 procedure TfmPreview.FormShow(Sender: TObject);
   begin
-    if mmPreview.Lines.Count = 0 then
-      if mmPreview.Text = '' then
-        mmPreview.Text := PREVIEW_TEXT_DEFAULT;
-
     UpdatePreview;
   end;
 

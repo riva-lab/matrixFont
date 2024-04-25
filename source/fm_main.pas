@@ -967,14 +967,18 @@ procedure TfmMain.actionService(Sender: TObject);
         begin
         fmMap.FontX := FontSet;
         fmMap.Show;
+        FormWindowStateChange(Sender);
         end;
 
       'acSetting': // действие: открыть окно "настройки приложения"
+        begin
+        Settings.SyncValues; // load current values to fields of 'cfg' record
         if fmSettings.ShowModal = mrOk then
           begin
           SettingsApplyToCurrentSession;
           ReDrawImage;
           end;
+        end;
 
       'acReset':   // действие: сброс настроек
         if fmConfirm.Show(TXT_RESET, WARN_RESET, [mbYes, mbNo], Self) = mrYes then
@@ -1190,6 +1194,9 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
 
       with sgNavigator.Columns do
         begin
+        if cfg.nav.char.font < 0 then cfg.nav.char.font := 0;
+        if cfg.nav.code.font < 0 then cfg.nav.code.font := 0;
+
         Items[0].Visible := cfg.nav.char.enable;
         Items[1].Visible := cfg.nav.code.enable;
 
