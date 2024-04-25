@@ -105,6 +105,7 @@ type
     lbStickingSide:     TLabel;
     lbStickingSize:     TLabel;
     lbTheme:            TLabel;
+    nbPages:            TNotebook;
     pButtons:           TPanel;
     pControls:          TPanel;
     pcPageCtrl:         TPageControl;
@@ -178,6 +179,7 @@ type
     procedure AdjustComponentsSizes;
     procedure FormAutosize;
     procedure InitConfig;
+    procedure InitPages;
 
     procedure OnLangChange(Sender: TObject);
     procedure StickingListUpdate;
@@ -227,9 +229,6 @@ procedure TfmSettings.FormCreate(Sender: TObject);
     EncodingsListAssign(cbEncoding.Items);
     cbEncoding.ItemIndex := 0;
 
-    pcPageCtrl.ActivePageIndex := 0;
-    pcPageCtrl.ShowTabs        := False;
-
     // add chapter titles to treeview
     for i := 0 to pcPageCtrl.PageCount - 1 do
       tvTabs.Items.Add(TTreeNode.Create(nil), pcPageCtrl.Page[i].Caption);
@@ -248,6 +247,8 @@ procedure TfmSettings.FormCreate(Sender: TObject);
 
       tsColors.ChildSizing.ControlsPerLine := 2;
       end;
+
+    InitPages;
   end;
 
 procedure TfmSettings.FormShow(Sender: TObject);
@@ -289,12 +290,12 @@ procedure TfmSettings.FormAutosize;
   begin
     AdjustComponentsSizes;
 
-    tmp := pcPageCtrl.ActivePageIndex;
+    tmp := nbPages.PageIndex;
 
-    for i := 0 to pcPageCtrl.PageCount - 1 do
+    for i := 0 to nbPages.PageCount - 1 do
       begin
-      pcPageCtrl.ActivePageIndex := i;
-      AutoSize := True;
+      nbPages.PageIndex := i;
+      AutoSize          := True;
 
       Constraints.MinWidth  := Width;
       Constraints.MinHeight := Height;
@@ -302,7 +303,7 @@ procedure TfmSettings.FormAutosize;
       AutoSize := False;
       end;
 
-    pcPageCtrl.ActivePageIndex := tmp;
+    nbPages.PageIndex := tmp;
   end;
 
 
@@ -380,6 +381,32 @@ procedure TfmSettings.InitConfig;
     Settings.Add(cbStickingBorder, @cfg.sticking.correct);
     Settings.Add(cbStickingEnable, @cfg.sticking.enable);
     Settings.Add('_cfg.sticking.config', stString, @cfg.sticking.config, '');
+  end;
+
+procedure TfmSettings.InitPages;
+  var
+    i, k: Integer;
+  begin
+      { In design time we use 'TPageControl:pcPageCtrl' for convenient GUI building.
+        But in run-time there are some issues, such as unexpected flickering.
+        So in run time we use 'TNotebook:nbPages' to show our GUI.
+        Here we move all content from 'pcPageCtrl' to 'nbPages' pages. }
+
+    pcPageCtrl.Hide;
+    pcPageCtrl.Align := alNone;
+    nbPages.Align    := alClient;
+
+    for i := 0 to pcPageCtrl.PageCount - 1 do
+      with pcPageCtrl.Pages[i] do
+        begin
+        nbPages.Pages.Add('npPage' + Name);
+        nbPages.Page[i].ChildSizing.Assign(ChildSizing);
+
+        for k := 0 to ControlCount - 1 do
+          Controls[0].Parent := nbPages.Page[i];
+        end;
+
+    nbPages.PageIndex := 0;
   end;
 
 procedure TfmSettings.OnLangChange(Sender: TObject);
@@ -500,7 +527,7 @@ procedure TfmSettings.cbStickingCtrlChange(Sender: TObject);
 
 procedure TfmSettings.tvTabsSelectionChanged(Sender: TObject);
   begin
-    pcPageCtrl.Page[tvTabs.Selected.AbsoluteIndex].Show;
+    nbPages.Page[tvTabs.Selected.AbsoluteIndex].Show;
   end;
 
 procedure TfmSettings.cbCharNameClick(Sender: TObject);

@@ -1702,15 +1702,16 @@ object fmSettings: TfmSettings
     end
   end
   object tvTabs: TTreeView
-    Left = 2
-    Height = 457
-    Top = 2
-    Width = 128
+    Left = 0
+    Height = 461
+    Top = 0
+    Width = 130
     Align = alLeft
     AutoExpand = True
-    BorderSpacing.Right = 2
-    BorderSpacing.Around = 2
+    BorderSpacing.Right = 4
+    BackgroundColor = clBtnHighlight
     BorderStyle = bsNone
+    Color = clBtnHighlight
     HideSelection = False
     ReadOnly = True
     RowSelect = True
@@ -1719,6 +1720,14 @@ object fmSettings: TfmSettings
     TabOrder = 0
     OnSelectionChanged = tvTabsSelectionChanged
     Options = [tvoAutoExpand, tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoToolTips, tvoThemedDraw]
+  end
+  object nbPages: TNotebook
+    Left = 32
+    Height = 48
+    Top = 120
+    Width = 62
+    Color = clBtnHighlight
+    TabOrder = 3
   end
   object alSettings: TActionList
     Images = fmMain.ImListNew16A
