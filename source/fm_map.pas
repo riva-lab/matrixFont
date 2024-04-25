@@ -189,14 +189,28 @@ procedure TfmMap.sgMapChangeBounds(Sender: TObject);
   begin
     if FontX = nil then Exit;
 
-    with sgMap do
+    { fix bug: when form is visible and you disable main form option 'on top'
+      cbMapWidth unexpectedly empties }
+    with cbMapWidth do
       begin
+      if Items.Count = 0 then
+        begin
+        Items.CommaText := '2,4,8,16,32,64';
+        ItemIndex       := Tag;
+        end;
+
+      Tag := ItemIndex;
+      end;
+
+    with sgMap do
+      try
       ColCount         := (2 shl cbMapWidth.ItemIndex) + 1;
       RowCount         := (FontX.FontLength - 1) div (ColCount - 1) + 2;
       _colWidth        := Width / ColCount;
       ColWidths[0]     := round(_colWidth);
       DefaultRowHeight := round(_colWidth / (FontX.Width + seSpaceX.Value) * (FontX.Height + seSpaceY.Value));
       ColWidths[0]     := ColWidths[0] + ColWidths[ColCount - 1] - sgMap.ColWidths[1];
+      except
       end;
   end;
 

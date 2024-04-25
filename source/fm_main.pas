@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, Forms, ExtCtrls, Controls, StdCtrls, Grids, ComCtrls, ActnList,
-  Windows, Graphics, Menus, StdActns, Dialogs, Spin, IniPropStorage, SysUtils,
+  Windows, Graphics, Menus, StdActns, Dialogs, Spin, SysUtils,
   LazUTF8, Types, strutils, LCLIntf, LCLTranslator, PairSplitter, LazFileUtils,
   LCLType, ImageSVGList, AppTuner, AppLocalizer, AppSettings, config_record,
 
@@ -15,7 +15,7 @@ uses
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map,
 
   // functional units
-  font, symbol, app_ver, cOpenFileList, Buttons,
+  font, symbol, app_ver, cOpenFileList, u_sticking,
 
   // additional units
   u_utilities, u_strings, u_helpers, u_encodings;
@@ -165,6 +165,21 @@ procedure TfmMain.FormShow(Sender: TObject);
 
     appLocalizerEx.EnumerateComponents;
 
+    // init sticking forms
+    with StickingFormsEx do
+      begin
+      MainForm := Self;
+
+      // forms added in default order
+      Add(fmGen, FM_GEN_CAPTION);
+      Add(fmPreview, FM_PREV_EXAMPLE);
+      Add(fmMap, FM_MAP_CAPTION);
+
+      Form[fmMap].Init(akLeft, True, True);
+      Form[fmGen].Init(akRight, True, True);
+      Form[fmPreview].Init(akBottom, True, True);
+      end;
+
     with appTunerEx do
       begin
       IniFile := Settings.IniFile;
@@ -235,54 +250,18 @@ procedure TfmMain.FormDropFiles(Sender: TObject; const FileNames: array of Strin
 
 // изменение состояния главного окна (свернуто, нормально, развернуто)
 procedure TfmMain.FormWindowStateChange(Sender: TObject);
-  var
-    R, RP: TRect;
   begin
-    if fmPreview.Visible or fmGen.Visible then
-      begin
-      GetWindowRect(Handle, R);
-      case WindowState of
+    // handle sticking of forms to main form
+    if cfg.sticking.enable then
+      with StickingFormsEx do
+        begin
+        UseBorderCorrection := cfg.sticking.correct;
 
-        // нормальное состояние - окно предпросмотра примагничено к низу главного
-        wsNormal:
-          begin
-          if cfg.prev.magnet then
-            begin
-            fmPreview.Top   := Top + R.Bottom - R.Top;
-            fmPreview.Left  := Left;
-            fmPreview.Width := Width;
-            end;
-
-          // нормальное состояние - окно генератора справа от редактора
-          if acGenFormMagnit.Checked then
-            begin
-            fmGen.Top    := Top;
-            fmGen.Left   := Left + R.Right - R.Left;
-            fmGen.Height := Height;
-            end;
-          end;
-
-        // развернутое состояние - окно предпросмотра в правом нижнем углу
-        wsMaximized:
-          begin
-          if cfg.prev.magnet then
-            begin
-            fmPreview.Width := fmPreview.Constraints.MinWidth;
-            GetWindowRect(fmPreview.Handle, RP);
-            fmPreview.Top   := R.Bottom + R.Top - RP.Bottom + RP.Top;
-            fmPreview.Left  := R.Right + R.Left - RP.Right + RP.Left;
-            end;
-
-          // развернутое состояние - окно генератора в правом нижнем углу
-          if acGenFormMagnit.Checked then
-            begin
-            GetWindowRect(fmGen.Handle, RP);
-            fmGen.Top  := R.Bottom + R.Top - RP.Bottom + RP.Top;
-            fmGen.Left := R.Right + R.Left - RP.Right + RP.Left;
-            end;
+        case WindowState of
+          wsNormal: Stick;
+          wsMaximized: StickToRightBottomEdge;
           end;
         end;
-      end;
 
     // выравнивание двух малых панелей по правой стороне
     with stStatusBar.Panels do
@@ -1190,6 +1169,7 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
   begin
     BeginFormUpdate;
     AdjustThemeDependentValues;
+    AdjustComponentSizes;
 
     if FontSet <> nil then
       try
@@ -1240,7 +1220,6 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
         MouseWheelOption := mwGrid;
       end;
 
-    AdjustComponentSizes;
     LanguageChange;
     acGenerateExecute(nil);
     actionZooming(nil);
@@ -1669,6 +1648,7 @@ procedure TfmMain.AfterLoadConfig;
   var
     i: Integer;
   begin
+    StickingFormsEx.Config   := cfg.sticking.config;
     fmGen.snEdit.Font.Height := cfg.gen.fontsize;
     if cfg.prev.enable then acFontPreview.Execute;
 
@@ -1682,6 +1662,8 @@ procedure TfmMain.BeforeSaveConfig;
   var
     i: Integer;
   begin
+    cfg.sticking.config := StickingFormsEx.Config;
+
     cfg.gen.fontsize := fmGen.snEdit.Font.Height;
     cfg.prev.enable  := fmPreview.Visible;
 

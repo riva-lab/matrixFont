@@ -9,6 +9,7 @@ object fmSettings: TfmSettings
   ClientHeight = 513
   ClientWidth = 823
   DesignTimePPI = 120
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
@@ -1438,27 +1439,195 @@ object fmSettings: TfmSettings
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 428
       ClientWidth = 681
-      object cbMagnetPreview: TCheckBox
+      object cbPreviewRefresh: TCheckBox
         AnchorSideTop.Side = asrBottom
         Left = 10
         Height = 24
         Top = 10
         Width = 661
-        Caption = 'Примагничивать окно предпросмотра к низу редактора'
+        Caption = 'Обновлять образец текста предпросмотра автоматически'
         Checked = True
         State = cbChecked
         TabOrder = 0
       end
-      object cbPreviewRefresh: TCheckBox
-        AnchorSideTop.Side = asrBottom
+    end
+    object tsSticking: TTabSheet
+      Caption = 'Прилипание'
+      ChildSizing.LeftRightSpacing = 10
+      ChildSizing.TopBottomSpacing = 10
+      ChildSizing.HorizontalSpacing = 5
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 428
+      ClientWidth = 681
+      object gbStickingScheme: TGroupBox
+        Left = 10
+        Height = 234
+        Top = 10
+        Width = 661
+        AutoSize = True
+        Caption = 'Схема прилипания окон'
+        ChildSizing.LeftRightSpacing = 10
+        ChildSizing.TopBottomSpacing = 5
+        ChildSizing.HorizontalSpacing = 5
+        ChildSizing.VerticalSpacing = 10
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ClientHeight = 209
+        ClientWidth = 657
+        TabOrder = 0
+        object cbStickingEnable: TCheckBox
+          Left = 10
+          Height = 24
+          Hint = 'Прилипание окон рассчитывается относительно главного окна'
+          Top = 5
+          Width = 637
+          Caption = 'Включить'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+          OnChange = cbStickingCtrlChange
+        end
+        object pStickingForms: TPanel
+          Left = 10
+          Height = 160
+          Top = 39
+          Width = 637
+          AutoSize = True
+          BorderSpacing.Bottom = 10
+          BevelOuter = bvNone
+          ChildSizing.HorizontalSpacing = 4
+          ChildSizing.VerticalSpacing = 5
+          ClientHeight = 160
+          ClientWidth = 637
+          TabOrder = 1
+          object clbSticking: TCheckListBox
+            Left = 11
+            Height = 100
+            Top = 0
+            Width = 584
+            Align = alClient
+            BorderSpacing.Left = 11
+            BorderStyle = bsNone
+            Color = clForm
+            ExtendedSelect = False
+            Items.Strings = (
+              '0'
+              '1'
+            )
+            ItemHeight = 21
+            ItemIndex = 0
+            TabOrder = 0
+            OnClickCheck = cbStickingCtrlChange
+            OnSelectionChange = clbStickingSelectionChange
+            Data = {
+              020000000000
+            }
+          end
+          object pValues4: TPanel
+            Left = 10
+            Height = 55
+            Top = 105
+            Width = 627
+            Align = alBottom
+            AutoSize = True
+            BorderSpacing.Left = 10
+            BevelOuter = bvNone
+            ChildSizing.HorizontalSpacing = 10
+            ChildSizing.VerticalSpacing = 5
+            ChildSizing.EnlargeHorizontal = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 2
+            ClientHeight = 55
+            ClientWidth = 627
+            TabOrder = 2
+            object lbStickingSide: TLabel
+              Left = 2
+              Height = 20
+              Top = 2
+              Width = 307
+              BorderSpacing.Around = 2
+              Caption = 'Сторона'
+            end
+            object lbStickingSize: TLabel
+              Left = 319
+              Height = 20
+              Top = 2
+              Width = 306
+              BorderSpacing.Around = 2
+              Caption = 'Размер'
+            end
+            object cbStickingSide: TComboBox
+              Left = 2
+              Height = 28
+              Top = 27
+              Width = 307
+              ItemHeight = 20
+              ItemIndex = 0
+              Items.Strings = (
+                'top'
+                'left'
+                'right'
+                'bottom'
+              )
+              Style = csDropDownList
+              TabOrder = 0
+              Text = 'top'
+              OnChange = cbStickingCtrlChange
+            end
+            object cbStickingSize: TComboBox
+              Left = 319
+              Height = 28
+              Top = 27
+              Width = 306
+              ItemHeight = 20
+              ItemIndex = 0
+              Items.Strings = (
+                'norm'
+                'full'
+              )
+              Style = csDropDownList
+              TabOrder = 1
+              Text = 'norm'
+              OnChange = cbStickingCtrlChange
+            end
+          end
+          object udStickingOrder: TUpDown
+            Left = 599
+            Height = 100
+            Top = 0
+            Width = 37
+            Align = alRight
+            BorderSpacing.Right = 1
+            Max = 1
+            Min = 0
+            OnChangingEx = udStickingOrderChangingEx
+            Position = 0
+            TabOrder = 1
+            TabStop = True
+          end
+        end
+      end
+      object pSpacer14: TPanel
+        Left = 10
+        Height = 8
+        Top = 249
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 1
+      end
+      object cbStickingBorder: TCheckBox
         Left = 10
         Height = 24
-        Top = 39
+        Hint = 'Для совместимости с "толстыми" границами в Windows 8'
+        Top = 262
         Width = 661
-        Caption = 'Обновлять образец текста предпросмотра автоматически'
-        Checked = True
-        State = cbChecked
-        TabOrder = 1
+        Caption = 'Учитывать толщину границы окна (актуально для Windows 8)'
+        TabOrder = 2
       end
     end
   end

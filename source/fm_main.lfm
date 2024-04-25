@@ -2002,13 +2002,6 @@ object fmMain: TfmMain
       OnExecute = acGenerateExecute
       ShortCut = 16466
     end
-    object acGenFormMagnit: TAction
-      Category = 'Генерация'
-      AutoCheck = True
-      Hint = 'Примагнитить справа от редактора'
-      ImageIndex = 43
-      OnExecute = FormWindowStateChange
-    end
     object acGenFormOnTop: TAction
       Category = 'Генерация'
       AutoCheck = True

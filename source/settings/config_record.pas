@@ -107,7 +107,6 @@ type
 
     prev: record
       enable:  Boolean;
-      magnet:  Boolean;
       refresh: Boolean;
       example: String;
       scale:   Integer;
@@ -156,6 +155,12 @@ type
       files: Boolean;
       tools: Boolean;
       nav:   Boolean;
+      end;
+
+    sticking: record
+      correct: Boolean;
+      enable:  Boolean;
+      config:  String;
       end;
   end;
 

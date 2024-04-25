@@ -6,10 +6,10 @@ interface
 
 uses
   Classes, SysUtils, Forms, Graphics, Dialogs, ComCtrls, Spin, StdCtrls,
-  ExtCtrls, ActnList, Controls, Buttons,
-  LazFileUtils, LazUTF8, Math, AppLocalizer, AppTuner,
-  fm_gen, fm_importc,
-  u_encodings, u_utilities, u_strings, config_record;
+  ExtCtrls, ActnList, Controls, Buttons, CheckLst,
+  LazFileUtils, LazUTF8, Math, AppLocalizer, AppTuner, AppSettings,
+  fm_gen, fm_importc, fm_preview, fm_map,
+  u_encodings, u_sticking, u_utilities, u_strings, config_record;
 
 const
   LANGUAGES_DIR  = 'lang';
@@ -35,11 +35,14 @@ type
     cbCodeNameFont:     TComboBox;
     cbEncoding:         TComboBox;
     cbLanguage:         TComboBox;
-    cbMagnetPreview:    TCheckBox;
     cbNaviInvert:       TCheckBox;
     cbNaviScroll:       TCheckBox;
     cbNaviTransparent:  TCheckBox;
     cbPreviewRefresh:   TCheckBox;
+    cbStickingBorder:   TCheckBox;
+    cbStickingEnable:   TCheckBox;
+    cbStickingSide:     TComboBox;
+    cbStickingSize:     TComboBox;
     cbTheme:            TComboBox;
     cbtnActive:         TColorButton;
     cbtnActiveD:        TColorButton;
@@ -61,8 +64,10 @@ type
     cbtnPreviewAD:      TColorButton;
     cbtnPreviewBG:      TColorButton;
     cbtnPreviewBGD:     TColorButton;
+    clbSticking:        TCheckListBox;
     edAuthor:           TEdit;
     edFontName:         TEdit;
+    gbStickingScheme:   TGroupBox;
     lbAuthor:           TLabel;
     lbBWTreshold:       TLabel;
     lbColorA:           TLabel;
@@ -97,6 +102,8 @@ type
     lbNewItemLast:      TLabel;
     lbNewItemStart:     TLabel;
     lbNewWidth:         TLabel;
+    lbStickingSide:     TLabel;
+    lbStickingSize:     TLabel;
     lbTheme:            TLabel;
     pButtons:           TPanel;
     pControls:          TPanel;
@@ -109,6 +116,7 @@ type
     pSpacer11:          TPanel;
     pSpacer12:          TPanel;
     pSpacer13:          TPanel;
+    pSpacer14:          TPanel;
     pSpacer2:           TPanel;
     pSpacer3:           TPanel;
     pSpacer4:           TPanel;
@@ -117,6 +125,7 @@ type
     pSpacer7:           TPanel;
     pSpacer8:           TPanel;
     pSpacer9:           TPanel;
+    pStickingForms:     TPanel;
     pTitle1:            TPanel;
     pTitle2:            TPanel;
     pTitle3:            TPanel;
@@ -128,6 +137,7 @@ type
     pValues1:           TPanel;
     pValues2:           TPanel;
     pValues3:           TPanel;
+    pValues4:           TPanel;
     seBWTreshold:       TSpinEdit;
     seCharNameFontSize: TSpinEdit;
     seCodeNameFontSize: TSpinEdit;
@@ -145,18 +155,24 @@ type
     tsNavigator:        TTabSheet;
     tsNewDefaults:      TTabSheet;
     tsPreview:          TTabSheet;
+    tsSticking:         TTabSheet;
     tvTabs:             TTreeView;
+    udStickingOrder:    TUpDown;
 
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
 
     procedure acOKExecute(Sender: TObject);
     procedure acCancelExecute(Sender: TObject);
 
+    procedure clbStickingSelectionChange(Sender: TObject; User: Boolean);
     procedure cbLanguageChange(Sender: TObject);
+    procedure cbStickingCtrlChange(Sender: TObject);
     procedure cbCharNameClick(Sender: TObject);
     procedure tvTabsSelectionChanged(Sender: TObject);
+    procedure udStickingOrderChangingEx(Sender: TObject; var AllowChange: Boolean; NewValue: SmallInt; Direction: TUpDownDirection);
 
   private
     procedure AdjustComponentsSizes;
@@ -164,6 +180,7 @@ type
     procedure InitConfig;
 
     procedure OnLangChange(Sender: TObject);
+    procedure StickingListUpdate;
   end;
 
 var
@@ -245,9 +262,25 @@ procedure TfmSettings.FormShow(Sender: TObject);
       cbLanguageChange(Sender);
       end;
 
+    with clbSticking do
+      begin
+      ItemHeight            := Canvas.TextHeight('0') * 13 div 10;
+      Constraints.MinHeight := Count * ItemHeight;
+      Constraints.MaxHeight := Constraints.MinHeight;
+      end;
+
+    udStickingOrder.Width := cbStickingSide.Height * 13 div 10;
+    cbStickingCtrlChange(Sender);
+
     Position := poDefault;
     FormAutosize;
     Position := poMainFormCenter;
+  end;
+
+procedure TfmSettings.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+  begin
+    if ModalResult = mrCancel then
+      acCancel.Execute;
   end;
 
 procedure TfmSettings.FormAutosize;
@@ -298,7 +331,6 @@ procedure TfmSettings.InitConfig;
     Settings.Add(seGridThickness, @cfg.grid.size);
     Settings.Add(cbChessGrid, @cfg.grid.chess);
 
-    Settings.Add(cbMagnetPreview, @cfg.prev.magnet);
     Settings.Add(cbPreviewRefresh, @cfg.prev.refresh);
 
     Settings.Add(cbtnActive, @cfg.colorl.editor.active);
@@ -344,6 +376,10 @@ procedure TfmSettings.InitConfig;
     Settings.Add(seNewItemStart, @cfg.new.start);
     Settings.Add(seNewItemLast, @cfg.new.last);
     Settings.Add(cbEncoding, @cfg.new.enc);
+
+    Settings.Add(cbStickingBorder, @cfg.sticking.correct);
+    Settings.Add(cbStickingEnable, @cfg.sticking.enable);
+    Settings.Add('_cfg.sticking.config', stString, @cfg.sticking.config, '');
   end;
 
 procedure TfmSettings.OnLangChange(Sender: TObject);
@@ -374,7 +410,34 @@ procedure TfmSettings.OnLangChange(Sender: TObject);
     fmGen.OnLanguageChange;
     fmImportC.OnLanguageChange;
 
+    StickingFormsEx.Rename(fmPreview, FM_PREV_EXAMPLE);
+    StickingFormsEx.Rename(fmMap, FM_MAP_CAPTION);
+    StickingFormsEx.Rename(fmGen, FM_GEN_CAPTION);
+
+    appLocalizerEx.Localize(cbStickingSide, STFM_ANCHOR_TXT);
+    appLocalizerEx.Localize(cbStickingSize, STFM_SIZE_TXT);
+
     EndFormUpdate;
+  end;
+
+procedure TfmSettings.StickingListUpdate;
+  var
+    i, s: Integer;
+  begin
+    s := clbSticking.ItemIndex;
+
+    clbSticking.Clear;
+    with StickingFormsEx do
+      for i := 0 to Count - 1 do
+        begin
+        clbSticking.Items.Add(Format('%s: %s, %s', [
+          FormByIndex[i].Name,
+          UTF8LowerCase(STFM_ANCHOR_TXT[FormByIndex[i].Anchor]),
+          UTF8LowerCase(STFM_SIZE_TXT[FormByIndex[i].FullSize])]));
+        clbSticking.Checked[i] := FormByIndex[i].Enable;
+        end;
+
+    clbSticking.ItemIndex := s;
   end;
 
 
@@ -391,17 +454,48 @@ procedure TfmSettings.acCancelExecute(Sender: TObject);
   begin
     Settings.SyncComponents;
     cbLanguageChange(Sender);
+    StickingFormsEx.Config := cfg.sticking.config;
 
     ModalResult := mrCancel;
   end;
 
 
 
+procedure TfmSettings.clbStickingSelectionChange(Sender: TObject; User: Boolean);
+  begin
+      try
+      with StickingFormsEx.FormByIndex[clbSticking.ItemIndex] do
+        begin
+        cbStickingSide.ItemIndex := Ord(Anchor);
+        cbStickingSize.ItemIndex := Ord(FullSize);
+        end;
+      except
+      end;
+  end;
+
 procedure TfmSettings.cbLanguageChange(Sender: TObject);
   begin
     BeginFormUpdate;
     appLocalizerEx.CurrentLanguage := cbLanguage.ItemIndex;
+    StickingListUpdate;
     EndFormUpdate;
+  end;
+
+procedure TfmSettings.cbStickingCtrlChange(Sender: TObject);
+  begin
+    pStickingForms.Enabled := cbStickingEnable.Checked;
+    clbSticking.Enabled    := cbStickingEnable.Checked;
+    clbStickingSelectionChange(Sender, True);
+
+    if clbSticking.ItemIndex >= 0 then
+      with StickingFormsEx.FormByIndex[clbSticking.ItemIndex] do
+        begin
+        Enable   := clbSticking.Checked[clbSticking.ItemIndex];
+        Anchor   := TAnchorKind(cbStickingSide.ItemIndex);
+        FullSize := cbStickingSize.ItemIndex > 0;
+        end;
+
+    StickingListUpdate;
   end;
 
 procedure TfmSettings.tvTabsSelectionChanged(Sender: TObject);
@@ -422,6 +516,24 @@ procedure TfmSettings.cbCharNameClick(Sender: TObject);
     cbCodeNameFont.Enabled     := cbCodeName.Checked;
     seCodeNameFontSize.Enabled := cbCodeName.Checked;
     cbCodeHex.Enabled          := cbCodeName.Checked;
+  end;
+
+procedure TfmSettings.udStickingOrderChangingEx(Sender: TObject; var AllowChange: Boolean; NewValue: SmallInt; Direction: TUpDownDirection);
+  var
+    i, j, c: Integer;
+  begin
+    c := clbSticking.Count - 1;
+    i := clbSticking.ItemIndex;
+    j := i;
+
+    if (Direction = updUp) and (i > 0) then   j := i - 1;
+    if (Direction = updDown) and (i < c) then j := i + 1;
+
+    if (i < 0) or (i = j) then Exit;
+    StickingFormsEx.Exchange(i, j);
+    StickingListUpdate;
+
+    clbSticking.ItemIndex := j;
   end;
 
 

@@ -983,7 +983,6 @@ object fmGen: TfmGen
         object ToolButton2: TToolButton
           Left = 186
           Top = 0
-          Action = fmMain.acGenFormMagnit
         end
         object ToolButton3: TToolButton
           Left = 121

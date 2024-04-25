@@ -29,7 +29,6 @@ acFontSnapRight:       TAction;
 acFontSnapUp:          TAction;
 acFontUndo:            TAction;
 acGenerate:            TAction;
-acGenFormMagnit:       TAction;
 acGenFormOnTop:        TAction;
 acGridToggle:          TAction;
 acHelp:                TAction;
