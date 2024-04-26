@@ -114,6 +114,7 @@ type
     procedure InitConfig;
     procedure AfterLoadConfig;
     procedure BeforeSaveConfig;
+    procedure LoadProjectAtStartup;
   end;
 
 var
@@ -199,14 +200,7 @@ procedure TfmMain.FormShow(Sender: TObject);
     // load property values to controls
     acStayOnTopToggle.Checked := appTunerEx.Form[Self].StayOnTop;
 
-    // загрузка файла, если он был перетащен на значок приложения
-    // или открыт системой по аасоциации с расширением
-    if (LazUTF8.ParamStrUTF8(1) <> '')
-      and FileExtCheck(LazUTF8.ParamStrUTF8(1), FILE_EXTENSION) then
-      FontLoadFromFile(LazUTF8.ParamStrUTF8(1)) else
-      with cfg.new do
-        FontCreateNew(w, h, start, last - start + 1, enc, title, author);
-
+    LoadProjectAtStartup;
     acZoomFit.Execute;
     tmrMain10msTimer(Sender);
     actionPasteMode(Sender);
@@ -1678,6 +1672,29 @@ procedure TfmMain.BeforeSaveConfig;
       cfg.app.lastfiles[i] := FOpenFileList.FilePath[i];
 
     fmMap.SaveConfig;
+  end;
+
+// load existing or create new project at startup
+procedure TfmMain.LoadProjectAtStartup;
+  var
+    _f: String = '';
+  begin
+    // get drag-n-drop file path
+    _f := LazUTF8.ParamStrUTF8(1);
+
+    // check drag-n-drop file
+    if not FileExtCheck(_f, FILE_EXTENSION) then
+      _f := '';
+
+    // load last opened file if allowed 
+    with cfg.app do
+      if loadlast and _f.IsEmpty and not lastfiles[0].IsEmpty then
+        _f := cfg.app.lastfiles[0];
+
+    with cfg.new do
+      if FileExistsUTF8(_f) then
+        FontLoadFromFile(_f) else
+        FontCreateNew(w, h, start, last - start + 1, enc, title, author);
   end;
 
 

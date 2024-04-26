@@ -47,6 +47,7 @@ type
       iconscale: Integer;
       splitter:  Integer;
       rollover:  Boolean;
+      loadlast:  Boolean;
       lastfiles: array[0..LAST_FILES_LIST_SIZE - 1] of String;
       end;
 

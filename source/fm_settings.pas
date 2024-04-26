@@ -35,6 +35,7 @@ type
     cbCodeNameFont:     TComboBox;
     cbEncoding:         TComboBox;
     cbLanguage:         TComboBox;
+    cbLastFileAtStart:  TCheckBox;
     cbNaviInvert:       TCheckBox;
     cbNaviScroll:       TCheckBox;
     cbNaviTransparent:  TCheckBox;
@@ -153,9 +154,9 @@ type
     tsColors:           TTabSheet;
     tsEditor:           TTabSheet;
     tsGeneral:          TTabSheet;
+    tsMisc:             TTabSheet;
     tsNavigator:        TTabSheet;
     tsNewDefaults:      TTabSheet;
-    tsPreview:          TTabSheet;
     tsSticking:         TTabSheet;
     tvTabs:             TTreeView;
     udStickingOrder:    TUpDown;
@@ -326,6 +327,7 @@ procedure TfmSettings.InitConfig;
   begin
     Settings.Add(cbLanguage, @cfg.app.lang);
     Settings.Add(seIconsScale, @cfg.app.iconscale);
+    Settings.Add(cbLastFileAtStart, @cfg.app.loadlast);
 
     Settings.Add(seBWTreshold, @cfg.import.bwlevel);
 

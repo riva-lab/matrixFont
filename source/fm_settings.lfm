@@ -24,7 +24,7 @@ object fmSettings: TfmSettings
     Align = alClient
     MultiLine = True
     TabIndex = 0
-    TabOrder = 1
+    TabOrder = 2
     Options = [nboMultiLine]
     object tsGeneral: TTabSheet
       Caption = 'Общие'
@@ -1428,29 +1428,6 @@ object fmSettings: TfmSettings
         end
       end
     end
-    object tsPreview: TTabSheet
-      Caption = 'Предпросмотр'
-      ChildSizing.LeftRightSpacing = 10
-      ChildSizing.TopBottomSpacing = 10
-      ChildSizing.HorizontalSpacing = 5
-      ChildSizing.VerticalSpacing = 5
-      ChildSizing.EnlargeHorizontal = crsScaleChilds
-      ChildSizing.Layout = cclLeftToRightThenTopToBottom
-      ChildSizing.ControlsPerLine = 1
-      ClientHeight = 428
-      ClientWidth = 681
-      object cbPreviewRefresh: TCheckBox
-        AnchorSideTop.Side = asrBottom
-        Left = 10
-        Height = 24
-        Top = 10
-        Width = 661
-        Caption = 'Обновлять образец текста предпросмотра автоматически'
-        Checked = True
-        State = cbChecked
-        TabOrder = 0
-      end
-    end
     object tsSticking: TTabSheet
       Caption = 'Прилипание'
       ChildSizing.LeftRightSpacing = 10
@@ -1630,6 +1607,37 @@ object fmSettings: TfmSettings
         TabOrder = 2
       end
     end
+    object tsMisc: TTabSheet
+      Caption = 'Разное'
+      ChildSizing.LeftRightSpacing = 10
+      ChildSizing.TopBottomSpacing = 10
+      ChildSizing.HorizontalSpacing = 5
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 428
+      ClientWidth = 681
+      object cbPreviewRefresh: TCheckBox
+        AnchorSideTop.Side = asrBottom
+        Left = 10
+        Height = 24
+        Top = 10
+        Width = 661
+        Caption = 'Обновлять образец текста предпросмотра автоматически'
+        Checked = True
+        State = cbChecked
+        TabOrder = 0
+      end
+      object cbLastFileAtStart: TCheckBox
+        Left = 10
+        Height = 24
+        Top = 39
+        Width = 661
+        Caption = 'Загружать последний открытый файл при запуске'
+        TabOrder = 1
+      end
+    end
   end
   object pControls: TPanel
     Left = 0
@@ -1648,7 +1656,7 @@ object fmSettings: TfmSettings
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 52
     ClientWidth = 823
-    TabOrder = 2
+    TabOrder = 3
     object pButtons: TPanel
       Left = 462
       Height = 40
@@ -1727,7 +1735,7 @@ object fmSettings: TfmSettings
     Top = 120
     Width = 62
     Color = clBtnHighlight
-    TabOrder = 3
+    TabOrder = 1
   end
   object alSettings: TActionList
     Images = fmMain.ImListNew16A
