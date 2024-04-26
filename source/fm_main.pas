@@ -1341,7 +1341,7 @@ function TfmMain.GetConfirmation: Boolean;
 // event on select char in map
 procedure TfmMain.OnMapSelectChar(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   begin
-    if (Button = mbLeft) and (Shift = [ssDouble]) then
+    if (Button = mbLeft) and (cfg.map.sclick xor (Shift = [ssDouble])) then
       sgNavigator.Row := fmMap.SelectedIndex + sgNavigator.FixedRows;
   end;
 

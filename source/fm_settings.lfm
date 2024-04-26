@@ -1637,6 +1637,71 @@ object fmSettings: TfmSettings
         Caption = 'Загружать последний открытый файл при запуске'
         TabOrder = 1
       end
+      object pSpacer15: TPanel
+        Left = 10
+        Height = 8
+        Top = 68
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 8
+        TabOrder = 2
+      end
+      object lbOpenCharInMap1: TLabel
+        Left = 10
+        Height = 20
+        Top = 81
+        Width = 661
+        Caption = 'Открывать в редакторе символ из карты по'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object pValues5: TPanel
+        Left = 10
+        Height = 24
+        Top = 106
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.LeftRightSpacing = 24
+        ChildSizing.HorizontalSpacing = 20
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.Layout = cclTopToBottomThenLeftToRight
+        ClientHeight = 24
+        ClientWidth = 661
+        TabOrder = 3
+        object rbOpenMapSngClick: TRadioButton
+          Cursor = crHandPoint
+          Left = 24
+          Height = 24
+          Top = 0
+          Width = 109
+          Caption = 'одинарному'
+          Checked = True
+          TabOrder = 0
+          TabStop = True
+        end
+        object rbOpenMapDblClick: TRadioButton
+          Cursor = crHandPoint
+          Left = 153
+          Height = 24
+          Top = 0
+          Width = 91
+          Caption = 'двойному'
+          TabOrder = 1
+        end
+        object lbOpenCharInMap2: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 264
+          Height = 24
+          Top = 0
+          Width = 108
+          Caption = 'щелчку мышью'
+          Layout = tlCenter
+          ParentColor = False
+        end
+      end
     end
   end
   object pControls: TPanel

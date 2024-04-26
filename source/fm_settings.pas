@@ -103,6 +103,8 @@ type
     lbNewItemLast:      TLabel;
     lbNewItemStart:     TLabel;
     lbNewWidth:         TLabel;
+    lbOpenCharInMap1:   TLabel;
+    lbOpenCharInMap2:   TLabel;
     lbStickingSide:     TLabel;
     lbStickingSize:     TLabel;
     lbTheme:            TLabel;
@@ -119,6 +121,7 @@ type
     pSpacer12:          TPanel;
     pSpacer13:          TPanel;
     pSpacer14:          TPanel;
+    pSpacer15:          TPanel;
     pSpacer2:           TPanel;
     pSpacer3:           TPanel;
     pSpacer4:           TPanel;
@@ -140,6 +143,9 @@ type
     pValues2:           TPanel;
     pValues3:           TPanel;
     pValues4:           TPanel;
+    pValues5:           TPanel;
+    rbOpenMapDblClick:  TRadioButton;
+    rbOpenMapSngClick:  TRadioButton;
     seBWTreshold:       TSpinEdit;
     seCharNameFontSize: TSpinEdit;
     seCodeNameFontSize: TSpinEdit;
@@ -330,6 +336,9 @@ procedure TfmSettings.InitConfig;
     Settings.Add(cbLastFileAtStart, @cfg.app.loadlast);
 
     Settings.Add(seBWTreshold, @cfg.import.bwlevel);
+
+    Settings.Add(rbOpenMapSngClick, @cfg.map.sclick);
+    Settings.Add(rbOpenMapDblClick, @cfg.map.dclick);
 
     Settings.Add(seGridThickness, @cfg.grid.size);
     Settings.Add(cbChessGrid, @cfg.grid.chess);

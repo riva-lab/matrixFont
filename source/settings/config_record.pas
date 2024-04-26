@@ -98,6 +98,8 @@ type
       h:      Integer;
       spacex: Integer;
       spacey: Integer;
+      sclick: Boolean;
+      dclick: Boolean;
       end;
 
     grid: record
