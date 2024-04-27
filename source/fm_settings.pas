@@ -81,28 +81,28 @@ type
     gbStickingScheme:   TGroupBox;
     lbAuthor:           TLabel;
     lbBWTreshold:       TLabel;
-    lbColorA:           TLabel;
+    lbColor:            TLabel;
     lbColorBG:          TLabel;
     lbColorEditor:      TLabel;
     lbColorGrid:        TLabel;
     lbColorImport:      TLabel;
-    lbColorImportA:     TLabel;
-    lbColorImportBG:    TLabel;
     lbColorMap:         TLabel;
-    lbColorMapA:        TLabel;
-    lbColorMapBG:       TLabel;
     lbColorMapExportBG: TLabel;
     lbColorMapSelA:     TLabel;
     lbColorMapSelBG:    TLabel;
     lbColorNavi:        TLabel;
-    lbColorNaviA:       TLabel;
-    lbColorNaviBG:      TLabel;
-    lbColorNaviT:       TLabel;
     lbColorPreview:     TLabel;
-    lbColorPreviewA:    TLabel;
-    lbColorPreviewBG:   TLabel;
-    lbColorsD:          TLabel;
-    lbColorsL:          TLabel;
+    lbColorsD1:         TLabel;
+    lbColorsD2:         TLabel;
+    lbColorsD3:         TLabel;
+    lbColorsD4:         TLabel;
+    lbColorsD5:         TLabel;
+    lbColorsHint:       TLabel;
+    lbColorsL1:         TLabel;
+    lbColorsL2:         TLabel;
+    lbColorsL3:         TLabel;
+    lbColorsL4:         TLabel;
+    lbColorsL5:         TLabel;
     lbColorsTheme:      TLabel;
     lbFontEncoding:     TLabel;
     lbFontName:         TLabel;
@@ -129,44 +129,75 @@ type
     lbTheme:            TLabel;
     nbPages:            TNotebook;
     pButtons:           TPanel;
+    pColorsGrid:        TPanel;
     pControls:          TPanel;
     pcPageCtrl:         TPageControl;
     pNaviColumns:       TPanel;
     pNewDefaults1:      TPanel;
     pNewDefaults2:      TPanel;
     pSpacer1:           TPanel;
-    pSpacer10:          TPanel;
-    pSpacer11:          TPanel;
-    pSpacer12:          TPanel;
-    pSpacer13:          TPanel;
     pSpacer14:          TPanel;
     pSpacer15:          TPanel;
-    pSpacer16:          TPanel;
-    pSpacer17:          TPanel;
     pSpacer2:           TPanel;
     pSpacer3:           TPanel;
     pSpacer4:           TPanel;
     pSpacer5:           TPanel;
     pSpacer6:           TPanel;
     pSpacer7:           TPanel;
-    pSpacer8:           TPanel;
-    pSpacer9:           TPanel;
     pStickingForms:     TPanel;
     pTitle1:            TPanel;
     pTitle10:           TPanel;
+    pTitle11:           TPanel;
+    pTitle12:           TPanel;
     pTitle2:            TPanel;
     pTitle3:            TPanel;
     pTitle4:            TPanel;
+    pTitle5:            TPanel;
     pTitle6:            TPanel;
     pTitle7:            TPanel;
     pTitle8:            TPanel;
     pTitle9:            TPanel;
     pValues1:           TPanel;
+    pValues10:          TPanel;
+    pValues11:          TPanel;
+    pValues12:          TPanel;
+    pValues13:          TPanel;
+    pValues14:          TPanel;
+    pValues15:          TPanel;
+    pValues16:          TPanel;
+    pValues17:          TPanel;
+    pValues18:          TPanel;
+    pValues19:          TPanel;
     pValues2:           TPanel;
+    pValues20:          TPanel;
+    pValues21:          TPanel;
+    pValues22:          TPanel;
+    pValues23:          TPanel;
+    pValues24:          TPanel;
+    pValues25:          TPanel;
+    pValues26:          TPanel;
+    pValues27:          TPanel;
+    pValues28:          TPanel;
+    pValues29:          TPanel;
     pValues3:           TPanel;
+    pValues30:          TPanel;
+    pValues31:          TPanel;
+    pValues32:          TPanel;
+    pValues33:          TPanel;
+    pValues34:          TPanel;
+    pValues35:          TPanel;
+    pValues36:          TPanel;
+    pValues37:          TPanel;
+    pValues38:          TPanel;
+    pValues39:          TPanel;
     pValues4:           TPanel;
+    pValues40:          TPanel;
+    pValues41:          TPanel;
     pValues5:           TPanel;
     pValues6:           TPanel;
+    pValues7:           TPanel;
+    pValues8:           TPanel;
+    pValues9:           TPanel;
     rbOpenMapDblClick:  TRadioButton;
     rbOpenMapSngClick:  TRadioButton;
     seBWTreshold:       TSpinEdit;
@@ -269,22 +300,21 @@ procedure TfmSettings.FormCreate(Sender: TObject);
     // disable dark theme color buttons if dark theme is not available
     if not appTunerEx.IsDarkThemeAvailable then
       begin
-      for c in [pTitle2, pTitle4, pTitle3, pSpacer3, pSpacer9, pSpacer11, pSpacer13,
+      for c in [pTitle2, pValues37, pValues38, pValues39, pValues40, pValues41,
           cbtnActiveD, cbtnBackgroundD, cbtnGridD, cbtnImportAD, cbtnImportBGD,
+          cbtnMapAD, cbtnMapBGD, cbtnMapExportBGD, cbtnMapSelAD, cbtnMapSelBGD,
           cbtnNaviAD, cbtnNaviBGD, cbtnNaviTD, cbtnPreviewAD, cbtnPreviewBGD] do
         c.Visible := False;
-
-      for i := 0 to tsColors.ControlCount - 1 do
-        if tsColors.Controls[i].ClassName = 'TLabel' then
-          TLabel(tsColors.Controls[i]).Alignment := taLeftJustify;
-
-      tsColors.ChildSizing.ControlsPerLine := 2;
       end;
 
     InitPages;
   end;
 
 procedure TfmSettings.FormShow(Sender: TObject);
+  var
+    i: Integer;
+    c: TControl;
+    g: array of TControl;
   begin
     // execute this block only once
     if Tag = 0 then
@@ -295,6 +325,12 @@ procedure TfmSettings.FormShow(Sender: TObject);
       cbCharNameClick(nil);
       cbLanguageChange(Sender);
       end;
+
+    // justify color buttons sizes
+    i := 0;
+    g := [lbColorEditor, lbColorNavi, lbColorPreview, lbColorImport, lbColorMap];
+    for c in g do i := Max(i, c.Width);
+    for c in g do c.Constraints.MinWidth := i;
 
     with clbSticking do
       begin
