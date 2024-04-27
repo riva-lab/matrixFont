@@ -258,7 +258,7 @@ object fmSettings: TfmSettings
           Color = cl3DLight
           ParentBackground = False
           ParentColor = False
-          TabOrder = 37
+          TabOrder = 1
           object lbColorEditor: TLabel
             Left = 18
             Height = 20
@@ -289,7 +289,7 @@ object fmSettings: TfmSettings
           Color = cl3DLight
           ParentBackground = False
           ParentColor = False
-          TabOrder = 38
+          TabOrder = 2
           object lbColorNavi: TLabel
             Left = 18
             Height = 20
@@ -320,7 +320,7 @@ object fmSettings: TfmSettings
           Color = cl3DLight
           ParentBackground = False
           ParentColor = False
-          TabOrder = 39
+          TabOrder = 3
           object lbColorPreview: TLabel
             Left = 19
             Height = 20
@@ -352,7 +352,7 @@ object fmSettings: TfmSettings
           Color = cl3DLight
           ParentBackground = False
           ParentColor = False
-          TabOrder = 40
+          TabOrder = 4
           object lbColorImport: TLabel
             Left = 21
             Height = 20
@@ -384,7 +384,7 @@ object fmSettings: TfmSettings
           Color = cl3DLight
           ParentBackground = False
           ParentColor = False
-          TabOrder = 41
+          TabOrder = 5
           object lbColorMap: TLabel
             Left = 28
             Height = 20
@@ -425,7 +425,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 103
-          TabOrder = 1
+          TabOrder = 6
           object cbtnActive: TColorButton
             AnchorSideTop.Side = asrBottom
             AnchorSideRight.Side = asrBottom
@@ -471,7 +471,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 112
-          TabOrder = 3
+          TabOrder = 7
           object cbtnNaviA: TColorButton
             AnchorSideTop.Side = asrBottom
             AnchorSideRight.Side = asrBottom
@@ -515,7 +515,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 4
+          TabOrder = 8
         end
         object pValues11: TPanel
           Left = 457
@@ -529,7 +529,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 5
+          TabOrder = 9
         end
         object pValues12: TPanel
           Left = 563
@@ -545,7 +545,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 98
-          TabOrder = 6
+          TabOrder = 10
           object cbtnMapA: TColorButton
             AnchorSideTop.Side = asrBottom
             AnchorSideRight.Side = asrBottom
@@ -603,7 +603,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 103
-          TabOrder = 2
+          TabOrder = 11
           object cbtnBackground: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -649,7 +649,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 112
-          TabOrder = 7
+          TabOrder = 12
           object cbtnNaviBG: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -695,7 +695,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 101
-          TabOrder = 8
+          TabOrder = 13
           object cbtnPreviewBG: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -741,7 +741,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 101
-          TabOrder = 9
+          TabOrder = 14
           object cbtnImportBG: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -787,7 +787,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 98
-          TabOrder = 10
+          TabOrder = 15
           object cbtnMapBG: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -845,7 +845,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 103
-          TabOrder = 11
+          TabOrder = 16
           object cbtnGrid: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -889,7 +889,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 112
-          TabOrder = 12
+          TabOrder = 17
           object cbtnNaviT: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -935,7 +935,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 101
-          TabOrder = 13
+          TabOrder = 18
           object cbtnPreviewA: TColorButton
             AnchorSideTop.Side = asrBottom
             AnchorSideRight.Side = asrBottom
@@ -981,7 +981,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 101
-          TabOrder = 14
+          TabOrder = 19
           object cbtnImportA: TColorButton
             AnchorSideTop.Side = asrBottom
             AnchorSideRight.Side = asrBottom
@@ -1025,7 +1025,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 15
+          TabOrder = 20
         end
         object lbColorMapExportBG: TLabel
           AnchorSideLeft.Side = asrBottom
@@ -1052,7 +1052,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 16
+          TabOrder = 21
         end
         object pValues23: TPanel
           Left = 234
@@ -1066,7 +1066,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 17
+          TabOrder = 22
         end
         object pValues24: TPanel
           Left = 351
@@ -1080,7 +1080,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 18
+          TabOrder = 23
         end
         object pValues25: TPanel
           Left = 457
@@ -1094,7 +1094,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 19
+          TabOrder = 24
         end
         object pValues26: TPanel
           Left = 563
@@ -1110,7 +1110,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 98
-          TabOrder = 20
+          TabOrder = 25
           object cbtnMapExportBG: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -1167,7 +1167,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 21
+          TabOrder = 26
         end
         object pValues28: TPanel
           Left = 234
@@ -1181,7 +1181,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 22
+          TabOrder = 27
         end
         object pValues29: TPanel
           Left = 351
@@ -1195,7 +1195,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 23
+          TabOrder = 28
         end
         object pValues30: TPanel
           Left = 457
@@ -1209,7 +1209,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 24
+          TabOrder = 29
         end
         object pValues31: TPanel
           Left = 563
@@ -1225,7 +1225,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 98
-          TabOrder = 25
+          TabOrder = 30
           object cbtnMapSelA: TColorButton
             AnchorSideTop.Side = asrBottom
             AnchorSideRight.Side = asrBottom
@@ -1282,7 +1282,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 26
+          TabOrder = 31
         end
         object pValues33: TPanel
           Left = 234
@@ -1296,7 +1296,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 27
+          TabOrder = 32
         end
         object pValues34: TPanel
           Left = 351
@@ -1310,7 +1310,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 28
+          TabOrder = 33
         end
         object pValues35: TPanel
           Left = 457
@@ -1324,7 +1324,7 @@ object fmSettings: TfmSettings
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          TabOrder = 29
+          TabOrder = 34
         end
         object pValues36: TPanel
           Left = 563
@@ -1340,7 +1340,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 98
-          TabOrder = 30
+          TabOrder = 35
           object cbtnMapSelBG: TColorButton
             AnchorSideTop.Side = asrBottom
             Cursor = crHandPoint
@@ -1419,7 +1419,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 103
-          TabOrder = 31
+          TabOrder = 37
           object lbColorsL1: TLabel
             Left = 0
             Height = 24
@@ -1468,7 +1468,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 112
-          TabOrder = 32
+          TabOrder = 38
           object lbColorsL2: TLabel
             Left = 0
             Height = 24
@@ -1517,7 +1517,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 101
-          TabOrder = 33
+          TabOrder = 39
           object lbColorsL3: TLabel
             Left = 0
             Height = 24
@@ -1566,7 +1566,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 101
-          TabOrder = 34
+          TabOrder = 40
           object lbColorsL4: TLabel
             Left = 0
             Height = 24
@@ -1615,7 +1615,7 @@ object fmSettings: TfmSettings
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 24
           ClientWidth = 98
-          TabOrder = 35
+          TabOrder = 41
           object lbColorsL5: TLabel
             Left = 0
             Height = 24
