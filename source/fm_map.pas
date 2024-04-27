@@ -113,7 +113,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
     with sgMap do
       begin
       Canvas.Brush.Style := bsSolid;
-      Canvas.Brush.Color := cfg.color.nav.bg;
+      Canvas.Brush.Color := cfg.color.map.bg;
       Canvas.Pen.Width   := 0;
       Canvas.Pen.Style   := psSolid;
       Canvas.Pen.Color   := Canvas.Brush.Color;
@@ -123,7 +123,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
       Canvas.TextStyle    := _txtStyle;
       _txtExt             := Canvas.TextExtent('0');
       Canvas.Font.Height  := trunc(ColWidths[1] / 4 / _txtExt.Width * _txtExt.Height);
-      Canvas.Font.Color   := cfg.color.nav.active;
+      Canvas.Font.Color   := cfg.color.map.active;
 
       Canvas.Rectangle(aRect);
 
@@ -156,11 +156,10 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
               aRect.Bottom  := aRect.Bottom - dh div 2;
 
               FontX.Item[i].DrawPreview(bm_tmp, False,
-                _isSelected.Select(cfg.color.prev.bg, cfg.color.nav.bg),
-                _isSelected.Select(cfg.color.prev.active, cfg.color.nav.active));
+                _isSelected.Select(cfg.color.map.selbg, cfg.color.map.bg),
+                _isSelected.Select(cfg.color.map.selact, cfg.color.map.active));
 
               Canvas.StretchDraw(aRect, bm_tmp);
-
               finally
               FreeAndNil(bm_tmp);
               end;
@@ -188,6 +187,7 @@ procedure TfmMap.sgMapChangeBounds(Sender: TObject);
     _colWidth: Double;
   begin
     if FontX = nil then Exit;
+    sgMap.Color := cfg.color.map.bg;
 
     { fix bug: when form is visible and you disable main form option 'on top'
       cbMapWidth unexpectedly empties }

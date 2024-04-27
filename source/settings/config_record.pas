@@ -35,6 +35,14 @@ type
       active: TColor;
       bg:     TColor;
       end;
+
+    map: record
+      active: TColor;
+      bg:     TColor;
+      selact: TColor;
+      selbg:  TColor;
+      export: TColor;
+      end;
   end;
 
   { Project settings.

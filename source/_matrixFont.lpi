@@ -116,8 +116,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="6"/>
-      <RevisionNr Value="5"/>
-      <BuildNr Value="73"/>
+      <RevisionNr Value="6"/>
+      <BuildNr Value="74"/>
       <Language Value="0419"/>
       <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
