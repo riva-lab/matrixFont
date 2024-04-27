@@ -1670,6 +1670,109 @@ object fmSettings: TfmSettings
         end
       end
     end
+    object tsMap: TTabSheet
+      Caption = 'Карта'
+      ChildSizing.LeftRightSpacing = 10
+      ChildSizing.TopBottomSpacing = 10
+      ChildSizing.HorizontalSpacing = 5
+      ChildSizing.VerticalSpacing = 5
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 428
+      ClientWidth = 681
+      object pTitle10: TPanel
+        Left = 10
+        Height = 24
+        Top = 10
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 0
+        object lbMapExport: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 58
+          BorderSpacing.Around = 2
+          Caption = 'Экспорт'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentFont = False
+          Transparent = False
+        end
+      end
+      object pValues6: TPanel
+        Left = 10
+        Height = 61
+        Top = 42
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 61
+        ClientWidth = 661
+        TabOrder = 1
+        object seMapExportSpace: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 0
+          Width = 100
+          Constraints.MinWidth = 100
+          MaxValue = 16
+          TabOrder = 0
+          Value = 2
+        end
+        object lbMapExportSpace: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 110
+          Height = 28
+          Hint = 'Применяется до масштабирования'
+          Top = 0
+          Width = 262
+          Caption = 'Пустое пространство вокруг символа'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seMapExportScale: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 33
+          Width = 100
+          Constraints.MinWidth = 100
+          MaxValue = 16
+          MinValue = 1
+          TabOrder = 1
+          Value = 4
+        end
+        object lbMapExportScale: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 110
+          Height = 28
+          Hint = 'Кратность увеличения символов.'#13#10'Чем больше коэффициент, тем больше разрешение изображения'
+          Top = 33
+          Width = 262
+          Caption = 'Коэффициент масштабирования'
+          Layout = tlCenter
+          ParentColor = False
+        end
+      end
+    end
     object tsSticking: TTabSheet
       Caption = 'Прилипание'
       ChildSizing.LeftRightSpacing = 10

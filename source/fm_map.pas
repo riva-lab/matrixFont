@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, Types, SysUtils, Forms, Controls, Graphics, Grids, ExtCtrls, StdCtrls,
-  Spin, LazUTF8, AppSettings,
-  font, u_encodings, u_helpers, config_record;
+  Spin, ComCtrls, Dialogs, LazUTF8, AppSettings,
+  font, u_encodings, u_map_render, u_helpers, config_record;
 
 resourcestring
   FM_MAP_CAPTION = 'Карта символов';
@@ -21,17 +21,22 @@ type
     lbMapCols:    TLabel;
     lbMapOffset:  TLabel;
     pMapControls: TPanel;
+    SaveDlg:      TSaveDialog;
     seSpaceX:     TSpinEdit;
     seSpaceY:     TSpinEdit;
     sgMap:        TStringGrid;
+    tbControls:   TToolBar;
+    ToolButton1:  TToolButton;
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+
     procedure sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
     procedure sgMapSelectCell(Sender: TObject; aCol, aRow: Integer; var CanSelect: Boolean);
     procedure sgMapChangeBounds(Sender: TObject);
     procedure sgMapSelection(Sender: TObject; aCol, aRow: Integer);
     procedure sgMapDblClick(Sender: TObject);
+    procedure actionExport(Sender: TObject);
 
   private
     WantSingleClick: Boolean;
@@ -101,6 +106,8 @@ procedure TfmMap.FormShow(Sender: TObject);
 
     UpdateMap;
   end;
+
+
 
 procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
   var
@@ -224,6 +231,43 @@ procedure TfmMap.sgMapDblClick(Sender: TObject);
   begin
     DoMouseClick(True);
   end;
+
+procedure TfmMap.actionExport(Sender: TObject);
+
+  function GetFilename(AIndex: Integer): String;
+    begin
+      Result := Format('%s_charmap_%d.png', [FontX.Name, AIndex]);
+    end;
+
+  procedure DialogPrepare;
+    var
+      n: Integer = 1;
+    begin
+      while FileExists(SaveDlg.InitialDir + GetFilename(n)) do Inc(n);
+      SaveDlg.InitialDir := ExtractFilePath(GetFilename(n));
+      SaveDlg.FileName   := ExtractFileName(GetFilename(n));
+    end;
+
+  begin
+    if not Assigned(FontX) then Exit;
+    DialogPrepare;
+
+    with SaveDlg do
+      if Execute then
+        try
+        if LowerCase(ExtractFileExt(FileName)) <> '.png' then
+          FileName := FileName + '.png';
+
+        RenderMapToPNG(
+          FileName, FontX, sgMap.ColCount - 1,
+          cfg.map.export.scale, cfg.map.export.space,
+          cfg.color.map.export, cfg.color.map.bg, cfg.color.map.active,
+          Screen.Fonts[cfg.nav.code.font]);
+        except
+        end;
+  end;
+
+
 
 procedure TfmMap.DoMouseClick(IsDouble: Boolean);
   var

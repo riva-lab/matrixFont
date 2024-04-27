@@ -2763,6 +2763,12 @@ object fmMain: TfmMain
       DisableIfNoHandler = False
       OnExecute = actionService
     end
+    object acMapExport: TAction
+      Category = 'Инструменты'
+      Hint = 'Экспорт карты символов в изображение'
+      ImageIndex = 30
+      OnExecute = actionService
+    end
   end
   object dlgOpen: TOpenDialog
     Title = 'Открыть файл шрифта'

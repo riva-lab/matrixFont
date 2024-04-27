@@ -964,6 +964,9 @@ procedure TfmMain.actionService(Sender: TObject);
         FormWindowStateChange(Sender);
         end;
 
+      'acMapExport': // export map to image file selected in dialog
+        fmMap.actionExport(nil);
+
       'acSetting': // действие: открыть окно "настройки приложения"
         begin
         Settings.SyncValues; // load current values to fields of 'cfg' record

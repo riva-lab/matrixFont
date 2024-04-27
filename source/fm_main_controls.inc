@@ -37,6 +37,7 @@ acHelpNet:             TAction;
 acInfo:                TAction;
 acLastFilesList:       TAction;
 acMap:                 TAction;
+acMapExport:           TAction;
 acMenuFile:            TAction;
 acMenuFont:            TAction;
 acMenuFontCenter:      TAction;

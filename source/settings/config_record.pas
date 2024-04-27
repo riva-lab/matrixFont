@@ -108,6 +108,11 @@ type
       spacey: Integer;
       sclick: Boolean;
       dclick: Boolean;
+
+      export: record
+        space: Integer;
+        scale: Integer;
+        end;
       end;
 
     grid: record

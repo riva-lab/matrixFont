@@ -111,6 +111,9 @@ type
     lbIconsScale:       TLabel;
     lbInterface:        TLabel;
     lbLanguage:         TLabel;
+    lbMapExport:        TLabel;
+    lbMapExportScale:   TLabel;
+    lbMapExportSpace:   TLabel;
     lbNaviColumns:      TLabel;
     lbNaviHeight:       TLabel;
     lbNaviOptions:      TLabel;
@@ -150,6 +153,7 @@ type
     pSpacer9:           TPanel;
     pStickingForms:     TPanel;
     pTitle1:            TPanel;
+    pTitle10:           TPanel;
     pTitle2:            TPanel;
     pTitle3:            TPanel;
     pTitle4:            TPanel;
@@ -162,6 +166,7 @@ type
     pValues3:           TPanel;
     pValues4:           TPanel;
     pValues5:           TPanel;
+    pValues6:           TPanel;
     rbOpenMapDblClick:  TRadioButton;
     rbOpenMapSngClick:  TRadioButton;
     seBWTreshold:       TSpinEdit;
@@ -170,6 +175,8 @@ type
     seFontScale:        TSpinEdit;
     seGridThickness:    TSpinEdit;
     seIconsScale:       TSpinEdit;
+    seMapExportScale:   TSpinEdit;
+    seMapExportSpace:   TSpinEdit;
     seNaviHeight:       TSpinEdit;
     seNewHeight:        TSpinEdit;
     seNewItemLast:      TSpinEdit;
@@ -178,6 +185,7 @@ type
     tsColors:           TTabSheet;
     tsEditor:           TTabSheet;
     tsGeneral:          TTabSheet;
+    tsMap:              TTabSheet;
     tsMisc:             TTabSheet;
     tsNavigator:        TTabSheet;
     tsNewDefaults:      TTabSheet;
@@ -357,6 +365,8 @@ procedure TfmSettings.InitConfig;
 
     Settings.Add(rbOpenMapSngClick, @cfg.map.sclick);
     Settings.Add(rbOpenMapDblClick, @cfg.map.dclick);
+    Settings.Add(seMapExportScale, @cfg.map.export.scale);
+    Settings.Add(seMapExportSpace, @cfg.map.export.space);
 
     Settings.Add(seGridThickness, @cfg.grid.size);
     Settings.Add(cbChessGrid, @cfg.grid.chess);
