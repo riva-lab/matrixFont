@@ -8,7 +8,7 @@ object fmGen: TfmGen
   ClientHeight = 538
   ClientWidth = 729
   Constraints.MinHeight = 250
-  Constraints.MinWidth = 600
+  Constraints.MinWidth = 500
   DesignTimePPI = 120
   OnShow = FormShow
   Position = poMainFormCenter
@@ -939,6 +939,9 @@ object fmGen: TfmGen
     BevelOuter = bvNone
     ChildSizing.LeftRightSpacing = 4
     ChildSizing.TopBottomSpacing = 4
+    ChildSizing.HorizontalSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.Layout = cclTopToBottomThenLeftToRight
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 48
     ClientWidth = 729
@@ -951,8 +954,8 @@ object fmGen: TfmGen
       Height = 40
       Top = 4
       Width = 246
-      Align = alLeft
       AutoSize = True
+      BorderSpacing.CellAlignHorizontal = ccaLeftTop
       BevelOuter = bvNone
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 40
@@ -983,6 +986,7 @@ object fmGen: TfmGen
         object ToolButton2: TToolButton
           Left = 186
           Top = 0
+          Visible = False
         end
         object ToolButton3: TToolButton
           Left = 121
@@ -1003,13 +1007,22 @@ object fmGen: TfmGen
         end
       end
     end
+    object lbInfo: TLabel
+      Left = 337
+      Height = 40
+      Top = 4
+      Width = 120
+      Alignment = taCenter
+      Caption = 'lbInfo'
+      Layout = tlCenter
+    end
     object pCode: TPanel
       Left = 544
       Height = 40
       Top = 4
       Width = 181
-      Align = alRight
       AutoSize = True
+      BorderSpacing.CellAlignHorizontal = ccaRightBottom
       BevelOuter = bvNone
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 40
@@ -1048,16 +1061,6 @@ object fmGen: TfmGen
           Action = acCopyToClipboard
         end
       end
-    end
-    object lbInfo: TLabel
-      Left = 250
-      Height = 40
-      Top = 4
-      Width = 294
-      Align = alClient
-      Alignment = taCenter
-      Caption = 'lbInfo'
-      Layout = tlCenter
     end
   end
   object ActionList1: TActionList
