@@ -12,7 +12,8 @@ unit u_map_render;
 interface
 
 uses
-  Classes, SysUtils, Types, Graphics, FPImgCmn, app_ver, font, base64, u_helpers;
+  Classes, SysUtils, Types, Graphics, FPImgCmn, base64,
+  app_ver, font, symbol, u_helpers;
 
 
 function AddTextChunkToPNG(const AFilename, AKey, AValue: String): Boolean;
@@ -23,6 +24,9 @@ function ExtractWatermark(ABitmap: TBitmap): String;
 
 procedure RenderMapToPNG(AFileName: String; AFont: TFont; ACols, AScale, ASpace: Integer;
   AColorBG, AColor0, AColor1: TColor; ALabelFont: String);
+
+function IsImageContainFontSet(AFileName: String; out AMetaData: String): Boolean;
+function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TFont): Boolean;
 
 
 implementation
@@ -359,6 +363,133 @@ procedure RenderMapToPNG(AFileName: String; AFont: TFont; ACols, AScale, ASpace:
 
       AddTextChunkToPNG(AFileName, 'matrixFontMeta', EncodeStringBase64(_meta));
       end;
+  end;
+
+function IsImageContainFontSet(AFileName: String; out AMetaData: String): Boolean;
+  begin
+    Result    := False;
+    AMetaData := '';
+
+    with TPicture.Create do
+      try
+      LoadFromFile(AFileName);
+
+      if LowerCase(ExtractFileExt(AFileName)) = '.png' then
+        AMetaData := DecodeStringBase64(GetTextChunkFromPNG(AFileName, 'matrixFontMeta'));
+
+      if AMetaData.IsEmpty then AMetaData := ExtractWatermark(Bitmap);
+      finally
+      Free;
+      end;
+
+    Result := not AMetaData.IsEmpty;
+  end;
+
+function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TFont): Boolean;
+  var
+    pic:      TPicture;
+    pixRef:   TColor;
+    isRefSet: Boolean = False;
+    ch:       Integer = 0;
+    scale, space, cols, offsetX, offsetY: Integer;
+
+  function DecodeMetadata(S: String): Boolean;
+    var
+      i: Integer = 0;
+      l: TStringList;
+
+    function NextString: String;
+      begin
+        Result := l.Strings[i];
+        Inc(i);
+      end;
+
+    function NextInteger: Integer;
+      begin
+        Result := NextString.ToInteger;
+      end;
+
+    begin
+      Result      := False;
+      l           := TStringList.Create;
+      l.CommaText := S;
+
+      if NextString.Equals('matrixFontMeta') then
+        begin
+        with AFontOut do
+          begin
+          Result        := True;
+          Name          := NextString;
+          Author        := NextString;
+          Encoding      := NextString;
+          AppCreate     := NextString;
+          AppCurrent    := app_info.ProductName + ' v' + app_info.FileVersion;
+          FontStartItem := NextInteger;
+          FontLength    := NextInteger;
+          Width         := NextInteger;
+          Height        := NextInteger;
+          end;
+
+        scale   := NextInteger;
+        space   := NextInteger;
+        cols    := NextInteger;
+        offsetX := NextInteger;
+        offsetY := NextInteger;
+        end;
+
+      l.Free;
+    end;
+
+  procedure GetRefPixel(AX, AY: Integer);
+    begin
+      if not isRefSet then
+        begin
+        pixRef   := pic.Bitmap.Canvas.Pixels[AX, AY];
+        isRefSet := True;
+        end;
+    end;
+
+  function ExtractNextChar: Boolean;
+    var
+      i, j, x, y: Integer;
+    begin
+      Result := False;
+        try
+        if not (ch in [0..AFontOut.FontLength - 1]) then Exit;
+
+        x := scale * (space + (offsetX + ch mod cols) * (2 * space + AFontOut.Width));
+        y := scale * (space + (offsetY + ch div cols) * (2 * space + AFontOut.Height));
+        GetRefPixel(x, y);
+
+        for i := 0 to AFontOut.Width - 1 do
+          for j := 0 to AFontOut.Height - 1 do
+            with pic.Bitmap.Canvas do
+              AFontOut.Item[ch].PixelAction(i, j,
+                (abs(Pixels[x + i * scale, y + j * scale] - pixRef) > 1).Select(paSet, paClear));
+
+        Result := True;
+        Inc(ch);
+        except
+        end;
+    end;
+
+  function ExtractFont: Boolean;
+    begin
+      Result := False;
+      while ExtractNextChar do ;
+      Result := True;
+    end;
+
+  begin
+      try
+      pic    := TPicture.Create;
+      pic.LoadFromFile(AFileName);
+      Result := DecodeMetadata(AMetaData) and ExtractFont;
+      except
+      Result := False;
+      end;
+
+    pic.Free;
   end;
 
 

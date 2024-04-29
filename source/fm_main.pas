@@ -15,7 +15,7 @@ uses
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map,
 
   // functional units
-  font, symbol, app_ver, cOpenFileList, u_sticking,
+  font, symbol, app_ver, cOpenFileList, u_sticking, u_map_render,
 
   // additional units
   u_utilities, u_strings, u_helpers, u_encodings;
@@ -794,6 +794,7 @@ procedure TfmMain.actionPasteMode(Sender: TObject);
 procedure TfmMain.actionSymbolGeneral(Sender: TObject);
   var
     item: TSymbol;
+    meta: String;
   begin
     item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
@@ -819,7 +820,22 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
         with dlgImport do
           begin
           if (FileName <> '') or Execute then
-            item.ImportImage(FileName, cfg.import.bwlevel);
+            repeat
+              if not IsImageContainFontSet(FileName, meta) then
+                begin
+                item.ImportImage(FileName, cfg.import.bwlevel);
+                Break;
+                end;
+
+              if (fmConfirm.Show(TXT_WARNING, WARN_IMPORT, mbYesNo, Self) = mrYes)
+                and GetConfirmation
+                and ImportFontFromPNG(FileName, meta, FontSet) then
+                FontCreateFinish;
+
+              FileName := '';
+              Exit;
+            until True;
+
           FileName := '';
           end;
 
@@ -1268,15 +1284,11 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
         AppCurrent               := app_info.ProductName + ' v' + app_info.FileVersion;
         dlgOpen.FileName         := AFileName;
         acSaveAs.Dialog.FileName := AFileName;
-        sgNavigator.RowCount     := FontLength + sgNavigator.FixedRows;
 
         LastFileAdd(AFileName);
         end;
 
       FontCreateFinish;
-      file_changed := False;
-      FileStatusUpdate;
-      SettingsApplyToCurrentSession;
       end;
   end;
 
@@ -1298,18 +1310,14 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
         AppAdditional := app_info.CompanyName;
         Encoding      := GetEncodingByIndex(e);
 
-        Width                := w;
-        Height               := h;
-        FontStartItem        := si;
-        FontLength           := l;
-        sgNavigator.RowCount := FontLength + sgNavigator.FixedRows;
+        Width         := w;
+        Height        := h;
+        FontStartItem := si;
+        FontLength    := l;
         end;
 
       FontCreateFinish;
       dlgOpen.FileName := '';
-      file_changed     := False;
-      FileStatusUpdate;
-      SettingsApplyToCurrentSession;
       except
       if fmConfirm.Show(TXT_ERROR, WARN_CREATE, mbYesNo, self) = mrYes then
         Close;
@@ -1408,8 +1416,14 @@ procedure TfmMain.FontCreateFinish;
     imEditor.Width  := FontSet.Item[0].WidthInPixels;
     imEditor.Height := FontSet.Item[0].HeightInPixels;
 
+    sgNavigator.RowCount := FontSet.FontLength + sgNavigator.FixedRows;
+
     acZoomFit.Execute;
     FontActionExecute;
+
+    file_changed := False;
+    FileStatusUpdate;
+    SettingsApplyToCurrentSession;
   end;
 
 // действия после применения изменений к символу
