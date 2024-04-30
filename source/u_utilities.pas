@@ -5,7 +5,7 @@ unit u_utilities;
 interface
 
 uses
-  Classes, SysUtils, LazFileUtils, LazUTF8, StdCtrls, Spin;
+  Classes, SysUtils, LazFileUtils, LazUTF8, StdCtrls, Spin, LCLType, LResources;
 
 
  // проверка расширения файла, регистронезависимая
@@ -16,6 +16,9 @@ function GetAuthorName(ACopyrightStr: String): String;
 
 // установка значения в компонент без вызова обработчика по изменению
 procedure SetValueWithoutAction(AComponent: TComponent; AValue: Integer);
+
+ // get the specified resource RCDATA as a string
+function GetResourceAsString(AResName: String): String;
 
 
 implementation
@@ -77,6 +80,28 @@ procedure SetValueWithoutAction(AComponent: TComponent; AValue: Integer);
           Value    := AValue;
           OnChange := tmp;
           end;
+      end;
+  end;
+
+function GetResourceAsString(AResName: String): String;
+  var
+    resStream: TResourceStream;
+  begin
+    // create a resource stream which points to our resource
+    resStream := TResourceStream.Create(HInstance, AResName, RT_RCDATA);
+
+      try
+      with TStringStream.Create do
+        try
+        LoadFromStream(resStream);
+        Result := DataString;
+        Free;
+        except
+        Result := '';
+        end;
+
+      finally
+      resStream.Free; // destroy the resource stream
       end;
   end;
 

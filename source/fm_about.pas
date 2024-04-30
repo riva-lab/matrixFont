@@ -5,73 +5,36 @@ unit fm_about;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, ExtCtrls, StdCtrls, LCLType, LCLIntf,
-  app_ver;
-
-resourcestring
-  ABOUT_RIGHTS  = 'Все права защищены' + LineEnding + 'Свободное ПО';
-  ABOUT_VERSION = 'версия';
-  ABOUT_BIT     = '-битная';
-  ABOUT_BUILD   = 'сборка';
-  ABOUT_SITE    = 'сайт';
+  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLIntf, ExtCtrls, Math,
+  BCSVGViewer, u_utilities, u_helpers, appAbout;
 
 const
-
-  // адрес сайта, пример https://example.site/home, пустая строка адреса отключает видимость ссылки
-  APP_SITE_ADDRESS = 'https://gitlab.com/riva-lab/matrixFont';
-  APP_SITE         = 'gitlab.com'; // отображаемое имя сайта
-
-  FILE_LICENSE     = 'license.md';
-  FILE_README      = 'readme.md';
+  COLOR_SVG_BOTTOM = $00153103; // background color of the SVG bottom
 
 type
 
   { TfmAbout }
 
   TfmAbout = class(TForm)
-    imLogo:       TImage;
-    lbLicense:    TLabel;
-    lbInfo:       TLabel;
-    lbSite:       TLabel;
+    BCSVGLogo:    TBCSVGViewer;
     lbCopyRights: TLabel;
-    pInfo:        TPanel;
-    lbHardware:   TLabel;
+    lbHomepage:   TLabel;
+    lbInfo:       TLabel;
+    lbLicense:    TLabel;
+    lbRepo:       TLabel;
+    pLinks:       TPanel;
+    pLinksX:      TPanel;
+
     procedure FormCreate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure FormUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
-    procedure lbLicenseClick(Sender: TObject);
-    procedure lbSiteClick(Sender: TObject);
-    procedure lbCopyRightsClick(Sender: TObject);
-  private
-    FAppArc:           String;
-    FAppAuthor:        String;
-    FAppBrief:         String;
-    FAppBuild:         String;
-    FAppCopyright:     String;
-    FAppDescription:   String;
-    FAppIntName:       String;
-    FAppSite:          String;
-    FAppSiteAvailable: Boolean;
-    FAppVersion:       String;
-    FAppComments:      String;
 
-    { private declarations }
+    procedure OnLinkClick(Sender: TObject);
+
   public
-    { public declarations }
     procedure ShowSplash(IsShow: Boolean = True);
-    procedure VisitSite;
-    procedure UpdateInfo;
 
-    property AppIntName: String read FAppIntName;
-    property AppVersion: String read FAppVersion;
-    property AppBuild: String read FAppBuild;
-    property AppArc: String read FAppArc;
-    property AppAuthor: String read FAppAuthor;
-    property AppCopyright: String read FAppCopyright;
-    property AppDescription: String read FAppDescription;
-    property AppBrief: String read FAppBrief;
-    property AppSite: String read FAppSite;
-    property AppSiteAvailable: Boolean read FAppSiteAvailable;
   end;
 
 var
@@ -85,10 +48,7 @@ implementation
 
 procedure TfmAbout.FormCreate(Sender: TObject);
   begin
-    UpdateInfo;
-    pInfo.ControlStyle := pInfo.ControlStyle - [csOpaque] + [csParentBackground];
-    lbHardware.Caption := Format('Screen:' + LineEnding + '%d x %d' + LineEnding + '%d DPI',
-      [Screen.Width, Screen.Height, Screen.PixelsPerInch]);
+    BCSVGLogo.SVGString := GetResourceAsString('LOGO');
   end;
 
 procedure TfmAbout.FormDeactivate(Sender: TObject);
@@ -96,30 +56,48 @@ procedure TfmAbout.FormDeactivate(Sender: TObject);
     Close;
   end;
 
+procedure TfmAbout.FormShow(Sender: TObject);
+
+  procedure CreateLinks(ALabel: array of TLabel; AURL: array of String);
+    var
+      i: Integer;
+    begin
+      if Length(ALabel) <> Length(AURL) then Exit;
+      if Length(ALabel) = 0 then Exit;
+      for i := 0 to High(ALabel) do
+        begin
+        ALabel[i].Hint    := AURL[i];
+        ALabel[i].OnClick := @OnLinkClick;
+        end;
+    end;
+
+  begin
+    lbInfo.Caption := appAbout.UpdateAboutAppInfo
+      + Format('Screen: %d x %d, %d DPI' + LineEnding, [Screen.Width, Screen.Height, Screen.PixelsPerInch]);
+
+    CreateLinks(
+      [lbLicense, lbCopyRights, lbHomepage, lbRepo],
+      [FILE_LICENSE, FILE_README, APP_URL_HOME, APP_URL_REPO]);
+
+    with BCSVGLogo.Constraints do
+      begin
+      MinWidth  := Max(Scale96ToScreen(360), pLinks.Width);
+      MinHeight := Max(MinWidth * 2 div 3, lbInfo.Height);
+      MinWidth  := MinHeight * 3 div 2;
+      end;
+
+    Color    := COLOR_SVG_BOTTOM;
+    Position := poMainFormCenter;
+  end;
+
 procedure TfmAbout.FormUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
   begin
-    case UTF8Key of
-      chr(13), chr(27), chr(32):
-        Close;
-      end;
+    if Ord(UTF8Key[1]) in [13, 27, 32] then Close;
   end;
 
-
-procedure TfmAbout.lbCopyRightsClick(Sender: TObject);
+procedure TfmAbout.OnLinkClick(Sender: TObject);
   begin
-    if not OpenDocument(FILE_README) then
-      OpenDocument('..' + DirectorySeparator + FILE_README);
-  end;
-
-procedure TfmAbout.lbLicenseClick(Sender: TObject);
-  begin
-    if not OpenDocument(FILE_LICENSE) then
-      OpenDocument('..' + DirectorySeparator + FILE_LICENSE);
-  end;
-
-procedure TfmAbout.lbSiteClick(Sender: TObject);
-  begin
-    VisitSite;
+    appAbout.linkClick(Sender);
   end;
 
 procedure TfmAbout.ShowSplash(IsShow: Boolean = True);
@@ -153,52 +131,5 @@ procedure TfmAbout.ShowSplash(IsShow: Boolean = True);
     OnUTF8KeyPress := @FormUTF8KeyPress;
   end;
 
-
-procedure TfmAbout.VisitSite;
-  begin
-    OpenURL(APP_SITE_ADDRESS);
-  end;
-
-procedure TfmAbout.UpdateInfo;
-  const
-  {$IfDef WIN64}
-    sys_arc = '64';
-  {$Else}
-    sys_arc = '32';
-  {$EndIf}
-  var
-    info:          String;
-    BuildDateTime: TDateTime;
-  begin
-    TryStrToDate({$INCLUDE %DATE%}, BuildDateTime, 'YYYY/MM/DD', '/');
-
-    ReadAppInfo;
-    FAppIntName       := app_info.InternalName;
-    FAppArc           := sys_arc + ABOUT_BIT;
-    FAppAuthor        := app_info.CompanyName;
-    FAppBuild         := ABOUT_BUILD + ' ' + FormatDateTime('yyyy.mm.dd', BuildDateTime);
-    FAppDescription   := app_info.FileDescription;
-    FAppVersion       := ABOUT_VERSION + ' ' + app_info.FileVersion;
-    FAppCopyright     := '© ' + app_info.LegalCopyright;
-    FAppComments      := app_info.Comments;
-    FAppBrief         := FAppIntName + ' ' + FAppVersion + ', ' + FAppArc + ', ' + FAppBuild;
-    FAppSite          := APP_SITE;
-    FAppSiteAvailable := Length(APP_SITE_ADDRESS) > 0;
-
-    info := app_info.InternalName + LineEnding;
-    info += FAppVersion + ', ' + FAppArc + LineEnding;
-    info += FAppBuild + LineEnding + LineEnding;
-    info += FAppComments + LineEnding + LineEnding;
-    info += FAppCopyright + LineEnding;
-    info += ABOUT_RIGHTS + LineEnding;
-    info += FAppAuthor;
-
-    lbInfo.Caption    := info;
-    lbSite.Caption    := {ABOUT_SITE + ': ' +} APP_SITE;
-    lbSite.Hint       := APP_SITE_ADDRESS;
-    lbSite.Visible    := FAppSiteAvailable;
-    lbLicense.Hint    := FILE_LICENSE;
-    lbCopyRights.Hint := FILE_README;
-  end;
 
 end.

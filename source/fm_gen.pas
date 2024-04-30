@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, SynHighlighterCpp, SynEdit, Forms, Clipbrd, strutils, Graphics,
   ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8,
   AppLocalizer, AppTuner,
-  symbol, font, fm_about, u_encodings, u_utilities;
+  symbol, font, appAbout, u_encodings, u_utilities;
 
 
 resourcestring
@@ -170,7 +170,7 @@ procedure TfmGen.FormShow(Sender: TObject);
       acTabSelSettings.Execute;
       if not Showing then Exit;
 
-      lbInfo.Caption          := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
+      lbInfo.Caption          := GetAppNameAuthor;
       tbSelector.ButtonHeight := pSelector.Height;
       tbCode.ButtonHeight     := pCode.Height;
       pcPages.ShowTabs        := False;

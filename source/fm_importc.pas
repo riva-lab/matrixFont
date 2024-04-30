@@ -8,8 +8,8 @@ uses
   Classes, SysUtils, LCLType, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   ComCtrls, ActnList, StdCtrls, Spin, SynEdit, LazUTF8, SynHighlighterCpp,
   Buttons, AppLocalizer, AppTuner,
-  fm_about, fm_gen,
-  font, u_utilities, u_encodings, u_helpers, config_record;
+  fm_gen,
+  font, u_utilities, u_encodings, u_helpers, config_record, appAbout;
 
 resourcestring
   FM_IMPC_CAPTION = 'Импорт шрифта из кода C';
@@ -178,7 +178,7 @@ procedure TfmImportC.FormShow(Sender: TObject);
     BeginFormUpdate;
 
     Caption        := FM_IMPC_CAPTION;
-    lbInfo.Caption := fmAbout.AppIntName + ', ' + GetAuthorName(fmAbout.AppCopyright);
+    lbInfo.Caption := GetAppNameAuthor;
 
     snImpEdit.Highlighter := fmGen.snCppSyntax;
 

@@ -16,14 +16,19 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
+      <Resources Count="3">
+        <Resource_0 FileName="..\resources\logoR-opt.svg" Type="RCDATA" ResourceName="LOGO"/>
+        <Resource_1 FileName="..\license.md" Type="RCDATA" ResourceName="LICENSE"/>
+        <Resource_2 FileName="..\readme.md" Type="RCDATA" ResourceName="README"/>
+      </Resources>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="88">
+      <ExcludedIdentifiers Count="90">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
-        <Item2 Value="TfmAbout.lbHardware.Caption"/>
-        <Item3 Value="tfmabout.lbsite.caption"/>
+        <Item2 Value="tfmabout.bcsvglogo.caption"/>
+        <Item3 Value="tfmmap.tbcontrols.caption"/>
         <Item4 Value="tfmconfirm.lbmessage.caption"/>
         <Item5 Value="tfmgen.cbemptybits.text"/>
         <Item6 Value="tfmgen.cbfonttype.text"/>
@@ -109,6 +114,8 @@
         <Item86 Value="AT_THEME_ALLOWDARK"/>
         <Item87 Value="AT_THEME_LIGHT"/>
         <Item88 Value="AT_THEME_DARK"/>
+        <Item89 Value="tfmsettings.cbstickingside.text"/>
+        <Item90 Value="tfmsettings.cbstickingsize.text"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -116,10 +123,10 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="6"/>
-      <RevisionNr Value="7"/>
-      <BuildNr Value="75"/>
+      <RevisionNr Value="9"/>
+      <BuildNr Value="77"/>
       <Language Value="0419"/>
-      <StringTable Comments="Создание и редактирование растровых шрифтов, предпросмотр образцов текста, генерирование кода Си" CompanyName="https://gitlab.com/riva-lab/matrixFont" FileDescription="matrixFont" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
+      <StringTable CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
     <BuildModes Count="4">
       <Item1 Name="x64-Debug" Default="True"/>
@@ -132,7 +139,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="settings;func"/>
+            <OtherUnitFiles Value="settings;func;misc"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -143,6 +150,7 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
+              <DebugInfoType Value="dsDwarf2"/>
               <StripSymbols Value="True"/>
             </Debugging>
             <LinkSmart Value="True"/>
@@ -168,7 +176,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="settings;func"/>
+            <OtherUnitFiles Value="settings;func;misc"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -218,7 +226,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="settings;func"/>
+            <OtherUnitFiles Value="settings;func;misc"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -229,7 +237,7 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
-              <DebugInfoType Value="dsDwarf3"/>
+              <DebugInfoType Value="dsDwarf2"/>
               <StripSymbols Value="True"/>
             </Debugging>
             <LinkSmart Value="True"/>
@@ -256,19 +264,25 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="4">
+    <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="AppFeaturesPkg"/>
+        <PackageName Value="bgracontrols"/>
       </Item1>
       <Item2>
-        <PackageName Value="ImageSVGListDsgn"/>
+        <PackageName Value="OnlineUpdaterPkg"/>
       </Item2>
       <Item3>
-        <PackageName Value="SynEdit"/>
+        <PackageName Value="AppFeaturesPkg"/>
       </Item3>
       <Item4>
-        <PackageName Value="LCL"/>
+        <PackageName Value="ImageSVGListDsgn"/>
       </Item4>
+      <Item5>
+        <PackageName Value="SynEdit"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="LCL"/>
+      </Item6>
     </RequiredPackages>
     <Units Count="28">
       <Unit0>
@@ -319,112 +333,113 @@
         <ResourceBaseClass Value="Form"/>
       </Unit7>
       <Unit8>
-        <Filename Value="app_ver.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit8>
-      <Unit9>
         <Filename Value="fm_import.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmImport"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit9>
-      <Unit10>
+      </Unit8>
+      <Unit9>
         <Filename Value="fm_preview.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmPreview"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit10>
-      <Unit11>
+      </Unit9>
+      <Unit10>
         <Filename Value="fm_sizes.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmSizes"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit11>
-      <Unit12>
+      </Unit10>
+      <Unit11>
         <Filename Value="fm_optimize.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmOptimize"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit12>
-      <Unit13>
+      </Unit11>
+      <Unit12>
         <Filename Value="fm_range.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmRange"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit13>
-      <Unit14>
+      </Unit12>
+      <Unit13>
         <Filename Value="fm_about.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmAbout"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit14>
-      <Unit15>
+      </Unit13>
+      <Unit14>
         <Filename Value="fm_settings.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmSettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="help.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit15>
       <Unit16>
-        <Filename Value="help.pas"/>
+        <Filename Value="u_strings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit16>
       <Unit17>
-        <Filename Value="u_strings.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit17>
-      <Unit18>
         <Filename Value="copenfilelist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cOpenFileList"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="u_utilities.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit18>
       <Unit19>
-        <Filename Value="u_utilities.pas"/>
+        <Filename Value="u_encodings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit19>
       <Unit20>
-        <Filename Value="u_encodings.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit20>
-      <Unit21>
         <Filename Value="fm_importc.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmImportC"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="u_helpers.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit21>
       <Unit22>
-        <Filename Value="u_helpers.pas"/>
+        <Filename Value="fm_main_controls.inc"/>
         <IsPartOfProject Value="True"/>
       </Unit22>
       <Unit23>
-        <Filename Value="fm_main_controls.inc"/>
-        <IsPartOfProject Value="True"/>
-      </Unit23>
-      <Unit24>
         <Filename Value="fm_map.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmMap"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="settings\config_record.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit24>
       <Unit25>
-        <Filename Value="settings\config_record.pas"/>
+        <Filename Value="func\u_sticking.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit25>
       <Unit26>
-        <Filename Value="func\u_sticking.pas"/>
+        <Filename Value="func\u_map_render.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit26>
       <Unit27>
-        <Filename Value="func\u_map_render.pas"/>
+        <Filename Value="misc\appabout.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="appAbout"/>
       </Unit27>
     </Units>
   </ProjectOptions>
@@ -436,7 +451,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="settings;func"/>
+      <OtherUnitFiles Value="settings;func;misc"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

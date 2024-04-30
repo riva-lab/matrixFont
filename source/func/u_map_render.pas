@@ -13,7 +13,7 @@ interface
 
 uses
   Classes, SysUtils, Types, Graphics, FPImgCmn, base64,
-  app_ver, font, symbol, u_helpers;
+  font, symbol, appAbout, u_helpers;
 
 
 function AddTextChunkToPNG(const AFilename, AKey, AValue: String): Boolean;
@@ -349,7 +349,7 @@ procedure RenderMapToPNG(AFileName: String; AFont: TFont; ACols, AScale, ASpace:
       DrawOffsets(MX, MY);
       DrawInfo(-1, 0, Format('Font "%s" by ©%s', [AFont.Name, AFont.Author]));
       DrawInfo(-1, 1, Format('Encoding: %s', [AFont.Encoding]));
-      DrawInfo(-1, MY + _r, Format('Created in %s v%s', [app_info.ProductName, app_info.FileVersion]));
+      DrawInfo(-1, MY + _r, 'Created in ' + GetAppNameVersion);
 
       // place digital watermark on image with font metadata
       ImplantWatermark(_scaled.Bitmap, _meta);
@@ -423,7 +423,7 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TFont): Boole
           Author        := NextString;
           Encoding      := NextString;
           AppCreate     := NextString;
-          AppCurrent    := app_info.ProductName + ' v' + app_info.FileVersion;
+          AppCurrent    := GetAppNameVersion;
           FontStartItem := NextInteger;
           FontLength    := NextInteger;
           Width         := NextInteger;

@@ -15,7 +15,7 @@ uses
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map,
 
   // functional units
-  font, symbol, app_ver, cOpenFileList, u_sticking, u_map_render,
+  font, symbol, cOpenFileList, appAbout, u_sticking, u_map_render,
 
   // additional units
   u_utilities, u_strings, u_helpers, u_encodings;
@@ -141,8 +141,9 @@ procedure TfmMain.FormCreate(Sender: TObject);
   var
     i: Integer;
   begin
-    ReadAppInfo;
     InitConfig;
+
+    stStatusBar.Panels.Items[3].Text := GetAppVersion;
 
     FOpenFileList := TOpenFileList.Create;
 
@@ -1008,13 +1009,13 @@ procedure TfmMain.actionService(Sender: TObject);
         OpenURL('..' + DirectorySeparator + HELP_DIR + DirectorySeparator + HELP_FILE + '.md');
 
       'acHelpNet': // действие: вызов справки онлайн
-        OpenURL(APP_SITE_ADDRESS + '/' + HELP_DIR_ONLINE + '/' + HELP_FILE + '.md');
+        OpenURL(APP_URL_HELP);
 
       'acWebsite': // действие: домашняя страница
-        OpenURL(APP_SITE_ADDRESS);
+        OpenURL(APP_URL_HOME);
 
       'acOpenRepo':// действие: репозиторий проекта
-        OpenURL(APP_SITE_ADDRESS);
+        OpenURL(APP_URL_REPO);
 
       'acInfo':    // действие: информация о программе
         fmAbout.Show;
@@ -1280,8 +1281,8 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
 
         acSymbolRedo.Enabled     := False;
         acSymbolUndo.Enabled     := False;
-        AppAdditional            := app_info.CompanyName;
-        AppCurrent               := app_info.ProductName + ' v' + app_info.FileVersion;
+        AppAdditional            := GetAppCompanyName;
+        AppCurrent               := GetAppNameVersion;
         dlgOpen.FileName         := AFileName;
         acSaveAs.Dialog.FileName := AFileName;
 
@@ -1305,9 +1306,9 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
 
         Name          := n;
         Author        := a;
-        AppCreate     := app_info.ProductName + ' v' + app_info.FileVersion;
+        AppCreate     := GetAppNameVersion;
         AppCurrent    := AppCreate;
-        AppAdditional := app_info.CompanyName;
+        AppAdditional := GetAppCompanyName;
         Encoding      := GetEncodingByIndex(e);
 
         Width         := w;
@@ -1370,10 +1371,8 @@ procedure TfmMain.FileStatusUpdate;
     if dlgOpen.FileName <> '' then s += ' [' + ExtractFileName(dlgOpen.FileName) + ']';
     if file_changed then s += ' (' + TXT_CHANGED + ')';
 
-    fmMain.Caption    := fmAbout.AppIntName + ' - ' + s;
+    fmMain.Caption    := GetAppName + ' - ' + s;
     Application.Title := s;
-
-    stStatusBar.Panels.Items[3].Text := app_info.FileVersion;
 
     with FontSet do
       miFontInfo.Caption := UpperCase(Encoding) + '   '
@@ -1632,8 +1631,6 @@ procedure TfmMain.LanguageChange;
   begin
     appLocalizerEx.CurrentLanguage := cfg.app.lang;
     appTunerEx.TuneComboboxes      := True;
-
-    fmAbout.UpdateInfo; // обновляем инфо на новом языке
   end;
 
 

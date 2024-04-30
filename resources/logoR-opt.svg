@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150mm" height="100mm" version="1.1" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css"><![CDATA[
+polyline {stroke-linecap:round; stroke-linejoin:round}
+polygon {stroke-linecap:round; stroke-linejoin:round}
+path {stroke-linecap:round; stroke-linejoin:round}
+circle {stroke-linecap:round; stroke-linejoin:round}
+]]></style>
+  <linearGradient id="linearGradient1" x1="-44.862" x2="168.44" y1="53.058" y2="53.058" gradientTransform="matrix(.46882 0 0 .93818 22.648 -124.78)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3f9772" offset="0"/>
+   <stop stop-color="#033115" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient8" x1="158.65" x2="190.07" y1="39.953" y2="39.953" gradientTransform="matrix(1.8988 0 0 4.6591 -259.28 -261.14)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#276e4d" offset="0"/>
+   <stop stop-color="#1b4d36" stop-opacity=".70196" offset=".43606"/>
+   <stop stop-opacity="0" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g transform="translate(0 -1.6159)">
+  <rect transform="rotate(90)" x="1.6159" y="-150" width="100" height="150" fill="url(#linearGradient1)"/>
+ </g>
+ <g transform="translate(0 -1.6159)" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(-.00010292 .00012984)" fill="none" stroke="#000">
+   <path d="m129.08 83.191v-13.861m-107.62 0.94703h8.6093m84.63 20.103c5.2556 2.7223 12.155 1.2237 15.798-3.4437m-109.04-25.268v4.3047m8.6093 4.3047c6.5665 0.21798 11.051-8.0432 7.1242-13.369-3.3889-5.6473-12.818-4.7186-15.041 1.4819-0.45853 1.0359-0.60136 2.1609-0.69305 3.278m111.92 17.219c0.0611 7.0128 5.8902 12.859 12.914 12.914m-17.219-22.47c-5.9724-5.7608-16.958-3.5648-20.228 4.0631-1.6816 3.5115-1.6374 7.7914 0.12538 11.262m24.408-18.682v12.914m-67.287-25.828h43.047m-51.656 0h-8.6093m12.914-4.3047v-4.3047m-44.634 17.219c-0.06111-7.0128-5.8902-12.859-12.914-12.914m-8.1e-6 43.047c7.0128-0.06113 12.859-5.8902 12.914-12.914m5e-6 -17.219v17.219m43.047 8.6093v-17.219m34.437-12.914v17.219m-17.219-17.219v17.219m-47.351 9e-6c7.7982 0.10745 14.393-7.7591 12.604-15.421-1.3132-8.2027-11.487-13.014-18.661-8.8267-1.1254 0.58003-2.12 1.3974-3.0695 2.2083m43.564 22.04c-0.06111-7.0128-5.8902-12.859-12.914-12.914m21.523 8.6093v-12.914m25.828 12.914v-12.914m-25.828 12.914c-0.10745 7.7982 7.7591 14.393 15.421 12.604 5.9589-1.0856 10.332-6.6072 10.407-12.604m-34.437 17.219v-12.914m-43.047 9e-6c5.4967 10.198 17.301 14.578 27.92 17.234 18.128 3.9714 37.502 3.8993 55.223-1.9396 6.0534-2.2151 12.342-5.3374 15.865-10.99m-90.398-4.3047h-4.3047m-4.3047 17.219v-17.219" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(-.00010292 .00012984)" stroke-width=".86093">
+   <circle cx="61.79" cy="53.058" r="2.5828"/>
+   <circle cx="120.47" cy="78.886" r="2.5828"/>
+  </g>
+ </g>
+ <g transform="translate(0 -1.6159)">
+  <rect transform="rotate(90)" x="41.957" y="-150" width="59.659" height="150" fill="url(#linearGradient8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.1468" style="mix-blend-mode:lighten"/>
+ </g>
+</svg>
