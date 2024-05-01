@@ -307,14 +307,20 @@ procedure TfmSettings.FormCreate(Sender: TObject);
         c.Visible := False;
       end;
 
+    // dark theme fixes
+    if appTunerEx.IsDarkTheme then
+      begin
+      nbPages.Color := clWindow;
+
+      for i := 0 to ComponentCount - 1 do
+        if TControl(Components[i]).Color = cl3DLight then
+          TControl(Components[i]).Color := cl3DDkShadow;
+      end;
+
     InitPages;
   end;
 
 procedure TfmSettings.FormShow(Sender: TObject);
-  var
-    i: Integer;
-    c: TControl;
-    g: array of TControl;
   begin
     // execute this block only once
     if Tag = 0 then
@@ -326,20 +332,6 @@ procedure TfmSettings.FormShow(Sender: TObject);
       cbLanguageChange(Sender);
       end;
 
-    // justify color buttons sizes
-    i := 0;
-    g := [lbColorEditor, lbColorNavi, lbColorPreview, lbColorImport, lbColorMap];
-    for c in g do i := Max(i, c.Width);
-    for c in g do c.Constraints.MinWidth := i;
-
-    with clbSticking do
-      begin
-      ItemHeight            := Canvas.TextHeight('0') * 13 div 10;
-      Constraints.MinHeight := Count * ItemHeight;
-      Constraints.MaxHeight := Constraints.MinHeight;
-      end;
-
-    udStickingOrder.Width := cbStickingSide.Height * 13 div 10;
     clbStickingSelectionChange(Sender, True);
     cbStickingCtrlChange(Sender);
 
@@ -382,6 +374,8 @@ procedure TfmSettings.AdjustComponentsSizes;
   var
     i: Integer;
     w: Integer = 0;
+    c: TControl;
+    g: array of TControl;
   begin
     // get tree view min width
     for i := 0 to tvTabs.Items.Count - 1 do
@@ -390,6 +384,23 @@ procedure TfmSettings.AdjustComponentsSizes;
     // set tree view min sizes
     tvTabs.Constraints.MinWidth  := w + tvTabs.Indent * 2 + VertScrollBar.Size;
     tvTabs.Constraints.MinHeight := tvTabs.Items.Count * tvTabs.DefaultItemHeight;
+
+    // sticking forms list sizes
+    with clbSticking do
+      begin
+      ItemHeight            := Canvas.TextHeight('0') * 13 div 10;
+      Constraints.MinHeight := Count * ItemHeight;
+      Constraints.MaxHeight := Constraints.MinHeight;
+      end;
+
+    // up/down arrows width
+    udStickingOrder.Width := cbStickingSide.Height * 13 div 10;
+
+    // justify color buttons sizes
+    i := 0;
+    g := [lbColorEditor, lbColorNavi, lbColorPreview, lbColorImport, lbColorMap];
+    for c in g do i := Max(i, TLabel(c).Canvas.TextWidth(TLabel(c).Caption));
+    for c in g do c.Constraints.MinWidth := i;
   end;
 
 procedure TfmSettings.InitConfig;
@@ -587,10 +598,24 @@ procedure TfmSettings.clbStickingSelectionChange(Sender: TObject; User: Boolean)
   end;
 
 procedure TfmSettings.cbLanguageChange(Sender: TObject);
+  var
+    c: TControl;
+    g: array of TControl;
   begin
     BeginFormUpdate;
     appLocalizerEx.CurrentLanguage := cbLanguage.ItemIndex;
     StickingListUpdate;
+
+    // light theme labels
+    g := [lbColorsL2, lbColorsL3, lbColorsL4, lbColorsL5];
+    for c in g do c.Caption := lbColorsL1.Caption;
+    for c in g do c.Hint := lbColorsL1.Hint;
+
+    // dark theme labels
+    g := [lbColorsD2, lbColorsD3, lbColorsD4, lbColorsD5];
+    for c in g do c.Caption := lbColorsD1.Caption;
+    for c in g do c.Hint := lbColorsD1.Hint;
+
     EndFormUpdate;
   end;
 
