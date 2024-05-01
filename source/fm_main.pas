@@ -269,6 +269,9 @@ procedure TfmMain.FormConstrainedResize(Sender: TObject; var MinWidth,
   begin
     if fmMain.Showing then
       FormWindowStateChange(Sender);
+
+    // some useful info
+    stStatusBar.Panels[0].Text := Format('Window: %d x %d', [Width, Height]);
   end;
 
 // действие при попытке закрыть приложение
@@ -819,12 +822,12 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
 
       'acSymbolImportImage': // действие: импорт изображения символа из файла PNG
         with dlgImport do
-          begin
           if (FileName <> '') or Execute then
             repeat
               if not IsImageContainFontSet(FileName, meta) then
                 begin
                 item.ImportImage(FileName, cfg.import.bwlevel);
+                FileName := '';
                 Break;
                 end;
 
@@ -835,10 +838,8 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
 
               FileName := '';
               Exit;
-            until True;
-
-          FileName := '';
-          end;
+            until True
+          else Exit;
 
 
       'acSymbolMirrorHorz': // действие: отображение символа горизонтально
@@ -1055,7 +1056,6 @@ procedure TfmMain.acFontCharsetExecute(Sender: TObject);
 
         sgNavigator.RowCount := FontSet.FontLength + sgNavigator.FixedRows;
         FontActionExecute;
-        FileStatusUpdate();
         end;
       end;
   end;
@@ -1080,7 +1080,7 @@ procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
         begin
         ChangeSize(res_up, res_down, res_left, res_right, True);
 
-        FontCreateFinish;
+        FontActionExecute;
         end;
       end;
   end;
@@ -1100,7 +1100,7 @@ procedure TfmMain.acFontChangeSizesExecute(Sender: TObject);
           seLeft.Value, seRight.Value,
           rgMode.ItemIndex = 1);
 
-        FontCreateFinish;
+        FontActionExecute;
         end;
       end;
   end;
