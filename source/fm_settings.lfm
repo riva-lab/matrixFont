@@ -2461,7 +2461,7 @@ object fmSettings: TfmSettings
           Hint = 'Прилипание окон рассчитывается относительно главного окна'
           Top = 5
           Width = 637
-          Caption = 'Включить'
+          Caption = 'Включить   [изменяйте порядок прилипания стрелками справа]'
           Checked = True
           State = cbChecked
           TabOrder = 0

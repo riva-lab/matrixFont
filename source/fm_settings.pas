@@ -340,6 +340,7 @@ procedure TfmSettings.FormShow(Sender: TObject);
       end;
 
     udStickingOrder.Width := cbStickingSide.Height * 13 div 10;
+    clbStickingSelectionChange(Sender, True);
     cbStickingCtrlChange(Sender);
 
     Position := poDefault;
@@ -597,7 +598,6 @@ procedure TfmSettings.cbStickingCtrlChange(Sender: TObject);
   begin
     pStickingForms.Enabled := cbStickingEnable.Checked;
     clbSticking.Enabled    := cbStickingEnable.Checked;
-    clbStickingSelectionChange(Sender, True);
 
     if clbSticking.ItemIndex >= 0 then
       with StickingFormsEx.FormByIndex[clbSticking.ItemIndex] do
