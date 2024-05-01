@@ -25,7 +25,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="90">
+      <ExcludedIdentifiers Count="106">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -116,6 +116,22 @@
         <Item88 Value="AT_THEME_DARK"/>
         <Item89 Value="tfmsettings.cbstickingside.text"/>
         <Item90 Value="tfmsettings.cbstickingsize.text"/>
+        <Item91 Value="tfmsettings.lbcolorsl2.caption"/>
+        <Item92 Value="tfmsettings.lbcolorsl3.caption"/>
+        <Item93 Value="tfmsettings.lbcolorsl4.caption"/>
+        <Item94 Value="tfmsettings.lbcolorsl5.caption"/>
+        <Item95 Value="tfmsettings.lbcolorsl2.hint"/>
+        <Item96 Value="tfmsettings.lbcolorsl3.hint"/>
+        <Item97 Value="tfmsettings.lbcolorsl4.hint"/>
+        <Item98 Value="tfmsettings.lbcolorsl5.hint"/>
+        <Item99 Value="tfmsettings.lbcolorsd2.caption"/>
+        <Item100 Value="tfmsettings.lbcolorsd3.caption"/>
+        <Item101 Value="tfmsettings.lbcolorsd4.caption"/>
+        <Item102 Value="tfmsettings.lbcolorsd5.caption"/>
+        <Item103 Value="tfmsettings.lbcolorsd2.hint"/>
+        <Item104 Value="tfmsettings.lbcolorsd3.hint"/>
+        <Item105 Value="tfmsettings.lbcolorsd4.hint"/>
+        <Item106 Value="tfmsettings.lbcolorsd5.hint"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -123,8 +139,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="6"/>
-      <RevisionNr Value="9"/>
-      <BuildNr Value="77"/>
+      <RevisionNr Value="10"/>
+      <BuildNr Value="78"/>
       <Language Value="0419"/>
       <StringTable CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>

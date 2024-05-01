@@ -70,6 +70,7 @@ object fmMain: TfmMain
         Caption = 'lbNavigator'
         Color = cl3DLight
         ParentColor = False
+        PopupMenu = pmPanels
         Transparent = False
       end
       object pFontToolsBox: TPanel
@@ -842,6 +843,7 @@ object fmMain: TfmMain
         Caption = 'lbEditor'
         Color = cl3DLight
         ParentColor = False
+        PopupMenu = pmPanels
         Transparent = False
       end
       object pCharToolsBox: TPanel

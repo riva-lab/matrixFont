@@ -140,7 +140,7 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrCenter
           Left = 160
           Height = 28
-          Hint = 'Доступна только на Windows 1809+'
+          Hint = 'Поддержка тем доступна только на Windows 1809+'
           Top = 0
           Width = 181
           Caption = 'Тема (после перезапуска)'
@@ -1945,6 +1945,7 @@ object fmSettings: TfmSettings
           AnchorSideTop.Side = asrCenter
           Left = 110
           Height = 28
+          Hint = 'Ctrl + колесо при наведении курсора на навигатор также изменяет высоту строки'
           Top = 0
           Width = 288
           Caption = 'Высота строки навигатора (Ctrl + колесо)'
@@ -1998,7 +1999,7 @@ object fmSettings: TfmSettings
         Hint = 'Прокрутка колесом перемещает по символам (выбрано) или прокручивает список (не выбрано)'
         Top = 88
         Width = 661
-        Caption = 'Навигатор: смена символов прокруткой'
+        Caption = 'Смена символов вращением колеса'
         TabOrder = 3
       end
       object cbNaviTransparent: TCheckBox
@@ -2009,7 +2010,7 @@ object fmSettings: TfmSettings
         Height = 24
         Top = 117
         Width = 661
-        Caption = 'Навигатор: фоновый цвет символа прозрачный'
+        Caption = 'Сделать прозрачным фоновый цвет символа'
         Checked = True
         State = cbChecked
         TabOrder = 4
@@ -2022,7 +2023,7 @@ object fmSettings: TfmSettings
         Height = 24
         Top = 146
         Width = 661
-        Caption = 'Навигатор: отображать выделенный символ инверсно'
+        Caption = 'Отображать выделенный символ инвертированным'
         Checked = True
         State = cbChecked
         TabOrder = 5
@@ -2253,9 +2254,10 @@ object fmSettings: TfmSettings
         object cbChessGrid: TCheckBox
           Left = 110
           Height = 24
+          Hint = 'Для второго цвета шахматного фона используется цвет сетки'
           Top = 66
           Width = 315
-          Caption = 'Редактор символа: шахматный фон'
+          Caption = 'Шахматный фон'
           TabOrder = 3
         end
       end
