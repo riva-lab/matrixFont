@@ -170,8 +170,13 @@ MenuItem122: TMenuItem;
 MenuItem123: TMenuItem;
 MenuItem124: TMenuItem;
 MenuItem125: TMenuItem;
-MenuItem126: TMenuItem;
-MenuItem13:  TMenuItem;
+MenuItem126: TMenuItem; 
+MenuItem127: TMenuItem;
+MenuItem128: TMenuItem;
+MenuItem129: TMenuItem;
+MenuItem13:  TMenuItem;  
+MenuItem130: TMenuItem;
+MenuItem131: TMenuItem;
 MenuItem14:  TMenuItem;
 MenuItem15:  TMenuItem;
 MenuItem16:  TMenuItem;
@@ -271,7 +276,8 @@ miFPS:       TMenuItem;
 Separator1:  TMenuItem;
 Separator2:  TMenuItem;
 Separator3:  TMenuItem;
-Separator4:  TMenuItem;
+Separator4:  TMenuItem; 
+Separator5:  TMenuItem;
 
 pFindBox:        TPanel;
 pEditor:         TPanel;
@@ -305,7 +311,8 @@ pTBSpacer17:     TPanel;
 pTBSpacer18:     TPanel;
 
 pmLastFiles:    TPopupMenu;
-pmPanels:       TPopupMenu;
+pmPanels:       TPopupMenu; 
+pmStatusBar:    TPopupMenu;
 
 psSide1: TPairSplitterSide;
 psSide2: TPairSplitterSide;

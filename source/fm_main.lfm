@@ -39,6 +39,7 @@ object fmMain: TfmMain
       item
         Width = 62
       end>
+    PopupMenu = pmStatusBar
     SimplePanel = False
   end
   object psSplit: TPairSplitter
@@ -624,7 +625,7 @@ object fmMain: TfmMain
             Title.ImageLayout = blGlyphTop
             Title.MultiLine = True
             Title.Caption = 'Символ'
-            Width = 80
+            Width = 67
           end        
           item
             Alignment = taCenter
@@ -633,7 +634,7 @@ object fmMain: TfmMain
             MaxSize = 250
             Title.Alignment = taCenter
             Title.Caption = 'Код'
-            Width = 79
+            Width = 66
           end        
           item
             Alignment = taCenter
@@ -642,7 +643,7 @@ object fmMain: TfmMain
             SizePriority = 0
             Title.Alignment = taCenter
             Title.Caption = 'Вид'
-            Width = 40
+            Width = 66
           end>
         Constraints.MinWidth = 100
         DefaultRowHeight = 44
@@ -660,9 +661,9 @@ object fmMain: TfmMain
         OnMouseWheel = sgNavigatorMouseWheel
         OnSelection = sgNavigatorSelection
         ColWidths = (
-          80
-          79
-          40
+          67
+          66
+          66
         )
         Cells = (
           4
@@ -2984,6 +2985,32 @@ object fmMain: TfmMain
     end
     object MenuItem126: TMenuItem
       Action = acViewNavigator
+      AutoCheck = True
+    end
+  end
+  object pmStatusBar: TPopupMenu
+    Left = 619
+    Top = 94
+    object MenuItem127: TMenuItem
+      Action = acMenuPaste
+    end
+    object Separator5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem128: TMenuItem
+      Action = acPasteModeNorm
+      AutoCheck = True
+    end
+    object MenuItem129: TMenuItem
+      Action = acPasteModeAnd
+      AutoCheck = True
+    end
+    object MenuItem130: TMenuItem
+      Action = acPasteModeOr
+      AutoCheck = True
+    end
+    object MenuItem131: TMenuItem
+      Action = acPasteModeXor
       AutoCheck = True
     end
   end
