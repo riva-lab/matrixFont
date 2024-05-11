@@ -19,22 +19,22 @@ object fmProp: TfmProp
   LCLVersion = '3.0.0.3'
   object pMain: TPanel
     Left = 44
-    Height = 325
+    Height = 308
     Top = 25
     Width = 648
     AutoSize = True
     BevelOuter = bvNone
     ChildSizing.HorizontalSpacing = 10
-    ChildSizing.VerticalSpacing = 5
+    ChildSizing.VerticalSpacing = 16
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 325
+    ClientHeight = 308
     ClientWidth = 648
     ParentBackground = False
     TabOrder = 0
     object pEdits: TPanel
       Left = 0
-      Height = 193
+      Height = 248
       Top = 0
       Width = 648
       AutoSize = True
@@ -44,7 +44,7 @@ object fmProp: TfmProp
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 193
+      ClientHeight = 248
       ClientWidth = 648
       ParentBackground = False
       TabOrder = 0
@@ -105,10 +105,70 @@ object fmProp: TfmProp
         Style = csDropDownList
         TabOrder = 2
       end
+      object lbFont: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 28
+        Top = 110
+        Width = 76
+        Alignment = taRightJustify
+        Caption = 'Шрифт'
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object pFont: TPanel
+        Left = 86
+        Height = 28
+        Top = 110
+        Width = 562
+        AutoSize = True
+        BorderSpacing.Top = 16
+        BorderSpacing.Bottom = 16
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 5
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 3
+        ClientHeight = 28
+        ClientWidth = 562
+        ParentBackground = False
+        TabOrder = 3
+        object edSize: TEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Hint = 'Холст, W × H:   %d × %d'
+          Top = 0
+          Width = 279
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 160
+          ParentShowHint = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edRange: TEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 284
+          Height = 28
+          Hint = 'Диапазон:   %d … %d'
+          Top = 0
+          Width = 278
+          Alignment = taCenter
+          Color = clForm
+          Constraints.MinWidth = 160
+          ParentShowHint = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
       object lbPath: TLabel
         Left = 0
         Height = 28
-        Top = 99
+        Top = 154
         Width = 76
         Alignment = taRightJustify
         Caption = 'Файл'
@@ -118,19 +178,19 @@ object fmProp: TfmProp
       object edPath: TEdit
         Left = 86
         Height = 28
-        Top = 99
+        Top = 154
         Width = 562
         Color = clForm
         Constraints.MinWidth = 562
         ReadOnly = True
-        TabOrder = 3
+        TabOrder = 4
         OnClick = edPathClick
       end
       object lbDateCreate: TLabel
         AnchorSideTop.Side = asrCenter
         Left = 0
         Height = 28
-        Top = 132
+        Top = 187
         Width = 76
         Alignment = taRightJustify
         Caption = 'Создан'
@@ -140,7 +200,7 @@ object fmProp: TfmProp
       object pCreate: TPanel
         Left = 86
         Height = 28
-        Top = 132
+        Top = 187
         Width = 562
         AutoSize = True
         BevelOuter = bvNone
@@ -152,7 +212,7 @@ object fmProp: TfmProp
         ClientHeight = 28
         ClientWidth = 562
         ParentBackground = False
-        TabOrder = 4
+        TabOrder = 5
         object edDateCreate: TEdit
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
@@ -184,7 +244,7 @@ object fmProp: TfmProp
         AnchorSideTop.Side = asrCenter
         Left = 0
         Height = 28
-        Top = 165
+        Top = 220
         Width = 76
         Alignment = taRightJustify
         Caption = 'Изменен'
@@ -194,7 +254,7 @@ object fmProp: TfmProp
       object pChange: TPanel
         Left = 86
         Height = 28
-        Top = 165
+        Top = 220
         Width = 562
         AutoSize = True
         BevelOuter = bvNone
@@ -206,7 +266,7 @@ object fmProp: TfmProp
         ClientHeight = 28
         ClientWidth = 562
         ParentBackground = False
-        TabOrder = 5
+        TabOrder = 6
         object edDateChange: TEdit
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
@@ -237,8 +297,8 @@ object fmProp: TfmProp
     end
     object pBottom: TPanel
       Left = 0
-      Height = 127
-      Top = 198
+      Height = 44
+      Top = 264
       Width = 648
       AutoSize = True
       BevelOuter = bvNone
@@ -247,130 +307,17 @@ object fmProp: TfmProp
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 127
+      ClientHeight = 44
       ClientWidth = 648
       ParentBackground = False
       TabOrder = 1
-      object pValues: TPanel
-        AnchorSideTop.Side = asrBottom
-        Left = 0
-        Height = 127
-        Top = 0
-        Width = 318
-        AutoSize = True
-        BevelOuter = bvNone
-        ChildSizing.HorizontalSpacing = 10
-        ChildSizing.VerticalSpacing = 5
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 2
-        ClientHeight = 127
-        ClientWidth = 318
-        ParentBackground = False
-        TabOrder = 0
-        object lbStart: TLabel
-          AnchorSideTop.Side = asrCenter
-          Left = 0
-          Height = 28
-          Top = 0
-          Width = 134
-          Alignment = taRightJustify
-          Caption = 'Первый символ'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object edStart: TEdit
-          AnchorSideTop.Side = asrBottom
-          Left = 144
-          Height = 28
-          Top = 0
-          Width = 100
-          Alignment = taCenter
-          Color = clForm
-          Constraints.MinWidth = 80
-          NumbersOnly = True
-          ReadOnly = True
-          TabOrder = 0
-        end
-        object lbLast: TLabel
-          AnchorSideTop.Side = asrCenter
-          Left = 0
-          Height = 28
-          Top = 33
-          Width = 134
-          Alignment = taRightJustify
-          Caption = 'Последний символ'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object edLast: TEdit
-          AnchorSideTop.Side = asrBottom
-          Left = 144
-          Height = 28
-          Top = 33
-          Width = 100
-          Alignment = taCenter
-          Color = clForm
-          Constraints.MinWidth = 80
-          NumbersOnly = True
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object lbWidth: TLabel
-          AnchorSideTop.Side = asrCenter
-          Left = 0
-          Height = 28
-          Top = 66
-          Width = 134
-          Alignment = taRightJustify
-          Caption = 'Ширина символа'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object edWidth: TEdit
-          AnchorSideTop.Side = asrBottom
-          Left = 144
-          Height = 28
-          Top = 66
-          Width = 100
-          Alignment = taCenter
-          Color = clForm
-          Constraints.MinWidth = 80
-          NumbersOnly = True
-          ReadOnly = True
-          TabOrder = 2
-        end
-        object lbHeight: TLabel
-          AnchorSideTop.Side = asrCenter
-          Left = 0
-          Height = 28
-          Top = 99
-          Width = 134
-          Alignment = taRightJustify
-          Caption = 'Высота символа'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object edHeight: TEdit
-          AnchorSideTop.Side = asrBottom
-          Left = 144
-          Height = 28
-          Top = 99
-          Width = 100
-          Alignment = taCenter
-          Color = clForm
-          Constraints.MinWidth = 80
-          NumbersOnly = True
-          ReadOnly = True
-          TabOrder = 3
-        end
-      end
       object bbApply: TBitBtn
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Side = asrBottom
         Left = 398
         Height = 44
-        Top = 83
+        Top = 0
         Width = 250
         AutoSize = True
         BorderSpacing.InnerBorder = 6
@@ -384,7 +331,7 @@ object fmProp: TfmProp
         Images = fmMain.ImListNew16A
         ImageIndex = 44
         Spacing = 10
-        TabOrder = 1
+        TabOrder = 0
       end
     end
   end
