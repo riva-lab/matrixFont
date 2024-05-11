@@ -761,7 +761,11 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
       // поиск и выделение найденного символа по названию
       if TEdit(Sender).Name = 'edFind' then
         if edFind.Text <> '' then
+          try
           seFind.Value := Ord(UTF8ToEncoding(edFind.Text, FontSet.Encoding)[1]);
+          except
+          seFind.Value := FontSet.FontStartItem;
+          end;
 
       sgNavigator.Row := seFind.Value - FontSet.FontStartItem + sgNavigator.FixedRows;
       sgNavigatorSelection(Sender, 1, sgNavigator.Row);
