@@ -7,7 +7,7 @@ object fmSizes: TfmSizes
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   BorderWidth = 10
-  Caption = 'Изменение размеров холста'
+  Caption = 'Изменение размера холста'
   ClientHeight = 336
   ClientWidth = 794
   DesignTimePPI = 120
