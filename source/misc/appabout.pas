@@ -168,7 +168,7 @@ function UpdateAboutAppInfo: String;
     with fvi do
       begin
       _info.Add('');
-      _info.Add(FileDescription);
+      _info.Add(Comments);
       _info.Add('');
       _info.Add('© ' + LegalCopyright);
       _info.Add(CompanyName);
