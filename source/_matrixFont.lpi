@@ -139,14 +139,14 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="6"/>
-      <RevisionNr Value="10"/>
-      <BuildNr Value="78"/>
+      <RevisionNr Value="12"/>
+      <BuildNr Value="80"/>
       <Language Value="0419"/>
       <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
     <BuildModes Count="4">
-      <Item1 Name="x64-Debug" Default="True"/>
-      <Item2 Name="x64-Release">
+      <Item1 Name="win64-Debug" Default="True"/>
+      <Item2 Name="win64-Release">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -183,7 +183,7 @@
           </Other>
         </CompilerOptions>
       </Item2>
-      <Item3 Name="x32-Debug">
+      <Item3 Name="win32-Debug">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -233,7 +233,7 @@
           </Other>
         </CompilerOptions>
       </Item3>
-      <Item4 Name="x32-Release">
+      <Item4 Name="win32-Release">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
