@@ -27,5 +27,5 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## License modification
 
-You can not sell this software product (including sources and binaries)
-without copyright holder's permission. 
+Sale of this software product, including source code, binaries and all other
+product files, without permission of the copyright holder is prohibited.
