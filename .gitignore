@@ -7,6 +7,10 @@ help/matrixFont-help.html
 install/
 source/backup/
 source/lib/
+help/matrixFont-help.html
+help/matrixFont-help.*.html
+readme.html
+readme.*.html
 
 # Lazarus compiler-generated binaries (safe to delete)
 *.exe
