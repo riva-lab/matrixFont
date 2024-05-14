@@ -63,9 +63,21 @@ function setPageEncoding() {
     makeMetaTag('charset', 'UTF-8');
 }
 
+function checkSpecialPage(url, base) {
+    if (url.match(base + '.md'))
+        url = (new URL(base + '.md', window.location.origin)).href;
+
+    return url;
+}
+
 function getMarkdownFilename() {
     var a = document.querySelector('link[rel="markdown"]');
-    return a ? a.getAttribute('href') : '';
+    a = a ? a.getAttribute('href') : '';
+
+    a = checkSpecialPage(a, '403');
+    a = checkSpecialPage(a, '404');
+
+    return a;
 }
 
 function loadContentExternal() {
@@ -98,6 +110,28 @@ function convertMarkdownToHtml(markdown) {
     converter.setFlavor('github');
 
     /**
+     * Fix unexpected over-converting of char '<'
+     */
+    converter.addExtension(function () {
+        return [{
+            type: 'output',
+            regex: /&amp;lt;/gi,
+            replace: '\\&lt;'
+        }];
+    }, 'ltSignFix');
+
+    /**
+     * Fix unexpected over-converting of char '>'
+     */
+    converter.addExtension(function () {
+        return [{
+            type: 'output',
+            regex: /&amp;gt;/gi,
+            replace: '&gt;'
+        }];
+    }, 'gtSignFix');
+
+    /**
      * Convert self-hosted links *.md to *.html
      */
     converter.addExtension(function () {
@@ -105,7 +139,9 @@ function convertMarkdownToHtml(markdown) {
             type: 'output',
             regex: /(<a\s[^>]*?href="[^"]+).md("[^>]*?>)/gi,
             replace: function (text) {
-                var url = (new URL(text.match(/"(.*?)"/)[1], window.location.origin)).href;
+                var base = window.location.origin;
+                if (window.location.protocol.startsWith('file:')) base = 'file:///';
+                var url = (new URL(text.match(/"(.*?)"/)[1], base)).href;
                 return url.includes(window.location.origin)
                     ? text.replace(/\.md"/gi, '.html"')
                     : text;
@@ -225,6 +261,17 @@ function convertMarkdownToHtml(markdown) {
             replace: '$1 class="line-numbers"$2'
         }];
     }, 'preTagLineNumbersForPrism');
+
+    /**
+     * Header tags wrapper for correct CSS rendering
+     */
+    converter.addExtension(function () {
+        return [{
+            type: 'output',
+            regex: /(<h\d[^>]*?>)(.*?)(<\/h\d>)/gis,
+            replace: '$1<span>$2</span>$3'
+        }];
+    }, 'headerTagsWrapper');
 
     /**
      * Replace EnDash
