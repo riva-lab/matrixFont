@@ -1,0 +1,70 @@
+﻿matrixFont
+==========
+
+matrixFont allows you to create and edit raster fonts, and generate C code to include the created font into a software project.
+
+The main usage area is software project development using graphical user interface in embedded systems.
+
+Features:
+
+- raster font:
+  
+  - character sizes from 1 × 1 to 100 × 100 (technically up to 512 × 512);
+  - character range from 0 to 255;
+  - charset (encoding) selection;
+  - compact native RHF file format;
+
+- project creating:
+  
+  - from system font;
+  - from code (support of matrixFont, AdaFruit GFX, LCD Vision V1.34 formats);
+  - from character map image with metadata;
+
+- character editor:
+  
+  - easy editing with mouse;
+  - scaling workspace with mouse wheel;
+  - copy, paste and move characters;
+  - importing image into character;
+  - history of editing operations for each character;
+  - operations: invert, display, rotate, shift, pinch, center characters;
+  - batch editing of all font characters;
+
+- navigation and preview:
+  
+  - character navigator with character display;
+  - search for characters by code or name;
+  - view sample text;
+  - character map;
+  - exporting character map to image;
+
+- tools:
+  
+  - changing character range of font;
+  - changing font character size;
+  - character size optimization;
+  - C code generator with fine-tuning;
+
+- interface:
+  
+  - intuitive and user-friendly design,
+  - full support for different display densities,
+  - localization support,
+  - theme support: light and dark,
+  - flexibility - customization of appearance, colors, etc.,
+
+- and also:
+  
+  - detailed user manual.
+
+
+Liability
+---------
+The application is provided for free use, without any warranty or technical support. You use the application at your own discretion and are solely responsible for the results of its functioning.
+
+
+See more at
+https://riva-lab.gitlab.io/en/apps/matrixFont
+
+Project source code
+https://gitlab.com/riva-lab/matrixFont
