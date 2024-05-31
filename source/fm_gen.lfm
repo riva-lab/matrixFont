@@ -13,7 +13,6 @@ object fmGen: TfmGen
   OnShow = FormShow
   Position = poMainFormCenter
   ShowHint = True
-  ShowInTaskBar = stAlways
   LCLVersion = '3.0.0.3'
   object pcPages: TPageControl
     Left = 0

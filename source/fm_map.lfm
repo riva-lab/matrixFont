@@ -12,7 +12,6 @@ object fmMap: TfmMap
   DesignTimePPI = 120
   OnCreate = FormCreate
   OnShow = FormShow
-  PopupMode = pmAuto
   Position = poMainFormCenter
   ShowHint = True
   LCLVersion = '3.0.0.3'

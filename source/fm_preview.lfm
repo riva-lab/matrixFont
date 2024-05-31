@@ -12,7 +12,6 @@ object fmPreview: TfmPreview
   DesignTimePPI = 120
   OnCreate = FormCreate
   OnShow = FormShow
-  PopupMode = pmAuto
   Position = poMainFormCenter
   LCLVersion = '3.0.0.3'
   object pcPages: TPageControl
