@@ -69,7 +69,7 @@ for %%a in (32,64) do (
     set PROJARC=win%%a
     set BINARY=bin\*!PROJARC!-%BUILD%.exe
     set FILES=!BINARY! %COMMONFILES%
-    set FILENAME=%DEST%\%PROJNAME%-!PROJARC!-Portable.zip
+    set FILENAME=%DEST%\%PROJNAME%-v%EXEVER%-!PROJARC!-Portable.zip
 
     echo.
     echo Creating archive:

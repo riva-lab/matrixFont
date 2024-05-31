@@ -24,7 +24,7 @@
 #define appVersion      GetVersionNumbersString(appPath + '\bin\' + appExeName)
 
 #define appOutputDir    "\install\v" + appVersion
-#define appOutputFile   "matrixFont-win" + appArch + "-Setup"
+#define appOutputFile   "matrixFont-v"+ appVersion + "-win" + appArch + "-Setup"
 
 
 [Setup]
