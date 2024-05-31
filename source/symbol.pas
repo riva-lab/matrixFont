@@ -17,8 +17,8 @@ type
   TNumberView      = (nvHEX, nvBIN, nvDEC);
   TFontType        = (ftMONOSPACE, ftPROPORTIONAL);
   TEmptyBit        = (emBIT_0, emBIT_1);
-  TSymbolField     = array of array of Boolean;
-  TPSymbolField    = ^TSymbolField;
+  TCharCanvas      = array of array of Boolean;
+  TPCharCanvas     = ^TCharCanvas;
   //TPBitmap         = ^TBitmap;
   TCanOptimize     = (coUp, coDown, coLeft, coRight);
   TDirection       = (dirUp, dirDown, dirLeft, dirRight);
@@ -28,12 +28,12 @@ type
   TPasteMode       = (pmNorm, pmOr, pmXor, pmAnd);
   TPixelAction     = (paSet, paClear, paInvert, paNone);
 
-  { TSymbol }
+  { TMatrixChar }
 
-  TSymbol = class
+  TMatrixChar = class
   private
     // ================================ Поля ===================================
-    FSymbol: TSymbolField; // холст символа
+    FCharCanvas: TCharCanvas; // холст символа
 
     // поля внешнего вида и параметров символа
     FWidth:               Integer; // поле - ширина символа в пикселях
@@ -53,7 +53,7 @@ type
     FShiftRollover: Boolean; // поле - флаг циклического режима сдвига
 
     // поля истории изменений
-    FHistory:         array of TSymbolField; // поле - массив для истории изменений
+    FHistory:         array of TCharCanvas; // поле - массив для истории изменений
     FHistoryPosition: Integer; // поле - текущее изменение символа
     FHistoryEmpty:    Boolean; // поле - флаг пустоты истории изменений
     FHistoryNoRedo:   Boolean; // поле - флаг невозможности отмены
@@ -144,7 +144,7 @@ type
     function GetCharHeight: Integer;
 
     // загрузка символа целиком
-    procedure LoadSymbol(ASymbol: TPSymbolField);
+    procedure LoadChar(ASymbol: TPCharCanvas);
 
     // изменение размеров холста символа
     procedure ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
@@ -222,21 +222,21 @@ type
     property ShiftRollover: Boolean read FShiftRollover write FShiftRollover;
 
     //--------------------------------------------------------------------------
-    property Symbol: TSymbolField read FSymbol;
+    property CharCanvas: TCharCanvas read FCharCanvas;
   end;
 
 implementation
 
-{ TSymbol }
+{ TMatrixChar }
 
-procedure TSymbol.SetWidth(AWidth: Integer);
+procedure TMatrixChar.SetWidth(AWidth: Integer);
   begin
     FWidth := AWidth;
-    SetLength(FSymbol, FWidth, FHeight);
+    SetLength(FCharCanvas, FWidth, FHeight);
     SetGridStep(FGridStep);
   end;
 
-function TSymbol.GetCopyBufferEmpty: Boolean;
+function TMatrixChar.GetCopyBufferEmpty: Boolean;
   begin
       try
       FCopyBufferEmpty := Clipboard.FindFormatID(EXCHANGE_BUFFER_TYPE_ID) = 0;
@@ -246,20 +246,20 @@ function TSymbol.GetCopyBufferEmpty: Boolean;
     Result := FCopyBufferEmpty;
   end;
 
-procedure TSymbol.SetGridThickness(AValue: Integer);
+procedure TMatrixChar.SetGridThickness(AValue: Integer);
   begin
     FGridThickness := AValue;
     SetGridStep(FGridStep);
   end;
 
-procedure TSymbol.SetHeight(AHeight: Integer);
+procedure TMatrixChar.SetHeight(AHeight: Integer);
   begin
     FHeight := AHeight;
-    SetLength(FSymbol, FWidth, FHeight);
+    SetLength(FCharCanvas, FWidth, FHeight);
     SetGridStep(FGridStep);
   end;
 
-procedure TSymbol.SetGridStep(AGridStep: Integer);
+procedure TMatrixChar.SetGridStep(AGridStep: Integer);
   begin
     FGridStep       := AGridStep;
     FWidthInPixels  := FWidth * FGridStep + FGridThickness;
@@ -267,38 +267,38 @@ procedure TSymbol.SetGridStep(AGridStep: Integer);
   end;
 
 // работа с пикселем (установка/очистка/инверсия)
-procedure TSymbol.PixelAction(AX, AY: Integer; AAction: TPixelAction);
+procedure TMatrixChar.PixelAction(AX, AY: Integer; AAction: TPixelAction);
   var
     state: Boolean;
   begin
     state := AAction = paSet;
 
     if (AX >= 0) and (AY >= 0) and (AX < FWidth) and (AY < FHeight) then
-      FSymbol[AX, AY] := state or (AAction = paInvert) and not FSymbol[AX, AY];
+      FCharCanvas[AX, AY] := state or (AAction = paInvert) and not FCharCanvas[AX, AY];
   end;
 
 // очистить символ
-procedure TSymbol.Clear;
+procedure TMatrixChar.Clear;
   var
     w, h: Integer;
   begin
     for h := 0 to FHeight - 1 do
       for w := 0 to FWidth - 1 do
-        FSymbol[w, h] := False;
+        FCharCanvas[w, h] := False;
   end;
 
 // инвертировать изображение символа
-procedure TSymbol.Invert;
+procedure TMatrixChar.Invert;
   var
     w, h: Integer;
   begin
     for h := 0 to FHeight - 1 do
       for w := 0 to FWidth - 1 do
-        FSymbol[w, h] := not FSymbol[w, h];
+        FCharCanvas[w, h] := not FCharCanvas[w, h];
   end;
 
 // отобразить символ
-procedure TSymbol.Mirror(MirrorDirection: TMirror);
+procedure TMatrixChar.Mirror(MirrorDirection: TMirror);
   var
     w, h: Integer;
     a:    Boolean;
@@ -310,9 +310,9 @@ procedure TSymbol.Mirror(MirrorDirection: TMirror);
         for h := 0 to FHeight - 1 do
           for w := 0 to (FWidth - 1) div 2 do
             begin
-            a             := FSymbol[w, h];
-            FSymbol[w, h] := FSymbol[FWidth - 1 - w, h];
-            FSymbol[FWidth - 1 - w, h] := a;
+            a                 := FCharCanvas[w, h];
+            FCharCanvas[w, h] := FCharCanvas[FWidth - 1 - w, h];
+            FCharCanvas[FWidth - 1 - w, h] := a;
             end;
 
       // отобразить символ вертикально
@@ -320,16 +320,16 @@ procedure TSymbol.Mirror(MirrorDirection: TMirror);
         for h := 0 to (FHeight - 1) div 2 do
           for w := 0 to FWidth - 1 do
             begin
-            a             := FSymbol[w, h];
-            FSymbol[w, h] := FSymbol[w, FHeight - 1 - h];
-            FSymbol[w, FHeight - 1 - h] := a;
+            a                 := FCharCanvas[w, h];
+            FCharCanvas[w, h] := FCharCanvas[w, FHeight - 1 - h];
+            FCharCanvas[w, FHeight - 1 - h] := a;
             end;
 
       end;
   end;
 
 // сдвиг символа
-procedure TSymbol.Shift(Direction: TDirection);
+procedure TMatrixChar.Shift(Direction: TDirection);
   var
     w, h: Integer;
     a:    array of Boolean;
@@ -343,15 +343,15 @@ procedure TSymbol.Shift(Direction: TDirection);
 
         for w := 0 to FWidth - 1 do
           begin
-          a[w] := FSymbol[w, 0];
+          a[w] := FCharCanvas[w, 0];
 
           for h := 0 to FHeight - 2 do
-            FSymbol[w, h] := FSymbol[w, h + 1];
+            FCharCanvas[w, h] := FCharCanvas[w, h + 1];
 
           if FShiftRollover then
-            FSymbol[w, FHeight - 1] := a[w]
+            FCharCanvas[w, FHeight - 1] := a[w]
           else
-            FSymbol[w, FHeight - 1] := False;
+            FCharCanvas[w, FHeight - 1] := False;
 
           end;
         end;
@@ -363,15 +363,15 @@ procedure TSymbol.Shift(Direction: TDirection);
 
         for w := 0 to FWidth - 1 do
           begin
-          a[w] := FSymbol[w, FHeight - 1];
+          a[w] := FCharCanvas[w, FHeight - 1];
 
           for h := FHeight - 1 downto 1 do
-            FSymbol[w, h] := FSymbol[w, h - 1];
+            FCharCanvas[w, h] := FCharCanvas[w, h - 1];
 
           if FShiftRollover then
-            FSymbol[w, 0] := a[w]
+            FCharCanvas[w, 0] := a[w]
           else
-            FSymbol[w, 0] := False;
+            FCharCanvas[w, 0] := False;
           end;
         end;
 
@@ -382,15 +382,15 @@ procedure TSymbol.Shift(Direction: TDirection);
 
         for h := 0 to FHeight - 1 do
           begin
-          a[h] := FSymbol[0, h];
+          a[h] := FCharCanvas[0, h];
 
           for w := 0 to FWidth - 2 do
-            FSymbol[w, h] := FSymbol[w + 1, h];
+            FCharCanvas[w, h] := FCharCanvas[w + 1, h];
 
           if FShiftRollover then
-            FSymbol[FWidth - 1, h] := a[h]
+            FCharCanvas[FWidth - 1, h] := a[h]
           else
-            FSymbol[FWidth - 1, h] := False;
+            FCharCanvas[FWidth - 1, h] := False;
 
           end;
         end;
@@ -402,15 +402,15 @@ procedure TSymbol.Shift(Direction: TDirection);
 
         for h := 0 to FHeight - 1 do
           begin
-          a[h] := FSymbol[FWidth - 1, h];
+          a[h] := FCharCanvas[FWidth - 1, h];
 
           for w := FWidth - 1 downto 1 do
-            FSymbol[w, h] := FSymbol[w - 1, h];
+            FCharCanvas[w, h] := FCharCanvas[w - 1, h];
 
           if FShiftRollover then
-            FSymbol[0, h] := a[h]
+            FCharCanvas[0, h] := a[h]
           else
-            FSymbol[0, h] := False;
+            FCharCanvas[0, h] := False;
           end;
 
         end;
@@ -419,7 +419,7 @@ procedure TSymbol.Shift(Direction: TDirection);
   end;
 
 // прижать символ к краю
-procedure TSymbol.Snap(Border: TBorder);
+procedure TMatrixChar.Snap(Border: TBorder);
   var
     w, h:  Integer;
     empty: Boolean;
@@ -433,7 +433,7 @@ procedure TSymbol.Snap(Border: TBorder);
           empty := True;
 
           for w := 0 to FWidth - 1 do
-            if FSymbol[w, 0] = True then
+            if FCharCanvas[w, 0] = True then
               begin
               empty := False;
               break;
@@ -452,7 +452,7 @@ procedure TSymbol.Snap(Border: TBorder);
           empty := True;
 
           for w := 0 to FWidth - 1 do
-            if FSymbol[w, FHeight - 1] = True then
+            if FCharCanvas[w, FHeight - 1] = True then
               begin
               empty := False;
               break;
@@ -471,7 +471,7 @@ procedure TSymbol.Snap(Border: TBorder);
           empty := True;
 
           for h := 0 to FHeight - 1 do
-            if FSymbol[0, h] = True then
+            if FCharCanvas[0, h] = True then
               begin
               empty := False;
               break;
@@ -490,7 +490,7 @@ procedure TSymbol.Snap(Border: TBorder);
           empty := True;
 
           for h := 0 to FHeight - 1 do
-            if FSymbol[FWidth - 1, h] = True then
+            if FCharCanvas[FWidth - 1, h] = True then
               begin
               empty := False;
               break;
@@ -506,7 +506,7 @@ procedure TSymbol.Snap(Border: TBorder);
   end;
 
 // центрирование символа
-procedure TSymbol.Center(AVertical: Boolean);
+procedure TMatrixChar.Center(AVertical: Boolean);
   var
     i, steps: Integer;
   begin
@@ -528,10 +528,10 @@ procedure TSymbol.Center(AVertical: Boolean);
   end;
 
 // поворот символа
-procedure TSymbol.Rotate(AClockWise: Boolean);
+procedure TMatrixChar.Rotate(AClockWise: Boolean);
   var
     s, h, w: Integer;
-    tmp:     TSymbolField;
+    tmp:     TCharCanvas;
   begin
     s := Min(FWidth, FHeight);
     SetLength(tmp, s, s);
@@ -542,17 +542,17 @@ procedure TSymbol.Rotate(AClockWise: Boolean);
       for w := 0 to s do
         tmp[
           AClockWise.Select(s - h, h),
-          AClockWise.Select(w, s - w)] := FSymbol[w, h];
+          AClockWise.Select(w, s - w)] := FCharCanvas[w, h];
 
     // copy from temp var
     Clear;
     for h := 0 to s do
       for w := 0 to s do
-        FSymbol[w, h] := tmp[w, h];
+        FCharCanvas[w, h] := tmp[w, h];
   end;
 
 // вывести изображение символа в битмап
-procedure TSymbol.Draw(bmp: TBitmap);
+procedure TMatrixChar.Draw(bmp: TBitmap);
   var
     start_x, start_y, end_x, end_y: Integer;
     w, h: Integer;
@@ -573,7 +573,7 @@ procedure TSymbol.Draw(bmp: TBitmap);
           end_x   := start_x + FGridStep;
           end_y   := start_y + FGridStep;
 
-          if FSymbol[w, h] then
+          if FCharCanvas[w, h] then
             Brush.Color := FActiveColor
           else
           if FShowGrid and FGridChessBackground and ((w + h) mod 2 = 0) then
@@ -598,7 +598,7 @@ procedure TSymbol.Draw(bmp: TBitmap);
   end;
 
 // вывести изображение предпросмотра в битмап
-procedure TSymbol.DrawPreview(bmp: TBitmap; Transparency: Boolean = True;
+procedure TMatrixChar.DrawPreview(bmp: TBitmap; Transparency: Boolean = True;
   ColorBG: TColor = $FFFFFF; ColorActive: TColor = 0);
   var
     w, h: Integer;
@@ -607,7 +607,7 @@ procedure TSymbol.DrawPreview(bmp: TBitmap; Transparency: Boolean = True;
       for w := 0 to FWidth - 1 do
         with bmp.Canvas do
           begin
-          if FSymbol[w, h] then
+          if FCharCanvas[w, h] then
             Brush.Color := ColorActive
           else
             Brush.Color := ColorBG;
@@ -623,7 +623,7 @@ procedure TSymbol.DrawPreview(bmp: TBitmap; Transparency: Boolean = True;
   end;
 
 // генерировать код символа
-function TSymbol.GenerateCode(
+function TMatrixChar.GenerateCode(
   fnScanColsFirst,             // поле - флаг очередности сканирования: столбцы-строки
   fnScanColsToRight,           // поле - флаг направления сканирования столбцов
   fnScanRowsToDown,            // поле - флаг направления сканирования строк
@@ -716,9 +716,9 @@ function TSymbol.GenerateCode(
         begin
 
         if fnScanColsFirst then
-          element := FSymbol[abs(w_st - x), abs(h_st - y)]
+          element := FCharCanvas[abs(w_st - x), abs(h_st - y)]
         else
-          element := FSymbol[abs(w_st - y), abs(h_st - x)];
+          element := FCharCanvas[abs(w_st - y), abs(h_st - x)];
 
         if element then
           str_binary := bit1 + str_binary
@@ -756,7 +756,7 @@ function TSymbol.GenerateCode(
   end;
 
 // очистить историю изменений
-procedure TSymbol.ClearChanges;
+procedure TMatrixChar.ClearChanges;
   begin
     FHistoryPosition := 1;
     SaveChange;
@@ -765,48 +765,48 @@ procedure TSymbol.ClearChanges;
   end;
 
 // сохранить текущую правку символа в историю
-procedure TSymbol.SaveChange;
+procedure TMatrixChar.SaveChange;
   begin
     FHistoryPosition := FHistoryPosition + 1;
     SetLength(FHistory, FHistoryPosition);
-    FHistory[FHistoryPosition - 1] := FSymbol;
+    FHistory[FHistoryPosition - 1] := FCharCanvas;
     FHistoryEmpty  := False;
     FHistoryNoRedo := True;
-    SetLength(FSymbol, FWidth, FHeight);
+    SetLength(FCharCanvas, FWidth, FHeight);
   end;
 
 // отменить одну правку с конца истории
-procedure TSymbol.UndoChange;
+procedure TMatrixChar.UndoChange;
   begin
     if FHistoryEmpty then Exit;
 
     FHistoryPosition := FHistoryPosition - 1;
-    FSymbol          := FHistory[FHistoryPosition - 1];
+    FCharCanvas      := FHistory[FHistoryPosition - 1];
 
     if FHistoryPosition = 2 then
       FHistoryEmpty := True;
 
     FHistoryNoRedo := False;
-    SetLength(FSymbol, FWidth, FHeight);
+    SetLength(FCharCanvas, FWidth, FHeight);
   end;
 
 // повторить отмененную ранее правку
-procedure TSymbol.RedoChange;
+procedure TMatrixChar.RedoChange;
   begin
     if FHistoryNoRedo then Exit;
 
     if FHistoryPosition < high(FHistory) + 1 then
       begin
       FHistoryEmpty    := False;
-      FSymbol          := FHistory[FHistoryPosition];
+      FCharCanvas      := FHistory[FHistoryPosition];
       FHistoryPosition := FHistoryPosition + 1;
       FHistoryNoRedo   := FHistoryPosition = (high(FHistory) + 1);
       end;
-    SetLength(FSymbol, FWidth, FHeight);
+    SetLength(FCharCanvas, FWidth, FHeight);
   end;
 
 // увеличение масштаба изображения символа (+10%)
-procedure TSymbol.ZoomIn;
+procedure TMatrixChar.ZoomIn;
   var
     tmp: Integer;
   begin
@@ -819,7 +819,7 @@ procedure TSymbol.ZoomIn;
   end;
 
 // уменьшение масштаба изображения символа (-10%)
-procedure TSymbol.ZoomOut;
+procedure TMatrixChar.ZoomOut;
   var
     tmp: Integer;
   begin
@@ -833,7 +833,7 @@ procedure TSymbol.ZoomOut;
   end;
 
 // масштаб изображения символа: вписанный в заданную область
-procedure TSymbol.ZoomFitToArea(Width, Height: Integer);
+procedure TMatrixChar.ZoomFitToArea(Width, Height: Integer);
   begin
     Width  := Width - FGridThickness;
     Height := Height - FGridThickness;
@@ -847,7 +847,7 @@ procedure TSymbol.ZoomFitToArea(Width, Height: Integer);
   end;
 
 // импорт символа из системного шрифта для растеризации
-procedure TSymbol.Import(Font: TFont; Index: Integer; AEncoding: String);
+procedure TMatrixChar.Import(Font: TFont; Index: Integer; AEncoding: String);
   var
     tmp:  TBitmap;
     w, h: Integer;
@@ -869,14 +869,14 @@ procedure TSymbol.Import(Font: TFont; Index: Integer; AEncoding: String);
       // растеризация символа во внутренний формат
       for h := 0 to FHeight - 1 do
         for w := 0 to FWidth - 1 do
-          FSymbol[w, h] := Pixels[w, h] = 0;
+          FCharCanvas[w, h] := Pixels[w, h] = 0;
       end;
 
     FreeAndNil(tmp);
   end;
 
 // импорт изображения символа из файла PNG
-procedure TSymbol.ImportImage(AFilename: String; ATreshold: Byte);
+procedure TMatrixChar.ImportImage(AFilename: String; ATreshold: Byte);
   var
     tmp:          TPicture;
     w, h, mw, mh: Integer;
@@ -895,14 +895,14 @@ procedure TSymbol.ImportImage(AFilename: String; ATreshold: Byte);
       // растеризация символа во внутренний формат
       for h := 0 to mh do
         for w := 0 to mw do
-          FSymbol[w, h] := ColorToGray(tmp.Bitmap.Canvas.Pixels[w, h]) < ATreshold;
+          FCharCanvas[w, h] := ColorToGray(tmp.Bitmap.Canvas.Pixels[w, h]) < ATreshold;
 
       FreeAndNil(tmp);
       end;
   end;
 
 // получение ширины символа
-function TSymbol.GetCharWidth: Integer;
+function TMatrixChar.GetCharWidth: Integer;
   var
     x, y, w, tmp: Integer;
     empty:        Boolean;
@@ -915,7 +915,7 @@ function TSymbol.GetCharWidth: Integer;
 
       empty := True;
       for y := 0 to FHeight - 1 do
-        if FSymbol[x, y] then
+        if FCharCanvas[x, y] then
           begin
           empty := False;
           break;
@@ -933,7 +933,7 @@ function TSymbol.GetCharWidth: Integer;
   end;
 
 // получение высоты символа
-function TSymbol.GetCharHeight: Integer;
+function TMatrixChar.GetCharHeight: Integer;
   var
     y, x, h, tmp: Integer;
     empty:        Boolean;
@@ -946,7 +946,7 @@ function TSymbol.GetCharHeight: Integer;
 
       empty := True;
       for x := 0 to FWidth - 1 do
-        if FSymbol[x, y] then
+        if FCharCanvas[x, y] then
           begin
           empty := False;
           break;
@@ -964,25 +964,25 @@ function TSymbol.GetCharHeight: Integer;
   end;
 
 // загрузка символа целиком (вызывается обычно после создания символа)
-procedure TSymbol.LoadSymbol(ASymbol: TPSymbolField);
+procedure TMatrixChar.LoadChar(ASymbol: TPCharCanvas);
   begin
-    FSymbol := ASymbol^;
-    SetLength(FSymbol, FWidth, FHeight);
+    FCharCanvas := ASymbol^;
+    SetLength(FCharCanvas, FWidth, FHeight);
 
     SetLength(FHistory, FHistoryPosition);
-    FHistory[FHistoryPosition - 1] := FSymbol;
-    SetLength(FSymbol, FWidth, FHeight);
+    FHistory[FHistoryPosition - 1] := FCharCanvas;
+    SetLength(FCharCanvas, FWidth, FHeight);
   end;
 
 // изменение размеров холста символа
-procedure TSymbol.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
+procedure TMatrixChar.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
   var
     h, w: Integer;
-    tmp:  TSymbolField;
+    tmp:  TCharCanvas;
   begin
     // временная копия символа
     SetLength(tmp, FWidth, FHeight);
-    tmp := FSymbol;
+    tmp := FCharCanvas;
 
     Up    := abs(Up);
     Down  := abs(Down);
@@ -995,7 +995,7 @@ procedure TSymbol.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
       begin
       for h := 0 to FHeight - 1 - Down - Up do
         for w := 0 to FWidth - 1 - Right - Left do
-          Symbol[w, h] := tmp[w + Left, h + Up];
+          CharCanvas[w, h] := tmp[w + Left, h + Up];
 
       h := FHeight - Up - Down;
       w := FWidth - Left - Right;
@@ -1012,16 +1012,16 @@ procedure TSymbol.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
       // очистка фона добавленной области
       for h := 0 to FHeight - 1 do
         for w := 0 to FWidth - 1 do
-          Symbol[w, h] := False;
+          CharCanvas[w, h] := False;
 
       for h := 0 to FHeight - 1 - Down - Up do
         for w := 0 to FWidth - 1 - Right - Left do
-          Symbol[w + Left, h + Up] := tmp[w, h];
+          CharCanvas[w + Left, h + Up] := tmp[w, h];
       end;
   end;
 
 // определение возможности усечь символ: результат - кол-во пустых строк/стоблцов
-function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
+function TMatrixChar.CanOptimize(Direction: TCanOptimize): Integer;
   var
     w, h, Count: Integer;
     exit_:       Boolean;
@@ -1038,7 +1038,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
             exit_ := False;
 
             for w := 0 to FWidth - 1 do
-              if FSymbol[w, h] = True then
+              if FCharCanvas[w, h] = True then
                 begin
                 exit_ := True;
                 break;
@@ -1058,7 +1058,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
             exit_ := False;
 
             for w := 0 to FWidth - 1 do
-              if FSymbol[w, h] = True then
+              if FCharCanvas[w, h] = True then
                 begin
                 exit_ := True;
                 break;
@@ -1078,7 +1078,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
             exit_ := False;
 
             for h := 0 to FHeight - 1 do
-              if FSymbol[w, h] = True then
+              if FCharCanvas[w, h] = True then
                 begin
                 exit_ := True;
                 break;
@@ -1098,7 +1098,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
             exit_ := False;
 
             for h := 0 to FHeight - 1 do
-              if FSymbol[w, h] = True then
+              if FCharCanvas[w, h] = True then
                 begin
                 exit_ := True;
                 break;
@@ -1115,7 +1115,7 @@ function TSymbol.CanOptimize(Direction: TCanOptimize): Integer;
   end;
 
 // операции с буфером обмена
-procedure TSymbol.ClipboardAction(Action: TClipboardAction; Mode: TPasteMode);
+procedure TMatrixChar.ClipboardAction(Action: TClipboardAction; Mode: TPasteMode);
   var
     h, w, cw, ch: Integer;
     pixel:        Boolean;
@@ -1125,29 +1125,29 @@ procedure TSymbol.ClipboardAction(Action: TClipboardAction; Mode: TPasteMode);
     // копирование символа
     if (Action = cbCopy) or (Action = cbCut) then
       with Stream do
-          try
-          if GetCopyBufferEmpty then
-            cb_fmt := RegisterClipboardFormat(EXCHANGE_BUFFER_TYPE_ID)
-          else
-            cb_fmt := Clipboard.FindFormatID(EXCHANGE_BUFFER_TYPE_ID);
+        try
+        if GetCopyBufferEmpty then
+          cb_fmt := RegisterClipboardFormat(EXCHANGE_BUFFER_TYPE_ID)
+        else
+          cb_fmt := Clipboard.FindFormatID(EXCHANGE_BUFFER_TYPE_ID);
 
-          Stream   := TMemoryStream.Create;
-          Position := 0;
-          WriteByte(FWidth);
-          WriteByte(FHeight);
+        Stream   := TMemoryStream.Create;
+        Position := 0;
+        WriteByte(FWidth);
+        WriteByte(FHeight);
 
-          for h := 0 to Height - 1 do
-            for w := 0 to Width - 1 do
-              if FSymbol[w, h] then
-                WriteByte(1)
-              else
-                WriteByte(0);
+        for h := 0 to Height - 1 do
+          for w := 0 to Width - 1 do
+            if FCharCanvas[w, h] then
+              WriteByte(1)
+            else
+              WriteByte(0);
 
-          Clipboard.AddFormat(cb_fmt, Stream);
-          FCopyBufferEmpty := False;
-          finally
-          FreeAndNil(Stream);
-          end;
+        Clipboard.AddFormat(cb_fmt, Stream);
+        FCopyBufferEmpty := False;
+        finally
+        FreeAndNil(Stream);
+        end;
 
     // вырезание символа: копировать + очистить
     if Action = cbCut then
@@ -1164,40 +1164,40 @@ procedure TSymbol.ClipboardAction(Action: TClipboardAction; Mode: TPasteMode);
           end;
 
         if cb_fmt <> 0 then
-            try
-            Stream := TMemoryStream.Create;
+          try
+          Stream := TMemoryStream.Create;
 
-            if Clipboard.GetFormat(cb_fmt, Stream) then
-              begin
-              Position := 0;
-              cw       := ReadByte;
-              ch       := ReadByte;
+          if Clipboard.GetFormat(cb_fmt, Stream) then
+            begin
+            Position := 0;
+            cw       := ReadByte;
+            ch       := ReadByte;
 
-              for h := 0 to ch - 1 do
-                for w := 0 to cw - 1 do
-                  begin
-                  pixel := (ReadByte = 1);
+            for h := 0 to ch - 1 do
+              for w := 0 to cw - 1 do
+                begin
+                pixel := (ReadByte = 1);
 
-                  if (w < FWidth) and (h < FHeight) then
-                    case Mode of
-                      pmNorm:
-                        FSymbol[w, h] := pixel;
-                      pmOr:
-                        FSymbol[w, h] := FSymbol[w, h] or pixel;
-                      pmXor:
-                        FSymbol[w, h] := FSymbol[w, h] xor pixel;
-                      pmAnd:
-                        FSymbol[w, h] := FSymbol[w, h] and pixel;
-                      end;
-                  end;
-              end;
-            finally
-            FreeAndNil(Stream);
+                if (w < FWidth) and (h < FHeight) then
+                  case Mode of
+                    pmNorm:
+                      FCharCanvas[w, h] := pixel;
+                    pmOr:
+                      FCharCanvas[w, h] := FCharCanvas[w, h] or pixel;
+                    pmXor:
+                      FCharCanvas[w, h] := FCharCanvas[w, h] xor pixel;
+                    pmAnd:
+                      FCharCanvas[w, h] := FCharCanvas[w, h] and pixel;
+                    end;
+                end;
             end;
+          finally
+          FreeAndNil(Stream);
+          end;
         end;
   end;
 
-constructor TSymbol.Create;
+constructor TMatrixChar.Create;
   begin
     FHeight              := 1;
     FWidth               := 1;
@@ -1212,7 +1212,7 @@ constructor TSymbol.Create;
     FShowGrid            := True;
     FShiftRollover       := True;
     FHistoryPosition     := 1;
-    SetLength(FSymbol, FWidth, FHeight);
+    SetLength(FCharCanvas, FWidth, FHeight);
     Clear;
     SaveChange;
     FHistoryEmpty  := True;
@@ -1221,9 +1221,9 @@ constructor TSymbol.Create;
     GetCopyBufferEmpty;
   end;
 
-destructor TSymbol.Destroy;
+destructor TMatrixChar.Destroy;
   begin
-    FSymbol := nil;
+    FCharCanvas := nil;
     inherited; // Эквивалентно: inherited Destroy;
   end;
 

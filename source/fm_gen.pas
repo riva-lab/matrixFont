@@ -135,8 +135,8 @@ type
   end;
 
 var
-  FontSet: TFont;
-  fmGen:   TfmGen;
+  mxFont: TMatrixFont;
+  fmGen:  TfmGen;
 
 implementation
 
@@ -155,8 +155,8 @@ procedure TfmGen.FormShow(Sender: TObject);
 
     BeginFormUpdate;
 
-    if FontSet <> nil then
-      with FontSet do
+    if mxFont <> nil then
+      with mxFont do
         begin
         SaveDlg.FileName := AnsiReplaceText(LowerCase(Name), ' ', '_') + '_font.h';
         edDefPrefix.Text := Transliterate(UpperCase('FONT_' + AnsiReplaceText(Name, ' ', '_')));
@@ -199,18 +199,18 @@ procedure TfmGen.edDefPrefixChange(Sender: TObject);
   var
     cursor_position, old_str_length, new_str_length: Integer;
   begin
-    if FontSet = nil then Exit;
+    if mxFont = nil then Exit;
 
     with edDefPrefix do
       begin
       cursor_position := SelStart;
-      old_str_length  := Length(UTF8ToEncoding(Text, FontSet.Encoding));
+      old_str_length  := Length(UTF8ToEncoding(Text, mxFont.Encoding));
       Text            := Transliterate(Text);
-      new_str_length  := Length(UTF8ToEncoding(Text, FontSet.Encoding));
+      new_str_length  := Length(UTF8ToEncoding(Text, mxFont.Encoding));
       SelStart        := cursor_position + new_str_length - old_str_length;
 
       if Length(Text) = 0 then
-        Text := UpperCase('FONT_' + AnsiReplaceText(FontSet.Name, ' ', '_'));
+        Text := UpperCase('FONT_' + AnsiReplaceText(mxFont.Name, ' ', '_'));
       end;
 
     acRefreshOut.Execute;
@@ -228,9 +228,9 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
   var
     TopLine_: Integer;
   begin
-    if FontSet = nil then Exit;
+    if mxFont = nil then Exit;
 
-    with FontSet do
+    with mxFont do
       begin
       ScanColsFirst    := cbScanColsFirst.ItemIndex = 0;
       ScanColsToRight  := cbScanColsToRight.ItemIndex = 0;
@@ -246,7 +246,7 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
 
     BeginFormUpdate;
     TopLine_       := snEdit.TopLine; // запоминаем положение текста
-    snEdit.Text    := FontSet.GenerateCode(seStart.Value, seEnd.Value);
+    snEdit.Text    := mxFont.GenerateCode(seStart.Value, seEnd.Value);
     snEdit.TopLine := TopLine_;       // восстанивливаем положение текста
     EndFormUpdate;
   end;
@@ -254,9 +254,9 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
 // восстановление диапазона вывода
 procedure TfmGen.acResetRangeExecute(Sender: TObject);
   begin
-    if FontSet = nil then Exit;
+    if mxFont = nil then Exit;
 
-    with FontSet do
+    with mxFont do
       begin
       seStart.MinValue := FontStartItem;
       seStart.MaxValue := FontLength + FontStartItem - 1;

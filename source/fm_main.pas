@@ -314,8 +314,8 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
     if cnt mod 4 = 0 then
       begin
       // отслеживание буфера обмена на наличие данных
-      acSymbolPaste.Enabled := not FontSet.Item[0].CopyBufferEmpty;
-      acFontPaste.Enabled   := not FontSet.Item[0].CopyBufferEmpty;
+      acSymbolPaste.Enabled := not mxFont.Item[0].CopyBufferEmpty;
+      acFontPaste.Enabled   := not mxFont.Item[0].CopyBufferEmpty;
       end;
 
     // управление видимостью панелей кнопок
@@ -338,41 +338,41 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
   begin
       try
       bm_tmp        := TBitmap.Create;
-      bm_tmp.Width  := FontSet.Item[0].Width;
-      bm_tmp.Height := FontSet.Item[0].Height;
+      bm_tmp.Width  := mxFont.Item[0].Width;
+      bm_tmp.Height := mxFont.Item[0].Height;
 
       with sgNavigator do
         begin
         Columns.Items[ColCount - 1].Width :=
-          DefaultRowHeight * FontSet.Width div FontSet.Height;
+          DefaultRowHeight * mxFont.Width div mxFont.Height;
 
         if (aRow >= TopRow) and (aRow - TopRow <= VisibleRowCount) and
           (aCol = ColCount - 1) and (aRow >= FixedRows) then
           begin
           // символ
-          Cells[0, aRow] := FontSet.GetCharName(FontSet.FontStartItem + aRow - FixedRows);
+          Cells[0, aRow] := mxFont.GetCharName(mxFont.FontStartItem + aRow - FixedRows);
 
           // код символа
           if cfg.nav.code.hex then
-            Cells[1, aRow] := IntToHex(FontSet.FontStartItem + aRow - FixedRows, 2) else
-            Cells[1, aRow] := IntToStr(FontSet.FontStartItem + aRow - FixedRows);
+            Cells[1, aRow] := IntToHex(mxFont.FontStartItem + aRow - FixedRows, 2) else
+            Cells[1, aRow] := IntToStr(mxFont.FontStartItem + aRow - FixedRows);
 
           // превью символа
           if cfg.nav.invert and (aRow = Row) then
             // выделенная строка в навигаторе
-            FontSet.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
+            mxFont.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
               cfg.color.nav.active, cfg.color.nav.bg)
           else
             // невыделенная строка в навигаторе
-            FontSet.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
+            mxFont.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
               cfg.color.nav.bg, cfg.color.nav.active);
           Canvas.StretchDraw(aRect, bm_tmp);
           end;
 
         // заголовок редактора
         lbEditor.Caption := TXT_SYMBOL + '  <' + sgNavigator.Cells[0, Row] + '>'
-          + '  DEC = ' + IntToStr(FontSet.FontStartItem + Row - FixedRows)
-          + ';  HEX = ' + IntToHex(FontSet.FontStartItem + Row - FixedRows, 2);
+          + '  DEC = ' + IntToStr(mxFont.FontStartItem + Row - FixedRows)
+          + ';  HEX = ' + IntToHex(mxFont.FontStartItem + Row - FixedRows, 2);
         end;
       finally
       FreeAndNil(bm_tmp);
@@ -382,9 +382,9 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
 // обновление изображения при смене символа (перемещении в навигаторе)
 procedure TfmMain.sgNavigatorSelection(Sender: TObject; aCol, aRow: Integer);
   var
-    item: TSymbol;
+    item: TMatrixChar;
   begin
-    item                 := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    item                 := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
     acSymbolUndo.Enabled := not item.HistoryEmpty;
     acSymbolRedo.Enabled := not item.HistoryNoRedo;
     ReDrawImage;
@@ -411,7 +411,7 @@ procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
   var
     i:         Integer;
-    item:      TSymbol;
+    item:      TMatrixChar;
     pixAction: TPixelAction = TPixelAction.paNone;
   begin
     case Button of
@@ -422,17 +422,17 @@ procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
 
     if pixAction <> TPixelAction.paNone then
       begin
-      X := (X - FontSet.GridThickness div 2) div FontSet.GridStep;
-      Y := (Y - FontSet.GridThickness div 2) div FontSet.GridStep;
+      X := (X - mxFont.GridThickness div 2) div mxFont.GridStep;
+      Y := (Y - mxFont.GridThickness div 2) div mxFont.GridStep;
 
-      item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
+      item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
       if ssCtrl in Shift then
-        for i := 0 to FontSet.Width - 1 do
+        for i := 0 to mxFont.Width - 1 do
           item.PixelAction(i, y, pixAction);
 
       if ssShift in Shift then
-        for i := 0 to FontSet.Height - 1 do
+        for i := 0 to mxFont.Height - 1 do
           item.PixelAction(x, i, pixAction);
 
       if not ((ssCtrl in Shift) xor (ssShift in Shift)) then
@@ -453,8 +453,8 @@ procedure TfmMain.imEditorMouseMove(Sender: TObject; Shift: TShiftState; X, Y: I
       if ssRight in Shift then Button := mbRight;
       imEditorMouseDown(Sender, Button, Shift, X, Y);
 
-      stStatusBar.Panels.Items[2].Text := 'X,Y: ' + IntToStr((x - 1) div FontSet.GridStep + 1) +
-        ', ' + IntToStr((y - 1) div FontSet.GridStep + 1);
+      stStatusBar.Panels.Items[2].Text := 'X,Y: ' + IntToStr((x - 1) div mxFont.GridStep + 1) +
+        ', ' + IntToStr((y - 1) div mxFont.GridStep + 1);
 
       timer_up := False;
       Inc(frames); // счетчик FPS
@@ -525,7 +525,7 @@ procedure TfmMain.acSaveExecute(Sender: TObject);
 
       if dlgOpen.FileName = '' then
         begin
-        FileName := AnsiReplaceText(FontSet.Name, ' ', '_');
+        FileName := AnsiReplaceText(mxFont.Name, ' ', '_');
         if Execute then FontSave(FileName);
         end
       else
@@ -551,7 +551,7 @@ procedure TfmMain.acSaveAsBeforeExecute(Sender: TObject);
         FileName := dlgOpen.FileName;
 
       if FileName = '' then
-        FileName := AnsiReplaceText(FontSet.Name, ' ', '_');
+        FileName := AnsiReplaceText(mxFont.Name, ' ', '_');
 
       InitialDir := ExtractFileDir(FileName) + DirectorySeparator;
       FileName   := ExtractFileNameOnly(FileName);
@@ -577,10 +577,10 @@ procedure TfmMain.acFontImportExecute(Sender: TObject);
           seW.Value, seH.Value, seStartItem.Value, seLastItem.Value - seStartItem.Value + 1,
           cbEncoding.ItemIndex, dlgFont.Font.Name + ' ' + dlgFont.Font.Size.ToString,
           cfg.new.author);
-        FontSet.Import(dlgFont.Font, seW.Value, seH.Value);
+        mxFont.Import(dlgFont.Font, seW.Value, seH.Value);
 
         if cbSnapLeft.Checked then acFontSnapLeft.Execute else acFontCenterH.Execute;
-        if cbOptimize.Checked then FontSet.ChangeSize(-1, -1, -1, -1, True);
+        if cbOptimize.Checked then mxFont.ChangeSize(-1, -1, -1, -1, True);
 
         FontCreateFinish;
         acSaveAs.Dialog.FileName := '';
@@ -595,7 +595,7 @@ procedure TfmMain.acFontImportCCodeExecute(Sender: TObject);
 
     with fmImportC do
       begin
-      FontImp.Encoding := FontSet.Encoding;
+      FontImp.Encoding := mxFont.Encoding;
 
       if ShowModal = mrOk then
         begin
@@ -605,7 +605,7 @@ procedure TfmMain.acFontImportCCodeExecute(Sender: TObject);
           seImpWidth.Value, seImpHeight.Value,
           seImpStartItem.Value, seImpLastItem.Value - seImpStartItem.Value + 1,
           cfg.new.enc, cfg.new.title, cfg.new.author);
-        UpdateFont(FontSet);
+        UpdateFont(mxFont);
         FontCreateFinish;
         end;
       end;
@@ -614,7 +614,7 @@ procedure TfmMain.acFontImportCCodeExecute(Sender: TObject);
 // действие: просмотр и изменение свойств шрифта
 procedure TfmMain.acFontPropertiesExecute(Sender: TObject);
   begin
-    with fmProp, FontSet do
+    with fmProp, mxFont do
       begin
       prPath      := dlgOpen.FileName;
       prName      := Name;
@@ -653,7 +653,7 @@ procedure TfmMain.acFontPreviewExecute(Sender: TObject);
       fmPreview.SaveDlg.InitialDir := ExtractFileDir(FileName) + DirectorySeparator;
       end;
 
-    fmPreview.PFontCustom := @FontSet;
+    fmPreview.PFontCustom := @mxFont;
     fmPreview.Show;
     FormWindowStateChange(Sender);
   end;
@@ -689,9 +689,9 @@ procedure TfmMain.acGenFormOnTopExecute(Sender: TObject);
 // действия с символом: масштабирование
 procedure TfmMain.actionZooming(Sender: TObject);
   var
-    item: TSymbol;
+    item: TMatrixChar;
   begin
-    item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
     if Sender <> nil then
       case TAction(Sender).Name of
@@ -706,18 +706,18 @@ procedure TfmMain.actionZooming(Sender: TObject);
           item.ZoomOut;
         end;
 
-    imEditor.Width   := item.WidthInPixels;
-    imEditor.Height  := item.HeightInPixels;
-    FontSet.GridStep := item.GridStep;
+    imEditor.Width  := item.WidthInPixels;
+    imEditor.Height := item.HeightInPixels;
+    mxFont.GridStep := item.GridStep;
     ReDrawImage;
   end;
 
 // действия с символом: отмена/повтор
 procedure TfmMain.actionSymbolHistory(Sender: TObject);
   var
-    item: TSymbol;
+    item: TMatrixChar;
   begin
-    item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
     case TAction(Sender).Name of
 
@@ -728,10 +728,10 @@ procedure TfmMain.actionSymbolHistory(Sender: TObject);
         item.RedoChange;
 
       'acFontUndo':
-        FontSet.UndoChange;
+        mxFont.UndoChange;
 
       'acFontRedo':
-        FontSet.RedoChange;
+        mxFont.RedoChange;
       end;
 
     acSymbolUndo.Enabled := not item.HistoryEmpty;
@@ -747,28 +747,28 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
       begin
       // показать/скрыть панель поиска символа в таблице
       pFind.Visible := acSymbolFind.Checked;
-      seFind.Value  := sgNavigator.Row + FontSet.FontStartItem - sgNavigator.FixedRows;
-      edFind.Text   := EncodingToUTF8(Char(seFind.Value), FontSet.Encoding);
+      seFind.Value  := sgNavigator.Row + mxFont.FontStartItem - sgNavigator.FixedRows;
+      edFind.Text   := EncodingToUTF8(Char(seFind.Value), mxFont.Encoding);
       end
     else
       begin
 
       // поиск и выделение найденного символа по коду
       if TSpinEdit(Sender).Name = 'seFind' then
-        if (seFind.Value >= FontSet.FontStartItem) and
-          (seFind.Value < FontSet.FontStartItem + FontSet.FontLength) then
-          edFind.Text := EncodingToUTF8(Char(seFind.Value), FontSet.Encoding);
+        if (seFind.Value >= mxFont.FontStartItem) and
+          (seFind.Value < mxFont.FontStartItem + mxFont.FontLength) then
+          edFind.Text := EncodingToUTF8(Char(seFind.Value), mxFont.Encoding);
 
       // поиск и выделение найденного символа по названию
       if TEdit(Sender).Name = 'edFind' then
         if edFind.Text <> '' then
           try
-          seFind.Value := Ord(UTF8ToEncoding(edFind.Text, FontSet.Encoding)[1]);
+          seFind.Value := Ord(UTF8ToEncoding(edFind.Text, mxFont.Encoding)[1]);
           except
-          seFind.Value := FontSet.FontStartItem;
+          seFind.Value := mxFont.FontStartItem;
           end;
 
-      sgNavigator.Row := seFind.Value - FontSet.FontStartItem + sgNavigator.FixedRows;
+      sgNavigator.Row := seFind.Value - mxFont.FontStartItem + sgNavigator.FixedRows;
       sgNavigatorSelection(Sender, 1, sgNavigator.Row);
       end;
   end;
@@ -802,10 +802,10 @@ procedure TfmMain.actionPasteMode(Sender: TObject);
 // действия с выбранным символом
 procedure TfmMain.actionSymbolGeneral(Sender: TObject);
   var
-    item: TSymbol;
+    item: TMatrixChar;
     meta: String;
   begin
-    item := FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
     case TAction(Sender).Name of
 
@@ -838,7 +838,7 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
 
               if (fmConfirm.Show(TXT_WARNING, WARN_IMPORT, mbYesNo, Self) = mrYes)
                 and GetConfirmation
-                and ImportFontFromPNG(FileName, meta, FontSet) then
+                and ImportFontFromPNG(FileName, meta, mxFont) then
                 FontCreateFinish;
 
               FileName := '';
@@ -907,68 +907,68 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
     case TAction(Sender).Name of
 
       'acFontClear':      // действие: очистка символов шрифта
-        FontSet.Clear;
+        mxFont.Clear;
 
       'acFontInvert':     // действие: инверсия символов шрифта
-        FontSet.Invert;
+        mxFont.Invert;
 
       'acFontMirrorHorz': // действие: отображение горизонтально символов шрифта
-        FontSet.Mirror(TMirror.mrHorizontal);
+        mxFont.Mirror(TMirror.mrHorizontal);
 
       'acFontMirrorVert': // действие: отображение вертикально символов шрифта
-        FontSet.Mirror(TMirror.mrVertical);
+        mxFont.Mirror(TMirror.mrVertical);
 
 
       'acFontShiftDown':  // действие: сдвиг вниз символов шрифта
-        FontSet.Shift(TDirection.dirDown);
+        mxFont.Shift(TDirection.dirDown);
 
       'acFontShiftLeft':  // действие: сдвиг влево символов шрифта
-        FontSet.Shift(TDirection.dirLeft);
+        mxFont.Shift(TDirection.dirLeft);
 
       'acFontShiftRight': // действие: сдвиг вправо символов шрифта
-        FontSet.Shift(TDirection.dirRight);
+        mxFont.Shift(TDirection.dirRight);
 
       'acFontShiftUp':    // действие: сдвиг вверх символов шрифта
-        FontSet.Shift(TDirection.dirUp);
+        mxFont.Shift(TDirection.dirUp);
 
 
       'acFontSnapDown':   // действие: прижатие вниз символов шрифта
-        FontSet.Snap(TBorder.brDown);
+        mxFont.Snap(TBorder.brDown);
 
       'acFontSnapLeft':   // действие: прижатие влево символов шрифта
-        FontSet.Snap(TBorder.brLeft);
+        mxFont.Snap(TBorder.brLeft);
 
       'acFontSnapRight':  // действие: прижатие вправо символов шрифта
-        FontSet.Snap(TBorder.brRight);
+        mxFont.Snap(TBorder.brRight);
 
       'acFontSnapUp':     // действие: прижатие вверх символов шрифта
-        FontSet.Snap(TBorder.brUp);
+        mxFont.Snap(TBorder.brUp);
 
 
       'acFontCenterH':    // действие: центрирование символов шрифта горизонтально
-        FontSet.Center(False);
+        mxFont.Center(False);
 
       'acFontCenterV':    // действие: центрирование символов шрифта вертикально
-        FontSet.Center(True);
+        mxFont.Center(True);
 
 
       'acFontRotateCW':   // действие: поворот символов шрифта по ч.с.
-        FontSet.Rotate(True);
+        mxFont.Rotate(True);
 
       'acFontRotateCCW':  // действие: поворот символов шрифта против ч.с.
-        FontSet.Rotate(False);
+        mxFont.Rotate(False);
 
 
       'acFontPaste':      // действие: пакетная вставка
-        FontSet.Paste(FPasteMode);
+        mxFont.Paste(FPasteMode);
 
 
       'acSymbolMoveUp':   // действие: переместить символ вверх
-        if FontSet.SwapChars(curr, curr - 1) then
+        if mxFont.SwapChars(curr, curr - 1) then
           sgNavigator.Row := sgNavigator.FixedRows + curr - 1;
 
       'acSymbolMoveDown': // действие: переместить символ вниз
-        if FontSet.SwapChars(curr, curr + 1) then
+        if mxFont.SwapChars(curr, curr + 1) then
           sgNavigator.Row := sgNavigator.FixedRows + curr + 1;
       end;
 
@@ -982,7 +982,7 @@ procedure TfmMain.actionService(Sender: TObject);
 
       'acMap':     // действие: показать окно "Карта символов"
         begin
-        fmMap.FontX := FontSet;
+        fmMap.FontX := mxFont;
         fmMap.Show;
         FormWindowStateChange(Sender);
         end;
@@ -1050,7 +1050,7 @@ procedure TfmMain.edFindUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
 // действие: изменение диапазона символов шрифта
 procedure TfmMain.acFontCharsetExecute(Sender: TObject);
   begin
-    with fmRange, FontSet do
+    with fmRange, mxFont do
       begin
       seStart.Value := FontStartItem;
       seEnd.Value   := FontLength + FontStartItem - 1;
@@ -1059,7 +1059,7 @@ procedure TfmMain.acFontCharsetExecute(Sender: TObject);
         begin
         SetRange(seStart.Value, seEnd.Value);
 
-        sgNavigator.RowCount := FontSet.FontLength + sgNavigator.FixedRows;
+        sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
         FontActionExecute;
         end;
       end;
@@ -1068,7 +1068,7 @@ procedure TfmMain.acFontCharsetExecute(Sender: TObject);
 // действие: оптимизация размеров холста символов шрифта
 procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
   begin
-    with fmOptimize, FontSet do
+    with fmOptimize, mxFont do
       begin
       opt_oldHeight := Height;
       opt_oldWidth  := Width;
@@ -1095,12 +1095,12 @@ procedure TfmMain.acFontChangeSizesExecute(Sender: TObject);
   begin
     with fmSizes do
       begin
-      oldHeight := FontSet.Height;
-      oldWidth  := FontSet.Width;
+      oldHeight := mxFont.Height;
+      oldWidth  := mxFont.Width;
 
       if fmSizes.ShowModal = mrOk then
         begin
-        FontSet.ChangeSize(
+        mxFont.ChangeSize(
           seUp.Value, seDown.Value,
           seLeft.Value, seRight.Value,
           rgMode.ItemIndex = 1);
@@ -1194,12 +1194,12 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
     AdjustThemeDependentValues;
     AdjustComponentSizes;
 
-    if FontSet <> nil then
+    if mxFont <> nil then
       try
-      with FontSet do
+      with mxFont do
         begin
-        ShowGrid              := acGridToggle.Checked;
-        FontSet.ShiftRollover := acFontShiftRollover.Checked;
+        ShowGrid             := acGridToggle.Checked;
+        mxFont.ShiftRollover := acFontShiftRollover.Checked;
 
         BackgroundColor     := cfg.color.editor.bg;
         ActiveColor         := cfg.color.editor.active;
@@ -1258,7 +1258,7 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
 // загрузка файла шрифта
 procedure TfmMain.FontLoadFromFile(AFileName: String);
   var
-    tmp:        TFont;
+    tmp:        TMatrixFont;
     isReadable: Boolean;
   begin
     if not GetConfirmation then Exit;
@@ -1267,7 +1267,7 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
     // load from original matrixFont font file
     if FileExtCheck(AFileName, FILE_EXTENSION) then
       begin
-      tmp        := TFont.Create;
+      tmp        := TMatrixFont.Create;
       isReadable := tmp.ReadFromFile(AFileName);
       FreeAndNil(tmp);
 
@@ -1279,10 +1279,10 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
         end;
 
       // загружаем файл, если он не поврежден
-      with FontSet do
+      with mxFont do
         begin
-        FreeAndNil(FontSet);
-        FontSet := TFont.Create;
+        FreeAndNil(mxFont);
+        mxFont := TMatrixFont.Create;
         ReadFromFile(AFileName);
 
         acSymbolRedo.Enabled     := False;
@@ -1303,7 +1303,7 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
       with rbfConverter do
         begin
         FontCreateNew(1, 1, 0, 1, 0, '', '');
-        AssignRHF(FontSet);
+        AssignRHF(mxFont);
         LoadFromFile(AFileName);
         LastFileAdd(AFileName);
         FontCreateFinish;
@@ -1314,10 +1314,10 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
 procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
   begin
       try
-      with FontSet do
+      with mxFont do
         begin
-        FreeAndNil(FontSet);
-        FontSet              := TFont.Create;
+        FreeAndNil(mxFont);
+        mxFont               := TMatrixFont.Create;
         acSymbolRedo.Enabled := False;
         acSymbolUndo.Enabled := False;
 
@@ -1349,7 +1349,7 @@ procedure TfmMain.FontSave(AFileName: String);
     // save to original matrixFont font file
     if FileExtCheck(AFileName, FILE_EXTENSION) then
       begin
-      FontSet.SaveToFile(AFileName);
+      mxFont.SaveToFile(AFileName);
       LastFileAdd(AFileName);
       dlgOpen.FileName := AFileName;
       file_changed     := False;
@@ -1359,7 +1359,7 @@ procedure TfmMain.FontSave(AFileName: String);
     if FileExtCheck(AFileName, RBF_EXTENSION) then
       with rbfConverter do
         begin
-        AssignRHF(FontSet);
+        AssignRHF(mxFont);
         if fmRbf.ShowModal = mrOk then
           SaveToFile(AFileName);
         end;
@@ -1398,19 +1398,19 @@ procedure TfmMain.FileStatusUpdate;
   begin
     BeginFormUpdate;
 
-    s := FontSet.Name;
+    s := mxFont.Name;
     if dlgOpen.FileName <> '' then s += ' [' + ExtractFileName(dlgOpen.FileName) + ']';
     if file_changed then s += ' (' + TXT_CHANGED + ')';
 
     fmMain.Caption    := GetAppName + ' - ' + s;
     Application.Title := s;
 
-    with FontSet do
+    with mxFont do
       miFontInfo.Caption := UpperCase(Encoding) + '   '
         + Width.ToString + ' x ' + Height.ToString;
 
     // visibility of controls in navigator on the left side
-    with FontSet, psSide1 do
+    with mxFont, psSide1 do
       if acViewNavigator.Checked then
         begin
         lbNavigator.Caption  := Format(' %s: %d - %d ', [TXT_NAVIGATOR, FontStartItem, FontStartItem + FontLength - 1]);
@@ -1432,7 +1432,7 @@ procedure TfmMain.FontActionExecute;
   begin
     ReDrawImage;
     ReDrawContent;
-    acSymbolUndo.Enabled := not FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows].HistoryEmpty;
+    acSymbolUndo.Enabled := not mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].HistoryEmpty;
     acSymbolRedo.Enabled := False;
     file_changed         := True;
     FileStatusUpdate();
@@ -1441,12 +1441,12 @@ procedure TfmMain.FontActionExecute;
 // завершение создания шрифта
 procedure TfmMain.FontCreateFinish;
   begin
-    FontSet.ClearChanges;
+    mxFont.ClearChanges;
 
-    imEditor.Width  := FontSet.Item[0].WidthInPixels;
-    imEditor.Height := FontSet.Item[0].HeightInPixels;
+    imEditor.Width  := mxFont.Item[0].WidthInPixels;
+    imEditor.Height := mxFont.Item[0].HeightInPixels;
 
-    sgNavigator.RowCount := FontSet.FontLength + sgNavigator.FixedRows;
+    sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
 
     acZoomFit.Execute;
     FontActionExecute;
@@ -1459,7 +1459,7 @@ procedure TfmMain.FontCreateFinish;
 // действия после применения изменений к символу
 procedure TfmMain.ReDrawAfterAction;
   begin
-    FontSet.Item[sgNavigator.Row - sgNavigator.FixedRows].SaveChange;
+    mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].SaveChange;
     file_changed         := True;
     acSymbolUndo.Enabled := True;
     acSymbolRedo.Enabled := False;
@@ -1478,9 +1478,9 @@ procedure TfmMain.ReDrawImage;
 
     with imEditor.Picture do
       begin
-      Bitmap.Width  := FontSet.Item[index].WidthInPixels;
-      Bitmap.Height := FontSet.Item[index].HeightInPixels;
-      FontSet.Item[index].Draw(Bitmap);
+      Bitmap.Width  := mxFont.Item[index].WidthInPixels;
+      Bitmap.Height := mxFont.Item[index].HeightInPixels;
+      mxFont.Item[index].Draw(Bitmap);
       end;
 
     imEditor.Visible := True; // отображаем готовое изображение

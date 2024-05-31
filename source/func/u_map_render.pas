@@ -22,11 +22,11 @@ function GetTextChunkFromPNG(const AFilename, AKey: String): String;
 procedure ImplantWatermark(ABitmap: TBitmap; AData: String);
 function ExtractWatermark(ABitmap: TBitmap): String;
 
-procedure RenderMapToPNG(AFileName: String; AFont: TFont; ACols, AScale, ASpace: Integer;
+procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, ASpace: Integer;
   AColorBG, AColor0, AColor1: TColor; ALabelFont: String);
 
 function IsImageContainFontSet(AFileName: String; out AMetaData: String): Boolean;
-function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TFont): Boolean;
+function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont): Boolean;
 
 
 implementation
@@ -212,7 +212,7 @@ function ExtractWatermark(ABitmap: TBitmap): String;
   end;
 
 
-procedure RenderMapToPNG(AFileName: String; AFont: TFont; ACols, AScale, ASpace: Integer;
+procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, ASpace: Integer;
   AColorBG, AColor0, AColor1: TColor; ALabelFont: String);
 
   const
@@ -385,7 +385,7 @@ function IsImageContainFontSet(AFileName: String; out AMetaData: String): Boolea
     Result := not AMetaData.IsEmpty;
   end;
 
-function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TFont): Boolean;
+function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont): Boolean;
   var
     pic:      TPicture;
     pixRef:   TColor;

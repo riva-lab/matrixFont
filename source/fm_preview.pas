@@ -13,7 +13,7 @@ resourcestring
   FM_PREV_EXAMPLE = 'Образец текста';
 
 type
-  TPFontCustom = ^font.TFont; // указатель на шрифт
+  TPFontCustom = ^font.TMatrixFont; // указатель на шрифт
 
   { TfmPreview }
 
@@ -76,10 +76,10 @@ type
     // обновление изображения предпросмотра
     procedure UpdatePreview;
 
-  PRIVATE
+  private
     procedure InitConfig;
 
-  PUBLIC
+  public
     { public declarations }
     PFontCustom: TPFontCustom;
   end;
@@ -108,9 +108,9 @@ implementation
 procedure TfmPreview.FormCreate(Sender: TObject);
   begin
     InitConfig;
-    pcPages.ActivePageIndex  := 0;
-    pcPages.ShowTabs         := False;
-    mmPreview.Text           := PREVIEW_TEXT_DEFAULT;
+    pcPages.ActivePageIndex := 0;
+    pcPages.ShowTabs        := False;
+    mmPreview.Text          := PREVIEW_TEXT_DEFAULT;
   end;
 
 // показ формы предпросмотра
@@ -155,22 +155,22 @@ procedure TfmPreview.acExportImageExecute(Sender: TObject);
       FileName := PFontCustom^.Name + '_preview_' + IntToStr(i) + '.png';
 
       if Execute then
-          try
-          pic := TPicture.Create;
+        try
+        pic := TPicture.Create;
 
-          with pic.Bitmap do
-            begin
-            Width  := imPreview.Picture.Bitmap.Width * cfg.prev.scale;
-            Height := imPreview.Picture.Bitmap.Height * cfg.prev.scale;
+        with pic.Bitmap do
+          begin
+          Width  := imPreview.Picture.Bitmap.Width * cfg.prev.scale;
+          Height := imPreview.Picture.Bitmap.Height * cfg.prev.scale;
 
-            // создание увеличенного в cfg.prev.scale раз изображения
-            Canvas.StretchDraw(Rect(0, 0, Width, Height), imPreview.Picture.Graphic);
-            end;
-
-          pic.SaveToFile(FileName, 'png');
-          finally
-          FreeAndNil(pic);
+          // создание увеличенного в cfg.prev.scale раз изображения
+          Canvas.StretchDraw(Rect(0, 0, Width, Height), imPreview.Picture.Graphic);
           end;
+
+        pic.SaveToFile(FileName, 'png');
+        finally
+        FreeAndNil(pic);
+        end;
       end;
   end;
 
@@ -226,8 +226,8 @@ procedure TfmPreview.UpdatePreview;
     lbBackground.Color := cfg.color.prev.bg;
 
     // определяем ширину текста
-    x := 0;
-    for y := 0 to mmPreview.Lines.Count - 1 do
+    x            := 0;
+    for y        := 0 to mmPreview.Lines.Count - 1 do
       begin
       xl         := x;
       x          := 0;
@@ -240,7 +240,7 @@ procedure TfmPreview.UpdatePreview;
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
               PFontCustom^.Encoding)[i]) - FontStartItem;
             if (char_code >= 0) and (char_code <= FontLength - 1) then
-              x := x + Item[char_code].GetCharWidth + seSpace.Value;
+              x       := x + Item[char_code].GetCharWidth + seSpace.Value;
             end
       else
         x := txt_length * (CharWidth + seSpace.Value) + 2;

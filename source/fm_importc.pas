@@ -144,13 +144,13 @@ type
 
   public
     procedure OnLanguageChange;
-    procedure UpdateFont(AFont: TFont = nil);
+    procedure UpdateFont(AFont: TMatrixFont = nil);
 
   end;
 
 var
   fmImportC: TfmImportC;
-  FontImp:   TFont;
+  FontImp:   TMatrixFont;
 
 implementation
 
@@ -484,7 +484,7 @@ procedure TfmImportC.OnLanguageChange;
       end;
   end;
 
-procedure TfmImportC.UpdateFont(AFont: TFont);
+procedure TfmImportC.UpdateFont(AFont: TMatrixFont);
   begin
     if AFont = nil then AFont := FontImp;
     BeginFormUpdate;
@@ -533,6 +533,6 @@ procedure TfmImportC.UpdateFont(AFont: TFont);
 
 
 initialization
-  FontImp := TFont.Create;
+  FontImp := TMatrixFont.Create;
 
 end.

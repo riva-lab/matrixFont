@@ -44,7 +44,7 @@ type
     procedure DoMouseClick(IsDouble: Boolean);
 
   public
-    FontX:         TFont;
+    FontX:         TMatrixFont;
     OnMouseEvent:  TMouseEvent;
     SelectedIndex: Integer;
 

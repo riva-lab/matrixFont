@@ -27,12 +27,12 @@ const
 
 type
   TQWordArray      = array of QWord;
-  TFontSet         = array of TSymbol;
+  TMxCharArray     = array of TMatrixChar;
   TCanOptimize     = symbol.TCanOptimize;
   TDirection       = symbol.TDirection;
   TBorder          = symbol.TBorder;
   TMirror          = symbol.TMirror;
-  TSymbolField     = symbol.TSymbolField;
+  TCharCanvas      = symbol.TCharCanvas;
   TClipboardAction = symbol.TClipboardAction;
   TPasteMode       = symbol.TPasteMode;
   TImportMode      = (imOwn, imAdafruit, imLCDVision, imCustom);
@@ -65,9 +65,9 @@ type
     Reserved:   array [0..127] of Byte; // резерв
   end;
 
-  { TFont }
+  { TMatrixFont }
 
-  TFont = class
+  TMatrixFont = class
   private
     FAuthor:        String;        // автор шрифта
     FName:          String;        // имя шрифта
@@ -75,7 +75,7 @@ type
     FAppCreate:     String;        // название приложения создания файла
     FAppChange:     String;        // название приложения изменения файла
     FAppCurrent:    String;        // название приложения, обрабатывающего файл
-    FSymbol:        TFontSet;      // набор символов
+    FCharArray:     TMxCharArray;  // набор символов
     FDefPrefix:     String;        // префикс для #define-ов
     FEncoding:      String;        // кодировка (кодовая страница)
 
@@ -291,7 +291,7 @@ type
     property FontLength: Integer read FFontLength write SetFontLength;
 
     // массив символов шрифта
-    property Item: TFontSet read FSymbol write FSymbol;
+    property Item: TMxCharArray read FCharArray write FCharArray;
 
     // свойство шрифта: имя
     property Name: String read FName write FName;
@@ -364,110 +364,110 @@ function Transliterate(cyr: String): String;
   end;
 
 { -----
-  TFont
+  TMatrixFont
   ----- }
 
 // очистить все символы шрифта
-procedure TFont.Clear;
+procedure TMatrixFont.Clear;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Clear;
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Clear;
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // инвертировать изображение всех символов шрифта
-procedure TFont.Invert;
+procedure TMatrixFont.Invert;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Invert;
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Invert;
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // отобразить все символы шрифта
-procedure TFont.Mirror(MirrorDirection: TMirror);
+procedure TMatrixFont.Mirror(MirrorDirection: TMirror);
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Mirror(MirrorDirection);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Mirror(MirrorDirection);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // сдвиг всех символов шрифта
-procedure TFont.Shift(Direction: TDirection);
+procedure TMatrixFont.Shift(Direction: TDirection);
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Shift(Direction);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Shift(Direction);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // прижать все символы шрифта к краю
-procedure TFont.Snap(Border: TBorder);
+procedure TMatrixFont.Snap(Border: TBorder);
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Snap(Border);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Snap(Border);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // центрирование всех символов шрифта
-procedure TFont.Center(AVertical: Boolean);
+procedure TMatrixFont.Center(AVertical: Boolean);
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Center(AVertical);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Center(AVertical);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // поворот всех символов шрифта
-procedure TFont.Rotate(AClockWise: Boolean);
+procedure TMatrixFont.Rotate(AClockWise: Boolean);
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Rotate(AClockWise);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Rotate(AClockWise);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // обменять местами символы в таблице
-function TFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
+function TMatrixFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
 
-  procedure DrawNewChar(AIndex: Integer; AData: TSymbolField);
+  procedure DrawNewChar(AIndex: Integer; AData: TCharCanvas);
     var
       action: array[Boolean] of TPixelAction = (paClear, paSet);
       w, h:   Integer;
     begin
       for w := 0 to FWidth - 1 do
         for h := 0 to FHeight - 1 do
-          FSymbol[AIndex].PixelAction(w, h, action[AData[w, h]]);
+          FCharArray[AIndex].PixelAction(w, h, action[AData[w, h]]);
 
       SetLength(AData, 0, 0);
     end;
 
   var
-    sf1, sf2: TSymbolField;
+    sf1, sf2: TCharCanvas;
     w, h, i:  Integer;
 
   begin
@@ -481,21 +481,21 @@ function TFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
     for w := 0 to FWidth - 1 do
       for h := 0 to FHeight - 1 do
         begin
-        sf1[w, h] := FSymbol[AIndex1].Symbol[w, h];
-        sf2[w, h] := FSymbol[AIndex2].Symbol[w, h];
+        sf1[w, h] := FCharArray[AIndex1].CharCanvas[w, h];
+        sf2[w, h] := FCharArray[AIndex2].CharCanvas[w, h];
         end;
 
     DrawNewChar(AIndex2, sf1);
     DrawNewChar(AIndex1, sf2);
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].SaveChange;
 
     Result := True;
   end;
 
 // генерировать код шрифта
-function TFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
+function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
   const
     tab_spaces = 32;
   var
@@ -646,7 +646,7 @@ function TFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         end;
 
       // бинарный код символа
-      s += AddChar(' ', '', 4) + FSymbol[i].GenerateCode(
+      s += AddChar(' ', '', 4) + FCharArray[i].GenerateCode(
         FScanColsFirst,
         FScanColsToRight,
         FScanRowsToDown,
@@ -678,25 +678,25 @@ function TFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
   end;
 
 // увеличение масштаба изображения всех символов шрифта
-procedure TFont.ZoomIn;
+procedure TMatrixFont.ZoomIn;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ZoomIn;
+      FCharArray[i - 1].ZoomIn;
   end;
 
 // уменьшение масштаба изображения всех символов шрифта
-procedure TFont.ZoomOut;
+procedure TMatrixFont.ZoomOut;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ZoomOut;
+      FCharArray[i - 1].ZoomOut;
   end;
 
 // сохранение шрифта в файл
-procedure TFont.SaveToFile(FileName: String);
+procedure TMatrixFont.SaveToFile(FileName: String);
   var
     file_header: file of TFileRHFHeader1;
     file_binary: file of Byte;
@@ -739,14 +739,14 @@ procedure TFont.SaveToFile(FileName: String);
     //for i := 1 to FFontLength do
     //  for h := 0 to FHeight - 1 do
     //    for w := 0 to FWidth - 1 do
-    //      Write(file_, FSymbol[i - 1].Symbol[w, h]);
+    //      Write(file_, FCharArray[i - 1].CharCanvas[w, h]);
 
     // запись данных символов (новый формат: побитовая запись)
     for i := 1 to FFontLength do
       for h := 0 to FHeight - 1 do
         for w := 0 to FWidth - 1 do
           begin
-          if FSymbol[i - 1].Symbol[w, h] then
+          if FCharArray[i - 1].CharCanvas[w, h] then
             tmp_byte := tmp_byte or mask;
 
           mask := (mask shl 1) and $FF;
@@ -763,12 +763,12 @@ procedure TFont.SaveToFile(FileName: String);
   end;
 
 // чтение шрифта из файла
-function TFont.ReadFromFile(FileName: String): Boolean;
+function TMatrixFont.ReadFromFile(FileName: String): Boolean;
   var
     file_header: file of TFileRHFHeader1;
     file_binary: file of Byte;
     header:      TFileRHFHeader1;
-    symbol_tmp:  TSymbolField;
+    char_tmp:    TCharCanvas;
     i, w, h:     Integer;
     tmp_byte:    Byte = 0;
     mask:        Longint = 0;
@@ -812,15 +812,15 @@ function TFont.ReadFromFile(FileName: String): Boolean;
     Seek(file_binary, SizeOf(TFileRHFHeader1));
 
     // инициализация временного массива для символа
-    SetLength(symbol_tmp, FWidth, FHeight);
+    SetLength(char_tmp, FWidth, FHeight);
 
     // чтение данных символов (старый формат) {file_: file of Boolean;}
     //for i := 1 to FFontLength do
     //  begin
     //  for h := 0 to FHeight - 1 do
     //    for w := 0 to FWidth - 1 do
-    //      Read(file_, symbol_tmp[w, h]);
-    //  FSymbol[i - 1].LoadSymbol(@symbol_tmp);
+    //      Read(file_, char_tmp[w, h]);
+    //  FCharArray[i - 1].LoadChar(@char_tmp);
     //  end;
 
     // чтение данных символов (новый формат: побитовая запись)
@@ -836,11 +836,11 @@ function TFont.ReadFromFile(FileName: String): Boolean;
               mask := 1;
               end;
 
-            symbol_tmp[w, h] := (tmp_byte and mask) <> 0;
-            mask             := (mask shl 1) and $FF;
+            char_tmp[w, h] := (tmp_byte and mask) <> 0;
+            mask           := (mask shl 1) and $FF;
             end;
 
-        FSymbol[i - 1].LoadSymbol(@symbol_tmp);
+        FCharArray[i - 1].LoadChar(@char_tmp);
         end;
       except
       Result := False; // файл поврежден
@@ -850,46 +850,46 @@ function TFont.ReadFromFile(FileName: String): Boolean;
   end;
 
 // очистить историю изменений
-procedure TFont.ClearChanges;
+procedure TMatrixFont.ClearChanges;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ClearChanges;
+      FCharArray[i - 1].ClearChanges;
   end;
 
 // отменить одну правку с конца истории
-procedure TFont.UndoChange;
+procedure TMatrixFont.UndoChange;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
-      FSymbol[i - 1].UndoChange;
+      FCharArray[i - 1].UndoChange;
   end;
 
 // повторить отмененную ранее правку
-procedure TFont.RedoChange;
+procedure TMatrixFont.RedoChange;
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
-      FSymbol[i - 1].RedoChange;
+      FCharArray[i - 1].RedoChange;
   end;
 
 // пакетная вставка
-procedure TFont.Paste(AMode: TPasteMode);
+procedure TMatrixFont.Paste(AMode: TPasteMode);
   var
     i: Integer;
   begin
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].ClipboardAction(cbPaste, AMode);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].ClipboardAction(cbPaste, AMode);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // импорт системного шрифта для растеризации
-procedure TFont.Import(Font: Graphics.TFont; Width, Height: Integer);
+procedure TMatrixFont.Import(Font: Graphics.TFont; Width, Height: Integer);
   var
     i: Integer;
   begin
@@ -898,13 +898,13 @@ procedure TFont.Import(Font: Graphics.TFont; Width, Height: Integer);
 
     for i := 1 to FFontLength do
       begin
-      FSymbol[i - 1].Import(Font, FFontStartItem + i - 1, FEncoding);
-      FSymbol[i - 1].SaveChange;
+      FCharArray[i - 1].Import(Font, FFontStartItem + i - 1, FEncoding);
+      FCharArray[i - 1].SaveChange;
       end;
   end;
 
 // импорт кода C
-function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode): Boolean;
+function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode): Boolean;
 
   type
     TGFXglyph = record           // Data stored PER GLYPH
@@ -1145,28 +1145,28 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
       begin
         Result := 0;
         with TRegExpr.Create do
-            try
-            ModifierI   := True;
-            InputString := ACode;
-            Expression  := AKey + '\s+?(0x|0b|0)?([\da-f]+)';
-            if Exec then Result := GetValue(Match[1], Match[2]);
-            finally
-            Free;
-            end;
+          try
+          ModifierI   := True;
+          InputString := ACode;
+          Expression  := AKey + '\s+?(0x|0b|0)?([\da-f]+)';
+          if Exec then Result := GetValue(Match[1], Match[2]);
+          finally
+          Free;
+          end;
       end;
 
     function GetMatrixFontParamStr(AKey: String): String;
       begin
         Result := '';
         with TRegExpr.Create do
-            try
-            ModifierI   := True;
-            InputString := ACode;
-            Expression  := AKey + '\s+?\((\w[^\s]*)\)';
-            if Exec then Result := Match[1];
-            finally
-            Free;
-            end;
+          try
+          ModifierI   := True;
+          InputString := ACode;
+          Expression  := AKey + '\s+?\((\w[^\s]*)\)';
+          if Exec then Result := Match[1];
+          finally
+          Free;
+          end;
       end;
 
     begin
@@ -1276,7 +1276,7 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
 
         for b := 0 to 7 do
           begin
-          FSymbol[AChar].PixelAction(
+          FCharArray[AChar].PixelAction(
             x + AGFXArr[AChar].xOffset + 8,
             y + AGFXArr[AChar].yOffset + Round(Height / 1.8) + 1,
             (_data and $80 > 0).Select(paSet, paClear));
@@ -1363,7 +1363,7 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
             sy := j div chLine;
             if FScanColsFirst then SwapInts(sx, sy);
 
-            FSymbol[ch].PixelAction(sx, sy,
+            FCharArray[ch].PixelAction(sx, sy,
               (currentValue and 1 > 0).Select(paSet, paClear));
 
             currentValue := currentValue shr 1;
@@ -1375,7 +1375,7 @@ function TFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImportMode
   end;
 
 // изменение размеров холста символов шрифта
-procedure TFont.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
+procedure TMatrixFont.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
   var
     i: Integer;
   begin
@@ -1388,15 +1388,15 @@ procedure TFont.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
       end;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ChangeSize(Up, Down, Left, Right, Crop);
+      FCharArray[i - 1].ChangeSize(Up, Down, Left, Right, Crop);
 
-    FHeight := FSymbol[0].Height;
-    FWidth  := FSymbol[0].Width;
+    FHeight := FCharArray[0].Height;
+    FWidth  := FCharArray[0].Width;
     ClearChanges;
   end;
 
 // определение возможности усечь символ
-function TFont.CanOptimize(Direction: TCanOptimize): Integer;
+function TMatrixFont.CanOptimize(Direction: TCanOptimize): Integer;
   var
     i, min, tmp: Integer;
   begin
@@ -1404,7 +1404,7 @@ function TFont.CanOptimize(Direction: TCanOptimize): Integer;
 
     for i := 1 to FFontLength do
       begin
-      tmp   := FSymbol[i - 1].CanOptimize(Direction);
+      tmp   := FCharArray[i - 1].CanOptimize(Direction);
       if tmp < min then
         min := tmp;
       end;
@@ -1413,22 +1413,22 @@ function TFont.CanOptimize(Direction: TCanOptimize): Integer;
   end;
 
 // установка диапазона символов шрифта
-procedure TFont.SetRange(StartCode: Integer; EndCode: Integer);
+procedure TMatrixFont.SetRange(StartCode: Integer; EndCode: Integer);
   var
     i, w, h: Integer;
     old_start, old_length: Integer;
-    tmp: TFontSet;
+    tmp: TMxCharArray;
   begin
 
     SetLength(tmp, FFontLength);
     for i := 0 to FFontLength - 1 do
       begin
-      tmp[i]        := TSymbol.Create;
+      tmp[i]        := TMatrixChar.Create;
       tmp[i].Width  := FWidth;
       tmp[i].Height := FHeight;
       for h := 0 to FHeight - 1 do
         for w := 0 to FWidth - 1 do
-          tmp[i].Symbol[w, h] := FSymbol[i].Symbol[w, h];
+          tmp[i].CharCanvas[w, h] := FCharArray[i].CharCanvas[w, h];
       end;
 
     old_start  := FFontStartItem;
@@ -1437,13 +1437,13 @@ procedure TFont.SetRange(StartCode: Integer; EndCode: Integer);
     FFontStartItem := StartCode;
     FFontLength    := EndCode - StartCode + 1;
 
-    SetLength(FSymbol, FFontLength);
+    SetLength(FCharArray, FFontLength);
     for i := 0 to FFontLength - 1 do
-      if FSymbol[i] = nil then
+      if FCharArray[i] = nil then
         begin
-        FSymbol[i] := TSymbol.Create;
+        FCharArray[i] := TMatrixChar.Create;
 
-        with FSymbol[i] do
+        with FCharArray[i] do
           begin
           Height          := FHeight;
           Width           := FWidth;
@@ -1461,11 +1461,11 @@ procedure TFont.SetRange(StartCode: Integer; EndCode: Integer);
     for i := 0 to old_length - 1 do
       if (i + old_start - FFontStartItem < FFontLength)
         and (i + old_start - FFontStartItem >= 0)
-        and (FSymbol[i + old_start - FFontStartItem] <> nil) then
+        and (FCharArray[i + old_start - FFontStartItem] <> nil) then
         for h := 0 to FHeight - 1 do
           for w := 0 to FWidth - 1 do
-            FSymbol[i + old_start - FFontStartItem].Symbol[w, h] :=
-              tmp[i].Symbol[w, h];
+            FCharArray[i + old_start - FFontStartItem].CharCanvas[w, h] :=
+              tmp[i].CharCanvas[w, h];
 
     for i := 0 to old_length - 1 do
       FreeAndNil(tmp[i]);
@@ -1473,14 +1473,14 @@ procedure TFont.SetRange(StartCode: Integer; EndCode: Integer);
     // очистка добавленных символов
     if old_start > FFontStartItem then
       for i := 0 to old_start - FFontStartItem - 1 do
-        FSymbol[i].Clear;
+        FCharArray[i].Clear;
 
     // очистка истории правок символов
     ClearChanges;
   end;
 
 // получение имени символа по его коду
-function TFont.GetCharName(ACode: Integer; AFull: Boolean): String;
+function TMatrixFont.GetCharName(ACode: Integer; AFull: Boolean): String;
 
   const
     // https://ru.wikipedia.org/wiki/Управляющие_символы
@@ -1541,103 +1541,103 @@ function TFont.GetCharName(ACode: Integer; AFull: Boolean): String;
       end;
   end;
 
-procedure TFont.SetHeight(AHeight: Integer);
+procedure TMatrixFont.SetHeight(AHeight: Integer);
   var
     i: Integer;
   begin
     FHeight := AHeight;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].Height := FHeight;
+      FCharArray[i - 1].Height := FHeight;
   end;
 
-procedure TFont.SetWidth(AWidth: Integer);
+procedure TMatrixFont.SetWidth(AWidth: Integer);
   var
     i: Integer;
   begin
     FWidth := AWidth;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].Width := FWidth;
+      FCharArray[i - 1].Width := FWidth;
   end;
 
-procedure TFont.SetFontStartItem(AValue: Integer);
+procedure TMatrixFont.SetFontStartItem(AValue: Integer);
   begin
     if FFontStartItem = AValue then
       Exit;
     FFontStartItem := AValue;
   end;
 
-procedure TFont.SetGridChessBackground(AValue: Boolean);
+procedure TMatrixFont.SetGridChessBackground(AValue: Boolean);
   var
     i: Integer;
   begin
     FGridChessBackground := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].GridChessBackground := FGridChessBackground;
+      FCharArray[i - 1].GridChessBackground := FGridChessBackground;
   end;
 
-procedure TFont.SetGridColor(AValue: TColor);
+procedure TMatrixFont.SetGridColor(AValue: TColor);
   var
     i: Integer;
   begin
     FGridColor := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].GridColor := FGridColor;
+      FCharArray[i - 1].GridColor := FGridColor;
   end;
 
-procedure TFont.SetGridThickness(AValue: Integer);
+procedure TMatrixFont.SetGridThickness(AValue: Integer);
   var
     i: Integer;
   begin
     FGridThickness := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].GridThickness := FGridThickness;
+      FCharArray[i - 1].GridThickness := FGridThickness;
   end;
 
-procedure TFont.SetGridStep(AGridStep: Integer);
+procedure TMatrixFont.SetGridStep(AGridStep: Integer);
   var
     i: Integer;
   begin
     FGridStep := AGridStep;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].GridStep := FGridStep;
+      FCharArray[i - 1].GridStep := FGridStep;
   end;
 
-procedure TFont.SetShiftRollover(AValue: Boolean);
+procedure TMatrixFont.SetShiftRollover(AValue: Boolean);
   var
     i: Integer;
   begin
     FShiftRollover := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ShiftRollover := FShiftRollover;
+      FCharArray[i - 1].ShiftRollover := FShiftRollover;
   end;
 
-procedure TFont.SetShowGrid(AValue: Boolean);
+procedure TMatrixFont.SetShowGrid(AValue: Boolean);
   var
     i: Integer;
   begin
     FShowGrid := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ShowGrid := FShowGrid;
+      FCharArray[i - 1].ShowGrid := FShowGrid;
   end;
 
-procedure TFont.SetFontLength(AValue: Integer);
+procedure TMatrixFont.SetFontLength(AValue: Integer);
   var
     i: Integer;
   begin
-    SetLength(FSymbol, AValue);
+    SetLength(FCharArray, AValue);
     for i := 1 to AValue do
-      if FSymbol[i - 1] = nil then
+      if FCharArray[i - 1] = nil then
         begin
-        FSymbol[i - 1] := TSymbol.Create;
-        with FSymbol[i - 1] do
+        FCharArray[i - 1] := TMatrixChar.Create;
+        with FCharArray[i - 1] do
           begin
           Height          := FHeight;
           Width           := FWidth;
@@ -1648,14 +1648,14 @@ procedure TFont.SetFontLength(AValue: Integer);
           ActiveColor     := FActiveColor;
           ShowGrid        := FShowGrid;
           ShiftRollover   := FShiftRollover;
-          //Zoom(FSymbol[0].ScaleFactor);
+          //Zoom(FCharArray[0].ScaleFactor);
           end;
         end;
 
     FFontLength := AValue;
   end;
 
-procedure TFont.SetActiveColor(AValue: TColor);
+procedure TMatrixFont.SetActiveColor(AValue: TColor);
   var
     i: Integer;
   begin
@@ -1664,10 +1664,10 @@ procedure TFont.SetActiveColor(AValue: TColor);
     FActiveColor := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].ActiveColor := FActiveColor;
+      FCharArray[i - 1].ActiveColor := FActiveColor;
   end;
 
-procedure TFont.SetBackgroundColor(AValue: TColor);
+procedure TMatrixFont.SetBackgroundColor(AValue: TColor);
   var
     i: Integer;
   begin
@@ -1676,10 +1676,10 @@ procedure TFont.SetBackgroundColor(AValue: TColor);
     FBackgroundColor := AValue;
 
     for i := 1 to FFontLength do
-      FSymbol[i - 1].BackgroundColor := FBackgroundColor;
+      FCharArray[i - 1].BackgroundColor := FBackgroundColor;
   end;
 
-constructor TFont.Create;
+constructor TMatrixFont.Create;
   var
     i: Integer;
   begin
@@ -1687,22 +1687,22 @@ constructor TFont.Create;
     FFontLength    := 1;  // кол-во символов в наборе
     FPasteMode     := pmNorm;
 
-    SetLength(FSymbol, FFontLength);
+    SetLength(FCharArray, FFontLength);
     for i := 1 to FFontLength do
       begin
-      FreeAndNil(FSymbol[i - 1]);
-      FSymbol[i - 1] := TSymbol.Create;
+      FreeAndNil(FCharArray[i - 1]);
+      FCharArray[i - 1] := TMatrixChar.Create;
       end;
 
-    FHeight          := FSymbol[0].Height;
-    FWidth           := FSymbol[0].Width;
-    FGridStep        := FSymbol[0].GridStep;
-    FGridColor       := FSymbol[0].GridColor;
-    FGridThickness   := FSymbol[0].GridThickness;
-    FBackgroundColor := FSymbol[0].BackgroundColor;
-    FActiveColor     := FSymbol[0].ActiveColor;
-    FShowGrid        := FSymbol[0].ShowGrid;
-    FShiftRollover   := FSymbol[0].ShiftRollover;
+    FHeight          := FCharArray[0].Height;
+    FWidth           := FCharArray[0].Width;
+    FGridStep        := FCharArray[0].GridStep;
+    FGridColor       := FCharArray[0].GridColor;
+    FGridThickness   := FCharArray[0].GridThickness;
+    FBackgroundColor := FCharArray[0].BackgroundColor;
+    FActiveColor     := FCharArray[0].ActiveColor;
+    FShowGrid        := FCharArray[0].ShowGrid;
+    FShiftRollover   := FCharArray[0].ShiftRollover;
     FDateCreate      := Now;
     FDateChange      := Now;
     FEncoding        := EncodingAnsi;
@@ -1717,12 +1717,12 @@ constructor TFont.Create;
     //FFontType         := ftMONOSPACE;
   end;
 
-destructor TFont.Destroy;
+destructor TMatrixFont.Destroy;
   var
     i: Integer;
   begin
     for i := 0 to FFontLength - 1 do
-      FreeAndNil(FSymbol[i]);
+      FreeAndNil(FCharArray[i]);
     inherited; // Эквивалентно: inherited Destroy;
   end;
 

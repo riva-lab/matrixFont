@@ -53,7 +53,7 @@ type
   TRBFFontConverter = class
 
   private
-    FFont: TFont;
+    FFont: TMatrixFont;
 
   const
     FNT_HDR_MAGIC = #224#14#240#13#3#0#0#0''; // E0 0E F0 0D 03 00 00 00
@@ -70,7 +70,7 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    procedure AssignRHF(AFont: TFont);
+    procedure AssignRHF(AFont: TMatrixFont);
     procedure LoadFromFile(AFilename: String);
     procedure SaveToFile(AFilename: String);
   end;
@@ -95,7 +95,7 @@ destructor TRBFFontConverter.Destroy;
     inherited Destroy;
   end;
 
-procedure TRBFFontConverter.AssignRHF(AFont: TFont);
+procedure TRBFFontConverter.AssignRHF(AFont: TMatrixFont);
   begin
     FFont := AFont;
     Name  := FFont.Name;
@@ -224,7 +224,7 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
           for w := 0 to wmax do
             begin
             b := b div 2;
-            if (w < FFont.Width) and FFont.Item[i].Symbol[w, h] then b += $80;
+            if (w < FFont.Width) and FFont.Item[i].CharCanvas[w, h] then b += $80;
 
             if (w mod 8 = 7) or (w = wmax) then
               begin
