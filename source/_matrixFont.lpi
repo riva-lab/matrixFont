@@ -300,7 +300,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="30">
+    <Units Count="29">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -398,75 +398,71 @@
         <ResourceBaseClass Value="Form"/>
       </Unit14>
       <Unit15>
-        <Filename Value="help.pas"/>
+        <Filename Value="u_strings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit15>
       <Unit16>
-        <Filename Value="u_strings.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit16>
-      <Unit17>
         <Filename Value="copenfilelist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cOpenFileList"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="u_utilities.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit17>
       <Unit18>
-        <Filename Value="u_utilities.pas"/>
+        <Filename Value="u_encodings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit18>
       <Unit19>
-        <Filename Value="u_encodings.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit19>
-      <Unit20>
         <Filename Value="fm_importc.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmImportC"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="u_helpers.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit20>
       <Unit21>
-        <Filename Value="u_helpers.pas"/>
+        <Filename Value="fm_main_controls.inc"/>
         <IsPartOfProject Value="True"/>
       </Unit21>
       <Unit22>
-        <Filename Value="fm_main_controls.inc"/>
-        <IsPartOfProject Value="True"/>
-      </Unit22>
-      <Unit23>
         <Filename Value="fm_map.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmMap"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="settings\config_record.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit23>
       <Unit24>
-        <Filename Value="settings\config_record.pas"/>
+        <Filename Value="func\u_sticking.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit24>
       <Unit25>
-        <Filename Value="func\u_sticking.pas"/>
+        <Filename Value="func\u_map_render.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit25>
       <Unit26>
-        <Filename Value="func\u_map_render.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit26>
-      <Unit27>
         <Filename Value="misc\appabout.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="appAbout"/>
-      </Unit27>
-      <Unit28>
+      </Unit26>
+      <Unit27>
         <Filename Value="func\u_rbf.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit28>
-      <Unit29>
+      </Unit27>
+      <Unit28>
         <Filename Value="fm_new.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmNew"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit29>
+      </Unit28>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
