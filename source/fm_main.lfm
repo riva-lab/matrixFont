@@ -2569,7 +2569,7 @@ object fmMain: TfmMain
       Category = 'Файл'
       Caption = 'Сохранить как ...'
       Dialog.Title = 'Сохранить файл шрифта'
-      Dialog.Filter = 'Raster H/W Font|*.RHF'
+      Dialog.Filter = 'Raster H/W Font (matrixFont original)|*.RHF|Raw Bitmap Font|*.RBF'
       Dialog.Options = [ofOverwritePrompt, ofEnableSizing]
       Hint = 'Сохранить шрифт в новый файл RHF'
       ImageIndex = 55
@@ -2775,7 +2775,7 @@ object fmMain: TfmMain
   end
   object dlgOpen: TOpenDialog
     Title = 'Открыть файл шрифта'
-    Filter = 'Raster H/W Font|*.RHF'
+    Filter = 'All supported formats|*.RHF;*.RBF|Raster H/W Font (matrixFont original)|*.RHF|Raw Bitmap Font|*.RBF'
     Options = [ofEnableSizing]
     Left = 500
     Top = 94

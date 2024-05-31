@@ -25,7 +25,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="106">
+      <ExcludedIdentifiers Count="107">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -132,13 +132,15 @@
         <Item104 Value="tfmsettings.lbcolorsd3.hint"/>
         <Item105 Value="tfmsettings.lbcolorsd4.hint"/>
         <Item106 Value="tfmsettings.lbcolorsd5.hint"/>
+        <Item107 Value="tfmrbf.lbfontwiki.hint"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <BuildNr Value="80"/>
+      <MinorVersionNr Value="1"/>
+      <BuildNr Value="82"/>
       <Language Value="0419"/>
       <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -298,7 +300,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="28">
+    <Units Count="30">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -318,9 +320,9 @@
         <ResourceBaseClass Value="Form"/>
       </Unit2>
       <Unit3>
-        <Filename Value="fm_new.pas"/>
+        <Filename Value="fm_rbf.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="fmNew"/>
+        <ComponentName Value="fmRbf"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit3>
@@ -455,6 +457,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="appAbout"/>
       </Unit27>
+      <Unit28>
+        <Filename Value="func\u_rbf.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="fm_new.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fmNew"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit29>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

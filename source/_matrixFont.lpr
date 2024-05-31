@@ -11,11 +11,12 @@ uses
 
   // project forms
   fm_about, fm_confirm, fm_gen, fm_import, fm_importc, fm_main, fm_new,
-  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map;
+  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map,
+  fm_rbf;
 
-{$R *.res}
+  {$R *.res}
 
-begin            
+begin
   { CRITICAL! Load INI file as soon as possible to support dark theme.
     INI file should be loaded before Application.Initialize method! }
   appTunerEx.IniFile := ExtractFilePath(ParamStrUTF8(0)) + SETTINGS_FILE;
@@ -39,6 +40,6 @@ begin
   Application.CreateForm(TfmSettings, fmSettings);
   Application.CreateForm(TfmImportC, fmImportC);
   Application.CreateForm(TfmMap, fmMap);
+  Application.CreateForm(TfmRbf, fmRbf);
   Application.Run;
 end.
-

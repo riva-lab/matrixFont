@@ -12,10 +12,10 @@ uses
 
   // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
-  fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map,
+  fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map, fm_rbf,
 
   // functional units
-  font, symbol, cOpenFileList, appAbout, u_sticking, u_map_render,
+  font, symbol, cOpenFileList, appAbout, u_sticking, u_map_render, u_rbf,
 
   // additional units
   u_utilities, u_strings, u_helpers, u_encodings;
@@ -225,7 +225,7 @@ procedure TfmMain.FormShow(Sender: TObject);
 procedure TfmMain.FormDropFiles(Sender: TObject; const FileNames: array of String);
   begin
     // загрузка проекта шрифта
-    if FileExtCheck(FileNames[0], FILE_EXTENSION) then
+    if FileExtCheck(FileNames[0], Format('%s,%s', [FILE_EXTENSION, RBF_EXTENSION])) then
       FontLoadFromFile(FileNames[0]);
 
     // бездиалоговый импорт изображений
@@ -554,7 +554,7 @@ procedure TfmMain.acSaveAsBeforeExecute(Sender: TObject);
         FileName := AnsiReplaceText(FontSet.Name, ' ', '_');
 
       InitialDir := ExtractFileDir(FileName) + DirectorySeparator;
-      FileName   := ExtractFileName(FileName);
+      FileName   := ExtractFileNameOnly(FileName);
       end;
   end;
 
@@ -583,6 +583,7 @@ procedure TfmMain.acFontImportExecute(Sender: TObject);
         if cbOptimize.Checked then FontSet.ChangeSize(-1, -1, -1, -1, True);
 
         FontCreateFinish;
+        acSaveAs.Dialog.FileName := '';
         end;
       end;
   end;
@@ -1263,7 +1264,8 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
     if not GetConfirmation then Exit;
     if not FileExists(AFileName) then Exit;
 
-    if CompareFileExt(UpperCase(AFileName), UpperCase(FILE_EXTENSION), False) = 0 then
+    // load from original matrixFont font file
+    if FileExtCheck(AFileName, FILE_EXTENSION) then
       begin
       tmp        := TFont.Create;
       isReadable := tmp.ReadFromFile(AFileName);
@@ -1295,6 +1297,17 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
 
       FontCreateFinish;
       end;
+
+    // import font from RBF file
+    if FileExtCheck(AFileName, RBF_EXTENSION) then
+      with rbfConverter do
+        begin
+        FontCreateNew(1, 1, 0, 1, 0, '', '');
+        AssignRHF(FontSet);
+        LoadFromFile(AFileName);
+        LastFileAdd(AFileName);
+        FontCreateFinish;
+        end;
   end;
 
 // создание нового шрифта
@@ -1322,7 +1335,8 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
         end;
 
       FontCreateFinish;
-      dlgOpen.FileName := '';
+      dlgOpen.FileName         := '';
+      acSaveAs.Dialog.FileName := '';
       except
       if fmConfirm.Show(TXT_ERROR, WARN_CREATE, mbYesNo, self) = mrYes then
         Close;
@@ -1332,10 +1346,23 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
 // сохранение шрифта
 procedure TfmMain.FontSave(AFileName: String);
   begin
-    FontSet.SaveToFile(AFileName);
-    LastFileAdd(AFileName);
-    dlgOpen.FileName := AFileName;
-    file_changed     := False;
+    // save to original matrixFont font file
+    if FileExtCheck(AFileName, FILE_EXTENSION) then
+      begin
+      FontSet.SaveToFile(AFileName);
+      LastFileAdd(AFileName);
+      dlgOpen.FileName := AFileName;
+      file_changed     := False;
+      end;
+
+    // export font to RBF file
+    if FileExtCheck(AFileName, RBF_EXTENSION) then
+      with rbfConverter do
+        begin
+        AssignRHF(FontSet);
+        if fmRbf.ShowModal = mrOk then
+          SaveToFile(AFileName);
+        end;
   end;
 
 // подтверждение при попытке закрыть несохраненный файл

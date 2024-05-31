@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-05-13 12:22+0300\n"
+"PO-Revision-Date: 2024-05-30 15:39+0300\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -1108,6 +1108,7 @@ msgid "Сброс"
 msgstr "Reset"
 
 #: tfmmain.acsave.caption
+msgctxt "tfmmain.acsave.caption"
 msgid "Сохранить"
 msgstr "Save"
 
@@ -1748,6 +1749,67 @@ msgctxt "TFMRANGE.LBSTART.CAPTION"
 msgid "Первый символ"
 msgstr "First char"
 
+#: tfmrbf.bbok.caption
+msgctxt "tfmrbf.bbok.caption"
+msgid "Сохранить"
+msgstr "Save"
+
+#: tfmrbf.caption
+msgid "Экспортировать в формат RBF"
+msgstr "Export to RBF format"
+
+#: tfmrbf.lbbaseline.caption
+msgid "Смещение базовой линии снизу, пикс."
+msgstr "Baseline offset from bottom, px."
+
+#: tfmrbf.lbbaseline.hint
+msgid "Расстояние от низа холста до базовой линии шрифта"
+msgstr "Distance from the bottom of the canvas to the font baseline"
+
+#: tfmrbf.lbfontwiki.caption
+msgid "Строение шрифта"
+msgstr "Typeface anatomy"
+
+#: tfmrbf.lbinterline.caption
+msgid "Межстрочное расстояние, пикс."
+msgstr "Interline spacing, px."
+
+#: tfmrbf.lbinterline.hint
+msgid ""
+"Дистанция между соседними строками,\n"
+"чем больше, тем строки более разрежены"
+msgstr ""
+"Spacing between lines,\n"
+"the larger, the greater distance between lines"
+
+#: tfmrbf.lbmonospace.caption
+msgid "Моноширинный шрифт"
+msgstr "Monospaced font"
+
+#: tfmrbf.lbmonospace.hint
+msgid "Если флажок не установлен - пропорциональный"
+msgstr "If not checked - proportional"
+
+#: tfmrbf.lbname.caption
+msgid "Внутреннее имя"
+msgstr "Internal name"
+
+#: tfmrbf.lboptions.caption
+msgid "Параметры"
+msgstr "Options"
+
+#: tfmrbf.lbspacing.caption
+msgid "Межсимвольное расстояние, пикс."
+msgstr "Сharacter spacing, px."
+
+#: tfmrbf.lbspacing.hint
+msgid ""
+"Дистанция между соседними символами,\n"
+"чем больше, тем текст более   р а з р е ж е н"
+msgstr ""
+"Spacing between characters,\n"
+"the larger, the lower  d e n s i t y  text has"
+
 #: tfmsettings.accancel.caption
 msgctxt "TFMSETTINGS.ACCANCEL.CAPTION"
 msgid "Отмена"
@@ -2383,3 +2445,4 @@ msgstr ""
 "Can not apply all settings!\n"
 "Fatal error has occurred. Restart application.\n"
 "Exit application?"
+

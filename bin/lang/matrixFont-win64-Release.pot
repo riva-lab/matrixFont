@@ -1074,6 +1074,7 @@ msgid "Сброс"
 msgstr ""
 
 #: tfmmain.acsave.caption
+msgctxt "tfmmain.acsave.caption"
 msgid "Сохранить"
 msgstr ""
 
@@ -1699,6 +1700,63 @@ msgstr ""
 #: tfmrange.lbstart.caption
 msgctxt "tfmrange.lbstart.caption"
 msgid "Первый символ"
+msgstr ""
+
+#: tfmrbf.bbok.caption
+msgctxt "tfmrbf.bbok.caption"
+msgid "Сохранить"
+msgstr ""
+
+#: tfmrbf.caption
+msgid "Экспортировать в формат RBF"
+msgstr ""
+
+#: tfmrbf.lbbaseline.caption
+msgid "Смещение базовой линии снизу, пикс."
+msgstr ""
+
+#: tfmrbf.lbbaseline.hint
+msgid "Расстояние от низа холста до базовой линии шрифта"
+msgstr ""
+
+#: tfmrbf.lbfontwiki.caption
+msgid "Строение шрифта"
+msgstr ""
+
+#: tfmrbf.lbinterline.caption
+msgid "Межстрочное расстояние, пикс."
+msgstr ""
+
+#: tfmrbf.lbinterline.hint
+msgid ""
+"Дистанция между соседними строками,\n"
+"чем больше, тем строки более разрежены"
+msgstr ""
+
+#: tfmrbf.lbmonospace.caption
+msgid "Моноширинный шрифт"
+msgstr ""
+
+#: tfmrbf.lbmonospace.hint
+msgid "Если флажок не установлен - пропорциональный"
+msgstr ""
+
+#: tfmrbf.lbname.caption
+msgid "Внутреннее имя"
+msgstr ""
+
+#: tfmrbf.lboptions.caption
+msgid "Параметры"
+msgstr ""
+
+#: tfmrbf.lbspacing.caption
+msgid "Межсимвольное расстояние, пикс."
+msgstr ""
+
+#: tfmrbf.lbspacing.hint
+msgid ""
+"Дистанция между соседними символами,\n"
+"чем больше, тем текст более   р а з р е ж е н"
 msgstr ""
 
 #: tfmsettings.accancel.caption

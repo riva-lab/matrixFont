@@ -21,6 +21,7 @@ The main usage area is software project development using graphical user interfa
   - character range from 0 to 255;
   - charset (encoding) selection;
   - compact native **RHF** file format;
+  - support for loading/saving fonts in RBF format;
 
 - project creating:
   

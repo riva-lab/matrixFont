@@ -1,0 +1,253 @@
+object fmRbf: TfmRbf
+  Left = 352
+  Height = 430
+  Top = 149
+  Width = 687
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  BorderWidth = 10
+  Caption = 'Экспортировать в формат RBF'
+  ChildSizing.VerticalSpacing = 16
+  ClientHeight = 430
+  ClientWidth = 687
+  DefaultMonitor = dmMainForm
+  DesignTimePPI = 120
+  OnShow = FormShow
+  PopupMode = pmExplicit
+  Position = poMainFormCenter
+  ShowHint = True
+  LCLVersion = '3.0.0.3'
+  object pMain: TPanel
+    Left = 10
+    Height = 350
+    Top = 10
+    Width = 667
+    Align = alClient
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.HorizontalSpacing = 10
+    ChildSizing.VerticalSpacing = 8
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 350
+    ClientWidth = 667
+    TabOrder = 0
+    object pName: TPanel
+      Left = 0
+      Height = 52
+      Top = 0
+      Width = 667
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 52
+      ClientWidth = 667
+      TabOrder = 0
+      object lbName: TLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 20
+        Top = 0
+        Width = 667
+        Caption = 'Внутреннее имя'
+        Color = cl3DLight
+        ParentColor = False
+        Transparent = False
+      end
+      object edName: TEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 28
+        Top = 24
+        Width = 667
+        MaxLength = 64
+        TabOrder = 0
+      end
+    end
+    object lbOptions: TLabel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 20
+      Top = 68
+      Width = 667
+      BorderSpacing.Top = 16
+      Caption = 'Параметры'
+      Color = cl3DLight
+      ParentColor = False
+      Transparent = False
+    end
+    object pOptions: TPanel
+      Left = 0
+      Height = 116
+      Top = 96
+      Width = 667
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.HorizontalSpacing = 10
+      ChildSizing.VerticalSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 116
+      ClientWidth = 667
+      TabOrder = 1
+      object seSpacing: TSpinEdit
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 28
+        Top = 0
+        Width = 150
+        Constraints.MinWidth = 80
+        MaxValue = 255
+        TabOrder = 0
+        Value = 1
+      end
+      object lbSpacing: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 160
+        Height = 28
+        Hint = 'Дистанция между соседними символами,'#13#10'чем больше, тем текст более   р а з р е ж е н'
+        Top = 0
+        Width = 507
+        Caption = 'Межсимвольное расстояние, пикс.'
+        Layout = tlCenter
+      end
+      object seInterline: TSpinEdit
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 28
+        Top = 32
+        Width = 150
+        Constraints.MinWidth = 80
+        MaxValue = 255
+        TabOrder = 1
+        Value = 1
+      end
+      object lbInterline: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 160
+        Height = 28
+        Hint = 'Дистанция между соседними строками,'#13#10'чем больше, тем строки более разрежены'
+        Top = 32
+        Width = 507
+        Caption = 'Межстрочное расстояние, пикс.'
+        Layout = tlCenter
+      end
+      object seBaseline: TSpinEdit
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 28
+        Top = 64
+        Width = 150
+        Constraints.MinWidth = 80
+        MaxValue = 255
+        TabOrder = 2
+        Value = 1
+      end
+      object lbBaseline: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 160
+        Height = 28
+        Hint = 'Расстояние от низа холста до базовой линии шрифта'
+        Top = 64
+        Width = 507
+        Caption = 'Смещение базовой линии снизу, пикс.'
+        Layout = tlCenter
+      end
+      object pMonospace: TPanel
+        Left = 0
+        Height = 20
+        Top = 96
+        Width = 150
+        BevelOuter = bvNone
+        ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
+        ChildSizing.Layout = cclTopToBottomThenLeftToRight
+        ClientHeight = 20
+        ClientWidth = 150
+        TabOrder = 3
+        object cbMonospace: TCheckBox
+          Left = 65
+          Height = 20
+          Top = 0
+          Width = 21
+          TabOrder = 0
+        end
+      end
+      object lbMonospace: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 160
+        Height = 20
+        Hint = 'Если флажок не установлен - пропорциональный'
+        Top = 96
+        Width = 507
+        Caption = 'Моноширинный шрифт'
+        Layout = tlCenter
+      end
+    end
+  end
+  object pControls: TPanel
+    Left = 10
+    Height = 44
+    Top = 376
+    Width = 667
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.HorizontalSpacing = 10
+    ChildSizing.VerticalSpacing = 10
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 44
+    ClientWidth = 667
+    Constraints.MinWidth = 500
+    TabOrder = 1
+    object lbFontWiki: TLabel
+      Cursor = crHandPoint
+      Left = 0
+      Height = 20
+      Hint = 'https://en.wikipedia.org/wiki/Typeface_anatomy'
+      Top = 12
+      Width = 125
+      BorderSpacing.CellAlignHorizontal = ccaLeftTop
+      BorderSpacing.CellAlignVertical = ccaCenter
+      Caption = 'Строение шрифта'
+      Font.Color = clHighlight
+      Font.Style = [fsUnderline]
+      Layout = tlCenter
+      ParentFont = False
+      OnClick = lbFontWikiClick
+    end
+    object bbOK: TBitBtn
+      Left = 417
+      Height = 44
+      Top = 0
+      Width = 250
+      AutoSize = True
+      BorderSpacing.InnerBorder = 6
+      BorderSpacing.CellAlignHorizontal = ccaRightBottom
+      Caption = 'Сохранить'
+      Constraints.MinHeight = 44
+      Constraints.MinWidth = 250
+      Default = True
+      ModalResult = 1
+      Images = fmMain.ImListNew16A
+      ImageIndex = 44
+      OnClick = bbOKClick
+      Spacing = 10
+      TabOrder = 0
+    end
+  end
+end
