@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-05-30 15:39+0300\n"
+"PO-Revision-Date: 2024-06-04 00:29+0300\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -1797,6 +1797,14 @@ msgstr "Internal name"
 #: tfmrbf.lboptions.caption
 msgid "Параметры"
 msgstr "Options"
+
+#: tfmrbf.lbspacew.caption
+msgid "Ширина пробела, %"
+msgstr "Space char width, %"
+
+#: tfmrbf.lbspacew.hint
+msgid "Ширина пробела в % от ширины шрифта"
+msgstr "Space char width in % of font width"
 
 #: tfmrbf.lbspacing.caption
 msgid "Межсимвольное расстояние, пикс."

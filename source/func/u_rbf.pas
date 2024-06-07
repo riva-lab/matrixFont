@@ -65,6 +65,7 @@ type
     Interline: Integer; // spacing between lines
     Baseline:  Integer; // baseline offset from bottom of char canvas
     Monospace: Boolean; // if TRUE then width will be the same for all chars
+    SpaceWdth: Integer; // space char #32 width in % of font width
     Name:      String[FNT_MAX_NAME];
 
     constructor Create;
@@ -88,6 +89,7 @@ constructor TRBFFontConverter.Create;
     Interline := 2;
     Baseline  := 2;
     Monospace := False;
+    SpaceWdth := 40;
   end;
 
 destructor TRBFFontConverter.Destroy;
@@ -127,7 +129,6 @@ procedure TRBFFontConverter.LoadFromFile(AFilename: String);
         FFont.Width         := MaxWidth;
         FFont.FontStartItem := CharFirst;
         FFont.FontLength    := CharLast - FFont.FontStartItem + 1;
-        Self.Spacing        := Spacing;
         Self.Baseline       := Baseline;
         Self.Interline      := Interline;
         end;
@@ -182,7 +183,7 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
     begin
       with header do
         begin
-        MaxWidth  := FFont.Width;
+        MaxWidth  := FFont.Width + Spacing;
         CharSize  := (MaxWidth + 7) div 8 * FFont.Height;
         Points    := FFont.Height;
         Height    := FFont.Height;
@@ -205,11 +206,19 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
 
   procedure WriteCharWidth;
     var
-      i: Integer;
+      i, w: Integer;
     begin
       for i := 0 to FFont.FontLength - 1 do
-        memstr.WriteByte(Spacing +
-          Monospace.Select(FFont.Width, FFont.Item[i].GetCharWidth));
+        begin
+        if Monospace then
+          w := FFont.Width + Spacing else
+          w := FFont.Item[i].GetCharWidth + Spacing;
+
+        if not Monospace and (FFont.FontStartItem + i = 32) then
+          w := round(FFont.Width * SpaceWdth / 100);
+
+        memstr.WriteByte(w);
+        end;
     end;
 
   procedure WriteCharData;
@@ -217,7 +226,7 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
       i, w, h, wmax: Integer;
       b:             Byte = 0;
     begin
-      wmax := ((FFont.Width + 7) div 8) * 8 - 1;
+      wmax := ((FFont.Width + Spacing + 7) div 8) * 8 - 1;
 
       for i := 0 to FFont.FontLength - 1 do
         for h := 0 to FFont.Height - 1 do

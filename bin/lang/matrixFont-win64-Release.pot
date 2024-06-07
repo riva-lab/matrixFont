@@ -1749,6 +1749,14 @@ msgstr ""
 msgid "Параметры"
 msgstr ""
 
+#: tfmrbf.lbspacew.caption
+msgid "Ширина пробела, %"
+msgstr ""
+
+#: tfmrbf.lbspacew.hint
+msgid "Ширина пробела в % от ширины шрифта"
+msgstr ""
+
 #: tfmrbf.lbspacing.caption
 msgid "Межсимвольное расстояние, пикс."
 msgstr ""

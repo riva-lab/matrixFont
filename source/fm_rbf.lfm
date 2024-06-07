@@ -88,7 +88,7 @@ object fmRbf: TfmRbf
     end
     object pOptions: TPanel
       Left = 0
-      Height = 116
+      Height = 148
       Top = 96
       Width = 667
       AutoSize = True
@@ -99,7 +99,7 @@ object fmRbf: TfmRbf
       ChildSizing.EnlargeVertical = crsHomogenousSpaceResize
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 116
+      ClientHeight = 148
       ClientWidth = 667
       TabOrder = 1
       object seSpacing: TSpinEdit
@@ -165,23 +165,47 @@ object fmRbf: TfmRbf
         Caption = 'Смещение базовой линии снизу, пикс.'
         Layout = tlCenter
       end
+      object seSpaceW: TSpinEdit
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 28
+        Top = 96
+        Width = 150
+        Constraints.MinWidth = 80
+        Increment = 5
+        MaxValue = 100
+        MinValue = 5
+        TabOrder = 3
+        Value = 40
+      end
+      object lbSpaceW: TLabel
+        AnchorSideTop.Side = asrCenter
+        Left = 160
+        Height = 28
+        Hint = 'Ширина пробела в % от ширины шрифта'
+        Top = 96
+        Width = 507
+        Caption = 'Ширина пробела, %'
+        Layout = tlCenter
+      end
       object pMonospace: TPanel
         Left = 0
         Height = 20
-        Top = 96
+        Top = 128
         Width = 150
         BevelOuter = bvNone
         ChildSizing.EnlargeHorizontal = crsHomogenousSpaceResize
         ChildSizing.Layout = cclTopToBottomThenLeftToRight
         ClientHeight = 20
         ClientWidth = 150
-        TabOrder = 3
+        TabOrder = 4
         object cbMonospace: TCheckBox
           Left = 65
           Height = 20
           Top = 0
           Width = 21
           TabOrder = 0
+          OnChange = OptionChange
         end
       end
       object lbMonospace: TLabel
@@ -189,7 +213,7 @@ object fmRbf: TfmRbf
         Left = 160
         Height = 20
         Hint = 'Если флажок не установлен - пропорциональный'
-        Top = 96
+        Top = 128
         Width = 507
         Caption = 'Моноширинный шрифт'
         Layout = tlCenter
