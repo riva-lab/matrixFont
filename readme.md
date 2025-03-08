@@ -101,6 +101,8 @@ HTML: [English](readme.en.html) | [**Русский**](readme.html)
 
 Если Вы обнаружили ошибку в работе приложения или хотите предложить что-то для улучшения приложения, пожалуйста, перейдите в раздел [Задачи](https://gitlab.com/riva-lab/matrixFont/-/issues) проекта **matrixFont**. Сначала изучите, не открыта ли ранее похожая или такая же задача. Не создавайте дублирующие задачи, обновляйте или переоткрывайте существующие — это ускоряет их рассмотрение. Если Ваш вопрос не поднимался ранее, создавайте новую задачу.
 
+If your native language is not Russian or Ukrainian, please write your messages in English. You can also add a translation into Russian or Ukrainian below the original if you want.
+
 Ваши вопросы и предложения помогают совершенствовать **matrixFont**.
 
 ## Авторство

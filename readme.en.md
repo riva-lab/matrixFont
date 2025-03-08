@@ -101,6 +101,8 @@ An introductory article on the topic of fonts and about app (Rus) — [Шриф�
 
 If you find a bug in the application or want to suggest something to improve the application, please go to the [Issues](https://gitlab.com/riva-lab/matrixFont/-/issues) section of the **matrixFont** project. First investigate if a similar or the same issue has been opened before. Do not create duplicate issues, update or reopen existing ones - this speeds up their review. If your issue has not been raised before, create a new issue.
 
+If your native language is not Russian or Ukrainian, please write your messages in English. You can also add a translation into Russian or Ukrainian below the original if you want.
+
 Your questions and suggestions help improve **matrixFont**.
 
 ## Сopyright and credits
