@@ -14,9 +14,11 @@ uses
 resourcestring
   FM_GEN_CAPTION = 'Генератор кода';
 
+  FM_GEN_BLKD_1  = 'Вертикально';
+  FM_GEN_BLKD_2  = 'Горизонтально';
 
-  FM_GEN_SCUD_1  = 'Сначала столбцы';
-  FM_GEN_SCUD_2  = 'Сначала строки';
+  FM_GEN_SCUD_1  = 'Столбцами групп';
+  FM_GEN_SCUD_2  = 'Строками групп';
 
   FM_GEN_SCLR_1  = 'Слева направо';
   FM_GEN_SCLR_2  = 'Справа налево';
@@ -75,6 +77,7 @@ type
     tsGenSettings:     TTabSheet;
     tsCode:            TTabSheet;
     edDefPrefix:       TEdit;
+    cbGroupDirection:  TComboBox;
     cbScanColsFirst:   TComboBox;
     cbScanColsToRight: TComboBox;
     cbScanRowsToDown:  TComboBox;
@@ -82,7 +85,8 @@ type
     cbNumbersView:     TComboBox;
     cbEmptyBits:       TComboBox;
     cbNumbersBits:     TComboBox;
-    cbLanguage:        TComboBox;
+    cbGenLanguage:     TComboBox;
+    lbGroupDirection:  TLabel;
     lbScanColsFirst:   TLabel;
     lbScanColsToRight: TLabel;
     lbScanRowsToDown:  TLabel;
@@ -232,6 +236,7 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
 
     with mxFont do
       begin
+      GroupIsVertical  := cbGroupDirection.ItemIndex = 0;
       ScanColsFirst    := cbScanColsFirst.ItemIndex = 0;
       ScanColsToRight  := cbScanColsToRight.ItemIndex = 0;
       ScanRowsToDown   := cbScanRowsToDown.ItemIndex = 0;
@@ -239,8 +244,8 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
       NumbersView      := TNumberView(cbNumbersView.ItemIndex mod 3);
       EmptyBits        := TEmptyBit(cbEmptyBits.ItemIndex);
       FontType         := TFontType(cbFontType.ItemIndex);
-      NumbersBits      := cbNumbersBits.ItemIndex * 8 + 8;
-      CommentStyle     := cbLanguage.ItemIndex;
+      BitsPerGroup     := cbNumbersBits.ItemIndex * 8 + 8;
+      CommentStyle     := cbGenLanguage.ItemIndex;
       DefPrefix        := edDefPrefix.Text;
       end;
 
@@ -303,13 +308,14 @@ procedure TfmGen.OnLanguageChange;
   begin
     with appLocalizerEx do
       begin
+      Localize(cbGroupDirection, [FM_GEN_BLKD_1, FM_GEN_BLKD_2]);
       Localize(cbScanColsFirst, [FM_GEN_SCUD_1, FM_GEN_SCUD_2]);
       Localize(cbScanColsToRight, [FM_GEN_SCLR_1, FM_GEN_SCLR_2]);
       Localize(cbScanRowsToDown, [FM_GEN_SRUD_1, FM_GEN_SRUD_2]);
       Localize(cbFontType, [FM_GEN_FT_1, FM_GEN_FT_2]);
       Localize(cbEmptyBits, [FM_GEN_EB_1, FM_GEN_EB_2]);
       Localize(cbNumbersBits, [FM_GEN_NB_1, FM_GEN_NB_2, FM_GEN_NB_3, FM_GEN_NB_4]);
-      Localize(cbLanguage, [FM_GEN_LNG_1, FM_GEN_LNG_2]);
+      Localize(cbGenLanguage, [FM_GEN_LNG_1, FM_GEN_LNG_2]);
       Localize(cbNumbersView, [FM_GEN_NV_1, FM_GEN_NV_2, FM_GEN_NV_3, FM_GEN_NV_4, FM_GEN_NV_5, FM_GEN_NV_6]);
       end;
   end;

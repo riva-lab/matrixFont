@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LazFileUtils,
-  LCLType, GraphUtil, Math,
+  LCLType, GraphUtil, Math, StrUtils,
   u_encodings, u_utilities, u_helpers;
 
 const
@@ -106,9 +106,9 @@ type
       $FFFFFF; ColorActive: TColor = 0);
 
     // генерировать код символа
-    function GenerateCode(fnScanColsFirst, fnScanColsToRight, fnScanRowsToDown,
+    function GenerateCode(fnGroupIsVertical, fnScanColsFirst, fnScanColsToRight, fnScanRowsToDown,
       fnNumbersInversion: Boolean; fnNumbersView: TNumberView; fnEmptyBits: TEmptyBit;
-      fnFontType: TFontType; fnNumbersBits: Integer): String;
+      fnFontType: TFontType; fnBitsPerBlock: Integer): String;
 
     // очистить историю изменений
     procedure ClearChanges;
@@ -624,6 +624,7 @@ procedure TMatrixChar.DrawPreview(bmp: TBitmap; Transparency: Boolean = True;
 
 // генерировать код символа
 function TMatrixChar.GenerateCode(
+  fnGroupIsVertical,           // направление считывания блока
   fnScanColsFirst,             // поле - флаг очередности сканирования: столбцы-строки
   fnScanColsToRight,           // поле - флаг направления сканирования столбцов
   fnScanRowsToDown,            // поле - флаг направления сканирования строк
@@ -631,128 +632,105 @@ function TMatrixChar.GenerateCode(
   fnNumbersView: TNumberView;  // поле - настройка представления выходных чисел
   fnEmptyBits: TEmptyBit;      // поле - настройка заполнения пустых разрядов
   fnFontType: TFontType;       // поле - тип шрифта
-  fnNumbersBits: Integer       // поле - разрядность выходных чисел
+  fnBitsPerBlock: Integer      // поле - разрядность блока в битах
   ): String;
 
-  function create_number(stb: String; fnNView: TNumberView): String;
+  var
+    numberChars: Integer;
+
+  function createNumber(stb: String; fnNView: TNumberView): String;
     var
-      i, max: Integer;
       number: QWord;
     begin
-      max    := trunc(fnNumbersBits / 10 * 3);
       number := StrToQWord('%' + stb);
+
       case fnNView of
-
-        nvBIN:
-          Result := '0b' + stb;
-
-        nvHEX:
-          Result := '0x' + IntToHex(number, fnNumbersBits div 4);
-
-        nvDEC:
-          begin
-          Result := IntToStr(number);
-
-          if number > 0 then
-            number := max - trunc(ln(number) / ln(10))
-          else
-            number := max;
-
-          if fnNView = nvDEC then
-            for i := 1 to number do
-              Result := ' ' + Result;
-          end;
+        nvBIN: Result := '0b' + stb;
+        nvHEX: Result := '0x' + IntToHex(number, fnBitsPerBlock div 4);
+        nvDEC: Result := PadLeft(IntToStr(number), numberChars);
         end;
     end;
 
-  var
-    ch:           Char;
-    x, y:         Integer;
-    x_end, y_end: Integer;
-    w_st, h_st:   Integer;
-    str_binary:   String;
-    str:          String = '';
-    bit1, bit0:   Char;
-    element:      Boolean;
+  function readBlock(AX, AY: Integer): String;
+    var
+      i, cx, cy: Integer;
+    begin
+      Result := AddChar(fnNumbersInversion.Select('1', '0'), '', fnBitsPerBlock);
+
+      if not (fnGroupIsVertical or fnScanColsToRight) then AX -= fnBitsPerBlock - 1;
+      if fnGroupIsVertical and not fnScanRowsToDown then   AY -= fnBitsPerBlock - 1;
+
+      for i := 0 to fnBitsPerBlock - 1 do
+        begin
+        cx := AX + fnGroupIsVertical.Select(0, i);
+        cy := AY + fnGroupIsVertical.Select(i, 0);
+
+        if (cx < 0) or (cx >= FWidth) or (cy < 0) or (cy >= FHeight) then
+          Result[i + 1] := (fnEmptyBits = emBIT_0).Select('0', '1')
+        else
+        if FCharCanvas[cx, cy] then
+          Result[i + 1] := fnNumbersInversion.Select('0', '1');
+        end;
+    end;
+
+  function readColByCol: String;
+    var
+      x, y, cx, cy: Integer;
+    begin
+      Result := '';
+      x      := 0;
+
+      while x < FWidth do
+        begin
+        y := 0;
+
+        while y < FHeight do
+          begin
+          cx     := fnScanColsToRight.Select(x, FWidth - 1 - x);
+          cy     := fnScanRowsToDown.Select(y, FHeight - 1 - y);
+          Result += createNumber(readBlock(cx, cy), fnNumbersView) + ', ';
+          y      += fnGroupIsVertical.Select(fnBitsPerBlock, 1);
+          end;
+
+        x += fnGroupIsVertical.Select(1, fnBitsPerBlock);
+        end;
+    end;
+
+  function readRowByRow: String;
+    var
+      x, y, cx, cy: Integer;
+    begin
+      Result := '';
+      y      := 0;
+
+      while y < FHeight do
+        begin
+        x := 0;
+
+        while x < FWidth do
+          begin
+          cx     := fnScanColsToRight.Select(x, FWidth - 1 - x);
+          cy     := fnScanRowsToDown.Select(y, FHeight - 1 - y);
+          Result += createNumber(readBlock(cx, cy), fnNumbersView) + ', ';
+          x      += fnGroupIsVertical.Select(1, fnBitsPerBlock);
+          end;
+
+        y += fnGroupIsVertical.Select(fnBitsPerBlock, 1);
+        end;
+    end;
 
   begin
+    numberChars := trunc(Log10((UInt64(1) shl fnBitsPerBlock) - 1)) + 1;
+
     if fnScanColsFirst then
-      begin
-      x_end := FWidth;
-      y_end := FHeight;
-      end
-    else
-      begin
-      x_end := FHeight;
-      y_end := FWidth;
-      end;
+      Result := readColByCol else
+      Result := readRowByRow;
 
-    if fnScanColsToRight then
-      w_st := 0            // сканирование столбцов слева направо
-    else
-      w_st := FWidth - 1;  // сканирование столбцов справа налево
-
-    if fnScanRowsToDown then
-      h_st := 0            // сканирование строк снизу вверх
-    else
-      h_st := FHeight - 1; // сканирование строк сверху вниз
-
-    bit0 := '0';
-    bit1 := '1';
-    if fnNumbersInversion then
-      begin
-      bit0 := '1';
-      bit1 := '0';
-      end;
-
-    for x := 0 to x_end - 1 do
-      begin
-      str_binary := '';
-
-      if (Length(str) > 0) then
-        str := str + ', ';
-
-      for y := 0 to y_end - 1 do
-        begin
-
-        if fnScanColsFirst then
-          element := FCharCanvas[abs(w_st - x), abs(h_st - y)]
-        else
-          element := FCharCanvas[abs(w_st - y), abs(h_st - x)];
-
-        if element then
-          str_binary := bit1 + str_binary
-        else
-          str_binary := bit0 + str_binary;
-
-        if (y_end > fnNumbersBits) and ((y + 1) mod fnNumbersBits = 0) and
-          (y + 1 <> y_end) then
-          begin
-          str        := str + create_number(str_binary, fnNumbersView) + ', ';
-          str_binary := '';
-          end;
-        end;
-
-      Inc(y);
-      while (y mod fnNumbersBits <> 0) do // дополнение пустых разрядов
-        begin
-        if fnEmptyBits = emBIT_0 then
-          ch := '0'
-        else
-          ch := '1';
-        //str_binary := str_binary + ch; // побитовое выравнивание по левой стороне
-        str_binary := ch + str_binary;  // побитовое выравнивание по правой стороне
-
-        Inc(y);
-        end;
-
-      str := str + create_number(str_binary, fnNumbersView);
-      end;
+    Result := Result.Remove(Result.Length - 2);
 
     if fnFontType = ftPROPORTIONAL then
-      Result := create_number(binStr(GetCharWidth, fnNumbersBits), nvDEC) + ', /*N*/ ' + str
-    else
-      Result := str;
+      Result := createNumber(binStr(GetCharWidth, fnBitsPerBlock), nvDEC)
+        + ', /*N*/ ' + Result;
   end;
 
 // очистить историю изменений

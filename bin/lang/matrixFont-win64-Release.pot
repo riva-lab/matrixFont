@@ -16,6 +16,16 @@ msgstr ""
 msgid "версия %s"
 msgstr ""
 
+#: fm_gen.fm_gen_blkd_1
+msgctxt "fm_gen.fm_gen_blkd_1"
+msgid "Вертикально"
+msgstr ""
+
+#: fm_gen.fm_gen_blkd_2
+msgctxt "fm_gen.fm_gen_blkd_2"
+msgid "Горизонтально"
+msgstr ""
+
 #: fm_gen.fm_gen_caption
 msgid "Генератор кода"
 msgstr ""
@@ -60,12 +70,12 @@ msgstr ""
 
 #: fm_gen.fm_gen_scud_1
 msgctxt "fm_gen.fm_gen_scud_1"
-msgid "Сначала столбцы"
+msgid "Столбцами групп"
 msgstr ""
 
 #: fm_gen.fm_gen_scud_2
 msgctxt "fm_gen.fm_gen_scud_2"
-msgid "Сначала строки"
+msgid "Строками групп"
 msgstr ""
 
 #: fm_gen.fm_gen_srud_1
@@ -311,13 +321,18 @@ msgctxt "tfmgen.lbfonttype.caption"
 msgid "Тип шрифта"
 msgstr ""
 
+#: tfmgen.lbgroupdirection.caption
+msgctxt "tfmgen.lbgroupdirection.caption"
+msgid "Считывание битов группы"
+msgstr ""
+
 #: tfmgen.lblanguage.caption
 msgid "Генерируемый код"
 msgstr ""
 
 #: tfmgen.lbnumbersbits.caption
 msgctxt "tfmgen.lbnumbersbits.caption"
-msgid "Разрядность чисел"
+msgid "Разрядность битовых групп"
 msgstr ""
 
 #: tfmgen.lbnumbersview.caption
@@ -334,7 +349,7 @@ msgstr ""
 
 #: tfmgen.lbscancolsfirst.caption
 msgctxt "tfmgen.lbscancolsfirst.caption"
-msgid "Очередность считывания"
+msgid "Способ считывания"
 msgstr ""
 
 #: tfmgen.lbscancolstoright.caption

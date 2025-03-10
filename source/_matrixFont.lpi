@@ -25,14 +25,14 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="107">
+      <ExcludedIdentifiers Count="108">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
         <Item4 Value="tfmconfirm.lbmessage.caption"/>
         <Item5 Value="tfmgen.cbemptybits.text"/>
         <Item6 Value="tfmgen.cbfonttype.text"/>
-        <Item7 Value="tfmgen.cblanguage.text"/>
+        <Item7 Value="tfmgen.cbgenlanguage.text"/>
         <Item8 Value="tfmgen.cbnumbersbits.text"/>
         <Item9 Value="tfmgen.cbnumbersview.text"/>
         <Item10 Value="tfmgen.cbscancolsfirst.text"/>
@@ -133,6 +133,7 @@
         <Item105 Value="tfmsettings.lbcolorsd4.hint"/>
         <Item106 Value="tfmsettings.lbcolorsd5.hint"/>
         <Item107 Value="tfmrbf.lbfontwiki.hint"/>
+        <Item108 Value="tfmgen.cbgroupdirection.text"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -140,8 +141,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="2"/>
-      <BuildNr Value="84"/>
+      <RevisionNr Value="3"/>
+      <BuildNr Value="85"/>
       <Language Value="0419"/>
       <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -462,6 +463,7 @@
         <Filename Value="fm_new.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmNew"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit28>
     </Units>

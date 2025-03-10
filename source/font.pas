@@ -105,6 +105,7 @@ type
 
     // поля настройки знакогенератора
 
+    FGroupIsVertical:  Boolean;     // поле - направление считывания группы битов: верт/гориз
     FScanColsFirst:    Boolean;     // поле - флаг очередности сканирования: столбцы-строки
     FScanColsToRight:  Boolean;     // поле - флаг направления сканирования столбцов
     FScanRowsToDown:   Boolean;     // поле - флаг направления сканирования строк
@@ -113,7 +114,7 @@ type
     FNumbersInversion: Boolean;     // поле - битовая инверсия представления выходных чисел
     FEmptyBits:        TEmptyBit;   // поле - настройка заполнения пустых разрядов
     FFontType:         TFontType;   // поле - тип шрифта
-    FNumbersBits:      Integer;     // поле - разрядность выходных чисел
+    FBitsPerGroup:     Integer;     // поле - разрядность группы битов
     FCommentStyle:     Integer;     // поле - тип комментария Си (0: С99, 1: С89)
     //==========================================================================
 
@@ -254,6 +255,9 @@ type
     //--------------------------------------------------------------------------
     // свойства настройки знакогенератора
 
+    // флаг направления считывания группы битов: вертикально/горизонтально
+    property GroupIsVertical: Boolean read FGroupIsVertical write FGroupIsVertical;
+
     // флаг очередности сканирования: столбцы-строки
     property ScanColsFirst: Boolean read FScanColsFirst write FScanColsFirst;
 
@@ -278,8 +282,8 @@ type
     // тип шрифта
     property FontType: TFontType read FFontType write FFontType;
 
-    // разрядность выходных чисел
-    property NumbersBits: Integer read FNumbersBits write FNumbersBits;
+    // разрядность группы битов
+    property BitsPerGroup: Integer read FBitsPerGroup write FBitsPerGroup;
 
     // тип комментария Си (0: С99, 1: С89)
     property CommentStyle: Integer read FCommentStyle write FCommentStyle;
@@ -555,14 +559,14 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
     if FScanColsFirst then
       begin
       ew     := dfw;
-      if (FHeight - 1) div FNumbersBits > 0 then
-        muls := ' * ' + IntToStr((FHeight - 1) div FNumbersBits + 1);
+      if (FHeight - 1) div FBitsPerGroup > 0 then
+        muls := ' * ' + IntToStr((FHeight - 1) div FBitsPerGroup + 1);
       end
     else
       begin
       ew     := dfh;
-      if (FWidth - 1) div FNumbersBits > 0 then
-        muls := ' * ' + IntToStr((FWidth - 1) div FNumbersBits + 1);
+      if (FWidth - 1) div FBitsPerGroup > 0 then
+        muls := ' * ' + IntToStr((FWidth - 1) div FBitsPerGroup + 1);
       end;
 
     // информационный блок
@@ -617,7 +621,7 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
 
     // объявление массива данных
     s += LineEnding;
-    s += 'const ' + int_str[FNumbersBits div 8 - 1] + ' ' + LowerCase(id);
+    s += 'const ' + int_str[FBitsPerGroup div 8 - 1] + ' ' + LowerCase(id);
 
     s += '[' + dfa + '] =' + LineEnding;
     s += '{' + LineEnding;
@@ -647,6 +651,7 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
 
       // бинарный код символа
       s += AddChar(' ', '', 4) + FCharArray[i].GenerateCode(
+        FGroupIsVertical,
         FScanColsFirst,
         FScanColsToRight,
         FScanRowsToDown,
@@ -654,7 +659,7 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         FNumbersView,
         FEmptyBits,
         FFontType,
-        FNumbersBits);
+        FBitsPerGroup);
 
       if i = ch_e then
         s += ' '
@@ -1174,7 +1179,7 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
       Height        := GetMatrixFontParamInt('char_height');
       FontStartItem := GetMatrixFontParamInt('start_char');
       FontLength    := GetMatrixFontParamInt('length');
-      NumbersBits   := 0;
+      BitsPerGroup  := 0;
       AOffset       := 0;
       ASkip         := 0;
       if GetMatrixFontParamStr('font_type') = 'FONT_TYPE_PROPORTIONAL' then
@@ -1193,7 +1198,7 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
         Height        := Integer(AArray[1] and $3FF);
         FontStartItem := Integer(AArray[2] and $3FF);
         FontLength    := Integer(AArray[3] and $3FF);
-        NumbersBits   := 8;
+        BitsPerGroup  := 8;
         AOffset       := 4;
         ASkip         := 0;
         FontType      := ftMONOSPACE;
@@ -1224,10 +1229,10 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
 
         imAdafruit:
           begin
-          FontType    := ftPROPORTIONAL;
-          NumbersBits := 8;
-          AOffset     := 0;
-          ASkip       := 0;
+          FontType     := ftPROPORTIONAL;
+          BitsPerGroup := 8;
+          AOffset      := 0;
+          ASkip        := 0;
           end;
 
         imLCDVision:
@@ -1242,7 +1247,7 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
         i: Integer;
       begin
         Result   := 0;
-        for i    := 1 to FNumbersBits do
+        for i    := 1 to FBitsPerGroup do
           begin
           Result := Result shl 1;
           if (AValue and 1) <> 0 then
@@ -1322,8 +1327,8 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
 
     // check fields
     if AOffset > High(values) then Exit;
-    if FNumbersBits = 0 then FNumbersBits := b;
-    if FNumbersBits = 0 then Exit;
+    if FBitsPerGroup = 0 then FBitsPerGroup := b;
+    if FBitsPerGroup = 0 then Exit;
     if FWidth = 0 then Exit;
     if FHeight = 0 then Exit;
     if FFontLength = 0 then Exit;
@@ -1334,7 +1339,7 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
     if not (AType in [imAdafruit, imLCDVision]) then
       if FMSBFirst then ChangeBitOrder(values);
 
-    chLine := (sx - 1) div FNumbersBits + 1;
+    chLine := (sx - 1) div FBitsPerGroup + 1;
     chSize := chLine * sy - 1;
     i      := AOffset;
     Result := True;
@@ -1348,7 +1353,7 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
 
         if (AType = imLCDVision) and (FontType = ftPROPORTIONAL) then
           begin
-          chLine := (values[4 + ch] - 1) div FNumbersBits + 1;
+          chLine := (values[4 + ch] - 1) div FBitsPerGroup + 1;
           chSize := chLine * Height - 1;
           end;
 
@@ -1357,9 +1362,9 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
           if i > High(values) then Exit;
           currentValue := values[i];
 
-          for b := 0 to FNumbersBits - 1 do
+          for b := 0 to FBitsPerGroup - 1 do
             begin
-            sx := (j mod chLine) * FNumbersBits + b;
+            sx := (j mod chLine) * FBitsPerGroup + b;
             sy := j div chLine;
             if FScanColsFirst then SwapInts(sx, sy);
 

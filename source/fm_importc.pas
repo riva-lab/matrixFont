@@ -494,7 +494,7 @@ procedure TfmImportC.UpdateFont(AFont: TMatrixFont);
 
       // set font parameters
       ScanColsFirst := cbImpOrder.ItemIndex = 0;
-      NumbersBits   := cbImpNBits.ItemIndex * 8;
+      BitsPerGroup  := cbImpNBits.ItemIndex * 8;
       MSBFirst      := cbImpBitOrder.ItemIndex > 0;
       Width         := seImpWidth.Value;
       Height        := seImpHeight.Value;

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-06-04 00:29+0300\n"
+"PO-Revision-Date: 2025-03-10 23:05+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -27,6 +27,16 @@ msgstr "build #%d, %s"
 #, object-pascal-format
 msgid "версия %s"
 msgstr "version %s"
+
+#: fm_gen.fm_gen_blkd_1
+msgctxt "fm_gen.fm_gen_blkd_1"
+msgid "Вертикально"
+msgstr "Vertically"
+
+#: fm_gen.fm_gen_blkd_2
+msgctxt "fm_gen.fm_gen_blkd_2"
+msgid "Горизонтально"
+msgstr "Horizontally"
 
 #: fm_gen.fm_gen_caption
 msgid "Генератор кода"
@@ -72,13 +82,13 @@ msgstr "Right to left"
 
 #: fm_gen.fm_gen_scud_1
 msgctxt "fm_gen.fm_gen_scud_1"
-msgid "Сначала столбцы"
-msgstr "Columns first"
+msgid "Столбцами групп"
+msgstr "Column by column"
 
 #: fm_gen.fm_gen_scud_2
 msgctxt "fm_gen.fm_gen_scud_2"
-msgid "Сначала строки"
-msgstr "Rows first"
+msgid "Строками групп"
+msgstr "Row by row"
 
 #: fm_gen.fm_gen_srud_1
 msgid "Сверху вниз"
@@ -324,14 +334,19 @@ msgctxt "tfmgen.lbfonttype.caption"
 msgid "Тип шрифта"
 msgstr "Font type"
 
+#: tfmgen.lbgroupdirection.caption
+msgctxt "tfmgen.lbgroupdirection.caption"
+msgid "Считывание битов группы"
+msgstr "Read bits of group"
+
 #: tfmgen.lblanguage.caption
 msgid "Генерируемый код"
 msgstr "Generated code"
 
 #: tfmgen.lbnumbersbits.caption
 msgctxt "tfmgen.lbnumbersbits.caption"
-msgid "Разрядность чисел"
-msgstr "Numbers width"
+msgid "Разрядность битовых групп"
+msgstr "Bits per group"
 
 #: tfmgen.lbnumbersview.caption
 msgid "Отображение чисел"
@@ -347,8 +362,8 @@ msgstr "[Reset]"
 
 #: tfmgen.lbscancolsfirst.caption
 msgctxt "tfmgen.lbscancolsfirst.caption"
-msgid "Очередность считывания"
-msgstr "Reading order"
+msgid "Способ считывания"
+msgstr "Reading method"
 
 #: tfmgen.lbscancolstoright.caption
 msgid "Считывание столбцов"
