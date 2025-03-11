@@ -180,26 +180,6 @@ msgstr ""
 msgid "Расширить холст"
 msgstr ""
 
-#: font.rhf_char_cyr
-msgid "Кириллица, строчные"
-msgstr ""
-
-#: font.rhf_char_cyrcap
-msgid "Кириллица, прописные"
-msgstr ""
-
-#: font.rhf_char_digit
-msgid "Цифры"
-msgstr ""
-
-#: font.rhf_char_lat
-msgid "Латиница, строчные"
-msgstr ""
-
-#: font.rhf_char_latcap
-msgid "Латиница, прописные"
-msgstr ""
-
 #: font.rhf_comment_app
 msgid "Сгенерировано"
 msgstr ""

@@ -1,0 +1,31 @@
+%CommentBegin% %LabelFontName% %FontName%
+%CommentNext% %LabelFontAuthor% %FontAuthor%
+%CommentNext% %LabelDateTime% %DateTime%
+%CommentNext% %LabelApplication% %Application%
+%CommentNext% %LabelFontEncoding% %FontEncoding%
+%CommentNext% %AppAdditional% %CommentEnd%
+
+#ifndef %FontIDUpperCase%_H
+#define %FontIDUpperCase%_H
+
+#ifndef FONT_TYPE_MONOSPACED
+#define FONT_TYPE_MONOSPACED    0
+#endif
+
+#ifndef FONT_TYPE_PROPORTIONAL
+#define FONT_TYPE_PROPORTIONAL  1
+#endif
+
+#define %FontIDUpperCase%_LENGTH        %FontLength%
+#define %FontIDUpperCase%_START_CHAR    %FontStartChar%
+#define %FontIDUpperCase%_CHAR_WIDTH    %FontWidth%
+#define %FontIDUpperCase%_CHAR_HEIGHT   %FontHeight%
+#define %FontIDUpperCase%_FONT_TYPE     FONT_TYPE_%FontType%
+#define %FontIDUpperCase%_ARRAY_LENGTH  %FontArraySize%
+#define %FontIDUpperCase%_ARRAY_BYTES   %FontArrayBytes%
+
+const %DataType% %FontIDLowerCase%_data[] %DataModifier1%=
+{
+%FontData%};
+
+#endif %CommentBegin% %FontIDUpperCase%_H %CommentEnd%

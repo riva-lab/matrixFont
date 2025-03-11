@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, LazUTF8, LConvEncoding, StrUtils, Graphics, regexpr,
-  symbol, u_encodings, u_helpers;
+  symbol, u_encodings, u_helpers, u_utilities;
 
 resourcestring
   RHF_COMMENT_NAME   = 'Название шрифта';
@@ -15,11 +15,6 @@ resourcestring
   RHF_COMMENT_APP    = 'Сгенерировано';
   RHF_COMMENT_CP     = 'Кодовая страница';
   RHF_COMMENT_CHAR   = 'Символ';
-  RHF_CHAR_DIGIT     = 'Цифры';
-  RHF_CHAR_LATCAP    = 'Латиница, прописные';
-  RHF_CHAR_LAT       = 'Латиница, строчные';
-  RHF_CHAR_CYRCAP    = 'Кириллица, прописные';
-  RHF_CHAR_CYR       = 'Кириллица, строчные';
 
 const
   FILE_EXTENSION     = 'RHF';
@@ -500,157 +495,52 @@ function TMatrixFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
 
 // генерировать код шрифта
 function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
-  const
-    tab_spaces = 32;
   var
-    id, dfs, dfl, dfw, dfh, dft, dfa, ew: String;
-    com_s, com_e, com_m: String;
-
-    ch_s, ch_e: Integer;
-    i, len, len_c: Integer;
-
-    s:       String = '';
-    muls:    String = '';
-    int_str: array[0..3] of String = (
-      'unsigned char ',
+    i, space: Integer;
+    s, id:    String;
+    dataType: array[0..3] of String = (
+      'unsigned char',
       'unsigned short',
-      'unsigned long ',
-      'unsigned long ');
+      'uint24_t',
+      'unsigned long');
 
-  begin
-    if FCommentStyle = 0 then
-      begin
-      com_s := '// ';  // начало комментария С99
-      com_m := '// ';  // продолжение комментария С99
-      com_e := ' ';    // конец комментария С99
-      end
-    else
-      begin
-      com_s := '/* '; // начало комментария С89
-      com_m := '   '; // продолжение комментария С89
-      com_e := ' */'; // конец комментария С89
-      end;
+  function AddBlockCaption(ACharCode: Integer): String;
+    begin
+      if ACharCode in [16, 32, 58, 91, 123] then Exit(LineEnding);
+      if (ACharCode > 127) and (ACharCode mod 16 = 0) then Exit(LineEnding);
 
-    if (StartChar > 0) and (StartChar > FFontStartItem) then
-      ch_s := StartChar - FFontStartItem
-    else
-      ch_s := 0;
+      Result := '';
 
-    if (EndChar > 0) and (EndChar >= StartChar) and (EndChar < FFontStartItem + FFontLength) then
-      ch_e := EndChar - FFontStartItem
-    else
-      ch_e := FFontLength - 1;
-
-    if FDefPrefix[1] in ['0'..'9'] then
-      FDefPrefix := '_' + FDefPrefix;
-    id           := Transliterate(FDefPrefix);
-    len          := (length(id) - 10) and not 3 + 4;
-    if len < 0 then
-      len := 0;
-    len := len + tab_spaces;
-
-    dfl := (id) + '_LENGTH';
-    dfs := (id) + '_START_CHAR';
-    dfw := (id) + '_CHAR_WIDTH';
-    dfh := (id) + '_CHAR_HEIGHT';
-    dft := (id) + '_FONT_TYPE';
-    dfa := (id) + '_ARRAY_LENGTH';
-
-    if FScanColsFirst then
-      begin
-      ew     := dfw;
-      if (FHeight - 1) div FBitsPerGroup > 0 then
-        muls := ' * ' + IntToStr((FHeight - 1) div FBitsPerGroup + 1);
-      end
-    else
-      begin
-      ew     := dfh;
-      if (FWidth - 1) div FBitsPerGroup > 0 then
-        muls := ' * ' + IntToStr((FWidth - 1) div FBitsPerGroup + 1);
-      end;
-
-    // информационный блок
-    len_c := 0;
-    if UTF8Length(RHF_COMMENT_NAME) > len_c then len_c := UTF8Length(RHF_COMMENT_NAME);
-    if UTF8Length(RHF_COMMENT_AUTHOR) > len_c then len_c := UTF8Length(RHF_COMMENT_AUTHOR);
-    if UTF8Length(RHF_COMMENT_TIME) > len_c then len_c := UTF8Length(RHF_COMMENT_TIME);
-    if UTF8Length(RHF_COMMENT_APP) > len_c then len_c := UTF8Length(RHF_COMMENT_APP);
-    if UTF8Length(RHF_COMMENT_CP) > len_c then len_c := UTF8Length(RHF_COMMENT_CP);
-    len_c := ((len_c + 3) div 4 + 1) * 4 - 3;
-
-    s += com_s + UTF8PadRight(RHF_COMMENT_NAME, len_c) + FName + LineEnding;
-    s += com_m + UTF8PadRight(RHF_COMMENT_AUTHOR, len_c) + FAuthor + LineEnding;
-    s += com_m + UTF8PadRight(RHF_COMMENT_TIME, len_c) + DateTimeToStr(Now) + LineEnding;
-    s += com_m + UTF8PadRight(RHF_COMMENT_APP, len_c) + FAppCurrent + LineEnding;
-    s += com_m + UTF8PadRight(RHF_COMMENT_CP, len_c) + GetEncodingCaption(FEncoding) + LineEnding;
-    s += com_m + FAppAdditional;
-    s += com_e + LineEnding + LineEnding;
-
-    // защита от множественных include
-    s += '#ifndef ' + UpperCase(id) + '_H' + LineEnding;
-    s += '#define ' + UpperCase(id) + '_H' + LineEnding + LineEnding;
-
-    // объявление используемых констант
-    s += '#ifndef FONT_TYPE_MONOSPACED' + LineEnding;
-    s += PadRight('#define FONT_TYPE_MONOSPACED', len) + '0' + LineEnding;
-    s += '#endif' + LineEnding + LineEnding;
-    s += '#ifndef FONT_TYPE_PROPORTIONAL' + LineEnding;
-    s += PadRight('#define FONT_TYPE_PROPORTIONAL', len) + '1' + LineEnding;
-    s += '#endif' + LineEnding + LineEnding;
-
-    // объявление константных параметров шрифта
-    s += PadRight('#define ' + dfl, len) + IntToStr(ch_e - ch_s + 1) + LineEnding;
-    s += PadRight('#define ' + dfs, len) + IntToStr(FFontStartItem + ch_s) + LineEnding;
-    s += PadRight('#define ' + dfw, len) + IntToStr(FWidth) + LineEnding;
-    s += PadRight('#define ' + dfh, len) + IntToStr(FHeight) + LineEnding;
-    if FFontType = ftMONOSPACE then
-      s += PadRight('#define ' + dft, len) + '(FONT_TYPE_MONOSPACED)' + LineEnding
-    else
-      s += PadRight('#define ' + dft, len) + '(FONT_TYPE_PROPORTIONAL)' + LineEnding;
-
-    s += PadRight('#define ' + dfa, len);
-    s += '(' + dfl + ' * ';
-
-    if FFontType = ftPROPORTIONAL then
-      s += '(1 + ';
-    s   += ew + muls;
-
-    if FFontType = ftPROPORTIONAL then
-      s += ')';
-    s   += ')' + LineEnding;
-
-    // объявление массива данных
-    s += LineEnding;
-    s += 'const ' + int_str[FBitsPerGroup div 8 - 1] + ' ' + LowerCase(id);
-
-    s += '[' + dfa + '] =' + LineEnding;
-    s += '{' + LineEnding;
-
-    // генерация массива данных
-    for i := ch_s to ch_e do
-      begin
-
-      // разделение набора на логические блоки
-      case FFontStartItem + i of
-        48: s  += LineEnding + AddChar(' ', '', 8) + com_s +
-            'Digits / ' + RHF_CHAR_DIGIT + com_e + LineEnding;
-        58: s  += LineEnding;
-        65: s  += LineEnding + AddChar(' ', '', 8) + com_s +
-            'Roman Capitals / ' + RHF_CHAR_LATCAP + com_e + LineEnding;
-        91: s  += LineEnding;
-        97: s  += LineEnding + AddChar(' ', '', 8) + com_s +
-            'Roman Smalls / ' + RHF_CHAR_LAT + com_e + LineEnding;
-        123: s += LineEnding;
-        192: if FEncoding = EncodingCP1251 then
-            s += LineEnding + AddChar(' ', '', 8) + com_s +
-              'Cyrillic Capitals / ' + RHF_CHAR_CYRCAP + com_e + LineEnding;
-        224: if FEncoding = EncodingCP1251 then
-            s += LineEnding + AddChar(' ', '', 8) + com_s +
-              'Cyrillic Smalls / ' + RHF_CHAR_CYR + com_e + LineEnding;
+      case ACharCode of
+        48: Result := 'Digits';
+        65: Result := 'Latin Uppercase';
+        97: Result := 'Latin Lowercase';
         end;
 
-      // бинарный код символа
-      s += AddChar(' ', '', 4) + FCharArray[i].GenerateCode(
+      if Result <> '' then
+        Result := LineEnding + '    %CommentBegin% ' + Result + '%CommentEnd%' + LineEnding;
+    end;
+
+  begin
+    if (StartChar < 0) or (StartChar < FFontStartItem) then
+      StartChar := FFontStartItem;
+
+    if (EndChar < 0) or (EndChar < StartChar) or (EndChar >= FFontStartItem + FFontLength) then
+      EndChar := FFontStartItem + FFontLength - 1;
+
+    if FDefPrefix[1] in ['0'..'9'] then FDefPrefix := '_' + FDefPrefix;
+    id := Transliterate(FDefPrefix);
+
+    Result := '';
+
+    // generate array of chars
+    for i := StartChar to EndChar do
+      Result += UnicodeFormat('%s    /*%s %-3d %-3s*/ %s%s', [
+        AddBlockCaption(i),
+        RHF_COMMENT_CHAR,
+        i,
+        ((i < 32) or (i = 127)).Select(GetCharName(i), '<' + GetCharName(i) + '>'),
+        FCharArray[i - FFontStartItem].GenerateCode(
         FGroupIsVertical,
         FScanColsFirst,
         FScanColsToRight,
@@ -659,27 +549,47 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         FNumbersView,
         FEmptyBits,
         FFontType,
-        FBitsPerGroup);
+        FBitsPerGroup),
+        (i = EndChar).Select('', ',')]) + LineEnding;
 
-      if i = ch_e then
-        s += ' '
-      else
-        s += ',';
+    i := FGroupIsVertical.Select(
+      FWidth * ((FHeight - 1) div FBitsPerGroup + 1),
+      FHeight * ((FWidth - 1) div FBitsPerGroup + 1));
+    i += (FFontType = ftMONOSPACE).Select(0, 1);
+    i *= EndChar - StartChar + 1;
 
-      // комментарий к символу
-      s += ' ' + com_s + RHF_COMMENT_CHAR + ' ';
-      s += PadRight(IntToStr(FFontStartItem + i), 4);
-      s += '<' + GetCharName(FFontStartItem + i, True);
-      s += '>' + com_e + LineEnding;
-      end;
+    space := 0;
+    for s in [RHF_COMMENT_NAME, RHF_COMMENT_AUTHOR, RHF_COMMENT_TIME, RHF_COMMENT_APP, RHF_COMMENT_CP] do
+      if UTF8Length(s) > space then space := UTF8Length(s);
+    space := ((space + 3) div 4 + 1) * 4 - 3;
 
-    // конец массива данных
-    s += '};' + LineEnding + LineEnding;
-
-    // защита от множественных include - завершение
-    s += '#endif ' + com_s + UpperCase(id) + '_H' + com_e + LineEnding;
-
-    Result := s;
+    Result := GetResourceAsString('CODETEMPDEF')
+      .Replace('%FontData%', Result)
+      .Replace('%CommentBegin%', (FCommentStyle = 0).Select('//', '/*'))
+      .Replace('%CommentNext%', (FCommentStyle = 0).Select('//', '  '))
+      .Replace('%CommentEnd%', (FCommentStyle = 0).Select(' ', '*/'))
+      .Replace('%LabelFontName%', UTF8PadRight(RHF_COMMENT_NAME, space))
+      .Replace('%LabelFontAuthor%', UTF8PadRight(RHF_COMMENT_AUTHOR, space))
+      .Replace('%LabelDateTime%', UTF8PadRight(RHF_COMMENT_TIME, space))
+      .Replace('%LabelApplication%', UTF8PadRight(RHF_COMMENT_APP, space))
+      .Replace('%LabelFontEncoding%', UTF8PadRight(RHF_COMMENT_CP, space))
+      .Replace('%FontName%', FName)
+      .Replace('%FontAuthor%', FAuthor)
+      .Replace('%DateTime%', DateTimeToStr(Now))
+      .Replace('%Application%', FAppCurrent)
+      .Replace('%FontEncoding%', GetEncodingCaption(FEncoding))
+      .Replace('%AppAdditional%', FAppAdditional)
+      .Replace('%FontIDUpperCase%', id)
+      .Replace('%FontIDLowerCase%', LowerCase(id))
+      .Replace('%FontLength%', (EndChar - StartChar + 1).ToString)
+      .Replace('%FontStartChar%', StartChar.ToString)
+      .Replace('%FontWidth%', FWidth.ToString)
+      .Replace('%FontHeight%', FHeight.ToString)
+      .Replace('%FontType%', (FFontType = ftMONOSPACE).Select('MONOSPACED', 'PROPORTIONAL'))
+      .Replace('%FontArraySize%', i.ToString)
+      .Replace('%FontArrayBytes%', (i * ((FBitsPerGroup + 7) div 8)).ToString)
+      .Replace('%DataType%', dataType[(FBitsPerGroup - 1) div 8])
+      .Replace('%DataModifier1%', '');
   end;
 
 // увеличение масштаба изображения всех символов шрифта
