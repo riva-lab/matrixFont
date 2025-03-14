@@ -26,7 +26,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="108">
+      <ExcludedIdentifiers Count="109">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -135,6 +135,7 @@
         <Item106 Value="tfmsettings.lbcolorsd5.hint"/>
         <Item107 Value="tfmrbf.lbfontwiki.hint"/>
         <Item108 Value="tfmgen.cbgroupdirection.text"/>
+        <Item109 Value="tfmgen.cbbitorderlsb.text"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -142,8 +143,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="4"/>
-      <BuildNr Value="86"/>
+      <RevisionNr Value="5"/>
+      <BuildNr Value="87"/>
       <Language Value="0419"/>
       <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>

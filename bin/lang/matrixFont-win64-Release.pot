@@ -26,6 +26,14 @@ msgctxt "fm_gen.fm_gen_blkd_2"
 msgid "Горизонтально"
 msgstr ""
 
+#: fm_gen.fm_gen_bo_1
+msgid "Сначала LSB"
+msgstr ""
+
+#: fm_gen.fm_gen_bo_2
+msgid "Сначала MSB"
+msgstr ""
+
 #: fm_gen.fm_gen_caption
 msgid "Генератор кода"
 msgstr ""
@@ -286,6 +294,10 @@ msgstr ""
 
 #: tfmgen.actabselsettings.hint
 msgid "Настройки вывода"
+msgstr ""
+
+#: tfmgen.lbbitorder.caption
+msgid "Порядок записи бит"
 msgstr ""
 
 #: tfmgen.lbdefprefix.caption

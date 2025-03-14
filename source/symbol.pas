@@ -106,8 +106,9 @@ type
       $FFFFFF; ColorActive: TColor = 0);
 
     // генерировать код символа
-    function GenerateCode(fnGroupIsVertical, fnScanColsFirst, fnScanColsToRight, fnScanRowsToDown,
-      fnNumbersInversion: Boolean; fnNumbersView: TNumberView; fnEmptyBits: TEmptyBit;
+    function GenerateCode(fnGroupIsVertical, fnScanColsFirst, fnScanColsToRight,
+      fnScanRowsToDown, fnBitOrderLSBFirst, fnNumbersInversion: Boolean;
+      fnNumbersView: TNumberView; fnEmptyBits: TEmptyBit;
       fnFontType: TFontType; fnBitsPerBlock: Integer): String;
 
     // очистить историю изменений
@@ -628,6 +629,7 @@ function TMatrixChar.GenerateCode(
   fnScanColsFirst,             // поле - флаг очередности сканирования: столбцы-строки
   fnScanColsToRight,           // поле - флаг направления сканирования столбцов
   fnScanRowsToDown,            // поле - флаг направления сканирования строк
+  fnBitOrderLSBFirst,          // порядок записи бит в байте
   fnNumbersInversion: Boolean; // поле - битовая инверсия представления выходных чисел
   fnNumbersView: TNumberView;  // поле - настройка представления выходных чисел
   fnEmptyBits: TEmptyBit;      // поле - настройка заполнения пустых разрядов
@@ -641,11 +643,16 @@ function TMatrixChar.GenerateCode(
   function createNumber(stb: String; fnNView: TNumberView): String;
     var
       number: QWord;
+      ch:     Char;
     begin
-      number := StrToQWord('%' + stb);
+      Result := fnBitOrderLSBFirst.Select('', stb);
+      if fnBitOrderLSBFirst then
+        for ch in stb do Result := ch + Result;
+
+      number := StrToQWord('%' + Result);
 
       case fnNView of
-        nvBIN: Result := '0b' + stb;
+        nvBIN: Result := '0b' + Result;
         nvHEX: Result := '0x' + IntToHex(number, fnBitsPerBlock div 4);
         nvDEC: Result := PadLeft(IntToStr(number), numberChars);
         end;

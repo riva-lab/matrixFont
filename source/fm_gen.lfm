@@ -245,18 +245,18 @@ object fmGen: TfmGen
           Text = '-'
           OnChange = acRefreshOutExecute
         end
-        object lbEmptyBits: TLabel
+        object lbBitOrder: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
           Height = 28
           Top = 241
           Width = 367
           Alignment = taRightJustify
-          Caption = 'Заполнение пустых разрядов'
+          Caption = 'Порядок записи бит'
           Layout = tlCenter
           ParentColor = False
         end
-        object cbEmptyBits: TComboBox
+        object cbBitOrderLSB: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Left = 387
@@ -273,18 +273,18 @@ object fmGen: TfmGen
           Text = '-'
           OnChange = acRefreshOutExecute
         end
-        object lbLanguage: TLabel
+        object lbEmptyBits: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
           Height = 28
           Top = 274
           Width = 367
           Alignment = taRightJustify
-          Caption = 'Генерируемый код'
+          Caption = 'Заполнение пустых разрядов'
           Layout = tlCenter
           ParentColor = False
         end
-        object cbGenLanguage: TComboBox
+        object cbEmptyBits: TComboBox
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Side = asrBottom
           Left = 387
@@ -301,11 +301,39 @@ object fmGen: TfmGen
           Text = '-'
           OnChange = acRefreshOutExecute
         end
-        object lbDefPrefix: TLabel
+        object lbLanguage: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
           Height = 28
           Top = 307
+          Width = 367
+          Alignment = taRightJustify
+          Caption = 'Генерируемый код'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object cbGenLanguage: TComboBox
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 387
+          Height = 28
+          Top = 307
+          Width = 324
+          ItemHeight = 20
+          ItemIndex = 0
+          Items.Strings = (
+            '-'
+          )
+          Style = csDropDownList
+          TabOrder = 9
+          Text = '-'
+          OnChange = acRefreshOutExecute
+        end
+        object lbDefPrefix: TLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 10
+          Height = 28
+          Top = 340
           Width = 367
           Alignment = taRightJustify
           Caption = 'Префикс для определений'
@@ -317,17 +345,17 @@ object fmGen: TfmGen
           AnchorSideRight.Side = asrBottom
           Left = 387
           Height = 28
-          Top = 307
+          Top = 340
           Width = 324
           CharCase = ecUppercase
           MaxLength = 32
-          TabOrder = 9
+          TabOrder = 10
           OnChange = edDefPrefixChange
         end
         object pRangeTxt: TPanel
           Left = 10
           Height = 28
-          Top = 340
+          Top = 373
           Width = 367
           BevelOuter = bvNone
           ChildSizing.HorizontalSpacing = 10
@@ -336,7 +364,7 @@ object fmGen: TfmGen
           ClientHeight = 28
           ClientWidth = 367
           ParentBackground = False
-          TabOrder = 10
+          TabOrder = 11
           object lbRangeReset: TLabel
             Cursor = crHandPoint
             Left = 314
@@ -369,7 +397,7 @@ object fmGen: TfmGen
         object pRange: TPanel
           Left = 387
           Height = 28
-          Top = 340
+          Top = 373
           Width = 324
           BevelOuter = bvNone
           ChildSizing.HorizontalSpacing = 10
@@ -379,7 +407,7 @@ object fmGen: TfmGen
           ClientHeight = 28
           ClientWidth = 324
           ParentBackground = False
-          TabOrder = 11
+          TabOrder = 12
           object seStart: TSpinEdit
             AnchorSideTop.Side = asrBottom
             Left = 0
@@ -953,7 +981,7 @@ object fmGen: TfmGen
     Constraints.MinHeight = 3
     ParentBackground = False
     ParentColor = False
-    TabOrder = 2
+    TabOrder = 1
     Visible = False
   end
   object pControls: TPanel
@@ -975,7 +1003,7 @@ object fmGen: TfmGen
     Color = cl3DLight
     ParentBackground = False
     ParentColor = False
-    TabOrder = 1
+    TabOrder = 2
     object pSelector: TPanel
       Left = 4
       Height = 40

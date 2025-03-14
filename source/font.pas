@@ -104,6 +104,7 @@ type
     FScanColsFirst:    Boolean;     // поле - флаг очередности сканирования: столбцы-строки
     FScanColsToRight:  Boolean;     // поле - флаг направления сканирования столбцов
     FScanRowsToDown:   Boolean;     // поле - флаг направления сканирования строк
+    FBitOrderLSBFirst: Boolean;     // поле - порядок записи бит в байте
     FNumbersView:      TNumberView; // поле - настройка представления выходных чисел
     FMSBFirst:         Boolean;     // поле - порядок вывода бит (используется только в импорте из кода)
     FNumbersInversion: Boolean;     // поле - битовая инверсия представления выходных чисел
@@ -261,6 +262,9 @@ type
 
     // флаг направления сканирования строк
     property ScanRowsToDown: Boolean read FScanRowsToDown write FScanRowsToDown;
+
+    // порядок записи бит в байте
+    property BitOrderLSBFirst: Boolean read FBitOrderLSBFirst write FBitOrderLSBFirst;
 
     // настройка представления выходных чисел
     property NumbersView: TNumberView read FNumbersView write FNumbersView;
@@ -545,6 +549,7 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         FScanColsFirst,
         FScanColsToRight,
         FScanRowsToDown,
+        FBitOrderLSBFirst,
         FNumbersInversion,
         FNumbersView,
         FEmptyBits,

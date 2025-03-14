@@ -36,6 +36,9 @@ resourcestring
   FM_GEN_NV_5    = 'BIN (Инверсия)';
   FM_GEN_NV_6    = 'DEC (Инверсия)';
 
+  FM_GEN_BO_1    = 'Сначала LSB';
+  FM_GEN_BO_2    = 'Сначала MSB';
+
   FM_GEN_EB_1    = '0 - нули';
   FM_GEN_EB_2    = '1 - единицы ';
 
@@ -83,6 +86,7 @@ type
     cbScanRowsToDown:  TComboBox;
     cbFontType:        TComboBox;
     cbNumbersView:     TComboBox;
+    cbBitOrderLSB:     TComboBox;
     cbEmptyBits:       TComboBox;
     cbNumbersBits:     TComboBox;
     cbGenLanguage:     TComboBox;
@@ -92,6 +96,7 @@ type
     lbScanRowsToDown:  TLabel;
     lbFontType:        TLabel;
     lbNumbersView:     TLabel;
+    lbBitOrder:        TLabel;
     lbEmptyBits:       TLabel;
     lbNumbersBits:     TLabel;
     lbLanguage:        TLabel;
@@ -242,6 +247,7 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
       ScanRowsToDown   := cbScanRowsToDown.ItemIndex = 0;
       NumbersInversion := cbNumbersView.ItemIndex > 2;
       NumbersView      := TNumberView(cbNumbersView.ItemIndex mod 3);
+      BitOrderLSBFirst := cbBitOrderLSB.ItemIndex = 0;
       EmptyBits        := TEmptyBit(cbEmptyBits.ItemIndex);
       FontType         := TFontType(cbFontType.ItemIndex);
       BitsPerGroup     := cbNumbersBits.ItemIndex * 8 + 8;
@@ -317,6 +323,7 @@ procedure TfmGen.OnLanguageChange;
       Localize(cbNumbersBits, [FM_GEN_NB_1, FM_GEN_NB_2, FM_GEN_NB_3, FM_GEN_NB_4]);
       Localize(cbGenLanguage, [FM_GEN_LNG_1, FM_GEN_LNG_2]);
       Localize(cbNumbersView, [FM_GEN_NV_1, FM_GEN_NV_2, FM_GEN_NV_3, FM_GEN_NV_4, FM_GEN_NV_5, FM_GEN_NV_6]);
+      Localize(cbBitOrderLSB, [FM_GEN_BO_1, FM_GEN_BO_2]);
       end;
   end;
 

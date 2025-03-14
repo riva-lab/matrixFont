@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-03-10 23:05+0200\n"
+"PO-Revision-Date: 2025-03-14 15:37+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -37,6 +37,14 @@ msgstr "Vertically"
 msgctxt "fm_gen.fm_gen_blkd_2"
 msgid "Горизонтально"
 msgstr "Horizontally"
+
+#: fm_gen.fm_gen_bo_1
+msgid "Сначала LSB"
+msgstr "LSB first"
+
+#: fm_gen.fm_gen_bo_2
+msgid "Сначала MSB"
+msgstr "MSB first"
 
 #: fm_gen.fm_gen_caption
 msgid "Генератор кода"
@@ -300,6 +308,10 @@ msgstr "Settings"
 #: tfmgen.actabselsettings.hint
 msgid "Настройки вывода"
 msgstr "Output settings"
+
+#: tfmgen.lbbitorder.caption
+msgid "Порядок записи бит"
+msgstr "Order of writing bits"
 
 #: tfmgen.lbdefprefix.caption
 msgid "Префикс для определений"
