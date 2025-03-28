@@ -1,4 +1,4 @@
-﻿Copyright 2015-2024 Riva
+﻿Copyright 2015-2025 Riva
 
 ## FreeBSD License, modified (see modification at the end)
 
