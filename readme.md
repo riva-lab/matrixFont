@@ -107,9 +107,9 @@ If your native language is not Russian or Ukrainian, please write your messages 
 
 ## Авторство
 
-Copyright 2015-2024 Riva, [FreeBSD License, modified](license.md). История версий — [versions.md](versions.md).
+Copyright 2015-2025 Riva, [FreeBSD License, modified](license.md). История версий — [versions.md](versions.md).
 
-Разработано в [Free Pascal RAD IDE Lazarus](http://www.lazarus-ide.org) v2.2.6, компилятор [Free Pascal Compiler](https://freepascal.org) v3.2.2.
+Разработано в [Free Pascal RAD IDE Lazarus](http://www.lazarus-ide.org) v3.0, компилятор [Free Pascal Compiler](https://freepascal.org) v3.2.2.
 
 Установщик для Windows создан в [Inno Setup](https://jrsoftware.org/isinfo.php). [Copyright](https://jrsoftware.org/files/is/license.txt) (C) 1997-2023, Jordan Russell, Martijn Laan.
 

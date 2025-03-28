@@ -107,9 +107,9 @@ Your questions and suggestions help improve **matrixFont**.
 
 ## Сopyright and credits
 
-Copyright 2015-2024 Riva, [FreeBSD License, modified](license.md). [Changelog (Ru)](versions.md).
+Copyright 2015-2025 Riva, [FreeBSD License, modified](license.md). [Changelog (Ru)](versions.md).
 
-Developed in [Free Pascal RAD IDE Lazarus](http://www.lazarus-ide.org) v2.2.6, [Free Pascal Compiler](https://freepascal.org) v3.2.2.
+Developed in [Free Pascal RAD IDE Lazarus](http://www.lazarus-ide.org) v3.0, [Free Pascal Compiler](https://freepascal.org) v3.2.2.
 
 The installer for Windows is created in [Inno Setup](https://jrsoftware.org/isinfo.php). [Copyright](https://jrsoftware.org/files/is/license.txt) (C) 1997-2023, Jordan Russell, Martijn Laan.
 
