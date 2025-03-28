@@ -9,15 +9,18 @@ uses
   ComCtrls, ActnList, StdCtrls, Spin, SynEdit, LazUTF8, SynHighlighterCpp,
   Buttons, AppLocalizer, AppTuner,
   fm_gen,
-  font, u_utilities, u_encodings, u_helpers, config_record, appAbout;
+  font, symbol, u_utilities, u_encodings, u_helpers, config_record, appAbout;
 
 resourcestring
   FM_IMPC_CAPTION = 'Импорт шрифта из кода C';
 
   FM_IMPC_TYPE_4  = 'Настройка вручную';
 
-  FM_IMPC_ORDER_1 = 'Сначала столбцы';
-  FM_IMPC_ORDER_2 = 'Сначала строки';
+  FM_IMPC_GDIR_1  = 'Вертикально';
+  FM_IMPC_GDIR_2  = 'Горизонтально';
+
+  FM_IMPC_ORDER_1 = 'Столбцами групп';
+  FM_IMPC_ORDER_2 = 'Строками групп';
 
   FM_IMPC_BITOR_1 = 'LSB первый';
   FM_IMPC_BITOR_2 = 'MSB первый';
@@ -53,6 +56,7 @@ type
 
     cbImpBitOrder: TComboBox;
     cbImpExample:  TCheckBox;
+    cbImpGrpDir:   TComboBox;
     cbImpNBits:    TComboBox;
     cbImpOptimize: TCheckBox;
     cbImpOrder:    TComboBox;
@@ -73,6 +77,7 @@ type
     lbImpCharHex:  TLabel;
     lbImpDropFile: TLabel;
     lbImpFile:     TLabel;
+    lbImpGrpDir:   TLabel;
     lbImpNBits:    TLabel;
     lbImpOffset:   TLabel;
     lbImpOrder:    TLabel;
@@ -105,6 +110,7 @@ type
     pcPages: TPageControl;
 
     sbClearCode: TSpeedButton;
+    btnSwapWH:   TButton;
 
     seImpCharCode:  TSpinEdit;
     seImpHeight:    TSpinEdit;
@@ -169,8 +175,6 @@ procedure TfmImportC.FormCreate(Sender: TObject);
       pImpControls.ParentColor := True;
       lbInfo.ParentColor       := True;
       end;
-
-    acTabCode.Execute;
   end;
 
 procedure TfmImportC.FormShow(Sender: TObject);
@@ -183,6 +187,7 @@ procedure TfmImportC.FormShow(Sender: TObject);
     snImpEdit.Highlighter := fmGen.snCppSyntax;
 
     EndFormUpdate;
+    acTabCode.Execute;
 
     // init block, executed only once
     if Tag = 0 then
@@ -281,6 +286,13 @@ procedure TfmImportC.actionExecute(Sender: TObject);
         if cbImpExample.Checked then UpdatePreview;
         end;
 
+      'btnSwapWH':
+        begin
+        seImpHeight.Tag  := seImpHeight.Value;
+        SetValueWithoutAction(seImpHeight, seImpWidth.Value);
+        seImpWidth.Value := seImpHeight.Tag;
+        end;
+
       end;
 
     EndFormUpdate;
@@ -292,6 +304,7 @@ procedure TfmImportC.actionParamExecute(Sender: TObject);
     _importMode: TImportMode;
   begin
     if Sender = nil then Exit;
+    if not Visible then Exit;
     BeginFormUpdate;
 
     case TComponent(Sender).Name of
@@ -300,17 +313,24 @@ procedure TfmImportC.actionParamExecute(Sender: TObject);
         begin
         _importMode            := TImportMode(cbImpType.ItemIndex);
         _enabled               := _importMode = imCustom;
-        cbImpOrder.Enabled     := _importMode <> imAdafruit;
-        cbImpBitOrder.Enabled  := not (_importMode in [imAdafruit, imLCDVision]);
+        cbImpGrpDir.Enabled    := _importMode in [imCustom, imLCDVision];
+        cbImpOrder.Enabled     := _importMode in [imCustom, imLCDVision, imOwn];
+        cbImpBitOrder.Enabled  := cbImpOrder.Enabled;
         cbImpNBits.Enabled     := _enabled;
-        lbImpNBits.Enabled     := _enabled;
+        btnSwapWH.Enabled      := _enabled;
         seImpStartItem.Enabled := _enabled;
         seImpLastItem.Enabled  := _enabled;
         seImpWidth.Enabled     := _enabled;
         seImpHeight.Enabled    := _enabled;
         seImpOffset.Enabled    := _enabled;
-        lbImpOffset.Enabled    := _enabled;
         seImpSkip.Enabled      := _enabled;
+        lbImpGrpDir.Enabled    := _enabled;
+        lbImpOrder.Enabled     := cbImpOrder.Enabled;
+        lbImpBitOrder.Enabled  := cbImpBitOrder.Enabled;
+        lbImpNBits.Enabled     := _enabled;
+        lbImpOffset.Enabled    := _enabled;
+        lbImpSizes.Enabled     := _enabled;
+        lbImpRange.Enabled     := _enabled;
         end;
 
       'cbImpOrder':
@@ -402,7 +422,7 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
 
         if AChar in [0..FontImp.FontLength - 1] then
           begin
-          FontImp.Item[AChar].DrawPreview(
+          FontImp.Item[AChar].Draw(
             bmp, False,
             AIsSingle.Select(cfg.color.prev.bg, cfg.color.import.bg),
             AIsSingle.Select(cfg.color.prev.active, cfg.color.import.active));
@@ -458,6 +478,7 @@ procedure TfmImportC.InitConfig;
     Settings.Add(cbImpSnapLeft, @cfg.importc.snapleft);
     Settings.Add(cbImpBitOrder, @cfg.importc.metrics.bitorder);
     Settings.Add(cbImpType, @cfg.importc.metrics.codetype);
+    Settings.Add(cbImpGrpDir, @cfg.importc.metrics.groupdir);
     Settings.Add(seImpHeight, @cfg.importc.metrics.h);
     Settings.Add(seImpLastItem, @cfg.importc.metrics.last);
     Settings.Add(cbImpNBits, @cfg.importc.metrics.nbits);
@@ -479,6 +500,7 @@ procedure TfmImportC.OnLanguageChange;
       begin
       Localize(cbImpType, [FM_IMPC_TYPE_1, FM_IMPC_TYPE_2, FM_IMPC_TYPE_3, FM_IMPC_TYPE_4]);
       Localize(cbImpBitOrder, [FM_IMPC_BITOR_1, FM_IMPC_BITOR_2]);
+      Localize(cbImpGrpDir, [FM_IMPC_GDIR_1, FM_IMPC_GDIR_2]);
       Localize(cbImpOrder, [FM_IMPC_ORDER_1, FM_IMPC_ORDER_2]);
       Localize(cbImpNBits, [FM_IMPC_BITS_1, FM_IMPC_BITS_2, FM_IMPC_BITS_3, FM_IMPC_BITS_4, FM_IMPC_BITS_5, FM_IMPC_BITS_6]);
       end;
@@ -493,13 +515,13 @@ procedure TfmImportC.UpdateFont(AFont: TMatrixFont);
       begin
 
       // set font parameters
-      ScanColsFirst := cbImpOrder.ItemIndex = 0;
-      BitsPerGroup  := cbImpNBits.ItemIndex * 8;
-      MSBFirst      := cbImpBitOrder.ItemIndex > 0;
-      Width         := seImpWidth.Value;
-      Height        := seImpHeight.Value;
-      FontStartItem := seImpStartItem.Value;
-      FontLength    := seImpLastItem.Value - FontStartItem + 1;
+      GroupIsVertical := cbImpGrpDir.ItemIndex = 0;
+      ScanColsFirst   := cbImpOrder.ItemIndex = 0;
+      BitsPerGroup    := cbImpNBits.ItemIndex * 8;
+      MSBFirst        := cbImpBitOrder.ItemIndex > 0;
+      FontStartItem   := seImpStartItem.Value;
+      FontLength      := seImpLastItem.Value - FontStartItem + 1;
+      SetSize(seImpWidth.Value, seImpHeight.Value);
 
       // try to decode C-code
         try
@@ -507,7 +529,7 @@ procedure TfmImportC.UpdateFont(AFont: TMatrixFont);
           begin
 
           // apply post decoding operations
-          if cbImpSnapLeft.Checked then Snap(TBorder.brLeft);
+          if cbImpSnapLeft.Checked then Snap(dirLeft);
           if cbImpOptimize.Checked then ChangeSize(-1, -1, -1, -1, True);
 
           // set some parameters with autodetected values
@@ -518,6 +540,14 @@ procedure TfmImportC.UpdateFont(AFont: TMatrixFont);
             SetValueWithoutAction(seImpHeight, Height);
             SetValueWithoutAction(seImpStartItem, FontStartItem);
             SetValueWithoutAction(seImpLastItem, FontLength + FontStartItem - 1);
+            end;
+
+          // set some parameters with autodetected values for mF fonts
+          if TImportMode(cbImpType.ItemIndex) = imOwn then
+            begin
+            SetValueWithoutAction(cbImpGrpDir, GroupIsVertical.Select(0, 1));
+            SetValueWithoutAction(seImpSkip, (FontType = ftMONOSPACE).Select(0, 1));
+            SetValueWithoutAction(seImpOffset, 0);
             end;
           end;
         except

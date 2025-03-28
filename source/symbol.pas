@@ -6,23 +6,20 @@ interface
 
 uses
   Classes, Graphics, SysUtils, Clipbrd, LazUTF8, LazFileUtils,
-  LCLType, GraphUtil, Math, StrUtils,
-  u_encodings, u_utilities, u_helpers;
+  LCLType, GraphUtil, Math, StrUtils, BGRABitmap, BGRACanvas, BGRABitmapTypes,
+  u_encodings, u_utilities, u_helpers, u_imghist, FPImage;
 
 const
-  EXCHANGE_BUFFER_TYPE_ID = 'matrixFontApp'; // ID буфера обмена
+  EXCHANGE_BUFFER_TYPE_ID = 'image/bmp'; // ID буфера обмена  matrixFontApp
   CHAR_IMPORT_FORMATS     = 'png,jpg,jpeg,bmp,pnm,pgm,ppm,pbm,tif,tiff,ico';
+  CHAR_COLOR_FG           = clBlack;
+  CHAR_COLOR_BG           = clWhite;
 
 type
   TNumberView      = (nvHEX, nvBIN, nvDEC);
   TFontType        = (ftMONOSPACE, ftPROPORTIONAL);
   TEmptyBit        = (emBIT_0, emBIT_1);
-  TCharCanvas      = array of array of Boolean;
-  TPCharCanvas     = ^TCharCanvas;
-  //TPBitmap         = ^TBitmap;
-  TCanOptimize     = (coUp, coDown, coLeft, coRight);
   TDirection       = (dirUp, dirDown, dirLeft, dirRight);
-  TBorder          = (brUp, brDown, brLeft, brRight);
   TMirror          = (mrHorizontal, mrVertical);
   TClipboardAction = (cbCut, cbCopy, cbPaste);
   TPasteMode       = (pmNorm, pmOr, pmXor, pmAnd);
@@ -32,47 +29,19 @@ type
 
   TMatrixChar = class
   private
-    // ================================ Поля ===================================
-    FCharCanvas: TCharCanvas; // холст символа
+    FBitmap:  TBGRABitmap;
+    FCanvas:  TBGRACanvas;
+    FHistory: TBGRABitmapHistory;
 
-    // поля внешнего вида и параметров символа
-    FWidth:               Integer; // поле - ширина символа в пикселях
-    FHeight:              Integer; // поле - высота символа в пикселях
-    FHeightInPixels:      Integer; // поле - высота изображения символа в пикселях
-    FWidthInPixels:       Integer; // поле - ширина изображения символа в пикселях
-    FGridStep:            Integer; // поле - шаг сетки в пикселях
-    FGridThickness:       Integer; // поле - толщина линий сетки
-    FGridColor:           Integer; // поле - цвет сетки
-    FBackgroundColor:     Integer; // поле - цвет фона
-    FActiveColor:         Integer; // поле - цвет нарисованного элемента
-    FShowGrid:            Boolean; // поле - флаг видимости сетки
-    FGridChessBackground: Boolean; // поле - флаг отображения сетки в виде шахматного фона
-    FCurrentPixel:        TPoint;  // поле - координаты текущего нарисованного пикселя
+    FWidth:        Integer; // ширина символа в пикселях
+    FHeight:       Integer; // высота символа в пикселях
+    FCurrentPixel: TPoint;  // координаты текущего нарисованного пикселя
 
-    // поля модификации символа
-    FShiftRollover: Boolean; // поле - флаг циклического режима сдвига
-
-    // поля истории изменений
-    FHistory:         array of TCharCanvas; // поле - массив для истории изменений
-    FHistoryPosition: Integer; // поле - текущее изменение символа
-    FHistoryEmpty:    Boolean; // поле - флаг пустоты истории изменений
-    FHistoryNoRedo:   Boolean; // поле - флаг невозможности отмены
-
-    // поля для работы с буфером обмена
-    FCopyBufferEmpty: Boolean; // поле - флаг заполненности буфера обмена
-
-    // ========================= Внутренние методы =============================
-    // Методы чтения и записи свойств
-    function GetCopyBufferEmpty: Boolean;
-    procedure SetGridThickness(AValue: Integer);
-    procedure SetWidth(AWidth: Integer);
-    procedure SetHeight(AHeight: Integer);
-    procedure SetGridStep(AGridStep: Integer);
-
-    //==========================================================================
+    function GetCanPaste: Boolean;
+    function GetCanUndo: Boolean;
+    function GetCanRedo: Boolean;
 
   public
-    // =================================== Методы ==============================
 
     // работа с пикселем (установка/очистка/инверсия)
     procedure PixelAction(AX, AY: Integer; AAction: TPixelAction);
@@ -87,10 +56,10 @@ type
     procedure Mirror(MirrorDirection: TMirror);
 
     // сдвиг символа
-    procedure Shift(Direction: TDirection);
+    procedure Shift(ADirection: TDirection; AShiftRollover: Boolean; APixels: Integer = 1);
 
     // прижать символ к краю
-    procedure Snap(Border: TBorder);
+    procedure Snap(ADirection: TDirection);
 
     // центрирование символа
     procedure Center(AVertical: Boolean);
@@ -98,12 +67,8 @@ type
     // поворот символа
     procedure Rotate(AClockWise: Boolean);
 
-    // вывести изображение символа в битмап
-    procedure Draw(bmp: TBitmap);
-
     // вывести изображение предпросмотра в битмап
-    procedure DrawPreview(bmp: TBitmap; Transparency: Boolean = True; ColorBG: TColor =
-      $FFFFFF; ColorActive: TColor = 0);
+    procedure Draw(ABitmap: TBitmap; ATransparent: Boolean; AColorBG, AColorActive: TColor);
 
     // генерировать код символа
     function GenerateCode(fnGroupIsVertical, fnScanColsFirst, fnScanColsToRight,
@@ -123,503 +88,230 @@ type
     // повторить отмененную ранее правку
     procedure RedoChange;
 
-    // увеличение масштаба изображения символа (+10%)
-    procedure ZoomIn;
-
-    // уменьшение масштаба изображения символа (-10%)
-    procedure ZoomOut;
-
-    // масштаб изображения символа: вписанный в заданную область
-    procedure ZoomFitToArea(Width, Height: Integer);
-
     // импорт символа из системного шрифта для растеризации
-    procedure Import(Font: TFont; Index: Integer; AEncoding: String);
+    procedure Import(AFont: TFont; AIndex: Integer; AEncoding: String);
 
-    // импорт изображения символа из файла PNG
-    procedure ImportImage(AFilename: String; ATreshold: Byte = 128);
+    // импорт изображения символа из файла
+    procedure Import(AFilename: String; APasteMode: TPasteMode; ATreshold: Byte = 128);
+
+    procedure Import(ABitmap: TBitmap; APasteMode: TPasteMode; ATreshold: Byte = 128);
 
     // получение ширины символа
     function GetCharWidth: Integer;
 
-    // получение высоты символа
-    function GetCharHeight: Integer;
-
     // загрузка символа целиком
-    procedure LoadChar(ASymbol: TPCharCanvas);
+    procedure LoadChar(ASymbol: TBGRABitmap);
+
+    // set char width and height
+    procedure SetSize(AWidth, AHeight: Integer);
 
     // изменение размеров холста символа
     procedure ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
 
     // определение возможности усечь символ: результат - кол-во пустых строк/стоблцов
-    function CanOptimize(Direction: TCanOptimize): Integer;
+    function CanOptimize(ADirection: TDirection): Integer;
 
     // операции с буфером обмена
     procedure ClipboardAction(Action: TClipboardAction; Mode: TPasteMode = pmNorm);
 
-    //==========================================================================
 
-    //======================== Конструкторы и деструкторы ======================
     constructor Create;
     destructor Destroy; override;
-    //==========================================================================
 
-    // =========================== Свойства ====================================
 
-    // свойства внешнего вида и параметров символа
+    property Width: Integer read FWidth;
+    property Height: Integer read FHeight;
 
-    // ширина символа в пикселях
-    property Width: Integer read FWidth write SetWidth;
-
-    // высота символа в пикселях
-    property Height: Integer read FHeight write SetHeight;
-
-    // ширина изображения символа в пикселях
-    property WidthInPixels: Integer read FWidthInPixels;
-
-    // высота изображения символа в пикселях
-    property HeightInPixels: Integer read FHeightInPixels;
-
-    // шаг сетки в пикселях
-    property GridStep: Integer read FGridStep write SetGridStep;
-
-    // толщина линий сетки
-    property GridThickness: Integer read FGridThickness write SetGridThickness;
-
-    // цвет сетки
-    property GridColor: Integer read FGridColor write FGridColor;
-
-    // флаг отображения сетки в виде шахматного фона
-    property GridChessBackground: Boolean read FGridChessBackground write FGridChessBackground;
-
-    // цвет фона
-    property BackgroundColor: Integer read FBackgroundColor write FBackgroundColor;
-
-    // цвет нарисованного элемента
-    property ActiveColor: Integer read FActiveColor write FActiveColor;
-
-    // флаг видимости сетки
-    property ShowGrid: Boolean read FShowGrid write FShowGrid;
-
-    // координаты текущего нарисованного пикселя
     property CurrentPixel: TPoint read FCurrentPixel;
 
-    //--------------------------------------------------------------------------
-    // свойства истории изменений
+    property CanUndo: Boolean read GetCanUndo;
+    property CanRedo: Boolean read GetCanRedo;
 
-    // флаг пустоты истории изменений
-    property HistoryEmpty: Boolean read FHistoryEmpty;
+    property CanPaste: Boolean read GetCanPaste;
 
-    // флаг невозможности отмены
-    property HistoryNoRedo: Boolean read FHistoryNoRedo;
-
-    //--------------------------------------------------------------------------
-    // флаг заполненности буфера обмена
-    property CopyBufferEmpty: Boolean read GetCopyBufferEmpty;
-
-    //--------------------------------------------------------------------------
-    // свойства модификации символа
-
-    // флаг циклического режима сдвига
-    property ShiftRollover: Boolean read FShiftRollover write FShiftRollover;
-
-    //--------------------------------------------------------------------------
-    property CharCanvas: TCharCanvas read FCharCanvas;
+    property Canvas: TBGRACanvas read FCanvas;
   end;
+
+
+  { Additional functions }
+
+procedure DrawChessBackground(ABitmap: TBitmap; AWidth, AHeight: Integer;
+  AColor1, AColor2: TColor);
+
 
 implementation
 
+procedure DrawChessBackground(ABitmap: TBitmap; AWidth, AHeight: Integer;
+  AColor1, AColor2: TColor);
+  var
+    h, w: Integer;
+  begin
+    if Assigned(ABitmap) then
+      with ABitmap do
+        begin
+        BeginUpdate(True);
+        SetSize(AWidth, AHeight);
+        Canvas.Brush.Color := AColor1;
+        Canvas.Clear;
+        Canvas.Clear;
+
+        for h := 0 to AHeight - 1 do
+          for w := 0 to AWidth - 1 do
+            if ((w + h) mod 2 = 0) then Canvas.Pixels[w, h] := AColor2;
+
+        EndUpdate;
+        end;
+  end;
+
+
 { TMatrixChar }
 
-procedure TMatrixChar.SetWidth(AWidth: Integer);
+function TMatrixChar.GetCanPaste: Boolean;
   begin
-    FWidth := AWidth;
-    SetLength(FCharCanvas, FWidth, FHeight);
-    SetGridStep(FGridStep);
+    Result := Clipboard.HasPictureFormat;
   end;
 
-function TMatrixChar.GetCopyBufferEmpty: Boolean;
+function TMatrixChar.GetCanUndo: Boolean;
   begin
-      try
-      FCopyBufferEmpty := Clipboard.FindFormatID(EXCHANGE_BUFFER_TYPE_ID) = 0;
-      except
-      FCopyBufferEmpty := True;
-      end;
-    Result := FCopyBufferEmpty;
+    Result := FHistory.CanUndo;
   end;
 
-procedure TMatrixChar.SetGridThickness(AValue: Integer);
+function TMatrixChar.GetCanRedo: Boolean;
   begin
-    FGridThickness := AValue;
-    SetGridStep(FGridStep);
-  end;
-
-procedure TMatrixChar.SetHeight(AHeight: Integer);
-  begin
-    FHeight := AHeight;
-    SetLength(FCharCanvas, FWidth, FHeight);
-    SetGridStep(FGridStep);
-  end;
-
-procedure TMatrixChar.SetGridStep(AGridStep: Integer);
-  begin
-    FGridStep       := AGridStep;
-    FWidthInPixels  := FWidth * FGridStep + FGridThickness;
-    FHeightInPixels := FHeight * FGridStep + FGridThickness;
+    Result := FHistory.CanRedo;
   end;
 
 // работа с пикселем (установка/очистка/инверсия)
 procedure TMatrixChar.PixelAction(AX, AY: Integer; AAction: TPixelAction);
-  var
-    state: Boolean;
   begin
-    state := AAction = paSet;
-
-    if (AX >= 0) and (AY >= 0) and (AX < FWidth) and (AY < FHeight) then
-      FCharCanvas[AX, AY] := state or (AAction = paInvert) and not FCharCanvas[AX, AY];
+    if InRange(AX, 0, FWidth - 1) and InRange(AY, 0, FHeight - 1) then
+      case AAction of
+        paSet: FCanvas.Pixels[AX, AY]    := CHAR_COLOR_FG;
+        paClear: FCanvas.Pixels[AX, AY]  := CHAR_COLOR_BG;
+        paInvert: FCanvas.Pixels[AX, AY] := (FCanvas.Pixels[AX, AY] = CHAR_COLOR_FG)
+            .Select(CHAR_COLOR_BG, CHAR_COLOR_FG);
+        end;
   end;
 
 // очистить символ
 procedure TMatrixChar.Clear;
-  var
-    w, h: Integer;
   begin
-    for h := 0 to FHeight - 1 do
-      for w := 0 to FWidth - 1 do
-        FCharCanvas[w, h] := False;
+    FBitmap.Fill(ColorToBGRA(CHAR_COLOR_BG));
   end;
 
 // инвертировать изображение символа
 procedure TMatrixChar.Invert;
-  var
-    w, h: Integer;
   begin
-    for h := 0 to FHeight - 1 do
-      for w := 0 to FWidth - 1 do
-        FCharCanvas[w, h] := not FCharCanvas[w, h];
+    FBitmap.Negative;
   end;
 
 // отобразить символ
 procedure TMatrixChar.Mirror(MirrorDirection: TMirror);
-  var
-    w, h: Integer;
-    a:    Boolean;
   begin
     case MirrorDirection of
-
-      // отобразить символ горизонтально
-      mrHorizontal:
-        for h := 0 to FHeight - 1 do
-          for w := 0 to (FWidth - 1) div 2 do
-            begin
-            a                 := FCharCanvas[w, h];
-            FCharCanvas[w, h] := FCharCanvas[FWidth - 1 - w, h];
-            FCharCanvas[FWidth - 1 - w, h] := a;
-            end;
-
-      // отобразить символ вертикально
-      mrVertical:
-        for h := 0 to (FHeight - 1) div 2 do
-          for w := 0 to FWidth - 1 do
-            begin
-            a                 := FCharCanvas[w, h];
-            FCharCanvas[w, h] := FCharCanvas[w, FHeight - 1 - h];
-            FCharCanvas[w, FHeight - 1 - h] := a;
-            end;
-
+      mrHorizontal: FBitmap.HorizontalFlip;
+      mrVertical: FBitmap.VerticalFlip;
       end;
   end;
 
 // сдвиг символа
-procedure TMatrixChar.Shift(Direction: TDirection);
+procedure TMatrixChar.Shift(ADirection: TDirection; AShiftRollover: Boolean;
+  APixels: Integer);
   var
-    w, h: Integer;
-    a:    array of Boolean;
+    x, y: Integer;
+    b:    TBGRABitmap = nil;
   begin
-    case Direction of
+    if APixels < 1 then Exit;
 
-      // сдвиг символа вверх
-      dirUp:
-        begin
-        SetLength(a, FWidth);
+      try
+      x := (ADirection in [dirLeft, dirRight]).Select(APixels, 0);
+      y := (ADirection in [dirUp, dirDown]).Select(APixels, 0);
+      x *= (ADirection in [dirRight, dirUp]).Select(-1, 1);
+      y *= (ADirection in [dirLeft, dirDown]).Select(-1, 1);
 
-        for w := 0 to FWidth - 1 do
-          begin
-          a[w] := FCharCanvas[w, 0];
+      b := TBGRABitmap.Create;
+      b.SetSize(FWidth, FHeight);
+      b.Canvas.Draw(0, 0, FBitmap.Bitmap);
 
-          for h := 0 to FHeight - 2 do
-            FCharCanvas[w, h] := FCharCanvas[w, h + 1];
+      Clear;
+      FCanvas.Brush.Color := CHAR_COLOR_BG;
+      FCanvas.CopyRect(0, 0, b, Rect(x, y, FWidth + x, FHeight + y));
 
-          if FShiftRollover then
-            FCharCanvas[w, FHeight - 1] := a[w]
-          else
-            FCharCanvas[w, FHeight - 1] := False;
-
-          end;
-        end;
-
-      // сдвиг символа вниз
-      dirDown:
-        begin
-        SetLength(a, FWidth);
-
-        for w := 0 to FWidth - 1 do
-          begin
-          a[w] := FCharCanvas[w, FHeight - 1];
-
-          for h := FHeight - 1 downto 1 do
-            FCharCanvas[w, h] := FCharCanvas[w, h - 1];
-
-          if FShiftRollover then
-            FCharCanvas[w, 0] := a[w]
-          else
-            FCharCanvas[w, 0] := False;
-          end;
-        end;
-
-      // сдвиг символа влево
-      dirLeft:
-        begin
-        SetLength(a, FHeight);
-
-        for h := 0 to FHeight - 1 do
-          begin
-          a[h] := FCharCanvas[0, h];
-
-          for w := 0 to FWidth - 2 do
-            FCharCanvas[w, h] := FCharCanvas[w + 1, h];
-
-          if FShiftRollover then
-            FCharCanvas[FWidth - 1, h] := a[h]
-          else
-            FCharCanvas[FWidth - 1, h] := False;
-
-          end;
-        end;
-
-      // сдвиг символа вправо
-      dirRight:
-        begin
-        SetLength(a, FHeight);
-
-        for h := 0 to FHeight - 1 do
-          begin
-          a[h] := FCharCanvas[FWidth - 1, h];
-
-          for w := FWidth - 1 downto 1 do
-            FCharCanvas[w, h] := FCharCanvas[w - 1, h];
-
-          if FShiftRollover then
-            FCharCanvas[0, h] := a[h]
-          else
-            FCharCanvas[0, h] := False;
-          end;
-
-        end;
+      if not AShiftRollover then
+        FCanvas.FillRect(
+          (ADirection = dirLeft).Select(FWidth - APixels, 0),
+          (ADirection = dirUp).Select(FHeight - APixels, 0),
+          (ADirection = dirRight).Select(APixels, FWidth),
+          (ADirection = dirDown).Select(APixels, FHeight));
+      finally
+      b.Free;
       end;
-    a := nil;
   end;
 
 // прижать символ к краю
-procedure TMatrixChar.Snap(Border: TBorder);
-  var
-    w, h:  Integer;
-    empty: Boolean;
+procedure TMatrixChar.Snap(ADirection: TDirection);
   begin
-    case Border of
-
-      // прижать символ к верхнему краю
-      brUp:
-        for h := 0 to FHeight - 1 do
-          begin
-          empty := True;
-
-          for w := 0 to FWidth - 1 do
-            if FCharCanvas[w, 0] = True then
-              begin
-              empty := False;
-              break;
-              end;
-
-          if empty then
-            Shift(dirUp)
-          else
-            break;
-          end;
-
-      // прижать символ к нижнему краю
-      brDown:
-        for h := 0 to FHeight - 1 do
-          begin
-          empty := True;
-
-          for w := 0 to FWidth - 1 do
-            if FCharCanvas[w, FHeight - 1] = True then
-              begin
-              empty := False;
-              break;
-              end;
-
-          if empty then
-            Shift(dirDown)
-          else
-            break;
-          end;
-
-      // прижать символ к левому краю
-      brLeft:
-        for w := 0 to FWidth - 1 do
-          begin
-          empty := True;
-
-          for h := 0 to FHeight - 1 do
-            if FCharCanvas[0, h] = True then
-              begin
-              empty := False;
-              break;
-              end;
-
-          if empty then
-            Shift(dirLeft)
-          else
-            break;
-          end;
-
-      // прижать символ к правому краю
-      brRight:
-        for w := 0 to FWidth - 1 do
-          begin
-          empty := True;
-
-          for h := 0 to FHeight - 1 do
-            if FCharCanvas[FWidth - 1, h] = True then
-              begin
-              empty := False;
-              break;
-              end;
-
-          if empty then
-            Shift(dirRight)
-          else
-            break;
-          end;
-
-      end;
+    Shift(ADirection, False, CanOptimize(ADirection));
   end;
 
 // центрирование символа
 procedure TMatrixChar.Center(AVertical: Boolean);
   var
-    i, steps: Integer;
+    pixels: Integer;
   begin
     if AVertical then
       begin
-      Snap(brUp);
-      steps := (FHeight - GetCharHeight) div 2;
-      for i := 0 to steps - 1 do
-        Shift(dirDown);
+      pixels := (CanOptimize(dirUp) - CanOptimize(dirDown)) div 2;
+      Shift((pixels > 0).Select(dirUp, dirDown), False, abs(pixels));
       end
     else
       begin
-      Snap(brLeft);
-      steps := (FWidth - GetCharWidth) div 2;
-      for i := 0 to steps - 1 do
-        Shift(dirRight);
+      pixels := (CanOptimize(dirLeft) - CanOptimize(dirRight)) div 2;
+      Shift((pixels > 0).Select(dirLeft, dirRight), False, abs(pixels));
       end;
-
   end;
 
 // поворот символа
 procedure TMatrixChar.Rotate(AClockWise: Boolean);
   var
-    s, h, w: Integer;
-    tmp:     TCharCanvas;
+    b: TBGRABitmap = nil;
   begin
-    s := Min(FWidth, FHeight);
-    SetLength(tmp, s, s);
-    s -= 1;
-
-    // rotate to temp var
-    for h := 0 to s do
-      for w := 0 to s do
-        tmp[
-          AClockWise.Select(s - h, h),
-          AClockWise.Select(w, s - w)] := FCharCanvas[w, h];
-
-    // copy from temp var
-    Clear;
-    for h := 0 to s do
-      for w := 0 to s do
-        FCharCanvas[w, h] := tmp[w, h];
-  end;
-
-// вывести изображение символа в битмап
-procedure TMatrixChar.Draw(bmp: TBitmap);
-  var
-    start_x, start_y, end_x, end_y: Integer;
-    w, h: Integer;
-  begin
-    with bmp.Canvas do
-      begin
-      Brush.Color := FBackgroundColor;
-      Clear;
-      Clear;
+      try
+      if AClockWise then
+        b := FBitmap.RotateCW else
+        b := FBitmap.RotateCCW;
+      FCanvas.Draw(0, 0, b);
+      finally
+      b.Free;
       end;
-
-    for h := 0 to FHeight - 1 do
-      for w := 0 to FWidth - 1 do
-        with bmp.Canvas do
-          begin
-          start_x := FGridThickness div 2 + 1 + w * FGridStep;
-          start_y := FGridThickness div 2 + 1 + h * FGridStep;
-          end_x   := start_x + FGridStep;
-          end_y   := start_y + FGridStep;
-
-          if FCharCanvas[w, h] then
-            Brush.Color := FActiveColor
-          else
-          if FShowGrid and FGridChessBackground and ((w + h) mod 2 = 0) then
-            Brush.Color := FGridColor
-          else
-            Brush.Color := FBackgroundColor;
-
-          FillRect(start_x - 1, start_y - 1, end_x, end_y);
-
-          if not FGridChessBackground and (FGridThickness < 1) then
-            FGridThickness := 1;
-
-          if FShowGrid and (FGridThickness > 0) then
-            begin
-            Pen.JoinStyle := pjsMiter; // квадратные углы концов линий фигур
-            Pen.Width     := FGridThickness;
-            Pen.Color     := FGridColor;
-
-            Rectangle(start_x - 1, start_y - 1, end_x, end_y);
-            end;
-          end;
   end;
 
 // вывести изображение предпросмотра в битмап
-procedure TMatrixChar.DrawPreview(bmp: TBitmap; Transparency: Boolean = True;
-  ColorBG: TColor = $FFFFFF; ColorActive: TColor = 0);
+procedure TMatrixChar.Draw(ABitmap: TBitmap; ATransparent: Boolean; AColorBG,
+  AColorActive: TColor);
   var
-    w, h: Integer;
+    b: TBGRABitmap = nil;
   begin
-    for h := 0 to FHeight - 1 do
-      for w := 0 to FWidth - 1 do
-        with bmp.Canvas do
-          begin
-          if FCharCanvas[w, h] then
-            Brush.Color := ColorActive
-          else
-            Brush.Color := ColorBG;
+    if Assigned(ABitmap) then
+      try
+      ABitmap.Width  := FWidth;
+      ABitmap.Height := FHeight;
 
-          Pixels[w, h] := Brush.Color;
-          end;
+      ABitmap.TransparentColor := clNone;
 
-    if Transparency then
-      begin
-      bmp.TransparentColor := ColorBG;
-      bmp.Transparent      := True;
+      b := TBGRABitmap.Create(FWidth, FHeight, ColorToBGRA(AColorActive));
+      b.FillMask(0, 0, FBitmap, ColorToBGRA(AColorBG));
+      ABitmap.Canvas.Draw(0, 0, b.Bitmap);
+
+      if ATransparent then
+        begin
+        ABitmap.TransparentMode  := tmFixed;
+        ABitmap.TransparentColor := AColorBG;
+        ABitmap.Transparent      := True;
+        end;
+
+      finally
+      b.Free;
       end;
   end;
 
@@ -640,13 +332,13 @@ function TMatrixChar.GenerateCode(
   var
     numberChars: Integer;
 
-  function createNumber(stb: String; fnNView: TNumberView): String;
+  function createNumber(stb: String; fnNView: TNumberView; IsLSBF: Boolean = False): String;
     var
       number: QWord;
       ch:     Char;
     begin
-      Result := fnBitOrderLSBFirst.Select('', stb);
-      if fnBitOrderLSBFirst then
+      Result := IsLSBF.Select('', stb);
+      if IsLSBF then
         for ch in stb do Result := ch + Result;
 
       number := StrToQWord('%' + Result);
@@ -675,17 +367,18 @@ function TMatrixChar.GenerateCode(
         if (cx < 0) or (cx >= FWidth) or (cy < 0) or (cy >= FHeight) then
           Result[i + 1] := (fnEmptyBits = emBIT_0).Select('0', '1')
         else
-        if FCharCanvas[cx, cy] then
+        if FCanvas.Pixels[cx, cy] = CHAR_COLOR_FG then
           Result[i + 1] := fnNumbersInversion.Select('0', '1');
         end;
     end;
 
   function readColByCol: String;
     var
-      x, y, cx, cy: Integer;
+      x, y, cx, cy, i: Integer;
     begin
       Result := '';
       x      := 0;
+      i      := 0;
 
       while x < FWidth do
         begin
@@ -695,8 +388,10 @@ function TMatrixChar.GenerateCode(
           begin
           cx     := fnScanColsToRight.Select(x, FWidth - 1 - x);
           cy     := fnScanRowsToDown.Select(y, FHeight - 1 - y);
-          Result += createNumber(readBlock(cx, cy), fnNumbersView) + ', ';
+          Result += createNumber(readBlock(cx, cy), fnNumbersView, fnBitOrderLSBFirst) + ', ';
           y      += fnGroupIsVertical.Select(fnBitsPerBlock, 1);
+          i      += 1;
+          if i mod 16 = 0 then Result += LineEnding + '    ';
           end;
 
         x += fnGroupIsVertical.Select(1, fnBitsPerBlock);
@@ -705,10 +400,11 @@ function TMatrixChar.GenerateCode(
 
   function readRowByRow: String;
     var
-      x, y, cx, cy: Integer;
+      x, y, cx, cy, i: Integer;
     begin
       Result := '';
       y      := 0;
+      i      := 0;
 
       while y < FHeight do
         begin
@@ -718,8 +414,10 @@ function TMatrixChar.GenerateCode(
           begin
           cx     := fnScanColsToRight.Select(x, FWidth - 1 - x);
           cy     := fnScanRowsToDown.Select(y, FHeight - 1 - y);
-          Result += createNumber(readBlock(cx, cy), fnNumbersView) + ', ';
+          Result += createNumber(readBlock(cx, cy), fnNumbersView, fnBitOrderLSBFirst) + ', ';
           x      += fnGroupIsVertical.Select(1, fnBitsPerBlock);
+          i      += 1;
+          if i mod 16 = 0 then Result += LineEnding + '    ';
           end;
 
         y += fnGroupIsVertical.Select(fnBitsPerBlock, 1);
@@ -733,483 +431,251 @@ function TMatrixChar.GenerateCode(
       Result := readColByCol else
       Result := readRowByRow;
 
-    Result := Result.Remove(Result.Length - 2);
-
-    if fnFontType = ftPROPORTIONAL then
-      Result := createNumber(binStr(GetCharWidth, fnBitsPerBlock), nvDEC)
-        + ', /*N*/ ' + Result;
+    Result := '    ' + Result.TrimRight([' ', ',', #10, #13]);
   end;
 
 // очистить историю изменений
 procedure TMatrixChar.ClearChanges;
   begin
-    FHistoryPosition := 1;
+    FHistory.Clear;
     SaveChange;
-    FHistoryEmpty    := True;
-    FHistoryNoRedo   := True;
   end;
 
 // сохранить текущую правку символа в историю
 procedure TMatrixChar.SaveChange;
   begin
-    FHistoryPosition := FHistoryPosition + 1;
-    SetLength(FHistory, FHistoryPosition);
-    FHistory[FHistoryPosition - 1] := FCharCanvas;
-    FHistoryEmpty  := False;
-    FHistoryNoRedo := True;
-    SetLength(FCharCanvas, FWidth, FHeight);
+    FHistory.Save;
   end;
 
 // отменить одну правку с конца истории
 procedure TMatrixChar.UndoChange;
   begin
-    if FHistoryEmpty then Exit;
-
-    FHistoryPosition := FHistoryPosition - 1;
-    FCharCanvas      := FHistory[FHistoryPosition - 1];
-
-    if FHistoryPosition = 2 then
-      FHistoryEmpty := True;
-
-    FHistoryNoRedo := False;
-    SetLength(FCharCanvas, FWidth, FHeight);
+    if not FHistory.CanUndo then Exit;
+    FHistory.Undo;
   end;
 
 // повторить отмененную ранее правку
 procedure TMatrixChar.RedoChange;
   begin
-    if FHistoryNoRedo then Exit;
-
-    if FHistoryPosition < high(FHistory) + 1 then
-      begin
-      FHistoryEmpty    := False;
-      FCharCanvas      := FHistory[FHistoryPosition];
-      FHistoryPosition := FHistoryPosition + 1;
-      FHistoryNoRedo   := FHistoryPosition = (high(FHistory) + 1);
-      end;
-    SetLength(FCharCanvas, FWidth, FHeight);
-  end;
-
-// увеличение масштаба изображения символа (+10%)
-procedure TMatrixChar.ZoomIn;
-  var
-    tmp: Integer;
-  begin
-    tmp := round(FGridStep * 1.1);
-    if tmp = FGridStep then
-      SetGridStep(FGridStep + 1)
-    else
-    if FGridStep < 150 then
-      SetGridStep(tmp);
-  end;
-
-// уменьшение масштаба изображения символа (-10%)
-procedure TMatrixChar.ZoomOut;
-  var
-    tmp: Integer;
-  begin
-    tmp := round(FGridStep / 1.1);
-    if tmp = FGridStep then
-      Dec(tmp);
-    if tmp < FGridThickness + 1 then
-      SetGridStep(FGridThickness + 1)
-    else
-      SetGridStep(tmp);
-  end;
-
-// масштаб изображения символа: вписанный в заданную область
-procedure TMatrixChar.ZoomFitToArea(Width, Height: Integer);
-  begin
-    Width  := Width - FGridThickness;
-    Height := Height - FGridThickness;
-
-    FWidthInPixels  := Width div FWidth;    // FWidthInPixels as temp var
-    FHeightInPixels := Height div FHeight;  // FHeightInPixels as temp var
-    if FWidthInPixels < FHeightInPixels then
-      SetGridStep(FWidthInPixels)
-    else
-      SetGridStep(FHeightInPixels);
+    if not FHistory.CanRedo then Exit;
+    FHistory.Redo;
   end;
 
 // импорт символа из системного шрифта для растеризации
-procedure TMatrixChar.Import(Font: TFont; Index: Integer; AEncoding: String);
-  var
-    tmp:  TBitmap;
-    w, h: Integer;
+procedure TMatrixChar.Import(AFont: TFont; AIndex: Integer; AEncoding: String);
   begin
-    tmp             := TBitmap.Create;
-    tmp.Canvas.Font := Font;
-    tmp.Width       := FWidth;
-    tmp.Height      := FHeight;
+    if not Assigned(AFont) then Exit;
 
-    with tmp.Canvas do
+    with FBitmap.Canvas do
       begin
-      Brush.Color  := 1;
-      Clear;
-      Clear;
-      Pen.Color    := 0;
+      Font.Assign(AFont);
       Font.Quality := fqNonAntialiased;
-      TextOut(1, 0, EncodingToUTF8(Char(Index), AEncoding));
-
-      // растеризация символа во внутренний формат
-      for h := 0 to FHeight - 1 do
-        for w := 0 to FWidth - 1 do
-          FCharCanvas[w, h] := Pixels[w, h] = 0;
+      Pen.Color    := CHAR_COLOR_FG;
+      Brush.Color  := CHAR_COLOR_BG;
+      Clear;
+      Clear;
+      TextOut(1, 0, EncodingToUTF8(Char(AIndex), AEncoding));
       end;
 
-    FreeAndNil(tmp);
+    Import(FBitmap.Bitmap, pmNorm);
   end;
 
-// импорт изображения символа из файла PNG
-procedure TMatrixChar.ImportImage(AFilename: String; ATreshold: Byte);
-  var
-    tmp:          TPicture;
-    w, h, mw, mh: Integer;
+// импорт изображения символа из файла
+procedure TMatrixChar.Import(AFilename: String; APasteMode: TPasteMode; ATreshold: Byte);
   begin
-    if FileExistsUTF8(AFilename) and
-      FileExtCheck(AFilename, CHAR_IMPORT_FORMATS) then
-      begin
-      tmp := TPicture.Create;
-      tmp.LoadFromFile(AFilename);
+    if FileExistsUTF8(AFilename) and FileExtCheck(AFilename, CHAR_IMPORT_FORMATS) then
+      with TPicture.Create do
+        try
+        LoadFromFile(AFilename);
+        Import(Bitmap, APasteMode, ATreshold);
+        finally
+        Free;
+        end;
+  end;
 
-      mw := FWidth - 1;
-      mh := FHeight - 1;
-      if tmp.Width < mw then mw := tmp.Width - 1;
-      if tmp.Height < mh then mh := tmp.Height - 1;
+procedure TMatrixChar.Import(ABitmap: TBitmap; APasteMode: TPasteMode; ATreshold: Byte);
+  var
+    w, h, mw, mh:     Integer;
+    px:               TColor;
+    srcBGRA:          TBGRABitmap = nil;
+    srcLine, dstLine: PBGRAPixel;
+  begin
+    if not Assigned(ABitmap) then Exit;
 
-      // растеризация символа во внутренний формат
+    mw := (ABitmap.Width < FWidth).Select(ABitmap.Width - 1, FWidth - 1);
+    mh := (ABitmap.Height < FHeight).Select(ABitmap.Height - 1, FHeight - 1);
+
+      try
+      srcBGRA := TBGRABitmap.Create(ABitmap);
+      srcBGRA.FilterGrayscale;
+
       for h := 0 to mh do
-        for w := 0 to mw do
-          FCharCanvas[w, h] := ColorToGray(tmp.Bitmap.Canvas.Pixels[w, h]) < ATreshold;
+        begin
+        srcLine := srcBGRA.ScanLine[h];
+        dstLine := FBitmap.ScanLine[h];
 
-      FreeAndNil(tmp);
+        for w := 0 to mw do
+          begin
+          if srcLine^.red < ATreshold then
+            px := CHAR_COLOR_FG else
+            px := CHAR_COLOR_BG;
+
+          case APasteMode of
+            pmOr: px  := px and dstLine^.ToColor;
+            pmXor: px := px xor not dstLine^.ToColor;
+            pmAnd: px := px or dstLine^.ToColor;
+            end;
+
+          dstLine^.FromColor(px and $FFFFFF);
+          dstLine += 1;
+          srcLine += 1;
+          end;
+        end;
+
+      finally
+      srcBGRA.Free;
       end;
   end;
 
 // получение ширины символа
 function TMatrixChar.GetCharWidth: Integer;
-  var
-    x, y, w, tmp: Integer;
-    empty:        Boolean;
   begin
-    w   := 0;
-    tmp := 0;
-
-    for x := 0 to FWidth - 1 do
-      begin
-
-      empty := True;
-      for y := 0 to FHeight - 1 do
-        if FCharCanvas[x, y] then
-          begin
-          empty := False;
-          break;
-          end;
-
-      Inc(tmp);
-      if not empty then
-        w := tmp;
-      end;
-
-    if w = 0 then
-      w := FWidth div 2 + 1;
-
-    Result := w;
-  end;
-
-// получение высоты символа
-function TMatrixChar.GetCharHeight: Integer;
-  var
-    y, x, h, tmp: Integer;
-    empty:        Boolean;
-  begin
-    h   := 0;
-    tmp := 0;
-
-    for y := 0 to FHeight - 1 do
-      begin
-
-      empty := True;
-      for x := 0 to FWidth - 1 do
-        if FCharCanvas[x, y] then
-          begin
-          empty := False;
-          break;
-          end;
-
-      Inc(tmp);
-      if not empty then
-        h := tmp;
-      end;
-
-    if h = 0 then
-      h := FHeight div 2 + 1;
-
-    Result := h;
+    Result := FWidth - CanOptimize(dirRight);
+    if Result = 0 then Result := FWidth div 2 + 1;
   end;
 
 // загрузка символа целиком (вызывается обычно после создания символа)
-procedure TMatrixChar.LoadChar(ASymbol: TPCharCanvas);
+procedure TMatrixChar.LoadChar(ASymbol: TBGRABitmap);
   begin
-    FCharCanvas := ASymbol^;
-    SetLength(FCharCanvas, FWidth, FHeight);
+    FCanvas.Draw(0, 0, ASymbol.Bitmap);
+  end;
 
-    SetLength(FHistory, FHistoryPosition);
-    FHistory[FHistoryPosition - 1] := FCharCanvas;
-    SetLength(FCharCanvas, FWidth, FHeight);
+// set char width and height
+procedure TMatrixChar.SetSize(AWidth, AHeight: Integer);
+  begin
+    if AWidth > 0 then  FWidth  := AWidth;
+    if AHeight > 0 then FHeight := AHeight;
+    FBitmap.SetSize(FWidth, FHeight);
   end;
 
 // изменение размеров холста символа
 procedure TMatrixChar.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
   var
     h, w: Integer;
-    tmp:  TCharCanvas;
+    b:    TBitmap = nil;
   begin
-    // временная копия символа
-    SetLength(tmp, FWidth, FHeight);
-    tmp := FCharCanvas;
+      try
+      b := TBitmap.Create;
+      b.SetSize(FWidth, FHeight);
+      b.Canvas.Draw(0, 0, FBitmap.Bitmap);
 
-    Up    := abs(Up);
-    Down  := abs(Down);
-    Left  := abs(Left);
-    Right := abs(Right);
+      h := FHeight + (Up + Down) * Crop.Select(-1, 1);
+      w := FWidth + (Left + Right) * Crop.Select(-1, 1);
+      SetSize((w < 1).Select(1, w), (h < 1).Select(1, h));
+      Clear;
 
-    if Crop then
-
-      // обрезка символа
-      begin
-      for h := 0 to FHeight - 1 - Down - Up do
-        for w := 0 to FWidth - 1 - Right - Left do
-          CharCanvas[w, h] := tmp[w + Left, h + Up];
-
-      h := FHeight - Up - Down;
-      w := FWidth - Left - Right;
-      SetHeight((h < 1).Select(1, h));
-      SetWidth((w < 1).Select(1, w));
-      end
-    else
-
-      // расширение символа
-      begin
-      SetHeight(FHeight + Up + Down);
-      SetWidth(FWidth + Left + Right);
-
-      // очистка фона добавленной области
-      for h := 0 to FHeight - 1 do
-        for w := 0 to FWidth - 1 do
-          CharCanvas[w, h] := False;
-
-      for h := 0 to FHeight - 1 - Down - Up do
-        for w := 0 to FWidth - 1 - Right - Left do
-          CharCanvas[w + Left, h + Up] := tmp[w, h];
+      Left *= Crop.Select(-1, 1);
+      Up   *= Crop.Select(-1, 1);
+      FCanvas.Draw(Left, Up, b);
+      finally
+      b.Free;
       end;
   end;
 
 // определение возможности усечь символ: результат - кол-во пустых строк/стоблцов
-function TMatrixChar.CanOptimize(Direction: TCanOptimize): Integer;
-  var
-    w, h, Count: Integer;
-    exit_:       Boolean;
+function TMatrixChar.CanOptimize(ADirection: TDirection): Integer;
+
+  function GetEmptyLines(AVertical, ATopLeft: Boolean): Integer;
+    var
+      rCount, oCoord, iCoord, outerEnd, innerEnd, oStep: Integer;
+    begin
+      outerEnd := AVertical.Select(FWidth, FHeight) - 1;
+      innerEnd := AVertical.Select(FHeight, FWidth) - 1;
+
+      if outerEnd = 0 then Exit(0);
+
+      oStep  := ATopLeft.Select(1, -1);
+      oCoord := ATopLeft.Select(0, outerEnd);
+      iCoord := 0;
+      rCount := 0;
+
+      while InRange(oCoord, 0, outerEnd) do
+        begin
+        for iCoord := 0 to innerEnd do
+          if FCanvas.Pixels[
+            AVertical.Select(oCoord, iCoord),
+            AVertical.Select(iCoord, oCoord)] = CHAR_COLOR_FG then Exit(rCount);
+
+        rCount += 1;
+        oCoord += oStep;
+        end;
+
+      Result := rCount;
+    end;
+
   begin
-    Count := 0;
-
-    case Direction of
-
-      // кол-во пустых строк сверху
-      coUp:
-        if FHeight > 1 then
-          for h := 0 to FHeight - 1 do
-            begin
-            exit_ := False;
-
-            for w := 0 to FWidth - 1 do
-              if FCharCanvas[w, h] = True then
-                begin
-                exit_ := True;
-                break;
-                end;
-
-            if exit_ then
-              break
-            else
-              Inc(Count);
-            end;
-
-      // кол-во пустых строк снизу
-      coDown:
-        if FHeight > 1 then
-          for h := FHeight - 1 downto 0 do
-            begin
-            exit_ := False;
-
-            for w := 0 to FWidth - 1 do
-              if FCharCanvas[w, h] = True then
-                begin
-                exit_ := True;
-                break;
-                end;
-
-            if exit_ then
-              break
-            else
-              Inc(Count);
-            end;
-
-      // кол-во пустых столбцов слева
-      coLeft:
-        if FWidth > 1 then
-          for w := 0 to FWidth - 1 do
-            begin
-            exit_ := False;
-
-            for h := 0 to FHeight - 1 do
-              if FCharCanvas[w, h] = True then
-                begin
-                exit_ := True;
-                break;
-                end;
-
-            if exit_ then
-              break
-            else
-              Inc(Count);
-            end;
-
-      // кол-во пустых столбцов справа
-      coRight:
-        if FWidth > 1 then
-          for w := FWidth - 1 downto 0 do
-            begin
-            exit_ := False;
-
-            for h := 0 to FHeight - 1 do
-              if FCharCanvas[w, h] = True then
-                begin
-                exit_ := True;
-                break;
-                end;
-
-            if exit_ then
-              break
-            else
-              Inc(Count);
-            end;
-      end;
-
-    Result := Count;
+    Result := GetEmptyLines(
+      ADirection in [dirLeft, dirRight],
+      ADirection in [dirLeft, dirUp]);
   end;
 
 // операции с буфером обмена
 procedure TMatrixChar.ClipboardAction(Action: TClipboardAction; Mode: TPasteMode);
   var
-    h, w, cw, ch: Integer;
-    pixel:        Boolean;
-    Stream:       TMemoryStream;
-    cb_fmt:       TClipboardFormat;
+    cb_fmt: TClipboardFormat;
+    p:      TPicture = nil;
   begin
-    // копирование символа
-    if (Action = cbCopy) or (Action = cbCut) then
-      with Stream do
-        try
-        if GetCopyBufferEmpty then
-          cb_fmt := RegisterClipboardFormat(EXCHANGE_BUFFER_TYPE_ID)
-        else
-          cb_fmt := Clipboard.FindFormatID(EXCHANGE_BUFFER_TYPE_ID);
+      try
+      p := TPicture.Create;
 
-        Stream   := TMemoryStream.Create;
-        Position := 0;
-        WriteByte(FWidth);
-        WriteByte(FHeight);
-
-        for h := 0 to Height - 1 do
-          for w := 0 to Width - 1 do
-            if FCharCanvas[w, h] then
-              WriteByte(1)
-            else
-              WriteByte(0);
-
-        Clipboard.AddFormat(cb_fmt, Stream);
-        FCopyBufferEmpty := False;
-        finally
-        FreeAndNil(Stream);
-        end;
-
-    // вырезание символа: копировать + очистить
-    if Action = cbCut then
-      Clear;
-
-    // вставка символа
-    if Action = cbPaste then
-      with Stream do
+      // копирование символа
+      if (Action = cbCopy) or (Action = cbCut) then
         begin
-          try
-          cb_fmt := Clipboard.FindFormatID(EXCHANGE_BUFFER_TYPE_ID);
-          except
-          cb_fmt := 0;
-          end;
+        if CanPaste then
+          cb_fmt := Clipboard.FindPictureFormatID
+        else
+          cb_fmt := RegisterClipboardFormat(EXCHANGE_BUFFER_TYPE_ID);
 
-        if cb_fmt <> 0 then
-          try
-          Stream := TMemoryStream.Create;
-
-          if Clipboard.GetFormat(cb_fmt, Stream) then
-            begin
-            Position := 0;
-            cw       := ReadByte;
-            ch       := ReadByte;
-
-            for h := 0 to ch - 1 do
-              for w := 0 to cw - 1 do
-                begin
-                pixel := (ReadByte = 1);
-
-                if (w < FWidth) and (h < FHeight) then
-                  case Mode of
-                    pmNorm:
-                      FCharCanvas[w, h] := pixel;
-                    pmOr:
-                      FCharCanvas[w, h] := FCharCanvas[w, h] or pixel;
-                    pmXor:
-                      FCharCanvas[w, h] := FCharCanvas[w, h] xor pixel;
-                    pmAnd:
-                      FCharCanvas[w, h] := FCharCanvas[w, h] and pixel;
-                    end;
-                end;
-            end;
-          finally
-          FreeAndNil(Stream);
-          end;
+        p.Bitmap.SetSize(FWidth, FHeight);
+        p.Bitmap.Canvas.Clear;
+        FBitmap.Draw(p.Bitmap.Canvas, 0, 0);
+        p.Bitmap.SaveToClipboardFormat(cb_fmt);
         end;
+
+      // вырезание символа: копировать + очистить
+      if Action = cbCut then
+        Clear;
+
+      // вставка символа
+      if (Action = cbPaste) and Clipboard.HasPictureFormat then
+        begin
+        p.LoadFromClipboardFormat(Clipboard.FindPictureFormatID);
+        Import(p.Bitmap, Mode);
+        end;
+
+      finally
+      p.Free;
+      end;
   end;
 
 constructor TMatrixChar.Create;
   begin
-    FHeight              := 1;
-    FWidth               := 1;
-    FHeightInPixels      := 3;
-    FWidthInPixels       := 3;
-    FGridStep            := 40;
-    FGridThickness       := 1;
-    FGridChessBackground := False;
-    FGridColor           := $BBBBBB;
-    FBackgroundColor     := $FFFFFF;
-    FActiveColor         := $000000;
-    FShowGrid            := True;
-    FShiftRollover       := True;
-    FHistoryPosition     := 1;
-    SetLength(FCharCanvas, FWidth, FHeight);
+    FHeight := 1;
+    FWidth  := 1;
+
+    FBitmap  := TBGRABitmap.Create(FWidth, FHeight);
+    FCanvas  := FBitmap.CanvasBGRA;
+    FHistory := TBGRABitmapHistory.Create(FBitmap);
+
     Clear;
     SaveChange;
-    FHistoryEmpty  := True;
-    FHistoryNoRedo := True;
-
-    GetCopyBufferEmpty;
   end;
 
 destructor TMatrixChar.Destroy;
   begin
-    FCharCanvas := nil;
-    inherited; // Эквивалентно: inherited Destroy;
+    FreeAndNil(FBitmap);
+    FreeAndNil(FHistory);
+    inherited;
   end;
 
 end.

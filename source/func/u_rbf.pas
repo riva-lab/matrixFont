@@ -125,12 +125,12 @@ procedure TRBFFontConverter.LoadFromFile(AFilename: String);
 
       with header do
         begin
-        FFont.Height        := Height;
-        FFont.Width         := MaxWidth;
+        FFont.SetSize(MaxWidth, Height);
         FFont.FontStartItem := CharFirst;
         FFont.FontLength    := CharLast - FFont.FontStartItem + 1;
         Self.Baseline       := Baseline;
         Self.Interline      := Interline;
+        FFont.Clear;
         end;
 
       SetLength(str, FFont.FontLength);
@@ -233,7 +233,9 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
           for w := 0 to wmax do
             begin
             b := b div 2;
-            if (w < FFont.Width) and FFont.Item[i].CharCanvas[w, h] then b += $80;
+
+            if (w < FFont.Width) and (FFont.Item[i].Canvas.Pixels[w, h] = CHAR_COLOR_FG) then
+              b += $80;
 
             if (w mod 8 = 7) or (w = wmax) then
               begin

@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, SynHighlighterCpp, SynEdit, Forms, Clipbrd, strutils, Graphics,
   ExtCtrls, StdCtrls, ActnList, ComCtrls, Spin, Dialogs, LazUTF8,
   AppLocalizer, AppTuner,
-  symbol, font, appAbout, u_encodings, u_utilities;
+  symbol, font, appAbout, u_encodings, u_utilities, u_helpers, config_record;
 
 
 resourcestring
@@ -47,8 +47,7 @@ resourcestring
   FM_GEN_NB_3    = '24 (uint24_t)';
   FM_GEN_NB_4    = '32 (uint32_t, unsigned long int)';
 
-  FM_GEN_LNG_1   = 'C (C99)';
-  FM_GEN_LNG_2   = 'C (C89)';
+  FM_GEN_UPDATE  = 'ОБНОВИТЕ КОД';
 
 type
 
@@ -89,7 +88,6 @@ type
     cbBitOrderLSB:     TComboBox;
     cbEmptyBits:       TComboBox;
     cbNumbersBits:     TComboBox;
-    cbGenLanguage:     TComboBox;
     lbGroupDirection:  TLabel;
     lbScanColsFirst:   TLabel;
     lbScanColsToRight: TLabel;
@@ -99,7 +97,6 @@ type
     lbBitOrder:        TLabel;
     lbEmptyBits:       TLabel;
     lbNumbersBits:     TLabel;
-    lbLanguage:        TLabel;
     lbInfo:            TLabel;
     lbDefPrefix:       TLabel;
     lbRange:           TLabel;
@@ -116,6 +113,9 @@ type
 
     // инициализация формы при показе
     procedure FormShow(Sender: TObject);
+
+    // handler executed when parameter was changed
+    procedure OnChangeParameter(Sender: TObject);
 
     // действие: <КОПИРОВАТЬ В БУФЕР ОБМЕНА>
     procedure acCopyToClipboardExecute(Sender: TObject);
@@ -162,6 +162,7 @@ procedure TfmGen.FormShow(Sender: TObject);
       pControls.ParentColor := True;
       end;
 
+    pControls.Show;
     BeginFormUpdate;
 
     if mxFont <> nil then
@@ -193,7 +194,18 @@ procedure TfmGen.FormShow(Sender: TObject);
       end;
 
     acResetRangeExecute(nil);
-    acRefreshOut.Execute;
+  end;
+
+// handler executed when parameter was changed
+procedure TfmGen.OnChangeParameter(Sender: TObject);
+  begin
+    if cfg.gen.refresh then
+      acRefreshOut.Execute
+    else
+      begin
+      lbInfo.Color   := appTunerEx.IsDarkTheme.Select($0000DD, $CCCCFF);
+      lbInfo.Caption := ' ' + FM_GEN_UPDATE + ' ';
+      end;
   end;
 
 
@@ -222,7 +234,7 @@ procedure TfmGen.edDefPrefixChange(Sender: TObject);
         Text := UpperCase('FONT_' + AnsiReplaceText(mxFont.Name, ' ', '_'));
       end;
 
-    acRefreshOut.Execute;
+    OnChangeParameter(Sender);
   end;
 
 // экспорт кода во внешний *.h файл
@@ -238,6 +250,7 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
     TopLine_: Integer;
   begin
     if mxFont = nil then Exit;
+    if not Visible then Exit;
 
     with mxFont do
       begin
@@ -251,7 +264,6 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
       EmptyBits        := TEmptyBit(cbEmptyBits.ItemIndex);
       FontType         := TFontType(cbFontType.ItemIndex);
       BitsPerGroup     := cbNumbersBits.ItemIndex * 8 + 8;
-      CommentStyle     := cbGenLanguage.ItemIndex;
       DefPrefix        := edDefPrefix.Text;
       end;
 
@@ -260,6 +272,9 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
     snEdit.Text    := mxFont.GenerateCode(seStart.Value, seEnd.Value);
     snEdit.TopLine := TopLine_;       // восстанивливаем положение текста
     EndFormUpdate;
+
+    lbInfo.ParentColor := True;
+    lbInfo.Caption     := GetAppNameAuthor;
   end;
 
 // восстановление диапазона вывода
@@ -282,14 +297,14 @@ procedure TfmGen.acResetRangeExecute(Sender: TObject);
         end;
       end;
 
-    acRefreshOut.Execute;
+    OnChangeParameter(Sender);
   end;
 
 // изменение начала диапазона вывода
 procedure TfmGen.seStartChange(Sender: TObject);
   begin
     seEnd.MinValue := seStart.Value;
-    acRefreshOut.Execute;
+    OnChangeParameter(Sender);
   end;
 
 // выбор вкладки для отображения
@@ -321,7 +336,6 @@ procedure TfmGen.OnLanguageChange;
       Localize(cbFontType, [FM_GEN_FT_1, FM_GEN_FT_2]);
       Localize(cbEmptyBits, [FM_GEN_EB_1, FM_GEN_EB_2]);
       Localize(cbNumbersBits, [FM_GEN_NB_1, FM_GEN_NB_2, FM_GEN_NB_3, FM_GEN_NB_4]);
-      Localize(cbGenLanguage, [FM_GEN_LNG_1, FM_GEN_LNG_2]);
       Localize(cbNumbersView, [FM_GEN_NV_1, FM_GEN_NV_2, FM_GEN_NV_3, FM_GEN_NV_4, FM_GEN_NV_5, FM_GEN_NV_6]);
       Localize(cbBitOrderLSB, [FM_GEN_BO_1, FM_GEN_BO_2]);
       end;

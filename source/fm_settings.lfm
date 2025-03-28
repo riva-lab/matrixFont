@@ -855,7 +855,7 @@ object fmSettings: TfmSettings
             Width = 49
             BorderWidth = 0
             ButtonColorSize = 16
-            ButtonColor = 12303291
+            ButtonColor = 14540253
             Constraints.MinHeight = 24
             Constraints.MinWidth = 36
             Flat = True
@@ -869,7 +869,7 @@ object fmSettings: TfmSettings
             Width = 49
             BorderWidth = 0
             ButtonColorSize = 16
-            ButtonColor = clMaroon
+            ButtonColor = 102
             Constraints.MinHeight = 24
             Constraints.MinWidth = 36
             Flat = True
@@ -2183,7 +2183,7 @@ object fmSettings: TfmSettings
       ClientWidth = 681
       object pValues2: TPanel
         Left = 10
-        Height = 90
+        Height = 28
         Top = 10
         Width = 661
         AutoSize = True
@@ -2192,7 +2192,7 @@ object fmSettings: TfmSettings
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 90
+        ClientHeight = 28
         ClientWidth = 661
         TabOrder = 0
         object seBWTreshold: TSpinEdit
@@ -2213,52 +2213,10 @@ object fmSettings: TfmSettings
           Left = 110
           Height = 28
           Top = 0
-          Width = 315
+          Width = 302
           Caption = 'Порог черного при импорте изображения'
           Layout = tlCenter
           ParentColor = False
-        end
-        object seGridThickness: TSpinEdit
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Left = 0
-          Height = 28
-          Top = 33
-          Width = 100
-          Constraints.MinWidth = 100
-          MaxValue = 9
-          TabOrder = 1
-          Value = 1
-        end
-        object lbGridThickness: TLabel
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Side = asrCenter
-          Left = 110
-          Height = 28
-          Top = 33
-          Width = 315
-          Caption = 'Толщина линий пиксельной сетки редактора'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object pSpacer7: TPanel
-          Left = 0
-          Height = 24
-          Top = 66
-          Width = 100
-          AutoSize = True
-          BevelOuter = bvNone
-          Constraints.MinHeight = 8
-          TabOrder = 2
-        end
-        object cbChessGrid: TCheckBox
-          Left = 110
-          Height = 24
-          Hint = 'Для второго цвета шахматного фона используется цвет сетки'
-          Top = 66
-          Width = 315
-          Caption = 'Шахматный фон'
-          TabOrder = 3
         end
       end
     end
@@ -2631,13 +2589,22 @@ object fmSettings: TfmSettings
         State = cbChecked
         TabOrder = 0
       end
-      object cbLastFileAtStart: TCheckBox
+      object cbGenerateAuto: TCheckBox
+        AnchorSideTop.Side = asrBottom
         Left = 10
         Height = 24
         Top = 39
         Width = 661
-        Caption = 'Загружать последний открытый файл при запуске'
+        Caption = 'Обновлять код при изменении параметров генератора'
         TabOrder = 1
+      end
+      object cbLastFileAtStart: TCheckBox
+        Left = 10
+        Height = 24
+        Top = 68
+        Width = 661
+        Caption = 'Загружать последний открытый файл при запуске'
+        TabOrder = 2
       end
     end
   end

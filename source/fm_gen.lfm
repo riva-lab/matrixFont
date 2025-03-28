@@ -75,7 +75,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 0
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbGroupDirection: TLabel
           AnchorSideTop.Side = asrCenter
@@ -103,7 +103,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 1
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbScanColsFirst: TLabel
           AnchorSideTop.Side = asrCenter
@@ -131,7 +131,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 2
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbScanColsToRight: TLabel
           AnchorSideTop.Side = asrCenter
@@ -159,7 +159,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 3
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbScanRowsToDown: TLabel
           AnchorSideTop.Side = asrCenter
@@ -187,7 +187,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 4
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbFontType: TLabel
           AnchorSideTop.Side = asrCenter
@@ -215,7 +215,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 5
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbNumbersView: TLabel
           AnchorSideTop.Side = asrCenter
@@ -243,7 +243,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 6
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbBitOrder: TLabel
           AnchorSideTop.Side = asrCenter
@@ -271,7 +271,7 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 7
           Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbEmptyBits: TLabel
           AnchorSideTop.Side = asrCenter
@@ -299,41 +299,13 @@ object fmGen: TfmGen
           Style = csDropDownList
           TabOrder = 8
           Text = '-'
-          OnChange = acRefreshOutExecute
-        end
-        object lbLanguage: TLabel
-          AnchorSideTop.Side = asrCenter
-          Left = 10
-          Height = 28
-          Top = 307
-          Width = 367
-          Alignment = taRightJustify
-          Caption = 'Генерируемый код'
-          Layout = tlCenter
-          ParentColor = False
-        end
-        object cbGenLanguage: TComboBox
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Side = asrBottom
-          Left = 387
-          Height = 28
-          Top = 307
-          Width = 324
-          ItemHeight = 20
-          ItemIndex = 0
-          Items.Strings = (
-            '-'
-          )
-          Style = csDropDownList
-          TabOrder = 9
-          Text = '-'
-          OnChange = acRefreshOutExecute
+          OnChange = OnChangeParameter
         end
         object lbDefPrefix: TLabel
           AnchorSideTop.Side = asrCenter
           Left = 10
           Height = 28
-          Top = 340
+          Top = 307
           Width = 367
           Alignment = taRightJustify
           Caption = 'Префикс для определений'
@@ -345,17 +317,17 @@ object fmGen: TfmGen
           AnchorSideRight.Side = asrBottom
           Left = 387
           Height = 28
-          Top = 340
+          Top = 307
           Width = 324
           CharCase = ecUppercase
           MaxLength = 32
-          TabOrder = 10
+          TabOrder = 9
           OnChange = edDefPrefixChange
         end
         object pRangeTxt: TPanel
           Left = 10
           Height = 28
-          Top = 373
+          Top = 340
           Width = 367
           BevelOuter = bvNone
           ChildSizing.HorizontalSpacing = 10
@@ -364,7 +336,7 @@ object fmGen: TfmGen
           ClientHeight = 28
           ClientWidth = 367
           ParentBackground = False
-          TabOrder = 11
+          TabOrder = 10
           object lbRangeReset: TLabel
             Cursor = crHandPoint
             Left = 314
@@ -397,7 +369,7 @@ object fmGen: TfmGen
         object pRange: TPanel
           Left = 387
           Height = 28
-          Top = 373
+          Top = 340
           Width = 324
           BevelOuter = bvNone
           ChildSizing.HorizontalSpacing = 10
@@ -407,7 +379,7 @@ object fmGen: TfmGen
           ClientHeight = 28
           ClientWidth = 324
           ParentBackground = False
-          TabOrder = 12
+          TabOrder = 11
           object seStart: TSpinEdit
             AnchorSideTop.Side = asrBottom
             Left = 0
@@ -439,7 +411,7 @@ object fmGen: TfmGen
             Top = 0
             Width = 116
             MaxValue = 1000
-            OnChange = acRefreshOutExecute
+            OnChange = OnChangeParameter
             TabOrder = 1
             Value = 1000
           end
@@ -1004,6 +976,7 @@ object fmGen: TfmGen
     ParentBackground = False
     ParentColor = False
     TabOrder = 2
+    Visible = False
     object pSelector: TPanel
       Left = 4
       Height = 40
@@ -1070,6 +1043,7 @@ object fmGen: TfmGen
       Alignment = taCenter
       Caption = 'lbInfo'
       Layout = tlCenter
+      Transparent = False
     end
     object pCode: TPanel
       Left = 544

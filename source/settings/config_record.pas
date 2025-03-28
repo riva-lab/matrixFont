@@ -61,6 +61,7 @@ type
 
     gen: record
       fontsize: Integer;
+      refresh:  Boolean;
       end;
 
     import: record
@@ -78,6 +79,7 @@ type
         nbits:    Integer;
         order:    Integer;
         codetype: Integer;
+        groupdir: Integer;
         bitorder: Integer;
         w:        Integer;
         h:        Integer;
@@ -117,8 +119,6 @@ type
 
     grid: record
       enable: Boolean;
-      size:   Integer;
-      chess:  Boolean;
       end;
 
     prev: record

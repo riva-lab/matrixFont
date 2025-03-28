@@ -276,7 +276,7 @@ procedure TfmPreview.UpdatePreview;
 
             if (char_code >= 0) and (char_code <= FontLength - 1) then
               begin
-              Item[char_code].DrawPreview(bm_tmp, False,
+              Item[char_code].Draw(bm_tmp, False,
                 cfg.color.prev.bg, cfg.color.prev.active);
 
               Canvas.Draw(1 + x, 1 + y * CharHeight, bm_tmp);

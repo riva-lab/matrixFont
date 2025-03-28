@@ -94,6 +94,7 @@ type
     FLastFileMenuItem2: array [0..LAST_FILES_LIST_SIZE - 1] of TMenuItem;
     FOpenFileList:      TOpenFileList;
     FPasteMode:         TPasteMode;
+    FGridStep:          Integer;
 
     procedure FontLoadFromFile(AFileName: String);
     procedure FontCreateNew(w, h, si, l, e: Integer; n, a: String);
@@ -204,7 +205,8 @@ procedure TfmMain.FormShow(Sender: TObject);
     LoadProjectAtStartup;
     acZoomFit.Execute;
     tmrMain10msTimer(Sender);
-    actionPasteMode(Sender);
+    actionPasteMode(acPasteModeNorm);
+    sgNavigatorSelection(Sender, 0, sgNavigator.FixedRows);
     AfterLoadConfig;
 
     psSplit.Cursor      := crHSplit; // fix splitter cursor bug
@@ -314,8 +316,8 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
     if cnt mod 4 = 0 then
       begin
       // отслеживание буфера обмена на наличие данных
-      acSymbolPaste.Enabled := not mxFont.Item[0].CopyBufferEmpty;
-      acFontPaste.Enabled   := not mxFont.Item[0].CopyBufferEmpty;
+      acSymbolPaste.Enabled := mxFont.Item[0].CanPaste;
+      acFontPaste.Enabled   := mxFont.Item[0].CanPaste;
       end;
 
     // управление видимостью панелей кнопок
@@ -360,19 +362,14 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
           // превью символа
           if cfg.nav.invert and (aRow = Row) then
             // выделенная строка в навигаторе
-            mxFont.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
+            mxFont.Item[aRow - FixedRows].Draw(bm_tmp, cfg.nav.transparent,
               cfg.color.nav.active, cfg.color.nav.bg)
           else
             // невыделенная строка в навигаторе
-            mxFont.Item[aRow - FixedRows].DrawPreview(bm_tmp, cfg.nav.transparent,
+            mxFont.Item[aRow - FixedRows].Draw(bm_tmp, cfg.nav.transparent,
               cfg.color.nav.bg, cfg.color.nav.active);
           Canvas.StretchDraw(aRect, bm_tmp);
           end;
-
-        // заголовок редактора
-        lbEditor.Caption := TXT_SYMBOL + '  <' + sgNavigator.Cells[0, Row] + '>'
-          + '  DEC = ' + IntToStr(mxFont.FontStartItem + Row - FixedRows)
-          + ';  HEX = ' + IntToHex(mxFont.FontStartItem + Row - FixedRows, 2);
         end;
       finally
       FreeAndNil(bm_tmp);
@@ -385,9 +382,14 @@ procedure TfmMain.sgNavigatorSelection(Sender: TObject; aCol, aRow: Integer);
     item: TMatrixChar;
   begin
     item                 := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
-    acSymbolUndo.Enabled := not item.HistoryEmpty;
-    acSymbolRedo.Enabled := not item.HistoryNoRedo;
+    acSymbolUndo.Enabled := item.CanUndo;
+    acSymbolRedo.Enabled := item.CanRedo;
     ReDrawImage;
+
+    aRow := mxFont.FontStartItem + sgNavigator.Row - sgNavigator.FixedRows;
+
+    lbEditor.Caption := Format('%s  <%s>  DEC = %d;  HEX = %x', [
+      TXT_SYMBOL, mxFont.GetCharName(aRow), aRow, aRow]);
   end;
 
 // изменение высоты строки навигатора мышью [+Ctrl]
@@ -409,6 +411,8 @@ procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
  // обработка нажатия мышью на рабочем холсте
 procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
+  const
+    prevPoint: DWord = MAXDWORD;
   var
     i:         Integer;
     item:      TMatrixChar;
@@ -422,21 +426,24 @@ procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
 
     if pixAction <> TPixelAction.paNone then
       begin
-      X := (X - mxFont.GridThickness div 2) div mxFont.GridStep;
-      Y := (Y - mxFont.GridThickness div 2) div mxFont.GridStep;
+      X := X div FGridStep;
+      Y := Y div FGridStep;
+
+      if prevPoint = (X shl 16) or (Y and $FFFF) then Exit
+      else prevPoint := (X shl 16) or (Y and $FFFF);
 
       item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
       if ssCtrl in Shift then
         for i := 0 to mxFont.Width - 1 do
-          item.PixelAction(i, y, pixAction);
+          item.PixelAction(i, Y, pixAction);
 
       if ssShift in Shift then
         for i := 0 to mxFont.Height - 1 do
-          item.PixelAction(x, i, pixAction);
+          item.PixelAction(X, i, pixAction);
 
       if not ((ssCtrl in Shift) xor (ssShift in Shift)) then
-        item.PixelAction(x, y, pixAction);
+        item.PixelAction(X, Y, pixAction);
 
       ReDrawImage;
       end;
@@ -453,8 +460,10 @@ procedure TfmMain.imEditorMouseMove(Sender: TObject; Shift: TShiftState; X, Y: I
       if ssRight in Shift then Button := mbRight;
       imEditorMouseDown(Sender, Button, Shift, X, Y);
 
-      stStatusBar.Panels.Items[2].Text := 'X,Y: ' + IntToStr((x - 1) div mxFont.GridStep + 1) +
-        ', ' + IntToStr((y - 1) div mxFont.GridStep + 1);
+      if FGridStep > 0 then
+        stStatusBar.Panels.Items[2].Text := Format('X,Y: %d, %d', [
+          (X - 1) div FGridStep + 1,
+          (Y - 1) div FGridStep + 1]);
 
       timer_up := False;
       Inc(frames); // счетчик FPS
@@ -688,27 +697,30 @@ procedure TfmMain.acGenFormOnTopExecute(Sender: TObject);
 
 // действия с символом: масштабирование
 procedure TfmMain.actionZooming(Sender: TObject);
-  var
-    item: TMatrixChar;
   begin
-    item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
-
     if Sender <> nil then
       case TAction(Sender).Name of
 
         'acZoomFit': // масштаб символа "вписанный в видимую область"
-          item.ZoomFitToArea(scbEditor.Width, scbEditor.Height);
+          FGridStep := min(
+            scbEditor.Width div mxFont.Width,
+            scbEditor.Height div mxFont.Height);
 
         'acZoomIn':  // увеличение масштаба
-          item.ZoomIn;
+          FGridStep := min(150, round((FGridStep + 1) * 1.1));
 
         'acZoomOut': // уменьшение масштаба
-          item.ZoomOut;
+          FGridStep := max(1, round((FGridStep - 1) / 1.1));
         end;
 
-    imEditor.Width  := item.WidthInPixels;
-    imEditor.Height := item.HeightInPixels;
-    mxFont.GridStep := item.GridStep;
+    with shBackground.Constraints do
+      begin
+      MinWidth  := FGridStep * mxFont.Width;
+      MaxWidth  := FGridStep * mxFont.Width;
+      MinHeight := FGridStep * mxFont.Height;
+      MaxHeight := FGridStep * mxFont.Height;
+      end;
+
     ReDrawImage;
   end;
 
@@ -734,10 +746,11 @@ procedure TfmMain.actionSymbolHistory(Sender: TObject);
         mxFont.RedoChange;
       end;
 
-    acSymbolUndo.Enabled := not item.HistoryEmpty;
-    acSymbolRedo.Enabled := not item.HistoryNoRedo;
+    acSymbolUndo.Enabled := item.CanUndo;
+    acSymbolRedo.Enabled := item.CanRedo;
     ReDrawImage;
     ReDrawContent;
+    fmGen.OnChangeParameter(nil);
   end;
 
 // действия с символом: поиск
@@ -810,7 +823,10 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
     case TAction(Sender).Name of
 
       'acSymbolCopy':       // действие: копирование символа в буфер обмена
+        begin
         item.ClipboardAction(TClipboardAction.cbCopy);
+        Exit;
+        end;
 
       'acSymbolCut':        // действие: вырезание символа в буфер обмена
         item.ClipboardAction(TClipboardAction.cbCut);
@@ -831,7 +847,7 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
             repeat
               if not IsImageContainFontSet(FileName, meta) then
                 begin
-                item.ImportImage(FileName, cfg.import.bwlevel);
+                item.Import(FileName, FPasteMode, cfg.import.bwlevel);
                 FileName := '';
                 Break;
                 end;
@@ -855,29 +871,29 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
 
 
       'acSymbolShiftDown':  // действие: сдвиг символа вниз
-        item.Shift(TDirection.dirDown);
+        item.Shift(dirDown, acFontShiftRollover.Checked);
 
       'acSymbolShiftLeft':  // действие: сдвиг символа влево
-        item.Shift(TDirection.dirLeft);
+        item.Shift(dirLeft, acFontShiftRollover.Checked);
 
       'acSymbolShiftRight': // действие: сдвиг символа вправо
-        item.Shift(TDirection.dirRight);
+        item.Shift(dirRight, acFontShiftRollover.Checked);
 
       'acSymbolShiftUp':    // действие: сдвиг символа вверх
-        item.Shift(TDirection.dirUp);
+        item.Shift(dirUp, acFontShiftRollover.Checked);
 
 
       'acSymbolSnapDown':   // действие: прижатие символа вниз
-        item.Snap(TBorder.brDown);
+        item.Snap(dirDown);
 
       'acSymbolSnapLeft':   // действие: прижатие символа влево
-        item.Snap(TBorder.brLeft);
+        item.Snap(dirLeft);
 
       'acSymbolSnapRight':  // действие: прижатие символа вправо
-        item.Snap(TBorder.brRight);
+        item.Snap(dirRight);
 
       'acSymbolSnapUp':     // действие: прижатие символа вверх
-        item.Snap(TBorder.brUp);
+        item.Snap(dirUp);
 
 
       'acSymbolCenterH':    // действие: центрирование символа горизонтально
@@ -920,29 +936,29 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
 
 
       'acFontShiftDown':  // действие: сдвиг вниз символов шрифта
-        mxFont.Shift(TDirection.dirDown);
+        mxFont.Shift(dirDown, acFontShiftRollover.Checked);
 
       'acFontShiftLeft':  // действие: сдвиг влево символов шрифта
-        mxFont.Shift(TDirection.dirLeft);
+        mxFont.Shift(dirLeft, acFontShiftRollover.Checked);
 
       'acFontShiftRight': // действие: сдвиг вправо символов шрифта
-        mxFont.Shift(TDirection.dirRight);
+        mxFont.Shift(dirRight, acFontShiftRollover.Checked);
 
       'acFontShiftUp':    // действие: сдвиг вверх символов шрифта
-        mxFont.Shift(TDirection.dirUp);
+        mxFont.Shift(dirUp, acFontShiftRollover.Checked);
 
 
       'acFontSnapDown':   // действие: прижатие вниз символов шрифта
-        mxFont.Snap(TBorder.brDown);
+        mxFont.Snap(dirDown);
 
       'acFontSnapLeft':   // действие: прижатие влево символов шрифта
-        mxFont.Snap(TBorder.brLeft);
+        mxFont.Snap(dirLeft);
 
       'acFontSnapRight':  // действие: прижатие вправо символов шрифта
-        mxFont.Snap(TBorder.brRight);
+        mxFont.Snap(dirRight);
 
       'acFontSnapUp':     // действие: прижатие вверх символов шрифта
-        mxFont.Snap(TBorder.brUp);
+        mxFont.Snap(dirUp);
 
 
       'acFontCenterH':    // действие: центрирование символов шрифта горизонтально
@@ -1038,6 +1054,8 @@ procedure TfmMain.actionService(Sender: TObject);
         FileStatusUpdate;
         end;
 
+      'acGridToggle':
+        imBackground.Visible := acGridToggle.Checked;
       end;
   end;
 
@@ -1061,6 +1079,7 @@ procedure TfmMain.acFontCharsetExecute(Sender: TObject);
 
         sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
         FontActionExecute;
+        fmGen.acResetRange.Execute;
         end;
       end;
   end;
@@ -1072,10 +1091,10 @@ procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
       begin
       opt_oldHeight := Height;
       opt_oldWidth  := Width;
-      opt_up        := CanOptimize(TCanOptimize.coUp);
-      opt_down      := CanOptimize(TCanOptimize.coDown);
-      opt_left      := CanOptimize(TCanOptimize.coLeft);
-      opt_right     := CanOptimize(TCanOptimize.coRight);
+      opt_up        := CanOptimize(dirUp);
+      opt_down      := CanOptimize(dirDown);
+      opt_left      := CanOptimize(dirLeft);
+      opt_right     := CanOptimize(dirRight);
 
       if not ((opt_oldHeight - opt_up - opt_down > 0) and
         (opt_oldWidth - opt_left - opt_right > 0)) then
@@ -1085,6 +1104,7 @@ procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
         begin
         ChangeSize(res_up, res_down, res_left, res_right, True);
 
+        SettingsApplyToCurrentSession;
         FontActionExecute;
         end;
       end;
@@ -1105,6 +1125,7 @@ procedure TfmMain.acFontChangeSizesExecute(Sender: TObject);
           seLeft.Value, seRight.Value,
           rgMode.ItemIndex = 1);
 
+        SettingsApplyToCurrentSession;
         FontActionExecute;
         end;
       end;
@@ -1196,20 +1217,10 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
 
     if mxFont <> nil then
       try
-      with mxFont do
-        begin
-        ShowGrid             := acGridToggle.Checked;
-        mxFont.ShiftRollover := acFontShiftRollover.Checked;
-
-        BackgroundColor     := cfg.color.editor.bg;
-        ActiveColor         := cfg.color.editor.active;
-        GridColor           := cfg.color.editor.grid;
-        GridThickness       := cfg.grid.size;
-        GridChessBackground := cfg.grid.chess;
-
-        imEditor.Width  := Item[0].WidthInPixels;
-        imEditor.Height := Item[0].HeightInPixels;
-        end;
+      shBackground.Brush.Color := cfg.color.editor.bg;
+      DrawChessBackground(imBackground.Picture.Bitmap,
+        mxFont.Width, mxFont.Height,
+        cfg.color.editor.bg, cfg.color.editor.grid);
 
       with sgNavigator.Columns do
         begin
@@ -1247,7 +1258,7 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
       end;
 
     LanguageChange;
-    acGenerateExecute(nil);
+    actionService(acGridToggle);
     actionZooming(nil);
     ReDrawContent;
     ReDrawImage;
@@ -1328,10 +1339,10 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
         AppAdditional := GetAppCompanyName;
         Encoding      := GetEncodingByIndex(e);
 
-        Width         := w;
-        Height        := h;
+        SetSize(w, h);
         FontStartItem := si;
         FontLength    := l;
+        Clear;
         end;
 
       FontCreateFinish;
@@ -1425,6 +1436,7 @@ procedure TfmMain.FileStatusUpdate;
         end;
 
     EndFormUpdate;
+    fmGen.OnChangeParameter(nil);
   end;
 
 // действия после применения эффекта ко всем символам шрифта
@@ -1432,7 +1444,7 @@ procedure TfmMain.FontActionExecute;
   begin
     ReDrawImage;
     ReDrawContent;
-    acSymbolUndo.Enabled := not mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].HistoryEmpty;
+    acSymbolUndo.Enabled := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].CanUndo;
     acSymbolRedo.Enabled := False;
     file_changed         := True;
     FileStatusUpdate();
@@ -1442,9 +1454,6 @@ procedure TfmMain.FontActionExecute;
 procedure TfmMain.FontCreateFinish;
   begin
     mxFont.ClearChanges;
-
-    imEditor.Width  := mxFont.Item[0].WidthInPixels;
-    imEditor.Height := mxFont.Item[0].HeightInPixels;
 
     sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
 
@@ -1473,17 +1482,10 @@ procedure TfmMain.ReDrawImage;
   var
     index: Integer;
   begin
-    index            := sgNavigator.Row - sgNavigator.FixedRows;
-    imEditor.Visible := False; // откл. видимость (и автообновление) компонента
+    index := sgNavigator.Row - sgNavigator.FixedRows;
 
-    with imEditor.Picture do
-      begin
-      Bitmap.Width  := mxFont.Item[index].WidthInPixels;
-      Bitmap.Height := mxFont.Item[index].HeightInPixels;
-      mxFont.Item[index].Draw(Bitmap);
-      end;
-
-    imEditor.Visible := True; // отображаем готовое изображение
+    mxFont.Item[index].Draw(imEditor.Picture.Bitmap, True,
+      cfg.color.editor.bg, cfg.color.editor.active);
   end;
 
  // обновление контента (навигатор, предпросмотр)

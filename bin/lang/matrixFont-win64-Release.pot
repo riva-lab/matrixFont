@@ -94,6 +94,10 @@ msgstr ""
 msgid "Снизу вверх"
 msgstr ""
 
+#: fm_gen.fm_gen_update
+msgid "ОБНОВИТЕ КОД"
+msgstr ""
+
 #: fm_import.fm_import_scale
 msgid "предпросмотр"
 msgstr ""
@@ -134,14 +138,24 @@ msgstr ""
 msgid "Импорт шрифта из кода C"
 msgstr ""
 
+#: fm_importc.fm_impc_gdir_1
+msgctxt "fm_importc.fm_impc_gdir_1"
+msgid "Вертикально"
+msgstr ""
+
+#: fm_importc.fm_impc_gdir_2
+msgctxt "fm_importc.fm_impc_gdir_2"
+msgid "Горизонтально"
+msgstr ""
+
 #: fm_importc.fm_impc_order_1
 msgctxt "fm_importc.fm_impc_order_1"
-msgid "Сначала столбцы"
+msgid "Столбцами групп"
 msgstr ""
 
 #: fm_importc.fm_impc_order_2
 msgctxt "fm_importc.fm_impc_order_2"
-msgid "Сначала строки"
+msgid "Строками групп"
 msgstr ""
 
 #: fm_importc.fm_impc_type_4
@@ -316,10 +330,6 @@ msgstr ""
 #: tfmgen.lbgroupdirection.caption
 msgctxt "tfmgen.lbgroupdirection.caption"
 msgid "Считывание битов группы"
-msgstr ""
-
-#: tfmgen.lblanguage.caption
-msgid "Генерируемый код"
 msgstr ""
 
 #: tfmgen.lbnumbersbits.caption
@@ -500,6 +510,10 @@ msgstr ""
 msgid "Обновить предпросмотр"
 msgstr ""
 
+#: tfmimportc.btnswapwh.hint
+msgid "Поменять местами высоту и ширину"
+msgstr ""
+
 #: tfmimportc.cbimpexample.caption
 msgctxt "tfmimportc.cbimpexample.caption"
 msgid "Образец текста"
@@ -573,6 +587,11 @@ msgstr ""
 msgid "Файл:"
 msgstr ""
 
+#: tfmimportc.lbimpgrpdir.caption
+msgctxt "tfmimportc.lbimpgrpdir.caption"
+msgid "Считывание битов группы"
+msgstr ""
+
 #: tfmimportc.lbimpnbits.caption
 msgctxt "tfmimportc.lbimpnbits.caption"
 msgid "Разрядность чисел"
@@ -584,7 +603,7 @@ msgstr ""
 
 #: tfmimportc.lbimporder.caption
 msgctxt "tfmimportc.lbimporder.caption"
-msgid "Очередность считывания"
+msgid "Способ считывания"
 msgstr ""
 
 #: tfmimportc.lbimprange.caption
@@ -1793,17 +1812,13 @@ msgctxt "tfmsettings.cbcharname.caption"
 msgid "Название"
 msgstr ""
 
-#: tfmsettings.cbchessgrid.caption
-msgid "Шахматный фон"
-msgstr ""
-
-#: tfmsettings.cbchessgrid.hint
-msgid "Для второго цвета шахматного фона используется цвет сетки"
-msgstr ""
-
 #: tfmsettings.cbcodename.caption
 msgctxt "tfmsettings.cbcodename.caption"
 msgid "Код"
+msgstr ""
+
+#: tfmsettings.cbgenerateauto.caption
+msgid "Обновлять код при изменении параметров генератора"
 msgstr ""
 
 #: tfmsettings.cblastfileatstart.caption
@@ -1973,10 +1988,6 @@ msgstr ""
 
 #: tfmsettings.lbfontscale.caption
 msgid "Размер шрифта, %"
-msgstr ""
-
-#: tfmsettings.lbgridthickness.caption
-msgid "Толщина линий пиксельной сетки редактора"
 msgstr ""
 
 #: tfmsettings.lbiconsscale.caption

@@ -29,11 +29,11 @@ type
     bbDefaults:         TBitBtn;
     cbCharName:         TCheckBox;
     cbCharNameFont:     TComboBox;
-    cbChessGrid:        TCheckBox;
     cbCodeHex:          TCheckBox;
     cbCodeName:         TCheckBox;
     cbCodeNameFont:     TComboBox;
     cbEncoding:         TComboBox;
+    cbGenerateAuto:     TCheckBox;
     cbLanguage:         TComboBox;
     cbLastFileAtStart:  TCheckBox;
     cbNaviInvert:       TCheckBox;
@@ -107,7 +107,6 @@ type
     lbFontEncoding:     TLabel;
     lbFontName:         TLabel;
     lbFontScale:        TLabel;
-    lbGridThickness:    TLabel;
     lbIconsScale:       TLabel;
     lbInterface:        TLabel;
     lbLanguage:         TLabel;
@@ -143,7 +142,6 @@ type
     pSpacer4:           TPanel;
     pSpacer5:           TPanel;
     pSpacer6:           TPanel;
-    pSpacer7:           TPanel;
     pStickingForms:     TPanel;
     pTitle1:            TPanel;
     pTitle10:           TPanel;
@@ -204,7 +202,6 @@ type
     seCharNameFontSize: TSpinEdit;
     seCodeNameFontSize: TSpinEdit;
     seFontScale:        TSpinEdit;
-    seGridThickness:    TSpinEdit;
     seIconsScale:       TSpinEdit;
     seMapExportScale:   TSpinEdit;
     seMapExportSpace:   TSpinEdit;
@@ -416,10 +413,9 @@ procedure TfmSettings.InitConfig;
     Settings.Add(seMapExportScale, @cfg.map.export.scale);
     Settings.Add(seMapExportSpace, @cfg.map.export.space);
 
-    Settings.Add(seGridThickness, @cfg.grid.size);
-    Settings.Add(cbChessGrid, @cfg.grid.chess);
-
     Settings.Add(cbPreviewRefresh, @cfg.prev.refresh);
+
+    Settings.Add(cbGenerateAuto, @cfg.gen.refresh);
 
     Settings.Add(cbtnActive, @cfg.colorl.editor.active);
     Settings.Add(cbtnBackground, @cfg.colorl.editor.bg);

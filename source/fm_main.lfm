@@ -706,9 +706,9 @@ object fmMain: TfmMain
           Height = 395
           Top = 0
           Width = 344
-          HorzScrollBar.Page = 113
+          HorzScrollBar.Page = 81
           HorzScrollBar.Tracking = True
-          VertScrollBar.Page = 113
+          VertScrollBar.Page = 81
           VertScrollBar.Tracking = True
           Align = alClient
           BorderSpacing.CellAlignHorizontal = ccaCenter
@@ -721,16 +721,55 @@ object fmMain: TfmMain
           ClientWidth = 344
           TabOrder = 0
           OnMouseWheel = imMouseWheel
-          object imEditor: TImage
-            Left = 116
-            Height = 113
-            Top = 141
-            Width = 113
+          object shBackground: TShape
+            Left = 132
+            Height = 81
+            Top = 157
+            Width = 81
+            Pen.Style = psClear
+          end
+          object imBackground: TImage
+            AnchorSideLeft.Control = shBackground
+            AnchorSideTop.Control = shBackground
+            AnchorSideRight.Control = shBackground
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = shBackground
+            AnchorSideBottom.Side = asrBottom
+            Left = 132
+            Height = 81
+            Top = 157
+            Width = 81
             AntialiasingMode = amOff
+            Anchors = [akTop, akLeft, akRight, akBottom]
             AutoSize = True
             OnMouseDown = imEditorMouseDown
             OnMouseMove = imEditorMouseMove
             OnMouseUp = imEditorMouseUp
+            ParentShowHint = False
+            Proportional = True
+            Stretch = True
+          end
+          object imEditor: TImage
+            AnchorSideLeft.Control = imBackground
+            AnchorSideTop.Control = imBackground
+            AnchorSideRight.Control = imBackground
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = imBackground
+            AnchorSideBottom.Side = asrBottom
+            Left = 132
+            Height = 81
+            Top = 157
+            Width = 81
+            AntialiasingMode = amOff
+            Anchors = [akTop, akLeft, akRight, akBottom]
+            AutoSize = True
+            OnMouseDown = imEditorMouseDown
+            OnMouseMove = imEditorMouseMove
+            OnMouseUp = imEditorMouseUp
+            ParentShowHint = False
+            Proportional = True
+            Stretch = True
+            Transparent = True
           end
         end
         object pFindBox: TPanel
@@ -1452,7 +1491,7 @@ object fmMain: TfmMain
       end
       object ToolButton5: TToolButton
         Left = 91
-        Height = 30
+        Height = 5
         Top = 0
         Caption = 'ToolButton5'
         Style = tbsDivider
@@ -1469,7 +1508,7 @@ object fmMain: TfmMain
       end
       object ToolButton7: TToolButton
         Left = 186
-        Height = 30
+        Height = 5
         Top = 0
         Caption = 'ToolButton7'
         Style = tbsDivider
@@ -1522,7 +1561,7 @@ object fmMain: TfmMain
       end
       object ToolButton45: TToolButton
         Left = 216
-        Height = 30
+        Height = 5
         Top = 0
         Caption = 'ToolButton5'
         Style = tbsDivider
@@ -1539,7 +1578,7 @@ object fmMain: TfmMain
       end
       object ToolButton63: TToolButton
         Left = 281
-        Height = 30
+        Height = 5
         Top = 0
         Caption = 'ToolButton7'
         Style = tbsDivider
@@ -1581,7 +1620,7 @@ object fmMain: TfmMain
       end
       object ToolButton16: TToolButton
         Left = 121
-        Height = 30
+        Height = 5
         Top = 0
         Caption = 'ToolButton16'
         Style = tbsDivider
@@ -2235,7 +2274,7 @@ object fmMain: TfmMain
       Checked = True
       Hint = 'Вкл/выкл видимость пиксельной сетки'
       ImageIndex = 9
-      OnExecute = SettingsApplyToCurrentSession
+      OnExecute = actionService
       ShortCut = 16455
     end
     object acStayOnTopToggle: TAction

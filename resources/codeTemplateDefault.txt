@@ -1,12 +1,19 @@
-%CommentBegin% %LabelFontName% %FontName%
-%CommentNext% %LabelFontAuthor% %FontAuthor%
-%CommentNext% %LabelDateTime% %DateTime%
-%CommentNext% %LabelApplication% %Application%
-%CommentNext% %LabelFontEncoding% %FontEncoding%
-%CommentNext% %AppAdditional% %CommentEnd%
+/******************************************************************************
+   %LabelFontName%  %FontName%
+   %LabelFontAuthor%  %FontAuthor%
+   %LabelDateTime%  %DateTime%
+   %LabelApplication%  %Application%
+   %LabelFontEncoding%  %FontEncoding%
+   %AppAdditional%
+
+   SYSINFOv1: N="%FontName%" W=%FontWidth% H=%FontHeight% S=%FontStartChar% L=%FontLength% T=%FontType4%
+              B=%FontValueBits% O=%FontBitOrder% V=%FontIsGroupVert% E=%FontEmptyBits% D=%FontRowByRow% C=%FontColumnsMode% R=%FontRowsMode%.
+*******************************************************************************/
 
 #ifndef %FontIDUpperCase%_H
 #define %FontIDUpperCase%_H
+
+/******************************   Font defines   ******************************/
 
 #ifndef FONT_TYPE_MONOSPACED
 #define FONT_TYPE_MONOSPACED    0
@@ -21,11 +28,17 @@
 #define %FontIDUpperCase%_CHAR_WIDTH    %FontWidth%
 #define %FontIDUpperCase%_CHAR_HEIGHT   %FontHeight%
 #define %FontIDUpperCase%_FONT_TYPE     FONT_TYPE_%FontType%
+#define %FontIDUpperCase%_IS_GROUP_VERT %FontIsGroupVert%
 #define %FontIDUpperCase%_ARRAY_LENGTH  %FontArraySize%
 #define %FontIDUpperCase%_ARRAY_BYTES   %FontArrayBytes%
+
+
+/********************************   Font data   *******************************/
 
 const %DataType% %FontIDLowerCase%_data[] %DataModifier1%=
 {
 %FontData%};
 
-#endif %CommentBegin% %FontIDUpperCase%_H %CommentEnd%
+/****************************   End of font data   ****************************/
+
+#endif /* %FontIDUpperCase%_H */

@@ -125,8 +125,9 @@ dlgOpen:        TOpenDialog;
 
 edFind:         TEdit;
 
-imEditor:   TImage;
-imFindIcon: TImage;
+imEditor:     TImage;
+imBackground: TImage;
+imFindIcon:   TImage;
 
 ImListNew16A: TImageList;
 ImListNew16D: TImageList;
@@ -321,7 +322,8 @@ psSplit: TPairSplitter;
 scbEditor:      TScrollBox;
 seFind:         TSpinEdit;
 sgNavigator:    TStringGrid;
-stStatusBar:    TStatusBar;
+stStatusBar:    TStatusBar; 
+shBackground:   TShape;
 
 tbFile:        TToolBar;
 tbTools:       TToolBar;

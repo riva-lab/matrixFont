@@ -26,7 +26,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="109">
+      <ExcludedIdentifiers Count="110">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -136,17 +136,17 @@
         <Item107 Value="tfmrbf.lbfontwiki.hint"/>
         <Item108 Value="tfmgen.cbgroupdirection.text"/>
         <Item109 Value="tfmgen.cbbitorderlsb.text"/>
+        <Item110 Value="tfmimportc.btnswapwh.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <MinorVersionNr Value="1"/>
-      <RevisionNr Value="5"/>
-      <BuildNr Value="87"/>
+      <MinorVersionNr Value="2"/>
+      <BuildNr Value="88"/>
       <Language Value="0419"/>
-      <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2024" OriginalFilename="matrixFont" ProductName="matrixFont"/>
+      <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2025" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
     <BuildModes Count="4">
       <Item1 Name="win64-Debug" Default="True"/>
@@ -213,11 +213,13 @@
             </Checks>
             <TargetCPU Value="i386"/>
             <TargetOS Value="win32"/>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
               <DebugInfoType Value="dsDwarf2"/>
-              <UseExternalDbgSyms Value="True"/>
             </Debugging>
             <Options>
               <Win32>
@@ -304,7 +306,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="29">
+    <Units Count="30">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -468,6 +470,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit28>
+      <Unit29>
+        <Filename Value="u_imghist.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit29>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -495,6 +501,9 @@
       </Checks>
       <TargetCPU Value="x86_64"/>
       <TargetOS Value="win64"/>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
     </CodeGeneration>
     <Linking>
       <Debugging>

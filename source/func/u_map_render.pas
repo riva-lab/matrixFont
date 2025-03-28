@@ -261,7 +261,7 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
   procedure DrawChar(AIndex, AX, AY: Integer);
     begin
       if not (AIndex in [0..AFont.FontLength - 1]) then Exit;
-      AFont.Item[AIndex].DrawPreview(_bmp, False, AColor0, AColor1);
+      AFont.Item[AIndex].Draw(_bmp, False, AColor0, AColor1);
       _export.Canvas.Draw(_w * AX + ASpace, _h * AY + ASpace, _bmp);
     end;
 
@@ -396,6 +396,7 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont):
   function DecodeMetadata(S: String): Boolean;
     var
       i: Integer = 0;
+      w: Integer;
       l: TStringList;
 
     function NextString: String;
@@ -426,8 +427,8 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont):
           AppCurrent    := GetAppNameVersion;
           FontStartItem := NextInteger;
           FontLength    := NextInteger;
-          Width         := NextInteger;
-          Height        := NextInteger;
+          w             := NextInteger;
+          SetSize(w, NextInteger);
           end;
 
         scale   := NextInteger;

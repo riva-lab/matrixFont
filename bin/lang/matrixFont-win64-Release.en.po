@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-03-14 15:37+0200\n"
+"PO-Revision-Date: 2025-03-28 15:48+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -106,6 +106,10 @@ msgstr "Top to bottom"
 msgid "Снизу вверх"
 msgstr "Bottom to top"
 
+#: fm_gen.fm_gen_update
+msgid "ОБНОВИТЕ КОД"
+msgstr "UPDATE CODE"
+
 #: fm_import.fm_import_scale
 msgid "предпросмотр"
 msgstr "preview"
@@ -147,15 +151,25 @@ msgctxt "fm_importc.fm_impc_caption"
 msgid "Импорт шрифта из кода C"
 msgstr "Import font from C code"
 
+#: fm_importc.fm_impc_gdir_1
+msgctxt "fm_importc.fm_impc_gdir_1"
+msgid "Вертикально"
+msgstr "Vertically"
+
+#: fm_importc.fm_impc_gdir_2
+msgctxt "fm_importc.fm_impc_gdir_2"
+msgid "Горизонтально"
+msgstr "Horizontally"
+
 #: fm_importc.fm_impc_order_1
 msgctxt "fm_importc.fm_impc_order_1"
-msgid "Сначала столбцы"
-msgstr "Columns first"
+msgid "Столбцами групп"
+msgstr "Column by column"
 
 #: fm_importc.fm_impc_order_2
 msgctxt "fm_importc.fm_impc_order_2"
-msgid "Сначала строки"
-msgstr "Rows first"
+msgid "Строками групп"
+msgstr "Row by row"
 
 #: fm_importc.fm_impc_type_4
 msgid "Настройка вручную"
@@ -330,10 +344,6 @@ msgstr "Font type"
 msgctxt "tfmgen.lbgroupdirection.caption"
 msgid "Считывание битов группы"
 msgstr "Read bits of group"
-
-#: tfmgen.lblanguage.caption
-msgid "Генерируемый код"
-msgstr "Generated code"
 
 #: tfmgen.lbnumbersbits.caption
 msgctxt "tfmgen.lbnumbersbits.caption"
@@ -513,6 +523,10 @@ msgstr "Update"
 msgid "Обновить предпросмотр"
 msgstr "Update preview"
 
+#: tfmimportc.btnswapwh.hint
+msgid "Поменять местами высоту и ширину"
+msgstr "Swap width and height"
+
 #: tfmimportc.cbimpexample.caption
 msgctxt "tfmimportc.cbimpexample.caption"
 msgid "Образец текста"
@@ -592,6 +606,11 @@ msgctxt "tfmimportc.lbimpfile.caption"
 msgid "Файл:"
 msgstr "File:"
 
+#: tfmimportc.lbimpgrpdir.caption
+msgctxt "tfmimportc.lbimpgrpdir.caption"
+msgid "Считывание битов группы"
+msgstr "Read bits of group"
+
 #: tfmimportc.lbimpnbits.caption
 msgctxt "tfmimportc.lbimpnbits.caption"
 msgid "Разрядность чисел"
@@ -603,8 +622,8 @@ msgstr "Offset of array/symbol"
 
 #: tfmimportc.lbimporder.caption
 msgctxt "tfmimportc.lbimporder.caption"
-msgid "Очередность считывания"
-msgstr "Reading order"
+msgid "Способ считывания"
+msgstr "Reading method"
 
 #: tfmimportc.lbimprange.caption
 msgctxt "tfmimportc.lbimprange.caption"
@@ -1845,18 +1864,14 @@ msgctxt "TFMSETTINGS.CBCHARNAME.CAPTION"
 msgid "Название"
 msgstr "Name"
 
-#: tfmsettings.cbchessgrid.caption
-msgid "Шахматный фон"
-msgstr "Chess background"
-
-#: tfmsettings.cbchessgrid.hint
-msgid "Для второго цвета шахматного фона используется цвет сетки"
-msgstr "Grid color is used for second color of chess background"
-
 #: tfmsettings.cbcodename.caption
 msgctxt "TFMSETTINGS.CBCODENAME.CAPTION"
 msgid "Код"
 msgstr "Code"
+
+#: tfmsettings.cbgenerateauto.caption
+msgid "Обновлять код при изменении параметров генератора"
+msgstr "Refresh generated code at parameters change"
 
 #: tfmsettings.cblastfileatstart.caption
 msgid "Загружать последний открытый файл при запуске"
@@ -2037,10 +2052,6 @@ msgstr "Name"
 #: tfmsettings.lbfontscale.caption
 msgid "Размер шрифта, %"
 msgstr "Font size in %"
-
-#: tfmsettings.lbgridthickness.caption
-msgid "Толщина линий пиксельной сетки редактора"
-msgstr "Editor pixel grid line width"
 
 #: tfmsettings.lbiconsscale.caption
 msgid "Размер иконок, %"
@@ -2460,4 +2471,3 @@ msgstr ""
 "Can not apply all settings!\n"
 "Fatal error has occurred. Restart application.\n"
 "Exit application?"
-
