@@ -3,6 +3,7 @@ bin/settings.ini
 bin/*.exe
 bin/lang/matrixFont.*
 bin/lang/matrixFont-*32-*
+bin/lang/*Debug*
 help/matrixFont-help.html
 install/
 source/backup/
