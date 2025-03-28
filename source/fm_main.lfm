@@ -1491,7 +1491,7 @@ object fmMain: TfmMain
       end
       object ToolButton5: TToolButton
         Left = 91
-        Height = 5
+        Height = 30
         Top = 0
         Caption = 'ToolButton5'
         Style = tbsDivider
@@ -1508,7 +1508,7 @@ object fmMain: TfmMain
       end
       object ToolButton7: TToolButton
         Left = 186
-        Height = 5
+        Height = 30
         Top = 0
         Caption = 'ToolButton7'
         Style = tbsDivider
@@ -1561,7 +1561,7 @@ object fmMain: TfmMain
       end
       object ToolButton45: TToolButton
         Left = 216
-        Height = 5
+        Height = 30
         Top = 0
         Caption = 'ToolButton5'
         Style = tbsDivider
@@ -1578,7 +1578,7 @@ object fmMain: TfmMain
       end
       object ToolButton63: TToolButton
         Left = 281
-        Height = 5
+        Height = 30
         Top = 0
         Caption = 'ToolButton7'
         Style = tbsDivider
@@ -1620,7 +1620,7 @@ object fmMain: TfmMain
       end
       object ToolButton16: TToolButton
         Left = 121
-        Height = 5
+        Height = 30
         Top = 0
         Caption = 'ToolButton16'
         Style = tbsDivider
@@ -2312,7 +2312,7 @@ object fmMain: TfmMain
       Hint = 'Повторить последнюю отмененную операцию над символом'
       ImageIndex = 34
       OnExecute = actionSymbolHistory
-      ShortCut = 16473
+      ShortCut = 24666
     end
     object acSymbolCut: TAction
       Category = 'Символ'
@@ -2450,7 +2450,7 @@ object fmMain: TfmMain
       Hint = 'Повтор последней отмененной правки в каждом символе'
       ImageIndex = 34
       OnExecute = actionSymbolHistory
-      ShortCut = 49241
+      ShortCut = 57434
     end
     object acFontPaste: TAction
       Category = 'Шрифт'
