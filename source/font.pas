@@ -94,6 +94,7 @@ type
     FEmptyBits:        TEmptyBit;   // поле - настройка заполнения пустых разрядов
     FFontType:         TFontType;   // поле - тип шрифта
     FBitsPerGroup:     Integer;     // поле - разрядность группы битов
+    FValuesPerLine:    Integer;     // поле - количество значений в строке
 
     procedure SetFontLength(AValue: Integer);
     procedure SetFontStartItem(AValue: Integer);
@@ -211,6 +212,8 @@ type
 
     // разрядность группы битов
     property BitsPerGroup: Integer read FBitsPerGroup write FBitsPerGroup;
+
+    property ValuesPerLine: Integer read FValuesPerLine write FValuesPerLine;
 
     // код начального символа в наборе
     property FontStartItem: Integer read FFontStartItem write SetFontStartItem;
@@ -475,7 +478,8 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         FNumbersView,
         FEmptyBits,
         FFontType,
-        FBitsPerGroup),
+        FBitsPerGroup,
+        FValuesPerLine),
         (i = EndChar).Select('', ',')]) + LineEnding + LineEnding;
       end;
 

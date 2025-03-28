@@ -88,6 +88,7 @@ type
     cbBitOrderLSB:     TComboBox;
     cbEmptyBits:       TComboBox;
     cbNumbersBits:     TComboBox;
+    lbGenValsPerLine:  TLabel;
     lbGroupDirection:  TLabel;
     lbScanColsFirst:   TLabel;
     lbScanColsToRight: TLabel;
@@ -101,6 +102,7 @@ type
     lbDefPrefix:       TLabel;
     lbRange:           TLabel;
     lbDots:            TLabel;
+    seGenValsPerLine:  TSpinEdit;
     seStart:           TSpinEdit;
     seEnd:             TSpinEdit;
     ActionList1:       TActionList;
@@ -264,6 +266,7 @@ procedure TfmGen.acRefreshOutExecute(Sender: TObject);
       EmptyBits        := TEmptyBit(cbEmptyBits.ItemIndex);
       FontType         := TFontType(cbFontType.ItemIndex);
       BitsPerGroup     := cbNumbersBits.ItemIndex * 8 + 8;
+      ValuesPerLine    := seGenValsPerLine.Value;
       DefPrefix        := edDefPrefix.Text;
       end;
 

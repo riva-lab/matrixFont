@@ -327,6 +327,11 @@ msgctxt "tfmgen.lbfonttype.caption"
 msgid "Тип шрифта"
 msgstr ""
 
+#: tfmgen.lbgenvalsperline.caption
+msgctxt "tfmgen.lbgenvalsperline.caption"
+msgid "Значений в строке"
+msgstr ""
+
 #: tfmgen.lbgroupdirection.caption
 msgctxt "tfmgen.lbgroupdirection.caption"
 msgid "Считывание битов группы"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-03-28 15:48+0200\n"
+"PO-Revision-Date: 2025-03-28 17:19+0200\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -339,6 +339,11 @@ msgstr "Fill empty bits by"
 msgctxt "tfmgen.lbfonttype.caption"
 msgid "Тип шрифта"
 msgstr "Font type"
+
+#: tfmgen.lbgenvalsperline.caption
+msgctxt "tfmgen.lbgenvalsperline.caption"
+msgid "Значений в строке"
+msgstr "Values per line"
 
 #: tfmgen.lbgroupdirection.caption
 msgctxt "tfmgen.lbgroupdirection.caption"

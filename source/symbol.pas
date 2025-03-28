@@ -74,7 +74,7 @@ type
     function GenerateCode(fnGroupIsVertical, fnScanColsFirst, fnScanColsToRight,
       fnScanRowsToDown, fnBitOrderLSBFirst, fnNumbersInversion: Boolean;
       fnNumbersView: TNumberView; fnEmptyBits: TEmptyBit;
-      fnFontType: TFontType; fnBitsPerBlock: Integer): String;
+      fnFontType: TFontType; fnBitsPerBlock: Integer; fnValuesPerLine: Integer): String;
 
     // очистить историю изменений
     procedure ClearChanges;
@@ -326,7 +326,8 @@ function TMatrixChar.GenerateCode(
   fnNumbersView: TNumberView;  // поле - настройка представления выходных чисел
   fnEmptyBits: TEmptyBit;      // поле - настройка заполнения пустых разрядов
   fnFontType: TFontType;       // поле - тип шрифта
-  fnBitsPerBlock: Integer      // поле - разрядность блока в битах
+  fnBitsPerBlock: Integer;     // поле - разрядность блока в битах
+  fnValuesPerLine: Integer     // количество значений в строке
   ): String;
 
   var
@@ -391,7 +392,7 @@ function TMatrixChar.GenerateCode(
           Result += createNumber(readBlock(cx, cy), fnNumbersView, fnBitOrderLSBFirst) + ', ';
           y      += fnGroupIsVertical.Select(fnBitsPerBlock, 1);
           i      += 1;
-          if i mod 16 = 0 then Result += LineEnding + '    ';
+          if i mod fnValuesPerLine = 0 then Result += LineEnding + '    ';
           end;
 
         x += fnGroupIsVertical.Select(1, fnBitsPerBlock);
@@ -417,7 +418,7 @@ function TMatrixChar.GenerateCode(
           Result += createNumber(readBlock(cx, cy), fnNumbersView, fnBitOrderLSBFirst) + ', ';
           x      += fnGroupIsVertical.Select(1, fnBitsPerBlock);
           i      += 1;
-          if i mod 16 = 0 then Result += LineEnding + '    ';
+          if i mod fnValuesPerLine = 0 then Result += LineEnding + '    ';
           end;
 
         y += fnGroupIsVertical.Select(fnBitsPerBlock, 1);
