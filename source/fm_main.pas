@@ -1445,7 +1445,7 @@ procedure TfmMain.FontActionExecute;
     ReDrawImage;
     ReDrawContent;
     acSymbolUndo.Enabled := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].CanUndo;
-    acSymbolRedo.Enabled := False;
+    acSymbolRedo.Enabled := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].CanRedo;
     file_changed         := True;
     FileStatusUpdate();
   end;

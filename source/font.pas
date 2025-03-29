@@ -384,37 +384,19 @@ procedure TMatrixFont.Rotate(AClockWise: Boolean);
 
 // обменять местами символы в таблице
 function TMatrixFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
-
-  function GetCharBitmap(AIndex: Integer): TBitmap;
-    begin
-      Result := TBitmap.Create;
-      Result.SetSize(FWidth, FHeight);
-      FCharArray[AIndex].Draw(Result, False, CHAR_COLOR_BG, CHAR_COLOR_FG);
-    end;
-
   var
-    b1, b2: TBitmap;
+    tmpMatrixChar: TMatrixChar;
 
   begin
     Result := False;
     if not InRange(AIndex1, 0, FFontLength - 1) then Exit;
     if not InRange(AIndex2, 0, FFontLength - 1) then Exit;
 
-      try
-      b1 := GetCharBitmap(AIndex1);
-      b2 := GetCharBitmap(AIndex2);
+    tmpMatrixChar       := FCharArray[AIndex2];
+    FCharArray[AIndex2] := FCharArray[AIndex1];
+    FCharArray[AIndex1] := tmpMatrixChar;
 
-      FCharArray[AIndex1].Import(b2, pmNorm);
-      FCharArray[AIndex2].Import(b1, pmNorm);
-
-      FCharArray[AIndex1].SaveChange;
-      FCharArray[AIndex2].SaveChange;
-
-      Result := True;
-      finally
-      if Assigned(b1) then b1.Free;
-      if Assigned(b2) then b2.Free;
-      end;
+    Result := True;
   end;
 
 // генерировать код шрифта
