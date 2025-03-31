@@ -2183,7 +2183,7 @@ object fmSettings: TfmSettings
       ClientWidth = 681
       object pValues2: TPanel
         Left = 10
-        Height = 28
+        Height = 61
         Top = 10
         Width = 661
         AutoSize = True
@@ -2192,7 +2192,7 @@ object fmSettings: TfmSettings
         ChildSizing.VerticalSpacing = 5
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 28
+        ClientHeight = 61
         ClientWidth = 661
         TabOrder = 0
         object seBWTreshold: TSpinEdit
@@ -2213,8 +2213,34 @@ object fmSettings: TfmSettings
           Left = 110
           Height = 28
           Top = 0
-          Width = 302
+          Width = 353
           Caption = 'Порог черного при импорте изображения'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object seCharUndoLimit: TSpinEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 28
+          Top = 33
+          Width = 100
+          Constraints.MinWidth = 100
+          Increment = 100
+          MaxValue = 2000
+          MinValue = 100
+          TabOrder = 1
+          Value = 500
+        end
+        object lbCharUndoLimit: TLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 110
+          Height = 28
+          Hint = 'Большее количество отмен требует больший объем памяти'
+          Top = 33
+          Width = 353
+          Caption = 'Максимальное количество отмен правок символа'
           Layout = tlCenter
           ParentColor = False
         end

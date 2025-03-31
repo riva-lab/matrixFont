@@ -1879,6 +1879,14 @@ msgstr ""
 msgid "Порог черного при импорте изображения"
 msgstr ""
 
+#: tfmsettings.lbcharundolimit.caption
+msgid "Максимальное количество отмен правок символа"
+msgstr ""
+
+#: tfmsettings.lbcharundolimit.hint
+msgid "Большее количество отмен требует больший объем памяти"
+msgstr ""
+
 #: tfmsettings.lbcolor.caption
 msgid "Пиксель"
 msgstr ""

@@ -64,6 +64,10 @@ type
       refresh:  Boolean;
       end;
 
+    editor: record
+      undolimit: Integer;
+      end;
+
     import: record
       bwlevel:  Integer;
       optimize: Boolean;

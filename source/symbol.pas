@@ -35,6 +35,7 @@ type
 
     FWidth:        Integer; // ширина символа в пикселях
     FHeight:       Integer; // высота символа в пикселях
+    FUndoLimit:    Integer; // undo limit (history depth)
     FCurrentPixel: TPoint;  // координаты текущего нарисованного пикселя
 
     function GetCanPaste: Boolean;
@@ -104,6 +105,9 @@ type
 
     // set char width and height
     procedure SetSize(AWidth, AHeight: Integer);
+
+    // set char undo limit (history depth), will take effect after ClearChanges
+    procedure SetUndoLimit(ALimit: Integer);
 
     // изменение размеров холста символа
     procedure ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
@@ -438,6 +442,7 @@ function TMatrixChar.GenerateCode(
 // очистить историю изменений
 procedure TMatrixChar.ClearChanges;
   begin
+    FHistory.Depth := FUndoLimit;
     FHistory.Clear;
     SaveChange;
   end;
@@ -559,6 +564,12 @@ procedure TMatrixChar.SetSize(AWidth, AHeight: Integer);
     FBitmap.SetSize(FWidth, FHeight);
   end;
 
+// set char undo limit (history depth), will take effect after ClearChanges
+procedure TMatrixChar.SetUndoLimit(ALimit: Integer);
+  begin
+    FUndoLimit := ALimit;
+  end;
+
 // изменение размеров холста символа
 procedure TMatrixChar.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
   var
@@ -664,9 +675,10 @@ constructor TMatrixChar.Create;
     FHeight := 1;
     FWidth  := 1;
 
-    FBitmap  := TBGRABitmap.Create(FWidth, FHeight);
-    FCanvas  := FBitmap.CanvasBGRA;
-    FHistory := TBGRABitmapHistory.Create(FBitmap);
+    FBitmap    := TBGRABitmap.Create(FWidth, FHeight);
+    FCanvas    := FBitmap.CanvasBGRA;
+    FHistory   := TBGRABitmapHistory.Create(FBitmap);
+    FUndoLimit := 0;
 
     Clear;
     SaveChange;

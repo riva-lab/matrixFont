@@ -1453,8 +1453,6 @@ procedure TfmMain.FontActionExecute;
 // завершение создания шрифта
 procedure TfmMain.FontCreateFinish;
   begin
-    mxFont.ClearChanges;
-
     sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
 
     acZoomFit.Execute;
@@ -1463,6 +1461,9 @@ procedure TfmMain.FontCreateFinish;
     file_changed := False;
     FileStatusUpdate;
     SettingsApplyToCurrentSession;
+
+    mxFont.SetUndoLimit(cfg.editor.undolimit + 1);
+    mxFont.ClearChanges;
   end;
 
 // действия после применения изменений к символу

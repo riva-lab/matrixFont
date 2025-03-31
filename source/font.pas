@@ -79,6 +79,7 @@ type
 
     FWidth:     Integer;    // ширина символа в пикселях
     FHeight:    Integer;    // высота символа в пикселях
+    FUndoLimit: Integer;    // undo limit (history depth)
     FPasteMode: TPasteMode; // режим вставки
 
     // поля настройки знакогенератора
@@ -155,6 +156,9 @@ type
 
     // set char width and height
     procedure SetSize(AWidth, AHeight: Integer);
+
+    // set char undo limit (history depth), will take effect after ClearChanges
+    procedure SetUndoLimit(ALimit: Integer);
 
     // изменение размеров холста символов шрифта
     // при обрезке: если значение < 0, то применяем оптимизацию
@@ -672,7 +676,10 @@ procedure TMatrixFont.ClearChanges;
     i: Integer;
   begin
     for i := 1 to FFontLength do
+      begin
+      FCharArray[i - 1].SetUndoLimit(FUndoLimit);
       FCharArray[i - 1].ClearChanges;
+      end;
   end;
 
 // отменить одну правку с конца истории
@@ -1217,6 +1224,12 @@ procedure TMatrixFont.SetSize(AWidth, AHeight: Integer);
     if AWidth > 0 then  FWidth  := AWidth;
     if AHeight > 0 then FHeight := AHeight;
     for mxChar in FCharArray do mxChar.SetSize(FWidth, FHeight);
+  end;
+
+// set char undo limit (history depth), will take effect after ClearChanges
+procedure TMatrixFont.SetUndoLimit(ALimit: Integer);
+  begin
+    FUndoLimit := ALimit;
   end;
 
 // изменение размеров холста символов шрифта

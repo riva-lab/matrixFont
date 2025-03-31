@@ -81,6 +81,7 @@ type
     gbStickingScheme:   TGroupBox;
     lbAuthor:           TLabel;
     lbBWTreshold:       TLabel;
+    lbCharUndoLimit:    TLabel;
     lbColor:            TLabel;
     lbColorBG:          TLabel;
     lbColorEditor:      TLabel;
@@ -201,6 +202,7 @@ type
     seBWTreshold:       TSpinEdit;
     seCharNameFontSize: TSpinEdit;
     seCodeNameFontSize: TSpinEdit;
+    seCharUndoLimit:    TSpinEdit;
     seFontScale:        TSpinEdit;
     seIconsScale:       TSpinEdit;
     seMapExportScale:   TSpinEdit;
@@ -407,6 +409,8 @@ procedure TfmSettings.InitConfig;
     Settings.Add(cbLastFileAtStart, @cfg.app.loadlast);
 
     Settings.Add(seBWTreshold, @cfg.import.bwlevel);
+
+    Settings.Add(seCharUndoLimit, @cfg.editor.undolimit);
 
     Settings.Add(rbOpenMapSngClick, @cfg.map.sclick);
     Settings.Add(rbOpenMapDblClick, @cfg.map.dclick);
