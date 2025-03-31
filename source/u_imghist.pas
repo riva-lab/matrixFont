@@ -43,6 +43,7 @@ type
     procedure ReadFromStream;
 
     function IsInvalidParameters: Boolean;
+    procedure SetDepth(AValue: Integer);
 
   public
     procedure SetWorkBitmap(ABitmap: TBGRABitmap);
@@ -59,7 +60,7 @@ type
     constructor Create(AWorkBitmap: TBGRABitmap);
     destructor Destroy; override;
 
-    property Depth: Integer read FDepth write FDepth;
+    property Depth: Integer read FDepth write SetDepth;
 
   const
     DefaultDepth = 100;
@@ -141,6 +142,13 @@ function TBGRABitmapHistory.IsInvalidParameters: Boolean;
   begin
     Result := not Assigned(FBGRABmp);
     Result := Result or (FBlockSize <= 1);
+  end;
+
+procedure TBGRABitmapHistory.SetDepth(AValue: Integer);
+  begin
+    if FDepth = AValue then Exit;
+    if AValue <= 0 then AValue := DefaultDepth;
+    FDepth := AValue;
   end;
 
 procedure TBGRABitmapHistory.SetWorkBitmap(ABitmap: TBGRABitmap);
