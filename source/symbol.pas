@@ -674,8 +674,8 @@ constructor TMatrixChar.Create;
 
 destructor TMatrixChar.Destroy;
   begin
-    FreeAndNil(FBitmap);
     FreeAndNil(FHistory);
+    FreeAndNil(FBitmap);
     inherited;
   end;
 
