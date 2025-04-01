@@ -979,12 +979,16 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
         mxFont.Paste(FPasteMode);
 
 
-      'acSymbolMoveUp':   // действие: переместить символ вверх
-        if mxFont.SwapChars(curr, curr - 1) then
+      'acSymbolMoveUp':   // действие: переместить символ/диапазон вверх
+        if acFontRangeMove.Checked then
+          mxFont.MoveChars(curr, cmmBottomRangeUp)
+        else if mxFont.MoveChars(curr, cmmSingleUp) then
           sgNavigator.Row := sgNavigator.FixedRows + curr - 1;
 
-      'acSymbolMoveDown': // действие: переместить символ вниз
-        if mxFont.SwapChars(curr, curr + 1) then
+      'acSymbolMoveDown': // действие: переместить символ/диапазон вниз
+        if acFontRangeMove.Checked then
+          mxFont.MoveChars(curr, cmmBottomRangeDown)
+        else if mxFont.MoveChars(curr, cmmSingleDown) then
           sgNavigator.Row := sgNavigator.FixedRows + curr + 1;
       end;
 

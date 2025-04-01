@@ -790,6 +790,16 @@ msgstr ""
 msgid "Просмотр свойств шрифта"
 msgstr ""
 
+#: tfmmain.acfontrangemove.caption
+msgid "Перемещать весь нижний поддиапазон"
+msgstr ""
+
+#: tfmmain.acfontrangemove.hint
+msgid ""
+"Если включено, то будут циклически перемещаться все символы\n"
+"в поддиапазоне ниже от выделенного символа"
+msgstr ""
+
 #: tfmmain.acfontredo.caption
 msgctxt "tfmmain.acfontredo.caption"
 msgid "Повторить"
@@ -1000,6 +1010,10 @@ msgstr ""
 
 #: tfmmain.acmenufontmirror.caption
 msgid "Отобразить символы"
+msgstr ""
+
+#: tfmmain.acmenufontmove.caption
+msgid "Переместить символы"
 msgstr ""
 
 #: tfmmain.acmenufontrotate.caption
@@ -1234,7 +1248,7 @@ msgid "Переместить вниз"
 msgstr ""
 
 #: tfmmain.acsymbolmovedown.hint
-msgid "Обменять местами текущий символ и следующий за ним"
+msgid "Переместить символ вниз"
 msgstr ""
 
 #: tfmmain.acsymbolmoveup.caption
@@ -1242,7 +1256,7 @@ msgid "Переместить вверх"
 msgstr ""
 
 #: tfmmain.acsymbolmoveup.hint
-msgid "Обменять местами текущий символ и предыдущий"
+msgid "Переместить символ вверх"
 msgstr ""
 
 #: tfmmain.acsymbolpaste.caption

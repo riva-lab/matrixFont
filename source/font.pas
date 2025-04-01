@@ -29,6 +29,7 @@ type
   TClipboardAction = symbol.TClipboardAction;
   TPasteMode       = symbol.TPasteMode;
   TImportMode      = (imOwn, imAdafruit, imLCDVision, imCustom);
+  TCharMoveMode    = (cmmSingleDown, cmmSingleUp, cmmBottomRangeDown, cmmBottomRangeUp);
 
   TFileRHFHeader = record
     AppVersion: String[16];
@@ -100,6 +101,9 @@ type
     procedure SetFontLength(AValue: Integer);
     procedure SetFontStartItem(AValue: Integer);
 
+    // обменять местами символы в таблице
+    function SwapChars(AIndex1, AIndex2: Integer): Boolean;
+
   public
 
     // очистить все символы шрифта
@@ -123,8 +127,8 @@ type
     // поворот всех символов шрифта
     procedure Rotate(AClockWise: Boolean);
 
-    // обменять местами символы в таблице
-    function SwapChars(AIndex1, AIndex2: Integer): Boolean;
+    // move chars in a font (swapping)
+    function MoveChars(AIndex: Integer; ACharMoveMode: TCharMoveMode): Boolean;
 
     // генерировать код шрифта
     function GenerateCode(StartChar: Integer = 0; EndChar: Integer = 0): String;
@@ -401,6 +405,30 @@ function TMatrixFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
     FCharArray[AIndex1] := tmpMatrixChar;
 
     Result := True;
+  end;
+
+// move chars in a font (swapping)
+function TMatrixFont.MoveChars(AIndex: Integer; ACharMoveMode: TCharMoveMode): Boolean;
+  var
+    i: Integer;
+  begin
+    Result := False;
+    case ACharMoveMode of
+
+      cmmSingleDown:
+        Result := SwapChars(AIndex, AIndex + 1);
+
+      cmmSingleUp:
+        Result := SwapChars(AIndex, AIndex - 1);
+
+      cmmBottomRangeDown:
+        for i := FFontLength - 2 downto AIndex do
+          Result := SwapChars(i + 1, i) or Result;
+
+      cmmBottomRangeUp:
+        for i := AIndex to FFontLength - 2 do
+          Result := SwapChars(i, i + 1) or Result;
+      end;
   end;
 
 // генерировать код шрифта

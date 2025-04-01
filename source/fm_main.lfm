@@ -93,8 +93,8 @@ object fmMain: TfmMain
         TabOrder = 0
         object pFontTools: TPanel
           Left = 2
-          Height = 402
-          Top = 60
+          Height = 438
+          Top = 42
           Width = 91
           AutoSize = True
           BevelOuter = bvNone
@@ -102,7 +102,7 @@ object fmMain: TfmMain
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 402
+          ClientHeight = 438
           ClientWidth = 91
           ParentBackground = False
           TabOrder = 0
@@ -602,6 +602,45 @@ object fmMain: TfmMain
               Action = acFontCenterV
             end
           end
+          object Bevel7: TBevel
+            Left = 0
+            Height = 2
+            Top = 404
+            Width = 91
+            Constraints.MaxHeight = 2
+            Shape = bsTopLine
+          end
+          object tbCharTools13: TToolBar
+            Left = 0
+            Height = 30
+            Top = 408
+            Width = 91
+            Align = alNone
+            AutoSize = True
+            BorderSpacing.CellAlignHorizontal = ccaCenter
+            ButtonHeight = 30
+            ButtonWidth = 30
+            DisabledImages = ImListNew16D
+            EdgeBorders = []
+            Images = ImListNew16A
+            TabOrder = 8
+            Transparent = True
+            object ToolButton118: TToolButton
+              Left = 31
+              Top = 0
+              Action = acSymbolMoveUp
+            end
+            object ToolButton119: TToolButton
+              Left = 61
+              Top = 0
+              Action = acSymbolMoveDown
+            end
+            object ToolButton2: TToolButton
+              Left = 1
+              Top = 0
+              Action = acFontRangeMove
+            end
+          end
         end
       end
       object sgNavigator: TStringGrid
@@ -905,8 +944,8 @@ object fmMain: TfmMain
         TabOrder = 1
         object pCharTools: TPanel
           Left = 2
-          Height = 438
-          Top = 42
+          Height = 402
+          Top = 60
           Width = 91
           AutoSize = True
           BevelOuter = bvNone
@@ -914,7 +953,7 @@ object fmMain: TfmMain
           ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 438
+          ClientHeight = 402
           ClientWidth = 91
           ParentBackground = False
           TabOrder = 0
@@ -1110,7 +1149,7 @@ object fmMain: TfmMain
             ClientHeight = 90
             ClientWidth = 91
             ParentBackground = False
-            TabOrder = 7
+            TabOrder = 6
             object tbCharTools6: TToolBar
               Left = 0
               Height = 30
@@ -1251,7 +1290,7 @@ object fmMain: TfmMain
             ClientHeight = 90
             ClientWidth = 91
             ParentBackground = False
-            TabOrder = 8
+            TabOrder = 7
             object tbCharTools9: TToolBar
               Left = 0
               Height = 30
@@ -1412,40 +1451,6 @@ object fmMain: TfmMain
               Left = 31
               Top = 0
               Action = acSymbolCenterV
-            end
-          end
-          object Bevel7: TBevel
-            Left = 0
-            Height = 2
-            Top = 404
-            Width = 91
-            Constraints.MaxHeight = 2
-            Shape = bsTopLine
-          end
-          object tbCharTools13: TToolBar
-            Left = 15
-            Height = 30
-            Top = 408
-            Width = 61
-            Align = alNone
-            AutoSize = True
-            BorderSpacing.CellAlignHorizontal = ccaCenter
-            ButtonHeight = 30
-            ButtonWidth = 30
-            DisabledImages = ImListNew16D
-            EdgeBorders = []
-            Images = ImListNew16A
-            TabOrder = 6
-            Transparent = True
-            object ToolButton118: TToolButton
-              Left = 1
-              Top = 0
-              Action = acSymbolMoveUp
-            end
-            object ToolButton119: TToolButton
-              Left = 31
-              Top = 0
-              Action = acSymbolMoveDown
             end
           end
         end
@@ -1877,15 +1882,6 @@ object fmMain: TfmMain
           Action = acSymbolSnapDown
         end
       end
-      object MenuItem69: TMenuItem
-        Caption = '-'
-      end
-      object MenuItem111: TMenuItem
-        Action = acSymbolMoveUp
-      end
-      object MenuItem110: TMenuItem
-        Action = acSymbolMoveDown
-      end
       object MenuItem109: TMenuItem
         Caption = '-'
       end
@@ -1975,6 +1971,22 @@ object fmMain: TfmMain
         end
         object MenuItem53: TMenuItem
           Action = acFontSnapDown
+        end
+      end
+      object MenuItem132: TMenuItem
+        Action = acMenuFontMove
+        object MenuItem111: TMenuItem
+          Action = acSymbolMoveUp
+        end
+        object MenuItem110: TMenuItem
+          Action = acSymbolMoveDown
+        end
+        object MenuItem69: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem133: TMenuItem
+          Action = acFontRangeMove
+          AutoCheck = True
         end
       end
       object MenuItem70: TMenuItem
@@ -2548,21 +2560,34 @@ object fmMain: TfmMain
       OnExecute = actionSymbolGeneral
       ShortCut = 32841
     end
-    object acSymbolMoveDown: TAction
-      Category = 'Символ'
-      Caption = 'Переместить вниз'
-      Hint = 'Обменять местами текущий символ и следующий за ним'
-      ImageIndex = 61
-      OnExecute = actionFontGeneral
-      ShortCut = 16574
+    object acMenuFontMove: TAction
+      Category = 'Шрифт - Перемещение символов'
+      Caption = 'Переместить символы'
+      DisableIfNoHandler = False
+    end
+    object acFontRangeMove: TAction
+      Category = 'Шрифт - Перемещение символов'
+      AutoCheck = True
+      Caption = 'Перемещать весь нижний поддиапазон'
+      DisableIfNoHandler = False
+      Hint = 'Если включено, то будут циклически перемещаться все символы'#13#10'в поддиапазоне ниже от выделенного символа'
+      ImageIndex = 68
     end
     object acSymbolMoveUp: TAction
-      Category = 'Символ'
+      Category = 'Шрифт - Перемещение символов'
       Caption = 'Переместить вверх'
-      Hint = 'Обменять местами текущий символ и предыдущий'
+      Hint = 'Переместить символ вверх'
       ImageIndex = 60
       OnExecute = actionFontGeneral
       ShortCut = 16572
+    end
+    object acSymbolMoveDown: TAction
+      Category = 'Шрифт - Перемещение символов'
+      Caption = 'Переместить вниз'
+      Hint = 'Переместить символ вниз'
+      ImageIndex = 61
+      OnExecute = actionFontGeneral
+      ShortCut = 16574
     end
     object acNewFont: TAction
       Category = 'Файл'
@@ -2918,6 +2943,7 @@ object fmMain: TfmMain
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><circle cx="5" cy="3.5" r="1.5"/><circle cx="11.5" cy="4.5" r="1.5"/><circle cx="5" cy="12.5" r="1.5"/><path d="m5 5v6"/><path d="m5 10.271c1.2728-2.2684 4.1081-1.8554 5.7181-4.4913"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><circle cx="5" cy="3.5" r="1.5"/><circle cx="11.5" cy="4.5" r="1.5"/><circle cx="5" cy="12.5" r="1.5"/><path d="m5 5v6"/><path d="m5 10.271c1.2728-2.2684 4.1081-1.8554 5.7181-4.4913"/></g></svg>'
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m13.561 4-1 4-3.4334-2.4752"/><path transform="scale(-1,1)" d="m-12.558 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m13.561 4-1 4-3.4334-2.4752"/><path transform="scale(-1,1)" d="m-12.558 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g></svg>'
       '<?xml version="1.0" encoding="UTF-8"?><svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"><path d="m2.5613 4 1 4 3.4334-2.4752"/><path d="m3.5638 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g><g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><path d="m2.5613 4 1 4 3.4334-2.4752"/><path d="m3.5638 7.8425a5 5 0 0 1 3.9512-4.7318 5 5 0 0 1 5.5417 2.7004 5 5 0 0 1-1.2918 6.0278 5 5 0 0 1-6.1616 0.19231"/></g></svg>'
+      '<?xml version="1.0" encoding="UTF-8"?> <svg width="14mm" height="14mm" version="1.1" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"> <g transform="translate(-1 -1)" fill="none" stroke="#49d095" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"> <path d="m14 12-2 2-2-2"/> <path d="m12 14v-12"/> <path d="m8 13h-6"/> <path d="m8 9.6667h-6"/> <path d="m8 6.3333h-6"/> <path d="m8 3h-6"/> </g> <g transform="translate(-1 -1)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"> <path d="m14 12-2 2-2-2"/> <path d="m12 14v-12"/> <path d="m8 13h-6"/> <path d="m8 9.6667h-6"/> <path d="m8 6.3333h-6"/> <path d="m8 3h-6"/> </g> </svg> '
     )
     List.SVGNames = (
       'new-file'
@@ -2988,6 +3014,7 @@ object fmMain: TfmMain
       'git-branch'
       'rotate-cw'
       'rotate-cсw'
+      'range-down'
     )
     Left = 275
     Top = 194

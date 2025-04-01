@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-03-31 23:11+0300\n"
+"PO-Revision-Date: 2025-04-01 17:49+0300\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -817,6 +817,18 @@ msgstr "Font properties ..."
 msgid "Просмотр свойств шрифта"
 msgstr "View font properties"
 
+#: tfmmain.acfontrangemove.caption
+msgid "Перемещать весь нижний поддиапазон"
+msgstr "Move whole lower subrange"
+
+#: tfmmain.acfontrangemove.hint
+msgid ""
+"Если включено, то будут циклически перемещаться все символы\n"
+"в поддиапазоне ниже от выделенного символа"
+msgstr ""
+"If enabled then all chars in range\n"
+"below selected char will be moving"
+
 #: tfmmain.acfontredo.caption
 msgctxt "TFMMAIN.ACFONTREDO.CAPTION"
 msgid "Повторить"
@@ -1034,6 +1046,10 @@ msgstr "Center chars"
 #: tfmmain.acmenufontmirror.caption
 msgid "Отобразить символы"
 msgstr "Mirror chars"
+
+#: tfmmain.acmenufontmove.caption
+msgid "Переместить символы"
+msgstr "Move chars"
 
 #: tfmmain.acmenufontrotate.caption
 msgid "Повернуть символы"
@@ -1268,16 +1284,16 @@ msgid "Переместить вниз"
 msgstr "Move down"
 
 #: tfmmain.acsymbolmovedown.hint
-msgid "Обменять местами текущий символ и следующий за ним"
-msgstr "Swap current char and one after it"
+msgid "Переместить символ вниз"
+msgstr "Move char up"
 
 #: tfmmain.acsymbolmoveup.caption
 msgid "Переместить вверх"
 msgstr "Move up"
 
 #: tfmmain.acsymbolmoveup.hint
-msgid "Обменять местами текущий символ и предыдущий"
-msgstr "Swap current char and one before it"
+msgid "Переместить символ вверх"
+msgstr "Move char down"
 
 #: tfmmain.acsymbolpaste.caption
 msgid "Вставить"
