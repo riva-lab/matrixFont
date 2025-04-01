@@ -484,6 +484,10 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     margin: 0.8em auto 1em auto;
+    overflow: auto;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    display: block;
 }
 
 table th {
