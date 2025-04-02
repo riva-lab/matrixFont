@@ -1632,6 +1632,59 @@ object fmMain: TfmMain
       end
     end
   end
+  object pAppUpdate: TPanel
+    AnchorSideLeft.Control = psSplit
+    AnchorSideTop.Control = psSplit
+    AnchorSideRight.Control = psSplit
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 40
+    Top = 43
+    Width = 750
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 10
+    ChildSizing.TopBottomSpacing = 5
+    ChildSizing.HorizontalSpacing = 10
+    ClientHeight = 40
+    ClientWidth = 750
+    ParentColor = False
+    TabOrder = 3
+    Visible = False
+    object lbAppUpdate: TLabel
+      Left = 10
+      Height = 30
+      Top = 5
+      Width = 470
+      Align = alClient
+      Caption = 'Доступна новая версия приложения. Обновить?'
+      Layout = tlCenter
+      ParentColor = False
+    end
+    object btnUpdateGo: TButton
+      Left = 490
+      Height = 30
+      Top = 5
+      Width = 120
+      Action = acUpdateGo
+      Align = alRight
+      AutoSize = True
+      Constraints.MinWidth = 120
+      TabOrder = 1
+    end
+    object btnUpdateCancel: TButton
+      Left = 620
+      Height = 30
+      Top = 5
+      Width = 120
+      Action = acUpdateCancel
+      Align = alRight
+      AutoSize = True
+      Constraints.MinWidth = 120
+      TabOrder = 0
+    end
+  end
   object MainMenu1: TMainMenu
     Images = ImListNew16A
     Left = 388
@@ -2018,6 +2071,9 @@ object fmMain: TfmMain
       end
       object MenuItem113: TMenuItem
         Action = acOpenRepo
+      end
+      object MenuItem134: TMenuItem
+        Action = acAppUpdate
       end
       object Separator2: TMenuItem
         Caption = '-'
@@ -2499,6 +2555,23 @@ object fmMain: TfmMain
       Caption = 'Справка в сети'
       Hint = 'Открыть руководство пользователя в репозитории (онлайн)'
       ImageIndex = 54
+      OnExecute = actionService
+    end
+    object acAppUpdate: TAction
+      Category = 'Обновление'
+      Caption = 'Обновление ...'
+      Hint = 'Поиск и скачивание обновлений'
+      ImageIndex = 42
+      OnExecute = actionService
+    end
+    object acUpdateGo: TAction
+      Category = 'Обновление'
+      Caption = 'Обновить'
+      OnExecute = actionService
+    end
+    object acUpdateCancel: TAction
+      Category = 'Обновление'
+      Caption = 'Не сейчас'
       OnExecute = actionService
     end
     object acWebsite: TAction

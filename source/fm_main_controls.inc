@@ -1,4 +1,5 @@
 acAppExit:             TAction;
+acAppUpdate:           TAction;
 acDeleteLastFilesList: TAction;
 acFontCenterH:         TAction;
 acFontCenterV:         TAction;
@@ -95,6 +96,8 @@ acSymbolSnapRight:     TAction;
 acSymbolSnapUp:        TAction;
 acSymbolUndo:          TAction;
 ActionList1:           TActionList;
+acUpdateGo:            TAction;
+acUpdateCancel:        TAction;
 acViewNavigator:       TAction;
 acViewTBCharTools:     TAction;
 acViewTBFile:          TAction;
@@ -122,6 +125,9 @@ Bevel7:  TBevel;
 Bevel8:  TBevel;
 Bevel9:  TBevel;
 
+btnUpdateCancel:   TButton;
+btnUpdateGo:       TButton;
+
 dlgImport:      TOpenDialog;
 dlgOpen:        TOpenDialog;
 
@@ -136,6 +142,7 @@ ImListNew16D: TImageList;
 ImListNew32A: TImageList;
 imSVGList:    TImageSVGList;
 
+lbAppUpdate:  TLabel;
 lbEditFind:   TLabel;
 lbEditor:     TLabel;
 lbNavigator:  TLabel;
@@ -182,6 +189,7 @@ MenuItem130: TMenuItem;
 MenuItem131: TMenuItem;
 MenuItem132: TMenuItem;
 MenuItem133: TMenuItem;
+MenuItem134: TMenuItem;
 MenuItem14:  TMenuItem;
 MenuItem15:  TMenuItem;
 MenuItem16:  TMenuItem;
@@ -284,6 +292,7 @@ Separator3:  TMenuItem;
 Separator4:  TMenuItem; 
 Separator5:  TMenuItem;
 
+pAppUpdate:      TPanel;
 pFindBox:        TPanel;
 pEditor:         TPanel;
 pCharToolsBox:   TPanel;

@@ -64,7 +64,8 @@ HTML: [English](readme.en.html) | [**Русский**](readme.html)
 
 - а также:
   
-  - подробная справка.
+  - подробная справка,
+  - поддержка онлайн-обновления.
 
 ## Компиляция
 
@@ -92,6 +93,14 @@ HTML: [English](readme.en.html) | [**Русский**](readme.html)
 Руководство пользователя на русском — [help/matrixFont-help.md](help/matrixFont-help.md).
 
 Ознакомительная статья по теме шрифтов и приложении — [Шрифты для графического дисплея? Это же очень просто](article/mf-article.md).
+
+## Интернет и обновление
+
+**matrixFont** использует доступ к сети Интернет исключительно для проверки обновлений. Обновление запрашивается только с сервера gitlab.com. Приложение не требует доступ к сети для нормальной работы. Если сеть не доступна, **matrixFont** просто не сможет проверить наличие обновлений.
+
+> **Обратите внимание.**
+> 
+> Если **matrixFont** был установлен для всех пользователей (естественно, с использованием прав администратора), то при обычном запуске от имени пользователя обновить его не удастся из-за отсутствия у пользователя разрешения на изменение файлов. В таком случае, когда **matrixFont** предложит обновиться, закройте его, запустите заново от имени администратора и обновите.
 
 ## Ответственность
 
@@ -122,5 +131,6 @@ Copyright 2015-2025 Riva, [FreeBSD License, modified](license.md). Истори�
 - [BGRABitmap](https://bgrabitmap.github.io/) — a package designed to modify and create images with transparency.
 - [BGRA Controls](https://bgrabitmap.github.io/bgracontrols/) — a set of graphical UI elements. Author: Lainz.
 - [ImageSVGListDsgn](https://gitlab.com/riva-lab/ImageSVGListDsgn) — a list of SVG images instead of regular bitmaps. Copyright (c) 2023 Riva.
-- [OnlineUpdater](https://gitlab.com/riva-lab/OnlineUpdater) — package for updating application from online repository. Copyright (c) 2023 Riva.
 - [AppFeaturesPkg](https://gitlab.com/riva-lab/AppFeaturesPkg) — package for customizing GUI applications and implementing standard application functionality. Copyright (c) 2024 Riva.
+- [OnlineUpdater](https://gitlab.com/riva-lab/OnlineUpdater) — package for updating application from online repository. Copyright (c) 2023 Riva.
+- [OpenSSL DLLs v1.1.1w](https://www.openssl.org/): [License](bin/openssl-license.txt) — toolkit for general-purpose cryptography and secure communication. Copyright (c) 1998-2023 The OpenSSL Project Authors. Copyright (c) 1995-1998 Eric A. Young, Tim J. Hudson.

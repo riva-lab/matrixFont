@@ -57,6 +57,12 @@ type
       rollover:  Boolean;
       loadlast:  Boolean;
       lastfiles: array[0..LAST_FILES_LIST_SIZE - 1] of String;
+
+      update: record
+        wayIndex:  Integer;
+        freqIndex: Integer;
+        lastTime:  Int64;
+        end;
       end;
 
     gen: record

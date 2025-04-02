@@ -84,7 +84,7 @@ object fmSettings: TfmSettings
         Constraints.MinHeight = 20
         TabOrder = 2
       end
-      object pTitle9: TPanel
+      object pTitle27: TPanel
         Left = 10
         Height = 24
         Top = 100
@@ -98,6 +98,112 @@ object fmSettings: TfmSettings
         ParentBackground = False
         ParentColor = False
         TabOrder = 3
+        object lbAppUpdate: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 90
+          BorderSpacing.Around = 2
+          Caption = 'Обновление'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+      end
+      object pValues42: TPanel
+        Left = 10
+        Height = 55
+        Top = 132
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        ChildSizing.HorizontalSpacing = 10
+        ChildSizing.VerticalSpacing = 5
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        ClientHeight = 55
+        ClientWidth = 661
+        TabOrder = 4
+        object lbAppUpdateFreq1: TLabel
+          Left = 2
+          Height = 20
+          Top = 2
+          Width = 324
+          BorderSpacing.Around = 2
+          Caption = 'Способ установки:'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object lbAppUpdateFreq: TLabel
+          Left = 336
+          Height = 20
+          Top = 2
+          Width = 323
+          BorderSpacing.Around = 2
+          Caption = 'Частота проверки:'
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object cbAppUpdateWay: TComboBox
+          Left = 2
+          Height = 28
+          Top = 27
+          Width = 324
+          ItemHeight = 20
+          ItemIndex = 1
+          Items.Strings = (
+            'auto'
+            'check only'
+            'manual'
+          )
+          Style = csDropDownList
+          TabOrder = 0
+          Text = 'check only'
+        end
+        object cbAppUpdateFreq: TComboBox
+          Left = 336
+          Height = 28
+          Top = 27
+          Width = 323
+          ItemHeight = 20
+          ItemIndex = 3
+          Items.Strings = (
+            'at startup'
+            'daily'
+            'weekly'
+            'monthly'
+            'quarterly'
+          )
+          Style = csDropDownList
+          TabOrder = 1
+          Text = 'monthly'
+        end
+      end
+      object pSpacer7: TPanel
+        Left = 10
+        Height = 20
+        Top = 192
+        Width = 661
+        AutoSize = True
+        BevelOuter = bvNone
+        Constraints.MinHeight = 20
+        TabOrder = 5
+      end
+      object pTitle9: TPanel
+        Left = 10
+        Height = 24
+        Top = 217
+        Width = 661
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        BevelOuter = bvNone
+        ClientHeight = 24
+        ClientWidth = 661
+        Color = cl3DLight
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 6
         object lbInterface: TLabel
           Left = 2
           Height = 20
@@ -113,7 +219,7 @@ object fmSettings: TfmSettings
       object pValues3: TPanel
         Left = 10
         Height = 94
-        Top = 132
+        Top = 249
         Width = 661
         AutoSize = True
         BevelOuter = bvNone
@@ -123,7 +229,7 @@ object fmSettings: TfmSettings
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 94
         ClientWidth = 661
-        TabOrder = 4
+        TabOrder = 7
         object cbTheme: TComboBox
           Left = 0
           Height = 28

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-04-01 17:49+0300\n"
+"PO-Revision-Date: 2025-04-02 16:16+0300\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -682,6 +682,14 @@ msgstr "Exit"
 #: tfmmain.acappexit.hint
 msgid "Завершить работу приложения"
 msgstr "Finish work and exit from application"
+
+#: tfmmain.acappupdate.caption
+msgid "Обновление ..."
+msgstr "Update ..."
+
+#: tfmmain.acappupdate.hint
+msgid "Поиск и скачивание обновлений"
+msgstr "Searching for and downloading updates"
 
 #: tfmmain.acdeletelastfileslist.caption
 msgid "Очистить список"
@@ -1411,6 +1419,15 @@ msgstr "Undo"
 msgid "Отменить последнюю операцию над символом"
 msgstr "Undo last operation with char"
 
+#: tfmmain.acupdatecancel.caption
+msgid "Не сейчас"
+msgstr "Later"
+
+#: tfmmain.acupdatego.caption
+msgctxt "tfmmain.acupdatego.caption"
+msgid "Обновить"
+msgstr "Update"
+
 #: tfmmain.acviewnavigator.caption
 msgctxt "tfmmain.acviewnavigator.caption"
 msgid "Навигатор"
@@ -1480,6 +1497,10 @@ msgstr "Import image"
 #: tfmmain.dlgopen.title
 msgid "Открыть файл шрифта"
 msgstr "Open font file"
+
+#: tfmmain.lbappupdate.caption
+msgid "Доступна новая версия приложения. Обновить?"
+msgstr "A new version of application is available. Update?"
 
 #: tfmmain.lbeditfind.caption
 msgctxt "tfmmain.lbeditfind.caption"
@@ -1938,6 +1959,19 @@ msgstr "Window sticking is calculated relative to the main window"
 msgid "Схема прилипания окон"
 msgstr "Window sticking scheme"
 
+#: tfmsettings.lbappupdate.caption
+msgctxt "tfmsettings.lbappupdate.caption"
+msgid "Обновление"
+msgstr "Update"
+
+#: tfmsettings.lbappupdatefreq.caption
+msgid "Частота проверки:"
+msgstr "Check frequency:"
+
+#: tfmsettings.lbappupdatefreq1.caption
+msgid "Способ установки:"
+msgstr "Install way:"
+
 #: tfmsettings.lbauthor.caption
 msgctxt "TFMSETTINGS.LBAUTHOR.CAPTION"
 msgid "Автор"
@@ -2292,6 +2326,24 @@ msgstr "Reset"
 msgid "Сброс значений"
 msgstr "Reset values"
 
+#: tfmupdate.btncheck.caption
+msgid "Проверить"
+msgstr "Check"
+
+#: tfmupdate.btnrestart.caption
+msgid "Перезапуск"
+msgstr "Restart"
+
+#: tfmupdate.btnupdate.caption
+msgctxt "tfmupdate.btnupdate.caption"
+msgid "Обновить"
+msgstr "Update"
+
+#: tfmupdate.caption
+msgctxt "tfmupdate.caption"
+msgid "Обновление"
+msgstr "Update"
+
 #: u_encodings.enc_1250
 msgid "1250 (ANSI - центрально-европейская)"
 msgstr "1250 (ANSI - Central Europe)"
@@ -2408,6 +2460,27 @@ msgstr "Fully"
 msgid "По окну"
 msgstr "By window"
 
+#: u_strings.txt_byte_gb
+msgid "ГБ"
+msgstr "GB"
+
+#: u_strings.txt_byte_kb
+msgid "КБ"
+msgstr "KB"
+
+#: u_strings.txt_byte_mb
+msgid "МБ"
+msgstr "MB"
+
+#: u_strings.txt_byte_short
+msgid "Б"
+msgstr "B"
+
+#: u_strings.txt_byte_size
+#, object-pascal-format
+msgid "Размер: %s"
+msgstr "Size: %s"
+
 #: u_strings.txt_confirm
 msgid "Подтверждение"
 msgstr "Confirmation"
@@ -2434,6 +2507,68 @@ msgstr "Dark"
 msgctxt "u_strings.txt_theme_light"
 msgid "Светлая"
 msgstr "Light"
+
+#: u_strings.txt_upd_atstartup
+msgid "При запуске"
+msgstr "At startup"
+
+#: u_strings.txt_upd_auto
+msgid "Автоматически"
+msgstr "Automatically"
+
+#: u_strings.txt_upd_check
+msgid "Только проверять"
+msgstr "Only check"
+
+#: u_strings.txt_upd_checking
+msgid "Поиск обновлений..."
+msgstr "Search for updates..."
+
+#: u_strings.txt_upd_dayly
+msgid "Раз в день"
+msgstr "Once a day"
+
+#: u_strings.txt_upd_downloading
+#, object-pascal-format
+msgid "Скачивание обновления, %s..."
+msgstr "Downloading update, %s..."
+
+#: u_strings.txt_upd_error
+msgid "Произошла ошибка при обновлении. Повторите попытку еще раз."
+msgstr "Error occurred during update. Please try again."
+
+#: u_strings.txt_upd_manual
+msgid "Вручную"
+msgstr "Manually"
+
+#: u_strings.txt_upd_monthly
+msgid "Раз в месяц"
+msgstr "Monthly"
+
+#: u_strings.txt_upd_newver
+#, object-pascal-format
+msgid "Доступна новая версия: v%d.%d.%d.%d (%s)"
+msgstr "New version available: v%d.%d.%d.%d (%s)"
+
+#: u_strings.txt_upd_quarter
+msgid "Раз в квартал"
+msgstr "Quarterly"
+
+#: u_strings.txt_upd_ready
+msgid "Все готово для обновления. Перезапустите приложение для завершения."
+msgstr "Everything is ready for update. Restart application to complete."
+
+#: u_strings.txt_upd_unzipping
+msgid "Распаковка..."
+msgstr "Unpacking..."
+
+#: u_strings.txt_upd_uptodate
+msgid "Приложение актуально. Обновление не требуется."
+msgstr "Application is up to date. No update is required."
+
+#: u_strings.txt_upd_weekly
+msgid "Раз в неделю"
+msgstr "Weekly"
 
 #: u_strings.txt_warning
 msgid "Предупреждение"
@@ -2500,3 +2635,12 @@ msgstr ""
 "Can not apply all settings!\n"
 "Fatal error has occurred. Restart application.\n"
 "Exit application?"
+
+#: u_strings.warn_update
+msgid ""
+"Сейчас скачивается обновление.\n"
+"Прервать и закрыть приложение?"
+msgstr ""
+"Update is downloading at the moment.\n"
+"Do you want to interrupt and quit application?"
+

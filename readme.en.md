@@ -64,7 +64,8 @@ The main usage area is software project development using graphical user interfa
 
 - and also:
   
-  - detailed user manual.
+  - detailed user manual,
+  - support for online updates.
 
 ## Сompilation
 
@@ -92,6 +93,14 @@ The translation will be added in the next release if it covers at least 2/3 (~67
 User Manual in Russian — [help/matrixFont-help.md](help/matrixFont-help.md).
 
 An introductory article on the topic of fonts and about app (Rus) — [Шрифты для графического дисплея? Это же очень просто](article/mf-article.md).
+
+## Internet and Updates
+
+**matrixFont** uses Internet access only to check for updates. An update is only requested from the gitlab.com server. The application does not require network access for normal operation. If no network is available, **matrixFont** will simply fail to check for updates.
+
+> **Note.**
+> 
+> If **matrixFont** has been installed for all users (using administrator rights, of course), it will fail to update when run normally as a user because the user does not have permission to modify files. In this case, when **matrixFont** prompts to update, close it, run it again as administrator and update.
 
 ## Liability
 
@@ -122,5 +131,6 @@ Installer icon: [icon-icons.com](https://icon-icons.com/icon/software/76005), [C
 - [BGRABitmap](https://bgrabitmap.github.io/) — a package designed to modify and create images with transparency.
 - [BGRA Controls](https://bgrabitmap.github.io/bgracontrols/) — a set of graphical UI elements. Author: Lainz.
 - [ImageSVGListDsgn](https://gitlab.com/riva-lab/ImageSVGListDsgn) — a list of SVG images instead of regular bitmaps. Copyright (c) 2023 Riva.
-- [OnlineUpdater](https://gitlab.com/riva-lab/OnlineUpdater) — package for updating application from online repository. Copyright (c) 2023 Riva.
 - [AppFeaturesPkg](https://gitlab.com/riva-lab/AppFeaturesPkg) — package for customizing GUI applications and implementing standard application functionality. Copyright (c) 2024 Riva.
+- [OnlineUpdater](https://gitlab.com/riva-lab/OnlineUpdater) — package for updating application from online repository. Copyright (c) 2023 Riva.
+- [OpenSSL DLLs v1.1.1w](https://www.openssl.org/): [License](bin/openssl-license.txt) — toolkit for general-purpose cryptography and secure communication. Copyright (c) 1998-2023 The OpenSSL Project Authors. Copyright (c) 1995-1998 Eric A. Young, Tim J. Hudson.

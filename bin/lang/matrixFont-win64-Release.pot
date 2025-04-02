@@ -660,6 +660,14 @@ msgstr ""
 msgid "Завершить работу приложения"
 msgstr ""
 
+#: tfmmain.acappupdate.caption
+msgid "Обновление ..."
+msgstr ""
+
+#: tfmmain.acappupdate.hint
+msgid "Поиск и скачивание обновлений"
+msgstr ""
+
 #: tfmmain.acdeletelastfileslist.caption
 msgid "Очистить список"
 msgstr ""
@@ -1375,6 +1383,15 @@ msgstr ""
 msgid "Отменить последнюю операцию над символом"
 msgstr ""
 
+#: tfmmain.acupdatecancel.caption
+msgid "Не сейчас"
+msgstr ""
+
+#: tfmmain.acupdatego.caption
+msgctxt "tfmmain.acupdatego.caption"
+msgid "Обновить"
+msgstr ""
+
 #: tfmmain.acviewnavigator.caption
 msgctxt "tfmmain.acviewnavigator.caption"
 msgid "Навигатор"
@@ -1440,6 +1457,10 @@ msgstr ""
 
 #: tfmmain.dlgopen.title
 msgid "Открыть файл шрифта"
+msgstr ""
+
+#: tfmmain.lbappupdate.caption
+msgid "Доступна новая версия приложения. Обновить?"
 msgstr ""
 
 #: tfmmain.lbeditfind.caption
@@ -1884,6 +1905,19 @@ msgstr ""
 msgid "Схема прилипания окон"
 msgstr ""
 
+#: tfmsettings.lbappupdate.caption
+msgctxt "tfmsettings.lbappupdate.caption"
+msgid "Обновление"
+msgstr ""
+
+#: tfmsettings.lbappupdatefreq.caption
+msgid "Частота проверки:"
+msgstr ""
+
+#: tfmsettings.lbappupdatefreq1.caption
+msgid "Способ установки:"
+msgstr ""
+
 #: tfmsettings.lbauthor.caption
 msgctxt "tfmsettings.lbauthor.caption"
 msgid "Автор"
@@ -2225,6 +2259,24 @@ msgstr ""
 msgid "Сброс значений"
 msgstr ""
 
+#: tfmupdate.btncheck.caption
+msgid "Проверить"
+msgstr ""
+
+#: tfmupdate.btnrestart.caption
+msgid "Перезапуск"
+msgstr ""
+
+#: tfmupdate.btnupdate.caption
+msgctxt "tfmupdate.btnupdate.caption"
+msgid "Обновить"
+msgstr ""
+
+#: tfmupdate.caption
+msgctxt "tfmupdate.caption"
+msgid "Обновление"
+msgstr ""
+
 #: u_encodings.enc_1250
 msgid "1250 (ANSI - центрально-европейская)"
 msgstr ""
@@ -2341,6 +2393,27 @@ msgstr ""
 msgid "По окну"
 msgstr ""
 
+#: u_strings.txt_byte_gb
+msgid "ГБ"
+msgstr ""
+
+#: u_strings.txt_byte_kb
+msgid "КБ"
+msgstr ""
+
+#: u_strings.txt_byte_mb
+msgid "МБ"
+msgstr ""
+
+#: u_strings.txt_byte_short
+msgid "Б"
+msgstr ""
+
+#: u_strings.txt_byte_size
+#, object-pascal-format
+msgid "Размер: %s"
+msgstr ""
+
 #: u_strings.txt_confirm
 msgid "Подтверждение"
 msgstr ""
@@ -2364,6 +2437,68 @@ msgstr ""
 
 #: u_strings.txt_theme_light
 msgid "Светлая"
+msgstr ""
+
+#: u_strings.txt_upd_atstartup
+msgid "При запуске"
+msgstr ""
+
+#: u_strings.txt_upd_auto
+msgid "Автоматически"
+msgstr ""
+
+#: u_strings.txt_upd_check
+msgid "Только проверять"
+msgstr ""
+
+#: u_strings.txt_upd_checking
+msgid "Поиск обновлений..."
+msgstr ""
+
+#: u_strings.txt_upd_dayly
+msgid "Раз в день"
+msgstr ""
+
+#: u_strings.txt_upd_downloading
+#, object-pascal-format
+msgid "Скачивание обновления, %s..."
+msgstr ""
+
+#: u_strings.txt_upd_error
+msgid "Произошла ошибка при обновлении. Повторите попытку еще раз."
+msgstr ""
+
+#: u_strings.txt_upd_manual
+msgid "Вручную"
+msgstr ""
+
+#: u_strings.txt_upd_monthly
+msgid "Раз в месяц"
+msgstr ""
+
+#: u_strings.txt_upd_newver
+#, object-pascal-format
+msgid "Доступна новая версия: v%d.%d.%d.%d (%s)"
+msgstr ""
+
+#: u_strings.txt_upd_quarter
+msgid "Раз в квартал"
+msgstr ""
+
+#: u_strings.txt_upd_ready
+msgid "Все готово для обновления. Перезапустите приложение для завершения."
+msgstr ""
+
+#: u_strings.txt_upd_unzipping
+msgid "Распаковка..."
+msgstr ""
+
+#: u_strings.txt_upd_uptodate
+msgid "Приложение актуально. Обновление не требуется."
+msgstr ""
+
+#: u_strings.txt_upd_weekly
+msgid "Раз в неделю"
 msgstr ""
 
 #: u_strings.txt_warning
@@ -2415,5 +2550,11 @@ msgid ""
 "Не удалось применить все настройки!\n"
 "Возникла критическая ошибка. Перезапустите приложение.\n"
 "Завершить работу приложения?"
+msgstr ""
+
+#: u_strings.warn_update
+msgid ""
+"Сейчас скачивается обновление.\n"
+"Прервать и закрыть приложение?"
 msgstr ""
 

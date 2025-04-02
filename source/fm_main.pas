@@ -13,6 +13,7 @@ uses
   // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map, fm_rbf,
+  fm_update,
 
   // functional units
   font, symbol, cOpenFileList, appAbout, u_sticking, u_map_render, u_rbf,
@@ -281,6 +282,9 @@ procedure TfmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   begin
     CanClose := GetConfirmation;
 
+    if CanClose and fmUpdate.IsDownloading then
+      CanClose := fmConfirm.Show(TXT_WARNING, WARN_UPDATE, mbYesNo, Self) = mrYes;
+
     if CanClose then
       begin
       Settings.SyncValues;
@@ -311,6 +315,9 @@ procedure TfmMain.tmrMain10msTimer(Sender: TObject);
         Settings.SyncComponents;
         syncSettings := False;
         end;
+
+      if Assigned(fmUpdate) then
+        pAppUpdate.Visible := fmUpdate.IsNotify;
       end;
 
     if cnt mod 4 = 0 then
@@ -1060,6 +1067,12 @@ procedure TfmMain.actionService(Sender: TObject);
 
       'acGridToggle':
         imBackground.Visible := acGridToggle.Checked;
+
+      'acAppUpdate', 'acUpdateGo':  // show update app form
+        fmUpdate.ShowModal;
+
+      'acUpdateCancel':             // cancel showing update app notification
+        fmUpdate.Later;
       end;
   end;
 
@@ -1661,6 +1674,7 @@ procedure TfmMain.AdjustThemeDependentValues;
 
       pFontToolsBox.Color := cl3DLight;
       pCharToolsBox.Color := cl3DLight;
+      pAppUpdate.Color    := cl3DLight;
       end;
   end;
 
@@ -1691,6 +1705,7 @@ procedure TfmMain.InitConfig;
 
     Settings.Add('_cfg.gen.fontsize', stInt, @cfg.gen.fontsize, '17');
     Settings.Add('_cfg.prev.enable', stBool, @cfg.prev.enable, '0');
+    Settings.Add('_cfg.app.update.lastTime', stInt64, @cfg.app.update.lastTime, '0');
 
     for i := 0 to LAST_FILES_LIST_SIZE - 1 do
       Settings.Add(Format('_cfg.app.lastfiles[%d]', [i]), stString, @cfg.app.lastfiles[i]);

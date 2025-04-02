@@ -26,7 +26,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="110">
+      <ExcludedIdentifiers Count="113">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -137,6 +137,9 @@
         <Item108 Value="tfmgen.cbgroupdirection.text"/>
         <Item109 Value="tfmgen.cbbitorderlsb.text"/>
         <Item110 Value="tfmimportc.btnswapwh.caption"/>
+        <Item111 Value="tfmupdate.lbsize.caption"/>
+        <Item112 Value="tfmsettings.cbappupdateway.text"/>
+        <Item113 Value="tfmsettings.cbappupdatefreq.text"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -144,8 +147,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="2"/>
-      <RevisionNr Value="4"/>
-      <BuildNr Value="92"/>
+      <RevisionNr Value="5"/>
+      <BuildNr Value="93"/>
       <Language Value="0419"/>
       <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2025" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -307,7 +310,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="30">
+    <Units Count="31">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -475,6 +478,13 @@
         <Filename Value="u_imghist.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit29>
+      <Unit30>
+        <Filename Value="fm_update.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fmUpdate"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit30>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

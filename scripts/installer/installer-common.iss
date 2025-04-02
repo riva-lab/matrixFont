@@ -109,6 +109,7 @@ Name: "{app}\bin\lang"; Permissions: users-modify
 
 ; Application files
 Source: "{#appPath}\bin\{#appExeName}";         DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "{#appPath}\bin\openssl-license.txt";   DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "settings.ini";                         DestDir: "{app}\bin"; Flags: ignoreversion; Permissions: users-modify
 
 ; Localization files

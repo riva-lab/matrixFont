@@ -1,0 +1,116 @@
+object fmUpdate: TfmUpdate
+  Left = 362
+  Height = 300
+  Top = 143
+  Width = 500
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  Caption = 'Обновление'
+  ChildSizing.LeftRightSpacing = 10
+  ChildSizing.TopBottomSpacing = 10
+  ChildSizing.HorizontalSpacing = 10
+  ChildSizing.VerticalSpacing = 10
+  ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+  ClientHeight = 300
+  ClientWidth = 500
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 500
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  ShowInTaskBar = stNever
+  LCLVersion = '3.0.0.3'
+  object mmLog: TMemo
+    Left = 10
+    Height = 240
+    Top = 10
+    Width = 480
+    Align = alClient
+    BorderStyle = bsNone
+    Lines.Strings = (
+      'mmLog'
+    )
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+  end
+  object pCtrl: TPanel
+    Left = 10
+    Height = 30
+    Top = 260
+    Width = 480
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ChildSizing.HorizontalSpacing = 10
+    ClientHeight = 30
+    ClientWidth = 480
+    TabOrder = 1
+    object pbBar: TProgressBar
+      Left = 0
+      Height = 28
+      Top = 1
+      Width = 39
+      Align = alClient
+      BorderSpacing.Top = 1
+      BorderSpacing.Bottom = 1
+      TabOrder = 0
+    end
+    object btnUpdate: TButton
+      Left = 278
+      Height = 30
+      Top = 0
+      Width = 96
+      Align = alRight
+      AutoSize = True
+      Caption = 'Обновить'
+      Constraints.MinWidth = 96
+      TabOrder = 1
+      Visible = False
+      OnClick = btnUpdateClick
+    end
+    object lbSize: TLabel
+      Left = 49
+      Height = 30
+      Top = 0
+      Width = 106
+      Align = alRight
+      Caption = '999,9 / 999,9 KB'
+      Layout = tlCenter
+      ParentColor = False
+      Visible = False
+    end
+    object btnRestart: TButton
+      Left = 384
+      Height = 30
+      Top = 0
+      Width = 96
+      Align = alRight
+      Caption = 'Перезапуск'
+      Constraints.MinWidth = 96
+      TabOrder = 2
+      Visible = False
+      OnClick = btnRestartClick
+    end
+    object btnCheck: TButton
+      Left = 165
+      Height = 30
+      Top = 0
+      Width = 103
+      Align = alRight
+      AutoSize = True
+      Caption = 'Проверить'
+      Constraints.MinWidth = 96
+      TabOrder = 3
+      Visible = False
+      OnClick = btnCheckClick
+    end
+  end
+  object tmrWork: TTimer
+    Interval = 5000
+    OnTimer = tmrWorkTimer
+    Left = 64
+    Top = 96
+  end
+end

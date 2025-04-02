@@ -19,7 +19,7 @@ echo.
 set PROJNAME=matrixFont
 set BUILD=Release
 set LANGDIR=bin\lang
-set COMMONFILES=%LANGDIR%\*.ini %LANGDIR%\%PROJNAME%.pot %LANGDIR%\%PROJNAME%.??.po %LANGDIR%\%PROJNAME%.?????.po readme.* license.* versions.* help\*
+set COMMONFILES=%LANGDIR%\*.ini %LANGDIR%\%PROJNAME%.pot %LANGDIR%\%PROJNAME%.??.po %LANGDIR%\%PROJNAME%.?????.po readme.* license.* versions.* help\* bin\openssl-license.txt
 
 
 echo.
@@ -66,9 +66,12 @@ echo.
 
 setlocal enabledelayedexpansion
 for %%a in (32,64) do (
+    if %%a==32 set SPECIFIC=bin\libcrypto-1_1.dll     bin\libssl-1_1.dll
+    if %%a==64 set SPECIFIC=bin\libcrypto-1_1-x64.dll bin\libssl-1_1-x64.dll
+
     set PROJARC=win%%a
     set BINARY=bin\*!PROJARC!-%BUILD%.exe
-    set FILES=!BINARY! %COMMONFILES%
+    set FILES=!BINARY! %COMMONFILES% !SPECIFIC!
     set FILENAME=%DEST%\%PROJNAME%-v%EXEVER%-!PROJARC!-Portable.zip
 
     echo.

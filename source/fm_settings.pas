@@ -27,6 +27,8 @@ type
     bbApply:            TBitBtn;
     bbCancel:           TBitBtn;
     bbDefaults:         TBitBtn;
+    cbAppUpdateFreq:    TComboBox;
+    cbAppUpdateWay:     TComboBox;
     cbCharName:         TCheckBox;
     cbCharNameFont:     TComboBox;
     cbCodeHex:          TCheckBox;
@@ -79,6 +81,9 @@ type
     edAuthor:           TEdit;
     edFontName:         TEdit;
     gbStickingScheme:   TGroupBox;
+    lbAppUpdate:        TLabel;
+    lbAppUpdateFreq:    TLabel;
+    lbAppUpdateFreq1:   TLabel;
     lbAuthor:           TLabel;
     lbBWTreshold:       TLabel;
     lbCharUndoLimit:    TLabel;
@@ -143,12 +148,14 @@ type
     pSpacer4:           TPanel;
     pSpacer5:           TPanel;
     pSpacer6:           TPanel;
+    pSpacer7:           TPanel;
     pStickingForms:     TPanel;
     pTitle1:            TPanel;
     pTitle10:           TPanel;
     pTitle11:           TPanel;
     pTitle12:           TPanel;
     pTitle2:            TPanel;
+    pTitle27:           TPanel;
     pTitle3:            TPanel;
     pTitle4:            TPanel;
     pTitle5:            TPanel;
@@ -192,6 +199,7 @@ type
     pValues4:           TPanel;
     pValues40:          TPanel;
     pValues41:          TPanel;
+    pValues42:          TPanel;
     pValues5:           TPanel;
     pValues6:           TPanel;
     pValues7:           TPanel;
@@ -201,8 +209,8 @@ type
     rbOpenMapSngClick:  TRadioButton;
     seBWTreshold:       TSpinEdit;
     seCharNameFontSize: TSpinEdit;
-    seCodeNameFontSize: TSpinEdit;
     seCharUndoLimit:    TSpinEdit;
+    seCodeNameFontSize: TSpinEdit;
     seFontScale:        TSpinEdit;
     seIconsScale:       TSpinEdit;
     seMapExportScale:   TSpinEdit;
@@ -407,6 +415,8 @@ procedure TfmSettings.InitConfig;
     Settings.Add(cbLanguage, @cfg.app.lang);
     Settings.Add(seIconsScale, @cfg.app.iconscale);
     Settings.Add(cbLastFileAtStart, @cfg.app.loadlast);
+    Settings.Add(cbAppUpdateWay, @cfg.app.update.wayIndex);
+    Settings.Add(cbAppUpdateFreq, @cfg.app.update.freqIndex);
 
     Settings.Add(seBWTreshold, @cfg.import.bwlevel);
 
@@ -540,6 +550,8 @@ procedure TfmSettings.OnLangChange(Sender: TObject);
 
     appLocalizerEx.Localize(cbStickingSide, STFM_ANCHOR_TXT);
     appLocalizerEx.Localize(cbStickingSize, STFM_SIZE_TXT);
+    appLocalizerEx.Localize(cbAppUpdateWay, TXT_UPDATE_WAY);
+    appLocalizerEx.Localize(cbAppUpdateFreq, TXT_UPDATE_FREQ);
 
     EndFormUpdate;
   end;
