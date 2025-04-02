@@ -112,6 +112,9 @@ Source: "{#appPath}\bin\{#appExeName}";         DestDir: "{app}\bin"; Flags: ign
 Source: "{#appPath}\bin\openssl-license.txt";   DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "settings.ini";                         DestDir: "{app}\bin"; Flags: ignoreversion; Permissions: users-modify
 
+Source: "{#appPath}\bin\libcrypto-1_1{#opensslArch}.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "{#appPath}\bin\libssl-1_1{#opensslArch}.dll";    DestDir: "{app}\bin"; Flags: ignoreversion
+
 ; Localization files
 Source: "{#appPath}\bin\lang\*.ini";            DestDir: "{app}\bin\lang"; Flags: ignoreversion
 Source: "{#appPath}\bin\lang\{#appName}.pot";   DestDir: "{app}\bin\lang"; Flags: ignoreversion
