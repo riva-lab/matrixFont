@@ -24,6 +24,7 @@ type
   TClipboardAction = (cbCut, cbCopy, cbPaste);
   TPasteMode       = (pmNorm, pmOr, pmXor, pmAnd);
   TPixelAction     = (paSet, paClear, paInvert, paNone);
+  THistoryAction   = (haClear, haSave, haUndo, haRedo);
 
   { TMatrixChar }
 
@@ -77,17 +78,8 @@ type
       fnNumbersView: TNumberView; fnEmptyBits: TEmptyBit;
       fnFontType: TFontType; fnBitsPerBlock: Integer; fnValuesPerLine: Integer): String;
 
-    // очистить историю изменений
-    procedure ClearChanges;
-
-    // сохранить текущую правку символа в историю
-    procedure SaveChange;
-
-    // отменить одну правку с конца истории
-    procedure UndoChange;
-
-    // повторить отмененную ранее правку
-    procedure RedoChange;
+    // manage changes history
+    procedure History(AHistoryAction: THistoryAction);
 
     // импорт символа из системного шрифта для растеризации
     procedure Import(AFont: TFont; AIndex: Integer; AEncoding: String);
@@ -439,32 +431,22 @@ function TMatrixChar.GenerateCode(
     Result := '    ' + Result.TrimRight([' ', ',', #10, #13]);
   end;
 
-// очистить историю изменений
-procedure TMatrixChar.ClearChanges;
+// manage changes history
+procedure TMatrixChar.History(AHistoryAction: THistoryAction);
   begin
-    FHistory.Depth := FUndoLimit;
-    FHistory.Clear;
-    SaveChange;
-  end;
+    case AHistoryAction of
 
-// сохранить текущую правку символа в историю
-procedure TMatrixChar.SaveChange;
-  begin
-    FHistory.Save;
-  end;
+      haClear:
+        begin
+        FHistory.Depth := FUndoLimit;
+        FHistory.Clear;
+        FHistory.Save;
+        end;
 
-// отменить одну правку с конца истории
-procedure TMatrixChar.UndoChange;
-  begin
-    if not FHistory.CanUndo then Exit;
-    FHistory.Undo;
-  end;
-
-// повторить отмененную ранее правку
-procedure TMatrixChar.RedoChange;
-  begin
-    if not FHistory.CanRedo then Exit;
-    FHistory.Redo;
+      haSave: FHistory.Save;
+      haUndo: if FHistory.CanUndo then FHistory.Undo;
+      haRedo: if FHistory.CanRedo then FHistory.Redo;
+      end;
   end;
 
 // импорт символа из системного шрифта для растеризации
@@ -681,7 +663,7 @@ constructor TMatrixChar.Create;
     FUndoLimit := 0;
 
     Clear;
-    SaveChange;
+    History(haSave);
   end;
 
 destructor TMatrixChar.Destroy;

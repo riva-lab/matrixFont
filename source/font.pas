@@ -139,14 +139,8 @@ type
     // чтение шрифта из файла
     function ReadFromFile(FileName: String): Boolean;
 
-    // очистить историю изменений
-    procedure ClearChanges;
-
-    // отменить одну правку с конца истории
-    procedure UndoChange;
-
-    // повторить отмененную ранее правку
-    procedure RedoChange;
+    // manage changes history
+    procedure History(AHistoryAction: THistoryAction);
 
     // пакетная вставка
     procedure Paste(AMode: TPasteMode = pmNorm);
@@ -314,7 +308,7 @@ procedure TMatrixFont.Clear;
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Clear;
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -326,7 +320,7 @@ procedure TMatrixFont.Invert;
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Invert;
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -338,7 +332,7 @@ procedure TMatrixFont.Mirror(MirrorDirection: TMirror);
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Mirror(MirrorDirection);
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -350,7 +344,7 @@ procedure TMatrixFont.Shift(ADirection: TDirection; AShiftRollover: Boolean);
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Shift(ADirection, AShiftRollover);
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -362,7 +356,7 @@ procedure TMatrixFont.Snap(ADirection: TDirection);
     for mxChar in FCharArray do
       begin
       mxChar.Snap(ADirection);
-      mxChar.SaveChange;
+      mxChar.History(haSave);
       end;
   end;
 
@@ -374,7 +368,7 @@ procedure TMatrixFont.Center(AVertical: Boolean);
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Center(AVertical);
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -386,7 +380,7 @@ procedure TMatrixFont.Rotate(AClockWise: Boolean);
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Rotate(AClockWise);
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -673,7 +667,7 @@ function TMatrixFont.ReadFromFile(FileName: String): Boolean;
       try
       for mxChar in FCharArray do
         begin
-        mxChar.ClearChanges;
+        mxChar.History(haClear);
 
         for h := 0 to FHeight - 1 do
           for w := 0 to FWidth - 1 do
@@ -698,34 +692,16 @@ function TMatrixFont.ReadFromFile(FileName: String): Boolean;
     CloseFile(file_binary);
   end;
 
-// очистить историю изменений
-procedure TMatrixFont.ClearChanges;
+// manage changes history
+procedure TMatrixFont.History(AHistoryAction: THistoryAction);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
+    for mxChar in FCharArray do
       begin
-      FCharArray[i - 1].SetUndoLimit(FUndoLimit);
-      FCharArray[i - 1].ClearChanges;
+      if AHistoryAction = haClear then mxChar.SetUndoLimit(FUndoLimit);
+      mxChar.History(AHistoryAction);
       end;
-  end;
-
-// отменить одну правку с конца истории
-procedure TMatrixFont.UndoChange;
-  var
-    i: Integer;
-  begin
-    for i := 1 to FFontLength do
-      FCharArray[i - 1].UndoChange;
-  end;
-
-// повторить отмененную ранее правку
-procedure TMatrixFont.RedoChange;
-  var
-    i: Integer;
-  begin
-    for i := 1 to FFontLength do
-      FCharArray[i - 1].RedoChange;
   end;
 
 // пакетная вставка
@@ -736,7 +712,7 @@ procedure TMatrixFont.Paste(AMode: TPasteMode);
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].ClipboardAction(cbPaste, AMode);
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -750,7 +726,7 @@ procedure TMatrixFont.Import(Font: Graphics.TFont; Width, Height: Integer);
     for i := 1 to FFontLength do
       begin
       FCharArray[i - 1].Import(Font, FFontStartItem + i - 1, FEncoding);
-      FCharArray[i - 1].SaveChange;
+      FCharArray[i - 1].History(haSave);
       end;
   end;
 
@@ -1278,7 +1254,7 @@ procedure TMatrixFont.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
 
     FHeight := FCharArray[0].Height;
     FWidth  := FCharArray[0].Width;
-    ClearChanges;
+    History(haClear);
   end;
 
 // определение возможности усечь символ
@@ -1346,7 +1322,7 @@ procedure TMatrixFont.SetRange(StartCode: Integer; EndCode: Integer);
         FCharArray[i].Clear;
 
     // очистка истории правок символов
-    ClearChanges;
+    History(haClear);
   end;
 
 // получение имени символа по его коду

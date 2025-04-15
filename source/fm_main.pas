@@ -741,16 +741,16 @@ procedure TfmMain.actionSymbolHistory(Sender: TObject);
     case TAction(Sender).Name of
 
       'acSymbolUndo':
-        item.UndoChange;
+        item.History(haUndo);
 
       'acSymbolRedo':
-        item.RedoChange;
+        item.History(haRedo);
 
       'acFontUndo':
-        mxFont.UndoChange;
+        mxFont.History(haUndo);
 
       'acFontRedo':
-        mxFont.RedoChange;
+        mxFont.History(haRedo);
       end;
 
     acSymbolUndo.Enabled := item.CanUndo;
@@ -1483,13 +1483,13 @@ procedure TfmMain.FontCreateFinish;
     SettingsApplyToCurrentSession;
 
     mxFont.SetUndoLimit(cfg.editor.undolimit + 1);
-    mxFont.ClearChanges;
+    mxFont.History(haClear);
   end;
 
 // действия после применения изменений к символу
 procedure TfmMain.ReDrawAfterAction;
   begin
-    mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].SaveChange;
+    mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].History(haSave);
     file_changed         := True;
     acSymbolUndo.Enabled := True;
     acSymbolRedo.Enabled := False;
