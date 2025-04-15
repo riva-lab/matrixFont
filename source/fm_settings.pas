@@ -72,7 +72,7 @@ procedure TfmSettings.FormCreate(Sender: TObject);
       a.Text  := s;
       end;
 
-    appLocalizerEx.OnLanguageChange := @OnLangChange;
+    appLocalizerEx.AddOnLanguageChangeHandler(@OnLangChange);
     appLocalizerEx.Load(
       Format('%0:s%1:s%0:s%2:s', [DirectorySeparator, LANGUAGES_DIR, LANGUAGES_FILE]),
       Format('%0:s%1:s%0:s%2:s', [DirectorySeparator, LANGUAGES_DIR, LANGUAGE_FILE]));
