@@ -36,7 +36,7 @@ type
   { TfmMain }
 
   TfmMain = class(TForm)
-    {$INCLUDE fm_main_controls.inc}
+    {$INCLUDE i_main_controls.inc}
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);

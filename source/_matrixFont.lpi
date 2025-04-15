@@ -310,7 +310,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="31">
+    <Units Count="32">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -436,7 +436,7 @@
         <IsPartOfProject Value="True"/>
       </Unit20>
       <Unit21>
-        <Filename Value="fm_main_controls.inc"/>
+        <Filename Value="i_main_controls.inc"/>
         <IsPartOfProject Value="True"/>
       </Unit21>
       <Unit22>
@@ -485,6 +485,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit30>
+      <Unit31>
+        <Filename Value="i_settings_controls.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit31>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
