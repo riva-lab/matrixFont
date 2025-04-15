@@ -1093,6 +1093,14 @@ msgctxt "tfmmain.acnewfont.hint"
 msgid "Создать новый шрифт"
 msgstr ""
 
+#: tfmmain.acopenissue.caption
+msgid "Есть идея? Нашли ошибку?"
+msgstr ""
+
+#: tfmmain.acopenissue.hint
+msgid "Предложить идею или сообщить об ошибке"
+msgstr ""
+
 #: tfmmain.acopenrepo.caption
 msgid "Репозиторий проекта"
 msgstr ""

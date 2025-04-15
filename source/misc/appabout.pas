@@ -30,6 +30,9 @@ const
   // project repository url
   APP_URL_REPO  = 'https://gitlab.com/riva-lab/matrixFont';
 
+  // project issue url
+  APP_URL_ISSUE = 'https://gitlab.com/riva-lab/matrixFont/-/issues';
+
   // project online help url
   APP_URL_HELP  = 'https://riva-lab.gitlab.io/apps/matrixFont/help.html';
 

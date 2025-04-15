@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-04-02 16:16+0300\n"
+"PO-Revision-Date: 2025-04-15 15:18+0300\n"
 "Last-Translator: user <>\n"
 "Language-Team: riva\n"
 "Language: en\n"
@@ -1127,6 +1127,14 @@ msgstr "New font..."
 msgctxt "tfmmain.acnewfont.hint"
 msgid "Создать новый шрифт"
 msgstr "Create new font"
+
+#: tfmmain.acopenissue.caption
+msgid "Есть идея? Нашли ошибку?"
+msgstr "Got an idea? Find a bug?"
+
+#: tfmmain.acopenissue.hint
+msgid "Предложить идею или сообщить об ошибке"
+msgstr "Suggest an idea or report a bug"
 
 #: tfmmain.acopenrepo.caption
 msgid "Репозиторий проекта"

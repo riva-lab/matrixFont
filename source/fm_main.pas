@@ -1050,6 +1050,9 @@ procedure TfmMain.actionService(Sender: TObject);
       'acOpenRepo':// действие: репозиторий проекта
         OpenURL(APP_URL_REPO);
 
+      'acOpenIssue':
+        OpenURL(APP_URL_ISSUE);
+
       'acInfo':    // действие: информация о программе
         fmAbout.Show;
 
