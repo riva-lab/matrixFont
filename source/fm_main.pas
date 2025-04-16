@@ -96,6 +96,7 @@ type
     FOpenFileList:      TOpenFileList;
     FPasteMode:         TPasteMode;
     FGridStep:          Integer;
+    FMouseLastXY:       DWord;
 
     procedure FontLoadFromFile(AFileName: String);
     procedure FontCreateNew(w, h, si, l, e: Integer; n, a: String);
@@ -418,8 +419,6 @@ procedure TfmMain.sgNavigatorMouseWheel(Sender: TObject; Shift: TShiftState;
  // обработка нажатия мышью на рабочем холсте
 procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
-  const
-    prevPoint: DWord = MAXDWORD;
   var
     i:         Integer;
     item:      TMatrixChar;
@@ -436,8 +435,8 @@ procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
       X := X div FGridStep;
       Y := Y div FGridStep;
 
-      if prevPoint = (X shl 16) or (Y and $FFFF) then Exit
-      else prevPoint := (X shl 16) or (Y and $FFFF);
+      if FMouseLastXY = (X shl 16) or (Y and $FFFF) then Exit
+      else FMouseLastXY := (X shl 16) or (Y and $FFFF);
 
       item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
 
@@ -482,6 +481,7 @@ procedure TfmMain.imEditorMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
   begin
     ReDrawAfterAction;
+    FMouseLastXY := MAXDWORD;
   end;
 
 // масштаб колесом мыши
