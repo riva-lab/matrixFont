@@ -81,7 +81,6 @@ type
     FWidth:     Integer;    // ширина символа в пикселях
     FHeight:    Integer;    // высота символа в пикселях
     FUndoLimit: Integer;    // undo limit (history depth)
-    FPasteMode: TPasteMode; // режим вставки
 
     // поля настройки знакогенератора
 
@@ -178,9 +177,6 @@ type
 
     property Width: Integer read FWidth;
     property Height: Integer read FHeight;
-
-    // режим вставки из буфера обмена
-    property PasteMode: TPasteMode read FPasteMode write FPasteMode;
 
     // флаг направления считывания группы битов: вертикально/горизонтально
     property GroupIsVertical: Boolean read FGroupIsVertical write FGroupIsVertical;
@@ -1417,7 +1413,6 @@ constructor TMatrixFont.Create;
   begin
     FFontStartItem := 32; // начальный символ в наборе
     FFontLength    := 1;  // кол-во символов в наборе
-    FPasteMode     := pmNorm;
 
     SetLength(FCharArray, FFontLength);
     for i := 1 to FFontLength do
