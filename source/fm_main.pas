@@ -1668,7 +1668,8 @@ procedure TfmMain.AdjustThemeDependentValues;
       begin
       cfg.color := cfg.colord; // load dark colorset for char drawing  
 
-      imSVGList.List.Text := imSVGList.List.Text
+      imSVGList.DisabledLevel := 96;
+      imSVGList.List.Text     := imSVGList.List.Text
         .Replace('#000', '#49d095')
         .Replace('stroke-width="1.7"', 'stroke-width="1.0"');
 
