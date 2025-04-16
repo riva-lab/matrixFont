@@ -408,10 +408,12 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
 
   procedure DrawChar(AChar, AX, AW: Integer; ADest: TBitmap; AIsSingle: Boolean);
     begin
+      if not FontImp.IsInRange(AChar) then Exit;
+
       with ADest do
         begin
         Width  := AW;
-        Height := bmp.Height;
+        Height := FontImp.Height;
 
         if not AIsSingle and (AX <= 1) then
           begin
@@ -420,7 +422,7 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
           Canvas.Clear;
           end;
 
-        if AChar in [0..FontImp.FontLength - 1] then
+        if FontImp.Item[AChar].Props.Active then
           begin
           FontImp.Item[AChar].Draw(
             bmp, False,
@@ -447,20 +449,16 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
     else
       with FontImp do
         try
-        bmp        := TBitmap.Create;
-        bmp.Width  := Width;
-        bmp.Height := Height;
+        bmp := TBitmap.Create;
 
         // draw single char preview
-        DrawChar(
-          seImpCharCode.Value - FontStartItem, 0, bmp.Width,
-          imImpChar.Picture.Bitmap, True);
+        DrawChar(seImpCharCode.Value, 0, Width, imImpChar.Picture.Bitmap, True);
 
         // draw text example preview
         if cbImpExample.Checked and not ASingle then
           for i := 1 to Length(edImpExample.Text) do
             DrawChar(
-              Ord(UTF8ToEncoding(edImpExample.Text[i], Props.Encoding)[1]) - FontStartItem,
+              Ord(UTF8ToEncoding(edImpExample.Text[i], Props.Encoding)[1]),
               1 + (i - 1) * (Width + 1),
               1 + Length(edImpExample.Text) * (Width + 1),
               imImpExample.Picture.Bitmap, False);

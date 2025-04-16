@@ -162,7 +162,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
               aRect.Top     := aRect.Top + dh div 2;
               aRect.Bottom  := aRect.Bottom - dh div 2;
 
-              FontX.Item[i].Draw(bm_tmp, False,
+              FontX.Item[FontX.FontStartItem + i].Draw(bm_tmp, False,
                 _isSelected.Select(cfg.color.map.selbg, cfg.color.map.bg),
                 _isSelected.Select(cfg.color.map.selact, cfg.color.map.active));
 

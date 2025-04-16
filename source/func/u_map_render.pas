@@ -261,7 +261,7 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
   procedure DrawChar(AIndex, AX, AY: Integer);
     begin
       if not (AIndex in [0..AFont.FontLength - 1]) then Exit;
-      AFont.Item[AIndex].Draw(_bmp, False, AColor0, AColor1);
+      AFont.Item[AFont.FontStartItem + AIndex].Draw(_bmp, False, AColor0, AColor1);
       _export.Canvas.Draw(_w * AX + ASpace, _h * AY + ASpace, _bmp);
     end;
 
@@ -465,7 +465,7 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont):
         for i := 0 to AFontOut.Width - 1 do
           for j := 0 to AFontOut.Height - 1 do
             with pic.Bitmap.Canvas do
-              AFontOut.Item[ch].PixelAction(i, j,
+              AFontOut.Item[AFontOut.FontStartItem + ch].PixelAction(i, j,
                 (abs(Pixels[x + i * scale, y + j * scale] - pixRef) > 1).Select(paSet, paClear));
 
         Result := True;

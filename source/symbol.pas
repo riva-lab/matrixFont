@@ -26,6 +26,17 @@ type
   TPixelAction     = (paSet, paClear, paInvert, paNone);
   THistoryAction   = (haClear, haSave, haUndo, haRedo);
 
+
+  { TMatrixCharProperties }
+
+  TMatrixCharProperties = class
+    Active: Boolean;
+    Index:  Integer;
+
+    constructor Create;
+  end;
+
+
   { TMatrixChar }
 
   TMatrixChar = class
@@ -33,6 +44,7 @@ type
     FBitmap:  TBGRABitmap;
     FCanvas:  TBGRACanvas;
     FHistory: TBGRABitmapHistory;
+    FProps:   TMatrixCharProperties;
 
     FWidth:        Integer; // ширина символа в пикселях
     FHeight:       Integer; // высота символа в пикселях
@@ -115,6 +127,7 @@ type
     destructor Destroy; override;
 
 
+    property Props: TMatrixCharProperties read FProps write FProps;
     property Width: Integer read FWidth;
     property Height: Integer read FHeight;
 
@@ -157,6 +170,16 @@ procedure DrawChessBackground(ABitmap: TBitmap; AWidth, AHeight: Integer;
 
         EndUpdate;
         end;
+  end;
+
+
+{ TMatrixCharProperties }
+
+constructor TMatrixCharProperties.Create;
+  begin
+    inherited;
+    Active := False;
+    Index  := -1;
   end;
 
 
@@ -659,6 +682,7 @@ constructor TMatrixChar.Create;
 
     FBitmap    := TBGRABitmap.Create(FWidth, FHeight);
     FCanvas    := FBitmap.CanvasBGRA;
+    FProps     := TMatrixCharProperties.Create;
     FHistory   := TBGRABitmapHistory.Create(FBitmap);
     FUndoLimit := 0;
 
@@ -669,6 +693,7 @@ constructor TMatrixChar.Create;
 destructor TMatrixChar.Destroy;
   begin
     FreeAndNil(FHistory);
+    FreeAndNil(FProps);
     FreeAndNil(FBitmap);
     inherited;
   end;

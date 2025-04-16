@@ -155,7 +155,7 @@ procedure TRBFFontConverter.LoadFromFile(AFilename: String);
               end;
 
             if (w < FFont.Width) and (b and 1 > 0) then
-              FFont.Item[i].PixelAction(w, h, paSet);
+              FFont.Item[FFont.FontStartItem + i].PixelAction(w, h, paSet);
             b := b div 2;
             end;
     end;
@@ -212,7 +212,7 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
         begin
         if Monospace then
           w := FFont.Width + Spacing else
-          w := FFont.Item[i].GetCharWidth + Spacing;
+          w := FFont.Item[FFont.FontStartItem + i].GetCharWidth + Spacing;
 
         if not Monospace and (FFont.FontStartItem + i = 32) then
           w := round(FFont.Width * SpaceWdth / 100);
@@ -234,7 +234,7 @@ procedure TRBFFontConverter.SaveToFile(AFilename: String);
             begin
             b := b div 2;
 
-            if (w < FFont.Width) and (FFont.Item[i].Canvas.Pixels[w, h] = CHAR_COLOR_FG) then
+            if (w < FFont.Width) and (FFont.Item[FFont.FontStartItem + i].Canvas.Pixels[w, h] = CHAR_COLOR_FG) then
               b += $80;
 
             if (w mod 8 = 7) or (w = wmax) then

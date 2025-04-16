@@ -178,6 +178,9 @@ type
     // установка диапазона символов шрифта
     procedure SetRange(StartCode: Integer = 32; EndCode: Integer = 255);
 
+    // check if index is in font chars range
+    function IsInRange(AIndex: Integer): Boolean;
+
     // получение имени символа по его коду
     function GetCharName(ACode: Integer; AFull: Boolean = False): String;
 
@@ -302,49 +305,49 @@ constructor TMatrixFontProperties.Create;
 // очистить все символы шрифта
 procedure TMatrixFont.Clear;
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Clear;
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Clear;
+
+    History(haSave);
   end;
 
 // инвертировать изображение всех символов шрифта
 procedure TMatrixFont.Invert;
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Invert;
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Invert;
+
+    History(haSave);
   end;
 
 // отобразить все символы шрифта
 procedure TMatrixFont.Mirror(MirrorDirection: TMirror);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Mirror(MirrorDirection);
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Mirror(MirrorDirection);
+
+    History(haSave);
   end;
 
 // сдвиг всех символов шрифта
 procedure TMatrixFont.Shift(ADirection: TDirection; AShiftRollover: Boolean);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Shift(ADirection, AShiftRollover);
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Shift(ADirection, AShiftRollover);
+
+    History(haSave);
   end;
 
 // прижать все символы шрифта к краю
@@ -353,34 +356,34 @@ procedure TMatrixFont.Snap(ADirection: TDirection);
     mxChar: TMatrixChar;
   begin
     for mxChar in FCharArray do
-      begin
-      mxChar.Snap(ADirection);
-      mxChar.History(haSave);
-      end;
+      if mxChar.Props.Active then
+        mxChar.Snap(ADirection);
+
+    History(haSave);
   end;
 
 // центрирование всех символов шрифта
 procedure TMatrixFont.Center(AVertical: Boolean);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Center(AVertical);
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Center(AVertical);
+
+    History(haSave);
   end;
 
 // поворот всех символов шрифта
 procedure TMatrixFont.Rotate(AClockWise: Boolean);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Rotate(AClockWise);
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Rotate(AClockWise);
+
+    History(haSave);
   end;
 
 // обменять местами символы в таблице
@@ -390,8 +393,8 @@ function TMatrixFont.SwapChars(AIndex1, AIndex2: Integer): Boolean;
 
   begin
     Result := False;
-    if not InRange(AIndex1, 0, FFontLength - 1) then Exit;
-    if not InRange(AIndex2, 0, FFontLength - 1) then Exit;
+    if not IsInRange(AIndex1) then Exit;
+    if not IsInRange(AIndex2) then Exit;
 
     tmpMatrixChar       := FCharArray[AIndex2];
     FCharArray[AIndex2] := FCharArray[AIndex1];
@@ -415,11 +418,11 @@ function TMatrixFont.MoveChars(AIndex: Integer; ACharMoveMode: TCharMoveMode): B
         Result := SwapChars(AIndex, AIndex - 1);
 
       cmmBottomRangeDown:
-        for i := FFontLength - 2 downto AIndex do
+        for i := FFontStartItem + FFontLength - 2 downto AIndex do
           Result := SwapChars(i + 1, i) or Result;
 
       cmmBottomRangeUp:
-        for i := AIndex to FFontLength - 2 do
+        for i := AIndex to FFontStartItem + FFontLength - 2 do
           Result := SwapChars(i, i + 1) or Result;
       end;
   end;
@@ -465,9 +468,10 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
     Result := '';
 
     // generate array of chars
-    for i := StartChar to EndChar do
+    for i := 0 to High(FCharArray) do
       begin
-      w      := FCharArray[i - FFontStartItem].GetCharWidth;
+      if not InRange(i, StartChar, EndChar) then Continue;
+      w      := FCharArray[i].GetCharWidth;
       Result += UnicodeFormat('%s    /*%s %-3d %-3s, width = %d */  %s%s%s', [
         AddBlockCaption(i),
         RHF_COMMENT_CHAR,
@@ -475,7 +479,7 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         ((i < 32) or (i = 127)).Select(GetCharName(i), '<' + GetCharName(i) + '>'),
         w,
         (FFontType = ftPROPORTIONAL).Select(w.ToString + ',', '') + LineEnding,
-        FCharArray[i - FFontStartItem].GenerateCode(
+        FCharArray[i].GenerateCode(
         FGroupIsVertical,
         FScanColsFirst,
         FScanColsToRight,
@@ -589,6 +593,7 @@ procedure TMatrixFont.SaveToFile(FileName: String);
       for h := 0 to FHeight - 1 do
         for w := 0 to FWidth - 1 do
           begin
+          if not mxChar.Props.Active then Continue;
           if mxChar.Canvas.Pixels[w, h] = CHAR_COLOR_FG then
             tmp_byte := tmp_byte or mask;
 
@@ -633,8 +638,6 @@ function TMatrixFont.ReadFromFile(FileName: String): Boolean;
 
       if not Result then Exit(Result);
 
-      FontStartItem     := CharFirst;
-      FontLength        := CharLength;
       FProps.Name       := FontName;
       FProps.Author     := FontAuthor;
       FProps.AppCreate  := AppCreate;
@@ -642,6 +645,7 @@ function TMatrixFont.ReadFromFile(FileName: String): Boolean;
       FProps.DateCreate := DateCreate;
       FProps.DateChange := DateChange;
       FProps.Encoding   := GetEncodingAdapted(Encoding);
+      SetRange(CharFirst, CharFirst + CharLength - 1);
       SetSize(CharWidth, CharHeight);
       end;
 
@@ -667,6 +671,7 @@ function TMatrixFont.ReadFromFile(FileName: String): Boolean;
       for mxChar in FCharArray do
         begin
         mxChar.History(haClear);
+        if not mxChar.Props.Active then Continue;
 
         for h := 0 to FHeight - 1 do
           for w := 0 to FWidth - 1 do
@@ -697,36 +702,37 @@ procedure TMatrixFont.History(AHistoryAction: THistoryAction);
     mxChar: TMatrixChar;
   begin
     for mxChar in FCharArray do
-      begin
-      if AHistoryAction = haClear then mxChar.SetUndoLimit(FUndoLimit);
-      mxChar.History(AHistoryAction);
-      end;
+      if mxChar.Props.Active then
+        begin
+        if AHistoryAction = haClear then mxChar.SetUndoLimit(FUndoLimit);
+        mxChar.History(AHistoryAction);
+        end;
   end;
 
 // пакетная вставка
 procedure TMatrixFont.Paste(AMode: TPasteMode);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].ClipboardAction(cbPaste, AMode);
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.ClipboardAction(cbPaste, AMode);
+
+    History(haSave);
   end;
 
 // импорт системного шрифта для растеризации
 procedure TMatrixFont.Import(Font: Graphics.TFont; Width, Height: Integer);
   var
-    i: Integer;
+    mxChar: TMatrixChar;
   begin
     SetSize(Width, Height);
 
-    for i := 1 to FFontLength do
-      begin
-      FCharArray[i - 1].Import(Font, FFontStartItem + i - 1, FProps.Encoding);
-      FCharArray[i - 1].History(haSave);
-      end;
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.Import(Font, mxChar.Props.Index, FProps.Encoding);
+
+    History(haSave);
   end;
 
 // импорт кода C
@@ -1196,7 +1202,8 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
 
     if AType = imAdafruit then
       begin
-      for ch := 0 to FFontLength - 1 do ReadAdafruitChar(ch, gfxArr, values);
+      for ch := 0 to FFontLength - 1 do
+        ReadAdafruitChar(FFontStartItem + ch, gfxArr, values);
       Exit(True);
       end;
 
@@ -1214,7 +1221,7 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
     i := AOffset;
 
     for ch := 0 to FFontLength - 1 do
-      ReadChar(i, values, ch, cSize, cLine);
+      ReadChar(i, values, FFontStartItem + ch, cSize, cLine);
 
     Result := True;
   end;
@@ -1226,7 +1233,10 @@ procedure TMatrixFont.SetSize(AWidth, AHeight: Integer);
   begin
     if AWidth > 0 then  FWidth  := AWidth;
     if AHeight > 0 then FHeight := AHeight;
-    for mxChar in FCharArray do mxChar.SetSize(FWidth, FHeight);
+
+    for mxChar in FCharArray do
+      if mxChar.Props.Active then
+        mxChar.SetSize(FWidth, FHeight);
   end;
 
 // set char undo limit (history depth), will take effect after ClearChanges
@@ -1249,10 +1259,11 @@ procedure TMatrixFont.ChangeSize(Up, Down, Left, Right: Integer; Crop: Boolean);
       end;
 
     for mxChar in FCharArray do
-      mxChar.ChangeSize(Up, Down, Left, Right, Crop);
+      if mxChar.Props.Active then
+        mxChar.ChangeSize(Up, Down, Left, Right, Crop);
 
-    FHeight := FCharArray[0].Height;
-    FWidth  := FCharArray[0].Width;
+    FHeight := FCharArray[FFontStartItem].Height;
+    FWidth  := FCharArray[FFontStartItem].Width;
     History(haClear);
   end;
 
@@ -1264,64 +1275,37 @@ function TMatrixFont.CanOptimize(ADirection: TDirection): Integer;
     Result := MaxInt;
 
     for mxChar in FCharArray do
-      Result := min(Result, mxChar.CanOptimize(ADirection));
+      if mxChar.Props.Active then
+        Result := min(Result, mxChar.CanOptimize(ADirection));
   end;
 
 // установка диапазона символов шрифта
 procedure TMatrixFont.SetRange(StartCode: Integer; EndCode: Integer);
   var
-    i, w, h: Integer;
-    old_start, old_length: Integer;
-    tmp: TMxCharArray;
+    i: Integer;
   begin
-
-    SetLength(tmp, FFontLength);
-    for i := 0 to FFontLength - 1 do
-      begin
-      tmp[i] := TMatrixChar.Create;
-      tmp[i].SetSize(FWidth, FHeight);
-
-      for h := 0 to FHeight - 1 do
-        for w := 0 to FWidth - 1 do
-          tmp[i].Canvas.Pixels[w, h] := FCharArray[i].Canvas.Pixels[w, h];
-      end;
-
-    old_start  := FFontStartItem;
-    old_length := FFontLength;
+    if not InRange(StartCode, 0, 255) then Exit;
+    if not InRange(EndCode - StartCode, 0, 255) then Exit;
 
     FFontStartItem := StartCode;
     FFontLength    := EndCode - StartCode + 1;
 
-    SetLength(FCharArray, FFontLength);
-    for i := 0 to FFontLength - 1 do
-      if FCharArray[i] = nil then
+    for i := 0 to High(FCharArray) do
+      with FCharArray[i] do
         begin
-        FCharArray[i] := TMatrixChar.Create;
+        Props.Active := IsInRange(i);
 
-        with FCharArray[i] do
+        if (Width <> FWidth) or (Height <> FHeight) then
+          begin
           SetSize(FWidth, FHeight);
+          Clear;
+          end;
         end;
+  end;
 
-    // сдвиг символов для соответствия коду
-    for i := 0 to old_length - 1 do
-      if (i + old_start - FFontStartItem < FFontLength)
-        and (i + old_start - FFontStartItem >= 0)
-        and (FCharArray[i + old_start - FFontStartItem] <> nil) then
-        for h := 0 to FHeight - 1 do
-          for w := 0 to FWidth - 1 do
-            FCharArray[i + old_start - FFontStartItem].Canvas.Pixels[w, h] :=
-              tmp[i].Canvas.Pixels[w, h];
-
-    for i := 0 to old_length - 1 do
-      FreeAndNil(tmp[i]);
-
-    // очистка добавленных символов
-    if old_start > FFontStartItem then
-      for i := 0 to old_start - FFontStartItem - 1 do
-        FCharArray[i].Clear;
-
-    // очистка истории правок символов
-    History(haClear);
+function TMatrixFont.IsInRange(AIndex: Integer): Boolean;
+  begin
+    Result := InRange(AIndex, FFontStartItem, FFontStartItem + FFontLength - 1);
   end;
 
 // получение имени символа по его коду
@@ -1388,25 +1372,14 @@ function TMatrixFont.GetCharName(ACode: Integer; AFull: Boolean): String;
 
 procedure TMatrixFont.SetFontStartItem(AValue: Integer);
   begin
-    if FFontStartItem = AValue then
-      Exit;
-    FFontStartItem := AValue;
+    if FFontStartItem = AValue then Exit;
+    SetRange(AValue, AValue + FFontLength - 1);
   end;
 
 procedure TMatrixFont.SetFontLength(AValue: Integer);
-  var
-    i: Integer;
   begin
-    SetLength(FCharArray, AValue);
-    for i := 1 to AValue do
-      if FCharArray[i - 1] = nil then
-        begin
-        FCharArray[i - 1] := TMatrixChar.Create;
-        with FCharArray[i - 1] do
-          SetSize(FWidth, FHeight);
-        end;
-
-    FFontLength := AValue;
+    if FFontLength = AValue then Exit;
+    SetRange(FFontStartItem, FFontStartItem + AValue - 1);
   end;
 
 
@@ -1417,11 +1390,12 @@ constructor TMatrixFont.Create;
     FFontStartItem := 32; // начальный символ в наборе
     FFontLength    := 1;  // кол-во символов в наборе
 
-    SetLength(FCharArray, FFontLength);
-    for i := 1 to FFontLength do
+    SetLength(FCharArray, 256);
+    for i := 0 to High(FCharArray) do
       begin
-      FreeAndNil(FCharArray[i - 1]);
-      FCharArray[i - 1] := TMatrixChar.Create;
+      FCharArray[i]              := TMatrixChar.Create;
+      FCharArray[i].Props.Index  := i;
+      FCharArray[i].Props.Active := IsInRange(i);
       end;
 
     FHeight := FCharArray[0].Height;
@@ -1439,7 +1413,7 @@ destructor TMatrixFont.Destroy;
   var
     i: Integer;
   begin
-    for i := 0 to FFontLength - 1 do
+    for i := 0 to High(FCharArray) do
       FreeAndNil(FCharArray[i]);
 
     FreeAndNil(FProps);

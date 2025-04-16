@@ -216,9 +216,7 @@ procedure TfmPreview.UpdatePreview;
     if not Assigned(PFontCustom) then Exit;
     if not Assigned(PFontCustom^) then Exit;
 
-    bm_tmp        := TBitmap.Create;
-    bm_tmp.Width  := PFontCustom^.Item[0].Width;
-    bm_tmp.Height := PFontCustom^.Item[0].Height;
+    bm_tmp := TBitmap.Create;
 
     CharWidth  := PFontCustom^.Width;
     CharHeight := PFontCustom^.Height + seDelta.Value;
@@ -238,8 +236,8 @@ procedure TfmPreview.UpdatePreview;
           with PFontCustom^ do
             begin
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
-              PFontCustom^.Props.Encoding)[i]) - FontStartItem;
-            if (char_code >= 0) and (char_code <= FontLength - 1) then
+              PFontCustom^.Props.Encoding)[i]);
+            if Item[char_code].Props.Active then
               x       := x + Item[char_code].GetCharWidth + seSpace.Value;
             end
       else
@@ -272,9 +270,9 @@ procedure TfmPreview.UpdatePreview;
           with PFontCustom^ do
             begin
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
-              PFontCustom^.Props.Encoding)[i]) - FontStartItem;
+              PFontCustom^.Props.Encoding)[i]);
 
-            if (char_code >= 0) and (char_code <= FontLength - 1) then
+            if Item[char_code].Props.Active then
               begin
               Item[char_code].Draw(bm_tmp, False,
                 cfg.color.prev.bg, cfg.color.prev.active);

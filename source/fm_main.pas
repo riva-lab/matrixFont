@@ -102,6 +102,7 @@ type
     procedure FontCreateNew(w, h, si, l, e: Integer; n, a: String);
     procedure FontSave(AFileName: String);
     function GetConfirmation: Boolean;
+    function IndexOfCharInNavigator: Integer;
     procedure OnMapSelectChar(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
     procedure FileStatusUpdate;
@@ -345,11 +346,10 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
   aRect: TRect; aState: TGridDrawState);
   var
     bm_tmp: TBitmap;
+    index:  Integer;
   begin
       try
-      bm_tmp        := TBitmap.Create;
-      bm_tmp.Width  := mxFont.Item[0].Width;
-      bm_tmp.Height := mxFont.Item[0].Height;
+      bm_tmp := TBitmap.Create;
 
       with sgNavigator do
         begin
@@ -359,22 +359,24 @@ procedure TfmMain.sgNavigatorDrawCell(Sender: TObject; aCol, aRow: Integer;
         if (aRow >= TopRow) and (aRow - TopRow <= VisibleRowCount) and
           (aCol = ColCount - 1) and (aRow >= FixedRows) then
           begin
+          index := mxFont.FontStartItem + aRow - FixedRows;
+
           // символ
-          Cells[0, aRow] := mxFont.GetCharName(mxFont.FontStartItem + aRow - FixedRows);
+          Cells[0, aRow] := mxFont.GetCharName(index);
 
           // код символа
           if cfg.nav.code.hex then
-            Cells[1, aRow] := IntToHex(mxFont.FontStartItem + aRow - FixedRows, 2) else
-            Cells[1, aRow] := IntToStr(mxFont.FontStartItem + aRow - FixedRows);
+            Cells[1, aRow] := IntToHex(index, 2) else
+            Cells[1, aRow] := IntToStr(index);
 
           // превью символа
           if cfg.nav.invert and (aRow = Row) then
             // выделенная строка в навигаторе
-            mxFont.Item[aRow - FixedRows].Draw(bm_tmp, cfg.nav.transparent,
+            mxFont.Item[index].Draw(bm_tmp, cfg.nav.transparent,
               cfg.color.nav.active, cfg.color.nav.bg)
           else
             // невыделенная строка в навигаторе
-            mxFont.Item[aRow - FixedRows].Draw(bm_tmp, cfg.nav.transparent,
+            mxFont.Item[index].Draw(bm_tmp, cfg.nav.transparent,
               cfg.color.nav.bg, cfg.color.nav.active);
           Canvas.StretchDraw(aRect, bm_tmp);
           end;
@@ -389,12 +391,12 @@ procedure TfmMain.sgNavigatorSelection(Sender: TObject; aCol, aRow: Integer);
   var
     item: TMatrixChar;
   begin
-    item                 := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    aRow := IndexOfCharInNavigator;
+
+    item                 := mxFont.Item[aRow];
     acSymbolUndo.Enabled := item.CanUndo;
     acSymbolRedo.Enabled := item.CanRedo;
     ReDrawImage;
-
-    aRow := mxFont.FontStartItem + sgNavigator.Row - sgNavigator.FixedRows;
 
     lbEditor.Caption := Format('%s  <%s>  DEC = %d;  HEX = %x', [
       TXT_SYMBOL, mxFont.GetCharName(aRow), aRow, aRow]);
@@ -438,7 +440,8 @@ procedure TfmMain.imEditorMouseDown(Sender: TObject; Button: TMouseButton;
       if FMouseLastXY = (X shl 16) or (Y and $FFFF) then Exit
       else FMouseLastXY := (X shl 16) or (Y and $FFFF);
 
-      item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
+      i    := IndexOfCharInNavigator;
+      item := mxFont.Item[i];
 
       if ssCtrl in Shift then
         for i := 0 to mxFont.Width - 1 do
@@ -669,7 +672,6 @@ procedure TfmMain.acFontPreviewExecute(Sender: TObject);
       fmPreview.SaveDlg.InitialDir := ExtractFileDir(FileName) + DirectorySeparator;
       end;
 
-    fmPreview.PFontCustom := @mxFont;
     fmPreview.Show;
     FormWindowStateChange(Sender);
   end;
@@ -736,7 +738,7 @@ procedure TfmMain.actionSymbolHistory(Sender: TObject);
   var
     item: TMatrixChar;
   begin
-    item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    item := mxFont.Item[IndexOfCharInNavigator];
 
     case TAction(Sender).Name of
 
@@ -825,7 +827,7 @@ procedure TfmMain.actionSymbolGeneral(Sender: TObject);
     item: TMatrixChar;
     meta: String;
   begin
-    item := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows];
+    item := mxFont.Item[IndexOfCharInNavigator];
 
     case TAction(Sender).Name of
 
@@ -925,7 +927,7 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
   var
     curr: Integer;
   begin
-    curr := sgNavigator.Row - sgNavigator.FixedRows;
+    curr := IndexOfCharInNavigator;
 
     case TAction(Sender).Name of
 
@@ -990,13 +992,13 @@ procedure TfmMain.actionFontGeneral(Sender: TObject);
         if acFontRangeMove.Checked then
           mxFont.MoveChars(curr, cmmBottomRangeUp)
         else if mxFont.MoveChars(curr, cmmSingleUp) then
-          sgNavigator.Row := sgNavigator.FixedRows + curr - 1;
+          sgNavigator.Row := curr - 1 - mxFont.FontStartItem + sgNavigator.FixedRows;
 
       'acSymbolMoveDown': // действие: переместить символ/диапазон вниз
         if acFontRangeMove.Checked then
           mxFont.MoveChars(curr, cmmBottomRangeDown)
         else if mxFont.MoveChars(curr, cmmSingleDown) then
-          sgNavigator.Row := sgNavigator.FixedRows + curr + 1;
+          sgNavigator.Row := curr + 1 - mxFont.FontStartItem + sgNavigator.FixedRows;
       end;
 
     FontActionExecute;
@@ -1009,7 +1011,6 @@ procedure TfmMain.actionService(Sender: TObject);
 
       'acMap':     // действие: показать окно "Карта символов"
         begin
-        fmMap.FontX := mxFont;
         fmMap.Show;
         FormWindowStateChange(Sender);
         end;
@@ -1409,6 +1410,11 @@ function TfmMain.GetConfirmation: Boolean;
     Result := not file_changed;
   end;
 
+function TfmMain.IndexOfCharInNavigator: Integer;
+  begin
+    Result := mxFont.FontStartItem + sgNavigator.Row - sgNavigator.FixedRows;
+  end;
+
 // event on select char in map
 procedure TfmMain.OnMapSelectChar(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   begin
@@ -1461,8 +1467,8 @@ procedure TfmMain.FontActionExecute;
   begin
     ReDrawImage;
     ReDrawContent;
-    acSymbolUndo.Enabled := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].CanUndo;
-    acSymbolRedo.Enabled := mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].CanRedo;
+    acSymbolUndo.Enabled := mxFont.Item[IndexOfCharInNavigator].CanUndo;
+    acSymbolRedo.Enabled := mxFont.Item[IndexOfCharInNavigator].CanRedo;
     file_changed         := True;
     FileStatusUpdate();
   end;
@@ -1470,6 +1476,9 @@ procedure TfmMain.FontActionExecute;
 // завершение создания шрифта
 procedure TfmMain.FontCreateFinish;
   begin
+    fmMap.FontX           := mxFont;
+    fmPreview.PFontCustom := @mxFont;
+
     sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
 
     acZoomFit.Execute;
@@ -1488,7 +1497,7 @@ procedure TfmMain.FontCreateFinish;
 // действия после применения изменений к символу
 procedure TfmMain.ReDrawAfterAction;
   begin
-    mxFont.Item[sgNavigator.Row - sgNavigator.FixedRows].History(haSave);
+    mxFont.Item[IndexOfCharInNavigator].History(haSave);
     file_changed         := True;
     acSymbolUndo.Enabled := True;
     acSymbolRedo.Enabled := False;
@@ -1499,12 +1508,8 @@ procedure TfmMain.ReDrawAfterAction;
 
 // прорисовка изображения холста [и превью]
 procedure TfmMain.ReDrawImage;
-  var
-    index: Integer;
   begin
-    index := sgNavigator.Row - sgNavigator.FixedRows;
-
-    mxFont.Item[index].Draw(imEditor.Picture.Bitmap, True,
+    mxFont.Item[IndexOfCharInNavigator].Draw(imEditor.Picture.Bitmap, True,
       cfg.color.editor.bg, cfg.color.editor.active);
   end;
 
