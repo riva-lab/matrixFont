@@ -320,10 +320,10 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
       with TStringList.Create do
         begin
         Add('matrixFontMeta'); // magic
-        Add(AFont.Name);
-        Add(AFont.Author);
-        Add(AFont.Encoding);
-        Add(AFont.AppChange);
+        Add(AFont.Props.Name);
+        Add(AFont.Props.Author);
+        Add(AFont.Props.Encoding);
+        Add(AFont.Props.AppChange);
         Add(AFont.FontStartItem.ToString);
         Add(AFont.FontLength.ToString);
         Add(AFont.Width.ToString);
@@ -347,8 +347,8 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
 
       DrawMap(MX, MY);
       DrawOffsets(MX, MY);
-      DrawInfo(-1, 0, Format('Font "%s" by ©%s', [AFont.Name, AFont.Author]));
-      DrawInfo(-1, 1, Format('Encoding: %s', [AFont.Encoding]));
+      DrawInfo(-1, 0, Format('Font "%s" by ©%s', [AFont.Props.Name, AFont.Props.Author]));
+      DrawInfo(-1, 1, Format('Encoding: %s', [AFont.Props.Encoding]));
       DrawInfo(-1, MY + _r, 'Created in ' + GetAppNameVersion);
 
       // place digital watermark on image with font metadata
@@ -419,15 +419,15 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont):
         begin
         with AFontOut do
           begin
-          Result        := True;
-          Name          := NextString;
-          Author        := NextString;
-          Encoding      := NextString;
-          AppCreate     := NextString;
-          AppCurrent    := GetAppNameVersion;
-          FontStartItem := NextInteger;
-          FontLength    := NextInteger;
-          w             := NextInteger;
+          Result           := True;
+          Props.Name       := NextString;
+          Props.Author     := NextString;
+          Props.Encoding   := NextString;
+          Props.AppCreate  := NextString;
+          Props.AppCurrent := GetAppNameVersion;
+          FontStartItem    := NextInteger;
+          FontLength       := NextInteger;
+          w                := NextInteger;
           SetSize(w, NextInteger);
           end;
 

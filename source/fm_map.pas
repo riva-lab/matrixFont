@@ -176,7 +176,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
               SelectedIndex := i;
               i             += FontX.FontStartItem;
               fmMap.Caption := FM_MAP_CAPTION + Format(' - %d, %.2x, <%s>',
-                [i, i, EncodingToUTF8(Chr(i), FontX.Encoding)]);
+                [i, i, EncodingToUTF8(Chr(i), FontX.Props.Encoding)]);
 
               if WantSingleClick then DoMouseClick(False);
               end;
@@ -236,7 +236,7 @@ procedure TfmMap.actionExport(Sender: TObject);
 
   function GetFilename(AIndex: Integer): String;
     begin
-      Result := Format('%s_charmap_%d.png', [FontX.Name, AIndex]);
+      Result := Format('%s_charmap_%d.png', [FontX.Props.Name, AIndex]);
     end;
 
   procedure DialogPrepare;

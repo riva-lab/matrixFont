@@ -146,13 +146,13 @@ procedure TfmPreview.acExportImageExecute(Sender: TObject);
     pic: TPicture;
     i:   Integer = 1;
   begin
-    while FileExists(SaveDlg.InitialDir + PFontCustom^.Name + '_preview_' +
+    while FileExists(SaveDlg.InitialDir + PFontCustom^.Props.Name + '_preview_' +
         IntToStr(i) + '.png') do
       Inc(i);
 
     with SaveDlg do
       begin
-      FileName := PFontCustom^.Name + '_preview_' + IntToStr(i) + '.png';
+      FileName := PFontCustom^.Props.Name + '_preview_' + IntToStr(i) + '.png';
 
       if Execute then
         try
@@ -231,14 +231,14 @@ procedure TfmPreview.UpdatePreview;
       begin
       xl         := x;
       x          := 0;
-      txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], PFontCustom^.Encoding));
+      txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], PFontCustom^.Props.Encoding));
 
       if rbProp.Checked then
         for i := 1 to txt_length do
           with PFontCustom^ do
             begin
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
-              PFontCustom^.Encoding)[i]) - FontStartItem;
+              PFontCustom^.Props.Encoding)[i]) - FontStartItem;
             if (char_code >= 0) and (char_code <= FontLength - 1) then
               x       := x + Item[char_code].GetCharWidth + seSpace.Value;
             end
@@ -267,12 +267,12 @@ procedure TfmPreview.UpdatePreview;
       for y := 0 to mmPreview.Lines.Count - 1 do
         begin
         x          := 0;
-        txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], PFontCustom^.Encoding));
+        txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], PFontCustom^.Props.Encoding));
         for i := 1 to txt_length do
           with PFontCustom^ do
             begin
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
-              PFontCustom^.Encoding)[i]) - FontStartItem;
+              PFontCustom^.Props.Encoding)[i]) - FontStartItem;
 
             if (char_code >= 0) and (char_code <= FontLength - 1) then
               begin

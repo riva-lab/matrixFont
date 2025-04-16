@@ -100,7 +100,7 @@ destructor TRBFFontConverter.Destroy;
 procedure TRBFFontConverter.AssignRHF(AFont: TMatrixFont);
   begin
     FFont := AFont;
-    Name  := FFont.Name;
+    Name  := FFont.Props.Name;
   end;
 
 procedure TRBFFontConverter.LoadFromFile(AFilename: String);
@@ -118,8 +118,8 @@ procedure TRBFFontConverter.LoadFromFile(AFilename: String);
 
       SetLength(str, FNT_MAX_NAME);
       memstr.ReadBuffer(str[1], FNT_MAX_NAME);
-      FFont.Name   := str.Remove(str.IndexOf(Chr(0)));
-      FFont.Author := 'RBF2RHF Import';
+      FFont.Props.Name   := str.Remove(str.IndexOf(Chr(0)));
+      FFont.Props.Author := 'RBF2RHF Import';
 
       memstr.ReadBuffer(header, SizeOf(header));
 

@@ -262,14 +262,14 @@ procedure TfmImportC.actionExecute(Sender: TObject);
       'edImpChar':
         begin
         if edImpChar.Text <> '' then
-          seImpCharCode.Value := Ord(UTF8ToEncoding(edImpChar.Text, FontImp.Encoding)[1]);
+          seImpCharCode.Value := Ord(UTF8ToEncoding(edImpChar.Text, FontImp.Props.Encoding)[1]);
         edImpCharHex.Text     := IntToHex(seImpCharCode.Value, 2);
         UpdatePreview(True);
         end;
 
       'seImpCharCode':
         begin
-        edImpChar.Text := EncodingToUTF8(Char(seImpCharCode.Value), FontImp.Encoding);
+        edImpChar.Text := EncodingToUTF8(Char(seImpCharCode.Value), FontImp.Props.Encoding);
         UpdatePreview(True);
         end;
 
@@ -460,7 +460,7 @@ procedure TfmImportC.UpdatePreview(ASingle: Boolean);
         if cbImpExample.Checked and not ASingle then
           for i := 1 to Length(edImpExample.Text) do
             DrawChar(
-              Ord(UTF8ToEncoding(edImpExample.Text[i], Encoding)[1]) - FontStartItem,
+              Ord(UTF8ToEncoding(edImpExample.Text[i], Props.Encoding)[1]) - FontStartItem,
               1 + (i - 1) * (Width + 1),
               1 + Length(edImpExample.Text) * (Width + 1),
               imImpExample.Picture.Bitmap, False);

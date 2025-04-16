@@ -59,24 +59,35 @@ type
     Reserved:   array [0..127] of Byte; // резерв
   end;
 
+
+  { TMatrixFontProperties }
+
+  TMatrixFontProperties = class
+  public
+    Name:       String;
+    Author:     String;
+    AppMore:    String;
+    AppCreate:  String;
+    AppChange:  String;
+    AppCurrent: String;
+    Encoding:   String;
+    DateCreate: TDateTime;
+    DateChange: TDateTime;
+
+    constructor Create;
+  end;
+
+
   { TMatrixFont }
 
   TMatrixFont = class
   private
-    FAuthor:        String;        // автор шрифта
-    FName:          String;        // имя шрифта
-    FAppAdditional: String;        // название компании-разработчика приложения-генератора
-    FAppCreate:     String;        // название приложения создания файла
-    FAppChange:     String;        // название приложения изменения файла
-    FAppCurrent:    String;        // название приложения, обрабатывающего файл
-    FCharArray:     TMxCharArray;  // набор символов
-    FDefPrefix:     String;        // префикс для #define-ов
-    FEncoding:      String;        // кодировка (кодовая страница)
+    FProps:     TMatrixFontProperties;
+    FCharArray: TMxCharArray;  // набор символов
+    FDefPrefix: String;        // префикс для #define-ов
 
     FFontStartItem: Integer;       // код начального символа в наборе
     FFontLength:    Integer;       // кол-во символов в наборе
-    FDateCreate:    TDateTime;     // дата и время создания
-    FDateChange:    TDateTime;     // дата и время изменения
 
     FWidth:     Integer;    // ширина символа в пикселях
     FHeight:    Integer;    // высота символа в пикселях
@@ -222,35 +233,10 @@ type
     // массив символов шрифта
     property Item: TMxCharArray read FCharArray write FCharArray;
 
-    // свойство шрифта: имя
-    property Name: String read FName write FName;
-
-    // свойство шрифта: автор
-    property Author: String read FAuthor write FAuthor;
-
-    // свойство шрифта: дополнительная информация (для генератора)
-    property AppAdditional: String read FAppAdditional write FAppAdditional;
-
-    // свойство шрифта: название приложение создания
-    property AppCreate: String read FAppCreate write FAppCreate;
-
-    // свойство шрифта: название приложения изменения файла
-    property AppChange: String read FAppChange write FAppChange;
-
-    // название приложения, обрабатывающего файл
-    property AppCurrent: String read FAppCurrent write FAppCurrent;
-
     // свойство шрифта: префикс для #define-ов
     property DefPrefix: String read FDefPrefix write FDefPrefix;
 
-    // свойство шрифта: дата и время создания
-    property DateCreate: TDateTime read FDateCreate;
-
-    // свойство шрифта: дата и время изменения
-    property DateChange: TDateTime read FDateChange;
-
-    // свойство шрифта: кодировка (кодовая страница)
-    property Encoding: String read FEncoding write FEncoding;
+    property Props: TMatrixFontProperties read FProps write FProps;
   end;
 
 // функция латинизации кириллицы (транслитерация)
@@ -290,6 +276,22 @@ function Transliterate(cyr: String): String;
         224..255:
           Result := Result + lat_l[Ord(cyr[i]) - 224];
         end;
+  end;
+
+{ TMatrixFontProperties }
+
+constructor TMatrixFontProperties.Create;
+  begin
+    inherited;
+    Name       := 'New Font';
+    Author     := 'Anonymous';
+    AppMore    := '';
+    AppCreate  := '';
+    AppChange  := '';
+    AppCurrent := '';
+    Encoding   := EncodingAnsi;
+    DateCreate := Now;
+    DateChange := Now;
   end;
 
 { -----
@@ -505,12 +507,12 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
       .Replace('%LabelDateTime%', UTF8PadRight(RHF_COMMENT_TIME, space))
       .Replace('%LabelApplication%', UTF8PadRight(RHF_COMMENT_APP, space))
       .Replace('%LabelFontEncoding%', UTF8PadRight(RHF_COMMENT_CP, space))
-      .Replace('%FontName%', FName)
-      .Replace('%FontAuthor%', FAuthor)
       .Replace('%DateTime%', DateTimeToStr(Now))
-      .Replace('%Application%', FAppCurrent)
-      .Replace('%FontEncoding%', GetEncodingCaption(FEncoding))
-      .Replace('%AppAdditional%', FAppAdditional)
+      .Replace('%FontName%', FProps.Name)
+      .Replace('%FontAuthor%', FProps.Author)
+      .Replace('%Application%', FProps.AppCurrent)
+      .Replace('%FontEncoding%', GetEncodingCaption(FProps.Encoding))
+      .Replace('%AppAdditional%', FProps.AppMore)
       .Replace('%FontIDUpperCase%', id)
       .Replace('%FontIDLowerCase%', LowerCase(id))
       .Replace('%FontLength%', (EndChar - StartChar + 1).ToString)
@@ -544,21 +546,21 @@ procedure TMatrixFont.SaveToFile(FileName: String);
     mask:        Longint = 1;
   begin
     // установка полей заголовка файла
-    FDateChange := Now;
-    FAppChange  := FAppCurrent;
+    FProps.DateChange := Now;
+    FProps.AppChange  := FProps.AppCurrent;
     with header do
       begin
-      FontName   := FName;
-      FontAuthor := FAuthor;
-      DateCreate := FDateCreate;
-      DateChange := FDateChange;
       CharFirst  := FFontStartItem;
       CharLength := FFontLength;
       CharHeight := FHeight;
       CharWidth  := FWidth;
-      AppCreate  := FAppCreate;
-      AppChange  := FAppChange;
-      Encoding   := FEncoding;
+      FontName   := FProps.Name;
+      FontAuthor := FProps.Author;
+      DateCreate := FProps.DateCreate;
+      DateChange := FProps.DateChange;
+      AppCreate  := FProps.AppCreate;
+      AppChange  := FProps.AppChange;
+      Encoding   := FProps.Encoding;
 
       for w := 0 to High(Reserved) do Reserved[w] := 42;
       end;
@@ -630,15 +632,15 @@ function TMatrixFont.ReadFromFile(FileName: String): Boolean;
 
       if not Result then Exit(Result);
 
-      FName         := FontName;
-      FAuthor       := FontAuthor;
-      FAppCreate    := AppCreate;
-      FAppChange    := AppChange;
-      FDateCreate   := DateCreate;
-      FDateChange   := DateChange;
-      FontStartItem := CharFirst;
-      FontLength    := CharLength;
-      FEncoding     := GetEncodingAdapted(Encoding);
+      FontStartItem     := CharFirst;
+      FontLength        := CharLength;
+      FProps.Name       := FontName;
+      FProps.Author     := FontAuthor;
+      FProps.AppCreate  := AppCreate;
+      FProps.AppChange  := AppChange;
+      FProps.DateCreate := DateCreate;
+      FProps.DateChange := DateChange;
+      FProps.Encoding   := GetEncodingAdapted(Encoding);
       SetSize(CharWidth, CharHeight);
       end;
 
@@ -721,7 +723,7 @@ procedure TMatrixFont.Import(Font: Graphics.TFont; Width, Height: Integer);
 
     for i := 1 to FFontLength do
       begin
-      FCharArray[i - 1].Import(Font, FFontStartItem + i - 1, FEncoding);
+      FCharArray[i - 1].Import(Font, FFontStartItem + i - 1, FProps.Encoding);
       FCharArray[i - 1].History(haSave);
       end;
   end;
@@ -1179,9 +1181,9 @@ function TMatrixFont.Import(ACode: String; AOffset, ASkip: Integer; AType: TImpo
     ACode  := NormalizeCode(ACode);
 
     if AType = imAdafruit then
-      ready := StrToArrayAdafruit(ACode, values, gfxArr, FName)
+      ready := StrToArrayAdafruit(ACode, values, gfxArr, FProps.Name)
     else
-      ready := StrToArray(ACode, values, b, FName);
+      ready := StrToArray(ACode, values, b, FProps.Name);
 
     if not ready then
       begin
@@ -1379,7 +1381,7 @@ function TMatrixFont.GetCharName(ACode: Integer; AFull: Boolean): String;
           Result := char_name[32];
 
       else
-        Result := EncodingToUTF8(Char(ACode), FEncoding);
+        Result := EncodingToUTF8(Char(ACode), FProps.Encoding);
       end;
   end;
 
@@ -1421,11 +1423,9 @@ constructor TMatrixFont.Create;
       FCharArray[i - 1] := TMatrixChar.Create;
       end;
 
-    FHeight     := FCharArray[0].Height;
-    FWidth      := FCharArray[0].Width;
-    FDateCreate := Now;
-    FDateChange := Now;
-    FEncoding   := EncodingAnsi;
+    FHeight := FCharArray[0].Height;
+    FWidth  := FCharArray[0].Width;
+    FProps  := TMatrixFontProperties.Create;
   end;
 
 destructor TMatrixFont.Destroy;
@@ -1434,6 +1434,8 @@ destructor TMatrixFont.Destroy;
   begin
     for i := 0 to FFontLength - 1 do
       FreeAndNil(FCharArray[i]);
+
+    FreeAndNil(FProps);
     inherited; // Эквивалентно: inherited Destroy;
   end;
 

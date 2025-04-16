@@ -170,8 +170,8 @@ procedure TfmGen.FormShow(Sender: TObject);
     if mxFont <> nil then
       with mxFont do
         begin
-        SaveDlg.FileName := AnsiReplaceText(LowerCase(Name), ' ', '_') + '_font.h';
-        edDefPrefix.Text := Transliterate(UpperCase('FONT_' + AnsiReplaceText(Name, ' ', '_')));
+        SaveDlg.FileName := AnsiReplaceText(LowerCase(Props.Name), ' ', '_') + '_font.h';
+        edDefPrefix.Text := Transliterate(UpperCase('FONT_' + AnsiReplaceText(Props.Name, ' ', '_')));
         end;
 
     EndFormUpdate;
@@ -227,13 +227,13 @@ procedure TfmGen.edDefPrefixChange(Sender: TObject);
     with edDefPrefix do
       begin
       cursor_position := SelStart;
-      old_str_length  := Length(UTF8ToEncoding(Text, mxFont.Encoding));
+      old_str_length  := Length(UTF8ToEncoding(Text, mxFont.Props.Encoding));
       Text            := Transliterate(Text);
-      new_str_length  := Length(UTF8ToEncoding(Text, mxFont.Encoding));
+      new_str_length  := Length(UTF8ToEncoding(Text, mxFont.Props.Encoding));
       SelStart        := cursor_position + new_str_length - old_str_length;
 
       if Length(Text) = 0 then
-        Text := UpperCase('FONT_' + AnsiReplaceText(mxFont.Name, ' ', '_'));
+        Text := UpperCase('FONT_' + AnsiReplaceText(mxFont.Props.Name, ' ', '_'));
       end;
 
     OnChangeParameter(Sender);

@@ -541,7 +541,7 @@ procedure TfmMain.acSaveExecute(Sender: TObject);
 
       if dlgOpen.FileName = '' then
         begin
-        FileName := AnsiReplaceText(mxFont.Name, ' ', '_');
+        FileName := AnsiReplaceText(mxFont.Props.Name, ' ', '_');
         if Execute then FontSave(FileName);
         end
       else
@@ -567,7 +567,7 @@ procedure TfmMain.acSaveAsBeforeExecute(Sender: TObject);
         FileName := dlgOpen.FileName;
 
       if FileName = '' then
-        FileName := AnsiReplaceText(mxFont.Name, ' ', '_');
+        FileName := AnsiReplaceText(mxFont.Props.Name, ' ', '_');
 
       InitialDir := ExtractFileDir(FileName) + DirectorySeparator;
       FileName   := ExtractFileNameOnly(FileName);
@@ -611,7 +611,7 @@ procedure TfmMain.acFontImportCCodeExecute(Sender: TObject);
 
     with fmImportC do
       begin
-      FontImp.Encoding := mxFont.Encoding;
+      FontImp.Props.Encoding := mxFont.Props.Encoding;
 
       if ShowModal = mrOk then
         begin
@@ -633,24 +633,24 @@ procedure TfmMain.acFontPropertiesExecute(Sender: TObject);
     with fmProp, mxFont do
       begin
       prPath      := dlgOpen.FileName;
-      prName      := Name;
-      prAuthor    := Author;
       prFirst     := FontStartItem;
       prLast      := FontLength + FontStartItem - 1;
       prW         := Width;
       prH         := Height;
-      prDTCreate  := DateTimeToStr(DateCreate);
-      prDTChange  := DateTimeToStr(DateChange);
-      prAppCreate := AppCreate;
-      prAppChange := AppChange;
-      prEnc       := GetIndexOfEncoding(Encoding);
+      prName      := Props.Name;
+      prAuthor    := Props.Author;
+      prAppCreate := Props.AppCreate;
+      prAppChange := Props.AppChange;
+      prDTCreate  := DateTimeToStr(Props.DateCreate);
+      prDTChange  := DateTimeToStr(Props.DateChange);
+      prEnc       := GetIndexOfEncoding(Props.Encoding);
 
       if ShowModal = mrOk then
         begin
-        file_changed := True;
-        Name         := edFontName.Text;
-        Author       := edAuthor.Text;
-        Encoding     := GetEncodingByIndex(cbEncoding.ItemIndex);
+        file_changed   := True;
+        Props.Name     := edFontName.Text;
+        Props.Author   := edAuthor.Text;
+        Props.Encoding := GetEncodingByIndex(cbEncoding.ItemIndex);
 
         FileStatusUpdate();
         ReDrawContent;
@@ -768,7 +768,7 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
       // показать/скрыть панель поиска символа в таблице
       pFind.Visible := acSymbolFind.Checked;
       seFind.Value  := sgNavigator.Row + mxFont.FontStartItem - sgNavigator.FixedRows;
-      edFind.Text   := EncodingToUTF8(Char(seFind.Value), mxFont.Encoding);
+      edFind.Text   := EncodingToUTF8(Char(seFind.Value), mxFont.Props.Encoding);
       end
     else
       begin
@@ -777,13 +777,13 @@ procedure TfmMain.actionSymbolFind(Sender: TObject);
       if TSpinEdit(Sender).Name = 'seFind' then
         if (seFind.Value >= mxFont.FontStartItem) and
           (seFind.Value < mxFont.FontStartItem + mxFont.FontLength) then
-          edFind.Text := EncodingToUTF8(Char(seFind.Value), mxFont.Encoding);
+          edFind.Text := EncodingToUTF8(Char(seFind.Value), mxFont.Props.Encoding);
 
       // поиск и выделение найденного символа по названию
       if TEdit(Sender).Name = 'edFind' then
         if edFind.Text <> '' then
           try
-          seFind.Value := Ord(UTF8ToEncoding(edFind.Text, mxFont.Encoding)[1]);
+          seFind.Value := Ord(UTF8ToEncoding(edFind.Text, mxFont.Props.Encoding)[1]);
           except
           seFind.Value := mxFont.FontStartItem;
           end;
@@ -1318,8 +1318,8 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
 
         acSymbolRedo.Enabled     := False;
         acSymbolUndo.Enabled     := False;
-        AppAdditional            := GetAppCompanyName;
-        AppCurrent               := GetAppNameVersion;
+        Props.AppMore            := GetAppCompanyName;
+        Props.AppCurrent         := GetAppNameVersion;
         dlgOpen.FileName         := AFileName;
         acSaveAs.Dialog.FileName := AFileName;
 
@@ -1348,16 +1348,14 @@ procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
       with mxFont do
         begin
         FreeAndNil(mxFont);
-        mxFont               := TMatrixFont.Create;
-        acSymbolRedo.Enabled := False;
-        acSymbolUndo.Enabled := False;
+        mxFont := TMatrixFont.Create;
 
-        Name          := n;
-        Author        := a;
-        AppCreate     := GetAppNameVersion;
-        AppCurrent    := AppCreate;
-        AppAdditional := GetAppCompanyName;
-        Encoding      := GetEncodingByIndex(e);
+        Props.Name       := n;
+        Props.Author     := a;
+        Props.AppCreate  := GetAppNameVersion;
+        Props.AppCurrent := Props.AppCreate;
+        Props.AppMore    := GetAppCompanyName;
+        Props.Encoding   := GetEncodingByIndex(e);
 
         SetSize(w, h);
         FontStartItem := si;
@@ -1429,7 +1427,7 @@ procedure TfmMain.FileStatusUpdate;
   begin
     BeginFormUpdate;
 
-    s := mxFont.Name;
+    s := mxFont.Props.Name;
     if dlgOpen.FileName <> '' then s += ' [' + ExtractFileName(dlgOpen.FileName) + ']';
     if file_changed then s += ' (' + TXT_CHANGED + ')';
 
@@ -1437,7 +1435,7 @@ procedure TfmMain.FileStatusUpdate;
     Application.Title := s;
 
     with mxFont do
-      miFontInfo.Caption := UpperCase(Encoding) + '   '
+      miFontInfo.Caption := UpperCase(Props.Encoding) + '   '
         + Width.ToString + ' x ' + Height.ToString;
 
     // visibility of controls in navigator on the left side
@@ -1478,7 +1476,9 @@ procedure TfmMain.FontCreateFinish;
     acZoomFit.Execute;
     FontActionExecute;
 
-    file_changed := False;
+    acSymbolRedo.Enabled := False;
+    acSymbolUndo.Enabled := False;
+    file_changed         := False;
     FileStatusUpdate;
     SettingsApplyToCurrentSession;
 
