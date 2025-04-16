@@ -183,6 +183,7 @@ type
 
 
     constructor Create;
+    constructor CreateInsteadOf(AReplacedInstance: TMatrixFont);
     destructor Destroy; override;
 
 
@@ -1426,6 +1427,12 @@ constructor TMatrixFont.Create;
     FHeight := FCharArray[0].Height;
     FWidth  := FCharArray[0].Width;
     FProps  := TMatrixFontProperties.Create;
+  end;
+
+constructor TMatrixFont.CreateInsteadOf(AReplacedInstance: TMatrixFont);
+  begin
+    Create;
+    if Assigned(AReplacedInstance) then FreeAndNil(AReplacedInstance);
   end;
 
 destructor TMatrixFont.Destroy;

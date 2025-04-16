@@ -1289,7 +1289,7 @@ procedure TfmMain.SettingsApplyToCurrentSession(Sender: TObject);
 // загрузка файла шрифта
 procedure TfmMain.FontLoadFromFile(AFileName: String);
   var
-    tmp:        TMatrixFont;
+    tmp, _old:  TMatrixFont;
     isReadable: Boolean;
   begin
     if not GetConfirmation then Exit;
@@ -1300,21 +1300,21 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
       begin
       tmp        := TMatrixFont.Create;
       isReadable := tmp.ReadFromFile(AFileName);
-      FreeAndNil(tmp);
 
       // если файл поврежден - предупреждаем, выходим
       if not isReadable then
         begin
         fmConfirm.Show(TXT_ERROR, WARN_LOAD, [mbYes], self);
+        FreeAndNil(tmp);
         Exit;
         end;
 
       // загружаем файл, если он не поврежден
       with mxFont do
         begin
-        FreeAndNil(mxFont);
-        mxFont := TMatrixFont.Create;
-        ReadFromFile(AFileName);
+        _old   := mxFont;
+        mxFont := tmp;
+        FreeAndNil(_old);
 
         acSymbolRedo.Enabled     := False;
         acSymbolUndo.Enabled     := False;
@@ -1344,12 +1344,11 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
 // создание нового шрифта
 procedure TfmMain.FontCreateNew(w, h, si, l, e: Integer; n, a: String);
   begin
+    mxFont := TMatrixFont.CreateInsteadOf(mxFont);
+
       try
       with mxFont do
         begin
-        FreeAndNil(mxFont);
-        mxFont := TMatrixFont.Create;
-
         Props.Name       := n;
         Props.Author     := a;
         Props.AppCreate  := GetAppNameVersion;
