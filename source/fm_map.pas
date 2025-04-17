@@ -192,19 +192,6 @@ procedure TfmMap.sgMapChangeBounds(Sender: TObject);
     if not Assigned(mxFont) then Exit;
     sgMap.Color := cfg.color.map.bg;
 
-    { fix bug: when form is visible and you disable main form option 'on top'
-      cbMapWidth unexpectedly empties }
-    with cbMapWidth do
-      begin
-      if Items.Count = 0 then
-        begin
-        Items.CommaText := '2,4,8,16,32,64';
-        ItemIndex       := Tag;
-        end;
-
-      Tag := ItemIndex;
-      end;
-
     with sgMap do
       try
       ColCount         := (2 shl cbMapWidth.ItemIndex) + 1;
