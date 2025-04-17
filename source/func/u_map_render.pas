@@ -40,6 +40,18 @@ function SwapDWord(This: DWord): DWord;
     {$ENDIF}
   end;
 
+function GetAddrStart(ACols, AStartItem: Integer): Integer;
+  begin
+    Result := AStartItem div ACols * ACols;
+  end;
+
+function GetRowsCount(ACols, AStartItem, ALength: Integer): Integer;
+  var
+    _addrEnd: Integer;
+  begin
+    _addrEnd := (AStartItem + ALength - 1) div ACols * ACols;
+    Result   := (_addrEnd - GetAddrStart(ACols, AStartItem)) div ACols + 1;
+  end;
 
 function AddTextChunkToPNG(const AFilename, AKey, AValue: String): Boolean;
   var
@@ -223,15 +235,18 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
     _export, _bmp: TBitmap;
     _scaled:       TPicture;
     _w, _h, _r:    Integer;
+    _addrStart:    Integer;
     _meta:         String;
 
   procedure ExportInit(AMapX, AMapY: Integer);
     var
       _txtExt: TSize;
     begin
+      _addrStart := GetAddrStart(ACols, AFont.FontStartItem);
+      _r         := GetRowsCount(ACols, AFont.FontStartItem, AFont.FontLength);
+
       _w := ASpace * 2 + AFont.Width;
       _h := ASpace * 2 + AFont.Height;
-      _r := 1 + (AFont.FontLength - 1) div ACols;
 
       _bmp    := TBitmap.Create;
       _export := TBitmap.Create;
@@ -260,8 +275,8 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
 
   procedure DrawChar(AIndex, AX, AY: Integer);
     begin
-      if not (AIndex in [0..AFont.FontLength - 1]) then Exit;
-      AFont.Item[AFont.FontStartItem + AIndex].Draw(_bmp, False, AColor0, AColor1);
+      if not AFont.IsInRange(AIndex) then Exit;
+      AFont.Item[AIndex].Draw(_bmp, False, AColor0, AColor1);
       _export.Canvas.Draw(_w * AX + ASpace, _h * AY + ASpace, _bmp);
     end;
 
@@ -272,7 +287,7 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
       // render char map in 1:1 AScale
       for x := 0 to ACols - 1 do
         for y := 0 to _r - 1 do
-          DrawChar(y * ACols + x, x + AX, y + AY);
+          DrawChar(_addrStart + y * ACols + x, x + AX, y + AY);
 
       // output bitmap scaling
       with _scaled.Bitmap.Canvas do
@@ -297,10 +312,9 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
     var
       s: String;
     begin
-      if not AIndex in [0..AFont.FontLength] then Exit;
       if AHorz then
         s := Format('+%x', [AIndex]) else
-        s := Format('%.2x', [AFont.FontStartItem + AIndex * ACols]);
+        s := Format('%.2x', [_addrStart + AIndex * ACols]);
       DrawInfo(AX, AY, s, True);
     end;
 
@@ -348,7 +362,8 @@ procedure RenderMapToPNG(AFileName: String; AFont: TMatrixFont; ACols, AScale, A
       DrawMap(MX, MY);
       DrawOffsets(MX, MY);
       DrawInfo(-1, 0, Format('Font "%s" by ©%s', [AFont.Props.Name, AFont.Props.Author]));
-      DrawInfo(-1, 1, Format('Encoding: %s', [AFont.Props.Encoding]));
+      DrawInfo(-1, 1, Format('Range: %d - %d.  Encoding: %s', [AFont.FontStartItem, AFont.FontStartItem + AFont.FontLength - 1, AFont.Props.Encoding]));
+      DrawInfo(-1, 2, Format('Width x Height: %d x %d', [AFont.Width, AFont.Height]));
       DrawInfo(-1, MY + _r, 'Created in ' + GetAppNameVersion);
 
       // place digital watermark on image with font metadata
@@ -390,7 +405,6 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont):
     pic:      TPicture;
     pixRef:   TColor;
     isRefSet: Boolean = False;
-    ch:       Integer = 0;
     scale, space, cols, offsetX, offsetY: Integer;
 
   function DecodeMetadata(S: String): Boolean;
@@ -450,34 +464,32 @@ function ImportFontFromPNG(AFileName, AMetaData: String; AFontOut: TMatrixFont):
         end;
     end;
 
-  function ExtractNextChar: Boolean;
+  procedure ExtractNextChar(AIndex: Integer);
     var
       i, j, x, y: Integer;
     begin
-      Result := False;
+      if not AFontOut.IsInRange(AIndex) then Exit;
         try
-        if not (ch in [0..AFontOut.FontLength - 1]) then Exit;
-
-        x := scale * (space + (offsetX + ch mod cols) * (2 * space + AFontOut.Width));
-        y := scale * (space + (offsetY + ch div cols) * (2 * space + AFontOut.Height));
+        i := AIndex - GetAddrStart(cols, AFontOut.FontStartItem);
+        x := scale * (space + (offsetX + i mod cols) * (2 * space + AFontOut.Width));
+        y := scale * (space + (offsetY + i div cols) * (2 * space + AFontOut.Height));
         GetRefPixel(x, y);
 
         for i := 0 to AFontOut.Width - 1 do
           for j := 0 to AFontOut.Height - 1 do
             with pic.Bitmap.Canvas do
-              AFontOut.Item[AFontOut.FontStartItem + ch].PixelAction(i, j,
+              AFontOut.Item[AIndex].PixelAction(i, j,
                 (abs(Pixels[x + i * scale, y + j * scale] - pixRef) > 1).Select(paSet, paClear));
-
-        Result := True;
-        Inc(ch);
         except
         end;
     end;
 
   function ExtractFont: Boolean;
+    var
+      i: Integer;
     begin
       Result := False;
-      while ExtractNextChar do ;
+      for i  := 0 to High(AFontOut.Item) do ExtractNextChar(i);
       Result := True;
     end;
 
