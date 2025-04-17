@@ -40,6 +40,7 @@ type
 
   private
     WantSingleClick: Boolean;
+    FAddrStart:      Integer;
 
     procedure DoMouseClick(IsDouble: Boolean);
 
@@ -139,15 +140,15 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
           begin
           Canvas.TextRect(aRect, aRect.Left, aRect.Top, (aRow = 0).Select(
             Format('+%x', [aCol - 1]),
-            Format('%.2x', [mxFont.FontStartItem + (aRow - 1) * (ColCount - 1)]))
+            Format('%.2x', [FAddrStart + (aRow - 1) * (ColCount - 1)]))
             );
           end
         else
           begin
           _isSelected := (aRow = Row) and (aCol = Col);
-          i           := (aRow - 1) * (ColCount - 1) + (aCol - 1);
+          i           := FAddrStart + (aRow - 1) * (ColCount - 1) + (aCol - 1);
 
-          if i in [0 .. mxFont.FontLength - 1] then
+          if mxFont.IsInRange(i) then
             begin
               try
               bm_tmp       := TBitmap.Create;
@@ -158,7 +159,7 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
               aRect.Top    := aRect.Top + dh div 2;
               aRect.Bottom := aRect.Bottom - dh div 2;
 
-              mxFont.Item[mxFont.FontStartItem + i].Draw(bm_tmp, False,
+              mxFont.Item[i].Draw(bm_tmp, False,
                 _isSelected.Select(cfg.color.map.selbg, cfg.color.map.bg),
                 _isSelected.Select(cfg.color.map.selact, cfg.color.map.active));
 
@@ -169,14 +170,15 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
 
             if _isSelected then
               begin
-              SelectedIndex := i;
-              i             += mxFont.FontStartItem;
-              fmMap.Caption := FM_MAP_CAPTION + Format(' - %d, %.2x, <%s>',
+              SelectedIndex := i - mxFont.FontStartItem;
+              fmMap.Caption := FM_MAP_CAPTION + Format(' - %d, %.2xh, <%s>',
                 [i, i, EncodingToUTF8(Chr(i), mxFont.Props.Encoding)]);
 
               if WantSingleClick then DoMouseClick(False);
               end;
-            end;
+            end
+          else if _isSelected then
+            fmMap.Caption := FM_MAP_CAPTION;
           end;
       end;
   end;
@@ -188,14 +190,19 @@ procedure TfmMap.sgMapSelectCell(Sender: TObject; aCol, aRow: Integer; var CanSe
 procedure TfmMap.sgMapChangeBounds(Sender: TObject);
   var
     _colWidth: Double;
+    _w, _end:  Integer;
   begin
     if not Assigned(mxFont) then Exit;
     sgMap.Color := cfg.color.map.bg;
 
+    _w         := (2 shl cbMapWidth.ItemIndex);
+    FAddrStart := mxFont.FontStartItem div _w * _w;
+    _end       := (mxFont.FontStartItem + mxFont.FontLength - 1) div _w * _w;
+
     with sgMap do
       try
-      ColCount         := (2 shl cbMapWidth.ItemIndex) + 1;
-      RowCount         := (mxFont.FontLength - 1) div (ColCount - 1) + 2;
+      ColCount         := _w + 1;
+      RowCount         := (_end - FAddrStart) div _w + 2;
       _colWidth        := Width / ColCount;
       ColWidths[0]     := round(_colWidth);
       DefaultRowHeight := round(_colWidth / (mxFont.Width + seSpaceX.Value) * (mxFont.Height + seSpaceY.Value));
