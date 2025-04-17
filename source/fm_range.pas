@@ -5,7 +5,8 @@ unit fm_range;
 interface
 
 uses
-  Forms, Buttons, StdCtrls, Spin, ExtCtrls, u_strings, Classes;
+  Classes, Forms, Buttons, StdCtrls, Spin, ExtCtrls, SysUtils,
+  font, u_helpers, u_strings;
 
 type
 
@@ -14,18 +15,22 @@ type
   TfmRange = class(TForm)
     bbApply:   TBitBtn;
     gbRange:   TGroupBox;
-    lbStart:   TLabel;
+    gbResult:  TGroupBox;
+    lbDiffE:   TLabel;
+    lbDiffEL:  TLabel;
+    lbDiffS:   TLabel;
+    lbDiffSL:  TLabel;
     lbEnd:     TLabel;
+    lbStart:   TLabel;
     lbWarning: TLabel;
     pControls: TPanel;
     pMain:     TPanel;
-    seStart:   TSpinEdit;
     seEnd:     TSpinEdit;
+    seStart:   TSpinEdit;
 
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure seEndChange(Sender: TObject);
-    procedure seStartChange(Sender: TObject);
+    procedure seValueChange(Sender: TObject);
   end;
 
 var
@@ -34,6 +39,11 @@ var
 implementation
 
 {$R *.lfm}
+
+function IntWithSign(AValue: Integer): String;
+  begin
+    Result := Format('%s%d', [(AValue > 0).Select('+', ''), AValue]);
+  end;
 
 { TfmRange }
 
@@ -44,18 +54,17 @@ procedure TfmRange.FormCreate(Sender: TObject);
 
 procedure TfmRange.FormShow(Sender: TObject);
   begin
-    lbWarning.Caption := WARN_NOREDO;
+    lbDiffS.Constraints.MinWidth := Canvas.TextWidth('0000');
+    lbDiffE.Constraints.MinWidth := Canvas.TextWidth('0000');
   end;
 
-procedure TfmRange.seStartChange(Sender: TObject);
+procedure TfmRange.seValueChange(Sender: TObject);
   begin
-    seEnd.MinValue := seStart.Value;
-  end;
-
-procedure TfmRange.seEndChange(Sender: TObject);
-  begin
+    seEnd.MinValue   := seStart.Value;
     seStart.MaxValue := seEnd.Value;
+
+    lbDiffS.Caption := IntWithSign(mxFont.FontStartItem - seStart.Value);
+    lbDiffE.Caption := IntWithSign(1 - mxFont.FontStartItem - mxFont.FontLength + seEnd.Value);
   end;
 
 end.
-

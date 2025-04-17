@@ -1304,6 +1304,7 @@ procedure TMatrixFont.SetRange(StartCode: Integer; EndCode: Integer);
           begin
           SetSize(FWidth, FHeight);
           Clear;
+          History(haClear);
           end;
         end;
   end;

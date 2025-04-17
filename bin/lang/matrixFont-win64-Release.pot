@@ -1763,7 +1763,22 @@ msgid "Задать диапазон"
 msgstr ""
 
 #: tfmrange.gbrange.caption
-msgid "Диапазон"
+msgid "Новый диапазон"
+msgstr ""
+
+#: tfmrange.gbresult.caption
+msgctxt "tfmrange.gbresult.caption"
+msgid "Результат"
+msgstr ""
+
+#: tfmrange.lbdiffel.caption
+msgctxt "tfmrange.lbdiffel.caption"
+msgid "в конце"
+msgstr ""
+
+#: tfmrange.lbdiffsl.caption
+msgctxt "tfmrange.lbdiffsl.caption"
+msgid "в начале"
 msgstr ""
 
 #: tfmrange.lbend.caption

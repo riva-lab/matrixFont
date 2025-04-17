@@ -26,7 +26,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="113">
+      <ExcludedIdentifiers Count="115">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -140,6 +140,8 @@
         <Item111 Value="tfmupdate.lbsize.caption"/>
         <Item112 Value="tfmsettings.cbappupdateway.text"/>
         <Item113 Value="tfmsettings.cbappupdatefreq.text"/>
+        <Item114 Value="tfmrange.lbdiffs.caption"/>
+        <Item115 Value="tfmrange.lbdiffe.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
