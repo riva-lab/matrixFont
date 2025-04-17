@@ -40,10 +40,12 @@ implementation
 
 {$R *.lfm}
 
+
 function IntWithSign(AValue: Integer): String;
   begin
     Result := Format('%s%d', [(AValue > 0).Select('+', ''), AValue]);
   end;
+
 
 { TfmRange }
 
@@ -56,6 +58,7 @@ procedure TfmRange.FormShow(Sender: TObject);
   begin
     lbDiffS.Constraints.MinWidth := Canvas.TextWidth('0000');
     lbDiffE.Constraints.MinWidth := Canvas.TextWidth('0000');
+    seValueChange(Sender);
   end;
 
 procedure TfmRange.seValueChange(Sender: TObject);
