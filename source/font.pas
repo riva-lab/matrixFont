@@ -435,9 +435,9 @@ function TMatrixFont.MoveChars(AIndex: Integer; ACharMoveMode: TCharMoveMode): B
 // генерировать код шрифта
 function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
   var
-    i, w, space: Integer;
-    s, id:       String;
-    dataType:    array[0..3] of String = (
+    i, space: Integer;
+    s, id:    String;
+    dataType: array[0..3] of String = (
       'unsigned char',
       'unsigned short',
       'uint24_t',
@@ -460,6 +460,36 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
         Result := LineEnding + '    /* ' + Result + ' */' + LineEnding;
     end;
 
+  function GenerateCodeForChar(AIndex: Integer): String;
+    var
+      _chWidth: Integer;
+    begin
+      if not InRange(AIndex, StartChar, EndChar) then Exit;
+
+      _chWidth := FCharArray[AIndex].GetCharWidth;
+
+      Result := UnicodeFormat('%s    /*%s %-3d %-3s, width = %d */  %s%s%s', [
+        AddBlockCaption(AIndex),
+        RHF_COMMENT_CHAR,
+        AIndex,
+        ((AIndex < 32) or (AIndex = 127)).Select(GetCharName(AIndex), '<' + GetCharName(AIndex) + '>'),
+        _chWidth,
+        (FFontType = ftPROPORTIONAL).Select(_chWidth.ToString + ',', '') + LineEnding,
+        FCharArray[AIndex].GenerateCode(
+        FGroupIsVertical,
+        FScanColsFirst,
+        FScanColsToRight,
+        FScanRowsToDown,
+        FBitOrderLSBFirst,
+        FNumbersInversion,
+        FNumbersView,
+        FEmptyBits,
+        FFontType,
+        FBitsPerGroup,
+        FValuesPerLine),
+        (AIndex = EndChar).Select('', ',')]) + LineEnding + LineEnding;
+    end;
+
   begin
     if (StartChar < 0) or (StartChar < FFontStartItem) then
       StartChar := FFontStartItem;
@@ -474,30 +504,7 @@ function TMatrixFont.GenerateCode(StartChar: Integer; EndChar: Integer): String;
 
     // generate array of chars
     for i := 0 to High(FCharArray) do
-      begin
-      if not InRange(i, StartChar, EndChar) then Continue;
-      w      := FCharArray[i].GetCharWidth;
-      Result += UnicodeFormat('%s    /*%s %-3d %-3s, width = %d */  %s%s%s', [
-        AddBlockCaption(i),
-        RHF_COMMENT_CHAR,
-        i,
-        ((i < 32) or (i = 127)).Select(GetCharName(i), '<' + GetCharName(i) + '>'),
-        w,
-        (FFontType = ftPROPORTIONAL).Select(w.ToString + ',', '') + LineEnding,
-        FCharArray[i].GenerateCode(
-        FGroupIsVertical,
-        FScanColsFirst,
-        FScanColsToRight,
-        FScanRowsToDown,
-        FBitOrderLSBFirst,
-        FNumbersInversion,
-        FNumbersView,
-        FEmptyBits,
-        FFontType,
-        FBitsPerGroup,
-        FValuesPerLine),
-        (i = EndChar).Select('', ',')]) + LineEnding + LineEnding;
-      end;
+      Result += GenerateCodeForChar(i);
 
     i := FGroupIsVertical.Select(
       FWidth * ((FHeight - 1) div FBitsPerGroup + 1),
