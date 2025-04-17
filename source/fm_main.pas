@@ -1476,9 +1476,6 @@ procedure TfmMain.FontActionExecute;
 // завершение создания шрифта
 procedure TfmMain.FontCreateFinish;
   begin
-    fmMap.FontX           := mxFont;
-    fmPreview.PFontCustom := @mxFont;
-
     sgNavigator.RowCount := mxFont.FontLength + sgNavigator.FixedRows;
 
     acZoomFit.Execute;

@@ -78,10 +78,6 @@ type
 
   private
     procedure InitConfig;
-
-  public
-    { public declarations }
-    PFontCustom: TPFontCustom;
   end;
 
 
@@ -146,13 +142,13 @@ procedure TfmPreview.acExportImageExecute(Sender: TObject);
     pic: TPicture;
     i:   Integer = 1;
   begin
-    while FileExists(SaveDlg.InitialDir + PFontCustom^.Props.Name + '_preview_' +
+    while FileExists(SaveDlg.InitialDir + mxFont.Props.Name + '_preview_' +
         IntToStr(i) + '.png') do
       Inc(i);
 
     with SaveDlg do
       begin
-      FileName := PFontCustom^.Props.Name + '_preview_' + IntToStr(i) + '.png';
+      FileName := mxFont.Props.Name + '_preview_' + IntToStr(i) + '.png';
 
       if Execute then
         try
@@ -213,13 +209,12 @@ procedure TfmPreview.UpdatePreview;
     bm_tmp: TBitmap;
     CharWidth, CharHeight, char_code, txt_length, x, xl, y, i: Integer;
   begin
-    if not Assigned(PFontCustom) then Exit;
-    if not Assigned(PFontCustom^) then Exit;
+    if not Assigned(mxFont) then Exit;
 
     bm_tmp := TBitmap.Create;
 
-    CharWidth  := PFontCustom^.Width;
-    CharHeight := PFontCustom^.Height + seDelta.Value;
+    CharWidth  := mxFont.Width;
+    CharHeight := mxFont.Height + seDelta.Value;
 
     lbBackground.Color := cfg.color.prev.bg;
 
@@ -229,14 +224,14 @@ procedure TfmPreview.UpdatePreview;
       begin
       xl         := x;
       x          := 0;
-      txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], PFontCustom^.Props.Encoding));
+      txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], mxFont.Props.Encoding));
 
       if rbProp.Checked then
         for i := 1 to txt_length do
-          with PFontCustom^ do
+          with mxFont do
             begin
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
-              PFontCustom^.Props.Encoding)[i]);
+              mxFont.Props.Encoding)[i]);
             if Item[char_code].Props.Active then
               x       := x + Item[char_code].GetCharWidth + seSpace.Value;
             end
@@ -254,8 +249,6 @@ procedure TfmPreview.UpdatePreview;
       Height := CharHeight * mmPreview.Lines.Count + 2;
 
       // очищаем холст
-      //Canvas.Brush.Color := PFontCustom^.BackgroundColor;
-      //Canvas.Pen.Color   := PFontCustom^.ActiveColor;
       Canvas.Brush.Color := cfg.color.prev.bg;
       Canvas.Pen.Color   := cfg.color.prev.active;
       Canvas.Clear;
@@ -265,12 +258,12 @@ procedure TfmPreview.UpdatePreview;
       for y := 0 to mmPreview.Lines.Count - 1 do
         begin
         x          := 0;
-        txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], PFontCustom^.Props.Encoding));
+        txt_length := Length(UTF8ToEncoding(mmPreview.Lines.Strings[y], mxFont.Props.Encoding));
         for i := 1 to txt_length do
-          with PFontCustom^ do
+          with mxFont do
             begin
             char_code := Ord(UTF8ToEncoding(mmPreview.Lines.Strings[y],
-              PFontCustom^.Props.Encoding)[i]);
+              mxFont.Props.Encoding)[i]);
 
             if Item[char_code].Props.Active then
               begin

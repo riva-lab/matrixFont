@@ -146,8 +146,7 @@ type
   end;
 
 var
-  mxFont: TMatrixFont;
-  fmGen:  TfmGen;
+  fmGen: TfmGen;
 
 implementation
 

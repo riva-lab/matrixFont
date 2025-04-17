@@ -44,7 +44,6 @@ type
     procedure DoMouseClick(IsDouble: Boolean);
 
   public
-    FontX:         TMatrixFont;
     OnMouseEvent:  TMouseEvent;
     SelectedIndex: Integer;
 
@@ -64,7 +63,6 @@ implementation
 
 procedure TfmMap.FormCreate(Sender: TObject);
   begin
-    FontX           := nil;
     OnMouseEvent    := nil;
     WantSingleClick := False;
 
@@ -134,14 +132,14 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
 
       Canvas.Rectangle(aRect);
 
-      if FontX = nil then Exit;
+      if not Assigned(mxFont) then Exit;
 
       if aRow + aCol > 0 then
         if (aRow = 0) or (aCol = 0) then
           begin
           Canvas.TextRect(aRect, aRect.Left, aRect.Top, (aRow = 0).Select(
             Format('+%x', [aCol - 1]),
-            Format('%.2x', [FontX.FontStartItem + (aRow - 1) * (ColCount - 1)]))
+            Format('%.2x', [mxFont.FontStartItem + (aRow - 1) * (ColCount - 1)]))
             );
           end
         else
@@ -149,20 +147,18 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
           _isSelected := (aRow = Row) and (aCol = Col);
           i           := (aRow - 1) * (ColCount - 1) + (aCol - 1);
 
-          if i in [0 .. FontX.FontLength - 1] then
+          if i in [0 .. mxFont.FontLength - 1] then
             begin
               try
-              bm_tmp        := TBitmap.Create;
-              bm_tmp.Width  := FontX.Width;
-              bm_tmp.Height := FontX.Height;
-              dw            := round(ColWidths[aCol] * (1 - FontX.Width / (FontX.Width + seSpaceX.Value)));
-              dh            := round(RowHeights[aCol] * (1 - FontX.Height / (FontX.Height + seSpaceY.Value)));
-              aRect.Left    := aRect.Left + dw div 2;
-              aRect.Right   := aRect.Right - dw div 2;
-              aRect.Top     := aRect.Top + dh div 2;
-              aRect.Bottom  := aRect.Bottom - dh div 2;
+              bm_tmp       := TBitmap.Create;
+              dw           := round(ColWidths[aCol] * (1 - mxFont.Width / (mxFont.Width + seSpaceX.Value)));
+              dh           := round(RowHeights[aCol] * (1 - mxFont.Height / (mxFont.Height + seSpaceY.Value)));
+              aRect.Left   := aRect.Left + dw div 2;
+              aRect.Right  := aRect.Right - dw div 2;
+              aRect.Top    := aRect.Top + dh div 2;
+              aRect.Bottom := aRect.Bottom - dh div 2;
 
-              FontX.Item[FontX.FontStartItem + i].Draw(bm_tmp, False,
+              mxFont.Item[mxFont.FontStartItem + i].Draw(bm_tmp, False,
                 _isSelected.Select(cfg.color.map.selbg, cfg.color.map.bg),
                 _isSelected.Select(cfg.color.map.selact, cfg.color.map.active));
 
@@ -174,9 +170,9 @@ procedure TfmMap.sgMapDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRec
             if _isSelected then
               begin
               SelectedIndex := i;
-              i             += FontX.FontStartItem;
+              i             += mxFont.FontStartItem;
               fmMap.Caption := FM_MAP_CAPTION + Format(' - %d, %.2x, <%s>',
-                [i, i, EncodingToUTF8(Chr(i), FontX.Props.Encoding)]);
+                [i, i, EncodingToUTF8(Chr(i), mxFont.Props.Encoding)]);
 
               if WantSingleClick then DoMouseClick(False);
               end;
@@ -193,7 +189,7 @@ procedure TfmMap.sgMapChangeBounds(Sender: TObject);
   var
     _colWidth: Double;
   begin
-    if FontX = nil then Exit;
+    if not Assigned(mxFont) then Exit;
     sgMap.Color := cfg.color.map.bg;
 
     { fix bug: when form is visible and you disable main form option 'on top'
@@ -212,10 +208,10 @@ procedure TfmMap.sgMapChangeBounds(Sender: TObject);
     with sgMap do
       try
       ColCount         := (2 shl cbMapWidth.ItemIndex) + 1;
-      RowCount         := (FontX.FontLength - 1) div (ColCount - 1) + 2;
+      RowCount         := (mxFont.FontLength - 1) div (ColCount - 1) + 2;
       _colWidth        := Width / ColCount;
       ColWidths[0]     := round(_colWidth);
-      DefaultRowHeight := round(_colWidth / (FontX.Width + seSpaceX.Value) * (FontX.Height + seSpaceY.Value));
+      DefaultRowHeight := round(_colWidth / (mxFont.Width + seSpaceX.Value) * (mxFont.Height + seSpaceY.Value));
       ColWidths[0]     := ColWidths[0] + ColWidths[ColCount - 1] - sgMap.ColWidths[1];
       except
       end;
@@ -236,7 +232,7 @@ procedure TfmMap.actionExport(Sender: TObject);
 
   function GetFilename(AIndex: Integer): String;
     begin
-      Result := Format('%s_charmap_%d.png', [FontX.Props.Name, AIndex]);
+      Result := Format('%s_charmap_%d.png', [mxFont.Props.Name, AIndex]);
     end;
 
   procedure DialogPrepare;
@@ -249,7 +245,7 @@ procedure TfmMap.actionExport(Sender: TObject);
     end;
 
   begin
-    if not Assigned(FontX) then Exit;
+    if not Assigned(mxFont) then Exit;
     DialogPrepare;
 
     with SaveDlg do
@@ -259,7 +255,7 @@ procedure TfmMap.actionExport(Sender: TObject);
           FileName := FileName + '.png';
 
         RenderMapToPNG(
-          FileName, FontX, sgMap.ColCount - 1,
+          FileName, mxFont, sgMap.ColCount - 1,
           cfg.map.export.scale, cfg.map.export.space,
           cfg.color.map.export, cfg.color.map.bg, cfg.color.map.active,
           Screen.Fonts[cfg.nav.code.font]);

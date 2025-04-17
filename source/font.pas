@@ -243,6 +243,11 @@ type
     property Props: TMatrixFontProperties read FProps write FProps;
   end;
 
+
+var
+  mxFont: TMatrixFont;
+
+
 // функция латинизации кириллицы (транслитерация)
 function Transliterate(cyr: String): String;
 
