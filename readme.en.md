@@ -132,5 +132,5 @@ Installer icon: [icon-icons.com](https://icon-icons.com/icon/software/76005), [C
 - [BGRA Controls](https://bgrabitmap.github.io/bgracontrols/) — a set of graphical UI elements. Author: Lainz.
 - [ImageSVGListDsgn](https://gitlab.com/riva-lab/ImageSVGListDsgn) — a list of SVG images instead of regular bitmaps. Copyright (c) 2023 Riva.
 - [AppFeaturesPkg](https://gitlab.com/riva-lab/AppFeaturesPkg) — package for customizing GUI applications and implementing standard application functionality. Copyright (c) 2024 Riva.
-- [OnlineUpdater](https://gitlab.com/riva-lab/OnlineUpdaterPkg) — package for updating application from online repository. Copyright (c) 2023 Riva.
+- [OnlineUpdaterPkg](https://gitlab.com/riva-lab/OnlineUpdaterPkg) — package for updating application from online repository. Copyright (c) 2023 Riva.
 - [OpenSSL DLLs v1.1.1w](https://www.openssl.org/): [License](bin/openssl-license.txt) — toolkit for general-purpose cryptography and secure communication. Copyright (c) 1998-2023 The OpenSSL Project Authors. Copyright (c) 1995-1998 Eric A. Young, Tim J. Hudson.
