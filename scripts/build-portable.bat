@@ -82,6 +82,6 @@ for %%a in (32,64) do (
 
     del /f /q "!FILENAME!"
     
-    "%SEVENZIP_EXECUTABLE%" a -tzip -mx5 !FILENAME! !FILES!
+    "%SEVENZIP_EXECUTABLE%" a -tzip -mx9 !FILENAME! !FILES!
 )
 
