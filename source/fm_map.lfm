@@ -84,6 +84,8 @@ object fmMap: TfmMap
         '16'
         '32'
         '64'
+        '128'
+        '256'
       )
       Style = csDropDownList
       TabOrder = 0
