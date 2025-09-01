@@ -13,10 +13,10 @@ uses
   // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
   fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map, fm_rbf,
-  fm_update,
+  fm_bdf, fm_update,
 
   // functional units
-  font, symbol, cOpenFileList, appAbout, u_sticking, u_map_render, u_rbf,
+  font, symbol, cOpenFileList, appAbout, u_sticking, u_map_render, u_rbf, u_bdf,
 
   // additional units
   u_utilities, u_strings, u_helpers, u_encodings;
@@ -1390,6 +1390,15 @@ procedure TfmMain.FontSave(AFileName: String);
         begin
         AssignRHF(mxFont);
         if fmRbf.ShowModal = mrOk then
+          SaveToFile(AFileName);
+        end;
+
+    // export font to Adobe BDF file
+    if FileExtCheck(AFileName, BDF_EXTENSION) then
+      with bdfConverter do
+        begin
+        AssignRHF(mxFont);
+        if fmBdf.ShowModal = mrOk then
           SaveToFile(AFileName);
         end;
   end;

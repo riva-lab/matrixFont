@@ -12,7 +12,7 @@ uses
   // project forms
   fm_about, fm_confirm, fm_gen, fm_import, fm_importc, fm_main, fm_new,
   fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map,
-  fm_rbf, fm_update;
+  fm_rbf, fm_bdf, fm_update;
 
   {$R *.res}
 
@@ -42,7 +42,7 @@ begin
   Application.CreateForm(TfmSettings, fmSettings);
   Application.CreateForm(TfmImportC, fmImportC);
   Application.CreateForm(TfmMap, fmMap);
-  Application.CreateForm(TfmRbf, fmRbf);
+  Application.CreateForm(TfmBdf, fmBdf);
   Application.CreateForm(TfmUpdate, fmUpdate);
   Application.Run;
 end.

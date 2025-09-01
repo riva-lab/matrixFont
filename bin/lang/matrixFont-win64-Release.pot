@@ -243,6 +243,86 @@ msgstr ""
 msgid "репозиторий"
 msgstr ""
 
+#: tfmbdf.bbok.caption
+msgctxt "tfmbdf.bbok.caption"
+msgid "Сохранить"
+msgstr ""
+
+#: tfmbdf.caption
+msgid "Экспортировать в формат Adobe BDF"
+msgstr ""
+
+#: tfmbdf.lbbaseline.caption
+msgctxt "tfmbdf.lbbaseline.caption"
+msgid "Смещение базовой линии снизу, пикс."
+msgstr ""
+
+#: tfmbdf.lbbaseline.hint
+msgctxt "tfmbdf.lbbaseline.hint"
+msgid "Расстояние от низа холста до базовой линии шрифта"
+msgstr ""
+
+#: tfmbdf.lbbdfwiki.caption
+msgid "Формат BDF"
+msgstr ""
+
+#: tfmbdf.lbdefchar.caption
+msgid "Код символа по умолчанию"
+msgstr ""
+
+#: tfmbdf.lbdefchar.hint
+msgid ""
+"Символ по умолчанию выводится вместо\n"
+"отсутствующего в шрифте символа"
+msgstr ""
+
+#: tfmbdf.lbfontwiki.caption
+msgctxt "tfmbdf.lbfontwiki.caption"
+msgid "Строение шрифта"
+msgstr ""
+
+#: tfmbdf.lbmonospace.caption
+msgctxt "tfmbdf.lbmonospace.caption"
+msgid "Моноширинный шрифт"
+msgstr ""
+
+#: tfmbdf.lbmonospace.hint
+msgctxt "tfmbdf.lbmonospace.hint"
+msgid "Если флажок не установлен - пропорциональный"
+msgstr ""
+
+#: tfmbdf.lbname.caption
+msgctxt "tfmbdf.lbname.caption"
+msgid "Внутреннее имя"
+msgstr ""
+
+#: tfmbdf.lboptions.caption
+msgctxt "tfmbdf.lboptions.caption"
+msgid "Параметры"
+msgstr ""
+
+#: tfmbdf.lbspacew.caption
+msgctxt "tfmbdf.lbspacew.caption"
+msgid "Ширина пробела, %"
+msgstr ""
+
+#: tfmbdf.lbspacew.hint
+msgctxt "tfmbdf.lbspacew.hint"
+msgid "Ширина пробела в % от ширины шрифта"
+msgstr ""
+
+#: tfmbdf.lbspacing.caption
+msgctxt "tfmbdf.lbspacing.caption"
+msgid "Межсимвольное расстояние, пикс."
+msgstr ""
+
+#: tfmbdf.lbspacing.hint
+msgctxt "tfmbdf.lbspacing.hint"
+msgid ""
+"Дистанция между соседними символами,\n"
+"чем больше, тем текст более   р а з р е ж е н"
+msgstr ""
+
 #: tfmconfirm.bbcancel.caption
 msgctxt "tfmconfirm.bbcancel.caption"
 msgid "Отмена"
@@ -1801,14 +1881,17 @@ msgid "Экспортировать в формат RBF"
 msgstr ""
 
 #: tfmrbf.lbbaseline.caption
+msgctxt "tfmrbf.lbbaseline.caption"
 msgid "Смещение базовой линии снизу, пикс."
 msgstr ""
 
 #: tfmrbf.lbbaseline.hint
+msgctxt "tfmrbf.lbbaseline.hint"
 msgid "Расстояние от низа холста до базовой линии шрифта"
 msgstr ""
 
 #: tfmrbf.lbfontwiki.caption
+msgctxt "tfmrbf.lbfontwiki.caption"
 msgid "Строение шрифта"
 msgstr ""
 
@@ -1823,34 +1906,42 @@ msgid ""
 msgstr ""
 
 #: tfmrbf.lbmonospace.caption
+msgctxt "tfmrbf.lbmonospace.caption"
 msgid "Моноширинный шрифт"
 msgstr ""
 
 #: tfmrbf.lbmonospace.hint
+msgctxt "tfmrbf.lbmonospace.hint"
 msgid "Если флажок не установлен - пропорциональный"
 msgstr ""
 
 #: tfmrbf.lbname.caption
+msgctxt "tfmrbf.lbname.caption"
 msgid "Внутреннее имя"
 msgstr ""
 
 #: tfmrbf.lboptions.caption
+msgctxt "tfmrbf.lboptions.caption"
 msgid "Параметры"
 msgstr ""
 
 #: tfmrbf.lbspacew.caption
+msgctxt "tfmrbf.lbspacew.caption"
 msgid "Ширина пробела, %"
 msgstr ""
 
 #: tfmrbf.lbspacew.hint
+msgctxt "tfmrbf.lbspacew.hint"
 msgid "Ширина пробела в % от ширины шрифта"
 msgstr ""
 
 #: tfmrbf.lbspacing.caption
+msgctxt "tfmrbf.lbspacing.caption"
 msgid "Межсимвольное расстояние, пикс."
 msgstr ""
 
 #: tfmrbf.lbspacing.hint
+msgctxt "tfmrbf.lbspacing.hint"
 msgid ""
 "Дистанция между соседними символами,\n"
 "чем больше, тем текст более   р а з р е ж е н"
