@@ -58,6 +58,7 @@ procedure TfmRbf.FormShow(Sender: TObject);
       begin
       edName.Text         := Name;
       seSpacing.Value     := Spacing;
+      seSpaceW.Value      := SpaceWdth;
       seInterline.Value   := Interline;
       seBaseline.Value    := Baseline;
       cbMonospace.Checked := Monospace;
@@ -74,6 +75,7 @@ procedure TfmRbf.bbOKClick(Sender: TObject);
       begin
       Name      := edName.Text;
       Spacing   := seSpacing.Value;
+      SpaceWdth := seSpaceW.Value;
       Interline := seInterline.Value;
       Baseline  := seBaseline.Value;
       Monospace := cbMonospace.Checked;
