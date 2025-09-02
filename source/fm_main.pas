@@ -230,7 +230,8 @@ procedure TfmMain.FormShow(Sender: TObject);
 procedure TfmMain.FormDropFiles(Sender: TObject; const FileNames: array of String);
   begin
     // загрузка проекта шрифта
-    if FileExtCheck(FileNames[0], Format('%s,%s', [FILE_EXTENSION, RBF_EXTENSION])) then
+    if FileExtCheck(FileNames[0], Format('%s,%s,%s',
+      [FILE_EXTENSION, RBF_EXTENSION, BDF_EXTENSION])) then
       FontLoadFromFile(FileNames[0]);
 
     // бездиалоговый импорт изображений
@@ -1335,6 +1336,20 @@ procedure TfmMain.FontLoadFromFile(AFileName: String);
       with rbfConverter do
         begin
         FontCreateNew(1, 1, 0, 1, 0, '', '');
+        AssignRHF(mxFont);
+        LoadFromFile(AFileName);
+        LastFileAdd(AFileName);
+        FontCreateFinish;
+        end;
+
+    // import font from Adobe BDF file
+    if FileExtCheck(AFileName, BDF_EXTENSION) then
+      with bdfConverter do
+        begin
+        with mxFont do
+          if Assigned(mxFont) then
+            FontCreateNew(Width, Height, 0, 255, GetIndexOfEncoding(Props.Encoding), '', '') else
+            FontCreateNew(cfg.new.w, cfg.new.h, 0, 255, cfg.new.enc, '', '');
         AssignRHF(mxFont);
         LoadFromFile(AFileName);
         LastFileAdd(AFileName);

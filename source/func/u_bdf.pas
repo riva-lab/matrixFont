@@ -6,7 +6,7 @@
   Instance of `TBDFFontConverter` with name `bdfConverter` is already created.
   This file is part of `matrixFont` project.
   ------------------------------------------------------------------------------
-  (c) Riva, 2025
+  (c) Riva, 2025.09.02
   https://riva-lab.gitlab.io        https://gitlab.com/riva-lab
 
   BDF Specification by Adobe Systems Incorporated:
@@ -22,7 +22,8 @@ unit u_bdf;
 interface
 
 uses
-  Classes, SysUtils, u_helpers, font, symbol;
+  Classes, SysUtils, Math, LazUTF8, u_helpers, u_encodings, regexpr,
+  font, symbol;
 
 const
   BDF_EXTENSION = 'bdf';
@@ -139,20 +140,168 @@ procedure TBDFFontConverter.AssignRHF(AFont: TMatrixFont);
   end;
 
 procedure TBDFFontConverter.LoadFromFile(AFilename: String);
+  var
+    _re:       TRegExpr;
+    p:         TBDFCharParameters;
+    firstRead: Boolean;
 
-  procedure ReadHeaderAndWidth;
+  function GetToken(AInput, ARegEx: String; AMatchGroupId: Integer): String;
+    var
+      re: TRegExpr;
     begin
+      re := TRegExpr.Create;
+
+        try
+        re.ModifierI   := True;
+        re.ModifierM   := True;
+        re.InputString := UnicodeString(AInput);
+        re.Expression  := UnicodeString(ARegEx);
+        if re.Exec then
+          Result := String(re.Match[AMatchGroupId]).Trim;
+        except
+        Result := '';
+        end;
+
+      re.Free;
     end;
 
-  procedure ReadCharData;
+  function GetStr(AInput, AToken: String; ADefault: String = ''): String;
     begin
+      Result := GetToken(AInput, '^' + AToken + '\s+(.+?)$', 1)
+        .Trim('"').Replace('""', '"');
+      if Result.IsEmpty then Result := ADefault;
+    end;
+
+  function GetInt(AInput, AToken: String; AIndex: Integer): Integer;
+    begin
+      Result := StrToIntDef(GetToken(AInput, '^' + AToken +
+        '\s+([+-]?\d+)' +
+        '(?:[\s\.]+([+-]?\d+))?' +
+        '(?:[\s\.]+([+-]?\d+))?' +
+        '(?:[\s\.]+([+-]?\d+))?.*?$', AIndex),
+        0);
+    end;
+
+  function IsVersionUnsupported: Boolean;
+    begin
+      Result := not (
+        (GetInt(FData, 'STARTFONT', 1) = 2) and
+        (GetInt(FData, 'STARTFONT', 2) >= 1));
+    end;
+
+  procedure ReadHeader;
+    begin
+      FFont.Props.Name   := GetStr(FData, 'FONT_NAME', GetStr(FData, 'FONT'));
+      FFont.Props.Author := GetStr(FData, 'FOUNDRY', GetStr(FData, 'COPYRIGHT'));
+
+      Baseline := GetInt(FData, 'FONT_DESCENT', 1);
+      p.Width  := Max(GetInt(FData, 'FONTBOUNDINGBOX', 1), FFont.Width);
+      p.Height := Max(GetInt(FData, 'FONT_ASCENT', 1) + Baseline, FFont.Height);
+
+      FFont.SetRange(0, 255);
+      FFont.SetSize(p.Width, p.Height);
+      FFont.Clear;
+    end;
+
+  procedure ReadCharsInit;
+    begin
+      _re := TRegExpr.Create;
+
+        try
+        firstRead       := True;
+        _re.ModifierI   := True;
+        _re.ModifierM   := True;
+        _re.InputString := UnicodeString(FData);
+        _re.Expression  := UnicodeString('^STARTCHAR\s+(.+?)ENDCHAR$');
+        except
+        end;
+    end;
+
+  function GetNextChar: String;
+    begin
+        try
+        if (firstRead and _re.Exec) or (not firstRead and _re.ExecNext) then
+          Result := String(_re.Match[1])
+        else
+          Result := '';
+
+        firstRead := False;
+        except
+        Result    := '';
+        end;
+    end;
+
+  procedure ReadCharsFinish;
+    begin
+      _re.Free;
+    end;
+
+  function GetCorrectedIndex(ABuffer: String): Integer;
+    var
+      tmp: String;
+    begin
+      Result := GetInt(ABuffer, 'ENCODING', 1);
+      if Result < 128 then Exit;
+      tmp := UTF8ToEncoding(UnicodeToUTF8(Result), FFont.Props.Encoding);
+      if not tmp.IsEmpty then Result := Ord(tmp[1]);
+    end;
+
+  procedure ReadBitmap(ABuffer: String; AIndex: Integer);
+    var
+      buffer:      String;
+      i, j, n:     Integer;
+      dx, dy, num: Integer;
+    begin
+      for i := 1 to p.Height do
+        begin
+        dx     := p.ofx;
+        dy     := p.ofy + i - 1;
+        buffer := GetToken(ABuffer, Format('^BITMAP\s+(?:.+?\n){%d}(.+?)\n', [i - 1]), 1);
+
+        for j := 1 to buffer.Length do
+          begin
+          num := StrToInt('$' + buffer[j]);
+
+          for n := 0 to 3 do
+            begin
+            if num and 8 > 0 then FFont.Item[AIndex].PixelAction(dx, dy, paSet);
+            dx  += 1;
+            num *= 2;
+            end;
+          end;
+        end;
+    end;
+
+  function ReadCharNext: Boolean;
+    var
+      buffer: String;
+      index:  Integer;
+    begin
+      buffer := GetNextChar;
+      if buffer.IsEmpty then Exit(False);
+
+      index := GetCorrectedIndex(buffer);
+      if not InRange(index, 0, 255) then Exit(True);
+
+      p.Height := GetInt(buffer, 'BBX', 2);
+      p.ofx    := GetInt(buffer, 'BBX', 3);
+      p.ofy    := FFont.Height - Baseline - p.Height - GetInt(buffer, 'BBX', 4);
+      FFont.Item[index].Clear;
+      ReadBitmap(buffer, index);
+
+      Result := True;
     end;
 
   begin
     if not Assigned(FFont) then Exit;
 
-    ReadHeaderAndWidth;
-    ReadCharData;
+    FData := GetFileAsString(AFilename);
+    if IsVersionUnsupported then Exit;
+
+    ReadHeader;
+    ReadCharsInit;
+    while ReadCharNext do ;
+    ReadCharsFinish;
   end;
 
 procedure TBDFFontConverter.SaveToFile(AFilename: String);

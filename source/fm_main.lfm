@@ -2922,7 +2922,7 @@ object fmMain: TfmMain
   end
   object dlgOpen: TOpenDialog
     Title = 'Открыть файл шрифта'
-    Filter = 'All supported formats|*.RHF;*.RBF|Raster H/W Font (matrixFont original)|*.RHF|Raw Bitmap Font|*.RBF'
+    Filter = 'All supported formats|*.RHF;*.RBF;*.BDF|Raster H/W Font (matrixFont original)|*.RHF|Raw Bitmap Font|*.RBF|Glyph Bitmap Distribution Format by Adobe |*.BDF'
     Options = [ofEnableSizing]
     Left = 500
     Top = 94
