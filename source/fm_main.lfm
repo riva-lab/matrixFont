@@ -141,10 +141,10 @@ object fmMain: TfmMain
             Shape = bsTopLine
           end
           object tbFontTools2: TToolBar
-            Left = 0
+            Left = 15
             Height = 30
             Top = 36
-            Width = 91
+            Width = 61
             Align = alNone
             AutoSize = True
             BorderSpacing.CellAlignHorizontal = ccaCenter
@@ -160,13 +160,8 @@ object fmMain: TfmMain
               Top = 0
               Action = acFontCharset
             end
-            object ToolButton149: TToolButton
-              Left = 31
-              Top = 0
-              Action = acFontOptimize
-            end
             object ToolButton87: TToolButton
-              Left = 61
+              Left = 31
               Top = 0
               Action = acFontChangeSizes
             end
@@ -1819,9 +1814,6 @@ object fmMain: TfmMain
       object MenuItem13: TMenuItem
         Action = acFontCharset
       end
-      object MenuItem67: TMenuItem
-        Action = acFontOptimize
-      end
       object MenuItem91: TMenuItem
         Action = acFontChangeSizes
       end
@@ -2881,14 +2873,6 @@ object fmMain: TfmMain
       ImageIndex = 32
       OnExecute = acFontCharsetExecute
       ShortCut = 49220
-    end
-    object acFontOptimize: TAction
-      Category = 'Инструменты'
-      Caption = 'Оптимизация размера холста ...'
-      Hint = 'Установить оптимальный размер холста всех символов'
-      ImageIndex = 36
-      OnExecute = acFontOptimizeExecute
-      ShortCut = 49233
     end
     object acFontChangeSizes: TAction
       Category = 'Инструменты'

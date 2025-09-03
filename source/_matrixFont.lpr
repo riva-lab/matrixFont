@@ -11,7 +11,7 @@ uses
 
   // project forms
   fm_about, fm_confirm, fm_gen, fm_import, fm_importc, fm_main, fm_new,
-  fm_optimize, fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map,
+  fm_preview, fm_prop, fm_range, fm_settings, fm_sizes, fm_map,
   fm_rbf, fm_bdf, fm_update;
 
   {$R *.res}
@@ -36,7 +36,6 @@ begin
   Application.CreateForm(TfmImport, fmImport);
   Application.CreateForm(TfmPreview, fmPreview);
   Application.CreateForm(TfmSizes, fmSizes);
-  Application.CreateForm(TfmOptimize, fmOptimize);
   Application.CreateForm(TfmRange, fmRange);
   Application.CreateForm(TfmAbout, fmAbout);
   Application.CreateForm(TfmSettings, fmSettings);

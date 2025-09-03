@@ -12,7 +12,7 @@ uses
 
   // forms
   fm_gen, fm_new, fm_prop, fm_confirm, fm_import, fm_preview, fm_sizes,
-  fm_optimize, fm_range, fm_about, fm_settings, fm_importc, fm_map, fm_rbf,
+  fm_range, fm_about, fm_settings, fm_importc, fm_map, fm_rbf,
   fm_bdf, fm_update,
 
   // functional units
@@ -79,7 +79,6 @@ type
     procedure edFindUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
 
     procedure acFontCharsetExecute(Sender: TObject);
-    procedure acFontOptimizeExecute(Sender: TObject);
     procedure acFontChangeSizesExecute(Sender: TObject);
 
     procedure acDeleteLastFilesListExecute(Sender: TObject);
@@ -1106,39 +1105,12 @@ procedure TfmMain.acFontCharsetExecute(Sender: TObject);
       end;
   end;
 
-// действие: оптимизация размеров холста символов шрифта
-procedure TfmMain.acFontOptimizeExecute(Sender: TObject);
-  begin
-    with fmOptimize, mxFont do
-      begin
-      opt_oldHeight := Height;
-      opt_oldWidth  := Width;
-      opt_up        := CanOptimize(dirUp);
-      opt_down      := CanOptimize(dirDown);
-      opt_left      := CanOptimize(dirLeft);
-      opt_right     := CanOptimize(dirRight);
-
-      if not ((opt_oldHeight - opt_up - opt_down > 0) and
-        (opt_oldWidth - opt_left - opt_right > 0)) then
-        fmConfirm.Show(TXT_WARNING, WARN_OPTIMIZE, [mbCancel], Self)
-      else
-      if ShowModal = mrOk then
-        begin
-        ChangeSize(res_up, res_down, res_left, res_right, True);
-
-        SettingsApplyToCurrentSession;
-        FontActionExecute;
-        end;
-      end;
-  end;
-
 // действие: изменение размеров холста символов шрифта
 procedure TfmMain.acFontChangeSizesExecute(Sender: TObject);
   begin
     with fmSizes do
       begin
-      oldHeight := mxFont.Height;
-      oldWidth  := mxFont.Width;
+      SetFont(mxFont);
 
       if fmSizes.ShowModal = mrOk then
         begin
@@ -1621,7 +1593,6 @@ procedure TfmMain.AdjustComponentSizes;
     // иконки-значки в заголовке окон
     ImListNew16A.GetIcon(3, fmSettings.Icon);
     ImListNew16A.GetIcon(32, fmRange.Icon);
-    ImListNew16A.GetIcon(36, fmOptimize.Icon);
     ImListNew16A.GetIcon(25, fmSizes.Icon);
     ImListNew16A.GetIcon(31, fmImport.Icon);
     ImListNew16A.GetIcon(28, fmProp.Icon);

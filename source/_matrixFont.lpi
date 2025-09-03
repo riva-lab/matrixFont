@@ -26,7 +26,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\lang"/>
-      <ExcludedIdentifiers Count="117">
+      <ExcludedIdentifiers Count="108">
         <Item1 Value="TfmAbout.lbInfo.Caption"/>
         <Item2 Value="tfmabout.bcsvglogo.caption"/>
         <Item3 Value="tfmmap.tbcontrols.caption"/>
@@ -69,13 +69,13 @@
         <Item40 Value="tfmmain.toolbutton67.caption"/>
         <Item41 Value="tfmmain.toolbutton7.caption"/>
         <Item42 Value="tfmmain.toolbutton76.caption"/>
-        <Item43 Value="tfmoptimize.lbdownvalue.caption"/>
-        <Item44 Value="tfmoptimize.lbleftvalue.caption"/>
-        <Item45 Value="tfmoptimize.lbnewvalue.caption"/>
-        <Item46 Value="tfmoptimize.lboldvalue.caption"/>
-        <Item47 Value="tfmoptimize.lbrightvalue.caption"/>
-        <Item48 Value="tfmoptimize.lbupvalue.caption"/>
-        <Item49 Value="tfmoptimize.lbwarning.caption"/>
+        <Item43 Value="tfmupdate.lbsize.caption"/>
+        <Item44 Value="tfmsettings.cbappupdateway.text"/>
+        <Item45 Value="tfmsettings.cbappupdatefreq.text"/>
+        <Item46 Value="tfmrange.lbdiffs.caption"/>
+        <Item47 Value="tfmrange.lbdiffe.caption"/>
+        <Item48 Value="tfmbdf.lbfontwiki.hint"/>
+        <Item49 Value="tfmbdf.lbbdfwiki.hint"/>
         <Item50 Value="tfmpreview.lbbackground.caption"/>
         <Item51 Value="tfmpreview.tbcontrols.caption"/>
         <Item52 Value="tfmrange.lbwarning.caption"/>
@@ -86,8 +86,8 @@
         <Item57 Value="tfmsettings.edauthor.text"/>
         <Item58 Value="tfmsettings.edfontname.text"/>
         <Item59 Value="tfmsettings.bbapply.caption"/>
-        <Item60 Value="tfmsizes.lbempty5.caption"/>
-        <Item61 Value="tfmsizes.lbempty6.caption"/>
+        <Item60 Value="tfmgen.cbgroupdirection.text"/>
+        <Item61 Value="tfmgen.cbbitorderlsb.text"/>
         <Item62 Value="tfmsizes.lbnewvalue.caption"/>
         <Item63 Value="tfmsizes.lboldvalue.caption"/>
         <Item64 Value="tfmsizes.lbwarning.caption"/>
@@ -134,16 +134,7 @@
         <Item105 Value="tfmsettings.lbcolorsd4.hint"/>
         <Item106 Value="tfmsettings.lbcolorsd5.hint"/>
         <Item107 Value="tfmrbf.lbfontwiki.hint"/>
-        <Item108 Value="tfmgen.cbgroupdirection.text"/>
-        <Item109 Value="tfmgen.cbbitorderlsb.text"/>
-        <Item110 Value="tfmimportc.btnswapwh.caption"/>
-        <Item111 Value="tfmupdate.lbsize.caption"/>
-        <Item112 Value="tfmsettings.cbappupdateway.text"/>
-        <Item113 Value="tfmsettings.cbappupdatefreq.text"/>
-        <Item114 Value="tfmrange.lbdiffs.caption"/>
-        <Item115 Value="tfmrange.lbdiffe.caption"/>
-        <Item116 Value="tfmbdf.lbfontwiki.hint"/>
-        <Item117 Value="tfmbdf.lbbdfwiki.hint"/>
+        <Item108 Value="tfmimportc.btnswapwh.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -151,8 +142,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="3"/>
-      <RevisionNr Value="1"/>
-      <BuildNr Value="99"/>
+      <RevisionNr Value="2"/>
+      <BuildNr Value="100"/>
       <Language Value="0419"/>
       <StringTable Comments="Raster fonts creating and editing. C code generating. Char map and example text preview. Export to image and import from image or code. Must-have tool for embed developers" CompanyName="Riva Lab :: riva-lab.gitlab.io" FileDescription="matrixFont - raster fonts editor" InternalName="matrixFont" LegalCopyright="Riva, 2015-2025" OriginalFilename="matrixFont" ProductName="matrixFont"/>
     </VersionInfo>
@@ -314,7 +305,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="34">
+    <Units Count="33">
       <Unit0>
         <Filename Value="_matrixFont.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -384,126 +375,119 @@
         <ResourceBaseClass Value="Form"/>
       </Unit10>
       <Unit11>
-        <Filename Value="fm_optimize.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="fmOptimize"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-      </Unit11>
-      <Unit12>
         <Filename Value="fm_range.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmRange"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit12>
-      <Unit13>
+      </Unit11>
+      <Unit12>
         <Filename Value="fm_about.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmAbout"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit13>
-      <Unit14>
+      </Unit12>
+      <Unit13>
         <Filename Value="fm_settings.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmSettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit14>
-      <Unit15>
+      </Unit13>
+      <Unit14>
         <Filename Value="u_strings.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit15>
-      <Unit16>
+      </Unit14>
+      <Unit15>
         <Filename Value="copenfilelist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cOpenFileList"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="u_utilities.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit16>
       <Unit17>
-        <Filename Value="u_utilities.pas"/>
+        <Filename Value="u_encodings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit17>
       <Unit18>
-        <Filename Value="u_encodings.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit18>
-      <Unit19>
         <Filename Value="fm_importc.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmImportC"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="u_helpers.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit19>
       <Unit20>
-        <Filename Value="u_helpers.pas"/>
+        <Filename Value="i_main_controls.inc"/>
         <IsPartOfProject Value="True"/>
       </Unit20>
       <Unit21>
-        <Filename Value="i_main_controls.inc"/>
-        <IsPartOfProject Value="True"/>
-      </Unit21>
-      <Unit22>
         <Filename Value="fm_map.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmMap"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="settings\config_record.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit22>
       <Unit23>
-        <Filename Value="settings\config_record.pas"/>
+        <Filename Value="func\u_sticking.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit23>
       <Unit24>
-        <Filename Value="func\u_sticking.pas"/>
+        <Filename Value="func\u_map_render.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit24>
       <Unit25>
-        <Filename Value="func\u_map_render.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit25>
-      <Unit26>
         <Filename Value="misc\appabout.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="appAbout"/>
-      </Unit26>
-      <Unit27>
+      </Unit25>
+      <Unit26>
         <Filename Value="func\u_rbf.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit27>
-      <Unit28>
+      </Unit26>
+      <Unit27>
         <Filename Value="fm_new.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmNew"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit28>
-      <Unit29>
+      </Unit27>
+      <Unit28>
         <Filename Value="u_imghist.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit29>
-      <Unit30>
+      </Unit28>
+      <Unit29>
         <Filename Value="fm_update.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmUpdate"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="i_settings_controls.inc"/>
+        <IsPartOfProject Value="True"/>
       </Unit30>
       <Unit31>
-        <Filename Value="i_settings_controls.inc"/>
+        <Filename Value="func\u_bdf.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit31>
       <Unit32>
-        <Filename Value="func\u_bdf.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit32>
-      <Unit33>
         <Filename Value="fm_bdf.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmBdf"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit33>
+      </Unit32>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

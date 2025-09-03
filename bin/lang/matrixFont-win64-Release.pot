@@ -186,22 +186,6 @@ msgctxt "fm_preview.fm_prev_example"
 msgid "Образец текста"
 msgstr ""
 
-#: fm_sizes.fm_sizes_add
-msgid "Добавить строки и столбцы"
-msgstr ""
-
-#: fm_sizes.fm_sizes_crop
-msgid "Обрезать холст"
-msgstr ""
-
-#: fm_sizes.fm_sizes_del
-msgid "Удалить строки и столбцы"
-msgstr ""
-
-#: fm_sizes.fm_sizes_expand
-msgid "Расширить холст"
-msgstr ""
-
 #: font.rhf_comment_app
 msgid "Сгенерировано"
 msgstr ""
@@ -844,14 +828,6 @@ msgstr ""
 
 #: tfmmain.acfontopen.hint
 msgid "Загрузить шрифт из файла RHF"
-msgstr ""
-
-#: tfmmain.acfontoptimize.caption
-msgid "Оптимизация размера холста ..."
-msgstr ""
-
-#: tfmmain.acfontoptimize.hint
-msgid "Установить оптимальный размер холста всех символов"
 msgstr ""
 
 #: tfmmain.acfontpaste.caption
@@ -1650,74 +1626,6 @@ msgstr ""
 msgid "ширина"
 msgstr ""
 
-#: tfmoptimize.bbapply.caption
-msgctxt "tfmoptimize.bbapply.caption"
-msgid "Применить"
-msgstr ""
-
-#: tfmoptimize.caption
-msgid "Оптимизация размера холста"
-msgstr ""
-
-#: tfmoptimize.gbborders.caption
-msgid "Границы оптимизации"
-msgstr ""
-
-#: tfmoptimize.lbdown.caption
-msgid "строк снизу:"
-msgstr ""
-
-#: tfmoptimize.lbleft.caption
-msgid "столбцов слева:"
-msgstr ""
-
-#: tfmoptimize.lbnew.caption
-msgctxt "tfmoptimize.lbnew.caption"
-msgid "Новый размер:"
-msgstr ""
-
-#: tfmoptimize.lbold.caption
-msgctxt "tfmoptimize.lbold.caption"
-msgid "Исходный размер:"
-msgstr ""
-
-#: tfmoptimize.lbright.caption
-msgid "столбцов справа:"
-msgstr ""
-
-#: tfmoptimize.lbup.caption
-msgid "строк сверху:"
-msgstr ""
-
-#: tfmoptimize.rgdelete.caption
-msgid "Будет удалено"
-msgstr ""
-
-#: tfmoptimize.rgresult.caption
-msgctxt "tfmoptimize.rgresult.caption"
-msgid "Результат"
-msgstr ""
-
-#: tfmoptimize.sbdown.hint
-msgid "Удалить пустое пространство снизу"
-msgstr ""
-
-#: tfmoptimize.sbleft.hint
-msgid "Удалить пустое пространство слева"
-msgstr ""
-
-#: tfmoptimize.sbreset.hint
-msgid "Удалить пустое пространство вокруг символа"
-msgstr ""
-
-#: tfmoptimize.sbright.hint
-msgid "Удалить пустое пространство справа"
-msgstr ""
-
-#: tfmoptimize.sbup.hint
-msgid "Удалить пустое пространство сверху"
-msgstr ""
-
 #: tfmpreview.acedittext.caption
 msgid "Текст"
 msgstr ""
@@ -2325,14 +2233,12 @@ msgstr ""
 msgid "Изменение размера холста"
 msgstr ""
 
-#: tfmsizes.lbdown.caption
-msgctxt "tfmsizes.lbdown.caption"
-msgid "Снизу"
+#: tfmsizes.gblimits.caption
+msgid "Изменение размера"
 msgstr ""
 
-#: tfmsizes.lbleft.caption
-msgctxt "tfmsizes.lbleft.caption"
-msgid "Слева"
+#: tfmsizes.lbhint.caption
+msgid "С каждой стороны холст можно расширить (полож. значение), обрезать (отриц. значение) или автоматически удалить пустое пространство"
 msgstr ""
 
 #: tfmsizes.lbnew.caption
@@ -2345,23 +2251,23 @@ msgctxt "tfmsizes.lbold.caption"
 msgid "Исходный размер:"
 msgstr ""
 
-#: tfmsizes.lbright.caption
-msgctxt "tfmsizes.lbright.caption"
-msgid "Справа"
-msgstr ""
-
-#: tfmsizes.lbup.caption
-msgctxt "tfmsizes.lbup.caption"
-msgid "Сверху"
-msgstr ""
-
 #: tfmsizes.rgmode.caption
-msgid "Операция"
+msgid "Подсказка"
 msgstr ""
 
 #: tfmsizes.rgresult.caption
 msgctxt "tfmsizes.rgresult.caption"
 msgid "Результат"
+msgstr ""
+
+#: tfmsizes.sbdown.hint
+msgctxt "tfmsizes.sbdown.hint"
+msgid "Удалить пустое пространство снизу"
+msgstr ""
+
+#: tfmsizes.sbleft.hint
+msgctxt "tfmsizes.sbleft.hint"
+msgid "Удалить пустое пространство слева"
 msgstr ""
 
 #: tfmsizes.sbreset.caption
@@ -2371,6 +2277,16 @@ msgstr ""
 
 #: tfmsizes.sbreset.hint
 msgid "Сброс значений"
+msgstr ""
+
+#: tfmsizes.sbright.hint
+msgctxt "tfmsizes.sbright.hint"
+msgid "Удалить пустое пространство справа"
+msgstr ""
+
+#: tfmsizes.sbup.hint
+msgctxt "tfmsizes.sbup.hint"
+msgid "Удалить пустое пространство сверху"
 msgstr ""
 
 #: tfmupdate.btncheck.caption
@@ -2647,10 +2563,6 @@ msgstr ""
 msgid ""
 "Изменения в текущем файле не сохранены.\n"
 "Сохранить?"
-msgstr ""
-
-#: u_strings.warn_optimize
-msgid "Все символы шрифта пусты. Оптимизация недоступна"
 msgstr ""
 
 #: u_strings.warn_reset
