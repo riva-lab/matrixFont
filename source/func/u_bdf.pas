@@ -3,6 +3,11 @@
   ------------------------------------------------------------------------------
   BDF v2.1 (Glyph Bitmap Distribution Format) to matrixFont.RHF
   bidirectional converter class.
+  Notes:
+    1. BDF file may contain more than 256 chars, so only a subset will be
+       imported, according to current project's codepage.
+    2. Canvas size may be extended, but not shrunk. It extends when
+       current project's canvas is too small for imported BDF chars.
   Instance of `TBDFFontConverter` with name `bdfConverter` is already created.
   This file is part of `matrixFont` project.
   ------------------------------------------------------------------------------
