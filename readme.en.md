@@ -9,7 +9,7 @@ HTML: [**English**](readme.en.html) | [Русский](readme.html)
 
 ## About application
 
-**matrixFont** allows you to create and edit raster fonts, and generate *C* code to include the created font into a software project.
+**matrixFont** allows you to create and edit raster monochromatic fonts, and generate *C* code to include the created font into a software project.
 
 The main usage area is software project development using graphical user interface in embedded systems.
 
@@ -21,7 +21,8 @@ The main usage area is software project development using graphical user interfa
   - character range from 0 to 255;
   - charset (encoding) selection;
   - compact native **RHF** file format;
-  - support for loading/saving fonts in RBF format;
+  - support for loading/saving fonts in **RBF** format;
+  - support for loading/saving fonts in **Adobe BDF** format;
 
 - project creating:
   
@@ -110,7 +111,7 @@ The translation will be added in the next release if it covers at least 2/3 (~67
 
 If you find a bug in the application or want to suggest something to improve the application, please go to the [Issues](https://gitlab.com/riva-lab/matrixFont/-/issues) section of the **matrixFont** project. First investigate if a similar or the same issue has been opened before. Do not create duplicate issues, update or reopen existing ones - this speeds up their review. If your issue has not been raised before, create a new issue.
 
-If your native language is not Russian or Ukrainian, please write your messages in English. You can also add a translation into Russian or Ukrainian below the original if you want.
+Important notice. Please use one of these languages: English (preferred), Ukrainian, Russian. You can also add a translation into Ukrainian or Russian below the original if you want.
 
 Your questions and suggestions help improve **matrixFont**.
 
