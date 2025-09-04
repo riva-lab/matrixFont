@@ -154,7 +154,6 @@ procedure TfmSizes.SetSideControls(ADir: TDirection; ASpEd: TSpinEdit; ASpBtn: T
     FSideControls[ADir].Edit  := ASpEd;
     FSideControls[ADir].Btn   := ASpBtn;
     FSideControls[ADir].Panel := APan;
-    Inc(ADir);
 
     ASpBtn.Down := False;
   end;

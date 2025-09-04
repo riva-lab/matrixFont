@@ -41,6 +41,7 @@ begin
   Application.CreateForm(TfmSettings, fmSettings);
   Application.CreateForm(TfmImportC, fmImportC);
   Application.CreateForm(TfmMap, fmMap);
+  Application.CreateForm(TfmRbf, fmRbf);
   Application.CreateForm(TfmBdf, fmBdf);
   Application.CreateForm(TfmUpdate, fmUpdate);
   Application.Run;
