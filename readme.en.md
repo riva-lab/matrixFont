@@ -17,43 +17,43 @@ The main usage area is software project development using graphical user interfa
 
 - raster font:
   
-  - character sizes from 1 × 1 to 100 × 100 (technically up to 512 × 512);
-  - character range from 0 to 255;
-  - charset (encoding) selection;
-  - compact native **RHF** file format;
-  - support for loading/saving fonts in **RBF** format;
-  - support for loading/saving fonts in **Adobe BDF** format;
+  - character sizes from 1 × 1 to 512 × 512,
+  - character range from 0 to 255,
+  - charset (encoding) selection,
+  - compact native **RHF** file format,
+  - support for loading/saving fonts in **RBF** format,
+  - support for loading/saving fonts in **Adobe BDF** format,
 
 - project creating:
   
-  - from system font;
-  - from code (support of *matrixFont*, *AdaFruit GFX*, *LCD Vision V1.34* formats);
-  - from character map image with metadata;
+  - from system font,
+  - from code (support of *matrixFont*, *AdaFruit GFX*, *LCD Vision V1.34* formats),
+  - from character map image with metadata,
 
 - character editor:
   
-  - easy editing with mouse;
-  - scaling workspace with mouse wheel;
-  - copy, paste and move characters;
-  - importing image into character;
-  - history of editing operations for each character;
-  - operations: invert, display, rotate, shift, pinch, center characters;
-  - batch editing of all font characters;
+  - easy editing with mouse,
+  - scaling workspace with mouse wheel,
+  - copy, paste and move characters,
+  - importing image into character,
+  - history of editing operations for each character,
+  - operations: invert, display, rotate, shift, pinch, center characters,
+  - batch editing of all font characters,
 
 - navigation and preview:
   
-  - character navigator with character display;
-  - search for characters by code or name;
-  - view sample text;
-  - character map;
-  - exporting character map to image;
+  - character navigator with character display,
+  - search for characters by code or name,
+  - view sample text,
+  - character map,
+  - exporting character map to image,
 
 - tools:
   
-  - changing character range of font;
-  - changing font character size;
-  - character size optimization;
-  - *C* code generator with fine-tuning;
+  - changing character range of font,
+  - changing font character size,
+  - character size optimization,
+  - *C* code generator with fine-tuning,
 
 - interface:
   
